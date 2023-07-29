@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Livewire\Traits;
+
+use Livewire\WithPagination;
+
+trait WithDataTables
+{
+    use WithPagination;
+    
+    protected $paginationTheme = 'bootstrap';
+
+    //DataTable props
+    public ?string $query = null;
+    public ?string $resultCount;
+    public string $orderBy = 'created_at';
+    public string $orderAsc = 'desc';
+    public int $perPage = 15;
+
+    public function refresh($message, $modal)
+    {
+        //Close the active modal
+        $this->dispatch('cancel', $modal);
+        session()->flash('message', $message);
+        //Refresh the livewire component
+        $refresh;
+    }
+    
+}
