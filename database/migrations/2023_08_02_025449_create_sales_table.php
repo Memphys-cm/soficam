@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+            $table->float('sales_amount');
+            $table->foreignId('user_id')->on('users')->nullable()->index();
+            $table->string('sales_code')->nullable();
+            $table->string('sales_type');
+            $table->string('created_by')->nullable();
             $table->timestamps();
         });
     }
