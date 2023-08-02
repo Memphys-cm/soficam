@@ -85,5 +85,9 @@ Route::group(
             Route::get('/', App\Livewire\Portal\Sales\SimpleSales\Index::class)->name('portal.simpleSale.index');
         });
 
+        Route::prefix('registration')->group(function () {
+            Route::get('/subdivisions', App\Http\Livewire\Portal\Registration\Subdivision\Index::class)->name('portal.registrations.subdivisions.index');
+        });
+
     }
 );
