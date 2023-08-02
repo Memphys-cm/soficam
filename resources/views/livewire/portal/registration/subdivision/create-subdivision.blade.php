@@ -10,7 +10,7 @@
                     </div>
                     <x-form-items.form wire:submit="store">
 
-                        {{-- <fieldset class="border p-3">
+                        <fieldset class="border p-3">
                             <legend class="w-auto">Informations on the ground</legend>
                             <div class='row form-group mb-3'>
                                 <div class="col-md-6 py-2">
@@ -164,7 +164,7 @@
                                     @enderror
                                 </div>
                             </div>
-                        </fieldset> --}}
+                        </fieldset>
 
                         @foreach($blocks as $blockIndex => $block)
                         <fieldset class="border p-3 mb-3">
@@ -176,20 +176,55 @@
                             </div>
             
                             @foreach($block['lots'] as $lotIndex => $lot)
-                                <div class="form-group mt-3">
+                            <div class="row form-group mt-3 mb-2">
+                                <div class="col-md-1">
                                     <label for="lotNumero">Lot Number</label>
-                                    <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.lots.{{ $lotIndex }}.numero">
+                                    <input type="number" class="form-control" wire:model="blocks.{{ $blockIndex }}.lots.{{ $lotIndex }}.lot_no">
+                                </div>
+                                
+                                
+                                <div class="col-md-1">
+                                    <label for="lotSuperficie">AREA OF LOT</label>
+                                    <input type="number" class="form-control" wire:model="blocks.{{ $blockIndex }}.lots.{{ $lotIndex }}.lot_area">
                                 </div>
             
-                                <div class="form-group">
-                                    <label for="lotSuperficie">Lot Superficie</label>
-                                    <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.lots.{{ $lotIndex }}.superficie">
+                                <div class="col-md-1">
+                                    <label for="lotEtat">State Of Lot</label>
+                                    <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.lots.{{ $lotIndex }}.condition_lot">
+                                </div>
+
+                                <div class="col-md-1">
+                                    <label for="lotNumero">LOT STATUS</label>
+                                    <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.lots.{{ $lotIndex }}.lot_status">
                                 </div>
             
-                                <div class="form-group">
-                                    <label for="lotEtat">Lot Etat</label>
-                                    <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.lots.{{ $lotIndex }}.etat">
+                                <div class="col-md-1">
+                                    <label for="lotSuperficie">NOTARY'S OFFICE</label>
+                                    <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.lots.{{ $lotIndex }}.notary_office">
                                 </div>
+            
+                                <div class="col-md-1">
+                                    <label for="lotEtat">NOTARY'S CLERK</label>
+                                    <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.lots.{{ $lotIndex }}.notary_clerk">
+                                </div>
+
+                                
+                                <div class="col-md-2 pt-4">
+                                    <label for="lotNumero">GEOMETRIC PRACTICE</label>
+                                    <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.lots.{{ $lotIndex }}.geometric_pratic">
+                                </div>
+            
+                                <div class="col-md-2 pt-4">
+                                    <label for="lotSuperficie">GEOMETRICIAN</label>
+                                    <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.lots.{{ $lotIndex }}.geometrician">
+                                </div>
+            
+                                <div class="col-md-2 pt-4">
+                                    <label for="lotEtat">Date</label>
+                                    <input type="date" class="form-control" wire:model="blocks.{{ $blockIndex }}.lots.{{ $lotIndex }}.date">
+                                </div>
+
+                            </div>
             
                                 <button type="button" wire:click="removeLot({{ $blockIndex }}, {{ $lotIndex }})" class="btn btn-danger">Remove Lot</button>
                             @endforeach
@@ -199,12 +234,12 @@
                         </fieldset>
                     @endforeach
             
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="newBlockName">New Block Name</label>
                         <input type="text" class="form-control" wire:model="newBlockName">
-                    </div>
+                    </div> --}}
                     <button type="button" wire:click="addBlock" class="btn btn-primary">Add Block</button>
-                    <button type="button" wire:click="addDefaultLot" class="btn btn-primary">Add Lot</button>
+                    {{-- <button type="button" wire:click="addDefaultLot" class="btn btn-primary">Add Lot</button> --}}
                 
 
                         {{-- <fieldset class="border p-3 my-2">
