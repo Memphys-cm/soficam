@@ -69,63 +69,24 @@
 
     @yield('scripts')
     <script>
-        // document.querySelectorAll('div.alert').querySelectorAll(":not(#elem)");
-        $('div.alert').not('.alert-important').delay(3000).fadeOut(400);
-
-        var form = document.querySelector('.form-modal')
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                var btn = document.querySelector('button[type="submit"].btn-loading')
-                btn.setAttribute('disabled', true)
-                console.log(btn)
-                btn.innerHtml = `<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>{{__('Loading')}}...`
-            })
-        }
-
-        Livewire.directive('confirm', ({
-            el,
-            directive,
-            component,
-            cleanup
-        }) => {
-            let content = directive.expression
-
-            // The "directive" object gives you access to the parsed directive.
-            // For example, here are its values for: wire:click.prevent="deletePost(1)"
-            //
-            // directive.raw = wire:click.prevent
-            // directive.value = "click"
-            // directive.modifiers = ['prevent']
-            // directive.expression = "deletePost(1)"
-
-            let onClick = e => {
-                if (!confirm(content)) {
-                    e.preventDefault()
-                    e.stopPropagation()
-                }
+        document.addEventListener('livewire:load', function() {
+            
+            var form = document.querySelector('.form-modal')
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    var btn = document.querySelector('button[type="submit"].btn-loading')
+                    btn.setAttribute('disabled', true)
+                    console.log(btn)
+                    btn.innerHtml = `<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>{{__('Loading')}}...`
+                })
             }
+            // closing any modal dynamically
+            window.livewire.on('cancel', modal => {
+                $('#' + modal).modal('hide');
+                $('div.alert').delay(3500).fadeOut(2000);
+            });
 
-            el.addEventListener('click', onClick, {
-                capture: true
-            })
-
-            // Register any cleanup code inside `cleanup()` in the case
-            // where a Livewire component is removed from the DOM while
-            // the page is still active.
-            cleanup(() => {
-                el.removeEventListener('click', onClick)
-            })
-        })
-        // // closing any modal dynamically
-        // window.livewire.on('cancel', modal => {
-        //     $('#' + modal).modal('hide');
-        // });
-
-        // Listen for events dispatched from Livewire components...
-        Livewire.on('cancel', ({
-            modal
-        }) => {
-            $('#' + modal).modal('hide');
+            $('div.alert-danger').delay(3500).fadeOut(2000);
         })
     </script>
 
