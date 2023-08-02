@@ -80,6 +80,10 @@ Route::group(
         Route::prefix('roles')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\Roles\Index::class)->name('portal.roles.index');
         });
+        //Sales
+        Route::prefix('sales')->group(function () {
+            Route::get('/', App\Livewire\Portal\Sales\SimpleSales\Index::class)->name('portal.simpleSale.index');
+        });
 
     }
 );
