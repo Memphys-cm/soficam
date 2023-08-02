@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Http\Livewire\Portal\Roles\Partial;
+
+
+trait WithRolePermissions
+{
+    public $selectedRolePermissions = [];
+    public $selectAllRolePermissions = false;
+    public $RolePermissions = [
+        'View' => 'role.view',
+        'Update' => 'role.update',
+        'Delete' => 'role.delete',
+        'Create' => 'role.create',
+    ];
+
+    public function rolePermissionClearFields()
+    {
+        $this->reset([
+            'selectedRolePermissions',
+            'selectAllRolePermissions',
+        ]);
+    }
+
+    public function updatedSelectAllRolePermissions($value)
+    {
+        if ($value) {
+            $this->selectedRolePermissions = [
+                'role.create',
+                'role.view',
+                'role.update',
+                'role.delete',
+            ];
+        } else {
+            $this->selectedRolePermissions = [];
+        }
+    }
+
+}
