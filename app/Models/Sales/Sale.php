@@ -2,8 +2,9 @@
 
 namespace App\Models\Sales;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Document;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Sale extends Model
 {
@@ -13,6 +14,15 @@ class Sale extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function saleables()
+    {
+        return $this->hasMany(Saleable::class, 'sale_id');
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
     }
 
     public static function search($query)

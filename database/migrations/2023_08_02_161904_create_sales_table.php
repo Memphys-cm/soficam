@@ -17,7 +17,11 @@ return new class extends Migration
             $table->foreignId('user_id')->on('users')->nullable()->index();
             $table->string('sales_code')->nullable();
             $table->string('purchaser')->nullable();
+            $table->enum('payment_type', ['cash','tranche'])->default('cash');
             $table->string('sales_type');
+            $table->string('advance')->nullable();
+            $table->string('balance')->nullable();
+            $table->longText('observation')->nullable();
             $table->string('created_by')->nullable();
             $table->timestamps();
         });
