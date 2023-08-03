@@ -10,7 +10,7 @@ use App\Http\Livewire\Traits\WithDataTables;
 class Index extends Component
 {
     use WithDataTables;
-    
+
     public Service $service;
     public $state = 0;
 
@@ -41,6 +41,8 @@ class Index extends Component
 
         $this->state = 0;
 
+        $this->reset();
+
         $this->refresh(__('Service successfully :state!', ['state' => $this->state ? 'Updated' : 'Created']), 'CreateUpdateServiceModal');
     }
 
@@ -67,6 +69,8 @@ class Index extends Component
 
         $this->refresh(__('Service successfully deleted!'), 'DeleteModal');
     }
+
+
 
     public function render()
     {
