@@ -18,7 +18,7 @@ class Index extends Component
 
     public HousingEstate $housing_estate;
     public $state = 0;
-    public $blocks = [];
+    public $blocks = [] , $blocks_delete;
     public $newBlockName = '';
     public $newLot = ['lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'lot_status' => '', 'notary_office' => '', 'notary_clerk' => '', 'geometric_pratic' => '', 'geometrician' => '', 'date' => ''];
     public $countBlock = 0;
@@ -29,7 +29,7 @@ class Index extends Component
         $this->blocks[] = [
             'land_id' =>  $this->land_id,
             'name' => $this->newBlockName,
-            'lots' => [],
+            'parcels' => [],
         ];
 
         $this->newBlockName = '';
@@ -38,7 +38,7 @@ class Index extends Component
 
     public function addLot($blockIndex)
     {
-        $this->blocks[$blockIndex]['lots'][] = $this->newLot;
+        $this->blocks[$blockIndex]['parcels'][] = $this->newLot;
         $this->newLot = ['lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'lot_status' => '', 'notary_office' => '', 'notary_clerk' => '', 'geometric_pratic' => '', 'geometrician' => '', 'date' => ''];
     }
 
@@ -50,8 +50,8 @@ class Index extends Component
 
     public function removeLot($blockIndex, $lotIndex)
     {
-        unset($this->blocks[$blockIndex]['lots'][$lotIndex]);
-        $this->blocks[$blockIndex]['lots'] = array_values($this->blocks[$blockIndex]['lots']);
+        unset($this->blocks[$blockIndex]['parcels'][$lotIndex]);
+        $this->blocks[$blockIndex]['parcels'] = array_values($this->blocks[$blockIndex]['parcels']);
     }
 
     protected array $rules = [
@@ -74,6 +74,9 @@ class Index extends Component
     public function initData($id)
     {
         $this->housing_estate = HousingEstate::findOrFail($id);
+        // $this->blocks_delete = $this->housing_estate->blocks()->with('parcels')->get();
+        $this->blocks = $this->housing_estate->blocks()->with('parcels')->get()->toArray();
+        // dd($this->blocks);
         $this->state = 1;
     }
 
@@ -85,39 +88,99 @@ class Index extends Component
         // }
         $this->validate();
 
-        $this->housing_estate->land_id = 1;
-        $this->housing_estate->code = 2772;
+        // $this->housing_estate->land_id = 1;
+        // $this->housing_estate->code = 2772;
         $this->housing_estate->save();
-
-        foreach ($this->blocks as $key => $blockData) {
-            $block = Block::create([
-                'housing_estate_id' => $this->housing_estate->id,
-                'name' => $blockData['name']
-            ]);
-
-            foreach ($blockData['lots'] as $lotData) {
-                // Créer un nouveau lot avec les données du tableau
-                $lot = Parcel::create([
-                    'block_id' => $block->id,
-                    'lot_no' => $lotData['lot_no'],
-                    'lot_area' => $lotData['lot_area'],
-                    'lot_status' => $lotData['lot_status'],
-                    'notary_office' => $lotData['notary_office'],
-                    'notary_clerk' => $lotData['notary_clerk'],
-                    'geometric_pratic' => $lotData['geometric_pratic'],
-                    'geometrician' => $lotData['geometrician'],
-                    'date' => $lotData['date'],
+        
+        if ($this->state == 0) {
+            foreach ($this->blocks as $key => $blockData) {
+                $block = Block::create([
+                    'housing_estate_id' => $this->housing_estate->id,
+                    'name' => $blockData['name']
                 ]);
+    
+                foreach ($blockData['parcels'] as $lotData) {
+                    // Créer un nouveau lot avec les données du tableau
+                    $lot = Parcel::create([
+                        'block_id' => $block->id,
+                        'lot_no' => $lotData['lot_no'],
+                        'lot_area' => $lotData['lot_area'],
+                        'lot_status' => $lotData['lot_status'],
+                        'notary_office' => $lotData['notary_office'],
+                        'notary_clerk' => $lotData['notary_clerk'],
+                        'geometric_pratic' => $lotData['geometric_pratic'],
+                        'geometrician' => $lotData['geometrician'],
+                        'date' => $lotData['date'],
+                    ]);
+                }
+            }
+        } else {
+            foreach ($this->blocks as $blockData) {
+                $block = Block::findOrFail($blockData['id']);
+                $block->update([
+                    'name' => $blockData['name']
+                ]);
+                 // Mise à jour des lots existants
+                 if (is_array($blockData) && isset($blockData['parcels'])) {
+                    // Mise à jour des lots existants
+                    foreach ($blockData['parcels'] as $lotData) {
+                        $lot = Parcel::findOrFail($lotData['id']);
+                        $lot->update($lotData);
+                    }
+                }
             }
         }
+        
+
+        
+        
+
+        
+    
+       
 
         // dd($this->blocks);
 
         $this->state = 0;
-
+        $this->clearFields();
         $this->refresh(__('housing_estate successfully :state!', ['state' => $this->state ? 'Updated' : 'Created']), 'CreateUpdateHousingEstateModal');
     }
 
+    public function delete()
+    {
+        // if (!Gate::allows('service.delete')) {
+        //     return abort(401);
+        // }
+
+        if (!empty($this->housing_estate)) {
+
+            // Supprimer tous les lots associés au bloc
+            // $this->housing_estate->blocks()->parcels()->delete();
+
+            // Supprimer le bloc lui-même
+            $this->housing_estate->blocks()->delete();
+
+            $this->housing_estate->delete();
+        }
+
+        $this->housing_estate = new HousingEstate();
+
+        $this->state = 0;
+
+        $this->refresh(__('Housing Estate successfully deleted!'), 'DeleteModal');
+    }
+
+    public function clearFields()
+    {
+        $this->reset([
+            'blocks',
+            // 'housing_estate',
+            // 'amount_deposit',
+            // 'remaining_amount'
+        ]);
+        // $this->blocks = [];
+        // $this->housing_estate;
+    }
 
     public function render()
     {

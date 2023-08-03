@@ -1,6 +1,7 @@
 <div>
     <x-alert />
     @include('livewire.portal.registration.housing-estate.create-housing_estate')
+    @include('livewire.portal.registration.housing-estate.view-housing_estate')
     {{-- @include('livewire.portal.housing_estates.import-housing_estates') --}}
     <x-delete-modal />
     <div class='p-0'>
@@ -149,7 +150,14 @@
                         {{-- @canany('housing_estate.update','housing_estate.delete') --}}
                         <td>
                             {{-- @can('housing_estate.update') --}}
-                            <a href="#" wire:click.prevent="initData({{$housing_estate->id}})" data-bs-toggle="modal" data-bs-target="#CreateUpdatehousing_estateModal" draggable="false">
+                            <a href="#" wire:click.prevent="initData({{$housing_estate->id}})" data-bs-toggle="modal" data-bs-target="#ViewHousingEstateModal" draggable="false">
+                                <svg class="icon icon-sm text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                  </svg>
+                                  
+                            </a>
+                            <a href="#" wire:click.prevent="initData({{$housing_estate->id}})" data-bs-toggle="modal" data-bs-target="#CreateUpdateHousingEstateModal" draggable="false">
                                 <svg class="icon icon-sm text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                 </svg>
