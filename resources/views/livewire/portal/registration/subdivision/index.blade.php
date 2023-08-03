@@ -1,7 +1,7 @@
 <div>
     <x-alert />
     @include('livewire.portal.registration.subdivision.create-subdivision')
-    {{-- @include('livewire.portal.services.import-services') --}}
+    {{-- @include('livewire.portal.subdivisions.import-subdivisions') --}}
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -29,21 +29,21 @@
             </div>
             <div class="d-flex justify-content-between mb-2">
 
-                {{-- @can('service.create') --}}
+                {{-- @can('subdivision.create') --}}
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateUpdateSubdivisionModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{__('New')}}
                 </a>
                 {{-- @endcan --}}
-                {{-- @can('service.import') --}}
-                <a href="#" data-bs-toggle="modal" data-bs-target="#importServicesModal" class="btn btn-sm btn-secondary py-2 d-inline-flex align-items-center">
+                {{-- @can('subdivision.import') --}}
+                <a href="#" data-bs-toggle="modal" data-bs-target="#importsubdivisionsModal" class="btn btn-sm btn-secondary py-2 d-inline-flex align-items-center">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                     </svg>{{__('Import')}}
                 </a>
                 {{-- @endcan --}}
-                {{-- @can('service.export_n_print') --}}
+                {{-- @can('subdivision.export_n_print') --}}
                 <div class="mx-2" wire:loading.remove>
                     <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center {
                         {{-- {count($subdivisons) > 0 ? '' :'disabled'}} --}}
@@ -114,7 +114,7 @@
                         <th class="border-bottom">{{__('Remaining Area')}}</th>
                         <th class="border-bottom">{{__('Real Estate Developer')}}</th>
                         <th class="border-bottom">{{__('Date created')}}</th>
-                        {{-- @canany('service.update','service.delete') --}}
+                        {{-- @canany('subdivision.update','subdivision.delete') --}}
                         <th class="border-bottom">{{__('Action')}}</th>
                         {{-- @endcanany --}}
                     </tr>
@@ -123,44 +123,47 @@
                     @forelse($subdivisions as $subdivison)
                     <tr>
                         <td>
-                            <span class="fw-normal">{{$service->code}}</span>
+                            <span class="fw-normal">{{$subdivison->code}}</span>
                         </td>
                         <td>
-                            <a href="#" class="d-flex align-items-center">
-                                <div class="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-primary me-3"><span class="text-white">{{initials($service->service_name)}}</span></div>
-                                <div class="d-block"><span class="fw-bold">{{$service->service_name}}</span>
-                                    <div class="small text-gray">{{!empty($service->service_name) ? $service->service_name : ''}}</div>
+                            {{-- <a href="#" class="d-flex align-items-center">
+                                <div class="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-primary me-3"><span class="text-white">{{initials($subdivision->subdivision_name)}}</span></div>
+                                <div class="d-block"><span class="fw-bold">{{$subdivision->subdivision_name}}</span>
+                                    <div class="small text-gray">{{!empty($subdivision->subdivision_name) ? $subdivision->subdivision_name : ''}}</div>
                                 </div>
-                            </a>
+                            </a> --}}
                         </td>
                         <td class="text-center">
-                            <span class="fw-normal">{{ $service->users_count }}</span>
+                            {{-- <span class="fw-normal">{{ $subdivision->users_count }}</span> --}}
                         </td>
                         <td>
-                            <span class="fw-normal badge super-badge p-2 bg-{{$service->statusStyle}} round">{{$service->statusText}}</span>
+                            {{-- <span class="fw-normal badge super-badge p-2 bg-{{$subdivision->statusStyle}} round">{{$subdivision->statusText}}</span> --}}
                         </td>
-
-                        <td>
-                            <span class="fw-normal">{{$service->created_at->format('Y-m-d')}}</span>
+                        <td class="text-center">
+                            <span class="fw-normal"></span>
                         </td>
-                        @canany('service.update','service.delete')
+                        <td class="text-center"> {{ $subdivison->estate_agent }} </td>
                         <td>
-                            @can('service.update')
-                            <a href="#" wire:click.prevent="initData({{$service->id}})" data-bs-toggle="modal" data-bs-target="#CreateUpdateServiceModal" draggable="false">
+                            <span class="fw-normal">{{$subdivison->created_at->format('Y-m-d')}}</span>
+                        </td>
+                        {{-- @canany('subdivision.update','subdivision.delete') --}}
+                        <td>
+                            {{-- @can('subdivision.update') --}}
+                            <a href="#" wire:click.prevent="initData({{$subdivison->id}})" data-bs-toggle="modal" data-bs-target="#CreateUpdateSubdivisionModal" draggable="false">
                                 <svg class="icon icon-sm text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                 </svg>
                             </a>
-                            @endcan
-                            @can('service.delete')
-                            <a href="#" wire:click.prevent="initData({{$service->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
+                            {{-- @endcan --}}
+                            {{-- @can('subdivision.delete') --}}
+                            <a href="#" wire:click.prevent="initData({{$subdivison->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
                                 <svg class="icon icon-sm text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                                 </svg>
                             </a>
-                            @endcan
+                            {{-- @endcan --}}
                         </td>
-                        @endcanany
+                        {{-- @endcanany --}}
                     </tr>
                     @empty
                     <tr>

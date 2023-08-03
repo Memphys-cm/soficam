@@ -13,7 +13,16 @@ return new class extends Migration
     {
         Schema::create('subdivisions', function (Blueprint $table) {
             $table->id();
-            $table->string('number')->nullable();
+            $table->string('code')->nullable();
+            $table->foreignId('land_id')->index()->constrained('divisions')->default(1);
+            $table->string('maeture')->nullable();
+            $table->string('property_developer')->nullable();
+            $table->string('estate_agent')->nullable();
+            $table->string('lotisser')->nullable();
+            $table->string('geometric_pratice')->nullable();
+            $table->string('geometric')->nullable();
+            $table->string('urbanist')->nullable();
+            $table->string('controller')->nullable();
             $table->timestamps();
         });
     }
