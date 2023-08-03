@@ -82,7 +82,7 @@ Route::group(
         });
 
         Route::prefix('registration')->group(function () {
-            Route::get('/subdivisions', App\Http\Livewire\Portal\Registration\Subdivision\Index::class)->name('portal.registrations.subdivisions.index');
+            Route::get('/subdivisions', App\Http\Livewire\Portal\Registration\HousingEstate\Index::class)->name('portal.registrations.housingestates.index');
         });
 
     }

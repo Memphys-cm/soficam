@@ -13,12 +13,12 @@ class Index extends Component
 {
 
     use WithDataTables;
-    
+
     public Subdivision $subdivision;
     public $state = 0;
     public $blocks = [];
     public $newBlockName = '';
-    public $newLot = ['lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'lot_status' => '', 'notary_office' => '' , 'notary_clerk' => '' , 'geometric_pratic' => '', 'geometrician' => '' , 'date' => ''] ;
+    public $newLot = ['lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'lot_status' => '', 'notary_office' => '', 'notary_clerk' => '', 'geometric_pratic' => '', 'geometrician' => '', 'date' => ''];
     public $countBlock = 0;
     public $land_id =  1;
     // public function __construct()
@@ -38,7 +38,7 @@ class Index extends Component
     //     ];
     // }
 
-    
+
 
     public function addBlock()
     {
@@ -56,14 +56,14 @@ class Index extends Component
     // {
     //     $this->blocks[0]['lots'][] = $this->newLot;
     //     $this->newLot = ['lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'lot_status' => '', 'notary_office' => '' , 'notary_clerk' => '' , 'geometric_pratic' => '', 'geometrician' => '' , 'date' => ''] ;
-   
+
     //     $this->saveBlocksToJson();
     // }
 
     public function addLot($blockIndex)
     {
         $this->blocks[$blockIndex]['lots'][] = $this->newLot;
-        $this->newLot = ['lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'lot_status' => '', 'notary_office' => '' , 'notary_clerk' => '' , 'geometric_pratic' => '', 'geometrician' => '' , 'date' => ''] ;
+        $this->newLot = ['lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'lot_status' => '', 'notary_office' => '', 'notary_clerk' => '', 'geometric_pratic' => '', 'geometrician' => '', 'date' => ''];
     }
 
     public function removeBlock($blockIndex)
@@ -98,24 +98,45 @@ class Index extends Component
     }
 
     public function showBlocksDataView()
-{
-    if (Storage::exists('blocks_data.json')) {
-        $jsonData = Storage::get('blocks_data.json');
-        $blocksData = json_decode($jsonData, true);
+    {
+        if (Storage::exists('blocks_data.json')) {
+            $jsonData = Storage::get('blocks_data.json');
+            $blocksData = json_decode($jsonData, true);
 
-        // Filtrer les blocs avec 'name' égal à 'me'
-        $filteredBlocksData = array_filter($blocksData, function ($block) {
-            return $block['land_id'] == $this->subdivision->id;
-        });
+            // Filtrer les blocs avec 'name' égal à 'me'
+            $filteredBlocksData = array_filter($blocksData, function ($block) {
+                return isset($block['land_id']) && $block['land_id'] == $this->subdivision->id;
+            });
             $this->blocks = $filteredBlocksData;
-    } else {
-        $this->blocks = null;
+        } else {
+            $this->blocks = null;
+        }
     }
-}
-
-
-     //Update & Store Rules
-     protected array $rules = [
+    public function updateBlocksAndLotsForLandId($landId, $newBlocksData)
+    {
+        if (Storage::exists('blocks_data.json')) {
+            $jsonData = Storage::get('blocks_data.json');
+            $blocksData = json_decode($jsonData, true);
+    
+            $blocksData = array_values(array_filter($blocksData, function ($block) use ($landId) {
+                return isset($block['land_id']) && $block['land_id'] !== $landId;
+            }));
+    
+            // Ajouter les nouvelles données pour le land_id donné
+            // $newBlocksData['land_id'] = $landId;
+            $blocksData[] = $newBlocksData;
+    
+            // Sauvegarder les modifications dans le fichier JSON
+            $jsonData = json_encode($blocksData, JSON_PRETTY_PRINT);
+            Storage::put('blocks_data.json', $jsonData);
+        } else {
+            // Si le fichier n'existe pas, vous pouvez le créer ici avec les nouvelles données pour land_id = 1.
+            $jsonData = json_encode([$newBlocksData], JSON_PRETTY_PRINT);
+            Storage::put('blocks_data.json', $jsonData);
+        }
+    }
+    //Update & Store Rules
+    protected array $rules = [
         'subdivision.maeture' => 'sometimes',
         'subdivision.code' => 'sometimes',
         'subdivision.property_developer' => 'sometimes',
@@ -147,6 +168,7 @@ class Index extends Component
         // }
 
         $this->saveBlocksToJson();
+        if ($this->state == 1) $this->updateBlocksAndLotsForLandId($this->subdivision->id, $this->blocks);
         $this->validate();
 
         // $this->subdivision->land_id = 1;
@@ -156,7 +178,6 @@ class Index extends Component
         $this->state = 0;
 
         $this->refresh(__('subdivision successfully :state!', ['state' => $this->state ? 'Updated' : 'Created']), 'CreateUpdateSubdivisionModal');
-
     }
 
     public function render()
@@ -169,14 +190,12 @@ class Index extends Component
         // dd($this->blocks);
 
         $subdivisions = Subdivision::
-        // withCount('users')->
-        orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
-
-        
+            // withCount('users')->
+            orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
 
         $subdivisions_count = Subdivision::count();
         // dd($subdivisions_count);
 
-        return view('livewire.portal.registration.subdivision.index' , ['subdivisions' => $subdivisions,'subdivisions_count' => $subdivisions_count]);
+        return view('livewire.portal.registration.subdivision.index', ['subdivisions' => $subdivisions, 'subdivisions_count' => $subdivisions_count]);
     }
 }
