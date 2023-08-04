@@ -2,6 +2,7 @@
 
 namespace App\Models\Sales;
 
+use App\Models\User;
 use App\Models\Document;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,15 +26,19 @@ class Sale extends Model
         return $this->hasMany(Document::class);
     }
 
+    protected $casts = [
+        'document_path' => 'array',
+    ];
+
     public static function search($query)
     {
         return empty($query) ?
             static::query() :
             static::query()
             ->where(function ($q) use ($query) {
-                $q->where('sales_amount', 'like', '%' . $query . '%');
+                $q->where('sale_amount', 'like', '%' . $query . '%');
                 $q->orWhere('sales_code', 'like', '%' . $query . '%');
-                $q->orWhere('sales_type', 'like', '%' . $query . '%');
+                $q->orWhere('sale_type', 'like', '%' . $query . '%');
                 
             });
     }

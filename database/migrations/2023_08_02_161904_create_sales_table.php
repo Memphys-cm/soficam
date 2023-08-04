@@ -13,14 +13,21 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->float('sales_amount');
+            $table->decimal('sale_amount', 300, 2);
             $table->foreignId('user_id')->on('users')->nullable()->index();
-            $table->string('sales_code')->nullable();
-            $table->string('purchaser')->nullable();
+            $table->string('sales_code')->unique()->nullable();
+            $table->string('number_of_lots_sold')->nullable();
+            $table->string('purchaser_name')->nullable();
+            $table->text('document_path')->nullable();
+            $table->string('number_of_lots_remaining')->nullable();
+            // $table->string('public_utility_area')->nullable();
+            $table->string('surface_for_sale')->nullable();
             $table->enum('payment_type', ['cash','tranche'])->default('cash');
-            $table->string('sales_type');
-            $table->string('advance')->nullable();
-            $table->string('balance')->nullable();
+            $table->string('sale_type');
+            $table->string('price_per_m²');
+            $table->foreignId('notary_id')->on('notaries')->nullable();
+            $table->decimal('advance', 300, 2)->nullable()->default(0.00);
+            $table->decimal('balance', 300, 2)->nullable()->default(0.00);
             $table->longText('observation')->nullable();
             $table->string('created_by')->nullable();
             $table->timestamps();

@@ -4,10 +4,12 @@ namespace App\Http\Livewire\Portal\Sales\SimpleSales;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Notary;
 use Livewire\Component;
 use App\Models\Sales\Sale;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
 class Index extends Component
@@ -24,16 +26,19 @@ class Index extends Component
     public $inputs = [0]; // Initialize with one element
     public $i = 0;
 
-    public $user, $user_id;
+
+    public $user, $user_id, $users, $notarys;
     public $created, $sales_code, $number_of_lots_sold, $number_of_lots_remaining, $balance, $observation;
     public $maeture, $land_title_area, $public_utility_area, $area_sold, $remaining_area, $number_of_blocks, $number_of_lots;
-    public $purchaser_address, $surface_for_sale, $price_per_m², $sale_amount, $payment_type, $advance;
+    public $surface_for_sale, $price_per_m², $sale_amount, $payment_type, $advance, $notary, $notary_id;
     public $document = [];
     public $purchaser_name = [];
+    public $first_name, $last_name, $email, $address, $date_of_birth, $place_of_birth, $sale, $saleId;
 
     public function mount()
     {
-        $this->user = User::select('id', 'first_name')->get();
+        $this->users = User::select('id', 'first_name')->get();
+        $this->notarys = Notary::select('id', 'name')->get();
         $this->created = Carbon::now()->addHour();
         $this->sales_code = $this->generateConsCode();
         $this->calculateSaleAmount();
@@ -81,6 +86,12 @@ class Index extends Component
 
             // Calculate the balance as the difference between sale_amount and advance
             $this->balance = $this->sale_amount - $this->advance;
+            if ($this->payment_type === 'tranche') {
+                $this->balance = $this->sale_amount - $this->advance;
+            } else {
+                $this->advance = null; // Set the advance value based on your logic for cash payment
+                $this->balance = null; // Set the balance value based on your logic for cash payment
+            }
         } else {
             // If any of the inputs is not set, set the sale amount to null or 0, depending on your preference
             $this->sale_amount = null; // or 0
@@ -93,7 +104,7 @@ class Index extends Component
     public static function generateConsCode()
     {
         $lastSaleCode = DB::table('sales')
-            ->where('sales_type', 'simple-sale')
+            ->where('sale_type', 'simple-sale')
             ->orderBy('id', 'desc')->select('sales_code')->first();
         $number = 1;
         if ($lastSaleCode) {
@@ -107,72 +118,160 @@ class Index extends Component
         return $SaleCode;
     }
 
+    public function updatedUserId($user_id)
+    {
+        // dd('s');
+        if (!empty($user_id)) {
+            $utilisateur = User::findOrFail($user_id);
+
+            // Update the Livewire component properties with the user information
+            $this->first_name = $utilisateur->first_name;
+            $this->last_name = $utilisateur->last_name;
+            $this->email = $utilisateur->email;
+            $this->address = $utilisateur->address;
+            $this->date_of_birth = $utilisateur->date_of_birth;
+            $this->place_of_birth = $utilisateur->place_of_birth;
+        } else {
+            // Reset the Livewire component properties when the user_id is empty
+            $this->first_name = '';
+            $this->last_name = '';
+            $this->email = '';
+            $this->address = '';
+            $this->date_of_birth = '';
+            $this->place_of_birth = '';
+        }
+    }
+
+    
 
     public function store()
     {
         // Validate the required fields before storing the data
         $this->validate([
+            'user_id' => 'required',
             'surface_for_sale' => 'required|numeric',
             'price_per_m²' => 'required|numeric',
             'advance' => 'nullable|numeric',
-            'document.*' => 'image|mimes:jpeg,png,jpg,gif,svg,pdf,docx,txt,doc,xlsx,mp3,mp4,zip|max:5120|nullable',
+            'notary_id' => 'required|nullable',
+            'payment_type' => 'required|in:cash,tranche',
+            'document.*' => [
+                'file',
+                'max:2048', // Maximum file size in kilobytes (2MB in this example)
+                'mimetypes:application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // Allowed MIME types
+            ],
             // Add more validation rules for other fields if needed
         ]);
 
         // Calculate the sale amount
         $this->calculateSaleAmount();
+
+        $documentPaths = [];
+        // foreach ($this->document as $document) {
+        //     dd($document);
+        //     $documentPaths[] = $document->store('documents', 'documents'); // Store using the 'documents' disk
+        // }
+        $documentPaths = [];
+        foreach ($this->document as $document) {
+            // dd($document);
+
+            $documentPaths[] = $document->store('public/documents');
+        }
+
         $purchaserNames = implode(',', $this->purchaser_name);
+
         // Store the data into the database (or any other storage medium)
         $sale = Sale::create([
             'user_id' => $this->user_id,
-            'created' => $this->created,
+            'notary_id' => $this->notary_id,
             'sales_code' => $this->sales_code,
             'number_of_lots_sold' => $this->number_of_lots_sold,
             'number_of_lots_remaining' => $this->number_of_lots_remaining,
             'balance' => $this->balance,
-            'mature' => $this->mature,
-            'land_title_area' => $this->land_title_area,
-            'public_utility_area' => $this->public_utility_area,
-            'area_sold' => $this->area_sold,
-            'remaining_area' => $this->remaining_area,
-            'number_of_blocks' => $this->number_of_blocks,
-            'number_of_lots' => $this->number_of_lots,
-            'purchaser_name' => $this->purchaserNames,
-            'purchaser_address' => $this->purchaser_address,
+            'purchaser_name' => implode(',', $this->purchaser_name),
             'surface_for_sale' => $this->surface_for_sale,
             'price_per_m²' => $this->price_per_m²,
             'sale_amount' => $this->sale_amount,
+            'document_path' => json_encode($documentPaths),// Use the array with document paths here
+            'sale_type' => 'simple_sale',
             'payment_type' => $this->payment_type,
             'advance' => $this->advance,
             'balance' => $this->balance,
             'observation' => $this->observation,
+            'created_by' => auth()->user()->name,
         ]);
 
-        // Store the documents
-        foreach ($this->document as $document) {
-            $document->store('document');
-            // Assuming you want to store the document's path in the database, you can do something like this:
-            $sale->documents()->create(['path' => $document->hashName()]);
+        // Assuming your Sale model has a documents relationship, you can store the documents like this:
+        foreach ($documentPaths as $path) {
+            $sale->documents()->create(['path' => $path]);
         }
 
+        session()->flash('success', 'Sale information stored successfully!');
+
+
         // Clear the input fields after storing
-        $this->resetInput();
+        $this->clearFields();
 
         // Optionally, you can add a success message or redirect to a confirmation page.
-        session()->flash('success', 'Sale information stored successfully!');
+    }
+
+    public function delete()
+    {
+        if ($this->sale) {
+            $this->sale->delete();
+            session()->flash('message', 'sale deleted successfully');
+            $this->dispatchBrowserEvent('close-modal');
+        }
     }
 
 
-    public function resetInput()
+    public function clearFields()
     {
+        $this->sale = '';
+        $this->saleId = '';
+        $this->sale_amount = '';
+        $this->user_id = '';
+        $this->sales_code = '';
+        $this->number_of_lots_sold = '';
+        $this->purchaser_name ='';
+        $this->document = '';
+        $this->number_of_lots_remaining = '';
+        $this->surface_for_sale = '';
+        $this->payment_type = '';
+        $this->price_per_m² = '';
+        $this->notary_id = '';
+        $this->advance = '';
+        $this->balance = '';
+        $this->observation = '';
+
+    }
+    public function initData($id)
+    {
+        $sale = Sale::findOrFail($id);
+        $this->sale = $sale;
+        $this->saleId = $id;
+        $this->sale_amount = $sale->sale_amount;
+        $this->user_id = $sale->user_id;
+        $this->sales_code = $sale->sales_code;
+        $this->number_of_lots_sold = $sale->number_of_lots_sold;
+        $this->purchaser_name = $sale->purchaser_name;
+        $this->document = $sale->document;
+        $this->number_of_lots_remaining = $sale->number_of_lots_remaining;
+        $this->surface_for_sale = $sale->surface_for_sale;
+        $this->payment_type = $sale->payment_type;
+        $this->price_per_m² = $sale->price_per_m²;
+        $this->notary_id = $sale->notary_id;
+        $this->advance = $sale->advance;
+        $this->balance = $sale->balance;
+        $this->observation = $sale->observation;
     }
 
 
     public function render()
     {
+        
 
         $simplesales = Sale::search($this->query)->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
 
-        return view('livewire..portal.sales.simple-sales.index', compact('simplesales'))->layout('components.layouts.dashboard');
+        return view('livewire..portal.sales.simple-sales.index', compact('simplesales'));
     }
 }

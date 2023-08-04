@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\Sales\Sale;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
@@ -94,6 +96,10 @@ class User extends Authenticatable
             false => 'danger',
             NULL => 'info'
         };
+    }
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
     }
     public function getStatusTextAttribute()
     {

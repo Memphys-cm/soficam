@@ -31,7 +31,7 @@
             <div class="d-flex justify-content-between mb-2">
 
                 {{-- @can('user.create') --}}
-                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateUserModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#CreatesimplesaleModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{__('New')}}
@@ -137,14 +137,16 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
+                        <th class="border-bottom">{{__('CODE')}}</th>
+                        <th class="border-bottom">{{__('PURCHASER(s) NAME')}}</th>
                         <th class="border-bottom">{{__('LAND TITLE NUMBER')}}</th>
                         <th class="border-bottom">{{__('Surface for sale')}}</th>
                         <th class="border-bottom">{{__('Price per m²')}}</th>
                         <th class="border-bottom">{{__('Sale amount')}}</th>
                         <th class="border-bottom">{{__('Amount Advance')}}</th>
                         <th class="border-bottom">{{__('Amount Balance')}}</th>
-                        <th class="border-bottom">{{__('Payment Method')}}</th>
-                        <th class="border-bottom">{{__('Status')}}</th>
+                        <th class="border-bottom">{{__('Payment Type')}}</th>
+                        <th class="border-bottom">{{__('Created By')}}</th>
                         <th class="border-bottom">{{__('Date created')}}</th>
                         {{-- @canany('user.update','user.delete') --}}
                         <th class="border-bottom">{{__('Action')}}</th>
@@ -154,55 +156,32 @@
                 <tbody>
                     @forelse($simplesales as $simplesale)
                     <tr>
-                        <td>
-                            <a href="#" class="d-flex align-items-center">
-                                <div class="avatar avatar-md d-flex align-items-center justify-content-center fw-bold fs-6 rounded bg-primary me-2"><span class="text-white">{{$simplesale>initials}}</span></div>
-                                <div class="d-block">
-                                    <span class="fw-bolder fs-6">{{ucwords($simplesale>name)}}</span>
-                                    <div class="small text-gray">
-                                        <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
-                                        </svg> {{$simplesale>email}}
-                                    </div>
-                                    <div class="small text-gray d-flex align-items-end">
-                                        <svg class="icon icon-xxs me-1 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                                        </svg> {{$simplesale>primary_phone_number}} | {{$simplesale>secondary_phone_number}}
-                                    </div>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="fs-normal">{{is_null($simplesale>service) ? __('NA'): ucfirst($simplesale>service->name) }}</span>
-                        </td>
-                        <td>
-                            <span class="fw-normal">{{$simplesale>getRoleNames()->first()}}</span>
-                        </td>
-                        <td>
-                            <span class="fw-normal  badge super-badge p-2  bg-{{$simplesale>status_style}} rounded">{{$simplesale>status_text}}</span>
-                        </td>
-                        <td>
-                            <span class="fw-normal">{{$simplesale>created_at->format('Y-m-d')}}</span>
-                        </td>
-                        // @canany('simplesaleupdate','simplesaledelete')
+                        <td>{{ $simplesale->sales_code }}</td>
+                        <td>{{ $simplesale->user_id }}</td>
+                        <td>{{ $simplesale->purchaser_name }}</td>
+                            <td>{{ $simplesale->surface_for_sale }}</td>
+                            <td>{{ $simplesale->price_per_m² }}</td>
+                            <td>{{ $simplesale->sale_amount }}</td>
+                            <td>{{ $simplesale->advance }}</td>
+                            <td>{{ $simplesale->balance }}</td>
+                            <td>{{ $simplesale->payment_type }}</td>
+                            <td>{{ $simplesale->created_by }}</td>
+                            <td>{{ $simplesale->created_at }}</td>
+                        
                         <td>
 
-                            // @can('simplesaleupdate')
-                            <a href='#' wire:click.prevent="initData({{$simplesale>id}})" data-bs-toggle="modal" data-bs-target="#Editsimplesaleodal">
+                            {{-- <a href='#' wire:click.prevent="initData({{$simplesale->id}})" data-bs-toggle="modal" data-bs-target="#Editsimplesaleodal">
                                 <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                 </svg>
-                            </a>
-                            @endcan
-                            @can('simplesaledelete')
-                            <a href='#' wire:click.prevent="initData({{$simplesale>id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal">
+                            </a> --}}
+                            
+                            <a href='#' wire:click.prevent="initData({{$simplesale->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal">
                                 <svg class="icon icon-xs text-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                 </svg>
                             </a>
-                            // @endcan
                         </td>
-                        // @endcanany
                     </tr>
                     @empty
                     <tr>
@@ -223,3 +202,12 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        window.addEventListener('close-modal', event => {
+            $('#CreatesimplesaleModal').modal('hide');
+            $('#DeleteModal').modal('hide');
+        });
+    </script>
+@endpush
