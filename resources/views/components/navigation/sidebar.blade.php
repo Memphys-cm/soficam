@@ -132,6 +132,44 @@
                                     </div>
                                 </li>
 
+                                @canany('titre_foncier.view','titre_foncier.operations.view')
+
+                                <li class="nav-item">
+                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.divisions.index') || $request->routeIs('portal.sub-divisions.index')  ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-land-title"><span>
+                                            <span class="sidebar-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon icon-sm">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
+                                                </svg>
+                                            </span>
+                                            <span class="sidebar-text">{{__('Land Titles')}}</span>
+                                        </span>
+                                        <span class="link-arrow">
+                                            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                    <div class="multi-level collapse {{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.divisions.index') || $request->routeIs('portal.sub-divisions.index')  ? 'show' : '' }}" role="list" id="submenu-land-title" aria-expanded="{{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.division.index') || $request->routeIs('portal.sub_division.index')  ? 'false' : 'true' }}">
+                                        <ul class="flex-column nav">
+                                            @can('titre_foncier.view')
+                                            <li class="nav-item {{$request->routeIs('portal.titre-fonciers.index') ? 'active' :'' }}">
+                                                <a href="{{route('portal.titre-fonciers.index')}}" class="nav-link">
+                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{__('All Land Titles')}}</span>
+                                                </a>
+                                            </li>
+                                            @endcan
+                                            @can('titre_foncier.operations.view')
+                                            <li class="nav-item {{$request->routeIs('portal.divisions.index') ? 'active' :'' }}">
+                                                <a href="{{route('portal.divisions.index')}}" class="nav-link">
+                                                    <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{__('Operations on TF')}}</span>
+                                                </a>
+                                            </li>
+                                            @endcan
+                                        </ul>
+                                    </div>
+                                </li>
+                                @endcanany
+
 
                                 @can('service.view')
                                 <li class="nav-item {{ $request->routeIs('portal.services.*') ? 'active' : '' }}">
@@ -190,8 +228,51 @@
                                     </a>
                                 </li>
                                 @endcanany
+                                {{-- @canany('region.view','division.view','sub_division.view') --}}
 
-                                <!-- <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
+                                <li class="nav-item">
+                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.sales.simpleSale.index') || $request->routeIs('portal.divisions.index')  ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#subsales-dashboard"><span>
+                                            <span class="sidebar-icon">
+                                                <svg class="icon icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                                                    <line x1="12" y1="7" x2="12" y2="17" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                                                    <line x1="16" y1="10" x2="8" y2="10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                                                    <line x1="16" y1="14" x2="8" y2="14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                                                </svg>
+
+                                            </span>
+                                            <span class="sidebar-text">{{__('Sales')}}</span>
+                                        </span>
+                                        <span class="link-arrow">
+                                            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                    <div class="multi-level collapse {{ $request->routeIs('portal.simpleSales.index') || $request->routeIs('portal.divisions.index') || $request->routeIs('portal.sub-divisions.index')  ? 'show' : '' }}" role="list" id="subsales-dashboard" aria-expanded="{{ $request->routeIs('portal.simpleSale.index') || $request->routeIs('portal.division.index') || $request->routeIs('portal.sub_division.index')  ? 'false' : 'true' }}">
+                                        <ul class="flex-column nav">
+                                            {{-- @can('simpleSale.view') --}}
+                                            <li class="nav-item {{$request->routeIs('portal.simpleSale.index') ? 'active' :'' }}">
+                                                <a href="{{route('portal.simpleSale.index')}}" class="nav-link">
+                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{__('Simple Sales')}}</span>
+                                                </a>
+                                            </li>
+                                            {{-- @endcan --}}
+                                            {{-- @can('division.view')
+                                            <li class="nav-item {{$request->routeIs('portal.divisions.index') ? 'active' :'' }}">
+                                            <a href="{{route('portal.divisions.index')}}" class="nav-link">
+                                                <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{__('Divisions')}}</span>
+                                            </a>
+                                </li>
+                                @endcan --}}
+
+
+                            </ul>
+                        </div>
+                        </li>
+                        {{-- @endcanany --}}
+
+                        <!-- <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
                                 <li class="nav-item">
                                     <a href="" target="_blank" class="nav-link d-flex align-items-center">
                                         <span class="sidebar-icon">
@@ -204,13 +285,13 @@
                                         </span>
                                     </a>
                                 </li> -->
-                            </ul>
-                        </div>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div>
+    </div>
+    <div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div>
     </div>
     <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
         <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>

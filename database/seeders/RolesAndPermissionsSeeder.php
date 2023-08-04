@@ -75,6 +75,16 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'role.import'],
             ['name' => 'role.export_n_print'],
 
+            ['name' => 'titre_foncier.view'],
+            ['name' => 'titre_foncier.view_detail'],
+            ['name' => 'titre_foncier.create'],
+            ['name' => 'titre_foncier.update'],
+            ['name' => 'titre_foncier.delete'],
+            
+            ['name' => 'titre_foncier.import'],
+            ['name' => 'titre_foncier.export_n_print'],
+            
+            ['name' => 'titre_foncier.operations.view'],
 
             ['name' => 'profile.view'],
             ['name' => 'profile.update'],
