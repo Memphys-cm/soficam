@@ -128,14 +128,14 @@
                         <td>{{ $total->purchaser_name }}</td>
                         <td>{{ $total->user_id }}</td>
                         <td>{{ $total->sale_type }}</td>
-                            <td>{{ $total->surface_for_sale }}  {{ __('m²') }}</td>
-                            <td>{{ $total->price_per_m² }}  {{ __('XAF') }}</td>
-                            <td>{{ $total->sale_amount }}  {{ __('XAF') }}</td>
-                            <td>{{ $total->advance }}  {{ __('XAF') }}</td>
-                            <td>{{ $total->balance }}  {{ __('XAF') }}</td>
-                            <td>{{ $total->payment_type }}</td>
-                            <td>{{ $total->created_by }}</td>
-                            <td>{{ $total->created_at }}</td>
+                        <td>{{ $total->surface_for_sale }}  {{ __('m²') }}</td>
+                        <td>{{ $total->price_per_m² }}  {{ __('XAF') }}</td>
+                        <td>{{ $total->sale_amount }}  {{ __('XAF') }}</td>
+                        <td>{{ $total->advance }}  {{ __('XAF') }}</td>
+                        <td>{{ $total->balance }}  {{ __('XAF') }}</td>
+                        <td>{{ $total->payment_type }}</td>
+                        <td>{{ $total->created_by }}</td>
+                        <td>{{ $total->created_at }}</td>
                         
                         <td>
 
