@@ -9,7 +9,7 @@
                     </div>
                     <x-form-items.form wire:submit="store">
 
-                        <fieldset class="border p-3">
+                        <fieldset class="border p-3 rounded">
                             <legend class="w-auto">Informations on the ground</legend>
                             <div class='row form-group mb-3'>
                                 <div class="col-md-6 py-2">
@@ -71,7 +71,7 @@
                             </div>
                         </fieldset>
 
-                        <fieldset class="border p-3 my-2">
+                        <fieldset class="border p-3 my-2 rounded">
                             <legend class="w-auto">{{__('Promoter Informations')}}</legend>
                             <div class='row form-group mb-3'>
                                 <div class="col-md-3 py-2">
@@ -134,7 +134,7 @@
                         </fieldset>
 
                         @foreach($blocks as $blockIndex => $block)
-                        <fieldset class="border p-3 mb-3">
+                        <fieldset class="border p-3 mb-3 rounded">
                             <legend class="w-auto">{{ $block['name'] }}</legend>
 
                             <div class='d-flex justify-content-between align-items-end'>
