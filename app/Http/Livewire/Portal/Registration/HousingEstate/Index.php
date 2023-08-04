@@ -20,7 +20,7 @@ class Index extends Component
     public $state = 0;
     public $blocks = [] , $blocks_delete;
     public $newBlockName = '';
-    public $newLot = ['lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'lot_status' => '', 'notary_office' => '', 'notary_clerk' => '', 'geometric_pratic' => '', 'geometrician' => '', 'date' => ''];
+    public $newLot = ['type' => '','lot_affectation' => '','lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'lot_status' => '', 'notary_office' => '', 'notary_clerk' => '', 'geometric_pratic' => '', 'geometrician' => '', 'date' => ''];
     public $countBlock = 0;
     public $land_id;
 
@@ -38,8 +38,14 @@ class Index extends Component
 
     public function addLot($blockIndex)
     {
+        $this->newLot = ['lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'type' => '', 'lot_status' => '', 'notary_office' => '', 'notary_clerk' => '', 'geometric_pratic' => '', 'geometrician' => '', 'date' => ''];
         $this->blocks[$blockIndex]['parcels'][] = $this->newLot;
-        $this->newLot = ['lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'lot_status' => '', 'notary_office' => '', 'notary_clerk' => '', 'geometric_pratic' => '', 'geometrician' => '', 'date' => ''];
+    }
+    
+    public function addLotPublic($blockIndex)
+    {
+        $this->newLot = ['lot_no' => '', 'lot_area' => '', 'type' => 'public','lot_affectation' => '', 'date' => ''];
+        $this->blocks[$blockIndex]['parcels'][] = $this->newLot;
     }
 
     public function removeBlock($blockIndex)
@@ -101,17 +107,31 @@ class Index extends Component
     
                 foreach ($blockData['parcels'] as $lotData) {
                     // Créer un nouveau lot avec les données du tableau
-                    $lot = Parcel::create([
-                        'block_id' => $block->id,
-                        'lot_no' => $lotData['lot_no'],
-                        'lot_area' => $lotData['lot_area'],
-                        'lot_status' => $lotData['lot_status'],
-                        'notary_office' => $lotData['notary_office'],
-                        'notary_clerk' => $lotData['notary_clerk'],
-                        'geometric_pratic' => $lotData['geometric_pratic'],
-                        'geometrician' => $lotData['geometrician'],
-                        'date' => $lotData['date'],
-                    ]);
+                    if ($lotData['type'] != 'public') {
+                        $lot = Parcel::create([
+                            'block_id' => $block->id,
+                            'lot_no' => $lotData['lot_no'],
+                            'lot_area' => $lotData['lot_area'],
+                            'lot_status' => $lotData['lot_status'],
+                            'type' => $lotData['type'],
+                            'notary_office' => $lotData['notary_office'],
+                            'notary_clerk' => $lotData['notary_clerk'],
+                            'geometric_pratic' => $lotData['geometric_pratic'],
+                            'geometrician' => $lotData['geometrician'],
+                            'date' => $lotData['date'],
+                        ]);
+                    } else {
+                        $lot = Parcel::create([
+                            'block_id' => $block->id,
+                            'lot_no' => $lotData['lot_no'],
+                            'lot_area' => $lotData['lot_area'],
+                            'type' => $lotData['type'],
+                            'lot_affectation' => $lotData['lot_affectation'],
+                            'date' => $lotData['date'],
+                        ]);
+                    }
+                    
+                   
                 }
             }
         } else {
@@ -130,15 +150,6 @@ class Index extends Component
                 }
             }
         }
-        
-
-        
-        
-
-        
-    
-       
-
         // dd($this->blocks);
 
         $this->state = 0;

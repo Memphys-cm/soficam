@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('lot_no')->nullable();
             $table->integer('lot_area')->nullable();
             $table->string('lot_status')->nullable();
+            $table->string('type')->nullable();
+            $table->string('lot_affectation')->nullable();
             $table->string('notary_office')->nullable();
             $table->string('notary_clerk')->nullable();
             $table->string('geometric_pratic')->nullable();

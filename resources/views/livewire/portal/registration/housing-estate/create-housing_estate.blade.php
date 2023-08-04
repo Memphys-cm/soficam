@@ -176,6 +176,7 @@
                             </div>
             
                             @foreach($block['parcels'] as $lotIndex => $lot)
+                            @if ($lot['type'] != 'public')
                             <div class="row form-group mt-3 mb-2">
                                 <div class="col-md-1">
                                     <label for="lotNumero">Lot Number</label>
@@ -224,12 +225,39 @@
                                     <input type="date" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.date">
                                 </div>
 
-                            </div>
+                            </div> 
+                            @else
+                            <div class="row form-group mt-3 mb-2">
+                                <div class="col-md-3">
+                                    <label for="lotNumero">Lot Number</label>
+                                    <input type="number" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.lot_no">
+                                </div>
+                                
+                                
+                                <div class="col-md-3">
+                                    <label for="parcelsuperficie">AREA OF LOT</label>
+                                    <input type="number" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.lot_area">
+                                </div>
+            
+                                <div class="col-md-3">
+                                    <label for="lotEtat">Lot Affectation</label>
+                                    <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.lot_affectation">
+                                </div>
+            
+                                <div class="col-md-3">
+                                    <label for="lotEtat">Date</label>
+                                    <input type="date" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.date">
+                                </div>
+
+                            </div>  
+                            @endif
+                            
             
                                 <button type="button" wire:click="removeLot({{ $blockIndex }}, {{ $lotIndex }})" class="btn btn-danger">Remove Lot</button>
                             @endforeach
             
-                            <button type="button" wire:click="addLot({{ $blockIndex }})" class="btn btn-primary">Add Lot</button>
+                            <button type="button" wire:click="addLot({{ $blockIndex }})" class="btn btn-primary">{{__('Add Lot')}}</button>
+                            <button type="button" wire:click="addLotPublic({{ $blockIndex }})" class="btn btn-primary">{{__('Add Lot Public')}}</button>
                             <button type="button" wire:click="removeBlock({{ $blockIndex }})" class="btn btn-danger">Remove Block</button>
                         </fieldset>
                     @endforeach
