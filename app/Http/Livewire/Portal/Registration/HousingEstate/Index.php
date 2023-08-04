@@ -38,7 +38,7 @@ class Index extends Component
 
     public function addLot($blockIndex)
     {
-        $this->newLot = ['lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'type' => '', 'lot_status' => '', 'notary_office' => '', 'notary_clerk' => '', 'geometric_pratic' => '', 'geometrician' => '', 'date' => ''];
+        $this->newLot = ['lot_no' => '', 'lot_area' => '', 'condition_lot' => 'standard', 'type' => '', 'lot_status' => '', 'notary_office' => '', 'notary_clerk' => '', 'geometric_pratic' => '', 'geometrician' => '', 'date' => ''];
         $this->blocks[$blockIndex]['parcels'][] = $this->newLot;
     }
     
@@ -94,8 +94,8 @@ class Index extends Component
         // }
         $this->validate();
 
-        // $this->housing_estate->land_id = 1;
-        // $this->housing_estate->code = 2772;
+        $this->housing_estate->land_id = 1;
+        $this->housing_estate->code = 2772;
         $this->housing_estate->save();
         
         if ($this->state == 0) {
