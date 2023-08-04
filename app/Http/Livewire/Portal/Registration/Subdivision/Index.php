@@ -13,14 +13,14 @@ class Index extends Component
 {
 
     use WithDataTables;
-    
+
     public Subdivision $subdivision;
     public $state = 0;
     public $blocks = [];
     public $newBlockName = '';
-    public $newLot = ['lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'lot_status' => '', 'notary_office' => '' , 'notary_clerk' => '' , 'geometric_pratic' => '', 'geometrician' => '' , 'date' => ''] ;
+    public $newLot = ['lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'lot_status' => '', 'notary_office' => '', 'notary_clerk' => '', 'geometric_pratic' => '', 'geometrician' => '', 'date' => ''];
     public $countBlock = 0;
-    public $land_id;
+    public $land_id =  1;
     // public function __construct()
     // {
     //     parent::__construct();
@@ -38,7 +38,7 @@ class Index extends Component
     //     ];
     // }
 
-    
+
 
     public function addBlock()
     {
@@ -56,14 +56,14 @@ class Index extends Component
     // {
     //     $this->blocks[0]['lots'][] = $this->newLot;
     //     $this->newLot = ['lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'lot_status' => '', 'notary_office' => '' , 'notary_clerk' => '' , 'geometric_pratic' => '', 'geometrician' => '' , 'date' => ''] ;
-   
+
     //     $this->saveBlocksToJson();
     // }
 
     public function addLot($blockIndex)
     {
         $this->blocks[$blockIndex]['lots'][] = $this->newLot;
-        $this->newLot = ['lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'lot_status' => '', 'notary_office' => '' , 'notary_clerk' => '' , 'geometric_pratic' => '', 'geometrician' => '' , 'date' => ''] ;
+        $this->newLot = ['lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'lot_status' => '', 'notary_office' => '', 'notary_clerk' => '', 'geometric_pratic' => '', 'geometrician' => '', 'date' => ''];
     }
 
     public function removeBlock($blockIndex)
@@ -97,39 +97,105 @@ class Index extends Component
         Storage::put('blocks_data.json', $mergedJsonData);
     }
 
+    public function showBlocksDataView()
+    {
+        if (Storage::exists('blocks_data.json')) {
+            $jsonData = Storage::get('blocks_data.json');
+            $blocksData = json_decode($jsonData, true);
 
-     //Update & Store Rules
-     protected array $rules = [
-        'service.service_name_fr' => 'required',
-        'service.service_name_en' => 'required',
-        'service.code' => 'required',
-        'service.status' => 'sometimes'
+            // Filtrer les blocs avec 'name' égal à 'me'
+            $filteredBlocksData = array_filter($blocksData, function ($block) {
+                return isset($block['land_id']) && $block['land_id'] == $this->subdivision->id;
+            });
+            $this->blocks = $filteredBlocksData;
+        } else {
+            $this->blocks = null;
+        }
+    }
+    public function updateBlocksAndLotsForLandId($landId, $newBlocksData)
+    {
+        if (Storage::exists('blocks_data.json')) {
+            $jsonData = Storage::get('blocks_data.json');
+            $blocksData = json_decode($jsonData, true);
+    
+            $blocksData = array_values(array_filter($blocksData, function ($block) use ($landId) {
+                return isset($block['land_id']) && $block['land_id'] !== $landId;
+            }));
+    
+            // Ajouter les nouvelles données pour le land_id donné
+            // $newBlocksData['land_id'] = $landId;
+            $blocksData[] = $newBlocksData;
+    
+            // Sauvegarder les modifications dans le fichier JSON
+            $jsonData = json_encode($blocksData, JSON_PRETTY_PRINT);
+            Storage::put('blocks_data.json', $jsonData);
+        } else {
+            // Si le fichier n'existe pas, vous pouvez le créer ici avec les nouvelles données pour land_id = 1.
+            $jsonData = json_encode([$newBlocksData], JSON_PRETTY_PRINT);
+            Storage::put('blocks_data.json', $jsonData);
+        }
+    }
+    //Update & Store Rules
+    protected array $rules = [
+        'subdivision.maeture' => 'sometimes',
+        'subdivision.code' => 'sometimes',
+        'subdivision.property_developer' => 'sometimes',
+        'subdivision.lotisser' => 'sometimes',
+        'subdivision.estate_agent' => 'sometimes',
+        'subdivision.geometric_pratice' => 'sometimes',
+        'subdivision.geometric' => 'sometimes',
+        'subdivision.urbanist' => 'sometimes',
+        'subdivision.controller' => 'sometimes',
     ];
 
     public function mount()
     {
-        // $url = Storage::url('blocks_data.json');
-        // dd($url);
+        $this->subdivision = new Subdivision();
+    }
+
+    public function initData($id)
+    {
+        $this->subdivision = Subdivision::findOrFail($id);
+        $this->showBlocksDataView();
+        $this->state = 1;
     }
 
     public function store()
     {
+
+        // if (!Gate::allows('subdivision.create') || !Gate::allows('subdivision.update')) {
+        //     return abort(401);
+        // }
+
         $this->saveBlocksToJson();
+        if ($this->state == 1) $this->updateBlocksAndLotsForLandId($this->subdivision->id, $this->blocks);
+        $this->validate();
+
+        // $this->subdivision->land_id = 1;
+        // $this->subdivision->code = 2772;
+        // $this->subdivision->save();
+
+        $this->state = 0;
+
+        $this->refresh(__('subdivision successfully :state!', ['state' => $this->state ? 'Updated' : 'Created']), 'CreateUpdateSubdivisionModal');
     }
 
     public function render()
     {
 
-        // if (!Gate::allows('service.view')) {
+        // if (!Gate::allows('subdivision.view')) {
         //     return abort(401);
         // }
 
+        // dd($this->blocks);
+
         $subdivisions = Subdivision::
-        // withCount('users')->
-        orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+            // withCount('users')->
+            orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
 
         $subdivisions_count = Subdivision::count();
+        // dd($subdivisions_count);
 
-        return view('livewire.portal.registration.subdivision.index' , ['subdivisions' => $subdivisions,'subdivisions_count' => $subdivisions_count]);
+        return view('livewire.portal.registration.subdivision.index', ['subdivisions' => $subdivisions, 'subdivisions_count' => $subdivisions_count]);
     }
 }

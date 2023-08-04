@@ -1,7 +1,8 @@
 <div>
     <x-alert />
-    @include('livewire.portal.registration.subdivision.create-subdivision')
-    {{-- @include('livewire.portal.subdivisions.import-subdivisions') --}}
+    @include('livewire.portal.registration.housing-estate.create-housing_estate')
+    @include('livewire.portal.registration.housing-estate.view-housing_estate')
+    {{-- @include('livewire.portal.housing_estates.import-housing_estates') --}}
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -16,37 +17,37 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{__('Dashboard')}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Subdivisions')}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('housing_estates')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
                     <svg class="icon me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    {{__('Subdivisions')}}
+                    {{__('housing_estates')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('View all Subdivisions')}} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{__('View all housing_estates')}} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
-                {{-- @can('subdivision.create') --}}
-                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateUpdateSubdivisionModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
+                {{-- @can('housing_estate.create') --}}
+                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateUpdateHousingEstateModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{__('New')}}
                 </a>
                 {{-- @endcan --}}
-                {{-- @can('subdivision.import') --}}
-                <a href="#" data-bs-toggle="modal" data-bs-target="#importsubdivisionsModal" class="btn btn-sm btn-secondary py-2 d-inline-flex align-items-center">
+                {{-- @can('housing_estate.import') --}}
+                <a href="#" data-bs-toggle="modal" data-bs-target="#importhousing_estatesModal" class="btn btn-sm btn-secondary py-2 d-inline-flex align-items-center">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                     </svg>{{__('Import')}}
                 </a>
                 {{-- @endcan --}}
-                {{-- @can('subdivision.export_n_print') --}}
+                {{-- @can('housing_estate.export_n_print') --}}
                 <div class="mx-2" wire:loading.remove>
                     <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center {
-                        {{-- {count($subdivisons) > 0 ? '' :'disabled'}} --}}
+                        {{-- {count($housing_estates) > 0 ? '' :'disabled'}} --}}
                         ">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
@@ -114,49 +115,56 @@
                         <th class="border-bottom">{{__('Remaining Area')}}</th>
                         <th class="border-bottom">{{__('Real Estate Developer')}}</th>
                         <th class="border-bottom">{{__('Date created')}}</th>
-                        {{-- @canany('subdivision.update','subdivision.delete') --}}
+                        {{-- @canany('housing_estate.update','housing_estate.delete') --}}
                         <th class="border-bottom">{{__('Action')}}</th>
                         {{-- @endcanany --}}
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($subdivisions as $subdivison)
+                    @forelse($housing_estates as $housing_estate)
                     <tr>
                         <td>
-                            <span class="fw-normal">{{$subdivison->code}}</span>
+                            <span class="fw-normal">{{$housing_estate->code}}</span>
                         </td>
                         <td>
                             {{-- <a href="#" class="d-flex align-items-center">
-                                <div class="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-primary me-3"><span class="text-white">{{initials($subdivision->subdivision_name)}}</span></div>
-                                <div class="d-block"><span class="fw-bold">{{$subdivision->subdivision_name}}</span>
-                                    <div class="small text-gray">{{!empty($subdivision->subdivision_name) ? $subdivision->subdivision_name : ''}}</div>
+                                <div class="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-primary me-3"><span class="text-white">{{initials($housing_estate->housing_estate_name)}}</span></div>
+                                <div class="d-block"><span class="fw-bold">{{$housing_estate->housing_estate_name}}</span>
+                                    <div class="small text-gray">{{!empty($housing_estate->housing_estate_name) ? $housing_estate->housing_estate_name : ''}}</div>
                                 </div>
                             </a> --}}
                         </td>
                         <td class="text-center">
-                            {{-- <span class="fw-normal">{{ $subdivision->users_count }}</span> --}}
+                            {{-- <span class="fw-normal">{{ $housing_estate->users_count }}</span> --}}
                         </td>
                         <td>
-                            {{-- <span class="fw-normal badge super-badge p-2 bg-{{$subdivision->statusStyle}} round">{{$subdivision->statusText}}</span> --}}
+                            {{-- <span class="fw-normal badge super-badge p-2 bg-{{$housing_estate->statusStyle}} round">{{$housing_estate->statusText}}</span> --}}
                         </td>
                         <td class="text-center">
                             <span class="fw-normal"></span>
                         </td>
-                        <td class="text-center"> {{ $subdivison->estate_agent }} </td>
+                        <td class="text-center"> {{ $housing_estate->estate_agent }} </td>
                         <td>
-                            <span class="fw-normal">{{$subdivison->created_at->format('Y-m-d')}}</span>
+                            <span class="fw-normal">{{$housing_estate->created_at->format('Y-m-d')}}</span>
                         </td>
-                        {{-- @canany('subdivision.update','subdivision.delete') --}}
+                        {{-- @canany('housing_estate.update','housing_estate.delete') --}}
                         <td>
-                            {{-- @can('subdivision.update') --}}
-                            <a href="#" wire:click.prevent="initData({{$subdivison->id}})" data-bs-toggle="modal" data-bs-target="#CreateUpdateSubdivisionModal" draggable="false">
+                            {{-- @can('housing_estate.update') --}}
+                            <a href="#" wire:click.prevent="initData({{$housing_estate->id}})" data-bs-toggle="modal" data-bs-target="#ViewHousingEstateModal" draggable="false">
+                                <svg class="icon icon-sm text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                  </svg>
+                                  
+                            </a>
+                            <a href="#" wire:click.prevent="initData({{$housing_estate->id}})" data-bs-toggle="modal" data-bs-target="#CreateUpdateHousingEstateModal" draggable="false">
                                 <svg class="icon icon-sm text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                 </svg>
                             </a>
                             {{-- @endcan --}}
-                            {{-- @can('subdivision.delete') --}}
-                            <a href="#" wire:click.prevent="initData({{$subdivison->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
+                            {{-- @can('housing_estate.delete') --}}
+                            <a href="#" wire:click.prevent="initData({{$housing_estate->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
                                 <svg class="icon icon-sm text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                                 </svg>
@@ -179,9 +187,9 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Showing')}} {{$perPage > $subdivisions_count ? $subdivisions_count : $perPage  }} {{__('items of')}} {{$subdivisions_count}}
+                    {{__('Showing')}} {{$perPage > $housing_estates_count ? $housing_estates_count : $perPage  }} {{__('items of')}} {{$housing_estates_count}}
                 </div>
-                {{-- {{ $subdivisons->links() }} --}}
+                {{-- {{ $housing_estates->links() }} --}}
             </div>
         </div>
     </div>

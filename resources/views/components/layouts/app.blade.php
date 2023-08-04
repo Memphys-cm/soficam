@@ -69,32 +69,25 @@
 
     @yield('scripts')
     <script>
-        // document.addEventListener('livewire:init', () => {
+        document.addEventListener('livewire:load', function() {
+            
+            var form = document.querySelector('.form-modal')
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    var btn = document.querySelector('button[type="submit"].btn-loading')
+                    btn.setAttribute('disabled', true)
+                    console.log(btn)
+                    btn.innerHtml = `<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>{{__('Loading')}}...`
+                })
+            }
+            // closing any modal dynamically
+            window.livewire.on('cancel', modal => {
+                $('#' + modal).modal('hide');
+                $('div.alert').delay(3500).fadeOut(2000);
+            });
 
-        //     // Listen for events dispatched from Livewire components...
-        //     Livewire.on('cancel', ({
-        //         modal
-        //     }) => {
-        //         $('#' + modal).modal('hide');
-        //     })
-        // })
-        // document.querySelectorAll('div.alert').querySelectorAll(":not(#elem)");
-
-
-        var form = document.querySelector('.form-modal')
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                var btn = document.querySelector('button[type="submit"].btn-loading')
-                btn.setAttribute('disabled', true)
-                console.log(btn)
-                btn.innerHtml = `<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>{{__('Loading')}}...`
-            })
-        }
-        // closing any modal dynamically
-        window.livewire.on('cancel', modal => {
-            $('#' + modal).modal('hide');
-            $('.alert-fixed').not('.alert-important').delay(300).fadeOut(400);
-        });
+            $('div.alert-danger').delay(3500).fadeOut(2000);
+        })
     </script>
 
 </body>

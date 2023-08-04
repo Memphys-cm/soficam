@@ -1,4 +1,4 @@
-@if ($errors->any())
+<!-- @if ($errors->any())
 <div class="alert alert-danger alert-fixed border-danger-dash alert-important alert-dimissable ">
     <div class='d-flex justify-content-between align-items-start'>
 
@@ -14,7 +14,7 @@
         </div>
     </div>
 </div>
-@endif
+@endif -->
 @if (session()->has('message'))
 <div class="alert alert-success alert-fixed border-success-dash alert-important alert-dimissable">
 
