@@ -70,7 +70,7 @@
     @yield('scripts')
     <script>
         document.addEventListener('livewire:load', function() {
-            
+
             var form = document.querySelector('.form-modal')
             if (form) {
                 form.addEventListener('submit', function(e) {
@@ -87,6 +87,12 @@
             });
 
             $('div.alert-danger').delay(3500).fadeOut(2000);
+
+
+            var selectStatesInputEl = d.querySelector('#users');
+            if (selectStatesInputEl) {
+                const choices = new Choices(selectStatesInputEl);
+            }
         })
     </script>
 
