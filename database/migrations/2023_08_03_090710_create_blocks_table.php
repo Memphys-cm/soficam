@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subdivisions', function (Blueprint $table) {
+        Schema::create('blocks', function (Blueprint $table) {
             $table->id();
-            $table->string('number')->nullable();
+            $table->string('name');
+            $table->foreignId('housing_estate_id')->index()->constrained('housing_estates');
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subdivisions');
+        Schema::dropIfExists('blocks');
     }
 };
