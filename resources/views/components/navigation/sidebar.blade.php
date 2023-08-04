@@ -195,9 +195,9 @@
                                             </svg>
                                         </span>
                                     </span>
-                                    <div class="multi-level collapse {{ $request->routeIs('portal.simpleSales.index') || $request->routeIs('portal.divisions.index') || $request->routeIs('portal.sub-divisions.index') ? 'show' : '' }}"
+                                    <div class="multi-level collapse {{ $request->routeIs('portal.simpleSales.index') || $request->routeIs('portal.totalSale.index')  ? 'show' : '' }}"
                                         role="list" id="subsales-dashboard"
-                                        aria-expanded="{{ $request->routeIs('portal.simpleSale.index') || $request->routeIs('portal.division.index') || $request->routeIs('portal.sub_division.index') ? 'false' : 'true' }}">
+                                        aria-expanded="{{ $request->routeIs('portal.simpleSale.index') || $request->routeIs('portal.totalSale.index') ? 'false' : 'true' }}">
                                         <ul class="flex-column nav">
                                             {{-- @can('simpleSale.view') --}}
                                             <li
@@ -205,6 +205,13 @@
                                                 <a href="{{ route('portal.simpleSale.index') }}" class="nav-link">
                                                     <span class="sidebar-text-contracted">R</span> <span
                                                         class="sidebar-text">{{ __('Simple Sales') }}</span>
+                                                </a>
+                                            </li>
+                                            <li
+                                                class="nav-item {{ $request->routeIs('portal.totalSale.index') ? 'active' : '' }}">
+                                                <a href="{{ route('portal.totalSale.index') }}" class="nav-link">
+                                                    <span class="sidebar-text-contracted">R</span> <span
+                                                        class="sidebar-text">{{ __('Total Sales') }}</span>
                                                 </a>
                                             </li>
                                             {{-- @endcan --}}

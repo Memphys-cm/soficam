@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Portal\Sales\SimpleSales;
+namespace App\Http\Livewire\Portal\Sales\TotalSales;
 
 use Carbon\Carbon;
 use App\Models\User;
@@ -9,11 +9,11 @@ use Livewire\Component;
 use App\Models\Sales\Sale;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
 class Index extends Component
 {
+
     use WithPagination;
     use WithFileUploads;
 
@@ -183,15 +183,13 @@ class Index extends Component
             'user_id' => $this->user_id,
             'notary_id' => $this->notary_id,
             'sales_code' => $this->sales_code,
-            'number_of_lots_sold' => $this->number_of_lots_sold,
-            'number_of_lots_remaining' => $this->number_of_lots_remaining,
             'balance' => $this->balance,
             'purchaser_name' => implode(',', $this->purchaser_name),
             'surface_for_sale' => $this->surface_for_sale,
             'price_per_m²' => $this->price_per_m²,
             'sale_amount' => $this->sale_amount,
             'document_path' => json_encode($documentPaths),// Use the array with document paths here
-            'sale_type' => 'simple_sale',
+            'sale_type' => 'total_sale',
             'payment_type' => $this->payment_type,
             'advance' => $this->advance,
             'balance' => $this->balance,
@@ -264,13 +262,10 @@ class Index extends Component
         $this->observation = $sale->observation;
     }
 
-
     public function render()
     {
-        
+        $totals = Sale::search($this->query)->where('sale_type', 'total_sale')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
 
-        $simplesales = Sale::search($this->query)->where('sale_type', 'simple_sale')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
-
-        return view('livewire..portal.sales.simple-sales.index', compact('simplesales'));
+        return view('livewire..portal.sales.total-sales.index', compact('totals'));
     }
 }
