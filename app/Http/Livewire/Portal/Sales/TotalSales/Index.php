@@ -107,7 +107,7 @@ class Index extends Component
             ->orderBy('id', 'desc')->select('sales_code')->first();
         $number = 1;
         if ($lastSaleCode) {
-            $number = (int)substr($lastSaleCode->code, 3) + 1;
+            $number = (int)substr($lastSaleCode->sales_code, 3) + 1;
         }
         $SaleCode = 'SSALE' . str_pad($number, 6, '0', STR_PAD_LEFT);
         while (DB::table('sales')->where('sales_code', $SaleCode)->exists()) {
