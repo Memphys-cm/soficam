@@ -10,29 +10,29 @@
                     <x-form-items.form wire:submit="store">
                         <div class='form-group mb-3'>
                             <label for="code">{{__('Code')}}</label>
-                            <input wire:model="service.code" type="text" class="form-control  @error('service.code') is-invalid @enderror" placeholder="NW" required="" value="" name="service.code">
-                            @error('service.code')
+                            <input wire:model="code" type="text" class="form-control  @error('code') is-invalid @enderror" placeholder="NW" required="" value="" name="code">
+                            @error('code')
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="form-group mb-3">
                             <label for="name">{{__('Service Name ')}} <span>({{__('English')}})</span></label>
-                            <input wire:model="service.service_name_en" type="text" class="form-control  @error('service.service_name_en') is-invalid @enderror" placeholder="{{__('MINDAF')}}" required="" name="name">
-                            @error('service.service_name_en')
+                            <input wire:model="service_name_en" type="text" class="form-control  @error('service_name_en') is-invalid @enderror" placeholder="{{__('MINDAF')}}" required="" name="name">
+                            @error('service_name_en')
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="form-group mb-3">
                             <label for="name">{{__('Service Name ')}} <span>({{__('French')}})</span></label>
-                            <input wire:model="service.service_name_fr" type="text" class="form-control  @error('service.service_name_fr') is-invalid @enderror" placeholder="{{__('MINDAF')}}" required="" name="name">
-                            @error('service.service_name_fr')
+                            <input wire:model="service_name_fr" type="text" class="form-control  @error('service_name_fr') is-invalid @enderror" placeholder="{{__('MINDAF')}}" required="" name="name">
+                            @error('service_name_fr')
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
                         <div class='form-group mb-4 px-1'>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" wire:model="service.status" id="service.status">
-                                <label class="form-check-label mb-0" for="service.status">{{ __('Mark as Active') }}</label>
+                                <input class="form-check-input" type="checkbox" value="" wire:model="status" id="status">
+                                <label class="form-check-label mb-0" for="status">{{ __('Mark as Active') }}</label>
                             </div>
                         </div>
 
