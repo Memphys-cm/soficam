@@ -1,5 +1,5 @@
-<div wire:ignore.self class="modal side-layout-modal fade" id="CreatetotalsaleModal" tabindex="-1" aria-labelledby="modal-form"
-    style="display: none;" aria-hidden="true">
+<div wire:ignore.self class="modal side-layout-modal fade" id="CreatetotalsaleModal" tabindex="-1"
+    aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:70%;">
         <div class="modal-content">
             <div class="modal-body p-0">
@@ -9,13 +9,9 @@
                         <p class="px-1"> {{ __('selling a total Land') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="store">
-
-
                         <fieldset class="border p-3">
                             <legend class="w-auto">Land Title Informations</legend>
                             <div class='form-group row mb-3'>
-
-
                                 <div class=" col"><label for="user_id">{{ __('Land Title Number') }}</label>
                                     <x-input.select wire:model="user_id" prettyname="user" :options="$users->pluck('first_name', 'id')->toArray()"
                                         selected="('user_id')" />
@@ -23,7 +19,6 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-
                                 <div class=" col"><label for="sales_code">{{ __('Code') }}</label>
                                     <input type="text" wire:model="sales_code"
                                         class="form-control  @error('sales_code') is-invalid @enderror "
@@ -35,7 +30,6 @@
                                         </div>
                                     @enderror
                                 </div>
-
                                 <div class=" col"><label for="notary_id">{{ __('NOTARY') }}</label>
                                     <x-input.select wire:model="notary_id" prettyname="notary" :options="$notarys->pluck('name', 'id')->toArray()"
                                         selected="('notary_id')" />
@@ -43,9 +37,7 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-
                             </div>
-
                             <div class='form-group row mb-3'>
                                 <div class=" col"><label for="first_name">{{ __('LAND TITLE AREA') }}</label>
                                     <input type="text" wire:model="first_name"
@@ -65,31 +57,6 @@
                                         value="{{ old('last_name') }}" placeholder="" id="last_name" autofocus=""
                                         required="" disabled>
                                     @error('last_name')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class=" col"><label for="email">{{ __('AREA SOLD') }}</label>
-                                    <input type="text" wire:model="email"
-                                        class="form-control  @error('email') is-invalid @enderror "
-                                        value="{{ old('email') }}" placeholder="" id="email" autofocus=""
-                                        required="" disabled>
-                                    @error('email')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class='form-group row mb-3'>
-
-                                <div class=" col"><label for="address">{{ __('REMAINING AREA') }}</label>
-                                    <input type="text" wire:model="address"
-                                        class="form-control  @error('address') is-invalid @enderror "
-                                        value="{{ old('address') }}" placeholder="" id="address" autofocus=""
-                                        required="" disabled>
-                                    @error('address')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -118,6 +85,9 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class='form-group row mb-3'>
+                                
+                            </div>
                         </fieldset>
                         <br>
 
@@ -130,12 +100,8 @@
                                         <div class='d-flex justify-content-between align-items-center'>
 
                                             <label for="purchaser_name">{{ __('Id of purchaser(s)') }}</label>
-                                            <button class="btn btn-primary" wire:click.prevent="addPurchaser">Add
-                                                Purchaser</button>
-
-
+                                            
                                         </div>
-                                        <hr class="p-0 mt-2 mb-2">
                                         <div class='row'>
                                             <div class="col">
                                                 <table class="table table-borderless align-items-center table-sm">
@@ -144,32 +110,43 @@
                                                         <tr>
                                                             <td>
                                                                 @foreach ($inputs as $index => $value)
-                                                                    <div>
-                                                                        <input class="form-control" type="text"
-                                                                            wire:model.defer="purchaser_name.{{ $index }}"
-                                                                            placeholder="Purchaser Name {{ $index + 1 }}" />
-                                                                        <br>
-                                                                        @if ($index > 0)
-                                                                            <button class="btn btn-danger btn-sm"
-                                                                                wire:click.prevent="removePurchaser({{ $index }})">Remove</button>
-                                                                        @endif
+                                                                    <div class="row">
+                                                                        <div class="col-md-11 mb-1">
+                                                                            <input class="form-control" type="text"
+                                                                                wire:model.defer="purchaser_name.{{ $index }}"
+                                                                                placeholder="Purchaser Name {{ $index + 1 }}" />
+                                                                        </div>
+                                                                        <div class="col-md-1">
+                                                                            @if ($index > 0)
+                                                                                <a href='#'
+                                                                                    wire:click.prevent="removePurchaser({{ $index }})"
+                                                                                   >
+                                                                                    <svg class="icon icon-xs text-danger"
+                                                                                        fill="none"
+                                                                                        stroke="currentColor"
+                                                                                        viewBox="0 0 24 24"
+                                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                                        <path stroke-linecap="round"
+                                                                                            stroke-linejoin="round"
+                                                                                            stroke-width="2"
+                                                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                                                                        </path>
+                                                                                    </svg>
+                                                                                </a>
+                                                                            @endif
+                                                                        </div>
                                                                     </div>
                                                                 @endforeach
 
+
                                                             </td>
-
-
                                                         </tr>
-
                                                     </tbody>
-                                                    <tfoot>
-                                                        <tr class="d-flex align-items-end">
-                                                            <td colspan="4" class="text-right">
-                                                            </td>
-                                                        </tr>
-                                                    </tfoot>
+                                                    
                                                 </table>
                                             </div>
+                                            <button class="btn btn-primary" wire:click.prevent="addPurchaser">Add
+                                                Purchaser</button>
                                         </div>
                                     </div>
                                 </div>
@@ -196,38 +173,6 @@
 
                             </div>
                             <div class='form-group row mb-3'>
-
-
-                                <div class=" col"><label
-                                        for="number_of_lots_sold">{{ __('NUMBER OF LOTS SOLD') }}</label>
-                                    <input type="number" wire:model="number_of_lots_sold"
-                                        class="form-control  @error('number_of_lots_sold') is-invalid @enderror "
-                                        value="{{ old('number_of_lots_sold') }}" placeholder="0"
-                                        id="number_of_lots_sold" autofocus="" required="">
-                                    @error('number_of_lots_sold')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-
-
-
-                                <div class=" col"><label
-                                        for="number_of_lots_remaining">{{ __('NUMBER OF LOTS REMAINING') }}</label>
-                                    <input type="number" wire:model="number_of_lots_remaining"
-                                        class="form-control  @error('number_of_lots_remaining') is-invalid @enderror "
-                                        value="{{ old('number_of_lots_remaining') }}" placeholder="0"
-                                        id="number_of_lots_remaining" autofocus="" required="">
-                                    @error('number_of_lots_remaining')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-
-                            </div>
-                            <div class='form-group row mb-3'>
                                 <div class=" col"><label for="price_per_m²">{{ __('Price(m²)') }}</label>
                                     <input type="number" wire:model="price_per_m²"
                                         class="form-control  @error('price_per_m²') is-invalid @enderror "
@@ -240,7 +185,7 @@
                                     @enderror
                                 </div>
                                 <div class=" col">
-                                    <label for="surface_for_sale">{{ __('SURFACE FOR SALE') }}</label>
+                                    <label for="surface_for_sale">{{ __('AREA SOLD') }}</label>
                                     <input type="number" wire:model="surface_for_sale"
                                         class="form-control  @error('surface_for_sale') is-invalid @enderror "
                                         value="{{ old('surface_for_sale') }}" placeholder="0" id="surface_for_sale"
@@ -264,9 +209,7 @@
                                         </div>
                                     @enderror
                                 </div>
-
                             </div>
-
                             @if ($payment_type === 'tranche')
                                 <div class='form-group row mb-3'>
                                     <div class="col">
@@ -317,17 +260,8 @@
                                         </span>
                                     @enderror
                                 </div>
-
-                               
-
                             </div>
-
                         </fieldset>
-                        <div>
-
-                        </div>
-                        <br>
-
                         <div class="d-flex justify-content-between align-items-end">
                             <div class="mb-4 mt-md-0">
                                 <button type="button" class="btn btn-sm btn-light text-gray-800 ms-auto "
@@ -346,7 +280,7 @@
                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                    </svg>CreatetotalModal
+                                    </svg>
                                     <span class="d-none d-sm-inline-block ms-1">{{ __('Save') }}</span>
                                 </button>
                             </div>

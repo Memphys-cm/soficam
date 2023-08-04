@@ -28,12 +28,14 @@ class Index extends Component
 
 
     public $user, $user_id, $users, $notarys;
-    public $created, $sales_code, $number_of_lots_sold, $number_of_lots_remaining, $balance, $observation;
+    public $created, $sales_code, $sale_type, $number_of_lots_remaining, $observation;
     public $maeture, $land_title_area, $public_utility_area, $area_sold, $remaining_area, $number_of_blocks, $number_of_lots;
-    public $surface_for_sale, $price_per_m², $sale_amount, $payment_type, $advance, $notary, $notary_id;
+    public $surface_for_sale, $price_per_m², $sale_amount, $payment_type, $notary, $notary_id;
     public $document = [];
     public $purchaser_name = [];
     public $first_name, $last_name, $email, $address, $date_of_birth, $place_of_birth, $sale, $saleId;
+    public $balance = 0;
+    public $advance = 0;
 
     public function mount()
     {
@@ -141,8 +143,6 @@ class Index extends Component
         }
     }
 
-    
-
     public function store()
     {
         // Validate the required fields before storing the data
@@ -161,6 +161,7 @@ class Index extends Component
             // Add more validation rules for other fields if needed
         ]);
 
+
         // Calculate the sale amount
         $this->calculateSaleAmount();
 
@@ -178,21 +179,28 @@ class Index extends Component
 
         $purchaserNames = implode(',', $this->purchaser_name);
 
+        if ($this->payment_type === 'cash') {
+            $defaultAdvance = 0;
+            $defaultBalance = 0;
+        } else {
+            $defaultAdvance = $this->advance ?? 0;
+            $defaultBalance = $this->balance ?? 0;
+        }
         // Store the data into the database (or any other storage medium)
         $sale = Sale::create([
             'user_id' => $this->user_id,
             'notary_id' => $this->notary_id,
             'sales_code' => $this->sales_code,
-            'balance' => $this->balance,
+            'balance' => $defaultBalance,
             'purchaser_name' => implode(',', $this->purchaser_name),
             'surface_for_sale' => $this->surface_for_sale,
             'price_per_m²' => $this->price_per_m²,
             'sale_amount' => $this->sale_amount,
-            'document_path' => json_encode($documentPaths),// Use the array with document paths here
+            'document_path' => json_encode($documentPaths), // Use the array with document paths here
             'sale_type' => 'total_sale',
             'payment_type' => $this->payment_type,
             'advance' => $this->advance,
-            'balance' => $this->balance,
+            'advance' => $defaultAdvance,
             'observation' => $this->observation,
             'created_by' => auth()->user()->name,
         ]);
@@ -223,23 +231,19 @@ class Index extends Component
 
     public function clearFields()
     {
-        $this->sale = '';
-        $this->saleId = '';
-        $this->sale_amount = '';
-        $this->user_id = '';
-        $this->sales_code = '';
-        $this->number_of_lots_sold = '';
-        $this->purchaser_name ='';
-        $this->document = '';
-        $this->number_of_lots_remaining = '';
-        $this->surface_for_sale = '';
-        $this->payment_type = '';
-        $this->price_per_m² = '';
-        $this->notary_id = '';
-        $this->advance = '';
-        $this->balance = '';
-        $this->observation = '';
-
+        $this->user_id = null;
+        $this->notary_id = null;
+        $this->sales_code = $this->generateConsCode();
+        $this->balance = 0;
+        $this->purchaser_name = [];
+        $this->surface_for_sale = null;
+        $this->price_per_m² = null;
+        $this->sale_amount = null;
+        $this->document = [];
+        $this->sale_type = 'total_sale';
+        $this->payment_type = 'cash';
+        $this->advance = 0;
+        $this->observation = null;
     }
     public function initData($id)
     {
@@ -249,10 +253,8 @@ class Index extends Component
         $this->sale_amount = $sale->sale_amount;
         $this->user_id = $sale->user_id;
         $this->sales_code = $sale->sales_code;
-        $this->number_of_lots_sold = $sale->number_of_lots_sold;
         $this->purchaser_name = $sale->purchaser_name;
         $this->document = $sale->document;
-        $this->number_of_lots_remaining = $sale->number_of_lots_remaining;
         $this->surface_for_sale = $sale->surface_for_sale;
         $this->payment_type = $sale->payment_type;
         $this->price_per_m² = $sale->price_per_m²;

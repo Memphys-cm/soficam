@@ -1,8 +1,6 @@
 <div>
     <x-alert />
     @include('livewire.portal.sales.total-sales.partials.create-total-sale')
-    {{-- @include('livewire.portal.users.edit-user')
-    @include('livewire.portal.users.import-users') --}}
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -65,37 +63,6 @@
             </div>
         </div>
     </div>
-    {{-- <div class='mb-3 mt-0'>
-        <div class='row'>
-            <div class="col-12 col-sm-6 col-xl-4 mb-2">
-                <div class="card border-0 shadow">
-                    <div class="card-body">
-                        <div class="row d-block d-xl-flex align-items-center">
-                            <div class="col-12 col-xl-4 text-xl-center mb-2 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                                <div class="icon-shape icon-shape-tertiary rounded me-2 me-sm-0">
-                                    <svg class="icon icon-md" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                    </svg>
-                                </div>
-                                <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5">{{__('Total Users')}} {{$total_users}}</h2>
-                                    <h3 class="mb-1">{{numberFormat(!is_null($total_users) ? $total_users : 0 )}}</h3>
-                                </div>
-                            </div>
-                            <div class="col-12 col-xl-8 px-xl-0">
-                                <a href="" class="d-none d-sm-block">
-                                    <h2 class="h5">{{__('Total Users')}}</h2>
-                                    <h3 class="fw-extrabold mb-1">{{numberFormat(!is_null($total_users) ? $total_users : 0 )}}</h3>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-        </div>
-    </div> --}}
     <x-alert />
 
     <div class="row p-3">
@@ -140,6 +107,7 @@
                         <th class="border-bottom">{{__('CODE')}}</th>
                         <th class="border-bottom">{{__('PURCHASER(s) NAME')}}</th>
                         <th class="border-bottom">{{__('LAND TITLE NUMBER')}}</th>
+                        <th class="border-bottom">{{__('SALE TYPE')}}</th>
                         <th class="border-bottom">{{__('Surface for sale')}}</th>
                         <th class="border-bottom">{{__('Price per m²')}}</th>
                         <th class="border-bottom">{{__('Sale amount')}}</th>
@@ -157,13 +125,14 @@
                     @forelse($totals as $total)
                     <tr>
                         <td>{{ $total->sales_code }}</td>
-                        <td>{{ $total->user_id }}</td>
                         <td>{{ $total->purchaser_name }}</td>
-                            <td>{{ $total->surface_for_sale }}</td>
-                            <td>{{ $total->price_per_m² }}</td>
-                            <td>{{ $total->sale_amount }}</td>
-                            <td>{{ $total->advance }}</td>
-                            <td>{{ $total->balance }}</td>
+                        <td>{{ $total->user_id }}</td>
+                        <td>{{ $total->sale_type }}</td>
+                            <td>{{ $total->surface_for_sale }}  {{ __('m²') }}</td>
+                            <td>{{ $total->price_per_m² }}  {{ __('XAF') }}</td>
+                            <td>{{ $total->sale_amount }}  {{ __('XAF') }}</td>
+                            <td>{{ $total->advance }}  {{ __('XAF') }}</td>
+                            <td>{{ $total->balance }}  {{ __('XAF') }}</td>
                             <td>{{ $total->payment_type }}</td>
                             <td>{{ $total->created_by }}</td>
                             <td>{{ $total->created_at }}</td>

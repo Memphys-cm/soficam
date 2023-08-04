@@ -140,6 +140,7 @@
                         <th class="border-bottom">{{__('CODE')}}</th>
                         <th class="border-bottom">{{__('PURCHASER(s) NAME')}}</th>
                         <th class="border-bottom">{{__('LAND TITLE NUMBER')}}</th>
+                        <th class="border-bottom">{{__('SALE TYPE')}}</th>
                         <th class="border-bottom">{{__('Surface for sale')}}</th>
                         <th class="border-bottom">{{__('Price per m²')}}</th>
                         <th class="border-bottom">{{__('Sale amount')}}</th>
@@ -159,11 +160,12 @@
                         <td>{{ $simplesale->sales_code }}</td>
                         <td>{{ $simplesale->user_id }}</td>
                         <td>{{ $simplesale->purchaser_name }}</td>
-                            <td>{{ $simplesale->surface_for_sale }}</td>
-                            <td>{{ $simplesale->price_per_m² }}</td>
-                            <td>{{ $simplesale->sale_amount }}</td>
-                            <td>{{ $simplesale->advance }}</td>
-                            <td>{{ $simplesale->balance }}</td>
+                        <td>{{ $simplesale->sale_type }}</td>
+                            <td>{{ $simplesale->surface_for_sale }} {{ __('m²') }}</td>
+                            <td>{{ $simplesale->price_per_m² }} {{ __('XAF') }}</td>
+                            <td>{{ $simplesale->sale_amount }} {{ __('XAF') }}</td>
+                            <td>{{ $simplesale->advance }} {{ __('XAF') }}</td>
+                            <td>{{ $simplesale->balance }} {{ __('XAF') }}</td>
                             <td>{{ $simplesale->payment_type }}</td>
                             <td>{{ $simplesale->created_by }}</td>
                             <td>{{ $simplesale->created_at }}</td>

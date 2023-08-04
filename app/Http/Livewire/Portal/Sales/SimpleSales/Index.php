@@ -177,7 +177,14 @@ class Index extends Component
         }
 
         $purchaserNames = implode(',', $this->purchaser_name);
-
+        
+        if ($this->payment_type === 'cash') {
+            $defaultAdvance = 0;
+            $defaultBalance = 0;
+        } else {
+            $defaultAdvance = $this->advance ?? 0;
+            $defaultBalance = $this->balance ?? 0;
+        }
         // Store the data into the database (or any other storage medium)
         $sale = Sale::create([
             'user_id' => $this->user_id,
@@ -185,7 +192,6 @@ class Index extends Component
             'sales_code' => $this->sales_code,
             'number_of_lots_sold' => $this->number_of_lots_sold,
             'number_of_lots_remaining' => $this->number_of_lots_remaining,
-            'balance' => $this->balance,
             'purchaser_name' => implode(',', $this->purchaser_name),
             'surface_for_sale' => $this->surface_for_sale,
             'price_per_m²' => $this->price_per_m²,
@@ -193,8 +199,8 @@ class Index extends Component
             'document_path' => json_encode($documentPaths),// Use the array with document paths here
             'sale_type' => 'simple_sale',
             'payment_type' => $this->payment_type,
-            'advance' => $this->advance,
-            'balance' => $this->balance,
+            'balance' => $defaultBalance,
+            'advance' => $defaultAdvance,
             'observation' => $this->observation,
             'created_by' => auth()->user()->name,
         ]);
