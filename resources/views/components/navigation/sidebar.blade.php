@@ -103,6 +103,34 @@
                                     </div>
                                 </li>
                                 @endcanany
+                                <li class="nav-item">
+                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.registrations.housingestates.index') ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-registration"><span>
+                                            <span class="sidebar-icon">
+                                                <svg class="icon icon-sm " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                                </svg>
+                                            </span>
+                                            <span class="sidebar-text">{{__('Registrations')}}</span>
+                                        </span>
+                                        <span class="link-arrow">
+                                            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                    <div class="multi-level collapse {{ $request->routeIs('portal.registrations.housingestates.index') ? 'show' : '' }}" role="list" id="submenu-registration" aria-expanded="{{ $request->routeIs('portal.registrations.housingestates.index')  ? 'false' : 'true' }}">
+                                        <ul class="flex-column nav">
+                                            @can('region.view')
+                                            <li class="nav-item {{$request->routeIs('portal.registrations.housingestates.index') ? 'active' :'' }}">
+                                                <a href="{{route('portal.registrations.housingestates.index')}}" class="nav-link">
+                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{__('Housing Estates')}}</span>
+                                                </a>
+                                            </li>
+                                            @endcan
+                                        </ul>
+                                    </div>
+                                </li>
 
 
                                 @can('service.view')
