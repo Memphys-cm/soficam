@@ -1,5 +1,6 @@
 <div>
     <x-alert />
+    @include('livewire.portal.titre-fonciers.create')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -28,7 +29,7 @@
             <div class="d-flex justify-content-between mb-2">
 
                 @can('titre_foncier.create')
-                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateUpdateServiceModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateTitreFoncierModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{__('New')}}
@@ -91,13 +92,14 @@
     </div>
     <div class="card pb-3">
         <div class="table-responsive  text-gray-700">
-            <table class="table employee-table table-hover align-items-center ">
+            <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('TF Number')}}</th>
-                        <th class="border-bottom">{{__('Service Name')}}</th>
-                        <th class="border-bottom">{{__('Users Count')}}</th>
-                        <th class="border-bottom">{{__('Status')}}</th>
+                        <th class="border-bottom">{{__('Land Title Number')}}</th>
+                        <th class="border-bottom">{{__('Delivered Date')}}</th>
+                        <th class="border-bottom">{{__('Propriators')}}</th>
+                        <th class="border-bottom">{{__('Location')}}</th>
+                        <th class="border-bottom">{{__('Limits')}}</th>
                         <th class="border-bottom">{{__('Date created')}}</th>
                         @canany('titre_foncier.update','titre_foncier.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
@@ -108,37 +110,73 @@
                     @forelse($titrefonciers as $titrefoncier)
                     <tr>
                         <td>
-                            <span class="fw-normal">{{$titrefoncier->code}}</span>
+                            <span class="fw-normal">{{$titrefoncier->numero_titre_foncier}}</span>
                         </td>
                         <td>
-                            <a href="#" class="d-flex align-items-center">
-                                <div class="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-primary me-3"><span class="text-white">{{initials($service->service_name)}}</span></div>
-                                <div class="d-block"><span class="fw-bold">{{$service->service_name}}</span>
-                                    <div class="small text-gray">{{!empty($service->service_name) ? $service->service_name : ''}}</div>
-                                </div>
-                            </a>
-                        </td>
-                        <td class="text-center">
-                            <span class="fw-normal">{{ $service->users_count }}</span>
-                        </td>
-                        <td>
-                            <span class="fw-normal badge super-badge p-2 bg-{{$service->statusStyle}} round">{{$service->statusText}}</span>
+                            <span class="fw-normal">{{$titrefoncier->date_de_delivrance_du_TF}}</span>
                         </td>
 
                         <td>
-                            <span class="fw-normal">{{$service->created_at->format('Y-m-d')}}</span>
+                            @foreach($titrefoncier->users->take(5) as $user)
+                            <a href="#" class="d-flex align-items-center {{!$loop->last ? 'border-bottom' : ''}} py-1">
+                                <div class="avatar  d-flex align-items-center justify-content-center fw-bold  rounded bg-primary me-2"><span class="text-white">{{$user->initials}}</span></div>
+                                <div class="d-block">
+                                    <span class="fw-bolder ">{{ucwords($user->name)}}</span>
+                                    <div class="small text-gray">
+                                        <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
+                                        </svg> {{$user->email}}
+                                        <svg class="icon icon-xxs me-1 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                        </svg> {{$user->primary_phone_number}} | {{$user->secondary_phone_number}}
+                                    </div>
+                                </div>
+                            </a>
+                            @endforeach
                         </td>
-                        @canany('service.update','service.delete')
                         <td>
-                            @can('service.update')
-                            <a href="#" wire:click.prevent="initData({{$service->id}})" data-bs-toggle="modal" data-bs-target="#CreateUpdateServiceModal" draggable="false">
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('Region')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->region->region_name}} </span>
+                            </div>
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('Division')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->division->division_name}} </span>
+                            </div>
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('Sub Divi')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->subDivision->sub_division_name}} </span>
+                            </div>
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('Lieu Dit')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->lieu_dit}} </span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-centerpy-1">
+                                <span class="fw-bolder mx-2"> {{__('North')}} </span> {{$titrefoncier->limit_nord}}
+                            </div>
+                            <div class="d-flex align-items-centerpy-1">
+                                <span class="fw-bolder mx-2"> {{__('South')}} </span> {{$titrefoncier->limit_sud}}
+                            </div>
+                            <div class="d-flex align-items-centerpy-1">
+                                <span class="fw-bolder mx-2"> {{__('East')}} </span> {{$titrefoncier->limit_est}}
+                            </div>
+                            <div class="d-flex align-items-centerpy-1">
+                                <span class="fw-bolder mx-2"> {{__('West')}} </span> {{$titrefoncier->limit_ouest}}
+                            </div>
+                        </td>
+
+                        <td>
+                            <span class="fw-normal">{{$titrefoncier->created_at->format('Y-m-d')}}</span>
+                        </td>
+                        @canany('titre_foncier.update','titre_foncier.delete')
+                        <td>
+                            @can('titre_foncier.update')
+                            <a href="#" wire:click.prevent="initData({{$titrefoncier->id}})" data-bs-toggle="modal" data-bs-target="#CreateTitreFoncierModal" draggable="false">
                                 <svg class="icon icon-sm text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                 </svg>
                             </a>
                             @endcan
-                            @can('service.delete')
-                            <a href="#" wire:click.prevent="initData({{$service->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
+                            @can('titre_foncier.delete')
+                            <a href="#" wire:click.prevent="initData({{$titrefoncier->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
                                 <svg class="icon icon-sm text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                                 </svg>
