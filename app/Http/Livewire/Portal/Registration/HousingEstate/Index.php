@@ -3,13 +3,14 @@
 namespace App\Http\Livewire\Portal\Registration\HousingEstate;
 
 use Livewire\Component;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Arr;
 use App\Models\Registration\Block;
+use App\Models\Registration\Parcel;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Registration\HousingEstate;
 use App\Http\Livewire\Traits\WithDataTables;
-use App\Models\Registration\Parcel;
 
 class Index extends Component
 {
@@ -211,4 +212,19 @@ class Index extends Component
 
         return view('livewire.portal.registration.housing-estate.index' , ['housing_estates' => $housing_estates, 'housing_estates_count' => $housing_estates_count]);
     }
+
+    public function  printPdf()
+    {
+        $data = [
+            'housing_estate' => $this->housing_estate,
+            'email' => 'john@example.com',
+            // Autres données que vous souhaitez afficher dans la vue
+        ];
+    
+        $pdf = app('dompdf.wrapper')->loadView('livewire.portal.registration.housing-estate.view-housing_estate', $data);
+        $pdf->setPaper('A4'); // Vous pouvez également définir d'autres tailles de papier comme 'letter', 'legal', etc.
+
+        return $pdf->stream('test.pdf');
+    }
+
 }
