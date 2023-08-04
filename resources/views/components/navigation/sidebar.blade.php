@@ -104,7 +104,7 @@
                                 </li>
                                 @endcanany
 
-                                @canany('region.view','division.view','sub_division.view')
+                                @canany('titre_foncier.view','titre_foncier.operations.view')
 
                                 <li class="nav-item">
                                     <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.divisions.index') || $request->routeIs('portal.sub-divisions.index')  ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-land-title"><span>
@@ -123,14 +123,14 @@
                                     </span>
                                     <div class="multi-level collapse {{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.divisions.index') || $request->routeIs('portal.sub-divisions.index')  ? 'show' : '' }}" role="list" id="submenu-land-title" aria-expanded="{{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.division.index') || $request->routeIs('portal.sub_division.index')  ? 'false' : 'true' }}">
                                         <ul class="flex-column nav">
-                                            @can('region.view')
+                                            @can('titre_foncier.view')
                                             <li class="nav-item {{$request->routeIs('portal.titre-fonciers.index') ? 'active' :'' }}">
                                                 <a href="{{route('portal.titre-fonciers.index')}}" class="nav-link">
                                                     <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{__('All Land Titles')}}</span>
                                                 </a>
                                             </li>
                                             @endcan
-                                            @can('division.view')
+                                            @can('titre_foncier.operations.view')
                                             <li class="nav-item {{$request->routeIs('portal.divisions.index') ? 'active' :'' }}">
                                                 <a href="{{route('portal.divisions.index')}}" class="nav-link">
                                                     <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{__('Operations on TF')}}</span>

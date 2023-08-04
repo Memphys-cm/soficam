@@ -10,6 +10,8 @@ class Index extends Component
 {
     use WithDataTables;
 
+    
+
     public function render()
     {
         $titrefonciers = TitreFoncier::with('users')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);

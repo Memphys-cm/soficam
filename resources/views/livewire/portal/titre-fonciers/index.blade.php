@@ -27,21 +27,31 @@
             </div>
             <div class="d-flex justify-content-between mb-2">
 
-                @can('service.create')
+                @can('titre_foncier.create')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateUpdateServiceModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{__('New')}}
                 </a>
                 @endcan
-                @can('service.import')
-                <a href="#" data-bs-toggle="modal" data-bs-target="#importServicesModal" class="btn btn-sm btn-secondary py-2 d-inline-flex align-items-center">
-                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                    </svg>{{__('Import')}}
-                </a>
+                @can('titre_foncier.import')
+                <div class="btn-group me-2">
+                    <button type="button" class="btn btn-outline-tertiary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="sr-only">{{__('Operations on Land Title')}}</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                </div>
                 @endcan
-               
+
             </div>
         </div>
     </div>
@@ -84,21 +94,21 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('Code')}}</th>
+                        <th class="border-bottom">{{__('TF Number')}}</th>
                         <th class="border-bottom">{{__('Service Name')}}</th>
                         <th class="border-bottom">{{__('Users Count')}}</th>
                         <th class="border-bottom">{{__('Status')}}</th>
                         <th class="border-bottom">{{__('Date created')}}</th>
-                        @canany('service.update','service.delete')
+                        @canany('titre_foncier.update','titre_foncier.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
                         @endcanany
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($titrefonciers as $service)
+                    @forelse($titrefonciers as $titrefoncier)
                     <tr>
                         <td>
-                            <span class="fw-normal">{{$service->code}}</span>
+                            <span class="fw-normal">{{$titrefoncier->code}}</span>
                         </td>
                         <td>
                             <a href="#" class="d-flex align-items-center">
