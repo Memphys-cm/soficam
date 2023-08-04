@@ -174,7 +174,7 @@ class Index extends Component
         $this->nom_et_prenoms_de_largent_traitant =  $titrefoncier->nom_et_prenoms_de_largent_traitant;
         $this->le_conservateur =  $titrefoncier->le_conservateur;
 
-        $this->user_ids = $titrefoncier->users->pluck('id');
+        $this->user_ids = $titrefoncier->users;
 
         $this->state = 1;
     }
@@ -208,6 +208,7 @@ class Index extends Component
                 'limit_sud' => 'required',
                 'limit_est' => 'required',
                 'limit_ouest' => 'required',
+               
             ]
         );
 
@@ -265,6 +266,8 @@ class Index extends Component
 
         $this->state = 0;
 
+        $this->clearFields();
+
         $this->refresh(__('TitreFoncier successfully deleted!'), 'DeleteModal');
     }
 
@@ -299,6 +302,8 @@ class Index extends Component
                 'le_conservateur',
             ]
         );
+
+        $this->user_ids = [];
     }
 
     public function render()

@@ -35,11 +35,7 @@
                         <div class="form-group mb-3 row">
                             <div class='col'>
                                 <label class="px-2" for="user_ids">{{__('Propriators')}}</label>
-                                <select wire:model="user_ids" name="user_ids" class="form-select  @error('user_ids') is-invalid @enderror" required="" multiple>
-                                    @foreach($users as $user)
-                                    <option value="{{$user->id}}">{{$user->name}}</option>
-                                    @endforeach
-                                </select>
+                                <x-input.selectmultipleusers wire:model="user_ids" prettyname="user_ids" :options="$users" selected="('user_ids')" />
                                 @error('user_ids')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
