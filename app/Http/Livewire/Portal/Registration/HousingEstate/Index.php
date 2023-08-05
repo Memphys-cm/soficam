@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Portal\Registration\HousingEstate;
 use Livewire\Component;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Arr;
+use App\Models\TitreFoncier;
 use App\Models\Registration\Block;
 use App\Models\Registration\Parcel;
 use Illuminate\Support\Facades\Gate;
@@ -18,6 +19,7 @@ class Index extends Component
     use WithDataTables;
 
     public HousingEstate $housing_estate;
+    public $land_titles;
     public $state = 0;
     public $blocks = [] , $blocks_delete;
     public $newBlockName = '';
@@ -76,6 +78,7 @@ class Index extends Component
     public function mount()
     {
         $this->housing_estate = new HousingEstate();
+        $this->land_titles = TitreFoncier::all();
     }
 
     public function initData($id)
