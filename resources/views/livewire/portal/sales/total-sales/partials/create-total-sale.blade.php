@@ -12,10 +12,10 @@
                         <fieldset class="border p-3">
                             <legend class="w-auto">Land Title Informations</legend>
                             <div class='form-group row mb-3'>
-                                <div class=" col"><label for="user_id">{{ __('Land Title Number') }}</label>
-                                    <x-input.select wire:model="user_id" prettyname="user" :options="$users->pluck('first_name', 'id')->toArray()"
-                                        selected="('user_id')" />
-                                    @error('user_id')
+                                <div class=" col"><label for="titre_foncier_id">{{ __('Land Title Number') }}</label>
+                                    <x-input.select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers->pluck('numero_titre_foncier', 'id')->toArray()"
+                                        selected="('titre_foncier_id')" />
+                                    @error('titre_foncier_id')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -39,54 +39,108 @@
                                 </div>
                             </div>
                             <div class='form-group row mb-3'>
-                                <div class=" col"><label for="first_name">{{ __('LAND TITLE AREA') }}</label>
-                                    <input type="text" wire:model="first_name"
-                                        class="form-control  @error('first_name') is-invalid @enderror "
-                                        value="{{ old('first_name') }}" placeholder="" id="first_name" autofocus=""
+                                <div class=" col"><label for="region_id">{{ __('Region') }}</label>
+                                    <input type="text" wire:model="region_id"
+                                        class="form-control  @error('region_id') is-invalid @enderror "
+                                        value="{{ old('region_id') }}" placeholder="" id="region_id"
+                                        autofocus="" required="" disabled>
+                                    @error('region_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class=" col"><label for="division_id">{{ __('Division') }}</label>
+                                    <input type="text" wire:model="division_id"
+                                        class="form-control  @error('division_id') is-invalid @enderror "
+                                        value="{{ old('division_id') }}" placeholder="" id="division_id"
+                                        autofocus="" required="" disabled>
+                                    @error('division_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class=" col"><label for="sub_division_id">{{ __('SubDivision') }}</label>
+                                    <input type="text" wire:model="sub_division_id"
+                                        class="form-control  @error('sub_division_id') is-invalid @enderror "
+                                        value="{{ old('sub_division_id') }}" placeholder="" id="sub_division_id"
+                                        autofocus="" required="" disabled>
+                                    @error('sub_division_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                               
+                            </div>
+                            
+                            <div class='form-group row mb-3'>
+                                <div class=" col"><label for="lieu_dit">{{ __('Village') }}</label>
+                                    <input type="text" wire:model="lieu_dit"
+                                        class="form-control  @error('lieu_dit') is-invalid @enderror "
+                                        value="{{ old('lieu_dit') }}" placeholder="" id="lieu_dit"
+                                        autofocus="" required="" disabled>
+                                    @error('lieu_dit')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class=" col"><label for="superficie_du_TF_mere">{{ __('LAND TITLE AREA') }}</label>
+                                    <input type="text" wire:model="superficie_du_TF_mere"
+                                        class="form-control  @error('superficie_du_TF_mere') is-invalid @enderror "
+                                        value="{{ old('superficie_du_TF_mere') }}" placeholder="" id="superficie_du_TF_mere" autofocus=""
                                         required="" disabled>
-                                    @error('first_name')
+                                    @error('superficie_du_TF_mere')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
 
-                                <div class=" col"><label for="last_name">{{ __('PUBLIC UTILITY AREA') }}</label>
-                                    <input type="text" wire:model="last_name"
-                                        class="form-control  @error('last_name') is-invalid @enderror "
-                                        value="{{ old('last_name') }}" placeholder="" id="last_name" autofocus=""
+                                <div class=" col"><label for="numero_titre_foncier">{{ __('PUBLIC UTILITY AREA') }}</label>
+                                    <input type="text" wire:model="numero_titre_foncier"
+                                        class="form-control  @error('numero_titre_foncier') is-invalid @enderror "
+                                        value="{{ old('numero_titre_foncier') }}" placeholder="" id="numero_titre_foncier" autofocus=""
                                         required="" disabled>
-                                    @error('last_name')
+                                    @error('numero_titre_foncier')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
-                                <div class=" col"><label for="date_of_birth">{{ __('NUMBER OF BLOCKS') }}</label>
-                                    <input type="text" wire:model="date_of_birth"
-                                        class="form-control  @error('date_of_birth') is-invalid @enderror "
-                                        value="{{ old('date_of_birth') }}" placeholder="" id="date_of_birth"
-                                        autofocus="" required="" disabled>
-                                    @error('date_of_birth')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class=" col"><label for="place_of_birth">{{ __('NUMBER OF LOTS') }}</label>
-                                    <input type="text" wire:model="place_of_birth"
-                                        class="form-control  @error('place_of_birth') is-invalid @enderror "
-                                        value="{{ old('place_of_birth') }}" placeholder="" id="place_of_birth"
-                                        autofocus="" required="" disabled>
-                                    @error('place_of_birth')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
+                               
                             </div>
-                            <div class='form-group row mb-3'>
-                                
+                            <div class='form-group mb-3 row'>
+                                <div class='col'>
+                                    <label for="limit_nord">{{__('North Limit')}}</label>
+                                    <input wire:model="limit_nord" type="text" class="form-control  @error('limit_nord') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="limit_nord" disabled>
+                                    @error('limit_nord')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class='col'>
+                                    <label for="limit_sud">{{__('South Limit')}}</label>
+                                    <input wire:model="limit_sud" type="text" class="form-control  @error('limit_sud') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="limit_sud" disabled>
+                                    @error('limit_sud')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class='col'>
+                                    <label for="limit_est">{{__('East Limit')}}</label>
+                                    <input wire:model="limit_est" type="text" class="form-control  @error('limit_est') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="limit_est" disabled>
+                                    @error('limit_est')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class='col'>
+                                    <label for="limit_ouest">{{__('West Limit')}}</label>
+                                    <input wire:model="limit_ouest" type="text" class="form-control  @error('limit_ouest') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="limit_ouest" disabled>
+                                    @error('limit_ouest')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
                             </div>
                         </fieldset>
                         <br>

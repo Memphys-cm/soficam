@@ -98,10 +98,7 @@ class User extends Authenticatable
             NULL => 'info'
         };
     }
-    public function sales()
-    {
-        return $this->hasMany(Sale::class);
-    }
+   
     public function getStatusTextAttribute()
     {
         return match ($this->is_active) {

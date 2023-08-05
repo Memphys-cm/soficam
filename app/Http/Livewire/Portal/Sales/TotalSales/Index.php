@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Notary;
 use Livewire\Component;
 use App\Models\Sales\Sale;
+use App\Models\TitreFoncier;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
@@ -27,19 +28,21 @@ class Index extends Component
     public $i = 0;
 
 
-    public $user, $user_id, $users, $notarys;
+    public $titre_foncier, $titre_foncier_id, $titre_fonciers, $notarys;
     public $created, $sales_code, $sale_type, $number_of_lots_remaining, $observation;
     public $maeture, $land_title_area, $public_utility_area, $area_sold, $remaining_area, $number_of_blocks, $number_of_lots;
     public $surface_for_sale, $price_per_m², $sale_amount, $payment_type, $notary, $notary_id;
     public $document = [];
     public $purchaser_name = [];
-    public $first_name, $last_name, $email, $address, $date_of_birth, $place_of_birth, $sale, $saleId;
+    public $numero_titre_foncier, $superficie_du_TF_mere, $limit_nord, $limit_sud, $limit_est, $limit_ouest, $sale, $saleId;
     public $balance = 0;
     public $advance = 0;
+    public $lieu_dit, $sub_division_id, $division_id, $region_id; 
+
 
     public function mount()
     {
-        $this->users = User::select('id', 'first_name')->get();
+        $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier')->get();
         $this->notarys = Notary::select('id', 'name')->get();
         $this->created = Carbon::now()->addHour();
         $this->sales_code = $this->generateConsCode();
@@ -119,27 +122,35 @@ class Index extends Component
         return $SaleCode;
     }
 
-    public function updatedUserId($user_id)
+    public function updatedTitreFoncierId($titre_foncier_id)
     {
         // dd('s');
-        if (!empty($user_id)) {
-            $utilisateur = User::findOrFail($user_id);
+        if (!empty($titre_foncier_id)) {
+            $utilisateur = TitreFoncier::findOrFail($titre_foncier_id);
 
-            // Update the Livewire component properties with the user information
-            $this->first_name = $utilisateur->first_name;
-            $this->last_name = $utilisateur->last_name;
-            $this->email = $utilisateur->email;
-            $this->address = $utilisateur->address;
-            $this->date_of_birth = $utilisateur->date_of_birth;
-            $this->place_of_birth = $utilisateur->place_of_birth;
+            // Update the Livewire component properties with the titre_foncier information
+            $this->numero_titre_foncier = $utilisateur->numero_titre_foncier;
+            $this->superficie_du_TF_mere = $utilisateur->superficie_du_TF_mere;
+            $this->limit_nord = $utilisateur->limit_nord;
+            $this->limit_sud = $utilisateur->limit_sud;
+            $this->limit_est = $utilisateur->limit_est;
+            $this->limit_ouest = $utilisateur->limit_ouest;
+            $this->lieu_dit = $utilisateur->lieu_dit;
+            $this->sub_division_id = $utilisateur->sub_division_id;
+            $this->region_id = $utilisateur->region_id;
+            $this->division_id = $utilisateur->division_id;
         } else {
-            // Reset the Livewire component properties when the user_id is empty
-            $this->first_name = '';
-            $this->last_name = '';
-            $this->email = '';
-            $this->address = '';
-            $this->date_of_birth = '';
-            $this->place_of_birth = '';
+            // Reset the Livewire component properties when the titre_foncier_id is empty
+            $this->numero_titre_foncier = '';
+            $this->superficie_du_TF_mere = '';
+            $this->limit_nord = '';
+            $this->limit_sud = '';
+            $this->limit_est = '';
+            $this->limit_ouest = '';
+            $this->lieu_dit = '';
+            $this->sub_division_id = '';
+            $this->region_id = '';
+            $this->division_id = '';
         }
     }
 
@@ -147,7 +158,7 @@ class Index extends Component
     {
         // Validate the required fields before storing the data
         $this->validate([
-            'user_id' => 'required',
+            'titre_foncier_id' => 'required',
             'surface_for_sale' => 'required|numeric',
             'price_per_m²' => 'required|numeric',
             'advance' => 'nullable|numeric',
@@ -188,7 +199,7 @@ class Index extends Component
         }
         // Store the data into the database (or any other storage medium)
         $sale = Sale::create([
-            'user_id' => $this->user_id,
+            'titre_foncier_id' => $this->titre_foncier_id,
             'notary_id' => $this->notary_id,
             'sales_code' => $this->sales_code,
             'balance' => $defaultBalance,
@@ -231,7 +242,7 @@ class Index extends Component
 
     public function clearFields()
     {
-        $this->user_id = null;
+        $this->titre_foncier_id = null;
         $this->notary_id = null;
         $this->sales_code = $this->generateConsCode();
         $this->balance = 0;
@@ -251,7 +262,7 @@ class Index extends Component
         $this->sale = $sale;
         $this->saleId = $id;
         $this->sale_amount = $sale->sale_amount;
-        $this->user_id = $sale->user_id;
+        $this->titre_foncier_id = $sale->titre_foncier_id;
         $this->sales_code = $sale->sales_code;
         $this->purchaser_name = $sale->purchaser_name;
         $this->document = $sale->document;

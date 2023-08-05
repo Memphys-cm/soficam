@@ -22,6 +22,10 @@ class TitreFoncier extends Model
     {
         return $this->belongsTo(Region::class);
     }
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
     public function division(): BelongsTo
     {
         return $this->belongsTo(Division::class);
