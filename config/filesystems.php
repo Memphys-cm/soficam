@@ -56,6 +56,12 @@ return [
             'throw' => false,
         ],
 
+        'documents' => [
+            'driver' => 'local',
+            'root' => storage_path('app/documents'), // Set the correct path for documents storage
+            'throw' => false,
+        ],
+
     ],
 
     /*
