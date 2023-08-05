@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('housing_estates', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->foreignId('land_id')->index()->constrained('divisions')->default(1);
+            $table->foreignId('land_id')->index()->constrained('titre_fonciers')->default(1);
             $table->string('maeture')->nullable();
             $table->string('property_developer')->nullable();
             $table->string('estate_agent')->nullable();

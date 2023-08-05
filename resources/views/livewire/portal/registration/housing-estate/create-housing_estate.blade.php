@@ -1,5 +1,5 @@
 <div wire:ignore.self class="modal side-layout-modal fade" id="CreateUpdateHousingEstateModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:65%;">
+    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:85%;">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
@@ -14,57 +14,29 @@
                             <div class='row form-group mb-3'>
                                 <div class="col-md-6 py-2">
                                     <label for="code">{{ __('Land Title Number') }}</label>
-                                    <input wire:model="housing_estate.code" type="text" class="form-control  @error('housing_estate.code') is-invalid @enderror" placeholder="NW" required="" value="" name="housing_estate.code">
-                                    @error('housing_estate.code')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <x-input.land_title-select wire:model="land_id" prettyname="land_id" :options="$land_titles" selected="('land_id')" />
+                                    @error('land_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 py-2">
                                     <label for="code">{{ __('Land Title Area') }}</label>
-                                    <input wire:model="housing_estate.code" type="text" class="form-control  @error('housing_estate.code') is-invalid @enderror" placeholder="NW" required="" value="" name="housing_estate.code">
+                                    <input wire:model="area" type="text" class="form-control  @error('area') is-invalid @enderror" placeholder="NW" required="" value="" name="area" disabled>
                                     @error('housing_estate.code')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 py-2">
-                                    <label for="code">{{ __('Public Usable Area') }}</label>
-                                    <input wire:model="housing_estate.code" type="text" class="form-control  @error('housing_estate.code') is-invalid @enderror" placeholder="NW" required="" value="" name="housing_estate.code">
-                                    @error('housing_estate.code')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 py-2">
-                                    <label for="code">{{ __('Usable Area') }}</label>
-                                    <input wire:model="housing_estate.code" type="text" class="form-control  @error('housing_estate.code') is-invalid @enderror" placeholder="NW" required="" value="" name="housing_estate.code">
-                                    @error('housing_estate.code')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-3 py-2">
                                     <label for="code">{{ __('Area sold') }}</label>
-                                    <input wire:model="housing_estate.code" type="text" class="form-control  @error('housing_estate.code') is-invalid @enderror" placeholder="NW" required="" value="" name="housing_estate.code">
-                                    @error('housing_estate.code')
+                                    <input wire:model="area_solde" type="text" class="form-control  @error('area_solde') is-invalid @enderror" placeholder="NW" required="" value="" name="area_solde" disabled>
+                                    @error('area_solde')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-3 py-2">
-                                    <label for="code">{{ __('Remaining Area') }}</label>
-                                    <input wire:model="housing_estate.code" type="text" class="form-control  @error('housing_estate.code') is-invalid @enderror" placeholder="NW" required="" value="" name="housing_estate.code">
-                                    @error('housing_estate.code')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-3 py-2">
-                                    <label for="code">{{ __('Bloc Number') }}</label>
-                                    <input wire:model="housing_estate.code" type="text" class="form-control  @error('housing_estate.code') is-invalid @enderror" placeholder="NW" required="" value="" name="housing_estate.code">
-                                    @error('housing_estate.code')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-3 py-2">
-                                    <label for="code">{{ __('Lot Number') }}</label>
-                                    <input wire:model="housing_estate.code" type="text" class="form-control  @error('housing_estate.code') is-invalid @enderror" placeholder="NW" required="" value="" name="housing_estate.code">
-                                    @error('housing_estate.code')
+                                <div class="col-md-6 py-2">
+                                    <label for="code">{{ __('remaning_area') }}</label>
+                                    <input wire:model="remaning_area" type="text" class="form-control  @error('remaning_area') is-invalid @enderror" placeholder="NW" required="" value="" name="remaning_area" disabled>
+                                    @error('remaning_area')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>

@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Registration\HousingEstate;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TitreFoncier extends Model
 {
@@ -33,6 +35,10 @@ class TitreFoncier extends Model
     public function subDivision(): BelongsTo
     {
         return $this->belongsTo(SubDivision::class);
+    }
+    public function housing_estate() : HasMany
+    {
+        return $this->hasMany(HousingEstate::class);
     }
 
 }

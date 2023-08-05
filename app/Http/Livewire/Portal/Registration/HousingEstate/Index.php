@@ -19,13 +19,12 @@ class Index extends Component
     use WithDataTables;
 
     public HousingEstate $housing_estate;
-    public $land_titles;
+    public $land_titles, $land_id, $area, $usable_area, $area_solde, $remaning_area;
     public $state = 0;
-    public $blocks = [] , $blocks_delete;
+    public $blocks = [], $blocks_delete;
     public $newBlockName = '';
-    public $newLot = ['type' => '','lot_affectation' => '','lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'lot_status' => '', 'notary_office' => '', 'notary_clerk' => '', 'geometric_pratic' => '', 'geometrician' => '', 'date' => ''];
+    public $newLot = ['type' => '', 'lot_affectation' => '', 'lot_no' => '', 'lot_area' => '', 'condition_lot' => '', 'lot_status' => '', 'notary_office' => '', 'notary_clerk' => '', 'geometric_pratic' => '', 'geometrician' => '', 'date' => ''];
     public $countBlock = 0;
-    public $land_id;
 
     public function addBlock()
     {
@@ -44,10 +43,10 @@ class Index extends Component
         $this->newLot = ['lot_no' => '', 'lot_area' => '', 'condition_lot' => 'standard', 'type' => '', 'lot_status' => '', 'notary_office' => '', 'notary_clerk' => '', 'geometric_pratic' => '', 'geometrician' => '', 'date' => ''];
         $this->blocks[$blockIndex]['parcels'][] = $this->newLot;
     }
-    
+
     public function addLotPublic($blockIndex)
     {
-        $this->newLot = ['lot_no' => '', 'lot_area' => '', 'type' => 'public','lot_affectation' => '', 'date' => ''];
+        $this->newLot = ['lot_no' => '', 'lot_area' => '', 'type' => 'public', 'lot_affectation' => '', 'date' => ''];
         $this->blocks[$blockIndex]['parcels'][] = $this->newLot;
     }
 
@@ -81,13 +80,29 @@ class Index extends Component
         $this->land_titles = TitreFoncier::all();
     }
 
+    public function updatedLandId($id)
+    {
+        $land = TitreFoncier::findOrFail($id);
+        $this->area = $land->superficie_du_TF_mere;
+        $this->area_solde = $land->superficie_vendue_du_TF_mere === null ? 0 : $land->superficie_vendue_du_TF_mere;
+        // dd($this->area_solde);
+        $this->remaning_area = $land->superficie_restant_du_TF_mere === null ? 0 : $land->superficie_restant_du_TF_mere;
+    }
+
     public function initData($id)
     {
         $this->housing_estate = HousingEstate::findOrFail($id);
+        // dd($this->housing_estate->land_title->numero_titre_foncier);
         // $this->blocks_delete = $this->housing_estate->blocks()->with('parcels')->get();
         $this->blocks = $this->housing_estate->blocks()->with('parcels')->get()->toArray();
         // dd($this->blocks);
         $this->state = 1;
+    }
+
+    public function generateUniqueCode($year, $counter)
+    {
+        $counterFormatted = str_pad($counter, 5, '0', STR_PAD_LEFT);
+        return $year . 'LOT' . $counterFormatted;
     }
 
     public function store()
@@ -96,19 +111,29 @@ class Index extends Component
         // if (!Gate::allows('housing_estate.create') || !Gate::allows('housing_estate.update')) {
         //     return abort(401);
         // }
+
+        // Récupérer l'année en cours au format 'yy'
+        $year = date('y');
+
+        // Récupérer le compteur depuis la base de données (par exemple en comptant les enregistrements de lotissement existants)
+        $counter = HousingEstate::count() + 1;
+
+        // Générer le code unique
+        $code = $this->generateUniqueCode($year, $counter);
+
         $this->validate();
 
-        $this->housing_estate->land_id = 1;
-        $this->housing_estate->code = 2772;
+        $this->housing_estate->land_id = $this->land_id;
+        $this->housing_estate->code = $code;
         $this->housing_estate->save();
-        
+
         if ($this->state == 0) {
             foreach ($this->blocks as $key => $blockData) {
                 $block = Block::create([
                     'housing_estate_id' => $this->housing_estate->id,
                     'name' => $blockData['name']
                 ]);
-    
+
                 foreach ($blockData['parcels'] as $lotData) {
                     // Créer un nouveau lot avec les données du tableau
                     if ($lotData['type'] != 'public') {
@@ -134,8 +159,6 @@ class Index extends Component
                             'date' => $lotData['date'],
                         ]);
                     }
-                    
-                   
                 }
             }
         } else {
@@ -144,8 +167,8 @@ class Index extends Component
                 $block->update([
                     'name' => $blockData['name']
                 ]);
-                 // Mise à jour des lots existants
-                 if (is_array($blockData) && isset($blockData['parcels'])) {
+                // Mise à jour des lots existants
+                if (is_array($blockData) && isset($blockData['parcels'])) {
                     // Mise à jour des lots existants
                     foreach ($blockData['parcels'] as $lotData) {
                         $lot = Parcel::findOrFail($lotData['id']);
@@ -200,7 +223,7 @@ class Index extends Component
     public function render()
     {
 
-         // if (!Gate::allows('housing_estate.view')) {
+        // if (!Gate::allows('housing_estate.view')) {
         //     return abort(401);
         // }
 
@@ -213,7 +236,7 @@ class Index extends Component
         $housing_estates_count = HousingEstate::count();
         // dd($housing_estates_count);
 
-        return view('livewire.portal.registration.housing-estate.index' , ['housing_estates' => $housing_estates, 'housing_estates_count' => $housing_estates_count]);
+        return view('livewire.portal.registration.housing-estate.index', ['housing_estates' => $housing_estates, 'housing_estates_count' => $housing_estates_count]);
     }
 
     public function  printPdf()
@@ -223,11 +246,10 @@ class Index extends Component
             'email' => 'john@example.com',
             // Autres données que vous souhaitez afficher dans la vue
         ];
-    
+
         $pdf = app('dompdf.wrapper')->loadView('livewire.portal.registration.housing-estate.view-housing_estate', $data);
         $pdf->setPaper('A4'); // Vous pouvez également définir d'autres tailles de papier comme 'letter', 'legal', etc.
 
         return $pdf->stream('test.pdf');
     }
-
 }
