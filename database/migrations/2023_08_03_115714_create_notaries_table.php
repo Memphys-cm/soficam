@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sales', function (Blueprint $table) {
+        Schema::create('notaries', function (Blueprint $table) {
             $table->id();
-            $table->float('sales_amount');
-            $table->foreignId('user_id')->on('users')->nullable()->index();
-            $table->string('sales_code')->nullable();
-            $table->string('sales_type');
-            $table->string('created_by')->nullable();
+            $table->string('name')->nullable();
+            $table->string('post')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sales');
+        Schema::dropIfExists('notaries');
     }
 };
