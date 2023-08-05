@@ -10,7 +10,7 @@
                     </div>
                     <x-form-items.form wire:submit="store">
                         <fieldset class="border p-3">
-                            <legend class="w-auto">Land Title Informations</legend>
+                            <legend class="w-auto">Land Title Informations*</legend>
                             <div class='form-group row mb-3'>
                                 <div class=" col"><label for="titre_foncier_id">{{ __('Land Title Number') }}</label>
                                     <x-input.select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers->pluck('numero_titre_foncier', 'id')->toArray()"
@@ -30,7 +30,7 @@
                                         </div>
                                     @enderror
                                 </div>
-                                <div class=" col"><label for="notary_id">{{ __('NOTARY') }}</label>
+                                <div class=" col"><label for="notary_id">{{ __('NOTARY*') }}</label>
                                     <x-input.select wire:model="notary_id" prettyname="notary" :options="$notarys->pluck('name', 'id')->toArray()"
                                         selected="('notary_id')" />
                                     @error('notary_id')
@@ -153,7 +153,7 @@
                                     <div>
                                         <div class='d-flex justify-content-between align-items-center'>
 
-                                            <label for="purchaser_name">{{ __('Id of purchaser(s)') }}</label>
+                                            <label for="purchaser_name">{{ __('Purchaser(s)*') }}</label>
                                             
                                         </div>
                                         <div class='row'>
@@ -206,7 +206,7 @@
                                 </div>
 
                                 <div class="col">
-                                    <label for="payment_type">{{ __('PAYMENT TYPE') }}</label>
+                                    <label for="payment_type">{{ __('PAYMENT TYPE*') }}</label>
                                     <select wire:model="payment_type"
                                         class="form-select @error('payment_type') is-invalid @enderror"
                                         id="payment_type" required="">
@@ -227,7 +227,7 @@
 
                             </div>
                             <div class='form-group row mb-3'>
-                                <div class=" col"><label for="price_per_m²">{{ __('Price(m²)') }}</label>
+                                <div class=" col"><label for="price_per_m²">{{ __('Price(m²)*') }}</label>
                                     <input type="number" wire:model="price_per_m²"
                                         class="form-control  @error('price_per_m²') is-invalid @enderror "
                                         value="{{ old('price_per_m²') }}" placeholder="0" id="price_per_m²"
@@ -239,12 +239,12 @@
                                     @enderror
                                 </div>
                                 <div class=" col">
-                                    <label for="surface_for_sale">{{ __('AREA SOLD') }}</label>
-                                    <input type="number" wire:model="surface_for_sale"
-                                        class="form-control  @error('surface_for_sale') is-invalid @enderror "
-                                        value="{{ old('surface_for_sale') }}" placeholder="0" id="surface_for_sale"
-                                        autofocus="" required="">
-                                    @error('surface_for_sale')
+                                    <label for="superficie_du_TF_mere">{{ __('AREA SOLD') }}</label>
+                                    <input type="number" wire:model="superficie_du_TF_mere"
+                                        class="form-control  @error('superficie_du_TF_mere') is-invalid @enderror "
+                                        value="{{ old('superficie_du_TF_mere') }}" placeholder="0" id="superficie_du_TF_mere"
+                                        autofocus="" required="" disabled>
+                                    @error('superficie_du_TF_mere')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -348,7 +348,7 @@
                                     </tr>
                                     <tr class="border-top">
                                         <th class="text-900">{{ __('SURFACE FOR SALE') }} </th>
-                                        <td class="fw-semi-bold">{{ number_format(floatval($surface_for_sale)) }}
+                                        <td class="fw-semi-bold">{{ number_format(floatval($superficie_du_TF_mere)) }}
                                             {{ __('m²') }}
                                         </td>
                                     </tr>
