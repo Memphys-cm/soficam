@@ -4,6 +4,7 @@ namespace App\Models\Sales;
 
 use App\Models\User;
 use App\Models\Document;
+use App\Models\TitreFoncier;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -12,9 +13,9 @@ class Sale extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function user()
+    public function titreFoncier()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(TitreFoncier::class);
     }
     public function saleables()
     {
