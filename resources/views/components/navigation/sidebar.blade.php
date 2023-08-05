@@ -231,40 +231,64 @@
                                 {{-- @canany('region.view','division.view','sub_division.view') --}}
 
                                 <li class="nav-item">
-                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.sales.simpleSale.index') || $request->routeIs('portal.divisions.index')  ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#subsales-dashboard"><span>
+                                    <span
+                                        class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.sales.simpleSale.index') || $request->routeIs('portal.divisions.index') ? 'collapse' : 'collapsed' }}"
+                                        data-bs-toggle="collapse" data-bs-target="#subsales-dashboard"><span>
                                             <span class="sidebar-icon">
-                                                <svg class="icon icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-                                                    <line x1="12" y1="7" x2="12" y2="17" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-                                                    <line x1="16" y1="10" x2="8" y2="10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-                                                    <line x1="16" y1="14" x2="8" y2="14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                                                <svg class="icon icon-sm" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <circle cx="12" cy="12" r="10"
+                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" />
+                                                    <line x1="12" y1="7" x2="12"
+                                                        y2="17" stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" />
+                                                    <line x1="16" y1="10" x2="8"
+                                                        y2="10" stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" />
+                                                    <line x1="16" y1="14" x2="8"
+                                                        y2="14" stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" />
                                                 </svg>
 
                                             </span>
-                                            <span class="sidebar-text">{{__('Sales')}}</span>
+                                            <span class="sidebar-text">{{ __('Sales') }}</span>
                                         </span>
                                         <span class="link-arrow">
-                                            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                    clip-rule="evenodd"></path>
                                             </svg>
                                         </span>
                                     </span>
-                                    <div class="multi-level collapse {{ $request->routeIs('portal.simpleSales.index') || $request->routeIs('portal.divisions.index') || $request->routeIs('portal.sub-divisions.index')  ? 'show' : '' }}" role="list" id="subsales-dashboard" aria-expanded="{{ $request->routeIs('portal.simpleSale.index') || $request->routeIs('portal.division.index') || $request->routeIs('portal.sub_division.index')  ? 'false' : 'true' }}">
+                                    <div class="multi-level collapse {{ $request->routeIs('portal.simpleSales.index') || $request->routeIs('portal.totalSale.index')  ? 'show' : '' }}"
+                                        role="list" id="subsales-dashboard"
+                                        aria-expanded="{{ $request->routeIs('portal.simpleSale.index') || $request->routeIs('portal.totalSale.index') ? 'false' : 'true' }}">
                                         <ul class="flex-column nav">
                                             {{-- @can('simpleSale.view') --}}
-                                            <li class="nav-item {{$request->routeIs('portal.simpleSale.index') ? 'active' :'' }}">
-                                                <a href="{{route('portal.simpleSale.index')}}" class="nav-link">
-                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{__('Simple Sales')}}</span>
+                                            <li
+                                                class="nav-item {{ $request->routeIs('portal.simpleSale.index') ? 'active' : '' }}">
+                                                <a href="{{ route('portal.simpleSale.index') }}" class="nav-link">
+                                                    <span class="sidebar-text-contracted">R</span> <span
+                                                        class="sidebar-text">{{ __('Simple Sales') }}</span>
+                                                </a>
+                                            </li>
+                                            <li
+                                                class="nav-item {{ $request->routeIs('portal.totalSale.index') ? 'active' : '' }}">
+                                                <a href="{{ route('portal.totalSale.index') }}" class="nav-link">
+                                                    <span class="sidebar-text-contracted">R</span> <span
+                                                        class="sidebar-text">{{ __('Total Sales') }}</span>
                                                 </a>
                                             </li>
                                             {{-- @endcan --}}
-                                            {{-- @can('division.view')
-                                            <li class="nav-item {{$request->routeIs('portal.divisions.index') ? 'active' :'' }}">
-                                            <a href="{{route('portal.divisions.index')}}" class="nav-link">
-                                                <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{__('Divisions')}}</span>
-                                            </a>
+                                           
+
+
+                                        </ul>
+                                    </div>
                                 </li>
-                                @endcan --}}
 
 
                             </ul>

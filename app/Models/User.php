@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\Sales\Sale;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
@@ -96,6 +98,7 @@ class User extends Authenticatable
             NULL => 'info'
         };
     }
+   
     public function getStatusTextAttribute()
     {
         return match ($this->is_active) {
