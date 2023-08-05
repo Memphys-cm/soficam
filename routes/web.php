@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -35,8 +36,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
     Route::prefix('auditlogs')->group(function () {
         Route::get('/', App\Http\Livewire\User\AuditLogs\Index::class)->name('user.auditlogs');
     });
-
-
 });
 
 
@@ -47,7 +46,7 @@ Route::group(
         Route::get('/dashboard', App\Http\Livewire\Portal\Dashboard::class)->name('portal.dashboard');
 
         Route::get('/profile-setting', App\Http\Livewire\Portal\ProfileSetting::class)->name('portal.profile-setting');
-     
+
         // AuditLogs
         Route::prefix('auditlogs')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\AuditLogs\Index::class)->name('portal.auditlogs.index');
@@ -59,12 +58,10 @@ Route::group(
 
         Route::prefix('divisions')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\Divisions\Index::class)->name('portal.divisions.index');
-           
         });
 
         Route::prefix('sub-divisions')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\SubDivisions\Index::class)->name('portal.sub-divisions.index');
-           
         });
 
         Route::prefix('services')->group(function () {
@@ -73,13 +70,23 @@ Route::group(
 
         Route::prefix('users')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\Users\Index::class)->name('portal.users.index');
-           
         });
 
         //roles
         Route::prefix('roles')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\Roles\Index::class)->name('portal.roles.index');
         });
+
+
+        Route::prefix('sales')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\Sales\SimpleSales\Index::class)->name('portal.simpleSale.index');
+        });
+        Route::prefix('totals')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\Sales\TotalSales\Index::class)->name('portal.totalSale.index');
+        });
+
+        Route::prefix('notary')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\Notary\Index::class)->name('portal.notary.index');
 
         //Land titles
 
@@ -88,14 +95,10 @@ Route::group(
         });
 
         
-        //Sales
-        Route::prefix('sales')->group(function () {
-            Route::get('/', App\Livewire\Portal\Sales\SimpleSales\Index::class)->name('portal.simpleSale.index');
-        });
+     
 
         Route::prefix('registration')->group(function () {
             Route::get('/subdivisions', App\Http\Livewire\Portal\Registration\HousingEstate\Index::class)->name('portal.registrations.housingestates.index');
         });
-
-    }
-);
+    });
+});
