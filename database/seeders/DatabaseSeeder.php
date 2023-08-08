@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DivisionSeeder::class);
         $this->call(SubDivisionSeeder::class);
         $this->call(RolesAndPermissionsSeeder::class);
+        $this->call(CategoryActivitesSeeder::class);
 
         \App\Models\User::factory(1000)->create();
         \App\Models\User::create([
