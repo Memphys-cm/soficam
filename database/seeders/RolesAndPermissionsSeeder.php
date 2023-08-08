@@ -90,6 +90,12 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'profile.update'],
             ['name' => 'profile.delete'],
 
+            ['name' => 'category_activites_and_activite.view'],
+            ['name' => 'category_activites_and_activite.create'],
+            ['name' => 'category_activites_and_activite.update'],
+            ['name' => 'category_activites_and_activite.delete'],
+            ['name' => 'category_activites_and_activite.export_n_print'],
+
 
         ];
 
