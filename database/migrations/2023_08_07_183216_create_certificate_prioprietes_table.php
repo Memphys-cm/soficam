@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('certificate_proprietes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('titre_foncier_id')->index();
             $table->string('certificate_proprietes_number');
+            $table->foreignId('requestor_id')->index()->constrained('users');
+            $table->float('price');
+            $table->timestamp('validity')->default(now()->addMonths(3));
+            $table->enum('certificate_proprietes_type',['personne_physique','personne_morale']);
+            $table->enum('status',['pending_payment','expired','active']);
+            $table->longText('certificate_propriete_reason');
             $table->timestamps();
         });
     }
