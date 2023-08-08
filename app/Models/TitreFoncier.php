@@ -41,4 +41,14 @@ class TitreFoncier extends Model
         return $this->hasMany(HousingEstate::class);
     }
 
+    public function getEtatTFStyleAttribute(): String
+    {
+        return match ($this->etat_TF) {
+            'HYPOTHEQUE' => 'info',
+            'DISPONIBLE' => 'success',
+            'PRENOTE' => 'secondary',
+            'SUSPENDU' => 'danger',
+            NULL => ''
+        };
+    }
 }

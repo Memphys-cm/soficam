@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('saleables', function (Blueprint $table) {
+        Schema::create('receipts', function (Blueprint $table) {
             $table->id();
+            $table->string('receipt_code')->default(Str::upper(Str::random(7)) . "" . now()->format('msu'));
+            $table->string('receipt_qr_code')->nullable();
+            $table->string('receipt_url')->nullable();
             $table->foreignId('sale_id')->on('sales')->nullable()->index();
-            $table->integer('saleable_id');
-            $table->string('saleable_type');
-            $table->integer('quantity')->default(1);
-            $table->float('price', 10, 2);
-            $table->foreignId('service_id')->on('services')->nullable()->index();
-            $table->string('created_by')->nullable();
+            $table->foreignId('receveur_id')->on('users')->nullable()->index();
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('saleables');
+        Schema::dropIfExists('receipts');
     }
 };

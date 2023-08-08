@@ -93,6 +93,9 @@ Route::group(
         Route::prefix('titrefonciers')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\TitreFonciers\Index::class)->name('portal.titre-fonciers.index');
         });
+        Route::prefix('titrefonciers')->group(function () {
+            Route::get('/details', App\Http\Livewire\Portal\TitreFonciers\Detail::class)->name('portal.titre-fonciers.details');
+        });
 
         
      
