@@ -91,7 +91,9 @@ Route::group(
         });
 
         
-        //Sales
+        Route::prefix('certificatepropriete')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\CertificatePropriete\Index::class)->name('portal.certificate-propriete.index');
+        });
       
 
         Route::prefix('registration')->group(function () {
