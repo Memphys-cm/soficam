@@ -230,7 +230,7 @@
                                 @endcanany
                                 {{-- @canany('region.view','division.view','sub_division.view') --}}
 
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <span
                                         class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.sales.simpleSale.index') || $request->routeIs('portal.divisions.index') ? 'collapse' : 'collapsed' }}"
                                         data-bs-toggle="collapse" data-bs-target="#subsales-dashboard"><span>
@@ -268,7 +268,7 @@
                                         aria-expanded="{{ $request->routeIs('portal.simpleSale.index') || $request->routeIs('portal.totalSale.index') ? 'false' : 'true' }}">
                                         <ul class="flex-column nav">
                                             {{-- @can('simpleSale.view') --}}
-                                            <li
+                                            {{-- <li
                                                 class="nav-item {{ $request->routeIs('portal.simpleSale.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.simpleSale.index') }}" class="nav-link">
                                                     <span class="sidebar-text-contracted">R</span> <span
@@ -281,14 +281,14 @@
                                                     <span class="sidebar-text-contracted">R</span> <span
                                                         class="sidebar-text">{{ __('Total Sales') }}</span>
                                                 </a>
-                                            </li>
+                                            </li> --}}
                                             {{-- @endcan --}}
                                            
 
-
+{{-- 
                                         </ul>
                                     </div>
-                                </li>
+                                </li> --}} 
 
 
                             </ul>

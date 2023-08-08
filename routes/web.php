@@ -91,16 +91,16 @@ Route::group(
 
         
         //Sales
-        Route::prefix('sales')->group(function () {
-            Route::get('/', App\Livewire\Portal\Sales\SimpleSales\Index::class)->name('portal.simpleSale.index');
-        });
+        // Route::prefix('sales')->group(function () {
+        //     Route::get('/', App\Livewire\Portal\Sales\SimpleSales\Index::class)->name('portal.simpleSale.index');
+        // });
 
         Route::prefix('registration')->group(function () {
             Route::get('/subdivisions', App\Http\Livewire\Portal\Registration\HousingEstate\Index::class)->name('portal.registrations.housingestates.index');
         });
-        // Route::prefix('state_assignment')->group(function () {
-        //     Route::get('/', App\Http\Livewire\Portal\StateAssignment\Index::class)->name('portal.registrations.state_assignment.index');
-        // });
+        Route::prefix('state_assignment')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\StateAssignment\Index::class)->name('portal.registrations.state_assignment.index');
+        });
         
 
         //Categories activites

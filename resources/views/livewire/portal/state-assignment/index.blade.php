@@ -1,7 +1,7 @@
 <div>
     <x-alert />
-    {{-- @include('livewire.portal.registration.housing-estate.create-housing_estate')
-    @include('livewire.portal.registration.housing-estate.view-housing_estate') --}}
+    @include('livewire.portal.state-assignment.create-state_assignment')
+    {{-- @@include('livewire.portal.registration.housing-estate.view-housing_estate') --}}
     {{-- @include('livewire.portal.state_assignments.import-state_assignments') --}}
     <x-delete-modal />
     <div class='p-0'>
