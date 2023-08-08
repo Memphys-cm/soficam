@@ -100,6 +100,7 @@
                         <th class="border-bottom">{{__('Propriators')}}</th>
                         <th class="border-bottom">{{__('Location')}}</th>
                         <th class="border-bottom">{{__('Limits')}}</th>
+                        <th class="border-bottom">{{__('Status')}}</th>
                         <th class="border-bottom">{{__('Date created')}}</th>
                         @canany('titre_foncier.update','titre_foncier.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
@@ -162,7 +163,9 @@
                                 <span class="fw-bolder mx-2"> {{__('West')}} </span> {{$titrefoncier->limit_ouest}}
                             </div>
                         </td>
-
+                        <td>
+                            <span class="fw-normal badge super-badge p-2 bg-{{$titrefoncier->EtatTFStyle}} round">{{$titrefoncier->etat_TF}}</span>
+                        </td>
                         <td>
                             <span class="fw-normal">{{$titrefoncier->created_at->format('Y-m-d')}}</span>
                         </td>
@@ -170,7 +173,7 @@
                         <td>
                             @can('titre_foncier.view_detail')
                             <a href="#">
-                                <svg class="icon icon-sm text-info"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                                <svg class="icon icon-sm text-info" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </a>
@@ -194,7 +197,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="7" class="text-center">
+                        <td colspan="9" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
                                 <h4 class="fs-4 fw-bold">{{__('Opps nothing here')}} &#128540;</h4>
                                 <p>{{__('No Record Found..!')}}</p>

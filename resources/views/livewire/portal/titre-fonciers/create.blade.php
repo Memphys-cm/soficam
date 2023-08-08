@@ -30,7 +30,6 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-
                         </div>
                         <div class="form-group mb-3 row">
                             <div class='col'>
@@ -40,9 +39,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-
                         </div>
-
                         <div class="form-group mb-3 row">
                             <div class='col'>
                                 <label class="px-2" for="region_id">{{__('Region')}}</label>
@@ -130,7 +127,13 @@
                         <div class='form-group mb-3 row'>
                             <div class="col">
                                 <label for="etat_TF">{{__('State of Land Title')}}</label>
-                                <input wire:model="etat_TF" type="text" class="form-control  @error('etat_TF') is-invalid @enderror" placeholder="{{__('Active')}}" required="" name="name">
+                                <select wire:model="etat_TF" name="etat_TF" class="form-select  @error('etat_TF') is-invalid @enderror" required="">
+                                    <option value="">{{__('Select Land title state')}}</option>
+                                    <option value="HYPOTHEQUE">{{__('HYPOTHEQUE')}}</option>
+                                    <option value="DISPONIBLE">{{__('DISPONIBLE')}}</option>
+                                    <option value="PRENOTE">{{__('PRENOTE')}}</option>
+                                    <option value="SUSPENDU">{{__('SUSPENDU')}}</option>
+                                </select>
                                 @error('etat_TF')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -149,6 +152,38 @@
                                 <label for="provenance_TF">{{__('Source of Land Title')}}</label>
                                 <input wire:model="provenance_TF" type="text" class="form-control  @error('provenance_TF') is-invalid @enderror" placeholder="{{__('Lotissement')}}" required="" name="name">
                                 @error('provenance_TF')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class='form-group mb-3 row'>
+                            <div class='col'>
+                                <label for="coordonness_b1">{{__('Coordonnees - B1')}}</label>
+                                <input wire:model="coordonness_b1" type="text" class="form-control  @error('coordonness_b1') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="coordonness_b1">
+                                @error('coordonness_b1')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class='col'>
+                                <label for="coordonness_b2">{{__('Coordonnees - B2')}}</label>
+                                <input wire:model="coordonness_b2" type="text" class="form-control  @error('coordonness_b2') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="coordonness_b2">
+                                @error('coordonness_b2')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class='col'>
+                                <label for="coordonness_b3">{{__('Coordonnees - B3')}}</label>
+                                <input wire:model="coordonness_b3" type="text" class="form-control  @error('coordonness_b3') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="coordonness_b3">
+                                @error('coordonness_b3')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class='form-group mb-3 row'>
+                            <div class='col'>
+                                <label for="coordonness_b4">{{__('Coordonnees - B4')}}</label>
+                                <input wire:model="coordonness_b4" type="text" class="form-control  @error('coordonness_b4') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="coordonness_b4">
+                                @error('coordonness_b4')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>

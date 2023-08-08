@@ -31,4 +31,14 @@ class TitreFoncier extends Model
         return $this->belongsTo(SubDivision::class);
     }
 
+    public function getEtatTFStyleAttribute(): String
+    {
+        return match ($this->etat_TF) {
+            'HYPOTHEQUE' => 'info',
+            'DISPONIBLE' => 'success',
+            'PRENOTE' => 'secondary',
+            'SUSPENDU' => 'danger',
+            NULL => ''
+        };
+    }
 }
