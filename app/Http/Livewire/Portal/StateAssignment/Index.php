@@ -5,6 +5,9 @@ namespace App\Http\Livewire\Portal\StateAssignment;
 use Livewire\Component;
 use App\Http\Livewire\Traits\WithDataTables;
 use App\Models\EtatCession;
+use App\Models\SubDivision;
+use App\Models\TitreFoncier;
+use App\Models\User;
 
 class Index extends Component
 {
@@ -12,11 +15,15 @@ class Index extends Component
     use WithDataTables;
 
     public EtatCession $state_assignment;
+    public $land_titles , $land_id , $geometre_id , $geometres , $subdivisions , $subdivision_id;
     public $state = 0;
 
     public function mount()
     {
         $this->state_assignment = new EtatCession();
+        $this->land_titles = TitreFoncier::all();
+        $this->geometres = User::all();
+        $this->subdivisions = SubDivision::all();
     }
 
     public function initData($id)
@@ -28,30 +35,54 @@ class Index extends Component
     protected array $rules = [
         'state_assignment.reference_etat_cession' => 'sometimes',
         'state_assignment.type_personne' => 'sometimes',
-        'state_assignment.terrain_urbain' => 'sometimes',
         'state_assignment.titre_foncier_id' => 'sometimes',
         'state_assignment.geometre_id' => 'sometimes',
         'state_assignment.user_id' => 'sometimes',
         'state_assignment.sub_division_id' => 'sometimes',
         'state_assignment.lieu_dit' => 'sometimes',
         'state_assignment.superficie_en_m2' => 'sometimes',
+        'state_assignment.type_operation' => 'sometimes',
         'state_assignment.cout' => 'sometimes',
         'state_assignment.frais_suplementaires' => 'sometimes',
         'state_assignment.cout_etat_cession' => 'sometimes',
         'state_assignment.status' => 'sometimes',
         'state_assignment.commentaires' => 'sometimes',
+        'state_assignment.zone' => 'sometimes',
     ];
+
+    public function generateUniqueCode($year, $counter)
+    {
+        $counterFormatted = str_pad($counter, 5, '0', STR_PAD_LEFT);
+        return $year . 'STATE' . $counterFormatted;
+    }
 
     public function store()
     {
-        $this->validate();
 
-        // $this->state_assignment->land_id = $this->land_id;
-        // $this->state_assignment->code = $code;
+        // Récupérer l'année en cours au format 'yy'
+        $year = date('y');
+
+        // Récupérer le compteur depuis la base de données (par exemple en comptant les enregistrements de lotissement existants)
+        $counter = EtatCession::count() + 1;
+
+        // Générer le code unique
+        $code = $this->generateUniqueCode($year, $counter);
+
+        $this->validate();
+        if ($this->state == 0) {
+            $this->state_assignment->sub_division_id = $this->subdivision_id;
+            $this->state_assignment->reference_etat_cession = $code;
+            $this->state_assignment->user_id = auth()->user()->id;
+            # code...
+        } else {
+            # code...
+        }
+        
+        // $this->subdivision_id->reference_etat_cession = $code;
         $this->state_assignment->save();
         $this->state = 0;
         $this->clearFields();
-        $this->refresh(__('housing_estate successfully :state!', ['state' => $this->state ? 'Updated' : 'Created']), 'CreateUpdateStateAssignmentModal');
+        $this->refresh(__('State Assignment successfully :state!', ['state' => $this->state ? 'Updated' : 'Created']), 'CreateUpdateStateAssignmentModal');
     }
 
     public function delete()

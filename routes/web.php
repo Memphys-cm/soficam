@@ -85,7 +85,7 @@ Route::group(
 
         //Land titles
 
-        Route::prefix(' ')->group(function () {
+        Route::prefix('titrefonciers')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\TitreFonciers\Index::class)->name('portal.titre-fonciers.index');
         });
 

@@ -113,9 +113,7 @@
                         <th class="border-bottom">{{__('operation')}}</th>
                         <th class="border-bottom">{{__('Zone')}}</th>
                         <th class="border-bottom">{{__('Geometre')}}</th>
-                        <th class="border-bottom">{{__('Remaining Area')}}</th>
                         <th class="border-bottom">{{__('User')}}</th>
-                        <th class="border-bottom">{{__('Area')}}</th>
                         <th class="border-bottom">{{__('Status')}}</th>
                         <th class="border-bottom">{{__('Date created')}}</th>
                         {{-- @canany('housing_estate.update','housing_estate.delete') --}}
@@ -127,40 +125,31 @@
                     @forelse($state_assignments as $housing_estate)
                     <tr>
                         <td>
-                            <span class="fw-normal">{{$housing_estate->code}}</span>
+                            <span class="fw-normal">{{$housing_estate->reference_etat_cession}}</span>
+                        </td>
+                        <td class="text-center"> {{ $housing_estate->type_personne }} </td>
+                        <td>
+                            <span class="fw-normal">{{$housing_estate->type_operation}}</span>
                         </td>
                         <td>
-                            {{-- <a href="#" class="d-flex align-items-center">
-                                <div class="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-primary me-3"><span class="text-white">{{initials($housing_estate->housing_estate_name)}}</span></div>
-                                <div class="d-block"><span class="fw-bold">{{$housing_estate->housing_estate_name}}</span>
-                                    <div class="small text-gray">{{!empty($housing_estate->housing_estate_name) ? $housing_estate->housing_estate_name : ''}}</div>
-                                </div>
-                            </a> --}}
-                        </td>
-                        <td class="text-center">
-                            {{-- <span class="fw-normal">{{ $housing_estate->users_count }}</span> --}}
+                            <span class="fw-normal">{{$housing_estate->zone}}</span>
                         </td>
                         <td>
-                            {{-- <span class="fw-normal badge super-badge p-2 bg-{{$housing_estate->statusStyle}} round">{{$housing_estate->statusText}}</span> --}}
+                            <span class="fw-normal">{{$housing_estate->geometre->first_name}} {{$housing_estate->geometre->last_name}}</span>
                         </td>
-                        <td class="text-center">
-                            <span class="fw-normal"></span>
+                        <td>
+                            <span class="fw-normal">{{$housing_estate->user->first_name }} {{$housing_estate->user->last_name }} </span>
                         </td>
-                        <td class="text-center"> {{ $housing_estate->estate_agent }} </td>
+                        <td>
+                            <span class="fw-normal">{{$housing_estate->status}}</span>
+                        </td>
                         <td>
                             <span class="fw-normal">{{$housing_estate->created_at->format('Y-m-d')}}</span>
                         </td>
                         {{-- @canany('housing_estate.update','housing_estate.delete') --}}
                         <td>
                             {{-- @can('housing_estate.update') --}}
-                            <a href="#" wire:click.prevent="initData({{$housing_estate->id}})" data-bs-toggle="modal" data-bs-target="#ViewHousingEstateModal" draggable="false">
-                                <svg class="icon icon-sm text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                  </svg>
-                                  
-                            </a>
-                            <a href="#" wire:click.prevent="initData({{$housing_estate->id}})" data-bs-toggle="modal" data-bs-target="#CreateUpdateHousingEstateModal" draggable="false">
+                            <a href="#" wire:click.prevent="initData({{$housing_estate->id}})" data-bs-toggle="modal" data-bs-target="#CreateUpdateStateAssignmentModal" draggable="false">
                                 <svg class="icon icon-sm text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                 </svg>
