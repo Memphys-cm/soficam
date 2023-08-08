@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Portal\Registration\HousingEstate;
 
 use Livewire\Component;
-use Barryvdh\DomPDF\PDF;
+use PDF;
 use Illuminate\Support\Arr;
 use App\Models\TitreFoncier;
 use App\Models\Registration\Block;
@@ -247,9 +247,14 @@ class Index extends Component
             // Autres données que vous souhaitez afficher dans la vue
         ];
 
-        $pdf = app('dompdf.wrapper')->loadView('livewire.portal.registration.housing-estate.view-housing_estate', $data);
-        $pdf->setPaper('A4'); // Vous pouvez également définir d'autres tailles de papier comme 'letter', 'legal', etc.
+        $pdf = PDF::loadView('livewire.portal.registration.housing-estate.print', $data);
 
-        return $pdf->stream('test.pdf');
+        return $pdf->download('livewire.portal.registration.housing-estate.print.pdf');
+
+        // $pdf = app('dompdf.wrapper')->loadView('livewire.portal.registration.housing-estate.view-housing_estate', $data);
+        // $pdf->setPaper('A4'); // Vous pouvez également définir d'autres tailles de papier comme 'letter', 'legal', etc.
+
+        // return $pdf->stream('test.pdf');
     }
+    
 }
