@@ -290,6 +290,55 @@
                                     </div>
                                 </li> --}} 
 
+                                <li class="nav-item">
+                                    <span
+                                        class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.demandecp.index') || $request->routeIs('portal.demandecpofrice.index') ? 'collapse' : 'collapsed' }}"
+                                        data-bs-toggle="collapse" data-bs-target="#subdemandecp-dashboard"><span>
+                                            <span class="sidebar-icon">
+                                                <svg class="icon icon-sm" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                                  </svg>
+
+                                            </span>
+                                            <span class="sidebar-text">{{ __('Certificat Proprite') }}</span>
+                                        </span>
+                                        <span class="link-arrow">
+                                            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                    <div class="multi-level collapse {{ $request->routeIs('portal.demandecp.index') || $request->routeIs('portal.demandecpofrice.index')  ? 'show' : '' }}"
+                                        role="list" id="subdemandecp-dashboard"
+                                        aria-expanded="{{ $request->routeIs('portal.demandecp.index') || $request->routeIs('portal.demandecpofrice.index') ? 'false' : 'true' }}">
+                                        <ul class="flex-column nav">
+                                            {{-- @can('simpleSale.view') --}}
+                                            <li
+                                                class="nav-item {{ $request->routeIs('portal.demandecp.index') ? 'active' : '' }}">
+                                                <a href="{{ route('portal.demandecp.index') }}" class="nav-link">
+                                                    <span class="sidebar-text-contracted">R</span> <span
+                                                        class="sidebar-text">{{ __('Demande CP') }}</span>
+                                                </a>
+                                            </li>
+                                            {{-- <li
+                                                class="nav-item {{ $request->routeIs('portal.notaryofrice.index') ? 'active' : '' }}">
+                                                <a href="{{ route('portal.notaryofrice.index') }}" class="nav-link">
+                                                    <span class="sidebar-text-contracted">R</span> <span
+                                                        class="sidebar-text">{{ __('Notary Office') }}</span>
+                                                </a>
+                                            </li> --}}
+                                            {{-- @endcan --}}
+                                           
+
+
+                                        </ul>
+                                    </div>
+                                </li>
+
 
                             </ul>
                         </div>
