@@ -16,6 +16,7 @@ use App\Http\Livewire\Traits\WithDataTables;
 class Index extends Component
 {
     use WithPagination;
+    use WithDataTables;
 
     protected $paginationTheme = 'bootstrap';
     public ?string $query = null;
@@ -66,15 +67,17 @@ class Index extends Component
 
             $sale = Sale::create([
                 'user_id' => $this->requestor_id,
-                'sales_amount' => $this->price,
-                'sales_type' => 'CertificatePropriete',
+                'sale_amount' => $this->price,
+                'sale_type' => 'CertificatePropriete',
                 'created_by' => auth()->user()->name,
             ]);
 
             // Create the Saleable item using only the specified information
             $saleableData = [
                 'sale_id' => $sale->id,
-                'saleable_id' => $certificatepropriete->id, // Adjust as needed
+                'price' => $this->price,
+                'saleable_id' => $certificatepropriete->id,
+                'saleable_type' => 'App\Models\CertificatePropriete', // Adjust the namespace if different
                 'created_by' => auth()->user()->name,
             ];
 
@@ -82,15 +85,12 @@ class Index extends Component
         });
        
 
-        // Create the Saleable item using only the specified information
        
 
        
-        // $certificatepropriete->users()->sync($this->user_ids);
-        // $this->refresh(__('CertificatePropriete sales completed successfully!'), 'CreateCertificateProprieteModal');
-        // session()->flash('message', 'CertificatePropriete successfully Created');
+        
         $this->clearFields();
-        $this->refresh(__('CertificatePropriete successfully Created!'), 'CreateCertificateProprieteModal');
+        $this->refresh(__('CertificatePropriete successfully Created!'), 'CreatecertificateproprieteModal');
     }
 
     public function initData($id)
@@ -151,12 +151,10 @@ class Index extends Component
         });
 
         
-        // $this->certificatepropriete->users()->sync($this->user_ids);
+        $this->refresh(__('CertificatePropriete Updated Created!'), 'updatecertificateproprieteModal');
 
         $this->clearFields();
-        session()->flash('message', 'CertificatePropriete successfully Created');
 
-        // $this->refresh(__('CertificatePropriete Updated Created!'), 'CreateCertificateProprieteModal');
     }
 
     

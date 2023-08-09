@@ -35,8 +35,8 @@
                                 @enderror
                             </div>
                         </div>
+                      
                         <div class='form-group mb-3 row'>
-                            
                             <div class="col">
                                 <label for="price">{{__('Price')}}</label>
                                 <input wire:model="price" type="number" class="form-control  @error('price') is-invalid @enderror" placeholder="{{__('')}}" required="" >
@@ -44,16 +44,6 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col">
-                                <label for="validity">{{__('Validity')}}</label>
-                                <input wire:model="validity" type="text" class="form-control  @error('validity') is-invalid @enderror" placeholder="{{__('')}}" required="" disabled>
-                                @error('validity')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class='form-group mb-3 row'>
-                            
                             <div class="col">
                                 <label for="certificate_proprietes_type">{{__('Certificate Proprietes Type')}}</label>
                                 <select wire:model="certificate_proprietes_type" name="certificate_proprietes_type" class="form-select  @error('certificate_proprietes_type') is-invalid @enderror" required="">
