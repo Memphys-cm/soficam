@@ -202,7 +202,9 @@
                 </tbody>
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
-
+                <div>
+                    {{__('Showing')}} {{$perPage > $notaryoffices_count ? $notaryoffices_count : $perPage  }} {{__('items of')}} {{$notaryoffices_count}}
+                </div>
                 {{ $notaryoffices->links() }}
             </div>
         </div>

@@ -16,15 +16,12 @@ class Index extends Component
     use WithDataTables;
 
 
-    protected $paginationTheme = 'bootstrap';
-    public ?string $query = null;
-    public int $perPage = 15;
-    public string $orderAsc = 'desc';
-    public string $orderBy = 'created_at';
+   
 
     public $name, $post, $notary_office_id;
     public  $notary, $notaryoffices;
     public $notaryId, $region_id;
+    public ?string $query = null;
 
     public function updated($fields)
     {
@@ -131,7 +128,9 @@ class Index extends Component
     public function render()
     {
         $notarys = Notary::search($this->query)->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $notarys_count = Notary::count();
 
-        return view('livewire..portal.notary.index', compact('notarys'));
+
+        return view('livewire..portal.notary.index', ['notarys'=>$notarys, 'notarys_count'=>$notarys_count]);
     }
 }

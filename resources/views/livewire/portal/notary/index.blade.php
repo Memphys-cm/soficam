@@ -126,7 +126,7 @@
         <div class="col-md-3">
             <label for="orderBy">{{ __('Order By') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="name">{{ __('Nmae') }}</option>
+                <option value="name">{{ __('Name') }}</option>
                 <option value="post">{{ __('Post') }}</option>
                 <option value="created_at">{{ __('Created Date') }}</option>
             </select>
@@ -208,6 +208,9 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
 
+                <div>
+                    {{__('Showing')}} {{$perPage > $notarys_count ? $notarys_count : $perPage  }} {{__('items of')}} {{$notarys_count}}
+                </div>
                 {{ $notarys->links() }}
             </div>
         </div>
