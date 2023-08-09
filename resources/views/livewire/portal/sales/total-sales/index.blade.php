@@ -74,8 +74,8 @@
         <div class="col-md-3">
             <label for="orderBy">{{__('Order By')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="user">{{__('User')}}</option>
-                <option value="action_type">{{__('Action Type')}}</option>
+                <option value="sale_amount">{{__('Sale Amount')}}</option>
+                <option value="sale_type">{{__('Sale Type')}}</option>
                 <option value="created_at">{{__('Created Date')}}</option>
             </select>
         </div>
@@ -165,18 +165,11 @@
                 </tbody>
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
-               
+                <div>
+                    {{__('Showing')}} {{$perPage > $totals_count ? $totals_count : $perPage  }} {{__('items of')}} {{$totals_count}}
+                </div>
                 {{ $totals->links() }}
             </div>
         </div>
     </div>
 </div>
-
-@push('scripts')
-    <script>
-        window.addEventListener('close-modal', event => {
-            $('#CreatetotalsaleModal').modal('hide');
-            $('#DeleteModal').modal('hide');
-        });
-    </script>
-@endpush

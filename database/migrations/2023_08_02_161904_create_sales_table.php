@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('surface_for_sale')->nullable();
             $table->enum('payment_type', ['cash','tranche'])->default('cash');
             $table->string('sale_type');
-            $table->string('price_per_m²');
+            $table->string('price_per_m²')->nullable();
             $table->foreignId('notary_id')->on('notaries')->nullable();
             $table->decimal('advance', 30, 2)->nullable()->default(0.00);
             $table->decimal('balance', 30, 2)->nullable()->default(0.00);

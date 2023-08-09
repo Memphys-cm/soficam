@@ -2,14 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\NotaryOffice;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Notary extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
+    public function notaryOffice()
+    {
+        return $this->belongsTo(NotaryOffice::class);
+    }
+   
     public static function search($query)
     {
         return empty($query) ?

@@ -1,8 +1,6 @@
 <div>
     <x-alert />
-    @include('livewire.portal.notary.partials.create-edit')
-    {{-- @include('livewire.portal.users.edit-user')
-    @include('livewire.portal.users.import-users') --}}
+    @include('livewire.portal.notary.notary-office.partials.create-edit')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -20,7 +18,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Notary') }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Notary Office') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -30,14 +28,14 @@
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                         </path>
                     </svg>
-                    {{ __('Notaries Managment') }}
+                    {{ __('Notaries Office Managment') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('View all Simple Notary within the application') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('View all Notaries Offices  within the application') }} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
                 {{-- @can('user.create') --}}
-                <a href="#" data-bs-toggle="modal" data-bs-target="#CreatenotaryModal"
+                <a href="#" data-bs-toggle="modal" data-bs-target="#CreatenotaryofficeModal"
                     class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
@@ -126,8 +124,8 @@
         <div class="col-md-3">
             <label for="orderBy">{{ __('Order By') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="name">{{ __('Name') }}</option>
-                <option value="post">{{ __('Post') }}</option>
+                <option value="office_name">{{ __('Office Name') }}</option>
+                <option value="description">{{ __('Descritpion') }}</option>
                 <option value="created_at">{{ __('Created Date') }}</option>
             </select>
         </div>
@@ -157,42 +155,39 @@
                 <thead>
                     <tr>
                         <th class="border-bottom">{{ __('ID') }}</th>
-                        <th class="border-bottom">{{ __('NAME') }}</th>
-                        <th class="border-bottom">{{ __('POST') }}</th>
+                        <th class="border-bottom">{{ __('OFFICE NAME') }}</th>
+                        <th class="border-bottom">{{ __('REGION') }}</th>
                         <th class="border-bottom">{{ __('Date created') }}</th>
                         <th class="border-bottom">{{ __('Action') }}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($notarys as $notary)
+                    @forelse($notaryoffices as $notaryoffice)
                         <tr>
-                            <td>{{ $notary->id }}</td>
-                            <td>{{ $notary->name }}</td>
-                            <td>{{ $notary->post }}</td>
-                            <td>{{ $notary->created_at }}</td>
-
-
-                            <td>
-
-                                <a href='#' wire:click.prevent="initData({{ $notary->id }})"
-                                    data-bs-toggle="modal" data-bs-target="#Editnotaryodal">
-                                    <svg class="icon icon-xs" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
-                                        </path>
-                                    </svg>
-                                </a>
-                                <a href='#' wire:click.prevent="initData({{ $notary->id }})"
-                                    data-bs-toggle="modal" data-bs-target="#DeleteModal">
-                                    <svg class="icon icon-xs text-danger" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                                        </path>
-                                    </svg>
-                                </a>
-                            </td>
+                            <td>{{ $notaryoffice->id }}</td>
+                            <td>{{ $notaryoffice->office_name }}</td>
+                            <td>{{ $notaryoffice->region->region_name_en }}</td>
+                            <td>{{ $notaryoffice->created_at }}</td>
+                                <td>
+                                        <a href='#' wire:click.prevent="initData({{ $notaryoffice -> id }})"
+                                            data-bs-toggle="modal" data-bs-target="#Editnotaryofficedal">
+                                            <svg class="icon icon-xs" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                                </path>
+                                            </svg>
+                                        </a>
+                                        <a href='#' wire:click.prevent="initData({{ $notaryoffice -> id }})"
+                                            data-bs-toggle="modal" data-bs-target="#DeleteModal">
+                                            <svg class="icon icon-xs text-danger" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                                </path>
+                                            </svg>
+                                        </a>
+                                </td>
                         </tr>
                     @empty
                         <tr>
@@ -207,11 +202,10 @@
                 </tbody>
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
-
                 <div>
-                    {{__('Showing')}} {{$perPage > $notarys_count ? $notarys_count : $perPage  }} {{__('items of')}} {{$notarys_count}}
+                    {{__('Showing')}} {{$perPage > $notaryoffices_count ? $notaryoffices_count : $perPage  }} {{__('items of')}} {{$notaryoffices_count}}
                 </div>
-                {{ $notarys->links() }}
+                {{ $notaryoffices->links() }}
             </div>
         </div>
     </div>

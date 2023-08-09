@@ -1,8 +1,9 @@
 <div>
     <x-alert />
-    @include('livewire.portal.notary.partials.create-edit')
-    {{-- @include('livewire.portal.users.edit-user')
-    @include('livewire.portal.users.import-users') --}}
+    @include('livewire.portal.certificate-propriete.create')
+    @include('livewire.portal.certificate-propriete.update')
+
+   
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -20,7 +21,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Notary') }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Request Certificate of Ownership') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -30,14 +31,14 @@
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                         </path>
                     </svg>
-                    {{ __('Notaries Managment') }}
+                    {{ __('Request Certificate of Ownership') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('View all Simple Notary within the application') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('View all Request Certificate of Ownership  within the application') }} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
                 {{-- @can('user.create') --}}
-                <a href="#" data-bs-toggle="modal" data-bs-target="#CreatenotaryModal"
+                <a href="#" data-bs-toggle="modal" data-bs-target="#CreatecertificateproprieteModal"
                     class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
@@ -126,8 +127,9 @@
         <div class="col-md-3">
             <label for="orderBy">{{ __('Order By') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="name">{{ __('Name') }}</option>
-                <option value="post">{{ __('Post') }}</option>
+                <option value="status">{{ __('Status') }}</option>
+                <option value="land_owner">{{ __('Land Owner') }}</option>
+                <option value="purchaser_name">{{ __('Purchaser Name') }}</option>
                 <option value="created_at">{{ __('Created Date') }}</option>
             </select>
         </div>
@@ -156,43 +158,63 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('ID') }}</th>
-                        <th class="border-bottom">{{ __('NAME') }}</th>
-                        <th class="border-bottom">{{ __('POST') }}</th>
+                        <th class="border-bottom">{{ __('LAND PURCHASER') }}</th>
+                        <th class="border-bottom">{{ __('LAND TITLE') }}</th>
+                        <th class="border-bottom">{{ __('CP NUMBER') }}</th>
+                        <th class="border-bottom">{{ __('PRICE') }}</th>
+                        <th class="border-bottom">{{ __('VALIDITY') }}</th>
+                        <th class="border-bottom">{{ __('CERTIFICATE TYPE') }}</th>
+                        <th class="border-bottom">{{ __('STATUS') }}</th>
                         <th class="border-bottom">{{ __('Date created') }}</th>
                         <th class="border-bottom">{{ __('Action') }}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($notarys as $notary)
+                    @forelse($certificateproprietes as $certificatepropriete)
                         <tr>
-                            <td>{{ $notary->id }}</td>
-                            <td>{{ $notary->name }}</td>
-                            <td>{{ $notary->post }}</td>
-                            <td>{{ $notary->created_at }}</td>
-
-
                             <td>
-
-                                <a href='#' wire:click.prevent="initData({{ $notary->id }})"
-                                    data-bs-toggle="modal" data-bs-target="#Editnotaryodal">
-                                    <svg class="icon icon-xs" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
-                                        </path>
-                                    </svg>
-                                </a>
-                                <a href='#' wire:click.prevent="initData({{ $notary->id }})"
-                                    data-bs-toggle="modal" data-bs-target="#DeleteModal">
-                                    <svg class="icon icon-xs text-danger" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                                        </path>
-                                    </svg>
+                                <a href="#" class="d-flex align-items-center">
+                                    <div class="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-primary me-3"><span class="text-white">{{initials($certificatepropriete->purchaser_name )}}</span></div>
+                                    <div class="d-block"><span class="fw-bold">{{$certificatepropriete->requestor_id }}</span>
+                                        <div class="small text-gray">{{!empty($certificatepropriete->purchaser_name ) ? $certificatepropriete->purchaser_name  : ''}}</div>
+                                    </div>
                                 </a>
                             </td>
+                            <td>{{ $certificatepropriete->titreFoncier->numero_titre_foncier }}</td>
+                            <td>{{ $certificatepropriete->certificate_proprietes_number }}</td>                            
+
+                            <td>{{ $certificatepropriete->price }}</td>
+                            <td>{{ $certificatepropriete->validity }}</td>
+                            <td>{{ $certificatepropriete->certificate_proprietes_type }}</td>
+
+                            <td>
+                                {{-- <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $this->getStatusClass($certificatepropriete->status) }}">
+                                    {{ ucfirst($certificatepropriete->status) }}
+                                </span> --}}
+                            <span class="fw-normal badge super-badge p-2 bg-{{$certificatepropriete->statusStyle}} round">{{$certificatepropriete->status}}</span>
+
+                            </td>
+                            <td>{{ $certificatepropriete->created_at }}</td>
+                                <td>
+                                        <a href='#' wire:click.prevent="initData({{ $certificatepropriete -> id }})"
+                                            data-bs-toggle="modal" data-bs-target="#updatecertificateproprieteModal">
+                                            <svg class="icon icon-xs" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                                </path>
+                                            </svg>
+                                        </a>
+                                        <a href='#' wire:click.prevent="initData({{ $certificatepropriete -> id }})"
+                                            data-bs-toggle="modal" data-bs-target="#DeleteModal">
+                                            <svg class="icon icon-xs text-danger" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                                </path>
+                                            </svg>
+                                        </a>
+                                </td>
                         </tr>
                     @empty
                         <tr>
@@ -208,10 +230,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
 
-                <div>
-                    {{__('Showing')}} {{$perPage > $notarys_count ? $notarys_count : $perPage  }} {{__('items of')}} {{$notarys_count}}
-                </div>
-                {{ $notarys->links() }}
+                {{ $certificateproprietes->links() }}
             </div>
         </div>
     </div>
