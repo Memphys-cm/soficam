@@ -52,6 +52,18 @@ class Index extends Component
 
     public  $state = 0;
 
+    public $coordinates = [];
+
+
+    public function addCoordinate()  {
+        $this->coordinates[] = ['borne_value'];
+    }
+
+    public function removeCoordinate($coordinateIndex)
+    {
+        unset($this->coordinates[$coordinateIndex]);
+        $this->coordinates = array_values($this->coordinates);
+    }
 
     public function mount()
     {
