@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notaries', function (Blueprint $table) {
+        Schema::create('notary_offices', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->foreignId('notary_office_id')->on('notary_offices')->nullable()->Index();
-            $table->string('post')->nullable();
+            $table->foreignId('region_id')->on('regions')->nullable()->Index();
+            $table->string('office_name');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notaries');
+        Schema::dropIfExists('notary_offices');
     }
 };
