@@ -10,6 +10,8 @@ use App\Models\TitreFoncier;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use App\Models\CertificatePropriete;
+use App\Http\Livewire\Traits\WithDataTables;
+
 
 class Index extends Component
 {
@@ -86,9 +88,9 @@ class Index extends Component
        
         // $certificatepropriete->users()->sync($this->user_ids);
         // $this->refresh(__('CertificatePropriete sales completed successfully!'), 'CreateCertificateProprieteModal');
-        session()->flash('message', 'CertificatePropriete successfully Created');
+        // session()->flash('message', 'CertificatePropriete successfully Created');
         $this->clearFields();
-        // $this->refresh(__('CertificatePropriete successfully Created!'), 'CreateCertificateProprieteModal');
+        $this->refresh(__('CertificatePropriete successfully Created!'), 'CreateCertificateProprieteModal');
     }
 
     public function initData($id)
