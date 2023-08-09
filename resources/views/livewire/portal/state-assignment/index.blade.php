@@ -135,7 +135,7 @@
                             <span class="fw-normal">{{$housing_estate->zone}}</span>
                         </td>
                         <td>
-                            <span class="fw-normal">{{$housing_estate->geometre->first_name}} {{$housing_estate->geometre->last_name}}</span>
+                            <span class="fw-normal">{{$housing_estate->geometre->first_name ?? '' }} {{$housing_estate->geometre->last_name ?? ''}}</span>
                         </td>
                         <td>
                             <span class="fw-normal">{{$housing_estate->user->first_name }} {{$housing_estate->user->last_name }} </span>
