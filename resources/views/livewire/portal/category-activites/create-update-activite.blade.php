@@ -13,7 +13,7 @@
                                 <label class="px-2" for="activite.category_activite_id">{{__('Category Activite')}}</label>
                                 <select wire:model="activite.category_activite_id" name="activite.category_activite_id" class="form-select  @error('activite.category_activite_id') is-invalid @enderror" required="">
                                     @foreach($categories as $category_activite)
-                                    <option value="{{$category_activite->id}}">{{$category_activite->nom_category}}</option>
+                                    <option value="{{$category_activite->id}}">{{$category_activite->grand_section." -> ".$category_activite->nom_category}}</option>
                                     @endforeach
                                 </select>
                                 @error('activite.category_activite_id')
