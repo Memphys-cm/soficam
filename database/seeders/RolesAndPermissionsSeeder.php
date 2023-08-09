@@ -96,6 +96,11 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'category_activites_and_activite.delete'],
             ['name' => 'category_activites_and_activite.export_n_print'],
 
+            ['name' => 'etat_cession.view'],
+            ['name' => 'etat_cession.create'],
+            ['name' => 'etat_cession.update'],
+            ['name' => 'etat_cession.delete'],
+            ['name' => 'etat_cession.export_n_print'],
 
         ];
 
