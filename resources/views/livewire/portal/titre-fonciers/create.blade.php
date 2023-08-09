@@ -158,38 +158,6 @@
                         </div>
                         <div class='form-group mb-3 row'>
                             <div class='col'>
-                                <label for="coordonness_b1">{{__('Coordonnees - B1')}}</label>
-                                <input wire:model="coordonness_b1" type="text" class="form-control  @error('coordonness_b1') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="coordonness_b1">
-                                @error('coordonness_b1')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class='col'>
-                                <label for="coordonness_b2">{{__('Coordonnees - B2')}}</label>
-                                <input wire:model="coordonness_b2" type="text" class="form-control  @error('coordonness_b2') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="coordonness_b2">
-                                @error('coordonness_b2')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class='col'>
-                                <label for="coordonness_b3">{{__('Coordonnees - B3')}}</label>
-                                <input wire:model="coordonness_b3" type="text" class="form-control  @error('coordonness_b3') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="coordonness_b3">
-                                @error('coordonness_b3')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class='form-group mb-3 row'>
-                            <div class='col'>
-                                <label for="coordonness_b4">{{__('Coordonnees - B4')}}</label>
-                                <input wire:model="coordonness_b4" type="text" class="form-control  @error('coordonness_b4') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="coordonness_b4">
-                                @error('coordonness_b4')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class='form-group mb-3 row'>
-                            <div class='col'>
                                 <label for="limit_nord">{{__('North Limit')}}</label>
                                 <input wire:model="limit_nord" type="text" class="form-control  @error('limit_nord') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="limit_nord">
                                 @error('limit_nord')
@@ -234,6 +202,30 @@
                                 @enderror
                             </div>
                         </div>
+
+                        @foreach($coordinates as $coordinateIndex => $coordinate)
+                        <div class='form-group mb-2 d-flex align-items-end justify-content-end'>
+                            <div class='col'>
+                                <label for="coordonness_b4">{{__('Coordonnees')}} - B{{ $loop->iteration }}</label>
+                                <input wire:model="coordonness_b4" type="text" class="form-control  @error('coordonness_b4') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="coordonness_b4">
+                                @error('coordonness_b4')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <button type="button" wire:click="removeCoordinate({{ $coordinateIndex }})" class="btn btn-sm btn-icon ">
+                                <svg class="icon icon-sm text-danger me-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        @endforeach
+                        <hr>
+                        <button type="button" wire:click="addCoordinate" class="btn btn-sm btn-outline-primary">
+                            <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                            {{__('Add Coordinate')}}
+                        </button>
 
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
