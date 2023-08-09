@@ -33,7 +33,6 @@ class Index extends Component
     }
     public function mount(){
         $this->notaryoffices = NotaryOffice::select('id', 'office_name')->get();
-
     }
     public function updatedNotaryOfficeId($notary_office_id)
     {

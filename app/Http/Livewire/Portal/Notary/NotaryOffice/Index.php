@@ -106,10 +106,6 @@ class Index extends Component
         $this->region_id = '';
     }
 
-
-
-    
-
     public function render()
     {
         $notaryoffices = NotaryOffice::search($this->query)->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
