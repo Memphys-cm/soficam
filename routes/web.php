@@ -101,6 +101,10 @@ Route::group(
         Route::prefix('state_assignment')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\StateAssignment\Index::class)->name('portal.state_assignments.index');
         });
+
+        Route::prefix('maps')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\Maps\Index::class)->name('portal.maps.index');
+        });
         
 
         //Categories activites
