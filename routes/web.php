@@ -88,19 +88,20 @@ Route::group(
         Route::prefix('titrefonciers')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\TitreFonciers\Index::class)->name('portal.titre-fonciers.index');
         });
-        Route::prefix('titrefonciers')->group(function () {
-            Route::get('/details', App\Http\Livewire\Portal\TitreFonciers\Detail::class)->name('portal.titre-fonciers.details');
-        });
 
         
         //Sales
-        Route::prefix('sales')->group(function () {
-            Route::get('/', App\Livewire\Portal\Sales\SimpleSales\Index::class)->name('portal.simpleSale.index');
-        });
+        // Route::prefix('sales')->group(function () {
+        //     Route::get('/', App\Livewire\Portal\Sales\SimpleSales\Index::class)->name('portal.simpleSale.index');
+        // });
 
         Route::prefix('registration')->group(function () {
             Route::get('/subdivisions', App\Http\Livewire\Portal\Registration\HousingEstate\Index::class)->name('portal.registrations.housingestates.index');
         });
+        Route::prefix('state_assignment')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\StateAssignment\Index::class)->name('portal.registrations.state_assignment.index');
+        });
+        
 
         //Categories activites
         Route::prefix('category-activites')->group(function () {
