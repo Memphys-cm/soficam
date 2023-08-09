@@ -11,18 +11,16 @@ use App\Models\TitreFoncier;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
+use App\Http\Livewire\Traits\WithDataTables;
 
 class Index extends Component
 {
 
     use WithPagination;
     use WithFileUploads;
+    use WithDataTables;
 
-    protected $paginationTheme = 'bootstrap';
     public ?string $query = null;
-    public int $perPage = 15;
-    public string $orderAsc = 'desc';
-    public string $orderBy = 'created_at';
 
     public $inputs = [0]; // Initialize with one element
     public $i = 0;
@@ -199,7 +197,6 @@ class Index extends Component
         }
         // Store the data into the database (or any other storage medium)
         $sale = Sale::create([
-            'titre_foncier_id' => $this->titre_foncier_id,
             'notary_id' => $this->notary_id,
             'sales_code' => $this->sales_code,
             'balance' => $defaultBalance,
@@ -216,16 +213,24 @@ class Index extends Component
             'created_by' => auth()->user()->name,
         ]);
 
+        $saleableData = [
+            'sale_id' => $sale->id,
+            'price' => $this->sale_amount,
+            'saleable_id' => $sale->id,
+            'saleable_type' => 'total_sale', // Adjust the namespace if different
+            'created_by' => auth()->user()->name,
+        ];
+
+        DB::table('saleables')->insert($saleableData);
         // Assuming your Sale model has a documents relationship, you can store the documents like this:
         foreach ($documentPaths as $path) {
             $sale->documents()->create(['path' => $path]);
         }
 
-        session()->flash('success', 'Sale information stored successfully!');
-
-
-        // Clear the input fields after storing
+      
         $this->clearFields();
+        $this->refresh(__('Sale successfully Created!'), 'CreatetotalsaleModal');
+
 
         // Optionally, you can add a success message or redirect to a confirmation page.
     }
@@ -234,8 +239,9 @@ class Index extends Component
     {
         if ($this->sale) {
             $this->sale->delete();
-            session()->flash('message', 'sale deleted successfully');
-            $this->dispatchBrowserEvent('close-modal');
+            $this->refresh(__('Sale successfully deleted!'), 'DeleteModal');
+
+
         }
     }
 
@@ -278,7 +284,8 @@ class Index extends Component
     public function render()
     {
         $totals = Sale::search($this->query)->where('sale_type', 'total_sale')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $totals_count = Notary::count();
 
-        return view('livewire..portal.sales.total-sales.index', compact('totals'));
+        return view('livewire..portal.sales.total-sales.index', ['totals'=>$totals, 'totals_count'=>$totals_count]);
     }
 }
