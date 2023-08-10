@@ -36,16 +36,23 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col-md-6 py-2">
+                        {{-- <div class="col-md-6 py-2">
                             <label for="code">{{ __('Status') }}</label>
                             <select wire:model="state_assignment.status" name="state_assignment.status" class="form-select  @error('state_assignment.status') is-invalid @enderror">
-                                {{-- <option value="pending_payment">{{ __('pending_payment') }}</option> --}}
-                                <option value="pending_payment">{{ __('pending_payment') }} </option>
+                                <option value="pending_payment">{{ __('pending_payment') }}</option> 
+                                 <option value="pending_payment">{{ __('pending_payment') }} </option>
                                 <option value="paid">{{ __('paid') }} </option>
                                 <option value="cancelled">{{ __('cancelled') }} </option>
                                 <option value="completed">{{ __('completed') }} </option>
                             </select>
                             @error('state_assignment.status')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div> --}}
+                        <div class="col-md-6 py-2">
+                            <label for="code">{{ __('User') }}</label>
+                            <x-input.select wire:model="user_id" prettyname="user_id" :options="$users->pluck('first_name', 'id')->toArray()" selected="('user_id')" />
+                            @error('geometre_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -95,35 +102,35 @@
                         </div>
                         <div class="col-md-6 py-2">
                             <label for="code">{{ __('Lieu_dit') }}</label>
-                            <input wire:model="state_assignment.lieu_dit" type="text" class="form-control  @error('state_assignment.lieu_dit') is-invalid @enderror" placeholder="NW" required="" value="" name="state_assignment.lieu_dit">
+                            <input wire:model="state_assignment.lieu_dit" type="text" class="form-control  @error('state_assignment.lieu_dit') is-invalid @enderror" placeholder="Logpom" required="" value="" name="state_assignment.lieu_dit">
                             @error('state_assignment.lieu_dit')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 py-2">
                             <label for="code">{{ __('superficie_en_m2') }}</label>
-                            <input wire:model="state_assignment.superficie_en_m2" type="number" class="form-control  @error('state_assignment.superficie_en_m2') is-invalid @enderror" placeholder="NW" required="" value="" name="state_assignment.superficie_en_m2">
+                            <input wire:model="state_assignment.superficie_en_m2" type="number" class="form-control  @error('state_assignment.superficie_en_m2') is-invalid @enderror" placeholder="25000" required="" value="" name="state_assignment.superficie_en_m2">
                             @error('state_assignment.superficie_en_m2')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 py-2">
                             <label for="code">{{ __('Cout') }}</label>
-                            <input wire:model="state_assignment.cout" type="number" class="form-control  @error('state_assignment.cout') is-invalid @enderror" placeholder="NW" required="" value="" name="state_assignment.cout">
+                            <input wire:model="state_assignment.cout" type="number" class="form-control  @error('state_assignment.cout') is-invalid @enderror" placeholder="70000" required="" value="" name="state_assignment.cout">
                             @error('state_assignment.cout')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 py-2">
                             <label for="code">{{ __('Frais Supplemetaires') }}</label>
-                            <input wire:model="state_assignment.frais_suplementaires" type="number" class="form-control  @error('state_assignment.frais_suplementaires') is-invalid @enderror" placeholder="NW" required="" value="" name="state_assignment.frais_suplementaires">
+                            <input wire:model="state_assignment.frais_suplementaires" type="number" class="form-control  @error('state_assignment.frais_suplementaires') is-invalid @enderror" placeholder="15000" required="" value="" name="state_assignment.frais_suplementaires">
                             @error('state_assignment.frais_suplementaires')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 py-2">
                             <label for="code">{{ __('Cout_etat_cession') }}</label>
-                            <input wire:model="state_assignment.cout_etat_cession" type="number" class="form-control  @error('state_assignment.cout_etat_cession') is-invalid @enderror" placeholder="NW" required="" value="" name="state_assignment.cout_etat_cession">
+                            <input wire:model="state_assignment.cout_etat_cession" type="number" class="form-control  @error('state_assignment.cout_etat_cession') is-invalid @enderror" placeholder="100000" required="" value="" name="state_assignment.cout_etat_cession">
                             @error('state_assignment.cout_etat_cession')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
