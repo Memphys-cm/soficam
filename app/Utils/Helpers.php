@@ -1,15 +1,15 @@
-<?php 
+<?php
 
 use App\Models\User;
 use App\Models\AuditLog;
 
 function initials($string)
 {
-    $string_array = explode(" ",$string);
-    if(count($string_array) >= 2){
+    $string_array = explode(" ", $string);
+    if (count($string_array) >= 2) {
         return strtoupper(Str::substr($string_array[0], 0, 1)) . "" . strtoupper(Str::substr($string_array[1], 0, 1));
-    }else{
-        return strtoupper(Str::substr($string_array[0], 0, 1)) ;
+    } else {
+        return strtoupper(Str::substr($string_array[0], 0, 1));
     }
 }
 
@@ -45,5 +45,22 @@ if (!function_exists('numberFormat')) {
         }
 
         return $number;
+    }
+}
+if (!function_exists('array_flatten')) {
+    function array_flatten($array)
+    {
+        if (!is_array($array)) {
+            return FALSE;
+        }
+        $result = array();
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $result = array_merge($result, array_flatten($value));
+            } else {
+                $result[$key] = $value;
+            }
+        }
+        return $result;
     }
 }

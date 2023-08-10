@@ -100,6 +100,7 @@
                         <th class="border-bottom">{{__('Propriators')}}</th>
                         <th class="border-bottom">{{__('Location')}}</th>
                         <th class="border-bottom">{{__('Limits')}}</th>
+                        <th class="border-bottom">{{__('Coordonnees')}}</th>
                         <th class="border-bottom">{{__('Status')}}</th>
                         <th class="border-bottom">{{__('Date created')}}</th>
                         @canany('titre_foncier.update','titre_foncier.delete')
@@ -162,6 +163,13 @@
                             <div class="d-flex align-items-centerpy-1">
                                 <span class="fw-bolder mx-2"> {{__('West')}} </span> {{$titrefoncier->limit_ouest}}
                             </div>
+                        </td>
+                        <td> 
+                            @foreach(collect(json_decode($titrefoncier->coordonnees,true)) as $key => $value)
+                            <div class="d-flex align-items-centerpy-1">
+                               <span class="fw-bolder mx-2"> {{ $key }} :</span> {{ $value}}
+                            </div>
+                            @endforeach
                         </td>
                         <td>
                             <span class="fw-normal badge super-badge p-2 bg-{{$titrefoncier->EtatTFStyle}} round">{{$titrefoncier->etat_TF}}</span>

@@ -33,6 +33,7 @@ return new class extends Migration
             $table->string('numero_bordereau_analytique')->nullable();
             $table->string('volume_du_bordereau_analytique')->nullable();
             $table->date('date_detablissement_du_bordereau_analytique')->nullable();
+            $table->string('numero_ccp')->nullable();
             $table->json('coordonnees')->nullable();
             $table->string('limit_nord');
             $table->string('limit_sud');

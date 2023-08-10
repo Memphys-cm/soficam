@@ -79,7 +79,7 @@ class Index extends Component
     protected array $rules = [
         'state_assignment.reference_etat_cession' => 'sometimes',
         'state_assignment.type_personne' => 'sometimes',
-        'state_assignment.titre_foncier_id' => 'sometimes',
+        'state_assignment.titre_foncier_id' => 'required',
         'state_assignment.geometre_id' => 'sometimes',
         'state_assignment.user_id' => 'sometimes',
         'state_assignment.sub_division_id' => 'sometimes',

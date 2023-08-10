@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('lot_area')->nullable();
             $table->string('lot_status')->nullable();
             $table->string('type')->nullable();
+            $table->string('numero_ccp')->nullable();
+            $table->json('coordonnees')->nullable();
             $table->string('lot_affectation')->nullable();
             $table->string('notary_office')->nullable();
             $table->string('notary_clerk')->nullable();
@@ -37,3 +39,8 @@ return new class extends Migration
         Schema::dropIfExists('parcels');
     }
 };
+
+
+
+// -> Releve Imo -> (transactional records -> titre_foncier) - CP details
+// -> Releve Bien Imo -> (All assests, (lot, land_title) that a user has in a given locality)
