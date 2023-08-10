@@ -108,6 +108,12 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'certificate_propriete.delete'],
             ['name' => 'certificate_propriete.export_n_print'],
 
+            ['name' => 'etat_cession.view'],
+            ['name' => 'etat_cession.create'],
+            ['name' => 'etat_cession.update'],
+            ['name' => 'etat_cession.delete'],
+            ['name' => 'etat_cession.export_n_print'],
+
         ];
 
         $insert_data = [];
@@ -131,6 +137,9 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $this->command->info('Creating Admin User\'s Role');
         $admin_user_role = Role::firstOrCreate(['name' => 'admin_user']);
+
+        $this->command->info('Creating Geometre User\'s Role');
+        $admin_user_role = Role::firstOrCreate(['name' => 'geometre']);
 
         $this->command->info('Creating User\'s Role');
         $user_role = Role::firstOrCreate(['name' => 'user']);
