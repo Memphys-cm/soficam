@@ -102,6 +102,12 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'etat_cession.delete'],
             ['name' => 'etat_cession.export_n_print'],
 
+            ['name' => 'certificate_propriete.view'],
+            ['name' => 'certificate_propriete.create'],
+            ['name' => 'certificate_propriete.update'],
+            ['name' => 'certificate_propriete.delete'],
+            ['name' => 'certificate_propriete.export_n_print'],
+
         ];
 
         $insert_data = [];

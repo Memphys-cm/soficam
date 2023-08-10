@@ -19,6 +19,7 @@ class SubDivisionSeeder extends Seeder
             'id' => 1,
             'division_id' => 1,
             'code' => '0101001',
+            'total_surface_area' => 4500000000,
             'sub_division_name_en' => 'NGAOUNDAL',
             'sub_division_name_fr' => 'NGAOUNDAL'
         ]);
@@ -159,6 +160,14 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 21,
+            'division_id' => 5,
+            'code' => '0101021',
+            'sub_division_name_en' => 'MARTAP',
+            'sub_division_name_fr' => 'MARTAP'
+        ]);
+
+        SubDivision::create([
+            'id' => 22,
             'division_id' => 5,
             'code' => '0101021',
             'sub_division_name_en' => 'MARTAP',

@@ -204,19 +204,19 @@
                         </div>
 
                         @foreach($coordinates as $coordinateIndex => $coordinate)
-                        <div class='form-group mb-2 d-flex align-items-end justify-content-end'>
-                            <div class='col'>
-                                <label for="coordonness_b4">{{__('Coordonnees')}} - B{{ $loop->iteration }}</label>
-                                <input wire:model="coordonness_b4" type="text" class="form-control  @error('coordonness_b4') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="coordonness_b4">
-                                @error('coordonness_b4')
+                        <div class='form-group mb-2 d-flex align-items-end justify-content-between'>
+                            <div class=''>
+                                <label for="coordonnees.{{$coordinateIndex}}">{{__('Coordonnees')}} - B{{ $loop->iteration }}</label>
+                                <input wire:model="coordonnees.{{$coordinateIndex}}" type="number" step="0.0001" class="form-control col-md-12 @error('coordonnees') is-invalid @enderror" placeholder="{{__('45.XXXXX')}}" required="" value="" name="coordonnees">
+                                @error('coordonnees')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <button type="button" wire:click="removeCoordinate({{ $coordinateIndex }})" class="btn btn-sm btn-icon ">
+                            <a type="button" wire:click="removeCoordinate({{ $coordinateIndex }})" class="btn-icon ">
                                 <svg class="icon icon-sm text-danger me-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                                 </svg>
-                            </button>
+                            </a>
                         </div>
                         @endforeach
                         <hr>

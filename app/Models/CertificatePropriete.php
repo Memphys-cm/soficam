@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CertificatePropriete extends Model
 {
@@ -18,10 +19,9 @@ class CertificatePropriete extends Model
         return $query->where('status', 'pending_payment');
     }
 
-
-    public function users(): HasMany
+    public function requestor(): BelongsTo
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class,'requestor_id');
     }
 
     public function getStatusStyleAttribute() : String
@@ -33,11 +33,21 @@ class CertificatePropriete extends Model
              NULL => ''
         };
     }
+    public function getStatusTextAttribute(): String
+    {
+        return match ($this->status) {
+            'active' => 'Active',
+            'expired' => 'Expired',
+            'pending_payment' => 'Pending Payment',
+            NULL => ''
+        };
+    }
 
     public function titreFoncier()
     {
         return $this->belongsTo(TitreFoncier::class, 'titre_foncier_id');
     }
+
     public static function search($query)
     {
         return empty($query) ?
@@ -50,16 +60,14 @@ class CertificatePropriete extends Model
                 $q->orWhere('validity', 'like', '%' . $query . '%');                
                 $q->orWhere('certificate_proprietes_type', 'like', '%' . $query . '%');                
                 $q->orWhere('status', 'like', '%' . $query . '%');                
-                $q->orWhere('recorded_by', 'like', '%' . $query . '%');                
-            });
-    }
-    public function getStatusTextAttribute() : String
-    {
-        return match ($this->status) {
-            'active' => 'active',
-            'expired' => 'expired',
-            'pending_payment' => 'pending_payment',
-             NULL => ''
-        };
+                $q->orWhere('recorded_by', 'like', '%' . $query . '%');
+                $q->orWhereHas('titreFoncier', function ($q) use ($query) {
+                    $q->where('numero_titre_foncier', 'like', '%' . $query . '%');
+                });
+                $q->orWhereHas('requestor', function ($q) use ($query) {
+                $q->where('first_name', 'like', '%' . $query . '%');
+                $q->orWhere('last_name', 'like', '%' . $query . '%');
+            }); 
+         });
     }
 }

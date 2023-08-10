@@ -10,6 +10,7 @@ use App\Models\SubDivision;
 use App\Models\TitreFoncier;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Livewire\Traits\WithDataTables;
+use Illuminate\Support\Arr;
 
 class Index extends Component
 {
@@ -52,11 +53,13 @@ class Index extends Component
 
     public  $state = 0;
 
-    public $coordinates = [];
+    public $coordinates = ['',''];
+    public $coordonnees = [];
+
 
 
     public function addCoordinate()  {
-        $this->coordinates[] = ['borne_value'];
+        $this->coordinates[] = [];
     }
 
     public function removeCoordinate($coordinateIndex)
@@ -68,7 +71,7 @@ class Index extends Component
     public function mount()
     {
         $this->users = User::with(['roles' => function ($role) {
-            return $role->whereNotIn('name', ['super_admin', 'admin_user'])->get();
+            return $role->whereIn('name', ['user'])->get();
         }])->get();
 
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
@@ -92,6 +95,7 @@ class Index extends Component
         if (!Gate::allows('titre_foncier.create')) {
             return abort(401);
         }
+        // dd($this->user_ids);
 
         $this->validate([
             'numero_titre_foncier' => 'required',
@@ -116,8 +120,18 @@ class Index extends Component
             'limit_sud' => 'required',
             'limit_est' => 'required',
             'limit_ouest' => 'required',
+            'coordonnees' => 'required',
+            'user_ids' => 'required|array|min:1',
+            'user_ids.*' => 'required',
         ]);
 
+        $coords = [];
+
+        foreach ($this->coordonnees as $key => $value) {
+             array_push($coords, ['B' . $key => $value]); 
+        }
+      
+        dd(json_encode($coords));
 
         $titrefoncier = TitreFoncier::create([
             'numero_titre_foncier' => $this->numero_titre_foncier,
@@ -135,9 +149,9 @@ class Index extends Component
             'etat_TF' => $this->etat_TF,
             'etat_terrain' => $this->etat_terrain,
             'provenance_TF' => $this->provenance_TF,
-            // 'numero_bordereau_analytique' => $this->numero_bordereau_analytique,
-            // 'volume_du_bordereau_analytique' => $this->volume_du_bordereau_analytique,
-            // 'date_detablissement_du_bordereau_analytique' => $this->date_detablissement_du_bordereau_analytique,
+            'numero_bordereau_analytique' => $this->numero_bordereau_analytique,
+            'volume_du_bordereau_analytique' => $this->volume_du_bordereau_analytique,
+            'date_detablissement_du_bordereau_analytique' => $this->date_detablissement_du_bordereau_analytique,
             'limit_nord' => $this->limit_nord,
             'limit_sud' => $this->limit_sud,
             'limit_est' => $this->limit_est,

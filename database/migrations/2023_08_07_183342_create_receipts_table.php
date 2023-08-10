@@ -14,12 +14,11 @@ return new class extends Migration
     {
         Schema::create('receipts', function (Blueprint $table) {
             $table->id();
-            $table->string('reason');
-            $table->string('rejected_reason')->nullable();
-            $table->string('purchaser_name');
-            $table->string('file')->nullable();
-            $table->string('land_owner');
-            $table->enum('status', ['waiting', 'accepted', 'rejected'])->default('waiting');
+            $table->string('receipt_code')->default(Str::upper(Str::random(7)) . "" . now()->format('msu'));
+            $table->string('receipt_qr_code')->nullable();
+            $table->string('receipt_url')->nullable();
+            $table->foreignId('sale_id')->on('sales')->nullable()->index();
+            $table->foreignId('receveur_id')->on('users')->nullable()->index();
             $table->timestamps();
         });
     }
