@@ -103,6 +103,10 @@ Route::group(
             Route::get('/', App\Http\Livewire\Portal\Sales\SimpleSales\Index::class)->name('portal.simplesale.index');
         });
 
+        Route::prefix('allsales')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\Sales\AllSales::class)->name('portal.allsales.index');
+        });
+
         //notary
 
         Route::prefix('notary')->group(function () {

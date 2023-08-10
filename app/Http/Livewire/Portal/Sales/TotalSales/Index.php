@@ -283,7 +283,7 @@ class Index extends Component
 
     public function render()
     {
-        $totals = Sale::search($this->query)->where('sale_type', 'total_sale')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $totals = Sale::search($this->query)->where('sales_type', 'total_sale')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
         $totals_count = Notary::count();
 
         return view('livewire..portal.sales.total-sales.index', ['totals'=>$totals, 'totals_count'=>$totals_count]);
