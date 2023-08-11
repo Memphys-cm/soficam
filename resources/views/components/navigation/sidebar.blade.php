@@ -132,7 +132,7 @@
                                     </div>
                                 </li>
 
-                                {{-- @can('user.view') --}}
+                                @can('etat_cession.view')
                                 <li class="nav-item {{ $request->routeIs('portal.state_assignments.*') ? 'active' : '' }}">
                                     <a href="{{route('portal.state_assignments.index')}}" class="nav-link">
                                         <span class="sidebar-icon">
@@ -143,7 +143,7 @@
                                         <span class="sidebar-text">{{__('State Assignment')}}</span>
                                     </a>
                                 </li>
-                                {{-- @endcan --}}
+                                @endcan
 
                                 @canany('titre_foncier.view','titre_foncier.operations.view')
 
