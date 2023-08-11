@@ -44,7 +44,7 @@ class Index extends Component
             if ($area <= 5000) {
                 $this->price_m2 = 25000;
                 $this->state_assignment->frais_suplementaires = 2500;
-            $this->state_assignment->cout = (int)$this->price_m2 * (int)$area;
+            $this->state_assignment->cout = (int)$this->price_m2;
             $this->state_assignment->cout_etat_cession = (int)$this->state_assignment->cout + (int)$this->state_assignment->frais_suplementaires;
                 # code...
             }else{
@@ -63,7 +63,7 @@ class Index extends Component
                 $this->price_m2 = 50000;
                 $this->state_assignment->frais_suplementaires = 2500;
             }
-            $this->state_assignment->cout = (int)$this->price_m2 * (int)$area;
+            $this->state_assignment->cout = (int)$this->price_m2;
             $this->state_assignment->cout_etat_cession = (int)$this->state_assignment->cout + (int)$this->state_assignment->frais_suplementaires;
         }
 
