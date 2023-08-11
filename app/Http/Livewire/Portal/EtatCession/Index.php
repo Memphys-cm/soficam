@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Portal\StateAssignment;
+namespace App\Http\Livewire\Portal\EtatCession;
 
 use Livewire\Component;
 use App\Http\Livewire\Traits\WithDataTables;
@@ -79,7 +79,7 @@ class Index extends Component
     protected array $rules = [
         'state_assignment.reference_etat_cession' => 'sometimes',
         'state_assignment.type_personne' => 'sometimes',
-        'state_assignment.titre_foncier_id' => 'required',
+        'state_assignment.titre_foncier_id' => 'sometimes',
         'state_assignment.geometre_id' => 'sometimes',
         'state_assignment.user_id' => 'sometimes',
         'state_assignment.sub_division_id' => 'sometimes',
@@ -159,12 +159,11 @@ class Index extends Component
     {
 
         $state_assignments = EtatCession::
-            // withCount('users')->
-            orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        // withCount('users')->
+        orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
 
         $state_assignments_count = EtatCession::count();
 
-
-        return view('livewire.portal.state-assignment.index' ,  ['state_assignments' => $state_assignments, 'state_assignments_count' => $state_assignments_count]);
+        return view('livewire.portal.etat-cession.index',  ['state_assignments' => $state_assignments, 'state_assignments_count' => $state_assignments_count]);
     }
 }

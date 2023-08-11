@@ -109,18 +109,18 @@ Route::group(
 
         //notary
 
-        Route::prefix('notary')->group(function () {
-            Route::get('/', App\Http\Livewire\Portal\Notary\Index::class)->name('portal.notary.index');
+        Route::prefix('membre-du-cabinets')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\MembreDuCabinet\Index::class)->name('portal.membre-du-cabinets.index');
         });
-        Route::prefix('notaryoffice')->group(function () {
-            Route::get('/', App\Http\Livewire\Portal\Notary\NotaryOffice\Index::class)->name('portal.notaryoffice.index');
+        Route::prefix('cabinets')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\MembreDuCabinet\Cabinet\Index::class)->name('portal.cabinets.index');
         });
 
         Route::prefix('registration')->group(function () {
             Route::get('/subdivisions', App\Http\Livewire\Portal\Registration\HousingEstate\Index::class)->name('portal.registrations.housingestates.index');
         });
-        Route::prefix('state_assignment')->group(function () {
-            Route::get('/', App\Http\Livewire\Portal\StateAssignment\Index::class)->name('portal.state_assignments.index');
+        Route::prefix('etat_cessions')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\EtatCession\Index::class)->name('portal.state_assignments.index');
         });
 
         Route::prefix('maps')->group(function () {

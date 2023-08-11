@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notaries', function (Blueprint $table) {
+        Schema::create('membre_du_cabinets', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->foreignId('notary_office_id')->on('notary_offices')->nullable()->Index();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('address')->nullable();
+            $table->enum('type_membre',['geomtre','notaire'])->nullable();
+            $table->foreignId('cabinet_id')->on('cabinets')->nullable()->Index();
             $table->string('post')->nullable();
             $table->timestamps();
         });

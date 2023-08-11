@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notary_offices', function (Blueprint $table) {
+        Schema::create('cabinets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('region_id')->on('regions')->nullable()->Index();
-            $table->string('office_name');
+            $table->foreignId('division_id')->on('divisions')->nullable()->Index();
+            $table->foreignId('sub_division_id')->on('sub_divisions')->nullable()->Index();
+            $table->string('nom_cabinet')->index();
             $table->string('description')->nullable();
             $table->timestamps();
         });
