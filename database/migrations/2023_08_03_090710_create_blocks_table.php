@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('blocks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('housing_estate_id')->index()->constrained('housing_estates');
+            $table->foreignId('lotissement_id')->index()->constrained('lotissements');
             $table->timestamps();
         });
     }

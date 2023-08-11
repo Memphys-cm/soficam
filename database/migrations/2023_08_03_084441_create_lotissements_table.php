@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('housing_estates', function (Blueprint $table) {
+        Schema::create('lotissements', function (Blueprint $table) {
             $table->id();
             $table->string('code');
             $table->foreignId('land_id')->index()->constrained('titre_fonciers')->default(1);
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('housing_estates');
+        Schema::dropIfExists('lotissements');
     }
 };
