@@ -15,7 +15,7 @@ class Sale extends Model
 
     public function titreFoncier()
     {
-        return $this->belongsTo(TitreFoncier::class);
+        return $this->belongsTo(TitreFoncier::class, 'titre_foncier_id');
     }
     public function saleables()
     {

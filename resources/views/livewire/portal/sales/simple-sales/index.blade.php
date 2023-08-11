@@ -78,14 +78,14 @@
                                     </svg>
                                 </div>
                                 <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5">{{__('Total Users')}} {{$total_users}}</h2>
-                                    <h3 class="mb-1">{{numberFormat(!is_null($total_users) ? $total_users : 0 )}}</h3>
+                                    <h2 class="fw-extrabold h5">{{__('simplesale Users')}} {{$simplesale_users}}</h2>
+                                    <h3 class="mb-1">{{numberFormat(!is_null($simplesale_users) ? $simplesale_users : 0 )}}</h3>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-8 px-xl-0">
                                 <a href="" class="d-none d-sm-block">
-                                    <h2 class="h5">{{__('Total Users')}}</h2>
-                                    <h3 class="fw-extrabold mb-1">{{numberFormat(!is_null($total_users) ? $total_users : 0 )}}</h3>
+                                    <h2 class="h5">{{__('simplesale Users')}}</h2>
+                                    <h3 class="fw-extrabold mb-1">{{numberFormat(!is_null($simplesale_users) ? $simplesale_users : 0 )}}</h3>
                                 </a>
                             </div>
                         </div>
@@ -137,31 +137,31 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('CODE')}}</th>
-                        <th class="border-bottom">{{__('PURCHASER(s) NAME')}}</th>
-                        <th class="border-bottom">{{__('LAND TITLE NUMBER')}}</th>
-                        <th class="border-bottom">{{__('SALE TYPE')}}</th>
-                        <th class="border-bottom">{{__('Surface for sale')}}</th>
-                        <th class="border-bottom">{{__('Price per m²')}}</th>
-                        <th class="border-bottom">{{__('Sale amount')}}</th>
-                        <th class="border-bottom">{{__('Amount Advance')}}</th>
-                        <th class="border-bottom">{{__('Amount Balance')}}</th>
-                        <th class="border-bottom">{{__('Payment Type')}}</th>
-                        <th class="border-bottom">{{__('Created By')}}</th>
-                        <th class="border-bottom">{{__('Date created')}}</th>
-                        {{-- @canany('user.update','user.delete') --}}
-                        <th class="border-bottom">{{__('Action')}}</th>
+                        <th class="border-bottom">{{ __('CODE') }}</th>
+                        <th class="border-bottom">{{ __('PURCHASER(s) NAME') }}</th>
+                        <th class="border-bottom">{{ __('LAND TITLE NUMBER') }}</th>
+                        <th class="border-bottom">{{ __('SALE TYPE') }}</th>
+                        <th class="border-bottom">{{ __('Surface for sale') }}</th>
+                        <th class="border-bottom">{{ __('Price per m²') }}</th>
+                        <th class="border-bottom">{{ __('Sale amount') }}</th>
+                        <th class="border-bottom">{{ __('Amount Advance') }}</th>
+                        <th class="border-bottom">{{ __('Amount Balance') }}</th>
+                        <th class="border-bottom">{{ __('Payment Type') }}</th>
+                        <th class="border-bottom">{{ __('Created By') }}</th>
+                        <th class="border-bottom">{{ __('Date created') }}</th>
+                        {{-- @canany('user.update', 'user.delete') --}}
+                        <th class="border-bottom">{{ __('Action') }}</th>
                         {{-- @endcanany --}}
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($simplesales as $simplesale)
-                    <tr>
-                        <td>{{ $simplesale->sales_code }}</td>
-                        <td>{{ $simplesale->user_id }}</td>
-                        <td>{{ $simplesale->purchaser_name }}</td>
-                        <td>{{ $simplesale->sale_type }}</td>
-                            <td>{{ $simplesale->surface_for_sale }} {{ __('m²') }}</td>
+                        <tr>
+                            <td>{{ $simplesale->sales_code }}</td>
+                            <td>{{ $simplesale->purchaser_name }}</td>
+                            <td>{{ $simplesale->titreFoncier->numero_titre_foncier }}</td>
+                            <td>{{ $simplesale->sale_type }}</td>
+                            <td>{{ $simplesale->titreFoncier->superficie_du_TF_mere }} {{ __('m²') }}</td>
                             <td>{{ $simplesale->price_per_m² }} {{ __('XAF') }}</td>
                             <td>{{ $simplesale->sale_amount }} {{ __('XAF') }}</td>
                             <td>{{ $simplesale->advance }} {{ __('XAF') }}</td>
@@ -169,31 +169,35 @@
                             <td>{{ $simplesale->payment_type }}</td>
                             <td>{{ $simplesale->created_by }}</td>
                             <td>{{ $simplesale->created_at }}</td>
-                        
-                        <td>
 
-                            {{-- <a href='#' wire:click.prevent="initData({{$simplesale->id}})" data-bs-toggle="modal" data-bs-target="#Editsimplesaleodal">
+                            <td>
+
+                                {{-- <a href='#' wire:click.prevent="initData({{$simplesale->id}})" data-bs-toggle="modal" data-bs-target="#Editsimplesaleodal">
                                 <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                 </svg>
                             </a> --}}
-                            
-                            <a href='#' wire:click.prevent="initData({{$simplesale->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal">
-                                <svg class="icon icon-xs text-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                </svg>
-                            </a>
-                        </td>
-                    </tr>
+
+                                <a href='#' wire:click.prevent="initData({{ $simplesale->id }})"
+                                    data-bs-toggle="modal" data-bs-target="#DeleteModal">
+                                    <svg class="icon icon-xs text-danger" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </td>
+                        </tr>
                     @empty
-                    <tr>
-                        <td colspan="7" class="text-center">
-                            <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps nothing here')}} &#128540;</h4>
-                                <p>{{__('No Record Found..!')}}</p>
-                            </div>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                <div class="text-center text-gray-800 mt-2">
+                                    <h4 class="fs-4 fw-bold">{{ __('Opps nothing here') }} &#128540;</h4>
+                                    <p>{{ __('No Record Found..!') }}</p>
+                                </div>
+                            </td>
+                        </tr>
                     @endforelse
                 </tbody>
             </table>
