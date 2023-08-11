@@ -49,6 +49,11 @@
                                     </div>
                                 @enderror
                             </div>
+                           
+
+                        </div>
+
+                        <div class='form-group row mb-3'>
                             <div class=" col"><label for="sub_division_id">{{ __('SubDivision') }}</label>
                                 <input type="text" wire:model="sub_division_id"
                                     class="form-control  @error('sub_division_id') is-invalid @enderror "
@@ -60,10 +65,6 @@
                                     </div>
                                 @enderror
                             </div>
-
-                        </div>
-
-                        <div class='form-group row mb-3'>
                             <div class=" col"><label for="lieu_dit">{{ __('Village') }}</label>
                                 <input type="text" wire:model="lieu_dit"
                                     class="form-control  @error('lieu_dit') is-invalid @enderror "
@@ -74,7 +75,9 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div>
+                            </div>                           
+                        </div>
+                        <div class='form-group mb-3 row'>
                             <div class=" col"><label for="superficie_du_TF_mere">{{ __('Land Title Area') }}</label>
                                 <input type="text" wire:model="superficie_du_TF_mere"
                                     class="form-control  @error('superficie_du_TF_mere') is-invalid @enderror "
@@ -86,7 +89,6 @@
                                     </div>
                                 @enderror
                             </div>
-
                             <div class=" col"><label
                                     for="numero_titre_foncier">{{ __('Public Utility Area') }}</label>
                                 <input type="text" wire:model="numero_titre_foncier"
@@ -99,53 +101,8 @@
                                     </div>
                                 @enderror
                             </div>
-
                         </div>
-                        <div class='form-group mb-3 row'>
-                            <div class='col'>
-                                <label for="limit_nord">{{ __('North Limit') }}</label>
-                                <input wire:model="limit_nord" type="text"
-                                    class="form-control  @error('limit_nord') is-invalid @enderror"
-                                    placeholder="{{ __('Road') }}" required="" value=""
-                                    name="limit_nord" disabled>
-                                @error('limit_nord')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class='col'>
-                                <label for="limit_sud">{{ __('South Limit') }}</label>
-                                <input wire:model="limit_sud" type="text"
-                                    class="form-control  @error('limit_sud') is-invalid @enderror"
-                                    placeholder="{{ __('Road') }}" required="" value=""
-                                    name="limit_sud" disabled>
-                                @error('limit_sud')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class='col'>
-                                <label for="limit_est">{{ __('East Limit') }}</label>
-                                <input wire:model="limit_est" type="text"
-                                    class="form-control  @error('limit_est') is-invalid @enderror"
-                                    placeholder="{{ __('Road') }}" required="" value=""
-                                    name="limit_est" disabled>
-                                @error('limit_est')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class='col'>
-                                <label for="limit_ouest">{{ __('West Limit') }}</label>
-                                <input wire:model="limit_ouest" type="text"
-                                    class="form-control  @error('limit_ouest') is-invalid @enderror"
-                                    placeholder="{{ __('Road') }}" required="" value=""
-                                    name="limit_ouest" disabled>
-                                @error('limit_ouest')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        </fieldset>
                         <br>
-
                         <div class='form-group row mb-3'>
                             <div class='col'>
                                 <label class="px-2" for="user_ids">{{ __('Purchaser(s) Name') }}</label>
@@ -269,6 +226,7 @@
 
 
                         </div>
+                        <br>
                         <div class="d-flex justify-content-between align-items-end">
                             <div class="mb-4 mt-md-0">
                                 <button type="button" class="btn btn-sm btn-light text-gray-800 ms-auto "
