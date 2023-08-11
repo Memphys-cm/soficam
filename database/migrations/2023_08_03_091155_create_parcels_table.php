@@ -15,10 +15,11 @@ return new class extends Migration
         Schema::create('parcels', function (Blueprint $table) {
             $table->id();
             $table->foreignId('block_id')->index()->constrained('blocks');
-            $table->integer('lot_no')->nullable();
-            $table->integer('lot_area')->nullable();
-            $table->string('lot_status')->nullable();
-            $table->string('type')->nullable();
+            $table->foreignId('titre_foncier_id')->index()->constrained('titre_fonciers');
+            $table->integer('numero_du_lot')->nullable();
+            $table->integer('surperficie_du_area')->nullable();
+            $table->enum('statut_du_lot', ['batit', 'non_batit'])->nullable();
+            $table->enum('type')->nullable();
             $table->string('numero_ccp')->nullable();
             $table->json('coordonnees')->nullable();
             $table->string('lot_affectation')->nullable();
