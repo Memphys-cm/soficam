@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('address')->nullable();
-            $table->enum('type_membre',['geomtre','notaire'])->nullable();
+            $table->enum('type_membre',['geomtre','notaire','lotisseur','maeture','promoteur_immobiliere','agent_immobiliere','urbaniste','controlleur'])->nullable();
             $table->foreignId('cabinet_id')->on('cabinets')->nullable()->Index();
             $table->string('post')->nullable();
             $table->timestamps();

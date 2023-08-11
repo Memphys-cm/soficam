@@ -14,20 +14,37 @@ return new class extends Migration
         
         Schema::create('parcels', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('block_id')->index()->constrained('blocks');
-            $table->foreignId('titre_foncier_id')->index()->constrained('titre_fonciers');
+            $table->foreignId('lotissement_id')->index()->on('lotissements')->nullable();
+            $table->foreignId('titre_foncier_id')->index()->on('titre_fonciers');
+            $table->foreignId('block_id')->index()->on('blocks')->nullable();
             $table->integer('numero_du_lot')->nullable();
-            $table->integer('surperficie_du_area')->nullable();
+            $table->integer('surperficie_du_lot')->nullable();
             $table->enum('statut_du_lot', ['batit', 'non_batit'])->nullable();
             $table->enum('type',['public','normale'])->deafult('normale');
+            $table->string('laffectation_du_lot')->nullable();
+            $table->date('date_lotissement')->nullable();
+            $table->foreignId('geometre_id')->on('membre_du_cabinets')->nullable();
             $table->string('numero_ccp')->nullable();
-            $table->json('coordonnees')->nullable();
-            $table->string('lot_affectation')->nullable();
-            $table->foreignId('carbinet_id')->nullable();
-            $table->string('notary_clerk')->nullable();
-            $table->string('geometric_pratic')->nullable();
-            $table->string('geometrician')->nullable();
-            $table->date('date')->nullable();
+            $table->json('coordonnees_du_lot')->nullable();
+            $table->date('date_renseignement_coordonnees')->nullable();
+            $table->longText('commentaire_du_geometre')->nullable();
+            $table->foreignId('notaire_id')->on('membre_du_cabinets')->nullable();
+            $table->longText('letude_du_notaire')->nullable();
+            $table->date('date_de_letude_notaire')->nullable();
+            $table->longText('commentaire_du_notaire')->nullable();
+            $table->enum('type_de_venter',['simple','mutation_totale'])->default('simple');
+            $table->enum('superficie_a_vendre',['totale','partielle'])->nullable();
+            $table->float('prix_du_m2',30,2)->nullable();
+            $table->integer('superficie_vendu',30,2)->nullable();
+            $table->integer('superficie_restant',30,2)->nullable();
+            $table->enum('type_de_versement',['tranche','cash'])->nullable();
+            $table->float('montant_de_la_vente',30,2)->nullable();
+            $table->float('montant_versee',30,2)->nullable();
+            $table->float('montant_restant',30,2)->nullable();
+            $table->float('impot_sur_la_vente',30,2)->nullable();
+            $table->date('date_de_vente')->nullable();
+            $table->string('lagent_traitant')->nullable();
+            $table->string('lauthorite_competente')->nullable();
             $table->timestamps();
         });
     }

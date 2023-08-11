@@ -41,7 +41,7 @@ class Index extends Component
     public function mount()
     {
         $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier')->get();
-        $this->notarys = Notary::select('id', 'name')->get();
+        $this->notarys = []; //Notary::select('id', 'name')->get();
         $this->created = Carbon::now()->addHour();
         $this->sales_code = $this->generateConsCode();
         $this->calculateSaleAmount();
@@ -284,7 +284,7 @@ class Index extends Component
     public function render()
     {
         $totals = Sale::search($this->query)->where('sale_type', 'total_sale')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
-        $totals_count = Notary::count();
+        $totals_count = 0 ;//Notary::count();
 
         return view('livewire..portal.sales.total-sales.index', ['totals'=>$totals, 'totals_count'=>$totals_count]);
     }
