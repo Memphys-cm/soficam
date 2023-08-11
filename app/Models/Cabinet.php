@@ -20,6 +20,10 @@ class Cabinet extends Model
     {
         return $query->where('type_cabinet',  'notaire');
     }
+    public function scopeGeometre($query)
+    {
+        return $query->where('type_cabinet',  'geometre');
+    }
 
     public function region(): BelongsTo
     {

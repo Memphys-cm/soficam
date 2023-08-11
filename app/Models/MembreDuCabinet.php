@@ -26,6 +26,31 @@ class MembreDuCabinet extends Model
     {
         return $query->where('type_membre',  'notaire');
     }
+    public function scopeMaeture($query)
+    {
+        return $query->where('type_membre',  'maeture');
+    }
+    public function scopeLotisseur($query)
+    {
+        return $query->where('type_membre',  'lotisseur');
+    }
+    public function scopeControlleur($query)
+    {
+        return $query->where('type_membre',  'controlleur');
+    }
+    public function scopeUrbaniste($query)
+    {
+        return $query->where('type_membre',  'urbaniste');
+    }
+    public function scopeAgentImo($query)
+    {
+        return $query->where('type_membre',  'agent_immobiliere');
+    }
+    public function scopePromoImo($query)
+    {
+        return $query->where('type_membre',  'promoteur_immobiliere');
+    }
+  
 
     public static function search($query)
     {

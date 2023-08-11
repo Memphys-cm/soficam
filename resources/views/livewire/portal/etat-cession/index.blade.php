@@ -106,12 +106,12 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
+                        <th class="border-bottom">{{__('Requestor')}}</th>
                         <th class="border-bottom">{{__('reference')}}</th>
                         <th class="border-bottom">{{__('personne')}}</th>
                         <th class="border-bottom">{{__('operation')}}</th>
                         <th class="border-bottom">{{__('Zone')}}</th>
                         <th class="border-bottom">{{__('Geometre')}}</th>
-                        <th class="border-bottom">{{__('User')}}</th>
                         <th class="border-bottom">{{__('Status')}}</th>
                         <th class="border-bottom">{{__('Date Creation')}}</th>
                         {{-- @canany('housing_estate.update','housing_estate.delete') --}}
@@ -122,6 +122,9 @@
                 <tbody>
                     @forelse($state_assignments as $housing_estate)
                     <tr>
+                        <td>
+                            <x-elements.user :options="$housing_estate->user" />
+                        </td>
                         <td>
                             <span class="fw-normal">{{$housing_estate->reference_etat_cession}}</span>
                         </td>
@@ -134,9 +137,6 @@
                         </td>
                         <td>
                             <span class="fw-normal">{{$housing_estate->geometre->first_name ?? '' }} {{$housing_estate->geometre->last_name ?? ''}}</span>
-                        </td>
-                        <td>
-                            <span class="fw-normal">{{$housing_estate->user->first_name }} {{$housing_estate->user->last_name }} </span>
                         </td>
                         <td>
                             <span class="fw-normal">{{$housing_estate->status}}</span>

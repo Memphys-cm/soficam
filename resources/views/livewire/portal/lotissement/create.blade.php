@@ -51,82 +51,77 @@
                             @enderror
                         </div>
                         <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Land Title Area') }}</label>
-                            <input wire:model="area" type="text" class="form-control  @error('area') is-invalid @enderror" placeholder="NW" required="" value="" name="area" disabled>
-                            @error('housing_estate.code')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <label for="">{{ __('Land Title total surface area') }}</label>
+                            <input type="text" class="form-control" required="" value="{{$tf_total_surface_area}}" disabled>
+
                         </div>
                         <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Area sold') }}</label>
-                            <input wire:model="area_solde" type="text" class="form-control  @error('area_solde') is-invalid @enderror" placeholder="NW" required="" value="" name="area_solde" disabled>
-                            @error('area_solde')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <label for="">{{ __('Land title surface area sold') }}</label>
+                            <input type="text" class="form-control" required="" value="{{$tf_total_surface_area_sold}}" disabled>
+
                         </div>
                         <div class="col-md-6 py-2">
-                            <label for="code">{{ __('remaning_area') }}</label>
-                            <input wire:model="remaning_area" type="text" class="form-control  @error('remaning_area') is-invalid @enderror" placeholder="NW" required="" value="" name="remaning_area" disabled>
-                            @error('remaning_area')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <label for="">{{ __('Land title surface area remaining') }}</label>
+                            <input type="text" class="form-control" required="" value="{{$tf_total_surface_area_remaining}}" disabled>
                         </div>
                     </div>
                     <legend class="w-auto">{{__('Promoter Informations')}}</legend>
                     <div class='row form-group mb-3'>
                         <div class="col-md-3 py-2">
                             <label for="code">{{ __('Maeture') }}</label>
-                            <input wire:model="housing_estate.maeture" type="text" class="form-control  @error('housing_estate.maeture') is-invalid @enderror" placeholder="maeture" required="" value="" name="housing_estate.maeture">
-                            @error('housing_estate.maeture')
+                            <input wire:model="maeture" type="text" class="form-control  @error('maeture') is-invalid @enderror" placeholder="maeture" required="" value="" name="maeture">
+                            @error('maeture')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-3 py-2">
-                            <label for="code">{{ __('Real Estate Developer') }}</label>
-                            <input wire:model="housing_estate.property_developer" type="text" class="form-control  @error('housing_estate.property_developer') is-invalid @enderror" placeholder="..." required="" value="" name="housing_estate.property_developer">
-                            @error('housing_estate.property_developer')
+                            <label for="code">{{ __('Promoter Real') }}</label>
+                            <input wire:model="promo_imo" type="text" class="form-control  @error('promo_imo') is-invalid @enderror" placeholder="..." required="" value="" name="promo_imo">
+                            @error('promo_imo')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-3 py-2">
                             <label for="code">{{ __('Real Estate Agent') }}</label>
-                            <input wire:model="housing_estate.estate_agent" type="text" class="form-control  @error('housing_estate.estate_agent') is-invalid @enderror" placeholder="..." required="" value="" name="housing_estate.estate_agent">
-                            @error('housing_estate.estate_agent')
+                            <input wire:model="agent_imo" type="text" class="form-control  @error('agent_imo') is-invalid @enderror" placeholder="..." required="" value="" name="agent_imo">
+                            @error('agent_imo')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-3 py-2">
-                            <label for="code">{{ __('Lotisser') }}</label>
-                            <input wire:model="housing_estate.lotisser" type="text" class="form-control  @error('housing_estate.lotisser') is-invalid @enderror" placeholder="lotisser" required="" value="" name="housing_estate.lotisser">
-                            @error('housing_estate.lotisser')
+                            <label for="code">{{ __('Lotisseur') }}</label>
+                            <input wire:model="lotisseur" type="text" class="form-control  @error('lotisseur') is-invalid @enderror" placeholder="lotisseur" required="" value="" name="lotisseur">
+                            @error('lotisseur')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-3 py-2">
-                            <label for="code">{{ __('Geometric Pratice') }}</label>
-                            <input wire:model="housing_estate.geometric_pratice" type="text" class="form-control  @error('housing_estate.geometric_pratice') is-invalid @enderror" placeholder="geometric_pratice" required="" value="" name="housing_estate.geometric_pratice">
-                            @error('housing_estate.geometric_pratice')
+                            <label for="code">{{ __('Cabinet Geometre') }}</label>
+
+                            <x-input.select wire:model="cabinet_geometre_id" prettyname="cabinet_geometre_id" :options="$cabinet_geometres" class="@error('cabinet_geometre_id') is-invalid @enderror" />
+                            @error('cabinet_geometre_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-3 py-2">
-                            <label for="code">{{ __('Geometric') }}</label>
-                            <input wire:model="housing_estate.geometric" type="text" class="form-control  @error('housing_estate.geometric') is-invalid @enderror" placeholder="geometric" required="" value="" name="housing_estate.geometric">
-                            @error('housing_estate.geometric')
+                            <label for="code">{{ __('Geometre') }}</label>
+
+                            <x-input.select wire:model="geometre_id" prettyname="geometre_id" :options="$geometres" class="@error('geometre_id') is-invalid @enderror" />
+                            @error('cabinet_geometre_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-3 py-2">
-                            <label for="code">{{ __('Urban Planner') }}</label>
-                            <input wire:model="housing_estate.urbanist" type="text" class="form-control  @error('housing_estate.urbanist') is-invalid @enderror" placeholder="urbanist" required="" value="" name="housing_estate.urbanist">
-                            @error('housing_estate.urbanist')
+                            <label for="code">{{ __('Urbaniste') }}</label>
+                            <input wire:model="urbaniste" type="text" class="form-control  @error('urbaniste') is-invalid @enderror" placeholder="urbaniste" required="" value="" name="urbaniste">
+                            @error('urbaniste')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-3 py-2">
-                            <label for="code">{{ __('controller') }}</label>
-                            <input wire:model="housing_estate.controller" type="text" class="form-control  @error('housing_estate.controller') is-invalid @enderror" placeholder="controller" required="" value="" name="housing_estate.controller">
-                            @error('housing_estate.controller')
+                            <label for="code">{{ __('Controlleur') }}</label>
+                            <input wire:model="controlleur" type="text" class="form-control  @error('controlleur') is-invalid @enderror" placeholder="controlleur" required="" value="" name="controlleur">
+                            @error('controlleur')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -144,7 +139,7 @@
                                 <div class=''>
                                     <label for="blockName">{{__('Block')}} {{$blockIndex+1 }} {{__('Name')}}</label>
                                     <input type="text" class="form-control px-4  @error('blocks.{{ $blockIndex }}.block_name') is-invalid @enderror" wire:model="blocks.{{ $blockIndex }}.name" width="5rem;" placeholder="{{'Block No. '.$blockIndex+1}}">
-                                    @error('blocks.{{ $blockIndex }}.block_name')
+                                    @error('blocks.$blockIndex.block_name')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -176,71 +171,82 @@
 
                         <div class="row form-group mt-3 mb-2">
                             <div class="col-md-3">
-                                <label for="numero_du_lot">{{__('Lot Number')}}</label>
+                                <label for="numero_du_lot">{{__('Numero du Lot')}}</label>
                                 <input type="number" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.numero_du_lot">
                             </div>
-
                             <div class="col-md-3">
-                                <label for="surperficie_du_lot">AREA OF LOT</label>
+                                <label for="surperficie_du_lot">{{__('Superficie du Lot')}}</label>
                                 <input type="number" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.surperficie_du_lot">
                             </div>
-
-                            <div class="col-md-3">
-                                <label for="lotEtat">State Of Lot</label>
-                                <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.condition_lot">
-                            </div>
-
-                            <div class="col-md-3">
-                                <label for="lotNumero">LOT STATUS</label>
-                                <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.lot_status">
+                            <div class="col-md-6">
+                                <label for="statut_du_lot">{{__('Statut du Lot')}}</label>
+                                <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.statut_du_lot">
                             </div>
                         </div>
                         <div class="row form-group mt-3 mb-2">
-                            <div class="col-md-3">
-                                <label for="parcelsuperficie">NOTARY'S OFFICE</label>
-                                <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.notary_office">
+                            <div class="col-md-3 ">
+                                <label for="code">{{ __('Cabinet Notaire') }}</label>
+                                <select wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.cabinet_notaire_id" class="form-control @error('cabinet_notaire_id') is-invalid @enderror">
+                                    <option value=''>{{__('-- Select --')}}</option>
+                                    @foreach($cabinet_notaires as $cabinet_notaire)
+                                    <option value='{{$cabinet_notaire->id}}'>{{ucfirst($cabinet_notaire->nom_cabinet)}}  </option>
+                                    @endforeach
+                                </select>
+                                @error('cabinet_notaire_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-
-                            <div class="col-md-3">
-                                <label for="lotEtat">NOTARY'S CLERK</label>
-                                <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.notary_clerk">
+                            <div class="col-md-3 ">
+                                <label for="code">{{ __('Notaire') }}</label>
+                                <select wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.notaire_id" class="form-control @error('notaire_id') is-invalid @enderror">
+                                    <option value=''>{{__('-- Select --')}}</option>
+                                    @foreach($notaires as $notaire)
+                                    <option value='{{$notaire->id}}'>{{ucfirst($notaire->first_name)}} {{ucfirst($notaire->last_name)}} </option>
+                                    @endforeach
+                                </select>
+                                @error('notaire_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-
-
-                            <div class="col-md-3">
-                                <label for="lotNumero">GEOMETRIC PRACTICE</label>
-                                <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.geometric_pratic">
+                            <div class="col-md-3 ">
+                                <label for="cabinet_lot_geometre_id">{{ __('Cabinet Geometre') }}</label>
+                                <select wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.cabinet_lot_geometre_id" class="form-control @error('cabinet_lot_geometre_id') is-invalid @enderror">
+                                    <option value=''>{{__('-- Select --')}}</option>
+                                    @foreach($cabinet_lot_geometres as $cabinet_lot_geo)
+                                    <option value='{{$cabinet_lot_geo->id}}'>{{ucfirst($cabinet_lot_geo->nom_cabinet)}} </option>
+                                    @endforeach
+                                </select>
+                                @error('cabinet_lot_geometre_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-
-                            <div class="col-md-3">
-                                <label for="parcelsuperficie">GEOMETRICIAN</label>
-                                <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.geometrician">
+                            <div class="col-md-3 ">
+                                <label for="lot_geometre_id">{{ __('Geometre') }}</label>
+                                <select wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.lot_geometre_id" class="form-control @error('lot_geometre_id') is-invalid @enderror">
+                                    <option value=''>{{__('-- Select --')}}</option>
+                                    @foreach($lot_geometres as $lot_geo)
+                                    <option value='{{$lot_geo->id}}'>{{ucfirst($lot_geo->first_name)}} {{ucfirst($lot_geo->last_name)}} </option>
+                                    @endforeach
+                                </select>
+                                @error('lot_geometre_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
-                        <div class="col-md-12 pb-2">
-                            <label for="lotEtat">Date</label>
-                            <input type="date" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.date">
-                        </div>
+
                         @else
                         <div class="row form-group mt-3 mb-2">
-                            <div class="col-md-3">
-                                <label for="lotNumero">Lot Number</label>
-                                <input type="number" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.lot_no">
+                            <div class="col-md-4">
+                                <label for="numero_du_lot">{{__('Numero du Lot')}}</label>
+                                <input type="number" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.numero_du_lot">
                             </div>
-
-                            <div class="col-md-3">
-                                <label for="parcelsuperficie">AREA OF LOT</label>
-                                <input type="number" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.lot_area">
+                            <div class="col-md-4">
+                                <label for="surperficie_du_lot">{{__('Superficie du Lot')}}</label>
+                                <input type="number" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.surperficie_du_lot">
                             </div>
-
-                            <div class="col-md-3">
-                                <label for="lotEtat">Lot Affectation</label>
-                                <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.lot_affectation">
-                            </div>
-
-                            <div class="col-md-3">
-                                <label for="lotEtat">Date</label>
-                                <input type="date" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.date">
+                            <div class="col-md-4">
+                                <label for="lotEtat">{{__('Laffectation du Lot')}}</label>
+                                <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.laffectation_du_lot">
                             </div>
                         </div>
                         @endif
