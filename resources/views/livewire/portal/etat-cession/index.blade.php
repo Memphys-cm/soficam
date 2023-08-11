@@ -1,8 +1,6 @@
 <div>
     <x-alert />
-    @include('livewire.portal.state-assignment.create-state_assignment')
-    {{-- @@include('livewire.portal.registration.housing-estate.view-housing_estate') --}}
-    {{-- @include('livewire.portal.state_assignments.import-state_assignments') --}}
+    @include('livewire.portal.etat-cession.create-etat_cession')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -17,7 +15,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{__('Dashboard')}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('State Assignments')}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Etat Cessions')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -26,7 +24,7 @@
                     </svg>
                     {{__('state_assignments')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('View all State Assignments')}} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{__('Voir Tous les Etats Cessions')}} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -34,14 +32,14 @@
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateUpdateStateAssignmentModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{__('New')}}
+                    </svg> {{__('Nouveau')}}
                 </a>
                 {{-- @endcan --}}
                 {{-- @can('housing_estate.import') --}}
                 <a href="#" data-bs-toggle="modal" data-bs-target="#importstate_assignmentsModal" class="btn btn-sm btn-secondary py-2 d-inline-flex align-items-center">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                    </svg>{{__('Import')}}
+                    </svg>{{__('Importer')}}
                 </a>
                 {{-- @endcan --}}
                 {{-- @can('housing_estate.export_n_print') --}}
@@ -52,7 +50,7 @@
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
                         </svg>
-                        {{__('Export')}}
+                        {{__('Exporter')}}
                     </a>
                 </div>
                 <div class="text-center mx-2" wire:loading wire:target="export">
@@ -109,13 +107,13 @@
                 <thead>
                     <tr>
                         <th class="border-bottom">{{__('reference')}}</th>
-                        <th class="border-bottom">{{__('person')}}</th>
+                        <th class="border-bottom">{{__('personne')}}</th>
                         <th class="border-bottom">{{__('operation')}}</th>
                         <th class="border-bottom">{{__('Zone')}}</th>
                         <th class="border-bottom">{{__('Geometre')}}</th>
                         <th class="border-bottom">{{__('User')}}</th>
                         <th class="border-bottom">{{__('Status')}}</th>
-                        <th class="border-bottom">{{__('Date created')}}</th>
+                        <th class="border-bottom">{{__('Date Creation')}}</th>
                         {{-- @canany('housing_estate.update','housing_estate.delete') --}}
                         <th class="border-bottom">{{__('Action')}}</th>
                         {{-- @endcanany --}}
