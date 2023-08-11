@@ -19,11 +19,11 @@ return new class extends Migration
             $table->integer('numero_du_lot')->nullable();
             $table->integer('surperficie_du_area')->nullable();
             $table->enum('statut_du_lot', ['batit', 'non_batit'])->nullable();
-            $table->enum('type')->nullable();
+            $table->enum('type',['public','normale'])->deafult('normale');
             $table->string('numero_ccp')->nullable();
             $table->json('coordonnees')->nullable();
             $table->string('lot_affectation')->nullable();
-            $table->string('notary_office')->nullable();
+            $table->foreignId('carbinet_id')->nullable();
             $table->string('notary_clerk')->nullable();
             $table->string('geometric_pratic')->nullable();
             $table->string('geometrician')->nullable();
