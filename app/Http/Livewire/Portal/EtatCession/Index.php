@@ -37,43 +37,33 @@ class Index extends Component
     {
         $area =  $this->state_assignment->superficie_en_m2;
         $zone = $this->state_assignment->zone;
-        // dd($area);
-        // $price_m2 = 0;
 
-        if ($zone == "terrain_urbain") {
-            if ($area <= 5000) {
-                $this->price_m2 = 25000;
-                $this->state_assignment->frais_suplementaires = 2500;
-            $this->state_assignment->cout = (int)$this->price_m2 * (int)$area;
-            $this->state_assignment->cout_etat_cession = (int)$this->state_assignment->cout + (int)$this->state_assignment->frais_suplementaires;
-                # code...
-            }else{
-                $area_are = $area - 5000;
-                $this->state_assignment->frais_suplementaires = 2500;
-                $this->state_assignment->cout = (25000 * 5000) + ($area_are * 20);
-                $this->state_assignment->cout_etat_cession = (int)$this->state_assignment->cout + (int)$this->state_assignment->frais_suplementaires;
-
-            }
-            
-        } else if($zone == "terrain_rurale"){
-            if ($area <= 50000) {
-                $this->price_m2 = 25000;
-                $this->state_assignment->frais_suplementaires = 2500;
-            } else if($area >= 50000 && $area <= 200000) {
-                $this->price_m2 = 50000;
-                $this->state_assignment->frais_suplementaires = 2500;
-            }
-            $this->state_assignment->cout = (int)$this->price_m2 * (int)$area;
-            $this->state_assignment->cout_etat_cession = (int)$this->state_assignment->cout + (int)$this->state_assignment->frais_suplementaires;
-        }
-
-        // if (!$area >=5000 && $zone == "terrain_urbain") {
-        //     $this->state_assignment->cout = (int)$this->price_m2 * (int)$area;
-        //     $this->state_assignment->cout_etat_cession = (int)$this->state_assignment->cout + (int)$this->state_assignment->frais_suplementaires;
-        //     # code...
+        // if ($zone == "terrain_urbain") {
+        //     $this->price_m2 = ($area <= 5000) ? 25000 : ($area - 5000) * 20;
+        // } else if ($zone == "terrain_rurale") {
+        //     if ($area <= 50000) {
+        //         $this->price_m2 = 25000;
+        //     } else if ($area >= 50000 && $area <= 200000) {
+        //         $this->price_m2 = 50000;
+        //     }else if($area > 200000){
+        //         $this->price_m2 = ($area - 200000) * 1;
+        //     }
         // }
+
+        $this->price_m2 = match ($zone) {
+            "terrain_urbain" => ($area <= 5000) ? 25000 : ($area - 5000) * 20,
+            "terrain_rurale" => match (true) {
+                ($area <= 50000) => 25000,
+                ($area >= 50000 && $area <= 200000) => 50000,
+                default => ($area - 200000) * 1,
+            },
+            default => 0,
+        };
         
-        
+        $this->state_assignment->frais_suplementaires = 2500;
+        $this->state_assignment->cout = (int)$this->price_m2;
+        $this->state_assignment->cout_etat_cession = (int)$this->state_assignment->cout + (int)$this->state_assignment->frais_suplementaires;
+   
     }
 
     protected array $rules = [
