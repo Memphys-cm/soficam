@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TitreFoncier extends Model implements HasMedia
 {
@@ -36,7 +37,7 @@ class TitreFoncier extends Model implements HasMedia
     {
         return $this->belongsTo(Region::class);
     }
-    public function sales()
+    public function sales(): HasMany
     {
         return $this->hasMany(Sale::class);
     }
