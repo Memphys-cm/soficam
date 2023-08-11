@@ -35,6 +35,7 @@ return new class extends Migration
             $table->date('date_detablissement_du_bordereau_analytique')->nullable();
             $table->foreignId('geometre_id')->constrained('membre_du_cabinets')->nullable();
             $table->foreignId('notaire_id')->constrained('membre_du_cabinets')->nullable();
+            $table->foreignId('conservateur_id')->constrained('users')->nullable();
             $table->string('numero_ccp')->nullable();
             $table->json('coordonnees')->nullable();
             $table->string('limit_nord');
