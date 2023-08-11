@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Portal\Notary\NotaryOffice;
+namespace App\Http\Livewire\Portal\MembreDuCabinet\Cabinet;
 
 use App\Models\Region;
 use Livewire\Component;
@@ -111,6 +111,6 @@ class Index extends Component
         $notaryoffices = NotaryOffice::search($this->query)->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
         $notaryoffices_count = NotaryOffice::count();
 
-        return view('livewire..portal.notary.notary-office.index', ['notaryoffices'=>$notaryoffices, 'notaryoffices_count'=>$notaryoffices_count]);
+        return view('livewire..portal.membre-du-cabinet.cabinet.index', ['notaryoffices'=>$notaryoffices, 'notaryoffices_count'=>$notaryoffices_count]);
     }
 }

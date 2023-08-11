@@ -105,11 +105,11 @@ Route::group(
 
         //notary
 
-        Route::prefix('notary')->group(function () {
-            Route::get('/', App\Http\Livewire\Portal\Notary\Index::class)->name('portal.notary.index');
+        Route::prefix('membre-du-cabinets')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\MembreDuCabinet\Index::class)->name('portal.membre-du-cabinets.index');
         });
-        Route::prefix('notaryoffice')->group(function () {
-            Route::get('/', App\Http\Livewire\Portal\Notary\NotaryOffice\Index::class)->name('portal.notaryoffice.index');
+        Route::prefix('cabinets')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\MembreDuCabinet\Cabinet\Index::class)->name('portal.cabinets.index');
         });
 
         Route::prefix('registration')->group(function () {
