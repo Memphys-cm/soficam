@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('sub_division_name_en')->index();
             $table->string('sub_division_name_fr')->index();
             $table->tinyInteger('status')->nullable()->default(1);
-            $table->bigInteger('total_surface_area')->nullable();
+            $table->float('total_surface_area',100,0)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
