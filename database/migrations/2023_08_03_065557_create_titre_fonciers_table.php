@@ -27,12 +27,17 @@ return new class extends Migration
             $table->string('superficie_du_TF_mere');
             $table->string('superficie_vendue_du_TF_mere')->nullable();
             $table->string('superficie_restant_du_TF_mere')->nullable();
-            $table->string('etat_TF');
+            $table->enum('etat_TF',['HYPOTHEQUE', 'DISPONIBLE', 'PRENOTE','SUSPENDU']);
             $table->enum('etat_terrain',['batit','non_batit']);
             $table->string('provenance_TF');
             $table->string('numero_bordereau_analytique')->nullable();
             $table->string('volume_du_bordereau_analytique')->nullable();
             $table->date('date_detablissement_du_bordereau_analytique')->nullable();
+            $table->foreignId('geometre_id')->constrained('membre_du_cabinets')->nullable();
+            $table->foreignId('notaire_id')->constrained('membre_du_cabinets')->nullable();
+            $table->foreignId('conservateur_id')->constrained('users')->nullable();
+            $table->string('numero_ccp')->nullable();
+            $table->json('coordonnees')->nullable();
             $table->string('limit_nord');
             $table->string('limit_sud');
             $table->string('limit_est');

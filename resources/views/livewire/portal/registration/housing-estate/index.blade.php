@@ -30,21 +30,21 @@
             </div>
             <div class="d-flex justify-content-between mb-2">
 
-                {{-- @can('housing_estate.create') --}}
+                @can('etat_cession.create')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateUpdateHousingEstateModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{__('New')}}
                 </a>
-                {{-- @endcan --}}
-                {{-- @can('housing_estate.import') --}}
+                @endcan
+                @can('etat_cession.import')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#importhousing_estatesModal" class="btn btn-sm btn-secondary py-2 d-inline-flex align-items-center">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                     </svg>{{__('Import')}}
                 </a>
-                {{-- @endcan --}}
-                {{-- @can('housing_estate.export_n_print') --}}
+                @endcan
+                @can('etat_cession.export_n_print')
                 <div class="mx-2" wire:loading.remove>
                     <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center {
                         {{-- {count($housing_estates) > 0 ? '' :'disabled'}} --}}
@@ -63,7 +63,7 @@
                         <div class="spinner-grow text-grey-300" style="width: 0.9rem; height: 0.9rem;" role="status"></div>
                     </div>
                 </div>
-                {{-- @endcan --}}
+                @endcan
             </div>
         </div>
     </div>
@@ -115,9 +115,9 @@
                         <th class="border-bottom">{{__('Remaining Area')}}</th>
                         <th class="border-bottom">{{__('Real Estate Developer')}}</th>
                         <th class="border-bottom">{{__('Date created')}}</th>
-                        {{-- @canany('housing_estate.update','housing_estate.delete') --}}
+                        @canany('etat_cession.update','etat_cession.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
-                        {{-- @endcanany --}}
+                        @endcanany
                     </tr>
                 </thead>
                 <tbody>
@@ -147,9 +147,9 @@
                         <td>
                             <span class="fw-normal">{{$housing_estate->created_at->format('Y-m-d')}}</span>
                         </td>
-                        {{-- @canany('housing_estate.update','housing_estate.delete') --}}
+                        @canany('etat_cession.update','etat_cession.delete')
                         <td>
-                            {{-- @can('housing_estate.update') --}}
+                            @can('etat_cession.update')
                             <a href="#" wire:click.prevent="initData({{$housing_estate->id}})" data-bs-toggle="modal" data-bs-target="#ViewHousingEstateModal" draggable="false">
                                 <svg class="icon icon-sm text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
@@ -162,16 +162,16 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                 </svg>
                             </a>
-                            {{-- @endcan --}}
-                            {{-- @can('housing_estate.delete') --}}
+                            @endcan
+                            @can('etat_cession.delete')
                             <a href="#" wire:click.prevent="initData({{$housing_estate->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
                                 <svg class="icon icon-sm text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                                 </svg>
                             </a>
-                            {{-- @endcan --}}
+                            @endcan
                         </td>
-                        {{-- @endcanany --}}
+                        @endcanany
                     </tr>
                     @empty
                     <tr>
@@ -189,7 +189,7 @@
                 <div>
                     {{__('Showing')}} {{$perPage > $housing_estates_count ? $housing_estates_count : $perPage  }} {{__('items of')}} {{$housing_estates_count}}
                 </div>
-                {{-- {{ $housing_estates->links() }} --}}
+                {{ $housing_estates->links() }}
             </div>
         </div>
     </div>

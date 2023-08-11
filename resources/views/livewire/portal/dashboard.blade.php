@@ -11,7 +11,7 @@
                 <p class="mt-n2">{{__('Manage companies and their related details')}} &#128524;</p>
             </div>
             <div class="d-flex justify-content-between">
-
+                 {{\Str::upper(\Str::random(5))."". now()->format('msu')}} <br>
             </div>
         </div>
     </div>

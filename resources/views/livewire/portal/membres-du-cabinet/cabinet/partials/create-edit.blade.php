@@ -1,39 +1,47 @@
-<div wire:ignore.self class="modal side-layout-modal fade" id="CreatenotaryModal" tabindex="-1" aria-labelledby="modal-form"
+<div wire:ignore.self class="modal side-layout-modal fade" id="CreatenotaryofficeModal" tabindex="-1" aria-labelledby="modal-form"
     style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:70%;">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Notary') }}</h1>
-                        <p class="px-1"> {{ __('Creating Notary') }} &#128522;</p>
+                        <h1 class="mb-0 h4"> {{ __('Notary Office') }}</h1>
+                        <p class="px-1"> {{ __('Creating Notary Office') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="store">
 
 
                         <div class='form-group row mb-3'>
-                            <div class=" col"><label for="name">{{ __('Name') }}</label>
-                                <input type="text" wire:model="name"
-                                    class="form-control  @error('name') is-invalid @enderror "
-                                    value="{{ old('name') }}" id="name" autofocus="" required="" >
-                                @error('name')
+                            <div class=" col"><label for="office_name">{{ __('Office Name*') }}</label>
+                                <input type="text" wire:model="office_name"
+                                    class="form-control  @error('office_name') is-invalid @enderror "
+                                    value="{{ old('office_name') }}" id="office_name" autofocus="" required="" >
+                                @error('office_name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
 
-                            <div class=" col"><label for="post">{{ __('Post') }}</label>
-                                <input type="text" wire:model="post"
-                                    class="form-control  @error('post') is-invalid @enderror "
-                                    value="{{ old('post') }}" id="post" autofocus="" required="" >
-                                @error('post')
+                            <div class=" col"><label for="region_id">{{ __('Region*') }}</label>
+                                <x-input.select wire:model="region_id" prettyname="region" :options="$regions->pluck('region_name_en', 'id')->toArray()"
+                                    selected="('region_id')" />
+                                @error('region_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                        </div>
+                        <div class='form-group row mb-3'>
+                            <div class="col">
+                                <label for="description">{{ __('Description') }}</label>
+                                <textarea wire:model="description" class="form-control @error('description') is-invalid @enderror" id="description" autofocus="" required=""></textarea>
+                                @error('description')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
-
                         </div>
 
                         <br>
@@ -51,7 +59,7 @@
                                     <span wire:click="clearFields()"
                                         class="d-none d-sm-inline-block ms-1">{{ __('Close') }}</span>
                                 </button>
-                                <button type="submit" wire:click.prevent="store"
+                                <button type="submit"
                                     class="btn btn-primary btn-sm btn-loading">
                                     <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -73,7 +81,7 @@
 
 
 {{-- update modal --}}
-<div wire:ignore.self class="modal side-layout-modal fade" id="Editnotaryodal" tabindex="-1" aria-labelledby="modal-form"
+<div wire:ignore.self class="modal side-layout-modal fade" id="Editnotaryofficedal" tabindex="-1" aria-labelledby="modal-form"
     style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:70%;">
         <div class="modal-content">
@@ -87,28 +95,37 @@
 
 
                         <div class='form-group row mb-3'>
-                            <div class=" col"><label for="name">{{ __('Name') }}</label>
-                                <input type="text" wire:model="name"
-                                    class="form-control  @error('name') is-invalid @enderror "
-                                    value="{{ old('name') }}" id="name" autofocus="" required="" >
-                                @error('name')
+                            <div class=" col"><label for="office_name">{{ __('Office Name') }}</label>
+                                <input type="text" wire:model="office_name"
+                                    class="form-control  @error('office_name') is-invalid @enderror "
+                                    value="{{ old('office_name') }}" id="office_name" autofocus="" required="" >
+                                @error('office_name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
 
-                            <div class=" col"><label for="post">{{ __('Post') }}</label>
-                                <input type="text" wire:model="post"
-                                    class="form-control  @error('post') is-invalid @enderror "
-                                    value="{{ old('post') }}" id="post" autofocus="" required="" >
-                                @error('post')
+                            <div class=" col"><label for="region_id">{{ __('Region*') }}</label>
+                                <x-input.select wire:model="region_id" prettyname="region" :options="$regions->pluck('region_name_en', 'id')->toArray()"
+                                    selected="('region_id')" />
+                                @error('region_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                        </div>
+                        <div class='form-group row mb-3'>
+                            <div class=" col"><label for="description">{{ __('Description') }}</label>
+                                <input type="text" wire:model="description"
+                                    class="form-control  @error('description') is-invalid @enderror "
+                                    value="{{ old('description') }}" id="description" autofocus="" required="" >
+                                @error('description')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
-
                         </div>
 
                         <br>
