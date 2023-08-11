@@ -122,6 +122,19 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'lotissement.sale'],
             ['name' => 'lotissement.add_coordinates'],
 
+            ['name' => 'membre_du_cabinet.view'],
+            ['name' => 'membre_du_cabinet.create'],
+            ['name' => 'membre_du_cabinet.update'],
+            ['name' => 'membre_du_cabinet.delete'],
+            ['name' => 'membre_du_cabinet.export_n_print'],
+
+            ['name' => 'cabinet.view'],
+            ['name' => 'cabinet.create'],
+            ['name' => 'cabinet.update'],
+            ['name' => 'cabinet.delete'],
+            ['name' => 'cabinet.export_n_print'],
+            
+
         ];
 
         $insert_data = [];

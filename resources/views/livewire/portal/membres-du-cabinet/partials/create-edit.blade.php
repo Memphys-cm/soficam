@@ -83,8 +83,14 @@
                             <div class="col">
                                 <label for="type_membre">{{__('Type Membre')}}</label>
                                 <select wire:model="type_membre" name="type_membre" class="form-select  @error('type_membre') is-invalid @enderror" required="">
-                                    <option value="">{{__('-- Select --')}}</option>
+                                    <option value="">{{__('-- Select Type Membre --')}}</option>
                                     <option value="geomtre">{{__('Geomtre')}}</option>
+                                    <option value="lotisseur">{{__('Lotisseur')}}</option>
+                                    <option value="maeture">{{__('Maeture')}}</option>
+                                    <option value="promoteur_immobiliere">{{__('Promoteur Immobiliere')}}</option>
+                                    <option value="agent_immobiliere">{{__('Agent Immobiliere')}}</option>
+                                    <option value="urbaniste">{{__('Urbaniste')}}</option>
+                                    <option value="controlleur">{{__('Controlleur')}}</option>
                                     <option value="notaire">{{__('Notaire')}}</option>
                                 </select>
                                 @error('type_membre')
@@ -93,29 +99,9 @@
                             </div>
                         </div>
                         <br>
-                        <div class="d-flex justify-content-between align-items-end">
-                            <div class="mb-4 mt-md-0">
-                                <button type="button" class="btn btn-sm btn-light text-gray-800 ms-auto "
-                                    data-bs-dismiss="modal">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                        <path
-                                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                                    </svg>
-                                    <span wire:click="clearFields()"
-                                        class="d-none d-sm-inline-block ms-1">{{ __('Close') }}</span>
-                                </button>
-                                <button type="submit" wire:click.prevent="store"
-                                    class="btn btn-primary btn-sm btn-loading">
-                                    <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                    </svg>
-                                    <span class="d-none d-sm-inline-block ms-1">{{ __('Save') }}</span>
-                                </button>
-                            </div>
-
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
+                            <button type="submit" class="btn btn-primary btn-loading" >{{ __('Update')}}</button>
                         </div>
                     </x-form-items.form>
 
@@ -226,25 +212,9 @@
                         <br>
 
 
-                        <div class="d-flex justify-content-between align-items-end">
-                            <div class="mb-4 mt-md-0">
-                                <button type="button" class="btn btn-sm btn-light text-gray-800 ms-auto "
-                                    data-bs-dismiss="modal">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                        <path
-                                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                                    </svg>
-                                    <span wire:click="clearFields()"
-                                        class="d-none d-sm-inline-block ms-1">{{ __('Close') }}</span>
-                                </button>
-                                <button type="submit" wire:click.prevent="update"
-                                    class="btn btn-primary btn-sm btn-loading">
-                                    
-                                    <span class="d-none d-sm-inline-block ms-1">{{ __('Update') }}</span>
-                                </button>
-                            </div>
-
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
+                            <button type="submit" class="btn btn-primary btn-loading" >{{ __('Update')}}</button>
                         </div>
                     </x-form-items.form>
 

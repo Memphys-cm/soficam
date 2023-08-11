@@ -34,7 +34,7 @@
             </div>
             <div class="d-flex justify-content-between mb-2">
 
-                {{-- @can('user.create') --}}
+                @can('cabinet.create')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreatecabinetModal"
                     class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -43,18 +43,9 @@
                             d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{ __('New') }}
                 </a>
-                {{-- @endcan --}}
-                {{-- @can('user.import') --}}
-                <a href="#" data-bs-toggle="modal" data-bs-target="#importNotaryModal"
-                    class="btn btn-sm btn-secondary py-2 d-inline-flex align-items-center">
-                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                    </svg>{{ __('Import') }}
-                </a>
-                {{-- @endcan --}}
-                {{-- @can('user.export_n_print') --}}
+                @endcan
+              
+                @can('cabinet.export_n_print')
                 <div class="mx-2" wire:loading.remove>
                     <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center ">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -77,41 +68,11 @@
                         </div>
                     </div>
                 </div>
-                {{-- @endcan --}}
+                @endcan
             </div>
         </div>
     </div>
-    {{-- <div class='mb-3 mt-0'>
-        <div class='row'>
-            <div class="col-12 col-sm-6 col-xl-4 mb-2">
-                <div class="card border-0 shadow">
-                    <div class="card-body">
-                        <div class="row d-block d-xl-flex align-items-center">
-                            <div class="col-12 col-xl-4 text-xl-center mb-2 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                                <div class="icon-shape icon-shape-tertiary rounded me-2 me-sm-0">
-                                    <svg class="icon icon-md" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                    </svg>
-                                </div>
-                                <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5">{{__('Total Users')}} {{$total_users}}</h2>
-                                    <h3 class="mb-1">{{numberFormat(!is_null($total_users) ? $total_users : 0 )}}</h3>
-                                </div>
-                            </div>
-                            <div class="col-12 col-xl-8 px-xl-0">
-                                <a href="" class="d-none d-sm-block">
-                                    <h2 class="h5">{{__('Total Users')}}</h2>
-                                    <h3 class="fw-extrabold mb-1">{{numberFormat(!is_null($total_users) ? $total_users : 0 )}}</h3>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-        </div>
-    </div> --}}
+
     <x-alert />
 
     <div class="row p-3">
@@ -119,7 +80,6 @@
             <label for="search">{{ __('Search') }}: </label>
             <input wire:model="query" id="search" type="text" placeholder="{{ __('Search...') }}"
                 class="form-control">
-            {{-- <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p> --}}
         </div>
         <div class="col-md-3">
             <label for="orderBy">{{ __('Order By') }}: </label>
@@ -156,7 +116,7 @@
                     <tr>
                         <th class="border-bottom">{{ __('OFFICE NAME') }}</th>
                         <th class="border-bottom">{{ __('LOCATION') }}</th>
-                       
+                        <th class="border-bottom">{{ __('TYPE CABINET') }}</th>                      
                         <th class="border-bottom">{{ __('Date created') }}</th>
                         <th class="border-bottom">{{ __('Action') }}</th>
                     </tr>
@@ -189,8 +149,13 @@
                                 </div>
                             </td>
 
+                            <td>{{ $cabinet->type_cabinet }}</td>
                             <td>{{ $cabinet->created_at }}</td>
+                        @canany(['cabinet.edit','cabinet.delete'])
+
                             <td>
+                            @can('cabinet.update')
+
                                 <a href='#' wire:click.prevent="initData({{ $cabinet->id }})"
                                     data-bs-toggle="modal" data-bs-target="#UpdateCabinetModal">
                                     <svg class="icon icon-xs" fill="none" stroke="currentColor"
@@ -200,6 +165,8 @@
                                         </path>
                                     </svg>
                                 </a>
+                                @endcan
+                                @can('cabinet.delete')
                                 <a href='#' wire:click.prevent="initData({{ $cabinet->id }})"
                                     data-bs-toggle="modal" data-bs-target="#DeleteModal">
                                     <svg class="icon icon-xs text-danger" fill="none" stroke="currentColor"
@@ -209,7 +176,11 @@
                                         </path>
                                     </svg>
                                 </a>
+                                @endcan
+
                             </td>
+                        @endcanany
+
                         </tr>
                     @empty
                         <tr>
