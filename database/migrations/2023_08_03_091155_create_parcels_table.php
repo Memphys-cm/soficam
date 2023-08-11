@@ -14,9 +14,9 @@ return new class extends Migration
         
         Schema::create('parcels', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('lotissement_id')->index()->on('lotissements')->nullable();
-            $table->foreignId('titre_foncier_id')->index()->on('titre_fonciers');
-            $table->foreignId('block_id')->index()->on('blocks')->nullable();
+            $table->foreignId('lotissement_id')->on('lotissements')->nullable()->index();
+            $table->foreignId('titre_foncier_id')->on('titre_fonciers')->index();
+            $table->foreignId('block_id')->on('blocks')->nullable()->index();
             $table->integer('numero_du_lot')->nullable();
             $table->integer('surperficie_du_lot')->nullable();
             $table->enum('statut_du_lot', ['batit', 'non_batit'])->nullable();
@@ -35,8 +35,8 @@ return new class extends Migration
             $table->enum('type_de_venter',['simple','mutation_totale'])->default('simple');
             $table->enum('superficie_a_vendre',['totale','partielle'])->nullable();
             $table->float('prix_du_m2',30,2)->nullable();
-            $table->integer('superficie_vendu',30,2)->nullable();
-            $table->integer('superficie_restant',30,2)->nullable();
+            $table->integer('superficie_vendu')->nullable();
+            $table->integer('superficie_restant')->nullable();
             $table->enum('type_de_versement',['tranche','cash'])->nullable();
             $table->float('montant_de_la_vente',30,2)->nullable();
             $table->float('montant_versee',30,2)->nullable();
