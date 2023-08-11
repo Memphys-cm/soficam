@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notaries', function (Blueprint $table) {
+        Schema::create('category_activites', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('post')->nullable();
+            $table->string('annee_loi_fin')->nullable();
+            $table->string('grand_section')->nullable();
+            $table->string('nom_category')->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notaries');
+        Schema::dropIfExists('category_activites');
     }
 };

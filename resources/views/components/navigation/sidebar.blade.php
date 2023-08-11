@@ -132,6 +132,19 @@
                                     </div>
                                 </li>
 
+                                @can('etat_cession.view')
+                                <li class="nav-item {{ $request->routeIs('portal.state_assignments.*') ? 'active' : '' }}">
+                                    <a href="{{route('portal.state_assignments.index')}}" class="nav-link">
+                                        <span class="sidebar-icon">
+                                            <svg class="icon icon-sm me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                                            </svg>
+                                        </span>
+                                        <span class="sidebar-text">{{__('Etat cession')}}</span>
+                                    </a>
+                                </li>
+                                @endcan
+
                                 @canany('titre_foncier.view','titre_foncier.operations.view')
 
                                 <li class="nav-item">
@@ -228,69 +241,7 @@
                                     </a>
                                 </li>
                                 @endcanany
-                                {{-- @canany('region.view','division.view','sub_division.view') --}}
-
-                                <li class="nav-item">
-                                    <span
-                                        class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.sales.simpleSale.index') || $request->routeIs('portal.divisions.index') ? 'collapse' : 'collapsed' }}"
-                                        data-bs-toggle="collapse" data-bs-target="#subsales-dashboard"><span>
-                                            <span class="sidebar-icon">
-                                                <svg class="icon icon-sm" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <circle cx="12" cy="12" r="10"
-                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2" />
-                                                    <line x1="12" y1="7" x2="12"
-                                                        y2="17" stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2" />
-                                                    <line x1="16" y1="10" x2="8"
-                                                        y2="10" stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2" />
-                                                    <line x1="16" y1="14" x2="8"
-                                                        y2="14" stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2" />
-                                                </svg>
-
-                                            </span>
-                                            <span class="sidebar-text">{{ __('Sales') }}</span>
-                                        </span>
-                                        <span class="link-arrow">
-                                            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd"
-                                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                    clip-rule="evenodd"></path>
-                                            </svg>
-                                        </span>
-                                    </span>
-                                    <div class="multi-level collapse {{ $request->routeIs('portal.simpleSales.index') || $request->routeIs('portal.totalSale.index')  ? 'show' : '' }}"
-                                        role="list" id="subsales-dashboard"
-                                        aria-expanded="{{ $request->routeIs('portal.simpleSale.index') || $request->routeIs('portal.totalSale.index') ? 'false' : 'true' }}">
-                                        <ul class="flex-column nav">
-                                            {{-- @can('simpleSale.view') --}}
-                                            <li
-                                                class="nav-item {{ $request->routeIs('portal.simpleSale.index') ? 'active' : '' }}">
-                                                <a href="{{ route('portal.simpleSale.index') }}" class="nav-link">
-                                                    <span class="sidebar-text-contracted">R</span> <span
-                                                        class="sidebar-text">{{ __('Simple Sales') }}</span>
-                                                </a>
-                                            </li>
-                                            <li
-                                                class="nav-item {{ $request->routeIs('portal.totalSale.index') ? 'active' : '' }}">
-                                                <a href="{{ route('portal.totalSale.index') }}" class="nav-link">
-                                                    <span class="sidebar-text-contracted">R</span> <span
-                                                        class="sidebar-text">{{ __('Total Sales') }}</span>
-                                                </a>
-                                            </li>
-                                            {{-- @endcan --}}
-                                           
-
-
-                                        </ul>
-                                    </div>
-                                </li>
-
-
+       
                             </ul>
                         </div>
                         </li>

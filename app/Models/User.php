@@ -7,12 +7,13 @@ namespace App\Models;
 use App\Models\Sales\Sale;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\CertificatePropriete;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -111,6 +112,10 @@ class User extends Authenticatable
     public function titrefoncier() : BelongsToMany
     {
         return $this->belongsToMany(TitreFoncier::class,'titrefoncier_user','user_id','titre_foncier_id')->withTimestamps();
+    }
+    public function certificatepropriete() : BelongsToMany
+    {
+        return $this->belongsToMany(CertificatePropriete::class,'titrefoncier_user','user_id','titre_foncier_id')->withTimestamps();
     }
     
 

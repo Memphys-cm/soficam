@@ -19,6 +19,7 @@ class SubDivisionSeeder extends Seeder
             'id' => 1,
             'division_id' => 1,
             'code' => '0101001',
+            'total_surface_area' => 4500000000,
             'sub_division_name_en' => 'NGAOUNDAL',
             'sub_division_name_fr' => 'NGAOUNDAL',
             'lot_area_superficie' => '4 500 000 000'

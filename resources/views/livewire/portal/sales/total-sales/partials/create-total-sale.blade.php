@@ -29,9 +29,9 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                </div>
-                                <div class=" col"><label for="notary_id">{{ __('NOTARY*') }}</label>
-                                    <x-input.select wire:model="notary_id" prettyname="notary" :options="$notarys->pluck('name', 'id')->toArray()"
+
+                                <div class=" col"><label for="notary_id">{{ __('NOTARY') }}</label>
+                                    <x-input.select wire:model="notary_id" prettyname="notary" :options="$notarys"
                                         selected="('notary_id')" />
                                     @error('notary_id')
                                         <div class="invalid-feedback">{{ $message }}</div>

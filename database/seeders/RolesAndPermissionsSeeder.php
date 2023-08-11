@@ -90,6 +90,29 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'profile.update'],
             ['name' => 'profile.delete'],
 
+            ['name' => 'category_activites_and_activite.view'],
+            ['name' => 'category_activites_and_activite.create'],
+            ['name' => 'category_activites_and_activite.update'],
+            ['name' => 'category_activites_and_activite.delete'],
+            ['name' => 'category_activites_and_activite.export_n_print'],
+
+            ['name' => 'etat_cession.view'],
+            ['name' => 'etat_cession.create'],
+            ['name' => 'etat_cession.update'],
+            ['name' => 'etat_cession.delete'],
+            ['name' => 'etat_cession.export_n_print'],
+
+            ['name' => 'certificate_propriete.view'],
+            ['name' => 'certificate_propriete.create'],
+            ['name' => 'certificate_propriete.update'],
+            ['name' => 'certificate_propriete.delete'],
+            ['name' => 'certificate_propriete.export_n_print'],
+
+            ['name' => 'etat_cession.view'],
+            ['name' => 'etat_cession.create'],
+            ['name' => 'etat_cession.update'],
+            ['name' => 'etat_cession.delete'],
+            ['name' => 'etat_cession.export_n_print'],
 
         ];
 
@@ -114,6 +137,9 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $this->command->info('Creating Admin User\'s Role');
         $admin_user_role = Role::firstOrCreate(['name' => 'admin_user']);
+
+        $this->command->info('Creating Geometre User\'s Role');
+        $admin_user_role = Role::firstOrCreate(['name' => 'geometre']);
 
         $this->command->info('Creating User\'s Role');
         $user_role = Role::firstOrCreate(['name' => 'user']);
