@@ -3,10 +3,10 @@
 namespace App\Http\Livewire\Portal\Sales;
 
 use App\Models\User;
-use App\Models\Notary;
 use Livewire\Component;
 use App\Models\Sales\Sale;
 use App\Http\Livewire\Traits\WithDataTables;
+use App\Models\MembreDuCabinet;
 use App\Models\Service;
 
 class AllSales extends Component
@@ -15,7 +15,7 @@ class AllSales extends Component
     public $notaries, $notary, $services, $service, $receveurs,$receveur, $status;
 
     public function mount(){
-        $this->notaries = Notary::select('id', 'name')->get();
+        $this->notaries = MembreDuCabinet::select('id', 'first_name', 'last_name')->get();
         $this->services = Service::all();
         $this->receveurs = User::role('admin_user')->select('id', 'first_name', 'last_name')->get();
 

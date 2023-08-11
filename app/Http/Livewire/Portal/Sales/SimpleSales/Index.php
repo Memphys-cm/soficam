@@ -9,6 +9,7 @@ use Livewire\Component;
 use App\Models\Sales\Sale;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use App\Models\MembreDuCabinet;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
@@ -38,7 +39,7 @@ class Index extends Component
     public function mount()
     {
         $this->users = User::select('id', 'first_name')->get();
-        $this->notarys = Notary::select('id', 'name')->get();
+        $this->notarys = MembreDuCabinet::select('id', 'name')->get();
         $this->created = Carbon::now()->addHour();
         $this->sales_code = $this->generateConsCode();
         $this->calculateSaleAmount();

@@ -12,6 +12,7 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
 use App\Http\Livewire\Traits\WithDataTables;
+use App\Models\MembreDuCabinet;
 
 class Index extends Component
 {
@@ -40,7 +41,7 @@ class Index extends Component
     public function mount()
     {
         $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier')->get();
-        $this->notarys = Notary::select('id', 'name')->get();
+        $this->notarys = MembreDuCabinet::select('id', 'name')->get();
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
@@ -243,7 +244,7 @@ class Index extends Component
     public function render()
     {
         $totals = Sale::search($this->query)->where('sales_type', 'total_sale')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
-        $totals_count = Notary::count();
+        $totals_count = Sale::count();
 
         return view('livewire..portal.sales.total-sales.index', ['totals'=>$totals, 'totals_count'=>$totals_count]);
     }
