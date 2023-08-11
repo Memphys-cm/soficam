@@ -1,8 +1,6 @@
 <div>
     <x-alert />
-    @include('livewire.portal.notary.partials.create-edit')
-    {{-- @include('livewire.portal.users.edit-user')
-    @include('livewire.portal.users.import-users') --}}
+    @include('livewire.portal.membres-du-cabinet.partials.create-edit')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -20,7 +18,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Notary') }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Membre du Cabinet') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -30,14 +28,14 @@
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                         </path>
                     </svg>
-                    {{ __('Notaries Managment') }}
+                    {{ __('Membre du Cabinet Managment') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('View all Simple Notary within the application') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('View all Membre du Cabinet within the application') }} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
                 {{-- @can('user.create') --}}
-                <a href="#" data-bs-toggle="modal" data-bs-target="#CreatenotaryModal"
+                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateMembreModal"
                     class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
@@ -156,26 +154,39 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('ID') }}</th>
                         <th class="border-bottom">{{ __('NAME') }}</th>
-                        <th class="border-bottom">{{ __('POST') }}</th>
                         <th class="border-bottom">{{ __('Date created') }}</th>
                         <th class="border-bottom">{{ __('Action') }}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($notarys as $notary)
+                    @forelse($membre_du_cabinets as $membre_du_cabinet)
                         <tr>
-                            <td>{{ $notary->id }}</td>
-                            <td>{{ $notary->name }}</td>
-                            <td>{{ $notary->post }}</td>
-                            <td>{{ $notary->created_at }}</td>
-
 
                             <td>
 
-                                <a href='#' wire:click.prevent="initData({{ $notary->id }})"
-                                    data-bs-toggle="modal" data-bs-target="#Editnotaryodal">
+                                <a href="#" class="d-flex align-items-center">
+                                    <div class="avatar avatar-md d-flex align-items-center justify-content-center fw-bold fs-6 rounded bg-primary me-2"><span class="text-white">{{ initials($membre_du_cabinet->first_name) }}{{ initials($membre_du_cabinet->last_name) }}</span></div>
+                                    <div class="d-block">
+                                        <span class="fw-bolder fs-6">{{ucwords($membre_du_cabinet->first_name)}} {{ $membre_du_cabinet->last_name }}</span>
+                                        <div class="small text-gray">
+                                            <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
+                                            </svg> {{$membre_du_cabinet->address}}
+                                        </div>
+                                        <div class="small text-gray d-flex align-items-end">
+                                            <svg class="icon icon-xxs me-1 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                            </svg> {{$membre_du_cabinet->phone_number}} | {{$membre_du_cabinet->post}}
+                                        </div>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>{{ $membre_du_cabinet->created_at }}</td>
+                            <td>
+
+                                <a href='#' wire:click.prevent="initData({{ $membre_du_cabinet->id }})"
+                                    data-bs-toggle="modal" data-bs-target="#EditMembeModal">
                                     <svg class="icon icon-xs" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -183,7 +194,7 @@
                                         </path>
                                     </svg>
                                 </a>
-                                <a href='#' wire:click.prevent="initData({{ $notary->id }})"
+                                <a href='#' wire:click.prevent="initData({{ $membre_du_cabinet->id }})"
                                     data-bs-toggle="modal" data-bs-target="#DeleteModal">
                                     <svg class="icon icon-xs text-danger" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -209,11 +220,12 @@
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
 
                 <div>
-                    {{__('Showing')}} {{$perPage > $notarys_count ? $notarys_count : $perPage  }} {{__('items of')}} {{$notarys_count}}
+                    {{ __('Showing') }}
+                    {{ $perPage > $membre_du_cabinets_count ? $membre_du_cabinets_count : $perPage }}
+                    {{ __('items of') }} {{ $membre_du_cabinets_count }}
                 </div>
-                {{ $notarys->links() }}
+                {{ $membre_du_cabinets->links() }}
             </div>
         </div>
     </div>
 </div>
-
