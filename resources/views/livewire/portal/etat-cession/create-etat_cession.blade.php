@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">{{ $state ? 'Update' : 'Create' }} {{ __(' State Assignment') }}</h1>
-                        <p class="px-1"> {{ $state ? 'Update' : 'Create' }} {{ __(' State Assignment') }} &#128522;</p>
+                        <h1 class="mb-0 h4">{{ $state ? 'Update' : 'Create' }} {{ __(' Etat Cession') }}</h1>
+                        <p class="px-1"> {{ $state ? 'Update' : 'Create' }} {{ __(' Etat Cession') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="store">
 
@@ -18,15 +18,15 @@
                             @enderror
                         </div> --}}
                         <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Land Title') }}</label>
+                            <label for="code">{{ __('Titre Foncier') }}</label>
                             <x-input.land_title-select wire:model="land_id" prettyname="land_id" :options="$land_titles" selected="('land_id')" />
                             @error('land_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Subdivision') }}</label>
-                            <select wire:model="subdivision_id" name="ssubdivision_id" class="form-select  @error('subdivision_id') is-invalid @enderror">
+                            <label for="code">{{ __('Arrondissement') }}</label>
+                            <select wire:model="subdivision_id" name="subdivision_id" class="form-select  @error('subdivision_id') is-invalid @enderror">
                                 @foreach ($subdivisions as $subdivision)
                                 <option value="{{$subdivision->id}}">{{ __($subdivision->sub_division_name_en) }} </option>
 
@@ -64,7 +64,7 @@
                             @enderror
                         </div>
                         <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Type Person') }}</label>
+                            <label for="code">{{ __('Typee de Personne') }}</label>
                             <select wire:model="state_assignment.type_personne" name="state_assignment.type_personne" class="form-select  @error('state_assignment.type_personne') is-invalid @enderror">
                                 <option value="">{{ __('--Select Type Person --') }}</option>
                                 <option value="morale">{{ __('moral') }} </option>
@@ -75,7 +75,7 @@
                             @enderror
                         </div>
                         <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Type Operation') }}</label>
+                            <label for="code">{{ __('Type D\'Operation') }}</label>
                             <select wire:model="state_assignment.type_operation" name="state_assignment.type_operation" class="form-select  @error('state_assignment.type_operation') is-invalid @enderror">
                                 <option value="">{{ __('--Select Type Operation --') }}</option>
                                 <option value="bornage">{{ __('bornage') }} </option>

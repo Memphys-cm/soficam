@@ -115,8 +115,8 @@ Route::group(
         Route::prefix('registration')->group(function () {
             Route::get('/subdivisions', App\Http\Livewire\Portal\Registration\HousingEstate\Index::class)->name('portal.registrations.housingestates.index');
         });
-        Route::prefix('state_assignment')->group(function () {
-            Route::get('/', App\Http\Livewire\Portal\StateAssignment\Index::class)->name('portal.state_assignments.index');
+        Route::prefix('etat_cessions')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\EtatCession\Index::class)->name('portal.state_assignments.index');
         });
 
         Route::prefix('maps')->group(function () {
