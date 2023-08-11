@@ -125,14 +125,6 @@ class Index extends Component
             'user_ids.*' => 'required',
         ]);
 
-        $coords = [];
-
-        foreach ($this->coordonnees as $key => $value) {
-             array_push($coords, ['B' . $key => $value]); 
-        }
-      
-        dd(json_encode($coords));
-
         $titrefoncier = TitreFoncier::create([
             'numero_titre_foncier' => $this->numero_titre_foncier,
             'region_id' => $this->region_id,
@@ -152,6 +144,7 @@ class Index extends Component
             'numero_bordereau_analytique' => $this->numero_bordereau_analytique,
             'volume_du_bordereau_analytique' => $this->volume_du_bordereau_analytique,
             'date_detablissement_du_bordereau_analytique' => $this->date_detablissement_du_bordereau_analytique,
+            'coordonnees' => json_encode($this->getCoords()),
             'limit_nord' => $this->limit_nord,
             'limit_sud' => $this->limit_sud,
             'limit_est' => $this->limit_est,
@@ -200,7 +193,11 @@ class Index extends Component
         $this->nom_et_prenoms_de_largent_traitant =  $titrefoncier->nom_et_prenoms_de_largent_traitant;
         $this->le_conservateur =  $titrefoncier->le_conservateur;
 
-        $this->user_ids = $titrefoncier->users;
+         $this->coordinates = array_values(json_decode($titrefoncier->coordonnees, true));
+         $this->coordonnees = array_values(json_decode($titrefoncier->coordonnees, true));
+
+
+        $this->user_ids = $titrefoncier->users->pluck('id');
 
         $this->state = 1;
     }
@@ -267,6 +264,7 @@ class Index extends Component
                 'recorded_by' => auth()->user()->name,
                 'nom_et_prenoms_de_largent_traitant' => $this->nom_et_prenoms_de_largent_traitant,
                 'le_conservateur' => $this->le_conservateur,
+                'coordonnees' => json_encode($this->getCoords()),
             ]);
         }
 
@@ -297,6 +295,16 @@ class Index extends Component
         $this->refresh(__('TitreFoncier successfully deleted!'), 'DeleteModal');
     }
 
+    public function getCoords()
+    {
+        $coords = [];
+
+        foreach ($this->coordonnees as $key => $value) {
+            array_push($coords, ['B' . $key + 1 => $value]);
+        }
+
+        return array_flatten($coords);
+    }
 
     public function clearFields()
     {
@@ -326,10 +334,12 @@ class Index extends Component
                 'recorded_by',
                 'nom_et_prenoms_de_largent_traitant',
                 'le_conservateur',
+                'coordonnees',
+                'user_ids',
             ]
         );
 
-        $this->user_ids = [];
+        // $this->user_ids = [];
     }
 
     public function render()

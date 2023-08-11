@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notaries', function (Blueprint $table) {
+        Schema::create('parcel_user', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->foreignId('notary_office_id')->on('notary_offices')->nullable()->Index();
-            $table->string('post')->nullable();
+            $table->foreignId('parcel_id');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notaries');
+        Schema::dropIfExists('titrefoncier_user');
     }
 };

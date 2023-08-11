@@ -1,27 +1,23 @@
 <?php
 
-namespace App\Http\Livewire\Portal\Notary;
+namespace App\Http\Livewire\Portal\MembreDuCabinet;
 
 use App\Models\Notary;
 use Livewire\Component;
-use App\Models\NotaryOffice;
+use App\Models\MembreDuCabinet;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use App\Http\Livewire\Traits\WithDataTables;
+use App\Models\Cabinet;
 
 class Index extends Component
 {
 
-    use WithPagination;
     use WithDataTables;
 
-
-   
-
-    public $name, $post, $notary_office_id;
-    public  $notary, $notaryoffices;
+    public $name, $post, $cabinet_id;
+    public $notary, $cabinets;
     public $notaryId, $region_id;
-    public ?string $query = null;
 
     public function updated($fields)
     {
@@ -31,9 +27,11 @@ class Index extends Component
             'post' => 'nullable',
         ]);
     }
+
     public function mount(){
-        $this->notaryoffices = NotaryOffice::select('id', 'office_name')->get();
+        $this->cabinets = Cabinet::select('id', 'nom_cabinet')->get();
     }
+
     public function updatedNotaryOfficeId($notary_office_id)
     {
         // dd('s');
@@ -130,6 +128,6 @@ class Index extends Component
         $notarys_count = Notary::count();
 
 
-        return view('livewire..portal.notary.index', ['notarys'=>$notarys, 'notarys_count'=>$notarys_count]);
+        return view('livewire..portal.membre-du-cabinet.index', ['notarys'=>$notarys, 'notarys_count'=>$notarys_count]);
     }
 }

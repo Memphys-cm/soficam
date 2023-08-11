@@ -23,7 +23,7 @@ class Index extends Component
         $this->state_assignment = new EtatCession();
         $this->land_titles = TitreFoncier::all();
         $this->users = User::role('user')->get();
-        $this->geometres = User::role('geometre')->get();
+        $this->geometres = User::role('user')->get();
         $this->subdivisions = SubDivision::all();
     }
 
