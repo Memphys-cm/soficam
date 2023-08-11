@@ -22,8 +22,7 @@ class Index extends Component
 
     public ?string $query = null;
 
-    public $inputs = [0]; // Initialize with one element
-    public $i = 0;
+ 
 
 
     public $titre_foncier, $titre_foncier_id, $titre_fonciers, $notarys;
@@ -31,19 +30,21 @@ class Index extends Component
     public $maeture, $land_title_area, $public_utility_area, $area_sold, $remaining_area, $number_of_blocks, $number_of_lots;
     public $surface_for_sale, $price_per_m², $sale_amount, $payment_type, $notary, $notary_id;
     public $document = [];
-    public $purchaser_name = [];
     public $numero_titre_foncier, $superficie_du_TF_mere, $limit_nord, $limit_sud, $limit_est, $limit_ouest, $sale, $saleId;
     public $balance = 0;
     public $advance = 0;
-    public $lieu_dit, $sub_division_id, $division_id, $region_id; 
+    public $lieu_dit, $sub_division_id, $division_id, $region_id, $users; 
+    public $user_ids = [];
 
 
     public function mount()
     {
         $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier')->get();
         $this->notarys = Notary::select('id', 'name')->get();
+        $this->users = User::with(['roles' => function ($role) {
+            return $role->whereIn('name', ['user'])->get();
+        }])->get();
         $this->created = Carbon::now()->addHour();
-        $this->sales_code = $this->generateConsCode();
         $this->calculateSaleAmount();
         // dd($this->calculateSaleAmount());
         // $this->sale_amount = $this->calculateSaleAmount();
@@ -63,23 +64,6 @@ class Index extends Component
         // Recalculate the balance based on the updated advance
         $this->balance = $this->sale_amount - $this->advance;
     }
-
-    public function addPurchaser()
-    {
-        $this->i++;
-        $this->inputs[] = $this->i;
-        $this->purchaser_name[] = ''; // Add an empty string for the new purchaser name
-    }
-
-    public function removePurchaser($index)
-    {
-        if ($index > 0) {
-            unset($this->inputs[$index]);
-            unset($this->purchaser_name[$index]);
-        }
-    }
-
-
     public function calculateSaleAmount()
     {
         // Check if both total surface for sale and unit price per m² are set
@@ -104,21 +88,7 @@ class Index extends Component
     }
 
 
-    public static function generateConsCode()
-    {
-        $lastSaleCode = DB::table('sales')
-            ->orderBy('id', 'desc')->select('sales_code')->first();
-        $number = 1;
-        if ($lastSaleCode) {
-            $number = (int)substr($lastSaleCode->sales_code, 3) + 1;
-        }
-        $SaleCode = 'SSALE' . str_pad($number, 6, '0', STR_PAD_LEFT);
-        while (DB::table('sales')->where('sales_code', $SaleCode)->exists()) {
-            $number++;
-            $SaleCode = 'SSale' . str_pad($number, 6, '0', STR_PAD_LEFT);
-        }
-        return $SaleCode;
-    }
+  
 
     public function updatedTitreFoncierId($titre_foncier_id)
     {
@@ -175,19 +145,13 @@ class Index extends Component
         $this->calculateSaleAmount();
 
         $documentPaths = [];
-        // foreach ($this->document as $document) {
-        //     dd($document);
-        //     $documentPaths[] = $document->store('documents', 'documents'); // Store using the 'documents' disk
-        // }
+      
         $documentPaths = [];
         foreach ($this->document as $document) {
             // dd($document);
 
             $documentPaths[] = $document->store('public/documents');
         }
-
-        $purchaserNames = implode(',', $this->purchaser_name);
-
         if ($this->payment_type === 'cash') {
             $defaultAdvance = 0;
             $defaultBalance = 0;
@@ -200,7 +164,6 @@ class Index extends Component
             'notary_id' => $this->notary_id,
             'sales_code' => $this->sales_code,
             'balance' => $defaultBalance,
-            'purchaser_name' => implode(',', $this->purchaser_name),
             'surface_for_sale' => $this->surface_for_sale,
             'price_per_m²' => $this->price_per_m²,
             'sale_amount' => $this->sale_amount,
@@ -250,9 +213,7 @@ class Index extends Component
     {
         $this->titre_foncier_id = null;
         $this->notary_id = null;
-        $this->sales_code = $this->generateConsCode();
         $this->balance = 0;
-        $this->purchaser_name = [];
         $this->surface_for_sale = null;
         $this->price_per_m² = null;
         $this->sale_amount = null;
@@ -269,8 +230,6 @@ class Index extends Component
         $this->saleId = $id;
         $this->sale_amount = $sale->sale_amount;
         $this->titre_foncier_id = $sale->titre_foncier_id;
-        $this->sales_code = $sale->sales_code;
-        $this->purchaser_name = $sale->purchaser_name;
         $this->document = $sale->document;
         $this->surface_for_sale = $sale->surface_for_sale;
         $this->payment_type = $sale->payment_type;
