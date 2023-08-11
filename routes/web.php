@@ -112,8 +112,10 @@ Route::group(
             Route::get('/', App\Http\Livewire\Portal\MembreDuCabinet\Cabinet\Index::class)->name('portal.cabinets.index');
         });
 
-        Route::prefix('registration')->group(function () {
-            Route::get('/subdivisions', App\Http\Livewire\Portal\Registration\HousingEstate\Index::class)->name('portal.registrations.housingestates.index');
+        Route::prefix('lotissements')->group(function () {
+            Route::get('/view-all', App\Http\Livewire\Portal\Lotissement\Index::class)->name('portal.lotissements.index');
+            Route::get('/create', App\Http\Livewire\Portal\Lotissement\Create::class)->name('portal.lotissements.create');
+            // Route::get('/{id}/update', App\Http\Livewire\Portal\Lotissement\Update::class)->name('portal.lotissements.update');
         });
         Route::prefix('etat_cessions')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\EtatCession\Index::class)->name('portal.state_assignments.index');

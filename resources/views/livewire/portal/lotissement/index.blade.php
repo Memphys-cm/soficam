@@ -1,8 +1,7 @@
 <div>
     <x-alert />
-    @include('livewire.portal.registration.housing-estate.create-housing_estate')
-    @include('livewire.portal.registration.housing-estate.view-housing_estate')
-    {{-- @include('livewire.portal.housing_estates.import-housing_estates') --}}
+    @include('livewire.portal.lotissement.create-housing_estate')
+    @include('livewire.portal.lotissement.view-housing_estate')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">

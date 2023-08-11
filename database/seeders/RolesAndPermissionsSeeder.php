@@ -114,6 +114,14 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'etat_cession.delete'],
             ['name' => 'etat_cession.export_n_print'],
 
+            ['name' => 'lotissement.view'],
+            ['name' => 'lotissement.create'],
+            ['name' => 'lotissement.update'],
+            ['name' => 'lotissement.delete'],
+            ['name' => 'lotissement.export_n_print'],
+            ['name' => 'lotissement.sale'],
+            ['name' => 'lotissement.add_coordinates'],
+
         ];
 
         $insert_data = [];
