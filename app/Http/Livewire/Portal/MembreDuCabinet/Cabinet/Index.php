@@ -22,6 +22,7 @@ class Index extends Component
 
     public $nom_cabinet, $post;
     public  $cabinet;
+    public $type_cabinet;
     public $cabinetId, $region, $regions, $region_id, $description;
     public  $sub_division_id, $division_id, $sub_divisions, $divisions;
 
@@ -32,6 +33,7 @@ class Index extends Component
             'description' => 'nullable',
             'region_id' => 'required',
             'division_id' => 'required',
+            'type_cabinet' => 'required',
             'sub_division_id' => 'required',
         ]);
     }
@@ -63,6 +65,7 @@ class Index extends Component
             'nom_cabinet' => 'required',
             'description' => 'nullable',
             'region_id' => 'required',
+            'type_cabinet' => 'required',
             'division_id' => 'required',
             'sub_division_id' => 'required',
         ]);
@@ -71,6 +74,7 @@ class Index extends Component
         $cabinet = new Cabinet();
         $cabinet->nom_cabinet = $this->nom_cabinet;
         $cabinet->description = $this->description;
+        $cabinet->type_cabinet = $this->type_cabinet;
         $cabinet->region_id = $this->region_id;
         $cabinet->division_id = $this->division_id;
         $cabinet->sub_division_id = $this->sub_division_id;
@@ -88,6 +92,7 @@ class Index extends Component
         $this->validate([
             'nom_cabinet' => 'required',
             'description' => 'nullable',
+            'type_cabinet' => 'required',
             'region_id' => 'required',
             'division_id' => 'required',
             'sub_division_id' => 'required',
@@ -96,6 +101,7 @@ class Index extends Component
             $this->cabinet->update([
                 'nom_cabinet' => $this->nom_cabinet,
                 'description' => $this->description,
+                'type_cabinet' => $this->type_cabinet,
                 'region_id' => $this->region_id,
                 'division_id' => $this->division_id,
                 'sub_division_id' => $this->sub_division_id,
@@ -114,6 +120,7 @@ class Index extends Component
         $this->cabinetId = $id;
         $this->nom_cabinet = $cabinet->nom_cabinet;
         $this->description = $cabinet->description;
+        $this->type_cabinet = $cabinet->type_cabinet;
         $this->region_id = $cabinet->region_id;
         $this->division_id = $cabinet->division_id;
         $this->sub_division_id = $cabinet->sub_division_id;
@@ -132,6 +139,7 @@ class Index extends Component
         $this->nom_cabinet = '';
         $this->description = '';
         $this->region_id = '';
+        $this->type_cabinet = '';
         $this->division_id = '';
         $this->sub_division_id = '';
     }
