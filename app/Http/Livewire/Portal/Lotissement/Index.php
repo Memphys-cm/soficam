@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Portal\Registration\HousingEstate;
+namespace App\Http\Livewire\Portal\Lotissement;
 
 use Livewire\Component;
 use PDF;

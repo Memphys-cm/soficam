@@ -43,4 +43,23 @@ class Sale extends Model
                 
             });
     }
+
+    public function getStatusStyleAttribute() : String
+    {
+        return match ($this->status) {
+             'active' => 'success',
+             'expired' => 'danger',
+             'pending_payment' => 'secondary',
+             NULL => ''
+        };
+    }
+    public function getStatusTextAttribute(): String
+    {
+        return match ($this->status) {
+            'active' => 'Active',
+            'expired' => 'Expired',
+            'pending_payment' => 'Pending Payment',
+            NULL => ''
+        };
+    }
 }
