@@ -13,10 +13,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-<<<<<<< HEAD
-// use Illuminate\Database\Eloquent\Relations\HasMany;
-=======
->>>>>>> 32913dacb9cfd4e1f4d34974388b8a3e4ddaa2dd
 
 class TitreFoncier extends Model implements HasMedia
 {
