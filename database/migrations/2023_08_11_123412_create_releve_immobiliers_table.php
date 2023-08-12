@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('releve_immobiliers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('titre_foncier_id')->index();
             $table->string('releve_number');
             $table->foreignId('requestor_id')->index()->constrained('users');
             $table->float('price');
