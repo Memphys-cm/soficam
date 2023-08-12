@@ -43,8 +43,8 @@ return new class extends Migration
             $table->string('limit_est');
             $table->string('limit_ouest');
             $table->string('recorded_by')->nullable();
-            $table->string('nom_et_prenoms_de_largent_traitant');
-            $table->string('le_conservateur');
+            $table->string('nom_et_prenoms_de_largent_traitant')->nullable();
+            $table->string('le_conservateur')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

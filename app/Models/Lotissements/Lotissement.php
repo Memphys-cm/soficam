@@ -27,7 +27,7 @@ class Lotissement extends Model
 
     public function parcels() : HasMany
     {
-        return $this->belongsTo(Parcel::class);
+        return $this->hasMany(Parcel::class);
     }
 
 }

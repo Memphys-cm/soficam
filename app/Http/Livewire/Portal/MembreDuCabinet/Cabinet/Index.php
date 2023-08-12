@@ -14,11 +14,7 @@ use App\Models\SubDivision;
 class Index extends Component
 {
 
-    use WithPagination;
     use WithDataTables;
-
-
-    public ?string $query = null;
 
     public $nom_cabinet, $post;
     public  $cabinet;
@@ -26,17 +22,6 @@ class Index extends Component
     public $cabinetId, $region, $regions, $region_id, $description;
     public  $sub_division_id, $division_id, $sub_divisions, $divisions;
 
-    public function updated($fields)
-    {
-        $this->validateOnly($fields, [
-            'nom_cabinet' => 'required',
-            'description' => 'nullable',
-            'region_id' => 'required',
-            'division_id' => 'required',
-            'type_cabinet' => 'required',
-            'sub_division_id' => 'required',
-        ]);
-    }
 
     public function mount(){
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
@@ -55,7 +40,6 @@ class Index extends Component
             $this->sub_divisions = SubDivision::whereDivisionId($division_id)->get();
         }
     }
-
 
     
     public function store()
@@ -149,6 +133,6 @@ class Index extends Component
         $cabinets = Cabinet::search($this->query)->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
         $cabinets_count = Cabinet::count();
 
-        return view('livewire..portal.membres-du-cabinet.cabinet.index', ['cabinets'=>$cabinets, 'cabinets_count'=>$cabinets_count]);
+        return view('livewire.portal.membres-du-cabinet.cabinet.index', ['cabinets'=>$cabinets, 'cabinets_count'=>$cabinets_count]);
     }
 }

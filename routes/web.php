@@ -117,9 +117,9 @@ Route::group(
         });
 
         Route::prefix('lotissements')->group(function () {
-            Route::get('/view-all', App\Http\Livewire\Portal\Lotissement\Index::class)->name('portal.lotissements.index');
-            Route::get('/create', App\Http\Livewire\Portal\Lotissement\Create::class)->name('portal.lotissements.create');
-            // Route::get('/{id}/update', App\Http\Livewire\Portal\Lotissement\Update::class)->name('portal.lotissements.update');
+            Route::get('/view-all', App\Http\Livewire\Portal\Lotissements\Index::class)->name('portal.lotissements.index');
+            Route::get('/create', App\Http\Livewire\Portal\Lotissements\Create::class)->name('portal.lotissements.create');
+            Route::get('/{lotissement_id}/edit', App\Http\Livewire\Portal\Lotissements\Edit::class)->name('portal.lotissements.edit');
         });
         Route::prefix('etat_cessions')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\EtatCession\Index::class)->name('portal.state_assignments.index');

@@ -16,7 +16,7 @@ class Cabinet extends Model
     protected $guarded = [];
     protected $table = 'cabinets';
 
-    public function scopeNotaires($query)
+    public function scopeNotaire($query)
     {
         return $query->where('type_cabinet',  'notaire');
     }

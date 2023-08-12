@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('division_id')->on('divisions')->nullable()->Index();
             $table->foreignId('sub_division_id')->on('sub_divisions')->nullable()->Index();
             $table->string('nom_cabinet')->index();
-            $table->enum('type_cabinet',['geomtre', 'notaire', 'lotisseur', 'maeture', 'promoteur_immobiliere', 'agent_immobiliere', 'urbaniste', 'controlleur']);
+            $table->enum('type_cabinet',['geometre', 'notaire', 'lotisseur', 'maeture', 'promoteur_immobiliere', 'agent_immobiliere', 'urbaniste', 'controlleur']);
             $table->string('description')->nullable();
             $table->timestamps();
         });
