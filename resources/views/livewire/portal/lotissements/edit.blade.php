@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class='col-md-9'>
-                <div class="card p-4 mb-3">
+                <div class="card p-4 mb-3 @error('blocks.*.block_name') bg-danger @enderror">
                     <legend class="w-auto">Informations on the Land</legend>
                     <div class='row form-group mb-3'>
                         <div class="col-md-6 py-2">

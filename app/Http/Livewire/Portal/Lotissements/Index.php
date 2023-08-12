@@ -6,16 +6,13 @@ use PDF;
 use Livewire\Component;
 use Illuminate\Support\Arr;
 use App\Models\TitreFoncier;
-use App\Models\Registration\Block;
-use App\Models\Registration\Parcel;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Lotissements\Lotissement;
-use App\Models\Registration\HousingEstate;
 use App\Http\Livewire\Traits\WithDataTables;
 
 class Index extends Component
 {
+    public Lotissement $lotissement;
 
     use WithDataTables;
 
@@ -24,39 +21,39 @@ class Index extends Component
       
     }
 
+    public function initData($id) : void 
+    {
+        $this->lotissement = Lotissement::findOrFail($id);
+    }
  
     public function delete()
     {
-        // if (!Gate::allows('service.delete')) {
-        //     return abort(401);
-        // }
-
-        if (!empty($this->housing_estate)) {
-
-            // Supprimer tous les lots associés au bloc
-            // $this->housing_estate->blocks()->parcels()->delete();
-
-            // Supprimer le bloc lui-même
-            $this->housing_estate->blocks()->delete();
-
-            $this->housing_estate->delete();
+        if (!Gate::allows('lotissement.delete')) {
+            return abort(401);
         }
 
-        $this->housing_estate = new HousingEstate();
+        if (!empty($this->lotissement)) {
 
-        $this->state = 0;
+            // Supprimer tous les lots associés au bloc
+            $this->lotissement->parcels()->delete();
 
-        $this->refresh(__('Housing Estate successfully deleted!'), 'DeleteModal');
+            // Supprimer le bloc lui-même
+            $this->lotissement->blocks()->delete();
+
+            $this->lotissement->delete();
+        }
+
+        session()->flash('message', __('Lotissement and Blockd and Lots successfully deleted!'));
+
+        return redirect()->route('portal.lotissements.index');
     }
 
 
     public function render()
     {
-
         if (!Gate::allows('lotissement.view')) {
             return abort(401);
         }
-
 
         $lotissements = Lotissement::withCount('blocks')->withCount('parcels')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
 

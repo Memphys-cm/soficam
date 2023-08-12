@@ -14,7 +14,33 @@ use App\Models\Lotissements\Lotissement;
 class Edit extends Component
 {
     use WithLotissementTrait;
- 
+
+    public Block $block;
+    public Parcel $parcel;
+
+
+    public function removeBlock($blockIndex)
+    {
+        if(!empty($this->blocks[$blockIndex]['parcels'])){
+            $block = Block::findOrFail($this->blocks[$blockIndex]['id']);
+            $block->delete();
+            $block->parcels()->delete();
+        }
+        unset($this->blocks[$blockIndex]);
+        $this->blocks = array_values($this->blocks);
+    }
+
+    public function removeLot($blockIndex, $lotIndex)
+    {
+        if (!empty($this->blocks[$blockIndex]['parcels'])){
+            $parcel = Parcel::findOrFail($this->blocks[$blockIndex]['parcels'][$lotIndex]['id']);
+            $parcel->delete();
+        }
+        unset($this->blocks[$blockIndex]['parcels'][$lotIndex]);
+        $this->blocks[$blockIndex]['parcels'] = array_values($this->blocks[$blockIndex]['parcels']);
+    }
+
+
     public function mount($lotissement_id)
     {
         $this->lotissement = Lotissement::findOrFail($lotissement_id);
@@ -22,15 +48,15 @@ class Edit extends Component
 
         // dd($this->blocks);
 
-         $this->titre_foncier_id = $this->lotissement->titre_foncier_id;
-         $this->geometre_id = $this->lotissement->geometre_id;
-         $this->cabinet_geometre_id = $this->lotissement->geometre_cabinet_id;
-         $this->maeture = $this->lotissement->maeture;
-         $this->promo_imo = $this->lotissement->promoteur_immobiliere;
-         $this->lotisseur = $this->lotissement->lotisseur;
-         $this->agent_imo = $this->lotissement->agent_immobiliere;
-         $this->urbaniste = $this->lotissement->urbaniste;
-         $this->controlleur = $this->lotissement->controlleur;
+        $this->titre_foncier_id = $this->lotissement->titre_foncier_id;
+        $this->geometre_id = $this->lotissement->geometre_id;
+        $this->cabinet_geometre_id = $this->lotissement->geometre_cabinet_id;
+        $this->maeture = $this->lotissement->maeture;
+        $this->promo_imo = $this->lotissement->promoteur_immobiliere;
+        $this->lotisseur = $this->lotissement->lotisseur;
+        $this->agent_imo = $this->lotissement->agent_immobiliere;
+        $this->urbaniste = $this->lotissement->urbaniste;
+        $this->controlleur = $this->lotissement->controlleur;
 
         $this->geometres = MembreDuCabinet::geometre()->whereCabinetId($this->cabinet_geometre_id)->get();
 
@@ -73,66 +99,64 @@ class Edit extends Component
             'controlleur' => $this->controlleur,
         ]);
 
-        // if ($this->state == 0) {
-        //     foreach ($this->blocks as $key => $blockData) {
-        //         $block = Block::create([
-        //             'lotissement_id' => $lotissement->id,
-        //             'block_name' => $blockData['block_name']
-        //         ]);
-
-        //         foreach ($blockData['parcels'] as $lotData) {
-        //             // Créer un nouveau lot avec les données du tableau
-        //             $lot_geometre = MembreDuCabinet::findOrFail($lotData['lot_geometre_id']);
-        //             $notaire = MembreDuCabinet::findOrFail($lotData['notaire_id']);
-
-        //             if ($lotData['type'] != 'public') {
-        //                 $lot = Parcel::create([
-        //                     'lotissement_id' => $lotissement->id,
-        //                     'titre_foncier_id' => $this->titre_foncier_id,
-        //                     'block_id' => $block->id,
-        //                     'numero_du_lot' => $lotData['numero_du_lot'],
-        //                     'surperficie_du_lot' => $lotData['surperficie_du_lot'],
-        //                     'statut_du_lot' => $lotData['statut_du_lot'],
-        //                     'type' => 'normale',
-        //                     'cabinet_notaire_id' => $lotData['cabinet_notaire_id'],
-        //                     'notaire_id' => $notaire->cabinet->id,
-        //                     'geometre_id' => $lotData['lot_geometre_id'],
-        //                     'geometre_cabinet_id' => $lot_geometre->cabinet->id,
-        //                     'date_lotissement' => $lotData['date_lotissement'],
-        //                 ]);
-        //             } else {
-        //                 $lot = Parcel::create([
-        //                     'lotissement_id' => $lotissement->id,
-        //                     'titre_foncier_id' => $this->titre_foncier_id,
-        //                     'block_id' => $block->id,
-        //                     'numero_du_lot' => $lotData['numero_du_lot'],
-        //                     'surperficie_du_lot' => $lotData['surperficie_du_lot'],
-        //                     'type' => 'public',
-        //                     'statut_du_lot' => 'non_batit',
-        //                     'laffectation_du_lot' => $lotData['laffectation_du_lot'],
-        //                     'date_lotissement' => $lotData['date_lotissement'],
-        //                 ]);
-        //             }
-        //         }
-        //     }
-        // } else {
-            foreach ($this->blocks as $blockData) {
-                $block = Block::findOrFail($blockData['id']);
-                $block->update([
+        foreach ($this->blocks as $blockData) {
+            
+            if (!empty($blockData['id'])) {
+                $this->block = Block::findOrFail($blockData['id']);
+                $this->block->update([
                     'block_name' => $blockData['block_name']
                 ]);
+            } else {
+                $this->block = Block::create([
+                    'lotissement_id' => $this->lotissement->id,
+                    'block_name' => $blockData['block_name']
+                ]);
+            }
+            // Mise à jour des lots existants
+            if (is_array($blockData) && isset($blockData['parcels'])) {
                 // Mise à jour des lots existants
-                if (is_array($blockData) && isset($blockData['parcels'])) {
-                    // Mise à jour des lots existants
-                    foreach ($blockData['parcels'] as $lotData) {
+                foreach ($blockData['parcels'] as $lotData) {
+                    if (!empty($lotData['id'])) {
                         $lot = Parcel::findOrFail($lotData['id']);
                         $lot->update($lotData);
+                    } else {
+
+                        if ($lotData['type'] != 'public') {
+                            $lot_geometre = MembreDuCabinet::findOrFail($lotData['lot_geometre_id']);
+                            $notaire = MembreDuCabinet::findOrFail($lotData['notaire_id']);
+                            $lot = Parcel::create([
+                                'lotissement_id' => $this->lotissement->id,
+                                'titre_foncier_id' => $this->titre_foncier_id,
+                                'block_id' => $this->block->id,
+                                'numero_du_lot' => $lotData['numero_du_lot'],
+                                'surperficie_du_lot' => $lotData['surperficie_du_lot'],
+                                'statut_du_lot' => $lotData['statut_du_lot'],
+                                'type' => 'normale',
+                                'cabinet_notaire_id' => $notaire->cabinet->id,
+                                'notaire_id' => $lotData['notaire_id'],
+                                'lot_geometre_id' => $lotData['lot_geometre_id'],
+                                'lot_geometre_cabinet_id' => $lot_geometre->cabinet->id,
+                                'date_lotissement' => $lotData['date_lotissement'],
+                            ]);
+                        } else {
+                            $lot = Parcel::create([
+                                'lotissement_id' => $this->lotissement->id,
+                                'titre_foncier_id' => $this->titre_foncier_id,
+                                'block_id' => $this->block->id,
+                                'numero_du_lot' => $lotData['numero_du_lot'],
+                                'surperficie_du_lot' => $lotData['surperficie_du_lot'],
+                                'type' => 'public',
+                                'statut_du_lot' => 'non_batit',
+                                'laffectation_du_lot' => $lotData['laffectation_du_lot'],
+                                'date_lotissement' => $lotData['date_lotissement'],
+                            ]);
+                        }
                     }
                 }
             }
-        // }
+        }
 
-        session()->flash(__('Lotissement successfully updated!'));
+        session()->flash('message', __('Lotissement successfully updated!'));
         return redirect()->route('portal.lotissements.index');
     }
 

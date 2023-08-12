@@ -120,8 +120,9 @@
                         <td>
                             <a href="#" class="d-flex align-items-center">
                                 <div class="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-primary me-3"><span class="text-white">#{{initials($lotissement->titreFoncier->numero_titre_foncier)}}</span></div>
-                                <div class="d-block"><span class="fw-bold">No. {{$lotissement->titreFoncier->numero_titre_foncier}}</span>
-                                    <div class="small text-gray">{{!empty($lotissement->titreFoncier) ? $lotissement->titreFoncier->date_de_delivrance_du_TF : ''}} | {{!empty($lotissement->titreFoncier) ? $lotissement->titreFoncier->etat_TF : ''}}</div>
+                                <div class="d-block">
+                                    <span class="fw-bolder">No. {{$lotissement->titreFoncier->numero_titre_foncier}}</span>
+                                    <div class="small text-gray align-items-center"><span class="fw-bold">{{!empty($lotissement->titreFoncier) ? $lotissement->titreFoncier->date_de_delivrance_du_TF : ''}} </span>| @if(!empty($lotissement->titreFoncier)) <span class="fw-light badge badge-md bg-{{$lotissement->titreFoncier->EtatTFStyle}} rounded-1 ">{{$lotissement->titreFoncier->etat_TF}}</span>@endif</div>
                                 </div>
                             </a>
                         </td>

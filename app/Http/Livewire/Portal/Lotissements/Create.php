@@ -143,8 +143,8 @@ class Create extends Component
             }
         }
 
-        session()->flash(__('Lotissement successfully created!'));
-        return redirect()->route('portal.lotissement.index');
+        session()->flash('message', __('Lotissement successfully created!'));
+        return redirect()->route('portal.lotissements.index');
     }
 
     public function render()
