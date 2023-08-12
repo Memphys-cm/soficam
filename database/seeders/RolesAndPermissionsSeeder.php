@@ -133,6 +133,12 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'cabinet.update'],
             ['name' => 'cabinet.delete'],
             ['name' => 'cabinet.export_n_print'],
+
+            ['name' => 'immobilier.view'],
+            ['name' => 'immobilier.create'],
+            ['name' => 'immobilier.update'],
+            ['name' => 'immobilier.delete'],
+            ['name' => 'immobilier.export_n_print'],
             
 
         ];

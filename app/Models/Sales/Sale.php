@@ -5,23 +5,28 @@ namespace App\Models\Sales;
 use App\Models\User;
 use App\Models\Document;
 use App\Models\TitreFoncier;
+use App\Models\Sales\Saleable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Sale extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
+   
     public function titreFoncier()
     {
         return $this->belongsTo(TitreFoncier::class, 'titre_foncier_id');
     }
     public function saleables()
     {
-        return $this->hasMany(Saleable::class, 'sale_id');
+        return $this->hasMany(Saleable::class)->onDelete('cascade');
     }
-
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class,'user_id');
+    }
     public function documents()
     {
         return $this->hasMany(Document::class);
@@ -46,7 +51,7 @@ class Sale extends Model
 
     public function getStatusStyleAttribute() : String
     {
-        return match ($this->status) {
+        return match ($this->payment_status) {
              'active' => 'success',
              'expired' => 'danger',
              'pending_payment' => 'secondary',
@@ -55,7 +60,7 @@ class Sale extends Model
     }
     public function getStatusTextAttribute(): String
     {
-        return match ($this->status) {
+        return match ($this->payment_status) {
             'active' => 'Active',
             'expired' => 'Expired',
             'pending_payment' => 'Pending Payment',
