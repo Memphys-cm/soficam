@@ -128,6 +128,11 @@ Route::group(
         Route::prefix('maps')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\Maps\Index::class)->name('portal.maps.index');
         });
+
+        Route::prefix('releve_immobilier')->group(function () {
+            Route::get('/bienImmobilier', App\Http\Livewire\Portal\ReleveImmobilier\BienImmobilier\Index::class)->name('portal.bien-mmobilier.index');
+            Route::get('/immobilier', App\Http\Livewire\Portal\ReleveImmobilier\Immobilier\Index::class)->name('portal.immobilier.index');
+        });
         
 
         //Categories activites
