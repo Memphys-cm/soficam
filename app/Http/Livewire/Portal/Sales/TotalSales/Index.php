@@ -17,11 +17,7 @@ class Index extends Component
 {
 
     use WithDataTables;
-
     public ?string $query = null;
-
- 
-
 
     public $titre_foncier, $titre_foncier_id, $titre_fonciers, $notarys;
     public $created, $sales_code, $sale_type, $number_of_lots_remaining, $commentaires;
@@ -35,86 +31,6 @@ class Index extends Component
 
     public $lieu_dit, $sub_division_id, $division_id, $region_id, $users, $user_id; 
 
-
-   
-    // public function store()
-    // {
-    //     // Validate the required fields before storing the data
-    //     $this->validate([
-    //         'titre_foncier_id' => 'required',
-    //         'surface_for_sale' => 'required|numeric',
-    //         'price_per_m²' => 'required|numeric',
-    //         'advanced_amount' => 'nullable|numeric',
-    //         'service_id' => 'required|nullable',
-    //         'payment_method' => 'required|in:cash,tranche',
-    //         'document.*' => [
-    //             'file',
-    //             'max:2048', // Maximum file size in kilobytes (2MB in this example)
-    //             'mimetypes:application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // Allowed MIME types
-    //         ],
-    //         // Add more validation rules for other fields if needed
-    //     ]);
-
-
-    //     // Calculate the sale amount
-    //     $this->calculateSaleAmount();
-
-    //     $documentPaths = [];
-      
-    //     $documentPaths = [];
-    //     foreach ($this->document as $document) {
-    //         // dd($document);
-
-    //         $documentPaths[] = $document->store('public/documents');
-    //     }
-    //     if ($this->payment_method === 'cash') {
-    //         $defaultadvanced_amount = 0;
-    //         $defaultremaining_amount = 0;
-    //     } else {
-    //         $defaultadvanced_amount = $this->advanced_amount ?? 0;
-    //         $defaultremaining_amount = $this->remaining_amount ?? 0;
-    //     }
-    //     // Store the data into the database (or any other storage medium)
-    //     $sale = Sale::create([
-    //         'service_id' => $this->service_id,
-    //         'sales_code' => $this->sales_code,
-    //         'remaining_amount' => $defaultremaining_amount,
-    //         'surface_for_sale' => $this->surface_for_sale,
-    //         'price_per_m²' => $this->price_per_m²,
-    //         'sale_amount' => $this->sale_amount,
-    //         'document_path' => json_encode($documentPaths), // Use the array with document paths here
-    //         'sale_type' => 'total_sale',
-    //         'payment_method' => $this->payment_method,
-    //         'advanced_amount' => $this->advanced_amount,
-    //         'advanced_amount' => $defaultadvanced_amount,
-    //         'commentaires' => $this->commentaires,
-    //         'created_by' => auth()->user()->name,
-    //     ]);
-
-    //     $saleableData = [
-    //         'sale_id' => $sale->id,
-    //         'price' => $this->sale_amount,
-    //         'saleable_id' => $sale->id,
-    //         'saleable_type' => 'total_sale', // Adjust the namespace if different
-    //         'created_by' => auth()->user()->name,
-    //     ];
-
-    //     DB::table('saleables')->insert($saleableData);
-    //     // Assuming your Sale model has a documents relationship, you can store the documents like this:
-    //     foreach ($documentPaths as $path) {
-    //         $sale->documents()->create(['path' => $path]);
-    //     }
-
-      
-    //     $this->clearFields();
-    //     $this->refresh(__('Sale successfully Created!'), 'CreatetotalsaleModal');
-
-
-    //     // Optionally, you can add a success message or redirect to a confirmation page.
-    // }
-
-
-
     public function mount()
     {
 
@@ -124,11 +40,7 @@ class Index extends Component
 
         $this->created = Carbon::now()->addHour();
         $this->calculateSaleAmount();
-        // dd($this->calculateSaleAmount());
-        // $this->sale_amount = $this->calculateSaleAmount();
     }
-
-
     public function calculateSaleAmount()
 {
     // Check if both total surface for sale (superficie_du_TF_mere) and unit price per m² are set
@@ -202,8 +114,6 @@ class Index extends Component
 
     public function store()
     {
-       
-
         $this->validate([
             'titre_foncier_id' => 'nullable',
             'service_id' => 'nullable',
@@ -211,8 +121,6 @@ class Index extends Component
             'payment_method' => 'nullable',
             
         ]);
-
-
         // Calculate the sale amount
         $this->calculateSaleAmount();
 
@@ -238,8 +146,6 @@ class Index extends Component
         ];
 
         DB::table('saleables')->insert($saleableData);
-
-
         $this->clearFields();
         $this->refresh(__('Sale successfully Created!'), 'CreatetotalsaleModal');
     }
@@ -253,9 +159,6 @@ class Index extends Component
         $this->refresh(__('Sale deleted successfully'), 'DeleteModal');
 
     }
-    
-
-
     public function clearFields()
     {
         $this->titre_foncier_id = null;
