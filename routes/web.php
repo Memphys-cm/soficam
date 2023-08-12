@@ -120,6 +120,7 @@ Route::group(
             Route::get('/view-all', App\Http\Livewire\Portal\Lotissements\Index::class)->name('portal.lotissements.index');
             Route::get('/create', App\Http\Livewire\Portal\Lotissements\Create::class)->name('portal.lotissements.create');
             Route::get('/{lotissement_id}/edit', App\Http\Livewire\Portal\Lotissements\Edit::class)->name('portal.lotissements.edit');
+            Route::get('/{lotissement_id}/simple-sale', App\Http\Livewire\Portal\Lotissements\Sale::class)->name('portal.lotissements.simple-sale');
         });
         Route::prefix('etat_cessions')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\EtatCession\Index::class)->name('portal.state_assignments.index');
