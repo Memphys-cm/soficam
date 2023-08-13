@@ -8,7 +8,6 @@ use App\Models\Sales\Sale;
 use App\Http\Livewire\Traits\WithDataTables;
 use App\Models\MembreDuCabinet;
 use App\Models\Service;
-use Carbon\Carbon;
 
 
 class Index extends Component

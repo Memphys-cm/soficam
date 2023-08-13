@@ -1,6 +1,7 @@
 <div>
     <x-alert />
-    @include('livewire.portal.sales.total-sales.partials.create-total-sale')
+    @include('livewire.portal.sales.all-sales.update')
+
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -33,17 +34,6 @@
                 <p class="mt-n1 mx-2">{{ __('View all Total Sales within the application') }} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
-
-                {{-- @can('user.create') --}}
-                <a href="#" data-bs-toggle="modal" data-bs-target="#CreatetotalsaleModal"
-                    class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
-                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{ __('New') }}
-                </a>
-                {{-- @endcan --}}
              
                 {{-- @can('user.export_n_print') --}}
                 <div class="mx-2" wire:loading.remove>
@@ -127,34 +117,40 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($totals as $total)
+                    @forelse($allsaless as $allsale)
                         <tr>
                             <td>
                                 <a href="#" class="d-flex align-items-center">
                                     <div
                                         class="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-primary me-3">
                                         <span
-                                            class="text-white">{{ initials($total->user->first_name) }}</span>
+                                            class="text-white">{{ initials($allsale->user->first_name) }}</span>
                                     </div>
                                     <div class="d-block"><span
-                                            class="fw-bold">{{ $total->user->first_name }}</span>
+                                            class="fw-bold">{{ $allsale->user->first_name }}</span>
                                     </div>
                                 </a>
                             </td>
-                            <td>{{ $total->payment_method }}</td>
-                            <td>{{ $total->sales_type }}</td>
-                            <td>{{ $total->sales_amount }} {{ __('XAF') }}</td>
+                            <td>{{ $allsale->payment_method }}</td>
+                            <td>{{ $allsale->sales_type }}</td>
+                            <td>{{ $allsale->sales_amount }} {{ __('XAF') }}</td>
                             <td>
 
                                 <span
-                                    class="fw-normal badge super-badge p-2 bg-{{ $total->statusStyle }} round">{{ $total->payment_status }}</span>
+                                    class="fw-normal badge super-badge p-2 bg-{{ $allsale->statusStyle }} round">{{ $allsale->payment_status }}</span>
 
                             </td>
-                            <td>{{ $total->created_by }}</td>
-                            <td>{{ $total->created_at }}</td>
+                            <td>{{ $allsale->created_by }}</td>
+                            <td>{{ $allsale->created_at }}</td>
 
                             <td>
-                                <a href='#' wire:click.prevent="initData({{ $total->id }})"
+                                <a href='#' wire:click.prevent="initData({{ $allsale -> id }})" data-bs-toggle="modal" data-bs-target="#updateAllSalesModal">
+                                    <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                        </path>
+                                    </svg>
+                                </a>
+                                <a href='#' wire:click.prevent="initData({{ $allsale->id }})"
                                     data-bs-toggle="modal" data-bs-target="#DeleteModal">
                                     <svg class="icon icon-xs text-danger" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -179,10 +175,10 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{ __('Showing') }} {{ $perPage > $totals_count ? $totals_count : $perPage }}
-                    {{ __('items of') }} {{ $totals_count }}
+                    {{ __('Showing') }} {{ $perPage > $allsales_count ? $allsales_count : $perPage }}
+                    {{ __('items of') }} {{ $allsales_count }}
                 </div>
-                {{ $totals->links() }}
+                {{ $allsaless->links() }}
             </div>
         </div>
     </div>
