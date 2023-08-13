@@ -42,9 +42,9 @@ class Sale extends Model
             static::query() :
             static::query()
             ->where(function ($q) use ($query) {
-                $q->where('sale_amount', 'like', '%' . $query . '%');
+                $q->where('sales_amount', 'like', '%' . $query . '%');
                 $q->orWhere('sales_code', 'like', '%' . $query . '%');
-                $q->orWhere('sale_type', 'like', '%' . $query . '%');
+                $q->orWhere('sales_type', 'like', '%' . $query . '%');
                 
             });
     }

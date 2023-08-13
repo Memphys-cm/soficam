@@ -106,6 +106,9 @@ Route::group(
         Route::prefix('allsales')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\Sales\AllSales::class)->name('portal.allsales.index');
         });
+        Route::prefix('salereport')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\Sales\SalesReport\Index::class)->name('portal.salereport.index');
+        });
 
         Route::prefix('allsale')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\Sales\AllSales\Index::class)->name('portal.allsale.index');
