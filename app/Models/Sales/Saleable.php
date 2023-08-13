@@ -15,4 +15,10 @@ class Saleable extends Model
     {
         return $this->belongsTo(Sale::class, 'sale_id');
     }
+
+    public function releveImmobilier()
+    {
+        return $this->belongsTo(ReleveImmobilier::class); // Update the foreign key column name
+    }
+
 }

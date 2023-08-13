@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Sales\Sale;
+use App\Models\Sales\Saleable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ReleveImmobilier extends Model
 {
@@ -14,6 +16,11 @@ class ReleveImmobilier extends Model
 
 
     protected $guarded = []; 
+
+    public function saleable()
+    {
+        return $this->hasOne(Saleable::class); // Update the foreign key column name
+    }
 
     public function scopeActive($query): Builder
     {
@@ -50,7 +57,7 @@ class ReleveImmobilier extends Model
             static::query() :
             static::query()
             ->where(function ($q) use ($query) {
-                $q->where('releves_number', 'like', '%' . $query . '%');                
+                $q->where('releve_number', 'like', '%' . $query . '%');                
                 $q->orWhere('price', 'like', '%' . $query . '%');                
                 $q->orWhere('validity', 'like', '%' . $query . '%');                
                 $q->orWhere('releves_type', 'like', '%' . $query . '%');                
