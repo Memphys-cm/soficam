@@ -81,11 +81,16 @@ Route::group(
         Route::prefix('roles')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\Roles\Index::class)->name('portal.roles.index');
         });
-
+        
+        
         //Land titles
         Route::prefix('titrefonciers')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\TitreFonciers\Index::class)->name('portal.titre-fonciers.index');
             Route::get('certificatepropriete', App\Http\Livewire\Portal\CertificatePropriete\Index::class)->name('portal.certificate-propriete.index');
+        });
+        
+        Route::prefix('operations')->group(function () {
+            Route::get('mutation-totale', App\Http\Livewire\Portal\CertificatePropriete\Index::class)->name('portal.mutation-totale.index');
         });
 
         Route::prefix('land-sales')->group(function () {
@@ -93,21 +98,17 @@ Route::group(
             Route::get('simple', App\Http\Livewire\Portal\Sales\TotalSales\Index::class)->name('portal.simple-sale.index');
         });
 
-
-        Route::prefix('sale-report')->group(function () {
-            Route::get('/', App\Http\Livewire\Portal\Sales\SalesReport\Index::class)->name('portal.salereport.index');
+        Route::prefix('sales-report')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\Sales\SalesReport\Index::class)->name('portal.sales-report.index');
         });
         Route::prefix('sales-payments')->group(function () {
 
             Route::get('/', App\Http\Livewire\Portal\Sales\AllSales\Index::class)->name('portal.allsales.index');
         });
 
-        //notary
-        Route::prefix('membre-du-cabinets')->group(function () {
-            Route::get('/', App\Http\Livewire\Portal\MembreDuCabinet\Index::class)->name('portal.membre-du-cabinets.index');
-        });
         Route::prefix('cabinets')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\MembreDuCabinet\Cabinet\Index::class)->name('portal.cabinets.index');
+            Route::get('membre-du-cabinets', App\Http\Livewire\Portal\MembreDuCabinet\Index::class)->name('portal.membre-du-cabinets.index');
         });
 
         Route::prefix('lotissements')->group(function () {
