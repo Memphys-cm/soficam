@@ -62,5 +62,5 @@ class TitreFoncier extends Model implements HasMedia
             'SUSPENDU' => 'danger',
             NULL => ''
         };
-    }
+    }ss
 }

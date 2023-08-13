@@ -53,6 +53,8 @@ class Index extends Component
 
     public  $state = 0;
 
+    public ?string $query = null;
+
     public $coordinates = ['',''];
     public $coordonnees = [];
 
@@ -75,6 +77,8 @@ class Index extends Component
         }])->get();
 
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
+        $this->divisions = Division::select('division_name_en', 'division_name_fr', 'id')->get();
+        $this->sub_divisions = SubDivision::select('sub_division_name_en', 'sub_division_name_fr', 'id')->get();
     }
 
     public function updatedRegionID($region_id)
@@ -344,11 +348,13 @@ class Index extends Component
 
     public function render()
     {
+
         if (!Gate::allows('titre_foncier.view')) {
             return abort(401);
         }
 
         $titrefonciers = TitreFoncier::with('users')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+
         $titrefonciers_count = TitreFoncier::count();
 
         return view('livewire.portal.titre-fonciers.index', [

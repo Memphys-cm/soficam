@@ -56,6 +56,7 @@
             </div>
         </div>
     </div>
+    
     <div class="row p-3">
         <div class="col-md-3">
             <label for="search">{{__('Search')}}: </label>
