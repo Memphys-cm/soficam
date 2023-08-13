@@ -33,9 +33,9 @@ return new class extends Migration
             $table->string('numero_bordereau_analytique')->nullable();
             $table->string('volume_du_bordereau_analytique')->nullable();
             $table->date('date_detablissement_du_bordereau_analytique')->nullable();
-            $table->foreignId('geometre_id')->constrained('membre_du_cabinets')->nullable();
-            $table->foreignId('notaire_id')->constrained('membre_du_cabinets')->nullable();
-            $table->foreignId('conservateur_id')->constrained('users')->nullable();
+            $table->foreignId('geometre_id')->on('membre_du_cabinets')->nullable();
+            $table->foreignId('notaire_id')->on('membre_du_cabinets')->nullable();
+            $table->foreignId('conservateur_id')->on('users')->nullable();
             $table->string('numero_ccp')->nullable();
             $table->json('coordonnees')->nullable();
             $table->string('limit_nord');
@@ -43,8 +43,8 @@ return new class extends Migration
             $table->string('limit_est');
             $table->string('limit_ouest');
             $table->string('recorded_by')->nullable();
-            $table->string('nom_et_prenoms_de_largent_traitant');
-            $table->string('le_conservateur');
+            $table->string('nom_et_prenoms_de_largent_traitant')->nullable();
+            $table->string('le_conservateur')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

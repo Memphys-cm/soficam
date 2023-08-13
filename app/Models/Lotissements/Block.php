@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Registration;
+namespace App\Models\Lotissements;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,10 +18,9 @@ class Block extends Model
         return $this->hasMany(Parcel::class);
     }
 
-    public function housing_estate(): BelongsTo
+    public function lotissement(): BelongsTo
     {
-        return $this->belongsTo(HousingEstate::class);
+        return $this->belongsTo(Lotissement::class,'lotissement_id');
     }
-
 
 }

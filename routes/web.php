@@ -103,6 +103,13 @@ Route::group(
             Route::get('/', App\Http\Livewire\Portal\Sales\SimpleSales\Index::class)->name('portal.simplesale.index');
         });
 
+        Route::prefix('allsales')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\Sales\AllSales::class)->name('portal.allsales.index');
+        });
+        Route::prefix('salereport')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\Sales\SalesReport\Index::class)->name('portal.salereport.index');
+        });
+
         //notary
 
         Route::prefix('membre-du-cabinets')->group(function () {
@@ -112,8 +119,10 @@ Route::group(
             Route::get('/', App\Http\Livewire\Portal\MembreDuCabinet\Cabinet\Index::class)->name('portal.cabinets.index');
         });
 
-        Route::prefix('registration')->group(function () {
-            Route::get('/subdivisions', App\Http\Livewire\Portal\Registration\HousingEstate\Index::class)->name('portal.registrations.housingestates.index');
+        Route::prefix('lotissements')->group(function () {
+            Route::get('/view-all', App\Http\Livewire\Portal\Lotissements\Index::class)->name('portal.lotissements.index');
+            Route::get('/create', App\Http\Livewire\Portal\Lotissements\Create::class)->name('portal.lotissements.create');
+            Route::get('/{lotissement_id}/edit', App\Http\Livewire\Portal\Lotissements\Edit::class)->name('portal.lotissements.edit');
         });
         Route::prefix('etat_cessions')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\EtatCession\Index::class)->name('portal.state_assignments.index');

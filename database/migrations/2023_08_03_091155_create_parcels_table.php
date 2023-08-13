@@ -23,12 +23,14 @@ return new class extends Migration
             $table->enum('type',['public','normale'])->deafult('normale');
             $table->string('laffectation_du_lot')->nullable();
             $table->date('date_lotissement')->nullable();
-            $table->foreignId('geometre_id')->on('membre_du_cabinets')->nullable();
+            $table->foreignId('lot_geometre_id')->on('membre_du_cabinets')->nullable();
+            $table->foreignId('lot_geometre_cabinet_id')->on('cabinets')->nullable();
             $table->string('numero_ccp')->nullable();
             $table->json('coordonnees_du_lot')->nullable();
             $table->date('date_renseignement_coordonnees')->nullable();
             $table->longText('commentaire_du_geometre')->nullable();
             $table->foreignId('notaire_id')->on('membre_du_cabinets')->nullable();
+            $table->foreignId('cabinet_notaire_id')->on('cabinets')->nullable();
             $table->longText('letude_du_notaire')->nullable();
             $table->date('date_de_letude_notaire')->nullable();
             $table->longText('commentaire_du_notaire')->nullable();

@@ -12,6 +12,7 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
 use App\Http\Livewire\Traits\WithDataTables;
+use App\Models\MembreDuCabinet;
 
 class Index extends Component
 {
@@ -22,8 +23,7 @@ class Index extends Component
 
     public ?string $query = null;
 
-    public $inputs = [0]; // Initialize with one element
-    public $i = 0;
+ 
 
 
     public $titre_foncier, $titre_foncier_id, $titre_fonciers, $notarys;
@@ -31,90 +31,31 @@ class Index extends Component
     public $maeture, $land_title_area, $public_utility_area, $area_sold, $remaining_area, $number_of_blocks, $number_of_lots;
     public $surface_for_sale, $price_per_m², $sale_amount, $payment_type, $notary, $notary_id;
     public $document = [];
-    public $purchaser_name = [];
     public $numero_titre_foncier, $superficie_du_TF_mere, $limit_nord, $limit_sud, $limit_est, $limit_ouest, $sale, $saleId;
     public $balance = 0;
     public $advance = 0;
-    public $lieu_dit, $sub_division_id, $division_id, $region_id;
+    public $lieu_dit, $sub_division_id, $division_id, $region_id, $users; 
+    public $user_ids = [];
 
 
     public function mount()
     {
         $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier')->get();
-        $this->notarys = []; //Notary::select('id', 'name')->get();
+        $this->notarys = MembreDuCabinet::select('id', 'name')->get();
+        $this->users = User::with(['roles' => function ($role) {
+            return $role->whereIn('name', ['user'])->get();
+        }])->get();
         $this->created = Carbon::now()->addHour();
-        $this->sales_code = $this->generateConsCode();
         $this->calculateSaleAmount();
         // dd($this->calculateSaleAmount());
         // $this->sale_amount = $this->calculateSaleAmount();
     }
-
-
-    public function addPurchaser()
-    {
-        $this->i++;
-        $this->inputs[] = $this->i;
-        $this->purchaser_name[] = ''; // Add an empty string for the new purchaser name
-    }
-
-    public function removePurchaser($index)
-    {
-        if ($index > 0) {
-            unset($this->inputs[$index]);
-            unset($this->purchaser_name[$index]);
-        }
-    }
-
-
-    // public function calculateSaleAmount()
-    // {
-    //     // Check if both total surface for sale and unit price per m² are set
-    //     if (!empty($this->surface_for_sale) && !empty($this->price_per_m²)) {
-    //         // Calculate the sale amount by multiplying surface for sale and price per m²
-    //         $this->sale_amount = $this->surface_for_sale * $this->price_per_m²;
-
-    //         // Calculate the balance as the difference between sale_amount and advance
-    //         $this->balance = $this->sale_amount - $this->advance;
-    //         if ($this->payment_type === 'tranche') {
-    //             $this->balance = $this->sale_amount - $this->advance;
-    //         } else {
-    //             $this->advance = null; // Set the advance value based on your logic for cash payment
-    //             $this->balance = null; // Set the balance value based on your logic for cash payment
-    //         }
-    //     } else {
-    //         // If any of the inputs is not set, set the sale amount to null or 0, depending on your preference
-    //         $this->sale_amount = null; // or 0
-
-    //         $this->balance = null; // or 0
-    //     }
-    // }
-
-    public function calculateSaleAmount()
-{
-    // Check if both total surface for sale (superficie_du_TF_mere) and unit price per m² are set
-    if (!empty($this->superficie_du_TF_mere) && !empty($this->price_per_m²)) {
-        // Calculate the sale amount by multiplying superficie_du_TF_mere and price per m²
-        $this->sale_amount = $this->superficie_du_TF_mere * $this->price_per_m²;
-
-        // Calculate the balance as the difference between sale_amount and advance
-        if ($this->payment_type === 'tranche') {
-            $this->balance = $this->sale_amount - $this->advance;
-        } else {
-            $this->advance = null; // Set the advance value based on your logic for cash payment
-            $this->balance = null; // Set the balance value based on your logic for cash payment
-        }
-    } else {
-        // If any of the inputs is not set, set the sale amount to null or 0, depending on your preference
-        $this->sale_amount = null; // or 0
-        $this->balance = null; // or 0
-    }
-}
     public function updatedSurfaceForSale()
     {
         $this->calculateSaleAmount();
     }
 
-    public function updatedPricePerM²()
+    public function updatedPricePerM2()
     {
         $this->calculateSaleAmount();
     }
@@ -124,30 +65,37 @@ class Index extends Component
         // Recalculate the balance based on the updated advance
         $this->balance = $this->sale_amount - $this->advance;
     }
-
-
-    public static function generateConsCode()
+    public function calculateSaleAmount()
     {
-        $lastSaleCode = DB::table('sales')
-            ->orderBy('id', 'desc')->select('sales_code')->first();
-        $number = 1;
-        if ($lastSaleCode) {
-            $number = (int)substr($lastSaleCode->sales_code, 3) + 1;
+        // Check if both total surface for sale and unit price per m² are set
+        if (!empty($this->surface_for_sale) && !empty($this->price_per_m²)) {
+            // Calculate the sale amount by multiplying surface for sale and price per m²
+            $this->sale_amount = $this->surface_for_sale * $this->price_per_m²;
+
+            // Calculate the balance as the difference between sale_amount and advance
+            $this->balance = $this->sale_amount - $this->advance;
+            if ($this->payment_type === 'tranche') {
+                $this->balance = $this->sale_amount - $this->advance;
+            } else {
+                $this->advance = null; // Set the advance value based on your logic for cash payment
+                $this->balance = null; // Set the balance value based on your logic for cash payment
+            }
+        } else {
+            // If any of the inputs is not set, set the sale amount to null or 0, depending on your preference
+            $this->sale_amount = null; // or 0
+
+            $this->balance = null; // or 0
         }
-        $SaleCode = 'SSALE' . str_pad($number, 6, '0', STR_PAD_LEFT);
-        while (DB::table('sales')->where('sales_code', $SaleCode)->exists()) {
-            $number++;
-            $SaleCode = 'SSale' . str_pad($number, 6, '0', STR_PAD_LEFT);
-        }
-        return $SaleCode;
     }
+
+
+  
 
     public function updatedTitreFoncierId($titre_foncier_id)
     {
         // dd('s');
         if (!empty($titre_foncier_id)) {
             $utilisateur = TitreFoncier::findOrFail($titre_foncier_id);
-            // dd($utilisateur->region->region_name_en);
 
             // Update the Livewire component properties with the titre_foncier information
             $this->numero_titre_foncier = $utilisateur->numero_titre_foncier;
@@ -157,10 +105,9 @@ class Index extends Component
             $this->limit_est = $utilisateur->limit_est;
             $this->limit_ouest = $utilisateur->limit_ouest;
             $this->lieu_dit = $utilisateur->lieu_dit;
-            $this->sub_division_id = $utilisateur->subDivision->sub_division_name_en;
-            $this->region_id = $utilisateur->region->region_name_en;
-            $this->division_id = $utilisateur->division->division_name_en;
-            $this->calculateSaleAmount();
+            $this->sub_division_id = $utilisateur->sub_division_id;
+            $this->region_id = $utilisateur->region_id;
+            $this->division_id = $utilisateur->division_id;
         } else {
             // Reset the Livewire component properties when the titre_foncier_id is empty
             $this->numero_titre_foncier = '';
@@ -181,7 +128,7 @@ class Index extends Component
         // Validate the required fields before storing the data
         $this->validate([
             'titre_foncier_id' => 'required',
-            'superficie_du_TF_mere' => 'required|numeric',
+            'surface_for_sale' => 'required|numeric',
             'price_per_m²' => 'required|numeric',
             'advance' => 'nullable|numeric',
             'notary_id' => 'required|nullable',
@@ -199,12 +146,13 @@ class Index extends Component
         $this->calculateSaleAmount();
 
         $documentPaths = [];
+      
         $documentPaths = [];
         foreach ($this->document as $document) {
+            // dd($document);
+
             $documentPaths[] = $document->store('public/documents');
         }
-        $purchaserNames = implode(',', $this->purchaser_name);
-
         if ($this->payment_type === 'cash') {
             $defaultAdvance = 0;
             $defaultBalance = 0;
@@ -217,14 +165,14 @@ class Index extends Component
             'notary_id' => $this->notary_id,
             'sales_code' => $this->sales_code,
             'balance' => $defaultBalance,
-            'purchaser_name' => implode(',', $this->purchaser_name),
-            'superficie_du_TF_mere' => $this->superficie_du_TF_mere,
+            'surface_for_sale' => $this->surface_for_sale,
             'price_per_m²' => $this->price_per_m²,
             'sale_amount' => $this->sale_amount,
             'document_path' => json_encode($documentPaths), // Use the array with document paths here
             'sale_type' => 'total_sale',
             'payment_type' => $this->payment_type,
             'advance' => $this->advance,
+            'advance' => $defaultAdvance,
             'observation' => $this->observation,
             'created_by' => auth()->user()->name,
         ]);
@@ -243,6 +191,7 @@ class Index extends Component
             $sale->documents()->create(['path' => $path]);
         }
 
+      
         $this->clearFields();
         $this->refresh(__('Sale successfully Created!'), 'CreatetotalsaleModal');
 
@@ -254,22 +203,19 @@ class Index extends Component
     {
         if ($this->sale) {
             $this->sale->delete();
-
             $this->refresh(__('Sale successfully deleted!'), 'DeleteModal');
+
 
         }
     }
-    
 
 
     public function clearFields()
     {
         $this->titre_foncier_id = null;
         $this->notary_id = null;
-        $this->sales_code = $this->generateConsCode();
         $this->balance = 0;
-        $this->purchaser_name = [];
-        $this->superficie_du_TF_mere = null;
+        $this->surface_for_sale = null;
         $this->price_per_m² = null;
         $this->sale_amount = null;
         $this->document = [];
@@ -285,10 +231,8 @@ class Index extends Component
         $this->saleId = $id;
         $this->sale_amount = $sale->sale_amount;
         $this->titre_foncier_id = $sale->titre_foncier_id;
-        $this->sales_code = $sale->sales_code;
-        $this->purchaser_name = $sale->purchaser_name;
         $this->document = $sale->document;
-        $this->superficie_du_TF_mere = $sale->superficie_du_TF_mere;
+        $this->surface_for_sale = $sale->surface_for_sale;
         $this->payment_type = $sale->payment_type;
         $this->price_per_m² = $sale->price_per_m²;
         $this->notary_id = $sale->notary_id;
@@ -299,8 +243,8 @@ class Index extends Component
 
     public function render()
     {
-        $totals = Sale::search($this->query)->where('sale_type', 'total_sale')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
-        $totals_count = 0 ;//Notary::count();
+        $totals = Sale::search($this->query)->where('sales_type', 'total_sale')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $totals_count = Sale::count();
 
         return view('livewire..portal.sales.total-sales.index', ['totals'=>$totals, 'totals_count'=>$totals_count]);
     }

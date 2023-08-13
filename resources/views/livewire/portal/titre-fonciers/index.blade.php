@@ -119,22 +119,7 @@
                         </td>
 
                         <td>
-                            @foreach($titrefoncier->users->take(5) as $user)
-                            <a href="#" class="d-flex align-items-center {{!$loop->last ? 'border-bottom' : ''}} py-1">
-                                <div class="avatar  d-flex align-items-center justify-content-center fw-bold  rounded bg-primary me-2"><span class="text-white">{{$user->initials}}</span></div>
-                                <div class="d-block">
-                                    <span class="fw-bolder ">{{ucwords($user->name)}}</span>
-                                    <div class="small text-gray">
-                                        <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
-                                        </svg> {{$user->email}}
-                                        <svg class="icon icon-xxs me-1 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                                        </svg> {{$user->primary_phone_number}} | {{$user->secondary_phone_number}}
-                                    </div>
-                                </div>
-                            </a>
-                            @endforeach
+                            <x-elements.user :options="$titrefoncier->users->take(5)" /> 
                         </td>
                         <td>
                             <div class="d-flex align-items-centerpy-1">
@@ -164,10 +149,10 @@
                                 <span class="fw-bolder mx-2"> {{__('West')}} </span> {{$titrefoncier->limit_ouest}}
                             </div>
                         </td>
-                        <td> 
+                        <td>
                             @foreach(collect(json_decode($titrefoncier->coordonnees,true)) as $key => $value)
                             <div class="d-flex align-items-centerpy-1">
-                               <span class="fw-bolder mx-2"> {{ $key }} :</span> {{ $value}}
+                                <span class="fw-bolder mx-2"> {{ $key }} :</span> {{ $value}}
                             </div>
                             @endforeach
                         </td>

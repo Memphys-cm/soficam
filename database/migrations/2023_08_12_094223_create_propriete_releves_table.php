@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('blocks', function (Blueprint $table) {
+        Schema::create('propriete_releves', function (Blueprint $table) {
             $table->id();
-            $table->string('block_name');
-            $table->foreignId('lotissement_id')->index()->constrained('lotissements');
+            $table->foreignId('releve_immobilier_id')->index();
+            $table->string('recorded_by')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('blocks');
+        Schema::dropIfExists('propriete_releves');
     }
 };

@@ -14,15 +14,16 @@ return new class extends Migration
         Schema::create('lotissements', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->foreignId('titre_foncier_id')->index()->on('titre_fonciers')->default(1);
-            $table->foreignId('maeture_id')->on('membre_du_cabinets')->nullable();
-            $table->foreignId('lotisseur_id')->on('membre_du_cabinets')->nullable();
-            $table->foreignId('promoteur_immobiliere_id')->on('membre_du_cabinets')->nullable();
-            $table->foreignId('agent_immobiliere_id')->on('membre_du_cabinets')->nullable();
-            $table->foreignId('urbaniste_id')->on('membre_du_cabinets')->nullable();
-            $table->foreignId('controlleur_id')->on('membre_du_cabinets')->nullable();
-            $table->foreignId('geometre_id')->on('membre_du_cabinets')->nullable();
-            $table->longText('commentaires')->nullable();
+            $table->foreignId('titre_foncier_id')->index()->constrained('titre_fonciers')->default(1);
+            $table->foreignId('geometre_id')->constrained('membre_du_cabinets')->nullable();
+            $table->foreignId('geometre_cabinet_id')->on('cabinets')->nullable();
+            $table->string('maeture')->nullable();
+            $table->string('promoteur_immobiliere')->nullable();
+            $table->string('lotisseur')->nullable();
+            $table->string('agent_immobiliere')->nullable();
+            $table->string('geometric')->nullable();
+            $table->string('urbaniste')->nullable();
+            $table->string('controlleur')->nullable();
             $table->timestamps();
         });
     }

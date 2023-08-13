@@ -1,6 +1,6 @@
 <div>
     <x-alert />
-    @include('livewire.portal.notary.notary-office.partials.create-edit')
+    @include('livewire.portal.membres-du-cabinet.cabinet.partials.create-edit')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -18,7 +18,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Notary Office') }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Cabinet') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -28,14 +28,14 @@
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                         </path>
                     </svg>
-                    {{ __('Notaries Office Managment') }}
+                    {{ __('Cabinet Managment') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('View all Notaries Offices  within the application') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('View all Cabinet  within the application') }} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
-                {{-- @can('user.create') --}}
-                <a href="#" data-bs-toggle="modal" data-bs-target="#CreatenotaryofficeModal"
+                @can('cabinet.create')
+                <a href="#" data-bs-toggle="modal" data-bs-target="#CreatecabinetModal"
                     class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
@@ -43,18 +43,9 @@
                             d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{ __('New') }}
                 </a>
-                {{-- @endcan --}}
-                {{-- @can('user.import') --}}
-                <a href="#" data-bs-toggle="modal" data-bs-target="#importNotaryModal"
-                    class="btn btn-sm btn-secondary py-2 d-inline-flex align-items-center">
-                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                    </svg>{{ __('Import') }}
-                </a>
-                {{-- @endcan --}}
-                {{-- @can('user.export_n_print') --}}
+                @endcan
+              
+                @can('cabinet.export_n_print')
                 <div class="mx-2" wire:loading.remove>
                     <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center ">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -77,41 +68,11 @@
                         </div>
                     </div>
                 </div>
-                {{-- @endcan --}}
+                @endcan
             </div>
         </div>
     </div>
-    {{-- <div class='mb-3 mt-0'>
-        <div class='row'>
-            <div class="col-12 col-sm-6 col-xl-4 mb-2">
-                <div class="card border-0 shadow">
-                    <div class="card-body">
-                        <div class="row d-block d-xl-flex align-items-center">
-                            <div class="col-12 col-xl-4 text-xl-center mb-2 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                                <div class="icon-shape icon-shape-tertiary rounded me-2 me-sm-0">
-                                    <svg class="icon icon-md" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                    </svg>
-                                </div>
-                                <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5">{{__('Total Users')}} {{$total_users}}</h2>
-                                    <h3 class="mb-1">{{numberFormat(!is_null($total_users) ? $total_users : 0 )}}</h3>
-                                </div>
-                            </div>
-                            <div class="col-12 col-xl-8 px-xl-0">
-                                <a href="" class="d-none d-sm-block">
-                                    <h2 class="h5">{{__('Total Users')}}</h2>
-                                    <h3 class="fw-extrabold mb-1">{{numberFormat(!is_null($total_users) ? $total_users : 0 )}}</h3>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-        </div>
-    </div> --}}
+
     <x-alert />
 
     <div class="row p-3">
@@ -119,7 +80,6 @@
             <label for="search">{{ __('Search') }}: </label>
             <input wire:model="query" id="search" type="text" placeholder="{{ __('Search...') }}"
                 class="form-control">
-            {{-- <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p> --}}
         </div>
         <div class="col-md-3">
             <label for="orderBy">{{ __('Order By') }}: </label>
@@ -154,40 +114,73 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('ID') }}</th>
                         <th class="border-bottom">{{ __('OFFICE NAME') }}</th>
-                        <th class="border-bottom">{{ __('REGION') }}</th>
+                        <th class="border-bottom">{{ __('LOCATION') }}</th>
+                        <th class="border-bottom">{{ __('TYPE CABINET') }}</th>                      
                         <th class="border-bottom">{{ __('Date created') }}</th>
                         <th class="border-bottom">{{ __('Action') }}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($notaryoffices as $notaryoffice)
+                    @forelse($cabinets as $cabinet)
                         <tr>
-                            <td>{{ $notaryoffice->id }}</td>
-                            <td>{{ $notaryoffice->office_name }}</td>
-                            <td>{{ $notaryoffice->region->region_name_en }}</td>
-                            <td>{{ $notaryoffice->created_at }}</td>
-                                <td>
-                                        <a href='#' wire:click.prevent="initData({{ $notaryoffice -> id }})"
-                                            data-bs-toggle="modal" data-bs-target="#Editnotaryofficedal">
-                                            <svg class="icon icon-xs" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a href='#' wire:click.prevent="initData({{ $notaryoffice -> id }})"
-                                            data-bs-toggle="modal" data-bs-target="#DeleteModal">
-                                            <svg class="icon icon-xs text-danger" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                </td>
+                            <td >
+                                <a href="#" class="d-flex align-items-center">
+                                    <div class="avatar avatar-md d-flex align-items-center justify-content-center fw-bold fs-6 rounded bg-primary me-2"><span class="text-white">{{ initials($cabinet->nom_cabinet)}}</span></div>
+                                    <div class="d-block">
+                                        <span class="fw-bolder fs-6"> {{ucwords($cabinet->nom_cabinet) }}</span>
+                                       
+                                    </div>
+                                </a>
+                               
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-centerpy-1">
+                                    {{ __('Region') }} : <span class="fw-bolder mx-2">
+                                        {{ $cabinet->region->region_name }} </span>
+                                </div>
+                                <div class="d-flex align-items-centerpy-1">
+                                    {{ __('Division') }} : <span class="fw-bolder mx-2">
+                                        {{ $cabinet->division->division_name }} </span>
+                                </div>
+                                <div class="d-flex align-items-centerpy-1">
+                                    {{ __('Sub Divi') }} : <span class="fw-bolder mx-2">
+                                        {{ $cabinet->subDivision->sub_division_name }} </span>
+                                </div>
+                            </td>
+
+                            <td>{{ $cabinet->type_cabinet }}</td>
+                            <td>{{ $cabinet->created_at }}</td>
+                        @canany(['cabinet.edit','cabinet.delete'])
+
+                            <td>
+                            @can('cabinet.update')
+
+                                <a href='#' wire:click.prevent="initData({{ $cabinet->id }})"
+                                    data-bs-toggle="modal" data-bs-target="#UpdateCabinetModal">
+                                    <svg class="icon icon-xs" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                        </path>
+                                    </svg>
+                                </a>
+                                @endcan
+                                @can('cabinet.delete')
+                                <a href='#' wire:click.prevent="initData({{ $cabinet->id }})"
+                                    data-bs-toggle="modal" data-bs-target="#DeleteModal">
+                                    <svg class="icon icon-xs text-danger" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                        </path>
+                                    </svg>
+                                </a>
+                                @endcan
+
+                            </td>
+                        @endcanany
+
                         </tr>
                     @empty
                         <tr>
@@ -203,11 +196,11 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Showing')}} {{$perPage > $notaryoffices_count ? $notaryoffices_count : $perPage  }} {{__('items of')}} {{$notaryoffices_count}}
+                    {{ __('Showing') }} {{ $perPage > $cabinets_count ? $cabinets_count : $perPage }}
+                    {{ __('items of') }} {{ $cabinets_count }}
                 </div>
-                {{ $notaryoffices->links() }}
+                {{ $cabinets->links() }}
             </div>
         </div>
     </div>
 </div>
-

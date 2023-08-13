@@ -23,8 +23,12 @@ class DatabaseSeeder extends Seeder
         $this->call(SubDivisionSeeder::class);
         $this->call(RolesAndPermissionsSeeder::class);
         $this->call(CategoryActivitesSeeder::class);
-
+        $this->call(CabinetAndMembreCabinetSeeder::class);
+      
         \App\Models\User::factory(1000)->create();
+
+        $this->call(TitreFoncierSeeder::class);
+
         \App\Models\User::create([
             'first_name' => fake()->name(),
             'last_name' => fake()->name(),

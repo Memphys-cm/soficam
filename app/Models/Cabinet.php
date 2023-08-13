@@ -16,6 +16,15 @@ class Cabinet extends Model
     protected $guarded = [];
     protected $table = 'cabinets';
 
+    public function scopeNotaire($query)
+    {
+        return $query->where('type_cabinet',  'notaire');
+    }
+    public function scopeGeometre($query)
+    {
+        return $query->where('type_cabinet',  'geometre');
+    }
+
     public function region(): BelongsTo
     {
         return $this->belongsTo(Region::class);

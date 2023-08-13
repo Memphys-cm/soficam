@@ -2,8 +2,14 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+use App\Models\Region;
+use App\Models\Division;
+use App\Models\SubDivision;
+use Illuminate\Support\Str;
+use App\Models\TitreFoncier;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class TitreFoncierSeeder extends Seeder
 {
@@ -12,6 +18,43 @@ class TitreFoncierSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        TitreFoncier::flushEventListeners();
+
+        $coordinates = [
+            'B1' => 234.12,
+            'B2' => 255.12,
+            'B3' => 12.12,
+            'B4' => 567.12,
+        ];
+
+        for ($i = 0; $i < 50; $i++) {
+
+           $titre_foncier = TitreFoncier::create([
+                'numero_titre_foncier' => Str::random(11),
+                'date_de_delivrance_du_TF' => fake()->date(),
+                'numero_du_duplicata' => fake()->randomNumber(5, true),
+                'region_id' => Region::pluck('id')->shuffle()->first(),
+                'division_id' => Division::pluck('id')->shuffle()->first(),
+                'sub_division_id' => SubDivision::pluck('id')->shuffle()->first(),
+                'groupement' => fake()->name(),
+                'lieu_dit' => fake()->name(),
+                'zone' => 'urbaine',
+                'numero_folio' => Str::random(2),
+                'volume' => Str::random(2),
+                'superficie_du_TF_mere' => fake()->randomNumber(6, true),
+                'superficie_vendue_du_TF_mere' => fake()->randomNumber(6, true),
+                'superficie_restant_du_TF_mere' => fake()->randomNumber(6, true),
+                'etat_terrain' => 'non_batit',
+                'provenance_TF' => 'mutation_totale',
+                'numero_bordereau_analytique' => fake()->randomNumber(6, true),
+                'coordonnees' => json_encode($coordinates),
+                'limit_nord' => fake()->sentence(),
+                'limit_sud' => fake()->sentence(),
+                'limit_est' => fake()->sentence(),
+                'limit_ouest' => fake()->sentence(),
+            ]);
+
+            $titre_foncier->users()->sync(User::pluck('id')->shuffle()->take(fake()->randomDigitNotNull())->toArray());
+        }
     }
 }

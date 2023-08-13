@@ -37,10 +37,29 @@ class Sale extends Model
             static::query() :
             static::query()
             ->where(function ($q) use ($query) {
-                $q->where('sale_amount', 'like', '%' . $query . '%');
+                $q->where('sales_amount', 'like', '%' . $query . '%');
                 $q->orWhere('sales_code', 'like', '%' . $query . '%');
-                $q->orWhere('sale_type', 'like', '%' . $query . '%');
+                $q->orWhere('sales_type', 'like', '%' . $query . '%');
                 
             });
+    }
+
+    public function getStatusStyleAttribute() : String
+    {
+        return match ($this->status) {
+             'active' => 'success',
+             'expired' => 'danger',
+             'pending_payment' => 'secondary',
+             NULL => ''
+        };
+    }
+    public function getStatusTextAttribute(): String
+    {
+        return match ($this->status) {
+            'active' => 'Active',
+            'expired' => 'Expired',
+            'pending_payment' => 'Pending Payment',
+            NULL => ''
+        };
     }
 }

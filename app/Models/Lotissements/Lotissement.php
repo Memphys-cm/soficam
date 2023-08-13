@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Models\Registration;
+namespace App\Models\Lotissements;
 
+use App\Models\Lotissements\Parcel;
 use App\Models\TitreFoncier;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class HousingEstate extends Model
+class Lotissement extends Model
 {
     use HasFactory;
 
@@ -19,9 +20,14 @@ class HousingEstate extends Model
         return $this->hasMany(Block::class);
     }
 
-    public function land_title() : BelongsTo
+    public function titreFoncier() : BelongsTo
     {
-        return $this->belongsTo(TitreFoncier::class , 'land_id');
+        return $this->belongsTo(TitreFoncier::class , 'titre_foncier_id');
+    }
+
+    public function parcels() : HasMany
+    {
+        return $this->hasMany(Parcel::class);
     }
 
 }
