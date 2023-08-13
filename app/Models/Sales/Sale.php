@@ -52,8 +52,8 @@ class Sale extends Model
     public function getStatusStyleAttribute() : String
     {
         return match ($this->payment_status) {
-             'active' => 'success',
-             'expired' => 'danger',
+             'totally_paid' => 'success',
+             'partially_paid' => 'info',
              'pending_payment' => 'secondary',
              NULL => ''
         };
@@ -61,8 +61,8 @@ class Sale extends Model
     public function getStatusTextAttribute(): String
     {
         return match ($this->payment_status) {
-            'active' => 'Active',
-            'expired' => 'Expired',
+            'totally_paid' => 'Totally Paid',
+            'partially_paid' => 'Partially Paid',
             'pending_payment' => 'Pending Payment',
             NULL => ''
         };

@@ -107,6 +107,10 @@ Route::group(
             Route::get('/', App\Http\Livewire\Portal\Sales\AllSales::class)->name('portal.allsales.index');
         });
 
+        Route::prefix('allsale')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\Sales\AllSales\Index::class)->name('portal.allsale.index');
+        });
+
         //notary
 
         Route::prefix('membre-du-cabinets')->group(function () {
