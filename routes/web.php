@@ -95,7 +95,7 @@ Route::group(
 
         Route::prefix('land-sales')->group(function () {
             Route::get('mutation-totale', App\Http\Livewire\Portal\Sales\TotalSales\Index::class)->name('portal.total-sale.index');
-            Route::get('simple', App\Http\Livewire\Portal\Sales\TotalSales\Index::class)->name('portal.simple-sale.index');
+            Route::get('simple', App\Http\Livewire\Portal\Sales\SimpleSales\Index::class)->name('portal.simple-sale.index');
         });
 
         Route::prefix('sales-report')->group(function () {

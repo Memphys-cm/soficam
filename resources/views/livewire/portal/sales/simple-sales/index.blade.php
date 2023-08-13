@@ -1,8 +1,5 @@
 <div>
     <x-alert />
-    @include('livewire.portal.sales.simple-sales.partials.create-simple-sale')
-    {{-- @include('livewire.portal.users.edit-user')
-    @include('livewire.portal.users.import-users') --}}
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -30,79 +27,14 @@
             </div>
             <div class="d-flex justify-content-between mb-2">
 
-                {{-- @can('user.create') --}}
-                <a href="#" data-bs-toggle="modal" data-bs-target="#CreatesimplesaleModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
-                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{__('New')}}
-                </a>
-                {{-- @endcan --}}
-                {{-- @can('user.import') --}}
-                <a href="#" data-bs-toggle="modal" data-bs-target="#importUsersModal" class="btn btn-sm btn-secondary py-2 d-inline-flex align-items-center">
-                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                    </svg>{{__('Import')}}
-                </a>
-                {{-- @endcan --}}
-                {{-- @can('user.export_n_print') --}}
-                <div class="mx-2" wire:loading.remove>
-                    <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center ">
-                        <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
-                        </svg>
-                        {{__('Export')}}
-                    </a>
-                </div>
-                <div class="text-center mx-2" wire:loading wire:target="export">
-                    <div class="text-center">
-                        <div class="spinner-grow text-grey-300" style="width: 0.9rem; height: 0.9rem;" role="status"></div>
-                        <div class="spinner-grow text-grey-300" style="width: 0.9rem; height: 0.9rem;" role="status"></div>
-                        <div class="spinner-grow text-grey-300" style="width: 0.9rem; height: 0.9rem;" role="status"></div>
-                        <div class="spinner-grow text-grey-300" style="width: 0.9rem; height: 0.9rem;" role="status"></div>
-                    </div>
-                </div>
-                {{-- @endcan --}}
+
             </div>
         </div>
     </div>
-    {{-- <div class='mb-3 mt-0'>
-        <div class='row'>
-            <div class="col-12 col-sm-6 col-xl-4 mb-2">
-                <div class="card border-0 shadow">
-                    <div class="card-body">
-                        <div class="row d-block d-xl-flex align-items-center">
-                            <div class="col-12 col-xl-4 text-xl-center mb-2 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                                <div class="icon-shape icon-shape-tertiary rounded me-2 me-sm-0">
-                                    <svg class="icon icon-md" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                    </svg>
-                                </div>
-                                <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5">{{__('simplesale Users')}} {{$simplesale_users}}</h2>
-                                    <h3 class="mb-1">{{numberFormat(!is_null($simplesale_users) ? $simplesale_users : 0 )}}</h3>
-                                </div>
-                            </div>
-                            <div class="col-12 col-xl-8 px-xl-0">
-                                <a href="" class="d-none d-sm-block">
-                                    <h2 class="h5">{{__('simplesale Users')}}</h2>
-                                    <h3 class="fw-extrabold mb-1">{{numberFormat(!is_null($simplesale_users) ? $simplesale_users : 0 )}}</h3>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-        </div>
-    </div> --}}
-    <x-alert />
-
-    <div class="row p-3">
+    <div class="row py-3">
         <div class="col-md-3">
             <label for="search">{{__('Search')}}: </label>
             <input wire:model="query" id="search" type="text" placeholder="{{__('Search...')}}" class="form-control">
-            {{-- <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p> --}}
         </div>
         <div class="col-md-3">
             <label for="orderBy">{{__('Order By')}}: </label>
@@ -129,91 +61,132 @@
                 <option value="15">15</option>
                 <option value="20">20</option>
                 <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
             </select>
         </div>
     </div>
     <div class="card pb-3">
         <div class="table-responsive  text-gray-700">
-            <table class="table employee-table table-hover align-items-center ">
+            <table class="table employee-table table-hover table-bordered align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('CODE') }}</th>
-                        <th class="border-bottom">{{ __('PURCHASER(s) NAME') }}</th>
-                        <th class="border-bottom">{{ __('LAND TITLE NUMBER') }}</th>
-                        <th class="border-bottom">{{ __('SALE TYPE') }}</th>
-                        <th class="border-bottom">{{ __('Surface for sale') }}</th>
-                        <th class="border-bottom">{{ __('Price per m²') }}</th>
-                        <th class="border-bottom">{{ __('Sale amount') }}</th>
-                        <th class="border-bottom">{{ __('Amount Advance') }}</th>
-                        <th class="border-bottom">{{ __('Amount Balance') }}</th>
-                        <th class="border-bottom">{{ __('Payment Type') }}</th>
-                        <th class="border-bottom">{{ __('Created By') }}</th>
-                        <th class="border-bottom">{{ __('Date created') }}</th>
-                        {{-- @canany('user.update', 'user.delete') --}}
-                        <th class="border-bottom">{{ __('Action') }}</th>
-                        {{-- @endcanany --}}
+                        <th class="border-bottom">{{__('Code')}}</th>
+                        <th class="border-bottom">{{__('Land title Number')}}</th>
+                        <th class="border-bottom">{{__('Location')}}</th>
+                        <th class="border-bottom">{{__('Details')}}</th>
+                        <th class="border-bottom">{{__('Contacts')}}</th>
+                        <th class="border-bottom">{{__('Date ')}}</th>
+                        @canany('lotissement.sale')
+                        <th class="border-bottom">{{__('Action')}}</th>
+                        @endcanany
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($simplesales as $simplesale)
-                        <tr>
-                            <td>{{ $simplesale->sales_code }}</td>
-                            <td>{{ $simplesale->purchaser_name }}</td>
-                            <td>{{ $simplesale->titreFoncier->numero_titre_foncier }}</td>
-                            <td>{{ $simplesale->sale_type }}</td>
-                            <td>{{ $simplesale->titreFoncier->superficie_du_TF_mere }} {{ __('m²') }}</td>
-                            <td>{{ $simplesale->price_per_m² }} {{ __('XAF') }}</td>
-                            <td>{{ $simplesale->sale_amount }} {{ __('XAF') }}</td>
-                            <td>{{ $simplesale->advance }} {{ __('XAF') }}</td>
-                            <td>{{ $simplesale->balance }} {{ __('XAF') }}</td>
-                            <td>{{ $simplesale->payment_type }}</td>
-                            <td>{{ $simplesale->created_by }}</td>
-                            <td>{{ $simplesale->created_at }}</td>
-
-                            <td>
-
-                                {{-- <a href='#' wire:click.prevent="initData({{$simplesale->id}})" data-bs-toggle="modal" data-bs-target="#Editsimplesaleodal">
-                                <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                </svg>
-                            </a> --}}
-
-                                <a href='#' wire:click.prevent="initData({{ $simplesale->id }})"
-                                    data-bs-toggle="modal" data-bs-target="#DeleteModal">
-                                    <svg class="icon icon-xs text-danger" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                                        </path>
-                                    </svg>
-                                </a>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="7" class="text-center">
-                                <div class="text-center text-gray-800 mt-2">
-                                    <h4 class="fs-4 fw-bold">{{ __('Opps nothing here') }} &#128540;</h4>
-                                    <p>{{ __('No Record Found..!') }}</p>
+                    @forelse($lotissements as $lotissement)
+                    <tr>
+                        <td>
+                            <span class="fw-normal">{{$lotissement->code}}</span>
+                        </td>
+                        <td>
+                            <a href="#" class="d-flex align-items-center">
+                                <div class="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-primary me-3"><span class="text-white">#{{initials($lotissement->titreFoncier->numero_titre_foncier)}}</span></div>
+                                <div class="d-block">
+                                    <span class="fw-bolder">No. {{$lotissement->titreFoncier->numero_titre_foncier}}</span>
+                                    <div class="small text-gray align-items-center"><span class="fw-bold">{{!empty($lotissement->titreFoncier) ? $lotissement->titreFoncier->date_de_delivrance_du_TF : ''}} </span>| @if(!empty($lotissement->titreFoncier)) <span class="fw-light badge badge-md bg-{{$lotissement->titreFoncier->EtatTFStyle}} rounded-1 ">{{$lotissement->titreFoncier->etat_TF}}</span>@endif</div>
                                 </div>
-                            </td>
-                        </tr>
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            @if(!empty($lotissement->titreFoncier))
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('Region')}} : <span class="fw-bolder mx-2"> {{$lotissement->titreFoncier->region->region_name}} </span>
+                            </div>
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('Division')}} : <span class="fw-bolder mx-2"> {{$lotissement->titreFoncier->division->division_name}} </span>
+                            </div>
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('Sub Divi')}} : <span class="fw-bolder mx-2"> {{$lotissement->titreFoncier->subDivision->sub_division_name}} </span>
+                            </div>
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('Lieu Dit')}} : <span class="fw-bolder mx-2"> {{$lotissement->titreFoncier->lieu_dit}} </span>
+                            </div>
+                            @endif
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('Blocks')}} : <span class="fw-bolder mx-2"> {{$lotissement->blocks_count}} </span>
+                            </div>
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('Lots')}} : <span class="fw-bolder mx-2"> {{$lotissement->parcels_count}} </span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('AI')}} : <span class="fw-bolder mx-2"> {{$lotissement->agent_immobiliere}} </span>
+                            </div>
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('PI')}} : <span class="fw-bolder mx-2"> {{$lotissement->promoteur_immobiliere}} </span>
+                            </div>
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('LS')}} : <span class="fw-bolder mx-2"> {{$lotissement->lotisseur}} </span>
+                            </div>
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('Ur')}} : <span class="fw-bolder mx-2"> {{$lotissement->urbaniste}} </span>
+                            </div>
+                        </td>
+
+                        <td>
+                            <span class="fw-normal">{{$lotissement->created_at->format('Y-m-d')}}</span>
+                        </td>
+                        @can('lotissement.sale')
+                        <td>
+                            @can('lotissement.sale')
+                            <a href="{{route('portal.lotissements.simple-sale',['lotissement_id'=>$lotissement->id])}}">
+                                <svg class="icon icon-sm text-info" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
+                                </svg>
+                            </a>
+
+                            @endcan
+
+                        </td>
+                        @endcan
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            <div class="text-center text-gray-800 mt-2">
+                                <h4 class="fs-4 fw-bold">{{__('Opps nothing here')}} &#128540;</h4>
+                                <p>{{__('You need to create lotissement before you can perform simple sales!')}}</p>
+                                @can('lotissement.create')
+                                <a href="{{route('portal.lotissements.create')}}" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
+                                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                    </svg> {{__('Add a Lotissement')}}
+                                </a>
+                                @endcan
+                            </div>
+                        </td>
+                    </tr>
                     @endforelse
                 </tbody>
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
-               
-                {{ $simplesales->links() }}
+                <div>
+                    {{__('Showing')}} {{$perPage > $lotissements_count ? $lotissements_count : $perPage  }} {{__('items of')}} {{$lotissements_count}}
+                </div>
+                {{ $lotissements->links() }}
             </div>
         </div>
     </div>
 </div>
 
 @push('scripts')
-    <script>
-        window.addEventListener('close-modal', event => {
-            $('#CreatesimplesalesaleModal').modal('hide');
-            $('#DeleteModal').modal('hide');
-        });
-    </script>
+<script>
+    window.addEventListener('close-modal', event => {
+        $('#CreatesimplesalesaleModal').modal('hide');
+        $('#DeleteModal').modal('hide');
+    });
+</script>
 @endpush
