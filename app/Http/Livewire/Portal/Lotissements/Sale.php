@@ -11,6 +11,7 @@ class Sale extends Component
     public Block $block;
     public Parcel $parcel;
 
+
     public function mount($lotissement_id)
     {
         $this->lotissement = Lotissement::findOrFail($lotissement_id);

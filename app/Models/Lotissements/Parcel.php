@@ -18,6 +18,15 @@ class Parcel extends Model
 
     public $guarded = [];
 
+    public function scopeMutationTotale($query)
+    {
+        return $query->where('type_de_venter','mutation_totale');
+    }
+
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'parcel_user', 'user_id', 'parcel_id')->withTimestamps();
+    }
     public function divisions() : HasMany
     {
         return $this->hasMany(Division::class);
