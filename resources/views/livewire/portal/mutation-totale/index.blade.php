@@ -1,6 +1,6 @@
 <div>
     <x-alert />
-    @include('livewire.portal.etat-cession.create-etat_cession')
+    @include('livewire.portal.mutation-totale.create-mutation_totale')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -15,37 +15,37 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{__('Dashboard')}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Etat Cessions')}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Mutation Totales')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
                     <svg class="icon me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    {{__('state_assignments')}}
+                    {{__('mutation_totales')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('Voir Tous les Etats Cessions')}} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{__('Voir Toutes les Mutations Totales')}} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
-                {{-- @can('housing_estate.create') --}}
+                {{-- @can('mutation_totale.create') --}}
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateUpdateStateAssignmentModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{__('Nouveau')}}
                 </a>
                 {{-- @endcan --}}
-                {{-- @can('housing_estate.import') --}}
-                <a href="#" data-bs-toggle="modal" data-bs-target="#importstate_assignmentsModal" class="btn btn-sm btn-secondary py-2 d-inline-flex align-items-center">
+                {{-- @can('mutation_totale.import') --}}
+                <a href="#" data-bs-toggle="modal" data-bs-target="#importmutation_totalesModal" class="btn btn-sm btn-secondary py-2 d-inline-flex align-items-center">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                     </svg>{{__('Importer')}}
                 </a>
                 {{-- @endcan --}}
-                {{-- @can('housing_estate.export_n_print') --}}
+                {{-- @can('mutation_totale.export_n_print') --}}
                 <div class="mx-2" wire:loading.remove>
                     <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center {
-                        {{-- {count($state_assignments) > 0 ? '' :'disabled'}} --}}
+                        {{-- {count($mutation_totales) > 0 ? '' :'disabled'}} --}}
                         ">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
@@ -114,47 +114,47 @@
                         <th class="border-bottom">{{__('Geometre')}}</th>
                         <th class="border-bottom">{{__('Status')}}</th>
                         <th class="border-bottom">{{__('Date Creation')}}</th>
-                        {{-- @canany('housing_estate.update','housing_estate.delete') --}}
+                        {{-- @canany('mutation_totale.update','mutation_totale.delete') --}}
                         <th class="border-bottom">{{__('Action')}}</th>
                         {{-- @endcanany --}}
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($state_assignments as $housing_estate)
+                    @forelse($mutation_totales as $mutation_totale)
                     <tr>
                         <td>
-                            <x-elements.user :options="$housing_estate->user" />
+                            <x-elements.user :options="$mutation_totale->user" />
                         </td>
                         <td>
-                            <span class="fw-normal">{{$housing_estate->reference_etat_cession}}</span>
+                            <span class="fw-normal">{{$mutation_totale->reference_etat_cession}}</span>
                         </td>
-                        <td class="text-center"> {{ $housing_estate->type_personne }} </td>
+                        <td class="text-center"> {{ $mutation_totale->type_personne }} </td>
                         <td>
-                            <span class="fw-normal">{{$housing_estate->type_operation}}</span>
-                        </td>
-                        <td>
-                            <span class="fw-normal">{{$housing_estate->zone}}</span>
+                            <span class="fw-normal">{{$mutation_totale->type_operation}}</span>
                         </td>
                         <td>
-                            <span class="fw-normal">{{$housing_estate->geometre->first_name ?? '' }} {{$housing_estate->geometre->last_name ?? ''}}</span>
+                            <span class="fw-normal">{{$mutation_totale->zone}}</span>
                         </td>
                         <td>
-                            <span class="fw-normal">{{$housing_estate->status}}</span>
+                            <span class="fw-normal">{{$mutation_totale->geometre->first_name ?? '' }} {{$mutation_totale->geometre->last_name ?? ''}}</span>
                         </td>
                         <td>
-                            <span class="fw-normal">{{$housing_estate->created_at->format('Y-m-d')}}</span>
+                            <span class="fw-normal">{{$mutation_totale->status}}</span>
                         </td>
-                        {{-- @canany('housing_estate.update','housing_estate.delete') --}}
                         <td>
-                            {{-- @can('housing_estate.update') --}}
-                            <a href="#" wire:click.prevent="initData({{$housing_estate->id}})" data-bs-toggle="modal" data-bs-target="#CreateUpdateStateAssignmentModal" draggable="false">
+                            <span class="fw-normal">{{$mutation_totale->created_at->format('Y-m-d')}}</span>
+                        </td>
+                        {{-- @canany('mutation_totale.update','mutation_totale.delete') --}}
+                        <td>
+                            {{-- @can('mutation_totale.update') --}}
+                            <a href="#" wire:click.prevent="initData({{$mutation_totale->id}})" data-bs-toggle="modal" data-bs-target="#CreateUpdateStateAssignmentModal" draggable="false">
                                 <svg class="icon icon-sm text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                 </svg>
                             </a>
                             {{-- @endcan --}}
-                            {{-- @can('housing_estate.delete') --}}
-                            <a href="#" wire:click.prevent="initData({{$housing_estate->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
+                            {{-- @can('mutation_totale.delete') --}}
+                            <a href="#" wire:click.prevent="initData({{$mutation_totale->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
                                 <svg class="icon icon-sm text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                                 </svg>
@@ -177,9 +177,9 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Showing')}} {{$perPage > $state_assignments_count ? $state_assignments_count : $perPage  }} {{__('items of')}} {{$state_assignments_count}}
+                    {{__('Showing')}} {{$perPage > $mutation_totales_count ? $mutation_totales_count : $perPage  }} {{__('items of')}} {{$mutation_totales_count}}
                 </div>
-                {{ $housing_estates->links() }}
+                {{ $mutation_totales->links() }}
             </div>
         </div>
     </div>

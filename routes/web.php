@@ -94,6 +94,10 @@ Route::group(
         Route::prefix('certificatepropriete')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\CertificatePropriete\Index::class)->name('portal.certificate-propriete.index');
         });
+
+        Route::prefix('mutation_totale')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\MutationTotale\Index::class)->name('portal.mutation-totale.index');
+        });
       
         // sales
         Route::prefix('tatalsale')->group(function () {
