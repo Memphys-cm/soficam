@@ -88,27 +88,9 @@ Route::group(
             Route::get('certificatepropriete', App\Http\Livewire\Portal\CertificatePropriete\Index::class)->name('portal.certificate-propriete.index');
         });
 
-<<<<<<< HEAD
-        
-        Route::prefix('certificatepropriete')->group(function () {
-            Route::get('/', App\Http\Livewire\Portal\CertificatePropriete\Index::class)->name('portal.certificate-propriete.index');
-        });
-
-        Route::prefix('mutation_totale')->group(function () {
-            Route::get('/', App\Http\Livewire\Portal\MutationTotale\Index::class)->name('portal.mutation-totale.index');
-        });
-      
-        // sales
-        Route::prefix('tatalsale')->group(function () {
-            Route::get('/', App\Http\Livewire\Portal\Sales\TotalSales\Index::class)->name('portal.totalsale.index');
-        });
-        Route::prefix('simplesale')->group(function () {
-            Route::get('/', App\Http\Livewire\Portal\Sales\SimpleSales\Index::class)->name('portal.simplesale.index');
-=======
         Route::prefix('land-sales')->group(function () {
             Route::get('mutation-totale', App\Http\Livewire\Portal\Sales\TotalSales\Index::class)->name('portal.total-sale.index');
             Route::get('simple', App\Http\Livewire\Portal\Sales\TotalSales\Index::class)->name('portal.simple-sale.index');
->>>>>>> fdfeb23670562862f8746d765e835df623238ed1
         });
 
 
