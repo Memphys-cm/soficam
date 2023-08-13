@@ -127,12 +127,7 @@
                     @forelse($immobiliers as $immobilier)
                     <tr>
                         <td>
-                            <a href="#" class="d-flex align-items-center">
-                                <div class="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-primary me-3"><span class="text-white">{{ initials($immobilier->requestor->first_name) }}</span></div>
-                                <div class="d-block"><span class="fw-bold">{{$immobilier->requestor->first_name }}</span>
-                                </div>
-                            </a>
-                           
+                            <x-elements.user :options="$immobilier->requestor" />
                         </td>
                         <td>{{ $immobilier->type}}</td>
                         <td>{{ $immobilier->releve_number }}</td>
@@ -142,7 +137,7 @@
                         <td>{{ $immobilier->releves_type }}</td>
 
                         <td>
-                            
+
                             <span class="fw-normal badge super-badge p-2 bg-{{$immobilier->statusStyle}} round">{{$immobilier->status}}</span>
 
                         </td>

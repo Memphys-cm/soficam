@@ -2,11 +2,12 @@
 
 namespace App\Http\Livewire\Traits;
 
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 trait WithDataTables
 {
-    use WithPagination;
+    use WithPagination, WithFileUploads;
     
     protected $paginationTheme = 'bootstrap';
 
