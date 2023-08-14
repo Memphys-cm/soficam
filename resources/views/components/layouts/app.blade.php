@@ -32,6 +32,8 @@
     <link type="text/css" href="{{ asset('css/theme.css')}}" rel="stylesheet">
 
     <script defer src="https://unpkg.com/alpinejs@3.9.0/dist/cdn.min.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css" rel="stylesheet" />
     @livewireStyles
     <style>
         * {
@@ -89,138 +91,7 @@
             $('div.alert-danger').delay(3500).fadeOut(2000);
         })
 
-
-        let tileType = "OpenStreetMap";
-        let enableAddMarker = false;
-
-        // Initialisation de la carte
-        let map = L.map('macarte').setView([7.3697, 12.3547], 13);
-
-        let selectedTile = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        // Creation de l'icône
-        let myIconClass = L.Icon.extend({
-            options: {
-                iconSize: [20, 20],
-                iconAnchor: [10, 10],
-                popupAnchor: [0, -10],
-                shadowSize: [20, 20],
-                shadowAnchor: [6, 8],
-            }
-        });
-        let icon = new myIconClass({
-            iconUrl: 'https://zestedesavoir.com/media/galleries/16186/d2a9ef14-71b2-4acb-a1cb-cf83eff0294f.png',
-            shadowUrl: 'https://zestedesavoir.com/media/galleries/16186/3503ba88-d052-4f5f-81df-223c70024f04.png'
-        });
-
-        // Ajout d'un marqueur sur Paris
-        L.marker([4.079616 , 9.6763904], {
-            icon: icon
-        }).bindPopup('Ceci est un mon emplacement').addTo(map);
-
-        // A clic -> Si la création de marqueur est activée, on ajoute un marqueur à la position du clic
-        map.on('mousedown', function(e) {
-            if (enableAddMarker) {
-                enableAddMarker = false;
-                L.marker([e.latlng.lat, e.latlng.lng], {
-                    icon: icon
-                }).bindPopup('Ceci est un emplacement').addTo(map);
-            }
-        });
-
-        /*
-         * Classe gérant l'interface utilisateur
-         */
-        let MyControlClass = L.Control.extend({
-
-            options: {
-                position: 'topleft'
-            },
-
-            /*
-             * Ajout de l'interface à la carte
-             */
-            onAdd: function(map) {
-
-                this.map = map;
-
-                var div = L.DomUtil.create('div', 'leaflet-bar my-control');
-
-                // Bouton de test
-                var myButton = L.DomUtil.create('button', 'my-button-class', div);
-
-                let myImage = L.DomUtil.create('img', '', myButton);
-                myImage.src =
-                    "https://zestedesavoir.com/media/galleries/16186/0d474532-15c1-4d45-94e9-a3abcc6e4327.png";
-                myImage.style = "margin-left:0px;width:20px;height:20px";
-
-                L.DomEvent.on(myButton, 'click', function() {
-                    alert("clic sur le button");
-                }, this);
-
-                // Bouton de changement de fond de carte
-                var buttonBackground = L.DomUtil.create('button', 'my-button-class', div);
-
-                let myBackground = L.DomUtil.create('img', '', buttonBackground);
-                myBackground.src =
-                    "https://zestedesavoir.com/media/galleries/16186/1b4da67d-cb8b-4c29-85cb-4633005ea1e9.svg";
-                myBackground.style = "margin-left:0px;width:20px;height:20px";
-
-                L.DomEvent.on(buttonBackground, 'click', function() {
-                    this.changeBackground();
-                }, this);
-
-                // Bouton d'ajout d'un marqueur
-                var buttonAddMarker = L.DomUtil.create('button', 'my-button-class', div);
-
-                let backgroundAddMarker = L.DomUtil.create('img', '', buttonAddMarker);
-                backgroundAddMarker.src =
-                    "https://zestedesavoir.com/media/galleries/16186/d2a9ef14-71b2-4acb-a1cb-cf83eff0294f.png";
-                backgroundAddMarker.style = "margin-left:0px;width:20px;height:20px";
-
-                L.DomEvent.on(backgroundAddMarker, 'click', function() {
-                    this.addMarker();
-                }, this);
-
-                return div;
-            },
-
-            /* 
-             * Action de changement de fond d'écran
-             */
-            changeBackground() {
-                this.map.removeLayer(selectedTile);
-
-                if (tileType == "OpenStreetMap") {
-                    tileType = "ArcGis";
-
-                    selectedTile = L.tileLayer(
-                        'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                            attribution: 'ArcGIS'
-                        }).addTo(this.map);
-                } else {
-                    tileType = "OpenStreetMap";
-
-                    selectedTile = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-                        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    }).addTo(map);
-                }
-            },
-
-            /*
-             * Active l'action d'ajout d'un marqueur au clic
-             */
-            addMarker() {
-                enableAddMarker = true;
-            },
-
-            onRemove: function(map) {}
-        });
-
-        // Ajout de l'interface utilisateur à la carte
-        let myControl = new MyControlClass().addTo(map);
+        
 
     </script>
 
