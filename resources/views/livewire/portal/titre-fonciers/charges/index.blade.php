@@ -1,7 +1,6 @@
 <div>
     <x-alert />
-    @include('livewire.portal.certificate-propriete.create')
-    @include('livewire.portal.certificate-propriete.update')
+    @include('livewire.portal.titre-fonciers.charges.partials.create')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -17,7 +16,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Request Certificate of Ownership') }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Land Titles Chrages') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -25,21 +24,18 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                         </path>
                     </svg>
-                    {{ __('Request Certificate of Ownership') }}
+                    {{ __('Attribute a charge to a Land Title') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('View all Request Certificate of Ownership  within the application') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('View all charges on Land Title') }} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
-                @can('certificate_propriete.create')
-                <a href="#" data-bs-toggle="modal" data-bs-target="#CreatecertificateproprieteModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateChargeModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{ __('New') }}
                 </a>
-                @endcan
 
-                @can('certificate_propriete.export_n_print')
                 <div class="mx-2" wire:loading.remove>
                     <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center ">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -60,7 +56,6 @@
                         </div>
                     </div>
                 </div>
-                @endcan
             </div>
         </div>
     </div>
@@ -75,12 +70,6 @@
         <div class="col-md-3">
             <label for="orderBy">{{ __('Order By') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="titre_foncier_id">{{ __('Land title') }}</option>
-                <option value="numero_certificate_proprietes">{{ __('CP Number') }}</option>
-                <option value="requestor_id">{{ __('Requestor') }}</option>
-                <option value="price">{{ __('Price') }}</option>
-                <option value="validity">{{ __('Validity') }}</option>
-                <option value="status">{{ __('Status') }}</option>
                 <option value="created_at">{{ __('Created Date') }}</option>
             </select>
         </div>
@@ -109,17 +98,12 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('Requestor') }}</th>
                         <th class="border-bottom">{{ __('LAND TITLE') }}</th>
-                        <th class="border-bottom">{{ __('CP NUMBER') }}</th>
-                        <th class="border-bottom">{{ __('PRICE') }}</th>
-                        <th class="border-bottom">{{ __('VALIDITY') }}</th>
-                        <th class="border-bottom">{{ __('CERTIFICATE TYPE') }}</th>
+                        <th class="border-bottom">{{ __('PROPRIATORS') }}</th>
+                        <th class="border-bottom">{{ __('CHARGE') }}</th>
                         <th class="border-bottom">{{ __('STATUS') }}</th>
                         <th class="border-bottom">{{ __('Date created') }}</th>
-                        @canany(['certificate_propriete.edit','certificate_propriete.delete'])
                         <th class="border-bottom">{{ __('Action') }}</th>
-                        @endcanany
                     </tr>
                 </thead>
                 <tbody>
