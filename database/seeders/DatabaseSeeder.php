@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\CertificatePropriete;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
@@ -27,7 +29,13 @@ class DatabaseSeeder extends Seeder
       
         \App\Models\User::factory(1000)->create();
 
-        $this->call(TitreFoncierSeeder::class);
+        $user_role = Role::where('name', 'user')->first();
+
+        User::all()->each(function ($user) use ($user_role) {
+            if (explode("@", $user->email)[1] !== "app.com") {
+                return $user->assignRole($user_role);
+            }
+        });
 
         \App\Models\User::create([
             'first_name' => fake()->name(),
@@ -44,18 +52,13 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
-        $user = User::where('email','super_admin@app.com')->first();
+        $user = User::where('email', 'super_admin@app.com')->first();
 
         $user->assignRole('super_admin');
 
-
-        $user_role = Role::where('name', 'user')->first();
-
-        User::all()->each(function ($user) use ($user_role) {
-            if (explode("@", $user->email)[1] !== "app.com") {
-                return $user->assignRole($user_role);
-            }
-        });  
+        $this->call(TitreFoncierSeeder::class);
+        $this->call(EtatCessionSeeder::class);
+        $this->call(CertificateProprieteSeeder::class);
         
     }
 }

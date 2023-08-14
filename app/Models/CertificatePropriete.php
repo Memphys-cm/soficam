@@ -14,6 +14,10 @@ class CertificatePropriete extends Model
 
     protected $guarded = []; 
 
+    protected $casts = [
+        'validity' => 'date'
+    ];
+
     public function scopeActive($query): Builder
     {
         return $query->where('status', 'pending_payment');

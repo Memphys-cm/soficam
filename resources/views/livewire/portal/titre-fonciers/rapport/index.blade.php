@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    <div class="row p-3">
+    <div class="row py-3">
         <div class="col">
             <label for="selectedRegion">{{__('by Regions')}}: </label>
             <select wire:model="selectedRegion" id="selectedRegion" class="form-select">

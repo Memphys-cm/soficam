@@ -69,7 +69,7 @@
                         <div class='form-group row mb-2'>
                             <div class='col'>
                                 <label class="px-2" for="user_ids">{{__('Propriators')}}</label>
-                                <x-input.selectmultipleusers wire:model="user_ids" prettyname="user_ids" :options="$users" selected="('user_ids')" />
+                                <x-input.selectmultipleusers wire:model="user_ids" prettyname="user_ids" :options="$users" selected="('user_ids')"  multiple="multiple"/>
                                 @error('user_ids')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
