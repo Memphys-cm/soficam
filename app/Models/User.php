@@ -118,5 +118,15 @@ class User extends Authenticatable
         return $this->belongsToMany(CertificatePropriete::class,'titrefoncier_user','user_id','titre_foncier_id')->withTimestamps();
     }
     
+    public static function search($query)
+    {
+        return empty($query) ?
+            static::query() :
+            static::query()
+            ->where(function ($q) use ($query) {
+                $q->where('first_name', 'like', '%' . $query . '%');
+                $q->orWhere('last_name', 'like', '%' . $query . '%'); 
+            });
+    }
 
 }

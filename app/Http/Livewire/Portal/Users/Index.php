@@ -35,6 +35,8 @@ class Index extends Component
     public $roles;
     public $role_id;
 
+    public ?string $query=null;
+
     // public $total_users, $total_active_users, $total_inactive_users;
 
 
@@ -176,7 +178,7 @@ class Index extends Component
             return abort(401);
         }
 
-        $users = User::with('roles')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $users = User::search($this->query)->with('roles')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
 
         $total_users = User::with(['roles' => function ($role) {
             return $role->whereNotIn('name', ['super_admin'])->get();

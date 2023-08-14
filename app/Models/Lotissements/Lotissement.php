@@ -30,4 +30,16 @@ class Lotissement extends Model
         return $this->hasMany(Parcel::class);
     }
 
+    public static function search($query)
+    {
+        return empty($query) ?
+            static::query() :
+            static::query()
+            ->where(function ($q) use ($query) {
+                $q->whereHas('titreFoncier', function ($q) use ($query) {
+                    $q->where('numero_titre_foncier', 'like', '%' . $query . '%');
+                });
+         });
+    }
+
 }

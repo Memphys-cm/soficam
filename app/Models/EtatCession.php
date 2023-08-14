@@ -20,4 +20,24 @@ class EtatCession extends Model
         return $this->belongsTo(User::class , 'user_id');
     }
     
+    public static function search($query)
+    {
+        return empty($query) ?
+            static::query() :
+            static::query()
+            ->where(function ($q) use ($query) {
+                $q->where('type_operation', 'like', '%' . $query . '%');
+                $q->orWhere('status', 'like', '%' . $query . '%');
+                $q->orWhere('type_personne', 'like', '%' . $query . '%');
+                $q->orWhere('zone', 'like', '%' . $query . '%');
+                $q->orWhereHas('user', function ($q) use ($query) {
+                    $q->where('first_name', 'like', '%' . $query . '%');
+                    $q->where('last_name', 'like', '%' . $query . '%');
+                });
+                $q->orWhereHas('geometre', function ($q) use ($query) {
+                    $q->where('first_name', 'like', '%' . $query . '%');
+                    $q->where('last_name', 'like', '%' . $query . '%');
+                });
+         });
+    }
 }
