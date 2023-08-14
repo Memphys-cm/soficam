@@ -53,4 +53,23 @@ class Division extends Model
         return $this->hasMany(SubDivision::class);
         
     }
+
+    public static function search($query)
+    {
+        return empty($query) ?
+            static::query() :
+            static::query()
+            ->where(function ($q) use ($query) {
+                $q->where('division_name_en', 'like', '%' . $query . '%');
+                $q->orWhere('division_name_fr', 'like', '%' . $query . '%');
+                $q->orWhereHas('subDivision', function ($q) use ($query) {
+                    $q->where('sub_division_name_en', 'like', '%' . $query . '%');
+                    $q->where('sub_division_name_fr', 'like', '%' . $query . '%');
+                });
+                $q->orWhereHas('region', function ($q) use ($query) {
+                    $q->where('region_name_en', 'like', '%' . $query . '%');
+                    $q->where('region_name_fr', 'like', '%' . $query . '%');
+                });
+         });
+    }
 }
