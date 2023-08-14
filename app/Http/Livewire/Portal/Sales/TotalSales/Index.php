@@ -134,7 +134,7 @@ class Index extends Component
             'titre_foncier_id' => $titre_foncier->id,
             'numero_du_lot' => fake()->randomDigitNot(2),
             'surperficie_du_lot' =>  $titre_foncier->superficie_du_TF_mere,
-            'superficie_a_vendre' =>  $titre_foncier->superficie_du_TF_mere,
+            'superficie_a_vendre' =>  'totale',
             'superficie_vendu' =>  $titre_foncier->superficie_du_TF_mere,
             'statut_du_lot' =>  $titre_foncier->etat_terrain,
             'type' => 'normale',
