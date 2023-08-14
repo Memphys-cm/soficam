@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Portal\TitreFonciers;
+namespace App\Http\Livewire\Portal\TitreFonciers\Rapport;
 
 use App\Models\User;
 use App\Models\Region;
@@ -50,12 +50,18 @@ class Index extends Component
     public $recorded_by;
     public $nom_et_prenoms_de_largent_traitant;
     public $le_conservateur;
-    public $numero_ccp;
-    public $attachements;
 
     public  $state = 0;
 
     public ?string $query = null;
+
+    public $selectedRegion=null;
+    public $selectedDivision=null;
+    public $selectedSubDivision=null;
+    public $selectedStatus=null;
+    public $startDate = null;
+    public $endDate = null;
+    public $selectedUsers=[];
 
     public $coordinates = ['',''];
     public $coordonnees = [];
@@ -127,7 +133,6 @@ class Index extends Component
             'limit_est' => 'required',
             'limit_ouest' => 'required',
             'coordonnees' => 'required',
-            'numero_ccp' => 'required',
             'user_ids' => 'required|array|min:1',
             'user_ids.*' => 'required',
         ]);
@@ -159,16 +164,9 @@ class Index extends Component
             'recorded_by' => auth()->user()->name,
             'nom_et_prenoms_de_largent_traitant' => $this->nom_et_prenoms_de_largent_traitant,
             'le_conservateur' => $this->le_conservateur,
-            'numero_ccp' => $this->numero_ccp,
         ]);
 
         $titrefoncier->users()->sync($this->user_ids);
-
-        if(!empty($this->attachements)){
-            $titrefoncier->addMedia($this->attachements->getRealPath())
-            ->usingName($titrefoncier->numero_titre_foncier)
-            ->toMediaCollection('titrefonciers');
-        }
 
         $this->clearFields();
 
@@ -206,7 +204,6 @@ class Index extends Component
         $this->recorded_by =  $titrefoncier->recorded_by;
         $this->nom_et_prenoms_de_largent_traitant =  $titrefoncier->nom_et_prenoms_de_largent_traitant;
         $this->le_conservateur =  $titrefoncier->le_conservateur;
-        $this->numero_ccp =  $titrefoncier->numero_ccp;
 
          $this->coordinates = array_values(json_decode($titrefoncier->coordonnees, true));
          $this->coordonnees = array_values(json_decode($titrefoncier->coordonnees, true));
@@ -239,7 +236,6 @@ class Index extends Component
                 'etat_TF' => 'required',
                 'etat_terrain' => 'required',
                 'provenance_TF' => 'required',
-                'numero_ccp' => 'required',
                 // 'numero_bordereau_analytique' => 'required',
                 // 'volume_du_bordereau_analytique' => 'required',
                 // 'date_detablissement_du_bordereau_analytique' => 'required',
@@ -280,7 +276,6 @@ class Index extends Component
                 'recorded_by' => auth()->user()->name,
                 'nom_et_prenoms_de_largent_traitant' => $this->nom_et_prenoms_de_largent_traitant,
                 'le_conservateur' => $this->le_conservateur,
-                'numero_ccp' => $this->numero_ccp,
                 'coordonnees' => json_encode($this->getCoords()),
             ]);
         }
@@ -353,11 +348,10 @@ class Index extends Component
                 'le_conservateur',
                 'coordonnees',
                 'user_ids',
-                'numero_ccp',
             ]
         );
 
-        $this->user_ids = [];
+        // $this->user_ids = [];
     }
 
     public function render()
@@ -367,11 +361,31 @@ class Index extends Component
             return abort(401);
         }
 
-        $titrefonciers = TitreFoncier::search($this->query)->with('users')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $titrefonciers = TitreFoncier::search($this->query)->with('users')
+        ->when($this->selectedRegion, function ($query, $regionId) {
+            return $query->where('region_id', $regionId);
+        })
+        ->when($this->selectedDivision, function ($query, $divisionId) {
+            return $query->where('division_id', $divisionId);
+        })
+        ->when($this->selectedSubDivision, function ($query, $subDivisionId) {
+            return $query->where('sub_division_id', $subDivisionId);
+        })
+        ->when($this->startDate, function ($query) {
+            return $query->whereDate('date_de_delivrance_du_TF', '>=', $this->startDate);
+        })
+        ->when($this->endDate, function ($query) {
+            return $query->whereDate('date_de_delivrance_du_TF', '<=', $this->endDate);
+        })
+        ->when($this->selectedStatus, function ($query, $selectedStatus) {
+            return $query->where('etat_TF', $selectedStatus);
+        })
+        ->orderBy($this->orderBy, $this->orderAsc)
+        ->paginate($this->perPage);
 
         $titrefonciers_count = TitreFoncier::count();
 
-        return view('livewire.portal.titre-fonciers.index', [
+        return view('livewire.portal.titre-fonciers.rapport.index', [
             'titrefonciers' => $titrefonciers,
             'titrefonciers_count' => $titrefonciers_count,
         ])->layout('components.layouts.dashboard');

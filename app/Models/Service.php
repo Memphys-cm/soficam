@@ -46,4 +46,14 @@ class Service extends Model
              NULL => ''
         };
     }
+
+    public static function search($query)
+    {
+        return empty($query) ?
+            static::query() :
+            static::query()
+            ->where(function ($q) use ($query) {
+                $q->where('service_name_en', 'like', '%' . $query . '%');
+         });
+    }
 }

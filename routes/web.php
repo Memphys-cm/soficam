@@ -93,6 +93,9 @@ Route::group(
             Route::get('simple', App\Http\Livewire\Portal\Sales\TotalSales\Index::class)->name('portal.simple-sale.index');
         });
 
+        Route::prefix('titrefonciers')->group(function (){
+            Route::get('/report', App\Http\Livewire\Portal\TitreFonciers\Rapport\Index::class)->name('portal.tf-report.index');
+        });
 
         Route::prefix('sale-report')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\Sales\SalesReport\Index::class)->name('portal.salereport.index');

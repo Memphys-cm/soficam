@@ -17,6 +17,7 @@ class Index extends Component
     public $service_name_en;
     public $code;
     public $status;
+    public ?string $query = null;
 
 
     //Update & Store Rules
@@ -119,7 +120,9 @@ class Index extends Component
             return abort(401);
         }
 
-        $services = Service::withCount('users')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $services = Service::search($this->query)->
+        //withCount('users')->
+        orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
 
         $services_count = Service::count();
 
