@@ -231,7 +231,7 @@
                         <div class='form-group mb-2 d-flex align-items-end justify-content-between'>
                             <div class=''>
                                 <label for="coordonnees.{{$coordinateIndex}}">{{__('Coordonnees')}} - B{{ $loop->iteration }}</label>
-                                <input wire:model="coordonnees.{{$coordinateIndex}}" type="number" step="0.0001" class="form-control col-md-12 @error('coordonnees') is-invalid @enderror" placeholder="{{__('45.XXXXX')}}" required="" value="" name="coordonnees">
+                                <input wire:model="coordonnees.{{$coordinateIndex}}" type="text" step="0.0001" class="form-control col-md-12 @error('coordonnees') is-invalid @enderror" placeholder="{{__('45.XXXXX')}}" required="" value="" name="coordonnees">
                                 @error('coordonnees')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
