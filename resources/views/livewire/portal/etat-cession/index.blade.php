@@ -179,7 +179,7 @@
                 <div>
                     {{__('Showing')}} {{$perPage > $state_assignments_count ? $state_assignments_count : $perPage  }} {{__('items of')}} {{$state_assignments_count}}
                 </div>
-                {{-- {{ $state_assignments->links() }} --}}
+                {{ $housing_estates->links() }}
             </div>
         </div>
     </div>
