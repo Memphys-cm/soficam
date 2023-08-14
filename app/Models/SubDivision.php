@@ -45,4 +45,19 @@ class SubDivision extends Model
         return $this->belongsTo(Division::class);
     }
 
+    public static function search($query)
+    {
+        return empty($query) ?
+            static::query() :
+            static::query()
+            ->where(function ($q) use ($query) {
+                $q->where('sub_division_name_en', 'like', '%' . $query . '%');
+                $q->orWhere('sub_division_name_fr', 'like', '%' . $query . '%');
+                $q->orWhereHas('division', function ($q) use ($query) {
+                    $q->where('division_name_en', 'like', '%' . $query . '%');
+                    $q->where('division_name_fr', 'like', '%' . $query . '%');
+                });
+         });
+    }
+
 }

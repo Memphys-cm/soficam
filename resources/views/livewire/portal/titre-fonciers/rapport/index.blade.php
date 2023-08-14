@@ -1,6 +1,5 @@
 <div>
     <x-alert />
-    @include('livewire.portal.titre-fonciers.create')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -22,41 +21,62 @@
                     <svg class="icon me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    {{__('Land Titles')}}
+                    {{__('Land Titles Report')}}
                 </h1>
                 <p class="mt-n1 mx-2">{{__('View all Land Titles')}} &#x23F0; </p>
             </div>
-            <div class="d-flex justify-content-between mb-2">
-
-                @can('titre_foncier.create')
-                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateTitreFoncierModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
-                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{__('New')}}
-                </a>
-                @endcan
-                @can('titre_foncier.import')
-                <div class="btn-group me-2">
-                    <button type="button" class="btn btn-outline-tertiary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                        </svg>
-                        <span class="sr-only">{{__('Operations on Land Title')}}</span>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
-                    </div>
-                </div>
-                @endcan
-
-            </div>
         </div>
     </div>
-    <div class="row py-3">
+    <div class="row p-3">
+        <div class="col">
+            <label for="selectedRegion">{{__('by Regions')}}: </label>
+            <select wire:model="selectedRegion" id="selectedRegion" class="form-select">
+                <option value="">All Regions</option>
+                @foreach ($regions as $region)
+                    <option value="{{$region->id}}">{{$region->region_name_en}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col">
+            <label for="selectedDivision">{{__('by Divisions')}}: </label>
+            <select wire:model="selectedDivision" id="selectedDivision" class="form-select">
+                <option value="">All Divisions</option>
+                @foreach ($divisions as $division)
+                    <option value="{{$division->id}}">{{$division->division_name_en}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col">
+            <label for="selectedSubDivision">{{__('by Subdivisions')}}: </label>
+            <select wire:model="selectedSubDivision" id="selectedSubDivision" class="form-select">
+                <option value="">All Sub-Divisions</option>
+                @foreach ($sub_divisions as $sub_division)
+                    <option value="{{$sub_division->id}}">{{$sub_division->sub_division_name_en}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div class="row p-3">
+        <div class="col">
+            <label for="startDate">Start Date:</label>
+            <input type="date" wire:model="startDate" class="form-control" id="startDate">
+        </div>
+        <div class="col">
+            <label for="endDate">End Date:</label>
+            <input type="date" wire:model="endDate" class="form-control" id="endDate">
+        </div>
+        <div class="col">
+            <label for="selectedStatus">{{__('by Status')}}: </label>
+            <select wire:model="selectedStatus" id="selectedStatus" class="form-select">
+                <option value="">By Status</option>
+                <option value="HYPOTHEQUE">HYPOTHEQUE</option>
+                <option value="PRENOTE">PRENOTE</option>
+                <option value="SUSPENDU">SUSPENDU</option>
+                <option value="DISPONIBLE">DISPONIBLE</option>
+            </select>
+        </div>
+    </div>
+    <div class="row p-3">
         <div class="col-md-3">
             <label for="search">{{__('Search')}}: </label>
             <input wire:model="query" id="search" type="text" placeholder="{{__('Search...')}}" class="form-control">
