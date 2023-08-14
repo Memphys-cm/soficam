@@ -28,7 +28,7 @@
             </div>
             <div class="d-flex justify-content-between mb-2">
 
-                @can('etat_cession.create')
+                @can('lotissement.create')
                 <a href="{{route('portal.lotissements.create')}}" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -36,7 +36,7 @@
                 </a>
                 @endcan
 
-                @can('etat_cession.export_n_print')
+                @can('lotissement.export_n_print')
                 <div class="mx-2" wire:loading.remove>
                     <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center {
                         {{-- {count($lotissements) > 0 ? '' :'disabled'}} --}}
