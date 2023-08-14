@@ -2,11 +2,12 @@
 
 namespace App\Models\Lotissements;
 
+use App\Models\User;
 use App\Models\Division;
-use App\Models\Lotissement\Lotissement;
-use App\Models\Lotissements\Block;
-use App\Models\MembreDuCabinet;
 use App\Models\TitreFoncier;
+use App\Models\MembreDuCabinet;
+use App\Models\Lotissements\Block;
+use App\Models\Lotissement\Lotissement;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
