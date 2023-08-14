@@ -196,6 +196,7 @@ class Index extends Component
     {
         $parcels = Parcel::mutationtotale()->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
         $parcels_count = Parcel::mutationtotale()->count();
+        
 
         return view('livewire..portal.sales.total-sales.index', ['parcels' => $parcels, 'parcels_count' => $parcels_count]);
     }
