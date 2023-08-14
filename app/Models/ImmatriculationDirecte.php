@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MutationTotale extends Model
+class ImmatriculationDirecte extends Model
 {
     use HasFactory;
 }

@@ -17,6 +17,7 @@ class Index extends Component
     public EtatCession $state_assignment;
     public $land_titles , $land_id , $geometre_id , $geometres , $subdivisions , $subdivision_id;
     public $state = 0 , $price_m2 , $users , $user_id;
+    public ?string $query=null;
 
     public function mount()
     {
@@ -148,7 +149,7 @@ class Index extends Component
     public function render()
     {
 
-        $state_assignments = EtatCession::
+        $state_assignments = EtatCession::search($this->query)->
         // withCount('users')->
         orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
 

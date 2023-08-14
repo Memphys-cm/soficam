@@ -16,6 +16,7 @@ class Index extends Component
     public $state = 0;
     public $regions;
     public $region_id; 
+    public ?string $query=null;
 
     //Update & Store Rules
     protected array $rules = [
@@ -80,7 +81,7 @@ class Index extends Component
         }
 
 
-        $divisions = Division::with('region')->withCount('subDivisions')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $divisions = Division::search($this->query)->with('region')->withCount('subDivisions')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
         $divisions_count = Division::count();
 
         return view('livewire.portal.divisions.index', [
