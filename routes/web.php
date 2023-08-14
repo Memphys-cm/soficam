@@ -88,6 +88,10 @@ Route::group(
             Route::get('/', App\Http\Livewire\Portal\TitreFonciers\Index::class)->name('portal.titre-fonciers.index');
             Route::get('certificatepropriete', App\Http\Livewire\Portal\CertificatePropriete\Index::class)->name('portal.certificate-propriete.index');
         });
+
+        Route::prefix('titrefonciers')->group(function () {
+            Route::get('/report', App\Http\Livewire\Portal\TitreFonciers\Report\Index::class)->name('portal.titre-fonciers-report.index');
+        });
         
         Route::prefix('operations')->group(function () {
             Route::get('mutation-totale', App\Http\Livewire\Portal\CertificatePropriete\Index::class)->name('portal.mutation-totale.index');
@@ -126,7 +130,7 @@ Route::group(
         });
 
         Route::prefix('releve_immobilier')->group(function () {
-            Route::get('/bienImmobilier', App\Http\Livewire\Portal\ReleveImmobilier\BienImmobilier\Index::class)->name('portal.bien-immobilier.index');
+            Route::get('/bienImmobilier', App\Http\Livewire\Portal\ReleveImmobilier\BienImmobilier\Index::class)->name('portal.bien-mmobilier.index');
             Route::get('/immobilier', App\Http\Livewire\Portal\ReleveImmobilier\Immobilier\Index::class)->name('portal.immobilier.index');
         });
         
