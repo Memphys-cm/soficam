@@ -122,6 +122,14 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'lotissement.sale'],
             ['name' => 'lotissement.add_coordinates'],
 
+            ['name' => 'mutation_totale.view'],
+            ['name' => 'mutation_totale.create'],
+            ['name' => 'mutation_totale.update'],
+            ['name' => 'mutation_totale.delete'],
+            ['name' => 'mutation_totale.export_n_print'],
+            ['name' => 'mutation_totale.sale'],
+            ['name' => 'mutation_totale.add_coordinates'],
+
             ['name' => 'membre_du_cabinet.view'],
             ['name' => 'membre_du_cabinet.create'],
             ['name' => 'membre_du_cabinet.update'],
