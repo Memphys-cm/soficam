@@ -118,17 +118,13 @@
     </div>
     <div class="card pb-3">
         <div class="table-responsive  text-gray-700">
-            <table class="table employee-table table-hover align-items-center ">
+            <table class="table employee-table table-hover table-bordered align-items-center ">
                 <thead>
                     <tr>
                         <th class="border-bottom">{{ __('REQUESTOR') }}</th>
-                        <th class="border-bottom">{{ __('PAYMENT METHOD') }}</th>
-                        <th class="border-bottom">{{ __('SALE TYPE') }}</th>
-                        <th class="border-bottom">{{ __('Sale amount') }}</th>
-                        <th class="border-bottom">{{ __('Payment Status') }}</th>
-                        <th class="border-bottom">{{ __('Created By') }}</th>
+                        <th class="border-bottom">{{ __('PAYMENT') }}</th>
+                        <th class="border-bottom">{{ __('SALE Details') }}</th>
                         <th class="border-bottom">{{ __('Date created') }}</th>
-                        {{-- @canany('user.update', 'user.delete') --}}
                         <th class="border-bottom">{{ __('Action') }}</th>
                         {{-- @endcanany --}}
                     </tr>
@@ -136,7 +132,67 @@
                 <tbody>
                     @forelse($parcels as $parcel)
                     <tr>
+                        <td>
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('TF N')}} : <span class="fw-bolder mx-2"> {{$parcel->titreFoncier->numero_titre_foncier}}</span>
+                            </div>
+                            <x-elements.user :options="$parcel->users" />
+                              
+                        </td>
+                        <td>
+                         
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('Sup Vendu')}} : <span class="fw-bolder mx-2"> {{$parcel->superficie_vendu}} {{ __('m²') }}</span>
+                            </div>
+                            
+                            <div class="d-flex align-items-centerpy-1">
+                                
+                                {{__('Prix du m²')}} : <span class="fw-bolder mx-2"> {{$parcel->prix_du_m2}} {{ __('XAF') }} </span>
+                            </div>
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('Montant de la Vente')}} : <span class="fw-bolder mx-2"> {{$parcel->montant_de_la_vente}} {{ __('XAF') }} </span>
+                            </div>
+                          
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('Type de Versement')}} : <span class="fw-bolder mx-2"> {{$parcel->type_de_versement}}</span>
+                            </div>
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('Type de Vente')}} : <span class="fw-bolder mx-2"> {{$parcel->type_de_venter}}</span>
+                            </div>
+                            
+                          
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('Date de Vente')}} : <span class="fw-bolder mx-2"> {{$parcel->date_de_vente}} </span>
+                            </div>
+                          
+                        </td>
+                      
 
+                      
+                        <td>{{ $parcel->created_at }}</td>
+                        @canany(['certificate_propriete.edit','certificate_propriete.delete'])
+                        <td>
+                            @can('certificate_propriete.update')
+                            <a href='#' wire:click.prevent="initData({{ $parcel -> id }})" data-bs-toggle="modal" data-bs-target="#UpdateparcelModal">
+                                <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                    </path>
+                                </svg>
+                            </a>
+
+                            @endcan
+                            @can('certificate_propriete.delete')
+                            <a href='#' wire:click.prevent="initData({{ $parcel -> id }})" data-bs-toggle="modal" data-bs-target="#DeleteModal">
+                                <svg class="icon icon-xs text-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                    </path>
+                                </svg>
+                            </a>
+                            @endcan
+                        </td>
+                        @endcanany
                     </tr>
                     @empty
                     <tr>

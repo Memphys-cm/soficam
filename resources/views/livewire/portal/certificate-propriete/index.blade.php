@@ -128,12 +128,8 @@
                     @forelse($certificateproprietes as $certificatepropriete)
                     <tr>
                         <td>
-                            <a href="#" class="d-flex align-items-center">
-                                <div class="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-primary me-3"><span class="text-white">{{initials($certificatepropriete->purchaser_name )}}</span></div>
-                                <div class="d-block"><span class="fw-bold">{{$certificatepropriete->requestor_id }}</span>
-                                    <div class="small text-gray">{{!empty($certificatepropriete->purchaser_name ) ? $certificatepropriete->purchaser_name  : ''}}</div>
-                                </div>
-                            </a>
+                            <x-elements.user :options="$certificatepropriete->requestor" />
+                            
                         </td>
                         <td>{{ !empty($certificatepropriete->titreFoncier) ? $certificatepropriete->titreFoncier->numero_titre_foncier : '' }}</td>
                         <td>{{ $certificatepropriete->certificate_proprietes_number }}</td>
