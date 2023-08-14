@@ -2,11 +2,12 @@
 
 namespace App\Models\Lotissements;
 
+use App\Models\User;
 use App\Models\Division;
-use App\Models\Lotissement\Lotissement;
-use App\Models\Lotissements\Block;
-use App\Models\MembreDuCabinet;
 use App\Models\TitreFoncier;
+use App\Models\MembreDuCabinet;
+use App\Models\Lotissements\Block;
+use App\Models\Lotissement\Lotissement;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,6 +19,15 @@ class Parcel extends Model
 
     public $guarded = [];
 
+    public function scopeMutationTotale($query)
+    {
+        return $query->where('type_de_venter','mutation_totale');
+    }
+
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'parcel_user', 'user_id', 'parcel_id')->withTimestamps();
+    }
     public function divisions() : HasMany
     {
         return $this->hasMany(Division::class);

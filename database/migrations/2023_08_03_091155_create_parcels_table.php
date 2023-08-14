@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('titre_foncier_id')->on('titre_fonciers')->index();
             $table->foreignId('block_id')->on('blocks')->nullable()->index();
             $table->integer('numero_du_lot')->nullable();
-            $table->integer('surperficie_du_lot')->nullable();
+            $table->bigInteger('surperficie_du_lot')->nullable();
             $table->enum('statut_du_lot', ['batit', 'non_batit'])->nullable();
             $table->enum('type',['public','normale'])->deafult('normale');
             $table->string('laffectation_du_lot')->nullable();
@@ -37,8 +37,8 @@ return new class extends Migration
             $table->enum('type_de_venter',['simple','mutation_totale'])->default('simple');
             $table->enum('superficie_a_vendre',['totale','partielle'])->nullable();
             $table->float('prix_du_m2',30,2)->nullable();
-            $table->integer('superficie_vendu')->nullable();
-            $table->integer('superficie_restant')->nullable();
+            $table->bigInteger('superficie_vendu')->nullable();
+            $table->bigInteger('superficie_restant')->nullable();
             $table->enum('type_de_versement',['tranche','cash'])->nullable();
             $table->float('montant_de_la_vente',30,2)->nullable();
             $table->float('montant_versee',30,2)->nullable();
