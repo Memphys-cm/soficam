@@ -23,6 +23,16 @@ class Region extends Model
     {
         return config('app.locale') == 'en' ? $this->region_name_en : $this->region_name_fr;
     }
+    public static function search($query)
+    {
+        return empty($query) ?
+            static::query() :
+            static::query()
+            ->where(function ($q) use ($query) {
+                $q->where('code', 'like', '%' . $query . '%');
+                $q->orWhere('region_name_en', 'like', '%' . $query . '%');
+            });
+    }
 
     public function divisions() : HasMany
     {

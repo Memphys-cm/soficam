@@ -195,6 +195,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'profile.update',
             'profile.delete',
         ]);
+        
     }
 
     /**

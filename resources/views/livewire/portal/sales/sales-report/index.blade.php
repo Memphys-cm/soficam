@@ -185,17 +185,31 @@
                 </thead>
                 <tbody>
                     @forelse ($allsales as $allsale)
-                        <tr>
-                            <td>
-                                <x-elements.user :options="$allsale->user" />
-                            </td>
-                            <td><span class="fw-normal">{{ $allsale->sales_code }}</span></td>
-                            <td><span class="fw-normal">{{ $allsale->sales_amount }} {{ __('XAF') }}</span></td>
-                            <td><span class="fw-normal">{{ $allsale->payment_method }}</span></td>
-                            <td><span class="fw-normal badge super-badge p-2 bg-{{ $allsale->statusStyle }} round">{{ $allsale->payment_status }}</span>
-                            </td>
-                            <td><span class="fw-normal">{{ $allsale->created_at->format('Y-m-d') }}</span></td>
-                        </tr>
+                    {{-- @if (
+                        $currentFilter === 'all' &&
+                        (!$sales_type || $allsale->sales_type == $sales_type) &&
+                        (!$payment_status || $allsale->payment_status == $payment_status) &&
+                        (!$payment_method || $allsale->payment_method == $payment_method) &&
+                        (!$created_at || ($allsale->$created_at)) &&
+                        (!$inter_end || $inter_end->isSameDay($allsale->inter_end)) &&
+                        (!$service_id || $allsale->service_id == $service_id) &&
+                        (!$receveur_id || $allsale->receveur_id == $receveur_id) &&
+                        (!$search ||
+                            strpos(strtolower($allsale->sales_code), strtolower($search)) !== false ||
+                            strpos(strtolower($allsale->user_id), strtolower($search)) !== false) ||
+                            ($sales_type && $allsale->sales_type == $sales_type)
+                    ) --}}
+                    
+                            <tr>
+                                <td><span class="fw-normal">{{ $allsale->sales_code }}</span></td>
+                                <td><span class="fw-normal">{{ $allsale->user_id }}</span></td>
+                                <td><span class="fw-normal">{{ $allsale->sales_amount }}</span></td>
+                                <td><span class="fw-normal">{{ $allsale->commentaires }}</span></td>
+                                <td><span class="fw-normal">{{ $allsale->payment_method }}</span></td>
+                                <td><span class="fw-normal">{{ $allsale->payment_status }}</span></td>
+                                <td><span class="fw-normal">{{ $allsale->created_at->format('Y-m-d') }}</span></td>
+                            </tr>
+                        {{-- @endif --}}
                     @empty
                         <tr>
                             <td colspan="9" class="text-center">

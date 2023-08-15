@@ -84,8 +84,8 @@
         <div class="col-md-3">
             <label for="orderBy">{{ __('Order By') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="office_name">{{ __('Office Name') }}</option>
-                <option value="description">{{ __('Descritpion') }}</option>
+                <option value="nom_cabinet">{{ __('Office Name') }}</option>
+                <option value="description">{{ __('Description') }}</option>
                 <option value="created_at">{{ __('Created Date') }}</option>
             </select>
         </div>
