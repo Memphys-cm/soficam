@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('charges', function (Blueprint $table) {
             $table->id();
             $table->enum('status',['pending_payment', 'active', 'inactive']);
-            $table->foreignId('titre_foncier_id')->on('titre_onciers')->index();
-            $table->foreignId('type_charge')->on('titre_fonciers');
+            $table->foreignId('titre_foncier_id')->on('titre_fonciers')->index();
+            $table->enum('type_charge',['prenote','hypotheque','suspendu'])->default('prenote');
+            $table->foreignId('requestor_id')->on('users')->nullable();
+            $table->float('prix',30,2);
+            $table->longText('commantaires');
             $table->timestamps();
         });
     }

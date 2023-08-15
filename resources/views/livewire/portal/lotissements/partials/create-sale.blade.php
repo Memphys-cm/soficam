@@ -1,5 +1,5 @@
 <div wire:ignore.self class="modal side-layout-modal fade" id="CreateLotSaleModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:45%;">
+    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-widdiv:50%;">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
@@ -8,6 +8,30 @@
                         <p class="px-1"> {{ 'Sell' }} {{ __(' ELot') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="store">
+                        
+                        <div class='form-group row mb-2'>
+                            <div class='col'>
+                                <label class="px-2" for="user_ids">{{__('Propriators')}}</label>
+                                <x-input.selectmultipleusers wire:model="user_ids" prettyname="user_ids" :options="$users" selected="('user_ids')"  multiple="multiple"/>
+                                @error('user_ids')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class='form-group row mb-3'>
+                            <div class="col-md-12 ">
+                                <label for="code">{{ __('Notaire') }}</label>
+                                <select wire:model="notaire_id" class="form-control @error('notaire_id') is-invalid @enderror">
+                                    <option value=''>{{__('-- Select --')}}</option>
+                                    @foreach($notaires as $notaire)
+                                    <option wire:key="{{ $notaire->id }}" value='{{$notaire->id}}'> {{!empty($notaire->cabinet) ? $notaire->cabinet->nom_cabinet : '' }} - {{ucfirst($notaire->first_name)}} {{ucfirst($notaire->last_name)}} </option>
+                                    @endforeach
+                                </select>
+                                @error('notaire_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class='form-group row mb-3'>
                             <div class="col">
@@ -90,26 +114,17 @@
                             </div>
                             <div class="mb-4 mt-md-0">
                                 <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-sm btn-loading">
-                                    <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                    </svg>
-                                    <span class="d-none d-sm-inline-block ms-1">{{ __('Save') }}</span>
+                                  
+                                    <span class="d-none d-sm-inline-block ms-1">{{ __('Sell') }}</span>
                                 </button>
                             </div>
                         </div>
-                        <div class="col-md-12 py-2">
-                            <label for="code">{{ __('Commentaires') }}</label>
-                            <textarea wire:model="commentaires" class="form-control  @error('commentaires') is-invalid @enderror" name="" id="" cols="30" rows="3">
-                                    </textarea>
-                            @error('commentaires')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                      
 
-                        <div class="d-flex justify-content-end py-2">
+                        {{-- <div class="d-flex justify-content-end py-2">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{ __('Close') }}</button>
                             <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{__('Sell') }} </button>
-                        </div>
+                        </div> --}}
                     </x-form-items.form>
                 </div>
             </div>
