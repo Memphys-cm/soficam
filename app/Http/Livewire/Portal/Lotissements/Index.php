@@ -2,7 +2,8 @@
 
 namespace App\Http\Livewire\Portal\Lotissements;
 
-use PDF;
+// use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Component;
 use Illuminate\Support\Arr;
 use App\Models\TitreFoncier;
@@ -66,17 +67,18 @@ class Index extends Component
         ]);
     }
 
-    public function  printPdf()
+    public function  printPdf($id)
     {
+        $this->lotissement = Lotissement::findOrFail($id);
         $data = [
-            'housing_estate' => $this->housing_estate,
+            'housing_estate' => $this->lotissement,
             'email' => 'john@example.com',
             // Autres données que vous souhaitez afficher dans la vue
         ];
 
-        $pdf = PDF::loadView('livewire.portal.registration.housing-estate.print', $data);
+        $pdf = Pdf::loadView('livewire.portal.lotissements.print',$data);
 
-        return $pdf->download('livewire.portal.registration.housing-estate.print.pdf');
+        return $pdf->download('print.pdf');
 
         // $pdf = app('dompdf.wrapper')->loadView('livewire.portal.registration.housing-estate.view-housing_estate', $data);
         // $pdf->setPaper('A4'); // Vous pouvez également définir d'autres tailles de papier comme 'letter', 'legal', etc.
