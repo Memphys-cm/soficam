@@ -80,7 +80,7 @@ class AuditLog extends Model
                 $q->orWhereHas('user', function ($q) use ($query) {
                     $q->where('first_name', 'like', '%' . $query . '%');
                     $q->orWhere('last_name', 'like', '%' . $query . '%');
-                    $q->orWhere('matricule', 'like', '%' . $query . '%');
+                    // $q->orWhere('matricule', 'like', '%' . $query . '%');
                     $q->orWhere('email', 'like', '%' . $query . '%');
                 });
             });
