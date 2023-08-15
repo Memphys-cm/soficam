@@ -62,7 +62,7 @@
                                 <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
                                 @canany('titre_foncier.view', 'certificate_propriete.view')
                                 <li class="nav-item">
-                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.divisions.index') || $request->routeIs('portal.sub-divisions.index') ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-land-title"><span>
+                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.certificate-propriete.index') || $request->routeIs('portal.titre-fonciers-charges.index') ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-land-title"><span>
                                             <span class="sidebar-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon icon-sm">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
@@ -76,7 +76,7 @@
                                             </svg>
                                         </span>
                                     </span>
-                                    <div class="multi-level collapse {{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.divisions.index') || $request->routeIs('portal.sub-divisions.index') ? 'show' : '' }}" role="list" id="submenu-land-title" aria-expanded="{{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.division.index') || $request->routeIs('portal.sub_division.index') ? 'false' : 'true' }}">
+                                    <div class="multi-level collapse {{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.certificate-propriete.index') || $request->routeIs('portal.titre-fonciers-charges.index') ? 'show' : '' }}" role="list" id="submenu-land-title" aria-expanded="{{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.division.index') || $request->routeIs('portal.sub_division.index') ? 'false' : 'true' }}">
                                         <ul class="flex-column nav">
                                             @can('titre_foncier.view')
                                             <li class="nav-item {{ $request->routeIs('portal.titre-fonciers.index') ? 'active' : '' }}">
@@ -89,6 +89,13 @@
                                             <li class="nav-item {{ $request->routeIs('portal.certificate-propriete.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.certificate-propriete.index') }}" class="nav-link">
                                                     <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Certificate Pro.') }}</span>
+                                                </a>
+                                            </li>
+                                            @endcan
+                                            @can('charge_titre_foncier.view')
+                                            <li class="nav-item {{ $request->routeIs('portal.titre-fonciers-charges.index') ? 'active' : '' }}">
+                                                <a href="{{ route('portal.titre-fonciers-charges.index') }}" class="nav-link">
+                                                    <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Charges.') }}</span>
                                                 </a>
                                             </li>
                                             @endcan
@@ -171,7 +178,7 @@
                                 @endcanany
                                 @canany('mutation_totale.view', 'certificate_propriete.view')
                                 <li class="nav-item">
-                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.state_assignments.index') || $request->routeIs('portal.mutation-totale.index') ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-land-operations"><span>
+                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.state_assignments.index') || $request->routeIs('portal.mutation-totale.index')  || $request->routeIs('portal.immatriculation_directes.index')  ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-land-operations"><span>
                                             <span class="sidebar-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon icon-sm">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3" />
@@ -186,7 +193,7 @@
                                             </svg>
                                         </span>
                                     </span>
-                                    <div class="multi-level collapse {{ $request->routeIs('portal.mutation-totale.index') || $request->routeIs('portal.state_assignments.index') ? 'show' : '' }}" role="list" id="submenu-land-operations" aria-expanded="{{ $request->routeIs('portal.mutation-totale.index') || $request->routeIs('portal.state_assignments.index') ? 'false' : 'true' }}">
+                                    <div class="multi-level collapse {{ $request->routeIs('portal.mutation-totale.index') || $request->routeIs('portal.state_assignments.index') ? 'show' : '' }}" role="list" id="submenu-land-operations" aria-expanded="{{ $request->routeIs('portal.mutation-totale.index') || $request->routeIs('portal.state_assignments.index') || $request->routeIs('portal.immatriculation_directes.index')  ? 'false' : 'true' }}">
                                         <ul class="flex-column nav">
                                             @can('etat_cession.view')
                                             <li class="nav-item {{ $request->routeIs('portal.state_assignments.*') ? 'active' : '' }}">
@@ -202,13 +209,26 @@
                                                 </a>
                                             </li>
                                             @endcan
+                                            @can('mutation_totale.view')
+                                            <li class="nav-item {{ $request->routeIs('portal.mutation-totale.index') ? 'active' : '' }}">
+                                                <a href="{{ route('portal.mutation-totale.index') }}" class="nav-link">
+                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Morcellement') }}</span>
+                                                </a>
+                                            </li>
+                                            @endcan
+
+                                            @can('mutation_totale.view')
+                                            <li class="nav-item {{ $request->routeIs('portal.immatriculation_directes.index') ? 'active' : '' }}">
+                                                <a href="{{ route('portal.immatriculation_directes.index') }}" class="nav-link">
+                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Imma Direct') }}</span>
+                                                </a>
+                                            </li>
+                                            @endcan
 
                                         </ul>
                                     </div>
                                 </li>
                                 @endcanany
-
-
 
                                 @can('etat_cession.view')
                                 <li class="nav-item {{ $request->routeIs('portal.maps.*') ? 'active' : '' }}">
