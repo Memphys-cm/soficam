@@ -120,17 +120,20 @@
                     @forelse($allsaless as $allsale)
                         <tr>
                             <td>
-                                <a href="#" class="d-flex align-items-center">
-                                    <div
-                                        class="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-primary me-3">
-                                        <span
-                                            class="text-white">{{ initials($allsale->user->first_name) }}</span>
-                                    </div>
-                                    <div class="d-block"><span
-                                            class="fw-bold">{{ $allsale->user->first_name }}</span>
-                                    </div>
-                                </a>
+                                @if ($allsale->user)
+                                    <a href="#" class="d-flex align-items-center">
+                                        <div class="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-primary me-3">
+                                            <span class="text-white">{{ initials($allsale->user->first_name) }}</span>
+                                        </div>
+                                        <div class="d-block">
+                                            <span class="fw-bold">{{ $allsale->user->first_name }}</span>
+                                        </div>
+                                    </a>
+                                @else
+                                    User not found
+                                @endif
                             </td>
+                            
                             <td>{{ $allsale->payment_method }}</td>
                             <td>{{ $allsale->sales_type }}</td>
                             <td>{{ $allsale->sales_amount }} {{ __('XAF') }}</td>

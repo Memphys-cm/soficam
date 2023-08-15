@@ -1,142 +1,118 @@
-<div wire:ignore.self class="modal side-layout-modal fade" id="CreateUpdateStateAssignmentModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
+<div wire:ignore.self class="modal side-layout-modal fade" id="CreateLotSaleModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:45%;">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">{{ $state ? 'Update' : 'Create' }} {{ __(' Etat Cession') }}</h1>
-                        <p class="px-1"> {{ $state ? 'Update' : 'Create' }} {{ __(' Etat Cession') }} &#128522;</p>
+                        <h1 class="mb-0 h4">{{ 'Sell' }} {{ __(' Lot') }}</h1>
+                        <p class="px-1"> {{ 'Sell' }} {{ __(' ELot') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="store">
 
-                        <div class='row form-group mb-3'>
-                            {{-- <div class="col-md-6 py-2">
-                                    <label for="code">{{ __('Reference') }}</label>
-                            <input wire:model="state_assignment.reference_etat_cession" type="text" class="form-control  @error('state_assignment.reference_etat_cession') is-invalid @enderror" placeholder="NW" required="" value="" name="state_assignment.reference_etat_cession" disabled>
-                            @error('state_assignment.reference_etat_cession')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div> --}}
-                        <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Titre Foncier') }}</label>
-                            <x-input.land_title-select wire:model="land_id" prettyname="land_id" :options="$land_titles" selected="('land_id')" />
-                            @error('land_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                        <div class='form-group row mb-3'>
+                            <div class="col">
+                                <label for="payment_method">{{ __('PAYMENT METHOD') }}</label>
+                                <select wire:model="payment_method" class="form-select @error('payment_method') is-invalid @enderror" id="payment_method" required="">
+                                    <option value="">{{ __('-- select payment type --') }}</option>
+                                    <option value="cash" selected>{{ __('Cash') }}</option>
+                                    <option value="tranche">{{ __('Tranche') }}</option>
+                                </select>
+                                @error('payment_method')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class=" col">
+                                <label for="price_per_m²">{{ __('Price(m²)*') }}</label>
+                                <input type="number" wire:model="price_per_m²" class="form-control  @error('price_per_m²') is-invalid @enderror " value="{{ old('price_per_m²') }}" placeholder="0" id="price_per_m²" autofocus="" required="">
+                                @error('price_per_m²')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
                         </div>
-                        <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Arrondissement') }}</label>
-                            <select wire:model="subdivision_id" name="subdivision_id" class="form-select  @error('subdivision_id') is-invalid @enderror">
-                                @foreach ($subdivisions as $subdivision)
-                                <option value="{{$subdivision->id}}">{{ __($subdivision->sub_division_name_en) }} </option>
 
-                                @endforeach
-                            </select>
-                            @error('subdivision_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                        <div class='form-group row mb-3'>
+                            <div class=" col">
+                                <label for="superficie_du_TF_mere">{{ __('AREA SOLD') }}</label>
+                                <input type="number" wire:model="superficie_du_TF_mere" class="form-control  @error('superficie_du_TF_mere') is-invalid @enderror " value="{{ old('superficie_du_TF_mere') }}" placeholder="0" id="superficie_du_TF_mere" autofocus="" required="" disabled>
+                                @error('superficie_du_TF_mere')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class=" col"><label for="sale_amount">{{ __('Sale Amount') }}
+                                    {{ __('XAF') }}</label>
+                                <input type="number" wire:model="sale_amount" class="form-control  @error('sale_amount') is-invalid @enderror " value="{{ old('sale_amount') }}" placeholder="0" id="sale_amount" autofocus="" required="" disabled>
+                                @error('sale_amount')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
                         </div>
-                        <div class="col-md-6 py-2">
-                            <label for="code">{{ __('User') }}</label>
-                            <x-input.select wire:model="user_id" prettyname="user_id" :options="$users->pluck('first_name', 'id')->toArray()" selected="('user_id')" />
-                            @error('geometre_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                        <div class='form-group row mb-3'>
+                            <div class=" col"><label for="commentaires">{{ __('Commentaires') }}</label>
+                                <textarea rows="3" wire:model="commentaires" class="form-control @error('commentaires') is-invalid @enderror" placeholder="Edea" id="commentaires" autofocus="" required="">{{ old('commentaires') }}</textarea>
+                                @error('commentaires')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
                         </div>
-                        <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Geometre') }}</label>
-                            <x-input.select wire:model="geometre_id" prettyname="geometre_id" :options="$geometres->pluck('first_name', 'id')->toArray()" selected="('geometre_id')" />
-                            @error('geometre_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Typee de Personne') }}</label>
-                            <select wire:model="state_assignment.type_personne" name="state_assignment.type_personne" class="form-select  @error('state_assignment.type_personne') is-invalid @enderror">
-                                <option value="">{{ __('--Select Type Person --') }}</option>
-                                <option value="morale">{{ __('moral') }} </option>
-                                <option value="physique">{{ __('physic') }} </option>
-                            </select>
-                            @error('state_assignment.type_personne')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Type D\'Operation') }}</label>
-                            <select wire:model="state_assignment.type_operation" name="state_assignment.type_operation" class="form-select  @error('state_assignment.type_operation') is-invalid @enderror">
-                                <option value="">{{ __('--Select Type Operation --') }}</option>
-                                <option value="bornage">{{ __('bornage') }} </option>
-                                <option value="morcellement">{{ __('morcellement') }} </option>
-                                <option value="mutation_totale">{{ __('mutation_totale') }} </option>
-                                <option value="retrait_indivision">{{ __('retrait_indivision') }} </option>
-                                <option value="immatriculation_direct">{{ __('immatriculation_direct') }} </option>
-                                <option value="concession">{{ __('concession') }} </option>
-                            </select>
-                            @error('state_assignment.type_operation')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Zone') }}</label>
-                            <select wire:model="state_assignment.zone" name="state_assignment.zone" class="form-select  @error('state_assignment.zone') is-invalid @enderror">
-                                <option value="">{{ __('--Select Zone --') }}</option>
-                                <option value="terrain_urbain">{{ __('terrain_urbain') }} </option>
-                                <option value="terrain_rurale">{{ __('terrain_rurale') }} </option>
-                            </select>
-                            @error('state_assignment.zone')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Lieu_dit') }}</label>
-                            <input wire:model="state_assignment.lieu_dit" type="text" class="form-control  @error('state_assignment.lieu_dit') is-invalid @enderror" placeholder="Logpom" required="" value="" name="state_assignment.lieu_dit">
-                            @error('state_assignment.lieu_dit')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-6 py-2">
-                            <label for="code">{{ __('superficie_en_m2') }}</label>
-                            <input wire:model="state_assignment.superficie_en_m2" type="number" class="form-control  @error('state_assignment.superficie_en_m2') is-invalid @enderror" placeholder="25000" required="" value="" name="state_assignment.superficie_en_m2">
-                            @error('state_assignment.superficie_en_m2')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Cout') }}</label>
-                            <input wire:model="state_assignment.cout" type="number" class="form-control  @error('state_assignment.cout') is-invalid @enderror" placeholder="70000" required="" value="" name="state_assignment.cout">
-                            @error('state_assignment.cout')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Frais Supplemetaires') }}</label>
-                            <input wire:model="state_assignment.frais_suplementaires" type="number" class="form-control  @error('state_assignment.frais_suplementaires') is-invalid @enderror" placeholder="15000" required="" value="" name="state_assignment.frais_suplementaires">
-                            @error('state_assignment.frais_suplementaires')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Cout_etat_cession') }}</label>
-                            <input wire:model="state_assignment.cout_etat_cession" type="number" class="form-control  @error('state_assignment.cout_etat_cession') is-invalid @enderror" placeholder="100000" required="" value="" name="state_assignment.cout_etat_cession">
-                            @error('state_assignment.cout_etat_cession')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                        <div class="d-flex justify-content-between align-items-end">
+                            <div class="col-auto">
+                                <div class="text-end">
+                                    <div class="d-flex my-1">
+                                        <div class="me-2">{{ __('Price(m²)') }} :</div>
+                                        <div class="fw-semi-bold"> {{ number_format(floatval($price_per_m²)) }}
+                                            {{ __('XAF') }}
+                                        </div>
+                                    </div>
+                                    <div class="d-flex my-1">
+                                        <div class=" me-2">{{ __('SURFACE FOR SALE') }} : </div>
+                                        <div class="fw-semi-bold">{{ number_format(floatval($superficie_du_TF_mere)) }}
+                                            {{ __('m²') }}
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex border-top border-2 my-1 py-2">
+                                        <div class=" h5 me-2">{{ __('Total Amount') }}:</div>
+                                        <div class="fw-semi-bold   h5"> {{ number_format(floatval($sale_amount)) }}
+                                            {{ __('XAF') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-4 mt-md-0">
+                                <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-sm btn-loading">
+                                    <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                    </svg>
+                                    <span class="d-none d-sm-inline-block ms-1">{{ __('Save') }}</span>
+                                </button>
+                            </div>
                         </div>
                         <div class="col-md-12 py-2">
                             <label for="code">{{ __('Commentaires') }}</label>
-                            <textarea wire:model="state_assignment.commentaires" class="form-control  @error('state_assignment.commentaires') is-invalid @enderror" name="" id="" cols="30" rows="10">
+                            <textarea wire:model="commentaires" class="form-control  @error('commentaires') is-invalid @enderror" name="" id="" cols="30" rows="3">
                                     </textarea>
-                            @error('state_assignment.commentaires')
+                            @error('commentaires')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                </div>
 
-                <div class="d-flex justify-content-end py-2">
-                    <button type="button" wire:click.prevent="clearFields" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{ __('Close') }}</button>
-                    <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ $state ? 'Update' : 'Create' }} </button>
+                        <div class="d-flex justify-content-end py-2">
+                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                            <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{__('Sell') }} </button>
+                        </div>
+                    </x-form-items.form>
                 </div>
-                </x-form-items.form>
             </div>
         </div>
     </div>
+</div>

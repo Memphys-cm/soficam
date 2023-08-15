@@ -2,20 +2,19 @@
 
 namespace App\Models;
 
-use App\Models\Lotissements\Parcel;
-use Spatie\Image\Manipulations;
+use App\Models\TitreFoncier;
+use App\Models\MembreDuCabinet;
 use Spatie\MediaLibrary\HasMedia;
+use App\Models\Lotissements\Parcel;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Registration\HousingEstate;
+use App\Models\Lotissements\Lotissement;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class TitreFoncier extends Model implements HasMedia
+class Operation extends Model implements  HasMedia
 {
     use HasFactory, SoftDeletes, InteractsWithMedia;
 
@@ -29,53 +28,46 @@ class TitreFoncier extends Model implements HasMedia
             ->nonQueued();
     }
 
-    public function users(): BelongsToMany
+    function scopeMutationTotale($query)
     {
-        return $this->belongsToMany(User::class, 'titrefoncier_user', 'user_id', 'titre_foncier_id')->withTimestamps();
+        return $query->where('type_operation', 'mutation_totale');
     }
 
-    public function certificatesProprietes(): HasMany
+    public function parcels(): BelongsToMany
     {
-        return $this->hasMany(CertificatePropriete::class);
+        return $this->belongsToMany(Parcel::class, 'parcel_operation', 'parcel_id', 'operation_id')->withTimestamps();
     }
 
-    public function etatCessionsPaid(): HasMany
+    public function titreFoncier(): BelongsTo
     {
-        return $this->hasMany(EtatCession::class)->where('status','paid');
+        return $this->belongsTo(TitreFoncier::class);
+    }
+    
+    public function geomtre(): BelongsTo
+    {
+        return $this->belongsTo(MembreDuCabinet::class);
     }
 
-    public function parcels(): HasMany
+    public function notaire(): BelongsTo
     {
-        return $this->hasMany(Parcel::class);
+        return $this->belongsTo(MembreDuCabinet::class);
     }
 
-    public function region(): BelongsTo
+    public function conservateur(): BelongsTo
     {
-        return $this->belongsTo(Region::class);
+        return $this->belongsTo(User::class, 'conservateur_id');
     }
+
+    public function lotissement(): BelongsTo
+    {
+        return $this->belongsTo(Lotissement::class);
+    }
+
     public function sales(): HasMany
     {
         return $this->hasMany(Sale::class);
     }
-    public function division(): BelongsTo
-    {
-        return $this->belongsTo(Division::class);
-    }
-    public function subDivision(): BelongsTo
-    {
-        return $this->belongsTo(SubDivision::class);
-    }
 
-    public function getEtatTFStyleAttribute(): String
-    {
-        return match ($this->etat_TF) {
-            'HYPOTHEQUE' => 'info',
-            'DISPONIBLE' => 'success',
-            'PRENOTE' => 'secondary',
-            'SUSPENDU' => 'danger',
-            NULL => ''
-        };
-    }
 
     public static function search($query)
     {
@@ -84,9 +76,9 @@ class TitreFoncier extends Model implements HasMedia
             static::query()
             ->where(function ($q) use ($query) {
                 $q->where('etat_terrain', 'like', '%' . $query . '%');
-                $q->orWhere('numero_titre_foncier', 'like', '%' . $query . '%');                
-                $q->orWhere('zone', 'like', '%' . $query . '%');                
-                $q->orWhere('etat_TF', 'like', '%' . $query . '%'); 
+                $q->orWhere('numero_titre_foncier', 'like', '%' . $query . '%');
+                $q->orWhere('zone', 'like', '%' . $query . '%');
+                $q->orWhere('etat_TF', 'like', '%' . $query . '%');
                 $q->orWhereHas('region', function ($q) use ($query) {
                     $q->where('region_name_en', 'like', '%' . $query . '%');
                     $q->where('region_name_fr', 'like', '%' . $query . '%');
@@ -99,10 +91,11 @@ class TitreFoncier extends Model implements HasMedia
                     $q->where('sub_division_name_en', 'like', '%' . $query . '%');
                     $q->where('sub_division_name_fr', 'like', '%' . $query . '%');
                 });
-                    $q->orWhereHas('users', function ($q) use ($query) {
+                $q->orWhereHas('users', function ($q) use ($query) {
                     $q->where('first_name', 'like', '%' . $query . '%');
                     $q->orWhere('last_name', 'like', '%' . $query . '%');
-                }); 
-         });
+                });
+            });
     }
+
 }

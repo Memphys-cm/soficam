@@ -92,9 +92,13 @@ Route::group(
         Route::prefix('titrefonciers')->group(function () {
             Route::get('/report', App\Http\Livewire\Portal\TitreFonciers\Report\Index::class)->name('portal.titre-fonciers-report.index');
         });
+
+        Route::prefix('titrefonciers')->group(function () {
+            Route::get('/charges', App\Http\Livewire\Portal\TitreFonciers\Charges\Index::class)->name('portal.titre-fonciers-charges.index');
+        });
         
         Route::prefix('operations')->group(function () {
-            Route::get('mutation-totale', App\Http\Livewire\Portal\CertificatePropriete\Index::class)->name('portal.mutation-totale.index');
+            Route::get('mutation-totale', App\Http\Livewire\Portal\Operations\MutationTotale\Index::class)->name('portal.mutation-totale.index');
         });
 
         Route::prefix('land-sales')->group(function () {
@@ -123,6 +127,10 @@ Route::group(
         });
         Route::prefix('etat_cessions')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\EtatCession\Index::class)->name('portal.state_assignments.index');
+        });
+
+        Route::prefix('immatriculation_directes')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\ImmatriculationDirecte\Index::class)->name('portal.immatriculation_directes.index');
         });
 
         Route::prefix('maps')->group(function () {
