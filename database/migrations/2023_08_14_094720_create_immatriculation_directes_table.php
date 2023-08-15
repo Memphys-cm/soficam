@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('immatriculation_directes', function (Blueprint $table) {
             $table->id();
+            $table->string('reference');
+            $table->string('localisation');
             $table->foreignId('titre_foncier_id')->index();
             $table->foreignId('requestor_id')->index()->constrained('users');
             $table->string('numero_bordereau_transmission');
+            $table->string('status')->nullable();
+            $table->string('StatusStyle')->nullable();
+            $table->date('date_delivrance');
             $table->json('comissions')->nullable();
             $table->timestamps();
         });
