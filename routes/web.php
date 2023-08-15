@@ -125,6 +125,10 @@ Route::group(
             Route::get('/', App\Http\Livewire\Portal\EtatCession\Index::class)->name('portal.state_assignments.index');
         });
 
+        Route::prefix('immatriculation_directes')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\ImmatriculationDirecte\Index::class)->name('portal.immatriculation_directes.index');
+        });
+
         Route::prefix('maps')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\Maps\Index::class)->name('portal.maps.index');
         });
