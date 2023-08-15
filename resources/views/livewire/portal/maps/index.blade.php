@@ -1,5 +1,9 @@
 <x-map-master>
     <div id="map"></div>
+    <div id="style-controls" style="position: absolute; top: 10px; left: 10px; z-index: 100;">
+        <button class="btn btn-primary" id="normalStyleButton">Style Normal</button>
+        <button class="btn btn-primary" id="satelliteStyleButton">Style Satellite</button>
+    </div>
     <script>
         mapboxgl.accessToken = "pk.eyJ1IjoiZGlsYW5lMDUiLCJhIjoiY2xreWJydjNxMGd5aDNtc2lsMG5uYnU5ayJ9.WBERCXWXNAEzQWfwc1RwlA";
         const map = new mapboxgl.Map({
@@ -28,11 +32,26 @@
                         // These coordinates outline Maine.
                         'coordinates': [
                             [
-                                [564321.00, 452564.00],
-                                [564335.746, 452548.271],
-                                [564315.224, 452531.059],
-                                [564303.601, 452544.471],
-                                [564321.00, 452564.00],
+                                [
+                                    9.718759675044595,
+                                    4.039558639732135
+                                ],
+                                [
+                                    9.718759675044595,
+                                    4.035245670812884
+                                ],
+                                [
+                                    9.724442532323536,
+                                    4.035245670812884
+                                ],
+                                [
+                                    9.724442532323536,
+                                    4.039558639732135
+                                ],
+                                [
+                                    9.718759675044595,
+                                    4.039558639732135
+                                ]
                             ]
                         ]
                     }
@@ -60,6 +79,24 @@
                     'line-color': '#000',
                     'line-width': 3
                 }
+            });
+
+            // Add navigation controls
+            const nav = new mapboxgl.NavigationControl({
+                showCompass: false // Masquer la boussole
+            });
+            map.addControl(nav, 'top-right');
+
+            // Add style switch buttons
+            const normalStyleButton = document.getElementById('normalStyleButton');
+            const satelliteStyleButton = document.getElementById('satelliteStyleButton');
+
+            normalStyleButton.addEventListener('click', () => {
+                map.setStyle('mapbox://styles/mapbox/light-v11');
+            });
+
+            satelliteStyleButton.addEventListener('click', () => {
+                map.setStyle('mapbox://styles/mapbox/satellite-v9');
             });
         });
     </script>
