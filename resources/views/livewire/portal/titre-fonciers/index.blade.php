@@ -44,11 +44,14 @@
                         <span class="sr-only">{{__('Operations on Land Title')}}</span>
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="{{route('portal.lotissements.index')}}">{{__('Lotissement')}}</a>
+                        <a class="dropdown-item" href="{{route('portal.lotissements.index')}}">{{__('Ventes')}}</a>
+                        <a class="dropdown-item" href="{{route('portal.mutation-totale.index')}}">{{__('Mutation totale')}}</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
+                        <a class="dropdown-item" href="{{route('portal.immobilier.index')}}">{{__('Releve Immo')}}</a>
+                        <a class="dropdown-item" href="{{route('portal.certificate-propriete.index')}}">{{__('Certificate Proprietes')}}</a>
+                        <a class="dropdown-item" href="{{route('portal.titre-fonciers-charges.index')}}">{{__('Charges')}}</a>
+                        <a class="dropdown-item" href="{{route('portal.state_assignments.index')}}">{{__('Etat Cession')}}</a>
                     </div>
                 </div>
                 @endcan
@@ -119,7 +122,7 @@
                         </td>
 
                         <td>
-                            <x-elements.user :options="$titrefoncier->users->take(5)" /> 
+                            <x-elements.user :options="$titrefoncier->users->take(5)" />
                         </td>
                         <td>
                             <div class="d-flex align-items-centerpy-1">

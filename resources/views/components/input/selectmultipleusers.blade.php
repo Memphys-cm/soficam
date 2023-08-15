@@ -32,7 +32,7 @@
 	  return result;
 	}
 	">
-	<select id="{{ $attributes['prettyname'] }}" wire-model="{{ $attributes['wire:model'] }}" wire:change="{{ $attributes['wire:change'] }}" x-ref="{{ $attributes['prettyname'] }}" multiple="multiple">
+	<select id="{{ $attributes['prettyname'] }}" wire-model="{{ $attributes['wire:model'] }}" wire:change="{{ $attributes['wire:change'] }}" x-ref="{{ $attributes['prettyname'] }}"   {{$attributes["multiple"]}}>
 		@if(count($attributes['options'])>0)
 		@foreach($attributes['options'] as $key=>$option)
 		<option value="{{$option->id}}">{{ucfirst($option->first_name)}} {{ucfirst($option->last_name)}} </option>

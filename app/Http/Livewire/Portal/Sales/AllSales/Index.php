@@ -57,7 +57,7 @@ class Index extends Component
 
         });
 
-        $this->refresh(__('immobilier Updated Created!'), 'updateAllSalesModal');
+        $this->refresh(__('Sales Updated Created!'), 'updateAllSalesModal');
 
         $this->clearFields();
     }
