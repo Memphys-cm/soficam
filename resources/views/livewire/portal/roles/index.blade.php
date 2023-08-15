@@ -58,11 +58,6 @@
         </div>
         <div class=' pb-4'>
             <div class="row">
-                <div class="col-md-4">
-                    <label for="search">{{__('Search')}}: </label>
-                    <input wire:model="query" id="search" type="text" placeholder="{{__('Search...')}}" class="form-control">
-                    <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p>
-                </div>
                 <div class="col-md-3">
                     <label for="orderBy">{{__('Order By')}}: </label>
                     <select wire:model="orderBy" id="orderBy" class="form-select">

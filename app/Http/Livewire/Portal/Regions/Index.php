@@ -75,7 +75,7 @@ class Index extends Component
             return abort(401);
         }
 
-        $regions = Region::withCount('divisions')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $regions = Region::search($this->query)->withCount('divisions')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
         $regions_count = Region::count();
 
         return view('livewire.portal.regions.index',
