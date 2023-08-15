@@ -92,6 +92,10 @@ Route::group(
         Route::prefix('titrefonciers')->group(function () {
             Route::get('/report', App\Http\Livewire\Portal\TitreFonciers\Report\Index::class)->name('portal.titre-fonciers-report.index');
         });
+
+        Route::prefix('titrefonciers')->group(function () {
+            Route::get('/charges', App\Http\Livewire\Portal\TitreFonciers\Charges\Index::class)->name('portal.titre-fonciers-charges.index');
+        });
         
         Route::prefix('operations')->group(function () {
             Route::get('mutation-totale', App\Http\Livewire\Portal\Operations\MutationTotale\Index::class)->name('portal.mutation-totale.index');
