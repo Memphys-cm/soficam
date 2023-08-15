@@ -134,7 +134,7 @@
                     <tr>
                         <td>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('TF N')}} : <span class="fw-bolder mx-2"> {{$parcel->titreFoncier->numero_titre_foncier}}</span>
+                                {{__('TF N')}} : <span class="fw-bolder mx-2"> {{$parcel->titreFoncier->numero_titre_foncier }}</span>
                             </div>
                             <x-elements.user :options="$parcel->users" />
                               
