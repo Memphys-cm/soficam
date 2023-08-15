@@ -12,6 +12,7 @@ use App\Models\CertificatePropriete;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Livewire\Traits\WithDataTables;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class Index extends Component
 {
@@ -21,52 +22,11 @@ class Index extends Component
     public $certificates_propriete_id, $certificates_proprietes = [], $users = [], $titre_fonciers = [], $notaires = [], $geomtres = [];
     public $titre_foncier_id, $numero_titre_foncier, $superficie_du_TF_mere;
     public $requestor_id, $region, $division, $sub_division, $lieu_dit;
-    public $parcel_ids, $parcels = [], $etat_cession_id, $etat_cessions = [];
+    public $parcel_id, $parcels = [], $etat_cession_id, $etat_cessions = [];
     public $commentaires;
-    public $newParcels = ['parcel_id' => '' ,'coordinates' => []];
-    public $coordinates = [];
 
-
-    public function addParcel()
-    {
-        $this->newParcels[] = [
-            'parcel_id' =>  '',
-            'coordinates' => [],
-        ];
-
-    }
-
-    public function addCoordinates($parcelIndex)
-    {
-        $this->coordinates = [];
-        $this->newParcels[$parcelIndex]['coordinates'][] = $this->newLot;
-    }
-
-    public function addLotPublic($blockIndex)
-    {
-        $this->newLot = [
-            'id' => '',
-            'numero_du_lot' => '',
-            'surperficie_du_lot' => '',
-            'type' => 'public',
-            'laffectation_du_lot' => '',
-            'statut_du_lot' => 'non_batit',
-            'date_lotissement' => now()->format('d/m/y'),
-        ];
-        $this->blocks[$blockIndex]['parcels'][] = $this->newLot;
-    }
-
-    public function removeBlock($blockIndex)
-    {
-        unset($this->blocks[$blockIndex]);
-        $this->blocks = array_values($this->blocks);
-    }
-
-    public function removeLot($blockIndex, $lotIndex)
-    {
-        unset($this->blocks[$blockIndex]['parcels'][$lotIndex]);
-        $this->blocks[$blockIndex]['parcels'] = array_values($this->blocks[$blockIndex]['parcels']);
-    }
+    public $coordinates = ['', ''];
+    public $coordonnees = [];
 
     public function addCoordinate()
     {
@@ -79,10 +39,11 @@ class Index extends Component
         $this->coordinates = array_values($this->coordinates);
     }
 
-    
+
     public function mount()
     {
-        $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier', 'region_id', 'division_id', 'sub_division_id', 'lieu_dit')->get();
+        $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier', 'region_id', 'division_id', 'sub_division_id', 'lieu_dit')
+                                ->whereHas('parcels', function (Builder $query) { $query->where('type_de_venter', 'mutation_totale');})->get();
         $this->notaires = MembreDuCabinet::notaire()->select('id', 'first_name', 'last_name')->get();
         $this->users = User::role('user')->select('id', 'first_name', 'last_name')->get();
     }
@@ -111,6 +72,7 @@ class Index extends Component
     {
         $operation = Operation::findOrFail($id);
         $this->mutation_totale = $operation;
+        $this->parcels = $operation->titreFoncier->parcels->where('type_de_venter','mutation_totale');
     }
 
     public function store()  
@@ -172,6 +134,24 @@ class Index extends Component
         $this->clearFields();
         $this->refresh(__('Mutation Totale successfully Created'), 'CreateMutationTotaleModal');
     }
+
+    public function delete()
+    {
+        if (!Gate::allows('mutation_totale.delete')) {
+            return abort(401);
+        }
+
+        if (!empty($this->mutation_totale)) {
+
+            // $this->mutation_totale->users()->delete();
+
+            $this->mutation_totale->delete();
+        }
+
+
+        $this->refresh(__('Operation successfully deleted!'), 'DeleteModal');
+    }
+
 
     public function clearFields()
     {
