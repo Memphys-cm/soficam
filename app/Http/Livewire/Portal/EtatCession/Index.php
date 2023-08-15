@@ -8,6 +8,7 @@ use App\Models\EtatCession;
 use App\Models\SubDivision;
 use App\Models\TitreFoncier;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class Index extends Component
 {
@@ -116,7 +117,29 @@ class Index extends Component
         }
         
         // $this->subdivision_id->reference_etat_cession = $code;
-        $this->state_assignment->save();
+        DB::transaction(function(){
+
+            $this->state_assignment->save();
+
+            $sale = Sale::create([
+                'user_id' => $this->user_id,
+                'sales_amount' => $this->state_assignment->cout_etat_cession,
+                'sales_type' => 'EtatCession',
+                'created_by' => auth()->user()->name,
+            ]);
+
+            // Create the Saleable item using only the specified information
+            $saleableData = [
+                'sale_id' => $sale->id,
+                'price' => $this->state_assignment->cout_etat_cession,
+                'quantity' => 1,
+                'saleable_id' => $this->state_assignment->id,
+                'saleable_type' => 'App\Models\EtatCession', // Adjust the namespace if different
+                'created_by' => auth()->user()->name,
+            ];
+
+            DB::table('saleables')->insert($saleableData);
+        });
         $this->state = 0;
         $this->clearFields();
         $this->refresh(__('State Assignment successfully :state!', ['state' => $this->state ? 'Updated' : 'Created']), 'CreateUpdateStateAssignmentModal');
