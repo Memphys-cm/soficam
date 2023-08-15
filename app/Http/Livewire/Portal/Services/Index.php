@@ -119,7 +119,7 @@ class Index extends Component
             return abort(401);
         }
 
-        $services = Service::withCount('users')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $services = Service::search($this->query)->withCount('users')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
 
         $services_count = Service::count();
 

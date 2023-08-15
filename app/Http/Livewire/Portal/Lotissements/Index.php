@@ -56,7 +56,7 @@ class Index extends Component
             return abort(401);
         }
 
-        $lotissements = Lotissement::withCount('blocks')->withCount('parcels')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $lotissements = Lotissement::search($this->query)->withCount('blocks')->withCount('parcels')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
 
         $lotissements_count = Lotissement::count();
 

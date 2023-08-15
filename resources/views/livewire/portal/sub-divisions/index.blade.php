@@ -75,7 +75,7 @@
         <div class="col-md-3">
             <label for="orderBy">{{__('Order By')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="">{{__('Sub-Dision Name')}}</option>
+                <option value="sub_division_name_en">{{__('Sub-Division Name')}}</option>
                 <option value="created_at">{{__('Created Date')}}</option>
             </select>
         </div>

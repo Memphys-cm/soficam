@@ -45,6 +45,10 @@ class Sale extends Model
                 $q->where('sales_amount', 'like', '%' . $query . '%');
                 $q->orWhere('sales_code', 'like', '%' . $query . '%');
                 $q->orWhere('sales_type', 'like', '%' . $query . '%');
+                $q->orWhere('user_id', 'like', '%' . $query . '%');
+                $q->orWhere('payment_status', 'like', '%' . $query . '%');
+                $q->orWhere('service_id', 'like', '%' . $query . '%');
+                $q->orWhere('sales_type', 'like', '%' . $query . '%');
                 
             });
     }

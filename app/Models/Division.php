@@ -62,7 +62,7 @@ class Division extends Model
             ->where(function ($q) use ($query) {
                 $q->where('division_name_en', 'like', '%' . $query . '%');
                 $q->orWhere('division_name_fr', 'like', '%' . $query . '%');
-                $q->orWhereHas('subDivision', function ($q) use ($query) {
+                $q->orWhereHas('subDivisions', function ($q) use ($query) {
                     $q->where('sub_division_name_en', 'like', '%' . $query . '%');
                     $q->where('sub_division_name_fr', 'like', '%' . $query . '%');
                 });
