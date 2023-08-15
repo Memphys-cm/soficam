@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Lotissements\Parcel;
+use App\Models\Charge;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
+use App\Models\Lotissements\Parcel;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Registration\HousingEstate;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -64,6 +65,11 @@ class TitreFoncier extends Model implements HasMedia
     public function subDivision(): BelongsTo
     {
         return $this->belongsTo(SubDivision::class);
+    }
+
+    public function charge(): HasMany
+    {
+        return $this->hasMany(Charge::class);
     }
 
     public function getEtatTFStyleAttribute(): String
