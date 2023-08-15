@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Portal\Sales\AllSales;
 
 use Livewire\Component;
 use App\Models\Sales\Sale;
+use App\Models\Sales\Saleable;
 use App\Models\ReleveImmobilier;
 use Illuminate\Support\Facades\DB;
 use App\Http\Livewire\Traits\WithDataTables;
@@ -50,6 +51,10 @@ class Index extends Component
                 'payment_status' => $this->payment_status,
             ]);
 
+            if ($this->payment_status === 'totally_paid') {
+                Saleable::where('sale_id', $this->allsales->id)
+                    ->update(['saleable_type' => 'DISPONIBLE']);
+            }
             // $this -> immobilier->update([
             //     'status' => $this->payment_status,
                

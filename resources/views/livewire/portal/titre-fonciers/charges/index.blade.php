@@ -29,13 +29,6 @@
                 <p class="mt-n1 mx-2">{{ __('View all charges on Land Title') }} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
-
-                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateChargeModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
-                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{ __('New') }}
-                </a>
-
                 <div class="mx-2" wire:loading.remove>
                     <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center ">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -99,6 +92,7 @@
                 <thead>
                     <tr>
                         <th class="border-bottom">{{ __('LAND TITLE') }}</th>
+                        <th class="border-bottom">{{ __('PROPRIATORS') }}</th>
                         <th class="border-bottom">{{ __('CHARGE') }}</th>
                         <th class="border-bottom">{{ __('STATUS') }}</th>
                         <th class="border-bottom">{{ __('Date created') }}</th>
@@ -107,21 +101,45 @@
                 </thead>
                 <tbody>
                     @forelse($charges as $charge)
-                    <tr>
+                        @php
+                            $statusBgColor = '';
+                            if (isset($statusMapping[$charge->etat_TF])) {
+                                switch ($statusMapping[$charge->etat_TF]) {
+                                    case 'inactive':
+                                        $statusBgColor = 'danger';
+                                        break;
+                                    case 'active':
+                                        $statusBgColor = 'success';
+                                        break;
+                                    case 'pending_payment':
+                                        $statusBgColor = 'secondary';
+                                        break;
+                                }
+                            }
+                        @endphp
                         <td>
-                            <span class="fw-normal">{{$charge->titre_foncier_id}}</span>
+                            <span class="fw-normal">{{$charge->numero_titre_foncier}}</span>
                         </td>
                         <td>
-                            <span class="fw-normal badge super-badge p-2 bg-{{$charge->EtatTFStyle}} round">{{$charge->type_charge}}</span>
+                            <x-elements.user :options="$charge->users->take(5)" /> 
                         </td>
                         <td>
-                            <span class="fw-normal bagde super-badge p-2 bg-{{$charge->StatusStyle}}">{{$charge->status}}</span>
+                            <span class="fw-normal badge super-badge p-2 bg-{{$charge->EtatTFStyle}} round">{{$charge->etat_TF}}</span>
+                        </td>
+                        <td>
+                            <span class="fw-normal bagde super-badge p-2 bg-{{$statusBgColor}} rounded text-white">
+                                @if (isset($statusMapping[$charge->etat_TF]))
+                                {{ $statusMapping[$charge->etat_TF] }}
+                                @else
+                                    N/A
+                                @endif
+                            </span>
                         </td>
                         <td>
                             <span class="fw-normal">{{$charge->created_at->format('Y-m-d')}}</span>
                         </td>
                         <td>
-                            <a href='#' wire:click.prevent="" data-bs-toggle="modal" data-bs-target="#UpdateCertificateProprieteModal">
+                            <a href='#' wire:click.prevent="initData({{$charge->id}})" data-bs-toggle="modal" data-bs-target="#CreateChargeModal">
                                 <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
                                     </path>

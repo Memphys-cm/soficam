@@ -11,16 +11,27 @@ class Charge extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function titrefoncier():BelongsTo {
         return $this->belongsTo(TitreFoncier::class);
     }
 
-    public function getStatusStyle(): String
+    public function getStatusStyleAttribute() : String
     {
-        return match ($this->status) {
-            'pending_payment' => 'secondary',
-            'active' => 'success',
-            'inative' => 'danger',
+        return match ($this->statusMapping) {
+             'active' => 'success',
+             'inactive' => 'dander',
+             'pending_payment' => 'secondary',
+             NULL => ''
+        };
+    }
+    public function getStatusTextAttribute(): String
+    {
+        return match ($this->statusMapping) {
+            'active' => 'Active',
+            'inactive' => 'Inactive',
+            'pending_payment' => 'Pending Payment',
             NULL => ''
         };
     }
