@@ -29,8 +29,8 @@ class Sale extends Component
 
     public function initLotData($id)
     {
-        $parcel = Parcel::findOrFail($id);
-        $this->superficie_du_TF_mere = $parcel->surperficie_du_lot;
+        $this->parcel = Parcel::findOrFail($id);
+        $this->superficie_du_TF_mere = $this->parcel->surperficie_du_lot;
 
     }
 
@@ -68,35 +68,55 @@ class Sale extends Component
             // 'parcels' => 'required|array',
         ]);
 
+        $notaire = MembreDuCabinet::findOrFail($this->notaire_id);
 
-     
-        foreach ($this->blocks as $blockData) {
+         $this->parcel->update([
+            'surperficie_du_lot' =>  $this->superficie_du_TF_mere,
+            'superficie_a_vendre' =>  'totale',
+            'superficie_vendu' =>  $this->superficie_du_TF_mere,
+            'statut_du_lot' =>  $this->etat_terrain,
+            'type' => 'normale',
+            'cabinet_notaire_id' => $notaire->cabinet->id,
+            'notaire_id' => $notaire->id,
+            'type_de_venter' => 'simple',
+            'type_de_versement' => $this->payment_method,
+            'prix_du_m2' =>  $this->price_per_m²,
+            'superficie_restant' =>  $this->price_per_m²,
+            'prix_du_m2' =>  $this->price_per_m²,
+            'montant_de_la_vente' =>  $this->sale_amount,
+            'montant_versee' =>  $this->sale_amount,
+            'montant_restant' =>  0,
+            'commentaire_du_notaire' => $this->commentaires,
+            'date_de_vente' => empty($this->date_de_vente) ? now() : $this->date_de_vente,
+         ]);
+
+        // foreach ($this->blocks as $blockData) {
             
-            if (!empty($blockData['id'])) {
-                $this->block = Block::findOrFail($blockData['id']);
-                $this->block->update([
-                    'block_name' => $blockData['block_name']
-                ]);
-            } else {
-                $this->block = Block::create([
-                    'lotissement_id' => $this->lotissement->id,
-                    'block_name' => $blockData['block_name']
-                ]);
-            }
-            // Mise à jour des lots existants
-            if (is_array($blockData) && isset($blockData['parcels'])) {
-                // Mise à jour des lots existants
-                foreach ($blockData['parcels'] as $lotData) {
-                    if (!empty($lotData['id'])) {
-                        $lot = Parcel::findOrFail($lotData['id']);
-                        $lot->update($lotData);
-                    } else {
+        //     if (!empty($blockData['id'])) {
+        //         $this->block = Block::findOrFail($blockData['id']);
+        //         $this->block->update([
+        //             'block_name' => $blockData['block_name']
+        //         ]);
+        //     } else {
+        //         $this->block = Block::create([
+        //             'lotissement_id' => $this->lotissement->id,
+        //             'block_name' => $blockData['block_name']
+        //         ]);
+        //     }
+        //     // Mise à jour des lots existants
+        //     if (is_array($blockData) && isset($blockData['parcels'])) {
+        //         // Mise à jour des lots existants
+        //         foreach ($blockData['parcels'] as $lotData) {
+        //             if (!empty($lotData['id'])) {
+        //                 $lot = Parcel::findOrFail($lotData['id']);
+        //                 $lot->update($lotData);
+        //             } else {
 
                     
-                    }
-                }
-            }
-        }
+        //             }
+        //         }
+        //     }
+        // }
 
         $this->clearFields();
         $this->refresh(__('Block Sold successfully'), 'CreateLotSaleModal');
