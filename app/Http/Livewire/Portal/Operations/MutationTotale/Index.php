@@ -23,6 +23,62 @@ class Index extends Component
     public $requestor_id, $region, $division, $sub_division, $lieu_dit;
     public $parcel_ids, $parcels = [], $etat_cession_id, $etat_cessions = [];
     public $commentaires;
+    public $newParcels = ['parcel_id' => '' ,'coordinates' => []];
+    public $coordinates = [];
+
+
+    public function addParcel()
+    {
+        $this->newParcels[] = [
+            'parcel_id' =>  '',
+            'coordinates' => [],
+        ];
+
+    }
+
+    public function addCoordinates($parcelIndex)
+    {
+        $this->coordinates = [];
+        $this->newParcels[$parcelIndex]['coordinates'][] = $this->newLot;
+    }
+
+    public function addLotPublic($blockIndex)
+    {
+        $this->newLot = [
+            'id' => '',
+            'numero_du_lot' => '',
+            'surperficie_du_lot' => '',
+            'type' => 'public',
+            'laffectation_du_lot' => '',
+            'statut_du_lot' => 'non_batit',
+            'date_lotissement' => now()->format('d/m/y'),
+        ];
+        $this->blocks[$blockIndex]['parcels'][] = $this->newLot;
+    }
+
+    public function removeBlock($blockIndex)
+    {
+        unset($this->blocks[$blockIndex]);
+        $this->blocks = array_values($this->blocks);
+    }
+
+    public function removeLot($blockIndex, $lotIndex)
+    {
+        unset($this->blocks[$blockIndex]['parcels'][$lotIndex]);
+        $this->blocks[$blockIndex]['parcels'] = array_values($this->blocks[$blockIndex]['parcels']);
+    }
+
+    public function addCoordinate()
+    {
+        $this->coordinates[] = [];
+    }
+
+    public function removeCoordinate($coordinateIndex)
+    {
+        unset($this->coordinates[$coordinateIndex]);
+        $this->coordinates = array_values($this->coordinates);
+    }
+
     
     public function mount()
     {
