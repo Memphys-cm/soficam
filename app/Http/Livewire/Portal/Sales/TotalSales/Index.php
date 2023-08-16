@@ -24,13 +24,14 @@ class Index extends Component
     public $titre_foncier, $titre_foncier_id, $titre_fonciers, $notaires, $notaire_id;
     public $created, $sales_code, $sale_type, $number_of_lots_remaining, $commentaires;
     public $region, $division, $sub_division, $lieu_dit,  $area_sold, $remaining_area, $number_of_blocks, $number_of_lots;
-    public $surface_for_sale, $price_per_m², $sale_amount, $payment_method, $notary, $service_id;
+    public $surface_for_sale, $price_per_m², $sale_amount, $notary, $service_id;
     public $users = [], $user_ids = [];
     public $numero_titre_foncier, $superficie_du_TF_mere, $limit_nord, $limit_sud, $limit_est, $limit_ouest, $sale, $saleId;
     public $remaining_amount = 0;
     public $advanced_amount = 0;
     public $payment_status = 'pending_payment';
-    public $date_de_vente;
+    public $montant_versee, $montant_restant;
+    public $date_de_vente, $type_de_versement;
 
     public function mount()
     {
@@ -48,17 +49,24 @@ class Index extends Component
             $this->sale_amount = $this->superficie_du_TF_mere * $this->price_per_m²;
 
             // Calculate the remaining_amount as the difference between sale_amount and advanced_amount
-            if ($this->payment_method === 'tranche') {
-                $this->remaining_amount = $this->sale_amount - $this->advanced_amount;
+            if ($this->type_de_versement === 'tranche') {
+                if ($this->montant_versee !== null) {
+                    $this->montant_restant = $this->sale_amount - $this->montant_versee;
+                } else {
+                    $this->montant_versee = 0;
+                    $this->montant_restant = 0;
+                }
             } else {
-                $this->advanced_amount = null; // Set the advanced_amount value based on your logic for cash payment
-                $this->remaining_amount = null; // Set the remaining_amount value based on your logic for cash payment
+                $this->type_de_versement = 'cash';
+                $this->montant_versee = 0;
+                $this->montant_restant = 0;
             }
         } else {
             // If any of the inputs is not set, set the sale amount to null or 0, depending on your preference
             $this->sale_amount = null; // or 0
             $this->remaining_amount = null; // or 0
         }
+        // dd($this->type_de_versement);
     }
     public function updatedSurfaceForSale()
     {
@@ -70,10 +78,25 @@ class Index extends Component
         $this->calculateSaleAmount();
     }
 
-    public function updatedAdvancedAmount()
+    public function updatedMontantVersee()
     {
-        // Recalculate the remaining_amount based on the updated advanced_amount
-        $this->remaining_amount = $this->sale_amount - $this->advanced_amount;
+        // Recalculate the montant_restant based on the updated montant_versee
+        $this->montant_restant = $this->sale_amount - $this->montant_versee;
+    }
+
+    public function updated($changedProperty)
+    {
+        // Recalculate based on changed property
+        if (
+            $changedProperty === 'superficie_du_TF_mere' ||
+            $changedProperty === 'price_per_m²' ||
+            $changedProperty === 'montant_versee' ||
+            $changedProperty === 'type_de_versement' ||
+            $changedProperty === 'superficie_restant'
+          
+        ) {
+            $this->calculateSaleAmount();
+        }
     }
 
 
@@ -117,7 +140,7 @@ class Index extends Component
             'titre_foncier_id' => 'required',
             'titre_foncier_id' => 'required',
             'payment_status' => 'required',
-            'payment_method' => 'nullable',
+            'type_de_versement' => 'nullable',
             'user_ids' => 'required',
             'notaire_id' => 'required',
 
@@ -141,13 +164,13 @@ class Index extends Component
             'cabinet_notaire_id' => $notaire->cabinet->id,
             'notaire_id' => $notaire->id,
             'type_de_venter' => 'mutation_totale',
-            'type_de_versement' => $this->payment_method,
+            'type_de_versement' => $this->type_de_versement,
             'prix_du_m2' =>  $this->price_per_m²,
             'superficie_restant' =>  $this->price_per_m²,
             'prix_du_m2' =>  $this->price_per_m²,
             'montant_de_la_vente' =>  $this->sale_amount,
-            'montant_versee' =>  $this->sale_amount,
-            'montant_restant' =>  0,
+            'montant_versee' =>  $this->montant_versee,
+            'montant_restant' =>  $this->montant_restant,
             'commentaire_du_notaire' => $this->commentaires,
             'date_de_vente' => empty($this->date_de_vente) ? now() : $this->date_de_vente ,
         ]);
@@ -167,14 +190,13 @@ class Index extends Component
     }
     public function clearFields()
     {
-        $this->titre_foncier_id = null;
-        $this->service_id = null;
-        $this->price_per_m² = null;
-        $this->sale_amount = null;
-        $this->document = [];
+        $this->titre_foncier_id = '';
+        $this->service_id = '';
+        $this->price_per_m² = '';
+        $this->sale_amount = '';
         $this->sale_type = 'total_sale';
-        $this->payment_method = 'cash';
-        $this->commentaires = null;
+        $this->type_de_versement = 'cash';
+        $this->commentaires = '';
     }
     public function initData($id)
     {
@@ -185,7 +207,7 @@ class Index extends Component
         $this->titre_foncier_id = $sale->titre_foncier_id;
         $this->sales_code = $sale->sales_code;
         $this->superficie_du_TF_mere = $sale->superficie_du_TF_mere;
-        $this->payment_method = $sale->payment_method;
+        $this->type_de_versement = $sale->type_de_versement;
         $this->price_per_m² = $sale->price_per_m²;
         $this->service_id = $sale->service_id;
         $this->advanced_amount = $sale->advanced_amount;

@@ -47,7 +47,7 @@
                                     id="superficie_a_vendre" required="">
                                     <option value="">{{ __('-- select superficie type --') }}
                                     </option>
-                                    <option value="totale" @if (old('superficie_a_vendre') === 'totale') selected @endif>Totale
+                                    <option value="total" @if (old('superficie_a_vendre') === 'total') selected @endif>Total
                                     </option>
                                     <option value="partielle" @if (old('superficie_a_vendre') === 'partielle') selected @endif>
                                         Partielle</option>
@@ -65,19 +65,19 @@
 
                         <div class='form-group row mb-3'>
 
+                            
+
                             <div class="col">
                                 <label for="type_de_versement">{{ __('Type de Versement') }}</label>
-                                <select wire:model.defer="type_de_versement"
+                                <select wire:model="type_de_versement"
                                     class="form-select @error('type_de_versement') is-invalid @enderror"
                                     id="type_de_versement" required="">
-                                    <option value="">{{ __('-- select type --') }}
+                                    
+                                    <option value="cash" @if (old('type_de_versement') === 'cash') selected @endif>Cash
                                     </option>
                                     <option value="tranche" @if (old('type_de_versement') === 'tranche') selected @endif>
                                         Tranche</option>
-                                    <option value="cash" @if (old('type_de_versement') === 'cash') selected @endif>Cash
-                                    </option>
-                                    
-
+    
                                 </select>
                                 @error('payment_type')
                                     <div class="invalid-feedback">
@@ -151,6 +151,9 @@
                                 @enderror
                             </div>
                         </div>
+                        
+
+                      
                         @if ($type_de_versement === 'tranche')
                             <div class='form-group row mb-3'>
                                 <div class="col">
@@ -179,8 +182,9 @@
                         @endif
                         <div class='form-group row mb-3'>
                             <div class=" col"><label for="commentaire_du_notaire">{{ __('Commentaire') }}</label>
-                                <textarea rows="3" wire:model="commentaire_du_notaire" class="form-control @error('commentaire_du_notaire') is-invalid @enderror"
-                                    placeholder="Edea" id="commentaire_du_notaire" autofocus="" required="">{{ old('commentaire_du_notaire') }}</textarea>
+                                <textarea rows="3" wire:model="commentaire_du_notaire"
+                                    class="form-control @error('commentaire_du_notaire') is-invalid @enderror" placeholder="Edea"
+                                    id="commentaire_du_notaire" autofocus="" required="">{{ old('commentaire_du_notaire') }}</textarea>
                                 @error('commentaire_du_notaire')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -213,7 +217,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                   
+
 
                                     <div class="d-flex my-1">
                                         <div class=" me-2">{{ __('Total Surface') }} : </div>
@@ -223,20 +227,20 @@
                                         </div>
                                     </div>
                                     @if ($type_de_versement === 'tranche')
-                                    <div class="d-flex border-top border-2 my-1 py-2">
-                                        <div class=" me-2">{{ __('Montant Versee') }} : </div>
-                                        <div class="fw-semi-bold">
-                                            {{ number_format(floatval($montant_versee)) }}
-                                            {{ __('XAF') }}
+                                        <div class="d-flex border-top border-2 my-1 py-2">
+                                            <div class=" me-2">{{ __('Montant Versee') }} : </div>
+                                            <div class="fw-semi-bold">
+                                                {{ number_format(floatval($montant_versee)) }}
+                                                {{ __('XAF') }}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="d-flex my-1">
-                                        <div class=" me-2">{{ __('Montant Restant') }} : </div>
-                                        <div class="fw-semi-bold">
-                                            {{ number_format(floatval($montant_restant)) }}
-                                            {{ __('XAF') }}
+                                        <div class="d-flex my-1">
+                                            <div class=" me-2">{{ __('Montant Restant') }} : </div>
+                                            <div class="fw-semi-bold">
+                                                {{ number_format(floatval($montant_restant)) }}
+                                                {{ __('XAF') }}
+                                            </div>
                                         </div>
-                                    </div>
                                     @endif
                                     <div class="d-flex border-top border-2 my-1 py-2">
                                         <div class=" h5 me-2">{{ __('Total Amount') }}:</div>
@@ -244,7 +248,7 @@
                                             {{ __('XAF') }}
                                         </div>
                                     </div>
-                                  
+
                                 </div>
                             </div>
                             <div class="mb-4 mt-md-0">
@@ -255,12 +259,6 @@
                                 </button>
                             </div>
                         </div>
-
-
-                        {{-- <div class="d-flex justify-content-end py-2">
-                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{ __('Close') }}</button>
-                            <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{__('Sell') }} </button>
-                        </div> --}}
                     </x-form-items.form>
                 </div>
             </div>
