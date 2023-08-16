@@ -16,6 +16,7 @@ class Sale extends Component
 
     public Block $block;
     public ?Parcel $parcel;
+    public $payment_type;
 
     public $users, $notares, $surface_for_sale, $price_per_m², $sale_amount, $payment_method, $notary, $service_id;
     public $superficie_du_TF_mere, $notaires, $lotissement, $surperficie_du_lot, $notaire_id;
@@ -31,6 +32,10 @@ class Sale extends Component
         $this->lotissement = Lotissement::findOrFail($lotissement_id);
         $this->notaires = MembreDuCabinet::notaire()->select('id', 'first_name', 'last_name')->get();
         $this->users = User::role('user')->select('id', 'first_name', 'last_name')->get();
+
+        $this->calculateSaleAmount();
+        $this->calculateSuperficieRestant();
+
     }
 
     public function initLotData($id)
@@ -61,12 +66,13 @@ class Sale extends Component
     public function calculateSaleAmount()
 {
     if (!empty($this->superficie_du_TF_mere) && !empty($this->price_per_m²)) {
-        if ($this->superficie_a_vendre === 'partielle') {
-            // Calculate the sale amount based on superficie_vendu and price_per_m²
-            $this->sale_amount = $this->superficie_vendu * $this->price_per_m²;
-        } elseif ($this->superficie_a_vendre === 'total') {
-            // Calculate the sale amount based on superficie_du_TF_mere and price_per_m²
+        if ($this->superficie_a_vendre === 'total') {
             $this->sale_amount = $this->superficie_du_TF_mere * $this->price_per_m²;
+            // Calculate the sale amount based on superficie_vendu and price_per_m²
+        } elseif ($this->superficie_a_vendre === 'partielle') {
+            // Calculate the sale amount based on superficie_du_TF_mere and price_per_m²
+            $this->sale_amount = $this->superficie_vendu * $this->price_per_m²;
+
         }
 
         if ($this->type_de_versement === 'tranche') {
@@ -95,12 +101,11 @@ class Sale extends Component
     }
 }
 
-
     public function updatedSuperficieAVendre()
-    {
-        // Call the new method to recalculate superficie_restant
-        $this->calculateSuperficieRestant();
-    }
+{
+    // Call the new method to recalculate superficie_restant
+    $this->calculateSuperficieRestant();
+}
 
     public function updatedSuperficieVendu()
     {
