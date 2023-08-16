@@ -4,14 +4,15 @@
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{__('Create')}}{{__('a new on a Land Title')}}</h1>
+                        <h1 class="mb-0 h4"> {{__('Add')}}{{__(' a new Charge on a Land Title')}}</h1>
                         <p class="px-1"> {{__('Land Title')}} </p>
                     </div>
                     <x-form-items.form wire:submit="">
                         <div class='form-group mb-3 row'>
-                            <div class=" col"><label for="titre_foncier_id">{{ __('Land Title Number') }}</label>
-                                <x-input.select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers->pluck('numero_titre_foncier', 'id')->toArray()"  />
-                                @error('titre_foncier_id')
+                            <div class=" col">
+                                <label for="numero_titre_foncier">{{ __('Land Title Number') }}</label>
+                                <input wire:model="numero_titre_foncier" class="form-control" name="numero_titre_foncier" id="numero_titre_foncier" type="text" disabled>
+                                @error('numero_titre_foncier')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

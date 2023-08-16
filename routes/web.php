@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Models\TitreFoncier;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,17 @@ Route::get('language/{locale}', function ($locale) {
 })->name('language-switcher');
 
 Route::get('/', function () {
+    $json = '{"B1":"4.041199733149849, 9.69162768162152","B2":"4.041468885432741, 9.693452200405627","B3":"4.040350621195789, 9.69353892929149","B4":"4.040456359714004, 9.691653379069184","B5":"4.041199733149849, 9.69162768162152"}';
+    $data = json_decode($json, true);
+
+    $result = [];
+
+    foreach ($data as $coordinates) {
+        list($latitude, $longitude) = explode(', ', $coordinates);
+        $result[] = [$longitude, $latitude];
+    }
+
+    dd($result);
     return redirect('login');
 });
 
@@ -129,9 +141,12 @@ Route::group(
             Route::get('/', App\Http\Livewire\Portal\ImmatriculationDirecte\Index::class)->name('portal.immatriculation_directes.index');
         });
 
-        Route::prefix('maps')->group(function () {
-            Route::get('/', App\Http\Livewire\Portal\Maps\Index::class)->name('portal.maps.index');
-        });
+        Route::get('maps', function () {
+
+            return view('livewire.portal.maps.index');
+
+            // Route::get('/', App\Http\Livewire\Portal\Maps\Index::class)->name('portal.maps.index');
+        })->name('portal.maps.index');
 
         Route::prefix('releve_immobilier')->group(function () {
             Route::get('/bienImmobilier', App\Http\Livewire\Portal\ReleveImmobilier\BienImmobilier\Index::class)->name('portal.bien-mmobilier.index');

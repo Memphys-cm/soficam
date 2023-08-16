@@ -3,13 +3,13 @@
         <thead>
             <tr>
                 <th class="f-bold"> {{ __('LAND TITLE NUMBER') }} </th>
-                <th> {{ __($housing_estate->land_title->numero_titre_foncier ) }} </th>
+                <th> {{ __($housing_estate->titreFoncier->numero_titre_foncier ) }} </th>
                 <th class="f-bold">{{ __('MAETURE') }}</th>
                 <th> {{ $housing_estate->maeture }} </th>
             </tr>
             <tr>
                 <th class="f-bold">{{ __('AREA OF LAND TITLE') }}</th>
-                <th> {{ __($housing_estate->land_title->superficie_du_TF_mere ?? '') }} </th>
+                <th> {{ __($housing_estate->titreFoncier->superficie_du_TF_mere ?? '') }} </th>
                 <th class="f-bold">{{ __('REAL ESTATE DEVELOPER') }}</th>
                 <th> {{ $housing_estate->property_developer }} </th>
             </tr>
@@ -33,14 +33,14 @@
             </tr>
             <tr>
                 <th class="f-bold">{{ __('AREA SOLD') }}</th>
-                <th> {{ __($housing_estate->land_title->superficie_vendue_du_TF_mere ?? '0') }}
+                <th> {{ __($housing_estate->titreFoncier->superficie_vendue_du_TF_mere ?? '0') }}
                 </th>
                 <th class="f-bold">{{ __('LE CABINET DE GEOMETRE') }}</th>
                 <th> {{ $housing_estate->geometric_pratice }} </th>
             </tr>
             <tr>
                 <th class="f-bold">{{ __('REMAINING AREA ') }}</th>
-                <th> {{ __($housing_estate->land_title->superficie_restant_du_TF_mere ?? '0') }}
+                <th> {{ __($housing_estate->titreFoncier->superficie_restant_du_TF_mere ?? '0') }}
                 </th>
                 <th class="f-bold">{{ __('THE SURVEYOR') }}</th>
                 <th> {{ $housing_estate->geometric }} </th>

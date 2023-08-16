@@ -169,6 +169,7 @@
                         </td>
                         @canany('lotissement.update','lotissement.delete')
                         <td>
+                            <button wire:click='printPdf({{$lotissement->id}})' class="btn btn-primary">PDF</button>
                             @can('lotissement.update')
                             <a href="{{route('portal.lotissements.simple-sale',['lotissement_id'=>$lotissement->id])}}">
                                 <svg class="icon icon-sm text-info" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
