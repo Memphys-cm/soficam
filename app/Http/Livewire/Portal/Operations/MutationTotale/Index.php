@@ -21,8 +21,9 @@ class Index extends Component
     public ?Collection $titre_foncier_users; 
     public $certificates_propriete_id, $certificates_proprietes = [], $users = [], $titre_fonciers = [], $notaires = [], $geomtres = [];
     public $titre_foncier_id, $numero_titre_foncier, $superficie_du_TF_mere;
-    public $requestor_id, $region, $division, $sub_division, $lieu_dit;
+    public $requestor_id, $region, $division, $sub_division, $lieu_dit, $operation;
     public $parcel_id, $parcels = [], $etat_cession_id, $etat_cessions = [];
+
 
     public $commentaires;
    
@@ -58,6 +59,7 @@ class Index extends Component
     {
         $operation = Operation::findOrFail($id);
         $this->mutation_totale = $operation;
+        $this->operation = $operation;
     }
 
     public function store()  
