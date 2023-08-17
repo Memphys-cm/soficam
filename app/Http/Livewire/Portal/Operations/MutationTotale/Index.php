@@ -98,7 +98,7 @@ class Index extends Component
         Operation::create([
             'numero_operation' => Str::upper(Str::random(6)) . "" . now()->format('msu'),
             'titre_foncier_id' => $this->titre_foncier_id,
-            'type_operation' => 'mutation_totale',
+            'type_operation' => 'mutation_totale_normale',
             'requestor_id' => $this->requestor_id,
             'certificate_prioprietes_id' => $this->certificates_propriete_id,
             'etat_cession_id' => $this->etat_cession_id,
@@ -106,7 +106,7 @@ class Index extends Component
         ]);
 
         $this->clearFields();
-        $this->refresh(__('Mutation Totale successfully Created'), 'CreateMutationTotaleModal');
+        $this->refresh(__('Mutation Totale successfully Created'), 'CreateMutationTotaleNormaleModal');
     }
 
     public function storeGeomtreUpdates()
@@ -162,6 +162,7 @@ class Index extends Component
             'etat_cession_id',
         ]);
     }
+    
     public function render()
     {
         if (!Gate::allows('mutation_totale.view')) {
