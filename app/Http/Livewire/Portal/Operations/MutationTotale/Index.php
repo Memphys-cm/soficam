@@ -23,23 +23,9 @@ class Index extends Component
     public $titre_foncier_id, $numero_titre_foncier, $superficie_du_TF_mere;
     public $requestor_id, $region, $division, $sub_division, $lieu_dit;
     public $parcel_id, $parcels = [], $etat_cession_id, $etat_cessions = [];
+
     public $commentaires;
-
-    public $coordinates = ['', ''];
-    public $coordonnees = [];
-
-    public function addCoordinate()
-    {
-        $this->coordinates[] = [];
-    }
-
-    public function removeCoordinate($coordinateIndex)
-    {
-        unset($this->coordinates[$coordinateIndex]);
-        $this->coordinates = array_values($this->coordinates);
-    }
-
-
+   
     public function mount()
     {
         $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier', 'region_id', 'division_id', 'sub_division_id', 'lieu_dit')
@@ -72,7 +58,6 @@ class Index extends Component
     {
         $operation = Operation::findOrFail($id);
         $this->mutation_totale = $operation;
-        $this->parcels = $operation->titreFoncier->parcels->where('type_de_venter','mutation_totale');
     }
 
     public function store()  
@@ -109,32 +94,6 @@ class Index extends Component
         $this->refresh(__('Mutation Totale successfully Created'), 'CreateMutationTotaleNormaleModal');
     }
 
-    public function storeGeomtreUpdates()
-    {
-        if (!Gate::allows('mutation_totale.create')) {
-            return abort(401);
-        }
-
-        $this->validate([
-            'titre_foncier_id' => 'required',
-            'requestor_id' => 'required',
-            'etat_cession_id' => 'sometimes',
-            'certificates_propriete_id' => 'required',
-        ]);
-
-        $this->mutation_total->update([
-            'geometre_id' => $this->geometre_id,
-            'numero_reference_plan' => $this->numero_reference_plan,
-            'numero_reference_quittance_etat_cession' => $this->numero_reference_quittance_etat_cession,
-            'commantaires_geometre' => $this->commantaires_geometre,
-            'certificate_prioprietes_id' => $this->certificates_propriete_id,
-            'etat_cession_id' => $this->etat_cession_id,
-        ]);
-
-        $this->clearFields();
-        $this->refresh(__('Mutation Totale successfully Created'), 'CreateMutationTotaleModal');
-    }
-
     public function delete()
     {
         if (!Gate::allows('mutation_totale.delete')) {
@@ -162,7 +121,7 @@ class Index extends Component
             'etat_cession_id',
         ]);
     }
-    
+
     public function render()
     {
         if (!Gate::allows('mutation_totale.view')) {
