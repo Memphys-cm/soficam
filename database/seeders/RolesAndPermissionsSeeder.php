@@ -129,6 +129,16 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'mutation_totale.export_n_print'],
             ['name' => 'mutation_totale.sale'],
             ['name' => 'mutation_totale.add_coordinates'],
+            ['name' => 'mutation_totale.par_deces'],
+
+            ['name' => 'morcellement.view'],
+            ['name' => 'morcellement.create'],
+            ['name' => 'morcellement.update'],
+            ['name' => 'morcellement.delete'],
+            ['name' => 'morcellement.export_n_print'],
+            ['name' => 'morcellement.sale'],
+            ['name' => 'morcellement.add_coordinates'],
+            ['name' => 'morcellement.forcee'],
 
             ['name' => 'membre_du_cabinet.view'],
             ['name' => 'membre_du_cabinet.create'],
