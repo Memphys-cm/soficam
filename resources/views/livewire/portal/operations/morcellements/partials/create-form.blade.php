@@ -1,11 +1,11 @@
-<div wire:ignore.self class="modal side-layout-modal fade" id="CreateMutationTotaleNormaleModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
+<div wire:ignore.self class="modal side-layout-modal fade" id="CreateMorcellementNormaleModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:45%;">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Create')}}{{__(' total mutation')}}</h1>
-                        <p class="px-1"> {{ __('Create')}}{{__(' a total mutation on land title')}} </p>
+                        <h1 class="mb-0 h4"> {{ __('Create')}}{{__(' morcellement')}}</h1>
+                        <p class="px-1"> {{ __('Create')}}{{__(' a morcellement on land title')}} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <div class='form-group  mb-2'>

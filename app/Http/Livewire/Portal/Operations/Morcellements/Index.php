@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Portal\Operations\MutationTotale;
+namespace App\Http\Livewire\Portal\Operations\Morcellements;
 
 use App\Models\User;
 use Livewire\Component;
@@ -18,7 +18,7 @@ class Index extends Component
 {
     use WithDataTables;
 
-    public ?Collection $titre_foncier_users; 
+    public ?Collection $titre_foncier_users;
     public $certificates_propriete_id, $certificates_proprietes = [], $users = [], $titre_fonciers = [], $notaires = [], $geomtres = [];
     public $titre_foncier_id, $numero_titre_foncier, $superficie_du_TF_mere;
     public $requestor_id, $region, $division, $sub_division, $lieu_dit;
@@ -43,7 +43,9 @@ class Index extends Component
     public function mount()
     {
         $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier', 'region_id', 'division_id', 'sub_division_id', 'lieu_dit')
-                                ->whereHas('parcels', function (Builder $query) { $query->where('type_de_venter', 'mutation_totale');})->get();
+            ->whereHas('parcels', function (Builder $query) {
+                $query->where('type_de_venter', 'morcellements');
+            })->get();
         $this->notaires = MembreDuCabinet::notaire()->select('id', 'first_name', 'last_name')->get();
         $this->users = User::role('user')->select('id', 'first_name', 'last_name')->get();
     }
@@ -61,23 +63,22 @@ class Index extends Component
             $this->division = $tf->division->division_name;
             $this->titre_foncier_users = $tf->users;
             $this->certificates_proprietes = $tf->certificatesProprietes;
-            $this->etat_cessions = $tf->etatCessionsPaid->where('type_operation','mutation_totale');
+            $this->etat_cessions = $tf->etatCessionsPaid->where('type_operation', 'morcellement');
             $this->parcels = $tf->parcels;
-        }else{
-
+        } else {
         }
     }
 
-    public function initData($id)  
+    public function initData($id)
     {
         $operation = Operation::findOrFail($id);
-        $this->mutation_totale = $operation;
-        $this->parcels = $operation->titreFoncier->parcels->where('type_de_venter','mutation_totale');
+        $this->morcellement = $operation;
+        $this->parcels = $operation->titreFoncier->parcels->where('type_de_venter', 'morcellement');
     }
 
-    public function store()  
+    public function store()
     {
-        if (!Gate::allows('mutation_totale.create')) {
+        if (!Gate::allows('morcellement.create')) {
             return abort(401);
         }
 
@@ -90,15 +91,15 @@ class Index extends Component
 
         $cp = CertificatePropriete::findOrFail($this->certificates_propriete_id);
 
-        if($cp->validity->lt(now())){
-            return ;
+        if ($cp->validity->lt(now())) {
+            return;
             session()->flash('message', __('Certificate propriete provided is in valid'));
         }
 
         Operation::create([
             'numero_operation' => Str::upper(Str::random(6)) . "" . now()->format('msu'),
             'titre_foncier_id' => $this->titre_foncier_id,
-            'type_operation' => 'mutation_totale_normale',
+            'type_operation' => 'morcellement_normale',
             'requestor_id' => $this->requestor_id,
             'certificate_prioprietes_id' => $this->certificates_propriete_id,
             'etat_cession_id' => $this->etat_cession_id,
@@ -106,12 +107,12 @@ class Index extends Component
         ]);
 
         $this->clearFields();
-        $this->refresh(__('Mutation Totale successfully Created'), 'CreateMutationTotaleNormaleModal');
+        $this->refresh(__('Morcellement Totale successfully Created'), 'CreateMorcellementNormaleModal');
     }
 
     public function storeGeomtreUpdates()
     {
-        if (!Gate::allows('mutation_totale.create')) {
+        if (!Gate::allows('morcellement.create')) {
             return abort(401);
         }
 
@@ -137,15 +138,15 @@ class Index extends Component
 
     public function delete()
     {
-        if (!Gate::allows('mutation_totale.delete')) {
+        if (!Gate::allows('morcellement.delete')) {
             return abort(401);
         }
 
-        if (!empty($this->mutation_totale)) {
+        if (!empty($this->morcellement)) {
 
-            // $this->mutation_totale->users()->delete();
+            // $this->morcellement->users()->delete();
 
-            $this->mutation_totale->delete();
+            $this->morcellement->delete();
         }
 
 
@@ -165,17 +166,16 @@ class Index extends Component
     
     public function render()
     {
-        if (!Gate::allows('mutation_totale.view')) {
+        if (!Gate::allows('morcellement.view')) {
             return abort(401);
         }
 
-        $mutation_totales = Operation::search($this->query)->mutationTotale()->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
-        $mutation_totales_count = Operation::mutationTotale()->count();
+        $morcellements = Operation::search($this->query)->morcellements()->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $morcellements_count = Operation::morcellements()->count();
 
-        return view('livewire.portal.operations.mutation-totale.index', [
-            'mutation_totales' => $mutation_totales,
-            'mutation_totales_count' => $mutation_totales_count,
+        return view('livewire.portal.operations.morcellements.index', [
+            'morcellements' => $morcellements,
+            'morcellements_count' => $morcellements_count,
         ])->layout('components.layouts.dashboard');
-
     }
 }
