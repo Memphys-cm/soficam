@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('operations', function (Blueprint $table) {
             $table->id();
             $table->string('numero_operation');
-            $table->enum('type_operation', ['mutation_totale', 'morcellement', 'retrait_indivision', 'mutation_par_deces'])->default('mutation_totale');
+            $table->enum('type_operation', ['mutation_totale_normale','mutation_totale_par_deces','morcellement_normale', 'morcellement_forcee', 'retrait_indivision'])->default('mutation_totale_normale');
             $table->foreignId('requestor_id')->on('users')->nullable();
             $table->foreignId('titre_foncier_id')->nullable();
             $table->foreignId('certificate_prioprietes_id')->nullable();

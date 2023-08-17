@@ -152,6 +152,12 @@
                             <div class="d-flex align-items-centerpy-1">
                                 {{__('Montant de la Vente')}} : <span class="fw-bolder mx-2"> {{$parcel->montant_de_la_vente}} {{ __('XAF') }} </span>
                             </div>
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('Montant Versee')}} : <span class="fw-bolder mx-2"> {{$parcel->montant_versee}} {{ __('XAF') }} </span>
+                            </div>
+                            <div class="d-flex align-items-centerpy-1">
+                                {{__('Montant Restant')}} : <span class="fw-bolder mx-2"> {{$parcel->montant_restant}} {{ __('XAF') }} </span>
+                            </div>
                           
                         </td>
                         <td>

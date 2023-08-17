@@ -178,7 +178,7 @@
                                 @endcanany
                                 @canany('mutation_totale.view', 'certificate_propriete.view')
                                 <li class="nav-item">
-                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.state_assignments.index') || $request->routeIs('portal.mutation-totale.index')  || $request->routeIs('portal.immatriculation_directes.index')  ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-land-operations"><span>
+                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.state_assignments.index') || $request->routeIs('portal.mutation-totale.index')  || $request->routeIs('portal.immatriculation_directes.index')  || $request->routeIs('portal.morcellements.index') ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-land-operations"><span>
                                             <span class="sidebar-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon icon-sm">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3" />
@@ -193,7 +193,7 @@
                                             </svg>
                                         </span>
                                     </span>
-                                    <div class="multi-level collapse {{ $request->routeIs('portal.mutation-totale.index') || $request->routeIs('portal.state_assignments.index') ? 'show' : '' }}" role="list" id="submenu-land-operations" aria-expanded="{{ $request->routeIs('portal.mutation-totale.index') || $request->routeIs('portal.state_assignments.index') || $request->routeIs('portal.immatriculation_directes.index')  ? 'false' : 'true' }}">
+                                    <div class="multi-level collapse {{ $request->routeIs('portal.mutation-totale.index') || $request->routeIs('portal.state_assignments.index')  || $request->routeIs('portal.morcellements.index') ? 'show' : '' }}" role="list" id="submenu-land-operations" aria-expanded="{{ $request->routeIs('portal.mutation-totale.index') || $request->routeIs('portal.state_assignments.index') || $request->routeIs('portal.immatriculation_directes.index')  ? 'false' : 'true' }}">
                                         <ul class="flex-column nav">
                                             @can('etat_cession.view')
                                             <li class="nav-item {{ $request->routeIs('portal.state_assignments.*') ? 'active' : '' }}">
@@ -209,9 +209,9 @@
                                                 </a>
                                             </li>
                                             @endcan
-                                            @can('mutation_totale.view')
-                                            <li class="nav-item {{ $request->routeIs('portal.mutation-totale.index') ? 'active' : '' }}">
-                                                <a href="{{ route('portal.mutation-totale.index') }}" class="nav-link">
+                                            @can('morcellement.view')
+                                            <li class="nav-item {{ $request->routeIs('portal.morcellements.index') ? 'active' : '' }}">
+                                                <a href="{{ route('portal.morcellements.index') }}" class="nav-link">
                                                     <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Morcellement') }}</span>
                                                 </a>
                                             </li>

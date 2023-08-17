@@ -30,7 +30,11 @@ class Operation extends Model implements  HasMedia
 
     function scopeMutationTotale($query)
     {
-        return $query->where('type_operation', 'mutation_totale');
+        return $query->where('type_operation', 'mutation_totale_normale')->orWhere('type_operation', 'mutation_totale_par_deces');
+    }
+    function scopeMorcellements($query)
+    {
+        return $query->where('type_operation', 'morcellement_normale')->orWhere('type_operation', 'morcellement_forcee');
     }
 
     public function parcels(): BelongsToMany
@@ -66,6 +70,29 @@ class Operation extends Model implements  HasMedia
     public function sales(): HasMany
     {
         return $this->hasMany(Sale::class);
+    }
+
+    public function getTypeOperationStyleAttribute(): String
+    {
+        return match ($this->type_operation) {
+            'mutation_totale_normale' => 'info',
+            'mutation_totale_par_deces' => 'primary',
+            'morcellement_normale' =>'secondary',
+            'morcellement_forcee' => 'tertiary', 
+            'retrait_indivision' => 'dark', 
+            NULL => ''
+        };
+    }
+    public function getTypeOperationTextAttribute(): String
+    {
+        return match ($this->type_operation) {
+            'mutation_totale_normale' => 'Mutation Totale',
+            'mutation_totale_par_deces' => 'Mutation Par Deces',
+            'morcellement_normale' => 'Morcellement',
+            'morcellement_forcee' => 'Morcellement Force',
+            'retrait_indivision' => 'Retrait D\'indivision',
+            NULL => ''
+        };
     }
 
 

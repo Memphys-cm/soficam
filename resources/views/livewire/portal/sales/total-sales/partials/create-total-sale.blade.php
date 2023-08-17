@@ -76,17 +76,24 @@
                             </div>
                         </div>
                         <div class='form-group row mb-3'>
+                          
+
                             <div class="col">
-                                <label for="payment_method">{{ __('PAYMENT METHOD') }}</label>
-                                <select wire:model="payment_method" class="form-select @error('payment_method') is-invalid @enderror" id="payment_method" required="">
-                                    <option value="">{{ __('-- select payment type --') }}</option>
-                                    <option value="cash" selected>{{ __('Cash') }}</option>
-                                    <option value="tranche">{{ __('Tranche') }}</option>
+                                <label for="type_de_versement">{{ __('PAYMENT TYPE*') }}</label>
+                                <select wire:model="type_de_versement"
+                                    class="form-select @error('type_de_versement') is-invalid @enderror"
+                                    id="type_de_versement" required="">
+                                    
+                                    <option value="cash" @if (old('type_de_versement') === 'cash') selected @endif>Cash
+                                    </option>
+                                    <option value="tranche" @if (old('type_de_versement') === 'tranche') selected @endif>
+                                        Tranche</option>
+
                                 </select>
-                                @error('payment_method')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                                @error('type_de_versement')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
                             <div class=" col">
@@ -120,6 +127,32 @@
                                 @enderror
                             </div>
                         </div>
+                        @if ($type_de_versement === 'tranche')
+                        <div class='form-group row mb-3'>
+                            <div class="col">
+                                <label for="montant_versee">{{ __('Montant Versee(XAF)') }}</label>
+                                <input type="number" wire:model="montant_versee"
+                                    class="form-control @error('montant_versee') is-invalid @enderror"
+                                    value="{{ old('montant_versee') }}" placeholder="0" id="montant_versee"
+                                    autofocus="" required="">
+                                @error('montant_versee')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="col">
+                                <label for="montant_restant">{{ __('Montant Restant(XAF)') }}</label>
+                                <input type="text"class="form-control" id="montant_restant"
+                                    name="montant_restant" value="{{ $montant_restant ?? 0 }}" readonly>
+                                @error('montant_restant')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                    @endif
                         <div class='form-group row mb-3'>
                             <div class=" col"><label for="commentaires">{{ __('Commentaires') }}</label>
                                 <textarea rows="3" wire:model="commentaires" class="form-control @error('commentaires') is-invalid @enderror" placeholder="Edea" id="commentaires" autofocus="" required="">{{ old('commentaires') }}</textarea>
@@ -146,6 +179,22 @@
                                         </div>
                                     </div>
 
+                                    @if ($type_de_versement === 'tranche')
+                                    <div class="d-flex border-top border-2 my-1 py-2">
+                                        <div class=" me-2">{{ __('Montant Versee') }} : </div>
+                                        <div class="fw-semi-bold">
+                                            {{ number_format(floatval($montant_versee)) }}
+                                            {{ __('XAF') }}
+                                        </div>
+                                    </div>
+                                    <div class="d-flex my-1">
+                                        <div class=" me-2">{{ __('Montant Restant') }} : </div>
+                                        <div class="fw-semi-bold">
+                                            {{ number_format(floatval($montant_restant)) }}
+                                            {{ __('XAF') }}
+                                        </div>
+                                    </div>
+                                @endif
                                     <div class="d-flex border-top border-2 my-1 py-2">
                                         <div class=" h5 me-2">{{ __('Total Amount') }}:</div>
                                         <div class="fw-semi-bold   h5"> {{ number_format(floatval($sale_amount)) }}
