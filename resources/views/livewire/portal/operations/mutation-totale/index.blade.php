@@ -48,11 +48,14 @@
             <div class="d-flex justify-content-between mb-2">
 
                 @can('mutation_totale.create')
-                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateTitreFoncierModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateMutationTotaleNormaleModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{__('New')}}
                 </a>
+                @endcan
+                @can('mutation_totale.create')
+                @livewire('portal.operations.mutation-totale.partials.create-par-deces-form')
                 @endcan
             </div>
         </div>
@@ -100,6 +103,7 @@
                         <th class="border-bottom">{{__('Land title')}}</th>
                         <th class="border-bottom">{{__('Location')}}</th>
                         <th class="border-bottom">{{__('Status')}}</th>
+                        <th class="border-bottom">{{__('Type Operation')}}</th>
                         <th class="border-bottom">{{__('Date created')}}</th>
                         @canany('mutation_totale.update','mutation_totale.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
@@ -126,7 +130,6 @@
                             </div>
                             {{__('Owners')}}
                             <x-elements.user :options="$mutation_totale->titreFoncier->users->take(5)" />
-                            {{__('Status')}}
                         </td>
                         <td>
                             <div class="d-flex align-items-centerpy-1">
@@ -143,6 +146,9 @@
                             </div>
                         </td>
                         <td>
+                            <span class="fw-normal badge super-badge p-2 bg-{{$mutation_totale->typeOperationStyle}} round">{{$mutation_totale->type_operation_text}}</span>
+                        </td>
+                        <td>
                             <div class="d-flex align-items-centerpy-1">
                                 {{__('Statut Geometre')}} : <span class="fw-bolder mx-2">{{$mutation_totale->statut_geometre}} </span>
                             </div>
@@ -153,6 +159,7 @@
                                 {{__('Statut Conservateur')}}: <span class="fw-bolder mx-2"> {{$mutation_totale->statut_conservateur}}</span>
                             </div>
                         </td>
+
                         <td>
                             <span class="fw-normal">{{$mutation_totale->created_at->format('Y-m-d')}}</span>
                         </td>
