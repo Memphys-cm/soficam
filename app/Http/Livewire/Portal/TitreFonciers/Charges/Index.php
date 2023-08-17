@@ -9,6 +9,7 @@ use App\Models\Sales\Sale;
 use App\Models\TitreFoncier;
 use Illuminate\Support\Facades\DB;
 use App\Http\Livewire\Traits\WithDataTables;
+use Twilio\Rest\Client;
 
 class Index extends Component
 {
@@ -17,6 +18,7 @@ class Index extends Component
     public $titre_foncier_id, $titre_fonciers, $titre_foncier;
     public $type_charge;
     public $etat_TF;
+    public $phone_number = '+237672959097';
 
     public function mount()
     {
@@ -96,7 +98,25 @@ class Index extends Component
 
         });
     
-        $this->refresh(__('immobilier successfully Created!'), 'CreateChargeModal');
+        $this->refresh(__('Charge successfully Created!'), 'CreateChargeModal');
+    }
+
+    public function sendMessage() {
+        $user = $this->titrefoncier->titrefoncier_user->user_id;
+
+        if($user) {
+            $twilio = new Client(config('services.twilio.sid'), config('services.twilio.token'));
+
+            $messageBody = "Hello {$user->first_name}, a new charge has been added to your land title.";
+
+            $twilio->messages->create(
+                $user->primary_phone_number,
+                [
+                    'from' => config('services.twilio.phone_number'),
+                    'body' => $messageBody,
+                ]
+            );
+        }
     }
 
     public function render()
