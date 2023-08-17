@@ -5,103 +5,97 @@ namespace App\Http\Livewire\Portal\TitreFonciers\Charges;
 use App\Models\User;
 use App\Models\Charge;
 use Livewire\Component;
-use App\Models\Sales\Sale;
-use App\Models\TitreFoncier;
-use Illuminate\Support\Facades\DB;
-use App\Http\Livewire\Traits\WithDataTables;
 use Twilio\Rest\Client;
+use App\Models\TitreFoncier;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Livewire\Traits\WithDataTables;
 
 class Index extends Component
 {
     use WithDataTables;
 
-    public $titre_foncier_id, $titre_fonciers, $titre_foncier;
+    public ?Charge $charge;
+    public $titre_foncier_id, $titre_fonciers, $numero_titre_foncier;
     public $type_charge;
+    public $attachements;
     public $etat_TF;
-    public $phone_number = '+237672959097';
+    //public $phone_number = '+237672959097';
 
     public function mount()
     {
-        $this->titre_fonciers = TitreFoncier::all();
+        $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier')->get();
+        $this->users = User::role('user')->select('id', 'first_name', 'last_name')->get();
     }
 
-    public $priceMapping = [
-        'HYPOTHEQUE' => 2334,
-        'DISPONIBLE' => 0,
-        'PRENOTE' => 3234,
-        'SUSPENDU' => 4344,
-    ];            
-
-    public $statusMapping = [
-        'HYPOTHEQUE' => 'pending_payment',
-        'DISPONIBLE' => 'active',
-        'PRENOTE' => 'pending_payment',
-        'SUSPENDU' => 'inactive',
-    ];
-
-    public function updatedEtatTF()
-    {
-        if (isset($this->priceMapping[$this->etat_TF])) {
-            $this->price = $this->priceMapping[$this->etat_TF];
-        } else {
-            $this->price = null;
+    public function updatedTitreFoncierId($titre_foncier_id) {
+        if (!empty($titre_foncier_id)) {
+            $tf = TitreFoncier::findOrFail($titre_foncier_id);
+            $this->numero_titre_foncier = $tf->numero_titre_foncier;
+            $this->titre_foncier_users = $tf->users;
+            $this->etat_TF = $tf->etat_TF;
         }
     }
 
     public function initData($id) {
-        $titrefoncier = TitreFoncier::findOrFail($id);
+        $charge = Charge::findOrFail($id);
 
-        $this->titrefoncier = $titrefoncier;
-        $this->numero_titre_foncier =  $titrefoncier->numero_titre_foncier;
-        $this->etat_TF =  $titrefoncier->etat_TF;
-        if (isset($this->priceMapping[$this->etat_TF])) {
-            $this->price = $this->priceMapping[$this->etat_TF];
-        } else {
-            $this->price = null;
-        }
+        $this->charge = $charge;
+        $this->titre_foncier_id = $charge->titreFoncier->numero_titre_foncier;
+        $this->type_charge = $charge->type_charge;
     }
 
     public function store() 
     {   
         $this->validate([
-            'etat_TF' => 'required'
+            'titre_foncier_id' => 'required',
+            'etat_TF' => 'required',
         ]);
-        
-        DB::transaction(function () {
-            $this->titrefoncier->update([
-                'etat_TF' => $this->etat_TF,
-            ]);
+
+        $this->titre_foncier = TitreFoncier::findOrFail($this->titre_foncier_id);
+
+        $this->titre_foncier->update([
+            'etat_TF' => $this->etat_TF,
+        ]);
             
-            $charge = Charge::create([
-                'titre_foncier_id' => $this->titrefoncier->id,
-                'type_charge' => $this->etat_TF, 
-                'status' => $this->statusMapping[$this->etat_TF],
-            ]);
+        $charge = Charge::create([
+            'titre_foncier_id' => $this->titre_foncier_id,
+            'type_charge' => $this->etat_TF,
+        ]);
 
-            $sale = Sale::create([
-                'sales_amount' => $this->price,
-                'sales_type' => 'charge',
-                'created_by' => auth()->user()->name,
-            ]);
-
-            // Create the Saleable item using only the specified information
-            $saleableData = [
-                'sale_id' => $sale->id,
-                'price' => $this->price,
-                'quantity' => 1,
-                'saleable_id' => $charge->id,
-                'saleable_type' => $this->etat_TF, // Adjust the namespace if different
-                'created_by' => auth()->user()->name,
-            ];
-
-            DB::table('saleables')->insert($saleableData);
-
-        });
+        if(!empty($this->attachements)){
+            $charge->addMedia($this->attachements->getRealPath())
+            ->usingName($charge->titre_foncier_id)
+            ->toMediaCollection('charges');
+        }
     
         $this->refresh(__('Charge successfully Created!'), 'CreateChargeModal');
     }
 
-    public function sendMessage() {
+    public function update() {
+        $this->validate([
+            'titre_foncier_id' => 'required',
+            'type_charge' => 'required',
+        ]);
+
+        if(!empty($this->charge)) {
+            $this->charge->update([
+                'type_charge' => $this->type_charge,
+            ]);
+        }
+
+        $this->refresh(__('Charge successfully Updated!'), 'EditChargeModal');
+    }
+
+    public function delete()
+    {
+        if (!empty($this->charge)) {
+            $this->charge->delete();
+        }
+
+        $this->refresh(__('Charge successfully deleted!'), 'DeleteModal');
+    }
+
+    /*public function sendMessage() {
         $user = $this->titrefoncier->titrefoncier_user->user_id;
 
         if($user) {
@@ -117,12 +111,12 @@ class Index extends Component
                 ]
             );
         }
-    }
+    }*/
 
     public function render()
     {
-        $charges = TitreFoncier::with('users')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
-        $charges_count = TitreFoncier::count();
+        $charges = Charge::with('titrefoncier')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $charges_count = Charge::count();
 
         return view('livewire.portal.titre-fonciers.charges.index', [
             'charges' => $charges,
