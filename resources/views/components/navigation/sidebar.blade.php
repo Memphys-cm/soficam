@@ -95,7 +95,7 @@
                                             @can('charge_titre_foncier.view')
                                             <li class="nav-item {{ $request->routeIs('portal.titre-fonciers-charges.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.titre-fonciers-charges.index') }}" class="nav-link">
-                                                    <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Charges.') }}</span>
+                                                    <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Charges') }}</span>
                                                 </a>
                                             </li>
                                             @endcan
