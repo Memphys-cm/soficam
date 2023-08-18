@@ -1,8 +1,12 @@
 <x-map-master>
     <div id="map"></div>
-    <div id="style-controls" style="position: absolute; top: 10px; left: 10px; z-index: 100;">
+    <div id="style-controls" style="position: absolute; top: 10px; left: 450px; z-index: 100;">
         <button class="btn btn-primary" id="normalStyleButton">Style Normal</button>
         <button class="btn btn-primary" id="satelliteStyleButton">Style Satellite</button>
+    </div>
+    <div id="info-box" style="position: absolute; top: 10px; right: 10px; background-color: white; padding: 10px; border: 1px solid #ccc; z-index: 100;">
+        <h3>Informations sur le Titre Foncier sélectionné :</h3>
+        <div id="info-content"></div>
     </div>
     <script>
         mapboxgl.accessToken = "pk.eyJ1IjoiZGlsYW5lMDUiLCJhIjoiY2xreWJydjNxMGd5aDNtc2lsMG5uYnU5ayJ9.WBERCXWXNAEzQWfwc1RwlA";
@@ -22,81 +26,96 @@
         map.fitBounds(coordinates);
 
         map.on('load', () => {
-            // Add a data source containing GeoJSON data.
-            map.addSource('maine', {
-                'type': 'geojson',
-                'data': {
-                    'type': 'Feature',
-                    'geometry': {
-                        'type': 'Polygon',
-                        // These coordinates outline Maine.
-                        'coordinates': [
+            // Données GeoJSON pour plusieurs polygones
+            const polygons = [
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
                             [
-                                [
-                                    9.718759675044595,
-                                    4.039558639732135
-                                ],
-                                [
-                                    9.718759675044595,
-                                    4.035245670812884
-                                ],
-                                [
-                                    9.724442532323536,
-                                    4.035245670812884
-                                ],
-                                [
-                                    9.724442532323536,
-                                    4.039558639732135
-                                ],
-                                [
-                                    9.718759675044595,
-                                    4.039558639732135
-                                ]
+                                [9.718759675044595, 4.039558639732135],
+                                [9.718759675044595, 4.035245670812884],
+                                [9.724442532323536, 4.035245670812884],
+                                [9.724442532323536, 4.039558639732135],
+                                [9.718759675044595, 4.039558639732135]
                             ]
                         ]
+                    },
+                    "properties": {
+                        "name": "Polygone 1",
+                        "area": 10
                     }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
+                            [
+                                [9.696401208736802, 4.074504199522764],
+                                [9.696401208736802, 4.054790199549046],
+                                [9.725934055296506, 4.054790199549046],
+                                [9.725934055296506, 4.074504199522764],
+                                [9.696401208736802, 4.074504199522764]
+                            ]
+                        ]
+                    },
+                    "properties": {
+                        "name": "Polygone 2",
+                        "area": 15
+                    }
+                }
+                // Ajoutez d'autres polygones de la même manière
+            ];
+
+            map.addSource('polygons', {
+                'type': 'geojson',
+                'data': {
+                    'type': 'FeatureCollection',
+                    'features': polygons
                 }
             });
 
-            // Add a new layer to visualize the polygon.
+            // Ajoutez une couche pour visualiser les polygones
             map.addLayer({
-                'id': 'maine',
+                'id': 'polygons',
                 'type': 'fill',
-                'source': 'maine', // reference the data source
+                'source': 'polygons',
                 'layout': {},
                 'paint': {
-                    'fill-color': '#0080ff', // blue color fill
+                    'fill-color': '#ff9900', // orange color fill
                     'fill-opacity': 0.5
                 }
             });
-            // Add a black outline around the polygon.
-            map.addLayer({
-                'id': 'outline',
-                'type': 'line',
-                'source': 'maine',
-                'layout': {},
-                'paint': {
-                    'line-color': '#000',
-                    'line-width': 3
+
+            // ... Votre code existant ...
+
+            map.on('click', 'polygons', (e) => {
+                const features = map.queryRenderedFeatures(e.point, {
+                    layers: ['polygons']
+                });
+
+                if (!features.length) {
+                    return;
                 }
+
+                const feature = features[0];
+
+                const infoContent = document.getElementById('info-content');
+                infoContent.innerHTML = `
+                    <p><strong>Nom :</strong> ${feature.properties.name}</p>
+                    <p><strong>Superficie :</strong> ${feature.properties.area} km²</p>
+                    <!-- Ajoutez d'autres propriétés de votre choix ici -->
+                `;
             });
 
-            // Add navigation controls
-            const nav = new mapboxgl.NavigationControl({
-                showCompass: false // Masquer la boussole
-            });
-            map.addControl(nav, 'top-right');
-
-            // Add style switch buttons
-            const normalStyleButton = document.getElementById('normalStyleButton');
-            const satelliteStyleButton = document.getElementById('satelliteStyleButton');
-
-            normalStyleButton.addEventListener('click', () => {
-                map.setStyle('mapbox://styles/mapbox/light-v11');
+            map.on('mousemove', 'polygons', (e) => {
+                map.getCanvas().style.cursor = 'pointer';
             });
 
-            satelliteStyleButton.addEventListener('click', () => {
-                map.setStyle('mapbox://styles/mapbox/satellite-v9');
+            map.on('mouseleave', 'polygons', () => {
+                map.getCanvas().style.cursor = '';
             });
         });
     </script>
