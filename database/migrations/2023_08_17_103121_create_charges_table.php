@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('charges', function (Blueprint $table) {
             $table->id();
-            $table->enum('status',['pending_payment', 'active', 'inactive']);
             $table->foreignId('titre_foncier_id')->on('titre_onciers')->index();
             $table->string('type_charge');
             $table->timestamps();

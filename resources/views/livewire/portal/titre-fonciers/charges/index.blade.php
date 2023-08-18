@@ -1,6 +1,7 @@
 <div>
     <x-alert />
     @include('livewire.portal.titre-fonciers.charges.partials.create')
+    @include('livewire.portal.titre-fonciers.charges.partials.edit')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -30,6 +31,12 @@
             </div>
             <div class="d-flex justify-content-between mb-2">
                 <div class="mx-2" wire:loading.remove>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#CreateChargeModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
+                        <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg> {{__('New')}}
+                    </a>
+
                     <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center ">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
@@ -91,62 +98,37 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('LAND TITLE') }}</th>
+                        <th class="border-bottom">{{ __('LAND TITLE NUMBER') }}</th>
                         <th class="border-bottom">{{ __('PROPRIATORS') }}</th>
                         <th class="border-bottom">{{ __('CHARGE') }}</th>
-                        <th class="border-bottom">{{ __('STATUS') }}</th>
                         <th class="border-bottom">{{ __('Date created') }}</th>
                         <th class="border-bottom">{{ __('Action') }}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($charges as $charge)
-                        @php
-                            $statusBgColor = '';
-                            if (isset($statusMapping[$charge->etat_TF])) {
-                                switch ($statusMapping[$charge->etat_TF]) {
-                                    case 'inactive':
-                                        $statusBgColor = 'danger';
-                                        break;
-                                    case 'active':
-                                        $statusBgColor = 'success';
-                                        break;
-                                    case 'pending_payment':
-                                        $statusBgColor = 'secondary';
-                                        break;
-                                }
-                            }
-                        @endphp
+                    @forelse ($charges as $charge)
                         <td>
-                            <span class="fw-normal">{{$charge->numero_titre_foncier}}</span>
+                            <span class="fw-normal">{{$charge->titreFoncier->numero_titre_foncier}}</span>
                         </td>
                         <td>
-                            <x-elements.user :options="$charge->users->take(5)" /> 
+                            <x-elements.user :options="$charge->titreFoncier->users" /> 
                         </td>
                         <td>
-                            <span class="fw-normal badge super-badge p-2 bg-{{$charge->EtatTFStyle}} round">{{$charge->etat_TF}}</span>
-                        </td>
-                        <td>
-                            <span class="fw-normal bagde super-badge p-2 bg-{{$statusBgColor}} rounded text-white">
-                                @if (isset($statusMapping[$charge->etat_TF]))
-                                {{ $statusMapping[$charge->etat_TF] }}
-                                @else
-                                    N/A
-                                @endif
-                            </span>
+                            <span class="fw-normal badge super-badge p-2 bg-{{$charge->EtatTFStyle}} round">{{$charge->type_charge}}</span>
                         </td>
                         <td>
                             <span class="fw-normal">{{$charge->created_at->format('Y-m-d')}}</span>
                         </td>
                         <td>
-                            <a href='#' wire:click.prevent="initData({{$charge->id}})" data-bs-toggle="modal" data-bs-target="#CreateChargeModal">
+                          
+                            <a href='#' wire:click.prevent="initData({{$charge->id}})" data-bs-toggle="modal" data-bs-target="#EditChargeModal">
                                 <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
                                     </path>
                                 </svg>
                             </a>
 
-                            <a href='#' wire:click.prevent="" data-bs-toggle="modal" data-bs-target="#DeleteModal">
+                            <a href='#' wire:click.prevent="initData({{$charge->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal">
                                 <svg class="icon icon-xs text-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
                                     </path>
