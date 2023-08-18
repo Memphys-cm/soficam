@@ -2,18 +2,25 @@
 
 namespace App\Http\Livewire\Portal\Operations\Partials;
 
+use App\Http\Livewire\Traits\WithDataTables;
 use Livewire\Component;
 use App\Models\Operation;
+use Livewire\WithFileUploads;
 use App\Models\MembreDuCabinet;
 use Illuminate\Support\Facades\Gate;
+use App\Models\Lotissements\Parcel;
 
 class AddCoordinates extends Component
 {
+    use WithDataTables;
+
     public ?Operation $operation;
     public $parcels = [] , $geometres = [];
-    public $parce_id, $geometre_id;
+    public $parcel_id, $geometre_id;
+    public $operation_type, $numero_ccp, $numero_reference_plan;
 
     public $commentaires;
+    public $attachments;
 
     public $coordinates = ['', ''];
     public $coordonnees = [];
@@ -34,7 +41,7 @@ class AddCoordinates extends Component
         $operation = Operation::findOrFail($operation_id);
         $this->operation = $operation;
         $this->parcels = $operation->titreFoncier->parcels->where('type_de_venter', $operation_type);
-        $this->geometre = MembreDuCabinet::geometre()->select('id', 'first_name', 'last_name')->get();
+        $this->geometres = MembreDuCabinet::geometre()->select('id', 'first_name', 'last_name')->get();
     }
 
     public function store()
@@ -44,32 +51,57 @@ class AddCoordinates extends Component
         }
 
         $this->validate([
-            'titre_foncier_id' => 'required',
-            'requestor_id' => 'required',
-            'etat_cession_id' => 'sometimes',
-            'certificates_propriete_id' => 'required',
+            'parcel_id' => 'required',
+            'geometre_id' => 'required',
+            'numero_ccp' =>' required',
+            'numero_reference_plan' => 'required'
         ]);
 
-        $this->mutation_total->update([
-            'geometre_id' => $this->geometre_id,
-            'numero_reference_plan' => $this->numero_reference_plan,
-            'numero_reference_quittance_etat_cession' => $this->numero_reference_quittance_etat_cession,
-            'commantaires_geometre' => $this->commantaires_geometre,
-            'certificate_prioprietes_id' => $this->certificates_propriete_id,
-            'etat_cession_id' => $this->etat_cession_id,
-        ]);
+        if(!empty($this->operation)){
 
-        $this->clearFields();
-        $this->refresh(__('Mutation Totale successfully Created'), 'CreateMutationTotaleModal');
+            $this->operation->update([
+                'geometre_id' => $this->geometre_id,
+                'numero_reference_plan' => $this->numero_reference_plan,
+                'commantaires_geometre' => $this->commentaires,
+                'statut_geometre' => 'ongoing'
+            ]);
+    
+            if (!empty($this->parcel_id)) {
+                $lot = Parcel::findOrFail($this->parcel_id);
+                $geometre = MembreDuCabinet::findOrFail($this->geometre_id);
+    
+                $lot->update([
+                    'commentaire_du_geometre'=> $this->commentaires,
+                    'coordonnees_du_lot' => json_encode(getCoords($this->coordonnees)),
+                    'numero_ccp' => $this->numero_ccp,
+                    'lot_geometre_id' => $this->geometre_id,
+                    'lot_geometre_cabinet_id' => $geometre->cabinet->id,
+                    'date_renseignement_coordonnees' => now()
+                ]);
+            }
+    
+            if (!empty($this->attachements)) {
+                $this->operation->addMedia($this->attachements->getRealPath())
+                    ->usingName($this->numero_reference_plan)
+                    ->toMediaCollection($this->operation_type);
+                    
+                $this->operation->update([ 'statut_geometre' => 'completed']);
+            }
+    
+            $this->clearFields();
+            $this->refresh(__('Operation successfully Created'), 'CreateAddCoordinatesModal');
+        }
     }
 
     public function clearFields()
     {
         return $this->reset([
-            'titre_foncier_id',
-            'requestor_id',
-            'certificates_propriete_id',
-            'etat_cession_id',
+            'geometre_id',
+            'numero_reference_plan',
+            'commentaires',
+            'numero_ccp',
+            'coordinates',
+            'parcel_id'
         ]);
     }
     public function render()

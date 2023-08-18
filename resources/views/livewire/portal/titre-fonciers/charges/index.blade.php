@@ -95,12 +95,12 @@
     </div>
     <div class="card pb-3">
         <div class="table-responsive  text-gray-700">
-            <table class="table employee-table table-hover align-items-center ">
+            <table class="table employee-table table-hover table-bordered align-items-center ">
                 <thead>
                     <tr>
                         <th class="border-bottom">{{ __('LAND TITLE NUMBER') }}</th>
                         <th class="border-bottom">{{ __('PROPRIATORS') }}</th>
-                        <th class="border-bottom">{{ __('CHARGE') }}</th>
+                        <th class="border-bottom text-center">{{ __('CHARGE') }}</th>
                         <th class="border-bottom">{{ __('Date created') }}</th>
                         <th class="border-bottom">{{ __('Action') }}</th>
                     </tr>
@@ -113,7 +113,7 @@
                         <td>
                             <x-elements.user :options="$charge->titreFoncier->users" /> 
                         </td>
-                        <td>
+                        <td class="text-center">
                             <span class="fw-normal badge super-badge p-2 bg-{{$charge->EtatTFStyle}} round">{{$charge->type_charge}}</span>
                         </td>
                         <td>

@@ -1,8 +1,8 @@
 <div wire:ignore.self class="modal side-layout-modal fade" id="CreateChargeModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:45%;">
+    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:35%;">
         <div class="modal-content">
             <div class="modal-body p-0">
-                <div class="p-4 p-lg-5">
+                <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4"> {{__('Add')}}{{__(' a new Charge on a Land Title')}}</h1>
                         <p class="px-1"> {{__('Land Title')}} </p>
@@ -37,8 +37,8 @@
                             </div>
                             @endforeach
                         </div>
-                        @endif 
-                        <div class="form-group mb-3 row">
+                        @endif
+                        <div class="form-group mb-2 row">
                             <div class="col">
                                 <label for="etat_TF">{{__('Type of Charge')}}</label>
                                 <select wire:model="etat_TF" name="etat_TF" class="form-select  @error('etat_TF') is-invalid @enderror" required="">
@@ -49,14 +49,20 @@
                                     <option value="SUSPENDU">{{__('SUSPENDU')}}</option>
                                 </select>
                                 @error('etat_TF')
-                                    <div class="invalid-feedback">{{$message}}</div>
+                                <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
-                            </div> 
-                            <div class="col">
-
                             </div>
                         </div>
-                        <div class="p-3 shadow my-4">
+
+                        <div class="col-md-12 py-2">
+                            <label for="code">{{ __('Commentaires') }}</label>
+                            <textarea wire:model="commentaires" class="form-control  @error('commentaires') is-invalid @enderror" rows="4">
+                                    </textarea>
+                            @error('commentaires')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="p-3 shadow border rounded my-2">
                             <h2 class="h5 mb-4">{{__('Add Files')}}</h2>
                             <div class="d-xl-flex align-items-center">
                                 <div class="file-field">
@@ -74,7 +80,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-end mt-5">
+                        <div class="d-flex justify-content-end mt-3">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
                             <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('create')}}</button>
                         </div>
