@@ -76,8 +76,6 @@
                             </div>
                         </div>
                         <div class='form-group row mb-3'>
-                          
-
                             <div class="col">
                                 <label for="type_de_versement">{{ __('PAYMENT TYPE*') }}</label>
                                 <select wire:model="type_de_versement"

@@ -24,7 +24,7 @@ class Index extends Component
 
     public function mount()
     {
-        $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier')->get();
+        $this->titre_fonciers = 
         $this->requestors = User::role('user')->select('id', 'first_name', 'last_name')->get();
     }
     public function store()

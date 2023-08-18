@@ -47,11 +47,10 @@
                                     id="superficie_a_vendre" required="">
                                     <option value="">{{ __('-- select superficie type --') }}
                                     </option>
-                                    <option value="total" @if (old('superficie_a_vendre') === 'total') selected @endif>Total
+                                    <option value="totale" @if (old('superficie_a_vendre') === 'total') selected @endif>Total
                                     </option>
                                     <option value="partielle" @if (old('superficie_a_vendre') === 'partielle') selected @endif>
                                         Partielle</option>
-
                                 </select>
                                 @error('payment_type')
                                     <div class="invalid-feedback">
@@ -59,13 +58,9 @@
                                     </div>
                                 @enderror
                             </div>
-
-
                         </div>
 
                         <div class='form-group row mb-3'>
-
-                            
 
                             <div class="col">
                                 <label for="type_de_versement">{{ __('Type de Versement') }}</label>

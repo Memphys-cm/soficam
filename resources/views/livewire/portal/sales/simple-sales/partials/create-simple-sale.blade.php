@@ -10,13 +10,10 @@
                     </div>
                     <x-form-items.form wire:submit="store">
 
-
                         <fieldset class="border p-3">
                             <legend class="w-auto">Land Title Informations</legend>
                             <div class='form-group row mb-3'>
 
-
-                                
                                 <div class=" col"><label for="titre_foncier_id">{{ __('Land Title Number') }}</label>
                                     <x-input.select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers->pluck('numero_titre_foncier', 'id')->toArray()"
                                         selected="('titre_foncier_id')" />

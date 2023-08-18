@@ -22,7 +22,7 @@ class Sale extends Component
     public $superficie_du_TF_mere, $notaires, $lotissement, $surperficie_du_lot, $notaire_id;
     public $user_ids = [];
     public $montant_versee, $montant_restant, $type_de_versement, $commentaire_du_notaire;
-    public $superficie_a_vendre = 'total';
+    public $superficie_a_vendre;
     public $superficie_vendu = null;
     public $superficie_restant = null;
 
