@@ -11,6 +11,7 @@
             style="background-color: white; border: 1px solid #ccc; position: absolute; top: 60px; right: 0; left: 0; max-height: 150px; overflow-y: auto; display: none;">
         </div>
     </div>
+    
     {{-- <div id="search-box-polygons"
         style="position: absolute; top: 10px; right: 100px; background-color: white; padding: 10px; border: 1px solid #ccc; z-index: 100;">
         <h3>Rechercher un Polygone :</h3>
@@ -18,6 +19,8 @@
         <h3>Filtrer par Superficie :</h3>
         <input type="number" id="area-filter-input" placeholder="Filtrer par superficie">
     </div> --}}
+
+
     <script>
         mapboxgl.accessToken = "pk.eyJ1IjoiZGlsYW5lMDUiLCJhIjoiY2xreWJydjNxMGd5aDNtc2lsMG5uYnU5ayJ9.WBERCXWXNAEzQWfwc1RwlA";
         const map = new mapboxgl.Map({
@@ -26,6 +29,71 @@
             center: [11.5, 6.5], // Centre géographique du Cameroun
             zoom: 6 // Zoom initial
         });
+
+        // var itemsFromController = @json($titles);
+        // itemsFromController.forEach(function(item) {
+        //     var jsonString = item.coordonnees;
+        //     var coordinatesArray = JSON.parse(jsonString);
+        //     var transformedCoordinates = [];
+
+        //     for (var i = 0; i < coordinatesArray.length; i++) {
+        //         var coords = coordinatesArray[i].split(', ');
+        //         transformedCoordinates.push([parseFloat(coords[0]), parseFloat(coords[1])]);
+        //     }
+
+        //     console.log(transformedCoordinates);
+        // });
+
+        var itemsFromController = @json($titles);
+        var transformedCoordinates = []; // Déplacez la définition ici
+
+        // itemsFromController.forEach(function(item) {
+        //     var jsonString = item.coordonnees;
+        //     var coordinatesArray = JSON.parse(jsonString);
+
+        //     for (var i = 0; i < coordinatesArray.length; i++) {
+        //         var coords = coordinatesArray[i].split(', ');
+        //         transformedCoordinates.push([parseFloat(coords[0]), parseFloat(coords[1])]);
+        //     }
+        // });
+
+        // var itemsFromController = @json($titles);
+        var polygons = [];
+
+        itemsFromController.forEach(function(item) {
+            var jsonString = item.coordonnees;
+            var numero = item.numero_titre_foncier
+            var superficie = item.superficie_du_TF_mere
+            var coordinatesArray = JSON.parse(jsonString);
+            var transformedCoordinates = [];
+
+            for (var i = 0; i < coordinatesArray.length; i++) {
+                var coords = coordinatesArray[i].split(', ');
+                transformedCoordinates.push([parseFloat(coords[0]), parseFloat(coords[
+                1])]); // Notez l'inversion des coordonnées
+            }
+            console.log([transformedCoordinates]);
+            polygons.push({
+                "type": "Feature",
+                "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [transformedCoordinates]
+                },
+                "properties": {
+                    "name": numero, // Remplacez par le nom approprié
+                    "area": superficie // Remplacez par la superficie appropriée
+                }
+            });
+        });
+
+        // var test = [[
+        //     [444, 4444],
+        //     [555, 555],
+        //     [6666, 666]
+        // ]]
+        // console.log(test)
+
+        // console.log(polygons)
 
 
         // Coordonnées des limites géographiques du Cameroun
@@ -55,83 +123,81 @@
 
         map.on('load', () => {
             // Données GeoJSON pour plusieurs polygones
-            const polygons = [{
-                array.forEach(element => {
-                    
-                });
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Polygon",
-                        "coordinates": [
-                            [
-                                [9.718759675044595, 4.039558639732135],
-                                [9.718759675044595, 4.035245670812884],
-                                [9.724442532323536, 4.035245670812884],
-                                [9.724442532323536, 4.039558639732135],
-                                [9.718759675044595, 4.039558639732135]
-                            ]
-                        ]
-                    },
-                    "properties": {
-                        "name": "1Poly",
-                        "area": 10
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Polygon",
-                        "coordinates": [
-                            [
-                                [9.696401208736802, 4.074504199522764],
-                                [9.696401208736802, 4.054790199549046],
-                                [9.725934055296506, 4.054790199549046],
-                                [9.725934055296506, 4.074504199522764],
-                                [9.696401208736802, 4.074504199522764]
-                            ]
-                        ]
-                    },
-                    "properties": {
-                        "name": "2Poly",
-                        "area": 15
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Polygon",
-                        "coordinates": [
-                            [
-                                [
-                                    9.725483172143782,
-                                    4.072255478648543
-                                ],
-                                [
-                                    9.725483172143782,
-                                    4.0484186517613665
-                                ],
-                                [
-                                    9.756969845701235,
-                                    4.0484186517613665
-                                ],
-                                [
-                                    9.756969845701235,
-                                    4.072255478648543
-                                ],
-                                [
-                                    9.725483172143782,
-                                    4.072255478648543
-                                ]
-                            ]
-                        ]
-                    },
-                    "properties": {
-                        "name": "Polygone 3",
-                        "area": 16
-                    }
-                }
-                // Ajoutez d'autres polygones de la même manière
-            ];
+
+            // const polygons = [{
+            //         "type": "Feature",
+            //         "geometry": {
+            //             "type": "Polygon",
+            //             "coordinates": [
+            //                 [
+            //                     [9.718759675044595, 4.039558639732135],
+            //                     [9.718759675044595, 4.035245670812884],
+            //                     [9.724442532323536, 4.035245670812884],
+            //                     [9.724442532323536, 4.039558639732135],
+            //                     [9.718759675044595, 4.039558639732135]
+            //                 ]
+            //             ]
+            //         },
+            //         "properties": {
+            //             "name": "1Poly",
+            //             "area": 10
+            //         }
+            //     },
+            //     {
+            //         "type": "Feature",
+            //         "geometry": {
+            //             "type": "Polygon",
+            //             "coordinates": [
+            //                 [
+            //                     [9.696401208736802, 4.074504199522764],
+            //                     [9.696401208736802, 4.054790199549046],
+            //                     [9.725934055296506, 4.054790199549046],
+            //                     [9.725934055296506, 4.074504199522764],
+            //                     [9.696401208736802, 4.074504199522764]
+            //                 ]
+            //             ]
+            //         },
+            //         "properties": {
+            //             "name": "2Poly",
+            //             "area": 15
+            //         }
+            //     },
+            //     {
+            //         "type": "Feature",
+            //         "geometry": {
+            //             "type": "Polygon",
+            //             "coordinates": [
+            //                 [
+            //                     [
+            //                         9.725483172143782,
+            //                         4.072255478648543
+            //                     ],
+            //                     [
+            //                         9.725483172143782,
+            //                         4.0484186517613665
+            //                     ],
+            //                     [
+            //                         9.756969845701235,
+            //                         4.0484186517613665
+            //                     ],
+            //                     [
+            //                         9.756969845701235,
+            //                         4.072255478648543
+            //                     ],
+            //                     [
+            //                         9.725483172143782,
+            //                         4.072255478648543
+            //                     ]
+            //                 ]
+            //             ]
+            //         },
+            //         "properties": {
+            //             "name": "Polygone 3",
+            //             "area": 16
+            //         }
+            //     }
+            //     // Ajoutez d'autres polygones de la même manière
+            // ];
 
 
             map.addSource('polygons', {
@@ -226,7 +292,7 @@
                     suggestionItem.addEventListener('click', () => {
                         searchInputGeneral.value = suggestion;
                         searchForLocation(
-                        suggestion); // Effectuer la recherche lors du clic sur la suggestion
+                            suggestion); // Effectuer la recherche lors du clic sur la suggestion
                         hideSuggestions();
                     });
                     suggestionItem.addEventListener('mouseover', () => {
