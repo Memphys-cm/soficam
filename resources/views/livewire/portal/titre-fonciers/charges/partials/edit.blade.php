@@ -4,13 +4,13 @@
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{__('Edit')}}{{__(' a Charge on a Land Title')}}</h1>
+                        <h1 class="mb-0 h4"> {{__('Remove')}}{{__(' a Charge on a Land Title')}}</h1>
                         <p class="px-1"> {{__('Land Title')}} </p>
                     </div>
                     <x-form-items.form>
                         <div class='form-group  mb-2'>
                             <label for="titre_foncier_id">{{ __('Land Title Number') }}</label>
-                            <input class="form-control" wire:model="titre_foncier_id" type="text" >
+                            <x-input.land_title-select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers" />
                             @error('titre_foncier_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -41,13 +41,7 @@
                         <div class="form-group mb-3 row">
                             <div class="col">
                                 <label for="type_charge">{{__('Type of Charge')}}</label>
-                                <select wire:model="type_charge" name="type_charge" class="form-select  @error('type_charge') is-invalid @enderror" required="">
-                                    <option value="">{{__('Select Type of Charge')}}</option>
-                                    <option value="HYPOTHEQUE">{{__('HYPOTHEQUE')}}</option>
-                                    <option value="DISPONIBLE">{{__('DISPONIBLE')}}</option>
-                                    <option value="PRENOTE">{{__('PRENOTE')}}</option>
-                                    <option value="SUSPENDU">{{__('SUSPENDU')}}</option>
-                                </select>
+                                <input class="form-control" wire:click.prevent="update" type="text" value="DISPONIBLE">
                                 @error('type_charge')
                                     <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -58,7 +52,7 @@
                         </div>
                         <div class="d-flex justify-content-end mt-5">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" wire:click.prevent="update" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Update')}}</button>
+                            <button type="submit" wire:click.prevent="update" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Remove')}}</button>
                         </div>
                     </x-form-items.form>
                 </div>

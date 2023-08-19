@@ -44,16 +44,12 @@
                                 <select wire:model="etat_TF" name="etat_TF" class="form-select  @error('etat_TF') is-invalid @enderror" required="">
                                     <option value="">{{__('Select Type of Charge')}}</option>
                                     <option value="HYPOTHEQUE">{{__('HYPOTHEQUE')}}</option>
-                                    <option value="DISPONIBLE">{{__('DISPONIBLE')}}</option>
                                     <option value="PRENOTE">{{__('PRENOTE')}}</option>
                                     <option value="SUSPENDU">{{__('SUSPENDU')}}</option>
                                 </select>
                                 @error('etat_TF')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
-                            </div> 
-                            <div class="col">
-
                             </div>
                         </div>
                         <div class="p-3 shadow border rounded my-2">
