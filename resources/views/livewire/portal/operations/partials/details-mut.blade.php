@@ -305,150 +305,146 @@
                 </div>
             </div>
             <div class="card p-4 ">
-                @foreach ($membres as $membre)
-                    @if (isset($membre->type_membre) && $membre->type_membre == 'notaire')
-                        <legend class="w-auto">{{ __('Notaire') }}</legend>
+
+                <legend class="w-auto">{{ __('Notaire') }}</legend>
 
 
-                        <div class="card pb-3">
-                            <div class="table-responsive  text-gray-700">
-                                <table class="table employee-table table-hover align-items-center ">
-                                    <thead>
-                                        <tr>
-                                            <th class="border-bottom">{{ __('NAME') }}</th>
-                                            <th class="border-bottom">{{ __('Cabinet') }}</th>
-                                            <th class="border-bottom">{{ __('Commentaire du notaire') }}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                <div class="card pb-3">
+                    <div class="table-responsive  text-gray-700">
+                        <table class="table employee-table table-hover align-items-center ">
+                            <thead>
+                                <tr>
+                                    <th class="border-bottom">{{ __('NAME') }}</th>
+                                    <th class="border-bottom">{{ __('Cabinet') }}</th>
+                                    <th class="border-bottom">{{ __('Commentaire du notaire') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                                        <tr>
-                                            <td>
+                                <tr>
+                                    <td>
 
-                                                <a href="#" class="d-flex align-items-center">
-                                                    <div
-                                                        class="avatar avatar-md d-flex align-items-center justify-content-center fw-bold fs-6 rounded bg-primary me-2">
-                                                        <span
-                                                            class="text-white">{{ initials($parcel->notaire->first_name) }}</span>
+                                        <a href="#" class="d-flex align-items-center">
+                                            <div
+                                                class="avatar avatar-md d-flex align-items-center justify-content-center fw-bold fs-6 rounded bg-primary me-2">
+                                                <span
+                                                    class="text-white">{{ initials($parcel->notaire->first_name) }}</span>
+                                            </div>
+                                            <div class="d-block">
+                                                <span
+                                                    class="fw-bolder fs-6">{{ ucwords($parcel->notaire->first_name) }}
+                                                    {{ $parcel->notaire->last_name }}</span>
+                                                <div class="small text-gray">
+                                                    <svg class="icon icon-xxs me-1" fill="none"
+                                                        stroke="currentColor" viewBox="0 0 24 24"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207">
+                                                        </path>
+                                                    </svg> {{ $parcel->notaire->address }}
+                                                </div>
+                                                <div class="small text-gray d-flex align-items-end">
+                                                    <svg class="icon icon-xxs me-1 " fill="none"
+                                                        stroke="currentColor" viewBox="0 0 24 24"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z">
+                                                        </path>
+                                                    </svg> {{ $parcel->notaire->phone_number }} |
+                                                    {{ $parcel->notaire->post }}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td>{{ $parcel->notaire->cabinet->nom_cabinet }}</td>
+                                    <td>{{ $parcel->commentaire_du_notaire }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br>
+
+                <div class="card p-4 ">
+                    <legend class="w-auto">{{ __('Geometre') }}</legend>
+
+
+                    <div class="card pb-3">
+                        <div class="table-responsive  text-gray-700">
+                            <table class="table employee-table table-hover align-items-center ">
+                                <thead>
+                                    <tr>
+                                        <th class="border-bottom">{{ __('NAME') }}</th>
+                                        <th class="border-bottom">{{ __('Cabinet') }}</th>
+                                        <th class="border-bottom">
+                                            {{ __('Commentaire de Geometre') }}</th>
+                                    </tr>
+                                </thead>
+                                {{-- <tbody>
+
+                                    <tr>
+
+                                        <td>
+
+                                            <a href="#" class="d-flex align-items-center">
+                                                <div
+                                                    class="avatar avatar-md d-flex align-items-center justify-content-center fw-bold fs-6 rounded bg-primary me-2">
+                                                    <span
+                                                        class="text-white">{{ initials($parcel->geometre->first_name) }}</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <span
+                                                        class="fw-bolder fs-6">{{ ucwords($parcel->geometre->first_name) }}
+                                                        {{ $parcel->geometre->last_name }}</span>
+                                                    <div class="small text-gray">
+                                                        <svg class="icon icon-xxs me-1" fill="none"
+                                                            stroke="currentColor" viewBox="0 0 24 24"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207">
+                                                            </path>
+                                                        </svg> {{ $parcel->geometre->address }}
                                                     </div>
-                                                    <div class="d-block">
-                                                        <span
-                                                            class="fw-bolder fs-6">{{ ucwords($parcel->notaire->first_name) }}
-                                                            {{ $parcel->notaire->last_name }}</span>
-                                                        <div class="small text-gray">
-                                                            <svg class="icon icon-xxs me-1" fill="none"
-                                                                stroke="currentColor" viewBox="0 0 24 24"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2"
-                                                                    d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207">
-                                                                </path>
-                                                            </svg> {{ $parcel->notaire->address }}
-                                                        </div>
-                                                        <div class="small text-gray d-flex align-items-end">
-                                                            <svg class="icon icon-xxs me-1 " fill="none"
-                                                                stroke="currentColor" viewBox="0 0 24 24"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2"
-                                                                    d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z">
-                                                                </path>
-                                                            </svg> {{ $parcel->notaire->phone_number }} |
-                                                            {{ $parcel->notaire->post }}
-                                                        </div>
+                                                    <div class="small text-gray d-flex align-items-end">
+                                                        <svg class="icon icon-xxs me-1 " fill="none"
+                                                            stroke="currentColor" viewBox="0 0 24 24"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z">
+                                                            </path>
+                                                        </svg> {{ $parcel->geometre->phone_number }} |
+                                                        {{ $parcel->geometre->post }}
                                                     </div>
-                                                </a>
-                                            </td>
-                                            <td>{{ $parcel->notaire->cabinet->nom_cabinet }}</td>
-                                            <td>{{ $parcel->commentaire_du_notaire }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                                </div>
+                                            </a>
+                                        </td>
+                                        <td>{{ $parcel->geometre->cabinet->nom_cabinet }}
+                                        </td>
+                                        <td>{{ $parcel->commentaire_du_geometre }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="7" class="text-center">
+                                            <div class="text-center text-gray-800 mt-2">
+                                                <h4 class="fs-4 fw-bold">
+                                                    {{ __('Opps nothing here') }} &#128540;
+                                                </h4>
+                                                <p>{{ __('No Record Found..!') }}</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody> --}}
+                            </table>
                         </div>
-                    @elseif(isset($membre->type_membre) && $membre->type_membre == 'geometre')
-                        <div class="card p-4 ">
-                            <legend class="w-auto">{{ __('Geometre') }}</legend>
+                    </div>
+                </div>
 
-
-                            <div class="card pb-3">
-                                <div class="table-responsive  text-gray-700">
-                                    <table class="table employee-table table-hover align-items-center ">
-                                        <thead>
-                                            <tr>
-                                                <th class="border-bottom">{{ __('NAME') }}</th>
-                                                <th class="border-bottom">{{ __('Cabinet') }}</th>
-                                                <th class="border-bottom">
-                                                    {{ __('Commentaire de Geometre') }}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <tr>
-
-                                                {{-- <td>
-        
-                                                    <a href="#" class="d-flex align-items-center">
-                                                        <div
-                                                            class="avatar avatar-md d-flex align-items-center justify-content-center fw-bold fs-6 rounded bg-primary me-2">
-                                                            <span
-                                                                class="text-white">{{ initials($parcel->geometre->first_name) }}</span>
-                                                        </div>
-                                                        <div class="d-block">
-                                                            <span
-                                                                class="fw-bolder fs-6">{{ ucwords($parcel->geometre->first_name) }}
-                                                                {{ $parcel->geometre->last_name }}</span>
-                                                            <div class="small text-gray">
-                                                                <svg class="icon icon-xxs me-1" fill="none"
-                                                                    stroke="currentColor" viewBox="0 0 24 24"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                                        stroke-width="2"
-                                                                        d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207">
-                                                                    </path>
-                                                                </svg> {{ $parcel->geometre->address }}
-                                                            </div>
-                                                            <div class="small text-gray d-flex align-items-end">
-                                                                <svg class="icon icon-xxs me-1 " fill="none"
-                                                                    stroke="currentColor" viewBox="0 0 24 24"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                                        stroke-width="2"
-                                                                        d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z">
-                                                                    </path>
-                                                                </svg> {{ $parcel->geometre->phone_number }} |
-                                                                {{ $parcel->geometre->post }}
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </td> --}}
-                                                {{-- <td>{{ $parcel->geometre->cabinet->nom_cabinet }} --}}
-                                                </td>
-                                                <td>{{ $parcel->commentaire_du_geometre }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="7" class="text-center">
-                                                    <div class="text-center text-gray-800 mt-2">
-                                                        <h4 class="fs-4 fw-bold">
-                                                            {{ __('Opps nothing here') }} &#128540;
-                                                        </h4>
-                                                        <p>{{ __('No Record Found..!') }}</p>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
             </div>
         </div>
     </div>
- 
+
 
 </div>
-
-
-

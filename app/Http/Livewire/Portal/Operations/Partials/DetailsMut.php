@@ -13,14 +13,15 @@ class DetailsMut extends Component
 {
    
     use WithDataTables;
-    public $parcel, $notaires, $users, $operation, $geometres, $membres;
+    public $parcel, $notaires, $users, $operation, $geometres, $membres = [];
     public $user_ids = [];
 
 
     public function mount($operation_id)
     {
         $this->parcel = Parcel::findOrFail($operation_id);
-        $this->membres = MembreDuCabinet::all('id', 'first_name', 'last_name', 'type_membre');
+        // dd($this->parcel->notaire); 
+        // $this->membres = MembreDuCabinet::select('id', 'first_name', 'last_name', 'type_membre')->get();
         // $this->geometres = MembreDuCabinet::geometre()->select('id', 'first_name', 'last_name')->get();
         $this->users = User::role('user')->select('id', 'first_name', 'last_name')->get();
 
