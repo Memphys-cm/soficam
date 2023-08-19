@@ -154,7 +154,6 @@
 
                                 @livewire('portal.operations.partials.add-coordinates', ['operation_id' => $mutation_totale->id,'operation_type'=>'mutation_totale' ], key($mutation_totale->id))
                                 @livewire('portal.operations.partials.add-sales-data', ['operation_id' => $mutation_totale->id,'operation_type'=>'mutation_totale' ], key($mutation_totale->id))
-                                @livewire('portal.operations.partials.add-payment-data', ['operation_id' => $mutation_totale->id,'operation_type'=>'mutation_totale' ], key($mutation_totale->id))
 
                                 <a href="{{route('portal.operations.detail-mut',['operation_id'=>$mutation_totale->id])}}">
                                     <svg class="icon icon-sm text-info" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
