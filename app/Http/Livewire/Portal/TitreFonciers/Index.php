@@ -130,16 +130,6 @@ class Index extends Component
             'user_ids.*' => 'required',
         ]);
 
-        // dd($this->coordonnees);
-
-        $coords = [];
-        collect($this->coordonnees)->map(function($value, $key){
-            return ['long' => explode(',', $value, 1), 'lat' => explode(',', $value, 2)];
-        });
-        dd(array_flatten($coords));
-
-        // /{"B1": "564321.00, 452564.00", "B2": "564335.746, 452548.271", "B3": "564315.224,452531.059", "B4": "564303.601,452544.471"}
-
         $titrefoncier = TitreFoncier::create([
             'numero_titre_foncier' => $this->numero_titre_foncier,
             'region_id' => $this->region_id,
@@ -159,7 +149,7 @@ class Index extends Component
             'numero_bordereau_analytique' => $this->numero_bordereau_analytique,
             'volume_du_bordereau_analytique' => $this->volume_du_bordereau_analytique,
             'date_detablissement_du_bordereau_analytique' => $this->date_detablissement_du_bordereau_analytique,
-            'coordonnees' => json_encode($this->getCoords()),
+            'coordonnees' => json_encode(getCoords($this->coordonnees)),
             'limit_nord' => $this->limit_nord,
             'limit_sud' => $this->limit_sud,
             'limit_est' => $this->limit_est,
@@ -289,7 +279,7 @@ class Index extends Component
                 'nom_et_prenoms_de_largent_traitant' => $this->nom_et_prenoms_de_largent_traitant,
                 'le_conservateur' => $this->le_conservateur,
                 'numero_ccp' => $this->numero_ccp,
-                'coordonnees' => json_encode($this->getCoords()),
+                'coordonnees' => json_encode(getCoords($this->coordonnees)),
             ]);
         }
 
@@ -318,17 +308,6 @@ class Index extends Component
         $this->clearFields();
 
         $this->refresh(__('TitreFoncier successfully deleted!'), 'DeleteModal');
-    }
-
-    public function getCoords()
-    {
-        $coords = [];
-
-        foreach ($this->coordonnees as $key => $value) {
-            array_push($coords, ['B' . $key + 1 => $value]);
-        }
-
-        return array_flatten($coords);
     }
 
     public function clearFields()

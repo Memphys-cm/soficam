@@ -62,13 +62,40 @@ class Index extends Component
             'type_charge' => $this->etat_TF,
         ]);
 
+        $this->sendChargeMessage($charge);
+
         if(!empty($this->attachements)){
             $charge->addMedia($this->attachements->getRealPath())
             ->usingName($charge->titre_foncier_id)
             ->toMediaCollection('charges');
         }
+
+        $this->clearFields();
     
         $this->refresh(__('Charge successfully Created!'), 'CreateChargeModal');
+    }
+
+    private function sendChargeMessage($charge)
+    {
+        $receivers = $charge->titreFoncier->users;
+
+        /*foreach($receivers as $user) {
+            if ($user) {*/
+            $sid='ACa77985267946bd8e613944d40b9d0458';
+            $token='b7b84303df6a21c3d6f9b32d3d678103';
+            $twilio = new Client($sid, $token);
+
+            $messageBody = "Hello, a $charge->type_charge has been added to your land title.";
+
+            $twilio->messages->create(
+                '+237672959097',
+                [
+                    'from' => '+15856393680',
+                    'body' => $messageBody,
+                ]
+            );
+            //}
+        //}
     }
 
     public function update() {
@@ -83,6 +110,8 @@ class Index extends Component
             ]);
         }
 
+        $this->clearFields();
+
         $this->refresh(__('Charge successfully Updated!'), 'EditChargeModal');
     }
 
@@ -94,25 +123,7 @@ class Index extends Component
 
         $this->refresh(__('Charge successfully deleted!'), 'DeleteModal');
     }
-
-    /*public function sendMessage() {
-        $user = $this->titrefoncier->titrefoncier_user->user_id;
-
-        if($user) {
-            $twilio = new Client(config('services.twilio.sid'), config('services.twilio.token'));
-
-            $messageBody = "Hello {$user->first_name}, a new charge has been added to your land title.";
-
-            $twilio->messages->create(
-                $user->primary_phone_number,
-                [
-                    'from' => config('services.twilio.phone_number'),
-                    'body' => $messageBody,
-                ]
-            );
-        }
-    }*/
-
+   
     public function render()
     {
         $charges = Charge::with('titrefoncier')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
@@ -122,5 +133,14 @@ class Index extends Component
             'charges' => $charges,
             'charges_count' => $charges_count,
         ])->layout('components.layouts.dashboard');
+    }
+
+    public function clearFields() {
+        $this->reset([
+            'etat_TF',
+            'type_charge',
+            'titre_foncier_id',
+            'numero_titre_foncier'
+        ]);
     }
 }

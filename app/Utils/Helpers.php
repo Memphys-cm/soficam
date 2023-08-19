@@ -47,6 +47,20 @@ if (!function_exists('numberFormat')) {
         return $number;
     }
 }
+if (!function_exists('getCoords')) {
+
+    function getCoords($coordinates)
+    {
+        $coords = [];
+
+        foreach ($coordinates as $key => $value) {
+            array_push($coords, ['B' . $key + 1 => $value]);
+        }
+
+        return array_flatten($coords);
+    }
+}
+
 if (!function_exists('array_flatten')) {
     function array_flatten($array)
     {
@@ -64,3 +78,7 @@ if (!function_exists('array_flatten')) {
         return $result;
     }
 }
+
+   
+   
+

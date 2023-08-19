@@ -1,4 +1,5 @@
  <div>
+     <x-alert-notif />
      <a href="#" class="d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#CreateAddCoordinatesModal" draggable="false" title="{{__('Add Coordinates')}}">
          <svg class="icon icon-sm text-info me-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 22 22" stroke-width="1.7" stroke="currentColor">
              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -9,7 +10,7 @@
          <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:35%;">
              <div class="modal-content">
                  <div class="modal-body p-0">
-                     <div class="p-4 p-lg-5">
+                     <div class="p-4 p-lg-4">
                          <div class="mb-4 mt-md-0">
                              <h1 class="mb-0 h4"> {{ __('Add Coordinates on Plot')}}</h1>
                              <p class="px-1"> {{ __('Add coordinates on the given plot')}} </p>
@@ -25,9 +26,9 @@
                                  @enderror
                              </div>
                              <div class="form-group mb-2">
-                                 <label for="numero_ccp">{{ __('Geometre') }}</label>
-                                 <input type="text" wire:model="numero_ccp" class="form-control  @error('numero_ccp') is-invalid @enderror " value="{{ old('numero_ccp') }}" placeholder="" id="numero_ccp" autofocus="" required="">
-                                 @error('numero_ccp')
+                                 <label for="geometre_id">{{ __('Geometre') }}</label>
+                                 <x-input.select :options="$geometres->pluck('first_name','id')->toArray()" wire:model="geometre_id" prettyname="geometre_id" />
+                                 @error('geometre_id')
                                  <div class="invalid-feedback">
                                      {{ $message }}
                                  </div>
@@ -47,10 +48,18 @@
                                      @enderror
                                  </div>
                              </div>
-
+                             <div class="form-group mb-2">
+                                 <label for="numero_reference_plan">{{ __('Numero Reference du plan') }}</label>
+                                 <input type="text" wire:model="numero_reference_plan" class="form-control  @error('numero_reference_plan') is-invalid @enderror " value="{{ old('numero_reference_plan') }}" placeholder="" id="numero_reference_plan" autofocus="" required="">
+                                 @error('numero_reference_plan')
+                                 <div class="invalid-feedback">
+                                     {{ $message }}
+                                 </div>
+                                 @enderror
+                             </div>
                              <div class='form-group row mb-2'>
                                  <div class='col'>
-                                     <label class="px-2" for="certificates_propriete_id">{{__('Add Files')}}</label>
+                                     <label class="px-2" for="plan">{{__('Add Files')}}</label>
                                      <div class="input-group">
                                          <input type="file" class="form-control" wire:model="attachments" multiple>
                                      </div>
