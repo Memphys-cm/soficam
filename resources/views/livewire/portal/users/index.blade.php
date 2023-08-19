@@ -16,7 +16,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/">Acceuil</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{__('Users')}}</li>
                     </ol>
                 </nav>
@@ -24,9 +24,9 @@
                     <svg class="icon me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    {{__('Users Management')}}
+                    {{__('Gestion des utilisateurs')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('View all users within the application')}} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{__('Afficher tous les utilisateurs de l\'application')}} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -34,14 +34,14 @@
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateUserModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{__('New')}}
+                    </svg> {{__('Nouveau')}}
                 </a>
                 @endcan
                 @can('user.import')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#importUsersModal" class="btn btn-sm btn-secondary py-2 d-inline-flex align-items-center">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                    </svg>{{__('Import')}}
+                    </svg>{{__('Importer')}}
                 </a>
                 @endcan
                 @can('user.export_n_print')
@@ -50,7 +50,7 @@
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
                         </svg>
-                        {{__('Export')}}
+                        {{__('Exporter')}}
                     </a>
                 </div>
                 <div class="text-center mx-2" wire:loading wire:target="export">
@@ -78,13 +78,13 @@
                                     </svg>
                                 </div>
                                 <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5">{{__('Total Users')}} {{$total_users}}</h2>
+                                    <h2 class="fw-extrabold h5">{{__('Total des utilisateurs')}} {{$total_users}}</h2>
                                     <h3 class="mb-1">{{numberFormat(!is_null($total_users) ? $total_users : 0 )}}</h3>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-8 px-xl-0">
                                 <a href="" class="d-none d-sm-block">
-                                    <h2 class="h5">{{__('Total Users')}}</h2>
+                                    <h2 class="h5">{{__('Total des utilisateurs')}}</h2>
                                     <h3 class="fw-extrabold mb-1">{{numberFormat(!is_null($total_users) ? $total_users : 0 )}}</h3>
                                 </a>
                             </div>
@@ -148,28 +148,28 @@
 
     <div class="row p-3">
         <div class="col-md-3">
-            <label for="search">{{__('Search')}}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{__('Search...')}}" class="form-control">
+            <label for="search">{{__('Recherche')}}: </label>
+            <input wire:model="query" id="search" type="text" placeholder="{{__('Recherche...')}}" class="form-control">
             <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p>
         </div>
         <div class="col-md-3">
-            <label for="orderBy">{{__('Order By')}}: </label>
+            <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="first_name">{{__('User')}}</option>
-                <option value="created_at">{{__('Created Date')}}</option>
+                <option value="first_name">{{__('Utilisateurs')}}</option>
+                <option value="created_at">{{__('Date creation')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Order direction')}}: </label>
+            <label for="direction">{{__('Direction du trie')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{__('Ascending')}}</option>
-                <option value="desc">{{__('Descending')}}</option>
+                <option value="asc">{{__('Ascendant')}}</option>
+                <option value="desc">{{__('Descendant')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Items Per Page')}}: </label>
+            <label for="perPage">{{__('Elements par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -184,11 +184,11 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('User')}}</th>
+                        <th class="border-bottom">{{__('Utilisateurs')}}</th>
                         <th class="border-bottom">{{__('Service')}}</th>
                         <th class="border-bottom">{{__('Role')}}</th>
-                        <th class="border-bottom">{{__('Status')}}</th>
-                        <th class="border-bottom">{{__('Date created')}}</th>
+                        <th class="border-bottom">{{__('Statut')}}</th>
+                        <th class="border-bottom">{{__('Date creation')}}</th>
                         @canany('user.update','user.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
                         @endcanany
@@ -251,7 +251,7 @@
                     <tr>
                         <td colspan="7" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps nothing here')}} &#128540;</h4>
+                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
                                 <p>{{__('No Record Found..!')}}</p>
                             </div>
                         </td>
@@ -261,7 +261,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Showing')}} {{$perPage > $total_users ? $total_users : $perPage  }} {{__('items of')}} {{$total_users}}
+                    {{__('Montrer')}} {{$perPage > $total_users ? $total_users : $perPage  }} {{__('element de')}} {{$total_users}}
                 </div>
                 {{ $users->links() }}
             </div>

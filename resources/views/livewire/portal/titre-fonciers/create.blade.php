@@ -10,21 +10,21 @@
                     <x-form-items.form wire:submit="{{$state ? 'update':'store'}}">
                         <div class='form-group mb-3 row'>
                             <div class='col'>
-                                <label for="numero_titre_foncier">{{__('Land Title Number')}}</label>
+                                <label for="numero_titre_foncier">{{__('Numero du Titre Foncier')}}</label>
                                 <input wire:model="numero_titre_foncier" type="text" class="form-control  @error('numero_titre_foncier') is-invalid @enderror" placeholder="10056/234/NW09" required="" value="" name="numero_titre_foncier">
                                 @error('numero_titre_foncier')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="date_de_delivrance_du_TF">{{__('Land Title Delivered On')}}</label>
+                                <label for="date_de_delivrance_du_TF">{{__('Délivrance du titre foncier')}}</label>
                                 <input wire:model="date_de_delivrance_du_TF" type="date" class="form-control  @error('date_de_delivrance_du_TF') is-invalid @enderror" placeholder="{{__('1986')}}" required="" name="name">
                                 @error('date_de_delivrance_du_TF')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="numero_du_duplicata">{{__('Duplicate Number')}}</label>
+                                <label for="numero_du_duplicata">{{__('Numéro de Duplicata')}}</label>
                                 <input wire:model="numero_du_duplicata" type="number" class="form-control  @error('numero_du_duplicata') is-invalid @enderror" placeholder="{{__('05')}}" required="" name="name">
                                 @error('numero_du_duplicata')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -33,7 +33,7 @@
                         </div>
                         <div class="form-group mb-3 row">
                             <div class='col'>
-                                <label class="px-2" for="user_ids">{{__('Propriators')}}</label>
+                                <label class="px-2" for="user_ids">{{__('Proprietaires')}}</label>
                                 <x-input.selectmultipleusers wire:model="user_ids" prettyname="user_ids" :options="$users" selected="('user_ids')"  multiple="multiple"/>
                                 @error('user_ids')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -103,7 +103,7 @@
                         </div>
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="numero_folio">{{__('Folio Number')}}</label>
+                                <label for="numero_folio">{{__('Numéro de dossier')}}</label>
                                 <input wire:model="numero_folio" type="number" class="form-control  @error('numero_folio') is-invalid @enderror" placeholder="{{__('34')}}" required="" name="name">
                                 @error('numero_folio')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -117,7 +117,7 @@
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label for="superficie_du_TF_mere">{{__('Surface Area parent Land title')}}</label>
+                                <label for="superficie_du_TF_mere">{{__('Superficie Titre foncier parent')}}</label>
                                 <input wire:model="superficie_du_TF_mere" type="number" class="form-control  @error('superficie_du_TF_mere') is-invalid @enderror" placeholder="{{__('12hac')}}" required="" value="" name="superficie_du_TF_mere">
                                 @error('superficie_du_TF_mere')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -126,9 +126,9 @@
                         </div>
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="etat_TF">{{__('State of Land Title')}}</label>
+                                <label for="etat_TF">{{__('État du titre foncier')}}</label>
                                 <select wire:model="etat_TF" name="etat_TF" class="form-select  @error('etat_TF') is-invalid @enderror" required="">
-                                    <option value="">{{__('Select Land title state')}}</option>
+                                    <option value="">{{__('Sélectionner état du titre foncier')}}</option>
                                     <option value="HYPOTHEQUE">{{__('HYPOTHEQUE')}}</option>
                                     <option value="DISPONIBLE">{{__('DISPONIBLE')}}</option>
                                     <option value="PRENOTE">{{__('PRENOTE')}}</option>
@@ -139,17 +139,17 @@
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="etat_terrain">{{__('State of Land')}}</label>
+                                <label for="etat_terrain">{{__('État du terrain')}}</label>
                                 <select wire:model="etat_terrain" name="etat_terrain" class="form-select  @error('etat_terrain') is-invalid @enderror" required="">
-                                    <option value="batit">{{__('Built')}}</option>
-                                    <option value="non_batit">{{__('Not built')}}</option>
+                                    <option value="batit">{{__('Construit')}}</option>
+                                    <option value="non_batit">{{__('Non Construit')}}</option>
                                 </select>
                                 @error('etat_terrain')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="provenance_TF">{{__('Source of Land Title')}}</label>
+                                <label for="provenance_TF">{{__('Source du titre foncier')}}</label>
                                 <input wire:model="provenance_TF" type="text" class="form-control  @error('provenance_TF') is-invalid @enderror" placeholder="{{__('Lotissement')}}" required="" name="name">
                                 @error('provenance_TF')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -158,21 +158,21 @@
                         </div>
                         <div class='form-group mb-3 row'>
                             <div class='col'>
-                                <label for="limit_nord">{{__('North Limit')}}</label>
+                                <label for="limit_nord">{{__('Limite nord')}}</label>
                                 <input wire:model="limit_nord" type="text" class="form-control  @error('limit_nord') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="limit_nord">
                                 @error('limit_nord')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label for="limit_sud">{{__('South Limit')}}</label>
+                                <label for="limit_sud">{{__('Limite sud')}}</label>
                                 <input wire:model="limit_sud" type="text" class="form-control  @error('limit_sud') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="limit_sud">
                                 @error('limit_sud')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label for="limit_est">{{__('East Limit')}}</label>
+                                <label for="limit_est">{{__('Limite Est')}}</label>
                                 <input wire:model="limit_est" type="text" class="form-control  @error('limit_est') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="limit_est">
                                 @error('limit_est')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -181,7 +181,7 @@
                         </div>
                         <div class='form-group mb-4 row'>
                             <div class='col'>
-                                <label for="limit_ouest">{{__('West Limit')}}</label>
+                                <label for="limit_ouest">{{__('Limite Ouest')}}</label>
                                 <input wire:model="limit_ouest" type="text" class="form-control  @error('limit_ouest') is-invalid @enderror" placeholder="{{__('Road')}}" required="" value="" name="limit_ouest">
                                 @error('limit_ouest')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -210,7 +210,7 @@
                             @enderror
                         </div>
                         <div class="p-3 shadow my-4">
-                            <h2 class="h5 mb-4">{{__('Add Files')}}</h2>
+                            <h2 class="h5 mb-4">{{__('Ajouter fichier')}}</h2>
                             <div class="d-xl-flex align-items-center">
                                 <div class="file-field">
                                     <div class="d-flex justify-content-xl-center ms-xl-3">
@@ -248,11 +248,11 @@
                             <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                             </svg>
-                            {{__('Add Coordinate')}}
+                            {{__('Ajouter Coordonnée')}}
                         </button>
 
                         <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
+                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
                             <button type="submit" wire:click.prevent="{{$state ? 'update':'store'}}" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{$state ? __('Update') : __('Register')}}</button>
                         </div>
                     </x-form-items.form>

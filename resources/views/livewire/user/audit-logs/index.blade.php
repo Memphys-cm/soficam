@@ -17,10 +17,10 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
                     </svg>
                     <span>
-                        {{__('Audit Logs')}}
+                        {{__('Journal de connexion')}}
                     </span>
                 </h1>
-                <p class="text-gray-800">{{__('View all activities audit Logs')}} &#129297; </p>
+                <p class="text-gray-800">{{__('Afficher les journaux de connexion de toutes les activités')}} &#129297; </p>
             </div>
             <div class=''>
 
@@ -37,7 +37,7 @@
                                 </svg>
                                 <div class="mb-3 mb-md-0">
                                     <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($creation_log_count)}} {{ __(\Str::plural('Creation log', $creation_log_count)) }} </h5>
-                                    <div class=" text-gray-500 ">{{__('recorded!')}} &#128516;</div>
+                                    <div class=" text-gray-500 ">{{__('enregistré!')}} &#128516;</div>
                                 </div>
                             </div>
                         </a>
@@ -52,7 +52,7 @@
                                 </svg>
                                 <div class="mb-3 mb-md-0">
                                     <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($update_log_count)}} {{ __(\Str::plural('Update log', $update_log_count)) }} </h5>
-                                    <div class=" text-gray-500 ">{{__('recorded!')}} &#128516;</div>
+                                    <div class=" text-gray-500 ">{{__('enregistré!')}} &#128516;</div>
                                 </div>
                             </div>
                         </a>
@@ -67,7 +67,7 @@
                                 </svg>
                                 <div class="mb-3 mb-md-0">
                                     <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($deletion_log_count)}} {{ __(\Str::plural('Deletion log', $deletion_log_count)) }}</h5>
-                                    <div class="text-gray-500 ">{{__('recorded!')}} &#128560;</div>
+                                    <div class="text-gray-500 ">{{__('enregistré!')}} &#128560;</div>
                                 </div>
                             </div>
                         </a>
@@ -77,26 +77,26 @@
         </div>
         <div class="row pt-4 pb-2 text-gray-600 ">
             <div class="col-md-3 mb-2">
-                <label for="search">{{__('Search')}}: </label>
-                <input wire:model="query" id="search" type="text" placeholder="{{__('Search...')}}" class="form-control">
+                <label for="search">{{__('Recherche')}}: </label>
+                <input wire:model="query" id="search" type="text" placeholder="{{__('Recherche...')}}" class="form-control">
                 <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p>
             </div>
             <div class="col-md-3 mb-2">
-                <label for="orderBy">{{__('Order By')}}: </label>
+                <label for="orderBy">{{__('Trier par')}}: </label>
                 <select wire:model="orderBy" id="orderBy" class="form-select">
-                    <option value="action_type">{{__('Action Type')}}</option>
-                    <option value="created_at">{{__('Created Date')}}</option>
+                    <option value="action_type">{{__('Type d\'action')}}</option>
+                    <option value="created_at">{{__('Date Creation')}}</option>
                 </select>
             </div>
             <div class="col-md-3 mb-2">
-                <label for="direction">{{__('Order direction')}}: </label>
+                <label for="direction">{{__('Sens de trie')}}: </label>
                 <select wire:model="orderAsc" id="direction" class="form-select">
                     <option value="asc">{{__('Ascending')}}</option>
                     <option value="desc">{{__('Descending')}}</option>
                 </select>
             </div>
             <div class="col-md-3 mb-2">
-                <label for="perPage">{{__('Items Per Page')}}: </label>
+                <label for="perPage">{{__('Element par page')}}: </label>
                 <select wire:model="perPage" id="perPage" class="form-select">
                     <option value="5">5</option>
                     <option value="10">10</option>
@@ -116,9 +116,9 @@
                     <thead>
                         <tr>
                             <!-- <th class="border-bottom">{{__('Employee')}}</th> -->
-                            <th class="border-bottom">{{__('Action Type')}}</th>
-                            <th class="border-bottom">{{__('Action Performed')}}</th>
-                            <th class="border-bottom">{{__('Date created')}}</th>
+                            <th class="border-bottom">{{__('Type d\'action')}}</th>
+                            <th class="border-bottom">{{__('Action réalisée')}}</th>
+                            <th class="border-bottom">{{__('Date creation')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -146,8 +146,8 @@
                         <tr>
                             <td colspan="7" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
-                                    <h4 class="fs-4 fw-bold">{{__('Opps nothing here')}} &#128540;</h4>
-                                    <p>{{__('No Record Found..!')}}</p>
+                                    <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                                    <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                                 </div>
                             </td>
                         </tr>
@@ -156,7 +156,7 @@
                 </table>
                 <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                     <div>
-                        {{__('Showing')}} {{$perPage > $logs_count ? $logs_count : $perPage  }} {{__('items of')}} {{$logs_count}}
+                        {{__('Montrer')}} {{$perPage > $logs_count ? $logs_count : $perPage  }} {{__('Element de')}} {{$logs_count}}
                     </div>
                     {{ $logs->links() }}
                 </div>
@@ -167,7 +167,7 @@
             <img src="{{asset('/img/empty.svg')}}" alt='{{__("Empty")}}' class="text-center  w-25 h-25">
             <div class="text-center text-gray-800 mt-2">
                 <h4 class="fs-4 fw-bold">{{__('Opps nothing here')}} &#128540;</h4>
-                <p>{{__('Record advance salary worked to see them here!')}}</p>
+                <p>{{__('L\'enregistrement du salaire anticipé a fonctionné pour les voir ici!')}}</p>
             </div>
         </div>
         @endif

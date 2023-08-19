@@ -22,7 +22,7 @@
                     </svg>
                     {{__('Audit Logs')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('View all activities performed within your space')}} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{__('Visualiser toutes les activités réalisées dans votre espace')}} &#x23F0; </p>
             </div>
             <div class="mb-2 mx-3">
 
@@ -42,7 +42,7 @@
                                     </svg>
                                 </div>
                                 <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5">{{__('Total Audit Logs')}}</h2>
+                                    <h2 class="fw-extrabold h5">{{__('Total des journaux d\'audit')}}</h2>
                                     <h3 class="mb-1">{{numberFormat(count($logs))}}</h3>
                                 </div>
                             </div>

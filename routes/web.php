@@ -159,5 +159,10 @@ Route::group(
             Route::get('/', App\Http\Livewire\Portal\CategoryActivites\Activite::class)->name('portal.category-activities.activites');
         });
 
+        //
+        Route::prefix('suivi-dossier')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\SuiviDossier\Index::class)->name('portal.suivi-dossier.index');
+        });
+
     }
 );

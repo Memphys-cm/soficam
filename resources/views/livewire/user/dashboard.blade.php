@@ -8,7 +8,7 @@
                     </div>
                 </div>
                 <div class=''>
-                    <div class='fw-bold display-4 text-gray-600'>{{__('Hi')}}, {{auth()->user()->first_name}}</div>
+                    <div class='fw-bold display-4 text-gray-600'>{{__('Bonjour')}}, {{auth()->user()->first_name}}</div>
                     <div class='d-flex align-items-center justify-content-start '>
                         <div class='leading text-gray-400 '>{{ auth()->user()->company ? auth()->user()->company->name : __('No Company')}} | {{ auth()->user()->department ? auth()->user()->department->name : __('No Department')}}</div>
                     </div>
@@ -28,7 +28,7 @@
         </div>
         <div class='mt-5'>
             <div class='d-flex justify-content-between align-items-end mx-2'>
-                <h5 class="h5 text-gray-600">{{__("Lastest Audit logs")}}</h5>
+                <h5 class="h5 text-gray-600">{{__("Dernière connexion")}}</h5>
                 <div>
                     <a href='{{route("user.auditlogs")}}' class='btn btn-secondary'>{{__("View all")}}</a>
                 </div>
@@ -39,8 +39,8 @@
                         <thead>
                             <tr>
                                 <!-- <th class="border-bottom">{{__('Employee')}}</th> -->
-                                <th class="border-bottom">{{__('Action Type')}}</th>
-                                <th class="border-bottom">{{__('Action Performed')}}</th>
+                                <th class="border-bottom">{{__('Type d\'action')}}</th>
+                                <th class="border-bottom">{{__('Action réalisée')}}</th>
                                 <th class="border-bottom">{{__('Date')}}</th>
                             </tr>
                         </thead>
@@ -69,8 +69,8 @@
                             <tr>
                                 <td colspan="7" class="text-center">
                                     <div class="text-center text-gray-800 mt-2">
-                                        <h4 class="fs-4 fw-bold">{{__('Opps nothing here')}} &#128540;</h4>
-                                        <p>{{__('No Record Found..!')}}</p>
+                                        <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                                        <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                                     </div>
                                 </td>
                             </tr>
