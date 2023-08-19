@@ -2,13 +2,14 @@
 
 namespace App\Http\Livewire\Portal\EtatCession;
 
+use App\Models\User;
 use Livewire\Component;
-use App\Http\Livewire\Traits\WithDataTables;
+use App\Models\Sales\Sale;
 use App\Models\EtatCession;
 use App\Models\SubDivision;
 use App\Models\TitreFoncier;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use App\Http\Livewire\Traits\WithDataTables;
 
 class Index extends Component
 {
