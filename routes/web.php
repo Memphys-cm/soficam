@@ -1,9 +1,10 @@
 <?php
 
+use App\Models\TitreFoncier;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Models\TitreFoncier;
 
 /*
 |--------------------------------------------------------------------------
@@ -148,6 +149,8 @@ Route::group(
         Route::prefix('category-activites')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\CategoryActivites\Activite::class)->name('portal.category-activities.activites');
         });
+
+        Route::get('/map', [TestController::class, 'index']);
 
     }
 );
