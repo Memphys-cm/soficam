@@ -1,8 +1,8 @@
 <x-map-master>
     <div id="map"></div>
-    <div id="style-controls" style="position: absolute; top: 10px; left: 450px; z-index: 100;">
-        <button class="btn btn-primary" id="normalStyleButton">Style Normal</button>
-        <button class="btn btn-primary" id="satelliteStyleButton">Style Satellite</button>
+    <div id="style-controls" style="position: absolute; top: 10px; left: 550px; z-index: 100;">
+        <button class="btn btn-white" id="normalStyleButton">Street</button>
+        <button class="btn btn-white" id="satelliteStyleButton">Satellite</button> 
     </div>
     <div id="search-box-general" style="position: absolute; top: 10px; right: 40px;  padding: 10px; z-index: 100;">
         <input class="form-control" type="text" id="search-input-general"
