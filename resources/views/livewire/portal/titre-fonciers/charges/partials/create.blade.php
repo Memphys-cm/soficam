@@ -37,8 +37,8 @@
                             </div>
                             @endforeach
                         </div>
-                        @endif
-                        <div class="form-group mb-2 row">
+                        @endif 
+                        <div class="form-group mb-3 row">
                             <div class="col">
                                 <label for="etat_TF">{{__('Type of Charge')}}</label>
                                 <select wire:model="etat_TF" name="etat_TF" class="form-select  @error('etat_TF') is-invalid @enderror" required="">
@@ -51,16 +51,10 @@
                                 @error('etat_TF')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
-                            </div>
-                        </div>
+                            </div> 
+                            <div class="col">
 
-                        <div class="col-md-12 py-2">
-                            <label for="code">{{ __('Commentaires') }}</label>
-                            <textarea wire:model="commentaires" class="form-control  @error('commentaires') is-invalid @enderror" rows="4">
-                                    </textarea>
-                            @error('commentaires')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            </div>
                         </div>
                         <div class="p-3 shadow border rounded my-2">
                             <h2 class="h5 mb-4">{{__('Add Files')}}</h2>
