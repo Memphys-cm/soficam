@@ -32,6 +32,10 @@ class Operation extends Model implements  HasMedia
     {
         return $query->where('type_operation', 'mutation_totale_normale')->orWhere('type_operation', 'mutation_totale_par_deces');
     }
+    function scopeMorcellements($query)
+    {
+        return $query->where('type_operation', 'morcellement_normale')->orWhere('type_operation', 'morcellement_forcee');
+    }
 
     public function parcels(): BelongsToMany
     {

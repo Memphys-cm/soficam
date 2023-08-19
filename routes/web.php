@@ -23,17 +23,6 @@ Route::get('language/{locale}', function ($locale) {
 })->name('language-switcher');
 
 Route::get('/', function () {
-    $json = '{"B1":"4.041199733149849, 9.69162768162152","B2":"4.041468885432741, 9.693452200405627","B3":"4.040350621195789, 9.69353892929149","B4":"4.040456359714004, 9.691653379069184","B5":"4.041199733149849, 9.69162768162152"}';
-    $data = json_decode($json, true);
-
-    $result = [];
-
-    foreach ($data as $coordinates) {
-        list($latitude, $longitude) = explode(', ', $coordinates);
-        $result[] = [$longitude, $latitude];
-    }
-
-    dd($result);
     return redirect('login');
 });
 
@@ -107,6 +96,7 @@ Route::group(
         
         Route::prefix('operations')->group(function () {
             Route::get('mutation-totale', App\Http\Livewire\Portal\Operations\MutationTotale\Index::class)->name('portal.mutation-totale.index');
+            Route::get('morcellements', App\Http\Livewire\Portal\Operations\Morcellements\Index::class)->name('portal.morcellements.index');
         });
 
         Route::prefix('land-sales')->group(function () {
