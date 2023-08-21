@@ -84,22 +84,22 @@
         <div class="col-md-3">
             <label for="orderBy">{{ __('Order By') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="nom_cabinet">{{ __('Office Name') }}</option>
+                <option value="nom_cabinet">{{ __('Nom du bureau') }}</option>
                 <option value="description">{{ __('Description') }}</option>
-                <option value="created_at">{{ __('Created Date') }}</option>
+                <option value="created_at">{{ __('Date de création') }}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{ __('Order direction') }}: </label>
+            <label for="direction">{{ __('Trier par direction') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{ __('Ascending') }}</option>
-                <option value="desc">{{ __('Descending') }}</option>
+                <option value="asc">{{ __('Ascendant') }}</option>
+                <option value="desc">{{ __('Descendant') }}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{ __('Items Per Page') }}: </label>
+            <label for="perPage">{{ __('Element par page') }}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -114,10 +114,10 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('OFFICE NAME') }}</th>
-                        <th class="border-bottom">{{ __('LOCATION') }}</th>
+                        <th class="border-bottom">{{ __('NOM DU BUREAU') }}</th>
+                        <th class="border-bottom">{{ __('LOCALISATION') }}</th>
                         <th class="border-bottom">{{ __('TYPE CABINET') }}</th>                      
-                        <th class="border-bottom">{{ __('Date created') }}</th>
+                        <th class="border-bottom">{{ __('Date de création') }}</th>
                         <th class="border-bottom">{{ __('Action') }}</th>
                     </tr>
                 </thead>
@@ -144,7 +144,7 @@
                                         {{ $cabinet->division->division_name }} </span>
                                 </div>
                                 <div class="d-flex align-items-centerpy-1">
-                                    {{ __('Sub Divi') }} : <span class="fw-bolder mx-2">
+                                    {{ __('Arrondissement') }} : <span class="fw-bolder mx-2">
                                         {{ $cabinet->subDivision->sub_division_name }} </span>
                                 </div>
                             </td>
@@ -186,8 +186,8 @@
                         <tr>
                             <td colspan="7" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
-                                    <h4 class="fs-4 fw-bold">{{ __('Opps nothing here') }} &#128540;</h4>
-                                    <p>{{ __('No Record Found..!') }}</p>
+                                    <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
+                                    <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                                 </div>
                             </td>
                         </tr>
@@ -196,8 +196,8 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{ __('Showing') }} {{ $perPage > $cabinets_count ? $cabinets_count : $perPage }}
-                    {{ __('items of') }} {{ $cabinets_count }}
+                    {{ __('Afficher') }} {{ $perPage > $cabinets_count ? $cabinets_count : $perPage }}
+                    {{ __('element de') }} {{ $cabinets_count }}
                 </div>
                 {{ $cabinets->links() }}
             </div>

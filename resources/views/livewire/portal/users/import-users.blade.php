@@ -4,15 +4,15 @@
              <div class="modal-body p-0">
                  <div class="p-3 p-lg-4">
                      <div class="mb-4 mt-md-0">
-                         <h1 class="mb-0 h4">{{__('Importer :name',['name'=>__('Companies')])}}</h1>
-                         <p>{{__('Importer nouveau :name from excel file',['name'=>__('Companies')])}} &#128522;</p>
+                         <h1 class="mb-0 h4">{{__('Importer :nom',['nom'=>__('Entreprise')])}}</h1>
+                         <p>{{__('Importer nouveau :nom à partir d\'un fichier Excel',['nom'=>__('Entreprise')])}} &#128522;</p>
                      </div>
                      <x-form-items.form wire:submit="import" class="form-modal">
-                         <p>{{__('Steps you have to follow for importing new :name',['name'=>__('companies')])}}</p>
+                         <p>{{__('Etapes à suivre pour importer un nouveau :nom',['nom'=>__('Entreprise')])}}</p>
                          <div class='mb-4'>
                              <ol>
-                                 <li>{{__('Télécharger l\'exemple de modèle d\'importation :name import template',['name'=>__('Company')])}} <a href="{{asset('templates/import_companies.xlsx')}}">{{__('Template')}}</a></li>
-                                 <li>{{__('Remplir le modèle avec votre :name data',['name'=>__('Companies')])}}</li>
+                                 <li>{{__('Télécharger l\'exemple de modèle d\'importation :nom modèle d\'importation',['nom'=>__('Entreprise')])}} <a href="{{asset('templates/import_companies.xlsx')}}">{{__('Modèle')}}</a></li>
+                                 <li>{{__('Remplir le modèle avec votre :name data',['name'=>__('Entreprises')])}}</li>
                                  <li>{{__('Téléchargez le modèle rempli en utilisant le formulaire ci-dessous et cliquez sur le bouton d\'importation pour l\'importer.')}}</li>
                              </ol>
                          </div>

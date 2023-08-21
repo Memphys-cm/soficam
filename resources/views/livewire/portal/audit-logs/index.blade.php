@@ -12,15 +12,15 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Audit Logs')}}</li>
+                        <li class="breadcrumb-item"><a href="/">Acceuil</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Jounaux de connexion')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
                     <svg class="icon me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    {{__('Audit Logs')}}
+                    {{__('Jounaux de connexion')}}
                 </h1>
                 <p class="mt-n1 mx-2">{{__('Visualiser toutes les activités réalisées dans votre espace')}} &#x23F0; </p>
             </div>
@@ -48,11 +48,11 @@
                             </div>
                             <div class="col-12 col-xl-8 px-xl-0">
                                 <a href="" class="d-none d-sm-block">
-                                    <h2 class="h5">{{__('Total Audit Logs')}}</h2>
+                                    <h2 class="h5">{{__('Total des journaux de connexion')}}</h2>
                                     <h3 class="fw-extrabold mb-1">{{numberFormat(count($logs))}}</h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Audit Log'), count($logs)) }} {{__('recorded')}}</div>
+                                    <div>{{ \Str::plural(__('Journal d\'audit'), count($logs)) }} {{__('enregistré')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -70,17 +70,17 @@
                                     </svg>
                                 </div>
                                 <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5">{{ \Str::plural(__('Creation Logs'), $creation_log_count) }}</h2>
+                                    <h2 class="fw-extrabold h5">{{ \Str::plural(__('Journaux de création'), $creation_log_count) }}</h2>
                                     <h3 class="mb-1">{{numberFormat($creation_log_count)}}</h3>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-8 px-xl-0">
                                 <a href="" class="d-none d-sm-block">
-                                    <h2 class="h5">{{ \Str::plural(__('Creation Logs'), $creation_log_count) }}</h2>
+                                    <h2 class="h5">{{ \Str::plural(__('Journaux de création'), $creation_log_count) }}</h2>
                                     <h3 class="fw-extrabold mb-1">{{numberFormat($creation_log_count)}}</h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Creation Logs'), $creation_log_count) }} {{__('recorded')}}</div>
+                                    <div>{{ \Str::plural(__('Journaux de création'), $creation_log_count) }} {{__('enregistré')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -98,17 +98,17 @@
                                     </svg>
                                 </div>
                                 <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5">{{ \Str::plural(__('Update Log'), $update_log_count) }}</h2>
+                                    <h2 class="fw-extrabold h5">{{ \Str::plural(__('Journal des mises à jour'), $update_log_count) }}</h2>
                                     <h3 class="mb-1">{{numberFormat($update_log_count)}}</h3>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-8 px-xl-0">
                                 <a href="" class="d-none d-sm-block">
-                                    <h2 class="h5">{{ \Str::plural(__('Update Log'), $update_log_count) }}</h2>
+                                    <h2 class="h5">{{ \Str::plural(__('Journal des mises à jour'), $update_log_count) }}</h2>
                                     <h3 class="fw-extrabold mb-1">{{numberFormat($update_log_count)}}</h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Update Log'), $update_log_count) }} {{__('recorded')}}</div>
+                                    <div>{{ \Str::plural(__('Journal des mises à jour'), $update_log_count) }} {{__('enregistré')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -126,17 +126,17 @@
                                     </svg>
                                 </div>
                                 <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5">{{ \Str::plural(__('Deletion Log'), $deletion_log_count) }}</h2>
+                                    <h2 class="fw-extrabold h5">{{ \Str::plural(__('Journal des suppressions'), $deletion_log_count) }}</h2>
                                     <h3 class="mb-1">{{numberFormat($deletion_log_count)}} </h3>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-8 px-xl-0">
                                 <a href="" class="d-none d-sm-block">
-                                    <h2 class="h5">{{ \Str::plural(__('Deletion Log'), $deletion_log_count) }}</h2>
+                                    <h2 class="h5">{{ \Str::plural(__('Journal des suppressions'), $deletion_log_count) }}</h2>
                                     <h3 class="fw-extrabold mb-1">{{numberFormat($deletion_log_count)}} </h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Deletion Log'), $deletion_log_count) }} {{__('recorded!')}}</div>
+                                    <div>{{ \Str::plural(__('Journal des suppressions'), $deletion_log_count) }} {{__('enregistré!')}}</div>
                                 </div>
                             </div>
                         </div>

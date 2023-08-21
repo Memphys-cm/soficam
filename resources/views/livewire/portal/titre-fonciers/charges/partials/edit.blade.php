@@ -4,12 +4,12 @@
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{__('Edit')}}{{__(' a Charge on a Land Title')}}</h1>
-                        <p class="px-1"> {{__('Land Title')}} </p>
+                        <h1 class="mb-0 h4"> {{__('Modifier')}}{{__(' une charge sur un titre foncier')}}</h1>
+                        <p class="px-1"> {{__('Titre Foncier')}} </p>
                     </div>
                     <x-form-items.form>
                         <div class='form-group  mb-2'>
-                            <label for="titre_foncier_id">{{ __('Land Title Number') }}</label>
+                            <label for="titre_foncier_id">{{ __('Numero Titre Foncier') }}</label>
                             <input class="form-control" wire:model="titre_foncier_id" type="text" >
                             @error('titre_foncier_id')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -17,7 +17,7 @@
                         </div>
 
                         @if(!empty($titre_foncier_users))
-                        <span class="fw-bold py-2">{{__('Land Owners')}}</span>
+                        <span class="fw-bold py-2">{{__('Propriétaires fonciers')}}</span>
                         <div class='row'>
                             @foreach($titre_foncier_users->split($titre_foncier_users->count()/2) as $row )
                             <div class="col-md-6" data-aos="fade-right" data-aos-duration="2000">
@@ -40,9 +40,9 @@
                         @endif 
                         <div class="form-group mb-3 row">
                             <div class="col">
-                                <label for="type_charge">{{__('Type of Charge')}}</label>
+                                <label for="type_charge">{{__('Type de charge')}}</label>
                                 <select wire:model="type_charge" name="type_charge" class="form-select  @error('type_charge') is-invalid @enderror" required="">
-                                    <option value="">{{__('Select Type of Charge')}}</option>
+                                    <option value="">{{__('Selectionner un Type de charge')}}</option>
                                     <option value="HYPOTHEQUE">{{__('HYPOTHEQUE')}}</option>
                                     <option value="DISPONIBLE">{{__('DISPONIBLE')}}</option>
                                     <option value="PRENOTE">{{__('PRENOTE')}}</option>
@@ -57,8 +57,8 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end mt-5">
-                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" wire:click.prevent="update" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Update')}}</button>
+                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
+                            <button type="submit" wire:click.prevent="update" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Mettre à jour')}}</button>
                         </div>
                     </x-form-items.form>
                 </div>

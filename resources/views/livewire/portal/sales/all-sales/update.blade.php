@@ -5,13 +5,13 @@
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Update Sales') }}</h1>
-                        <p class="px-1"> {{ __('Updating  Sales') }} &#128522;</p>
+                        <h1 class="mb-0 h4"> {{ __('Mise à jour des ventes') }}</h1>
+                        <p class="px-1"> {{ __('Mise à jour des ventes') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="update">
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="payment_method">{{ __('PAYMENT METHOD') }}</label>
+                                <label for="payment_method">{{ __('MODE DE PAIEMENT') }}</label>
                                 <select wire:model="payment_method"
                                     class="form-select @error('payment_method') is-invalid @enderror"
                                     id="payment_method" required="">
@@ -31,12 +31,12 @@
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="payment_status">{{ __('payment_status Immobilier ') }}</label>
+                                <label for="payment_status">{{ __('Statut_paiement Immobilier ') }}</label>
                                 <select wire:model="payment_status" name="payment_status"
                                     class="form-select  @error('payment_status') is-invalid @enderror" required="">
-                                    <option value="">{{ __('-- Select --') }}</option>
-                                    <option value="pending_payment">{{ __('pending_payment') }}</option>
-                                    <option value="totally_paid">{{ __('totally_paid') }}</option>
+                                    <option value="">{{ __('-- Selectionner --') }}</option>
+                                    <option value="pending_payment">{{ __('paiement_en_attente') }}</option>
+                                    <option value="totally_paid">{{ __('totalement_payé') }}</option>
                                 </select>
                                 @error('payment_status')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -46,7 +46,7 @@
 
                         <div class='form-group mb-3 row'>
                             <div class=" col">
-                                <label for="sales_type">{{ __('Sale Type') }}</label>
+                                <label for="sales_type">{{ __('Type de vente') }}</label>
                                 <input type="text" wire:model="sales_type"
                                     class="form-control  @error('sales_type') is-invalid @enderror "
                                     value="{{ old('sales_type') }}" placeholder="0" id="sales_type" autofocus=""
@@ -58,7 +58,7 @@
                                 @enderror
                             </div>
                             <div class=" col">
-                                <label for="sales_amount">{{ __('Sale Amount') }}
+                                <label for="sales_amount">{{ __('Montant de la vente') }}
                                     {{ __('XAF') }}</label>
                                 <input type="number" wire:model="sales_amount"
                                     class="form-control  @error('sales_amount') is-invalid @enderror "
@@ -74,9 +74,9 @@
                         </div>
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
-                                data-bs-dismiss="modal">{{ __('Close') }}</button>
+                                data-bs-dismiss="modal">{{ __('Fermer') }}</button>
                             <button type="submit" wire:click.prevent="update" class="btn btn-primary btn-loading"
-                                wire:loading.attr="disabled">{{ __('Update') }}</button>
+                                wire:loading.attr="disabled">{{ __('Mettre à jour') }}</button>
                         </div>
                     </x-form-items.form>
                 </div>

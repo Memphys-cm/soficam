@@ -14,7 +14,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">{{__('Dashboard')}}</a></li>
+                        <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{__('Etat Cessions')}}</li>
                     </ol>
                 </nav>
@@ -22,7 +22,7 @@
                     <svg class="icon me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    {{__('state_assignments')}}
+                    {{__('affectations_d\'état')}}
                 </h1>
                 <p class="mt-n1 mx-2">{{__('Voir Tous les Etats Cessions')}} &#x23F0; </p>
             </div>
@@ -67,32 +67,32 @@
     </div>
     <div class="row p-3">
         <div class="col-md-3">
-            <label for="search">{{__('Search')}}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{__('Search...')}}" class="form-control">
+            <label for="search">{{__('Recherche')}}: </label>
+            <input wire:model="query" id="search" type="text" placeholder="{{__('Recherche...')}}" class="form-control">
             <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p>
         </div>
         <div class="col-md-3">
-            <label for="orderBy">{{__('Order By')}}: </label>
+            <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="type_operation">{{__('Operation')}}</option>
                 <option value="type_personne">{{__('Personne')}}</option>
                 <option value="zone">{{__('Zone')}}</option>
-                <option value="user_id">{{__('Requestor')}}</option>
+                <option value="user_id">{{__('Requerant')}}</option>
                 <option value="geometre_id">{{__('Geometre')}}</option>
-                <option value="created_at">{{__('Created Date')}}</option>
+                <option value="created_at">{{__('Date de création')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Order direction')}}: </label>
+            <label for="direction">{{__('Trier par direction')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{__('Ascending')}}</option>
-                <option value="desc">{{__('Descending')}}</option>
+                <option value="asc">{{__('Ascendant')}}</option>
+                <option value="desc">{{__('Descendant')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Items Per Page')}}: </label>
+            <label for="perPage">{{__('Éléments par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -109,13 +109,13 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('Requestor')}}</th>
+                        <th class="border-bottom">{{__('Requerant')}}</th>
                         <th class="border-bottom">{{__('reference')}}</th>
                         <th class="border-bottom">{{__('personne')}}</th>
                         <th class="border-bottom">{{__('operation')}}</th>
                         <th class="border-bottom">{{__('Zone')}}</th>
                         <th class="border-bottom">{{__('Geometre')}}</th>
-                        <th class="border-bottom">{{__('Status')}}</th>
+                        <th class="border-bottom">{{__('Statut')}}</th>
                         <th class="border-bottom">{{__('Date Creation')}}</th>
                         {{-- @canany('housing_estate.update','housing_estate.delete') --}}
                         <th class="border-bottom">{{__('Action')}}</th>
@@ -170,8 +170,8 @@
                     <tr>
                         <td colspan="10" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps nothing here')}} &#128540;</h4>
-                                <p>{{__('No Record Found..!')}}</p>
+                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                                <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
                     </tr>
@@ -180,7 +180,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Showing')}} {{$perPage > $state_assignments_count ? $state_assignments_count : $perPage  }} {{__('items of')}} {{$state_assignments_count}}
+                    {{__('Affichage')}} {{$perPage > $state_assignments_count ? $state_assignments_count : $perPage  }} {{__('éléments de')}} {{$state_assignments_count}}
                 </div>
                 {{ $state_assignments->links() }}
             </div>

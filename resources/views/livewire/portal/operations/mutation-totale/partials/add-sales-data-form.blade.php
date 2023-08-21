@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Add Sales Data of Plot')}}</h1>
-                        <p class="px-1"> {{ __('Add sales Data od the given plot')}} </p>
+                        <h1 class="mb-0 h4"> {{ __('Ajouter les données de vente de la parcelle')}}</h1>
+                        <p class="px-1"> {{ __('Ajouter les données de vente au graphique donné')}} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <div class="form-group mb-2">
@@ -28,7 +28,7 @@
                         </div>
                         <div class='form-group row mb-2'>
                             <div class='col'>
-                                <label class="px-2" for="certificates_propriete_id">{{__('Add Files')}}</label>
+                                <label class="px-2" for="certificates_propriete_id">{{__('Ajouter fichier')}}</label>
                                 <div class="input-group">
                                     <input type="file" class="form-control" wire:model="attachments" multiple>
                                 </div>

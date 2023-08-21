@@ -35,7 +35,7 @@
                         </div>
 
                         <div class='form-group row mb-3'>
-                            <div class=" col"><label for="first_name">{{ __('Premier Nom') }}</label>
+                            <div class=" col"><label for="first_name">{{ __('Prenom') }}</label>
                                 <input type="text" wire:model="first_name" class="form-control  @error('first_name') is-invalid @enderror " value="{{ old('first_name') }}" placeholder="Jane" id="first_name" autofocus="" required="">
                                 @error('first_name')
                                 <div class="invalid-feedback">
@@ -43,7 +43,7 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class=" col"><label for="last_name">{{ __('Dernier Nom') }}</label>
+                            <div class=" col"><label for="last_name">{{ __('Nom') }}</label>
                                 <input type="text" wire:model="last_name" class="form-control  @error('last_name') is-invalid @enderror " value="{{ old('last_name') }}" placeholder="Doe" id="last_name" autofocus="" required="">
                                 @error('last_name')
                                 <div class="invalid-feedback">

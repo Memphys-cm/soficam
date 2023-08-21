@@ -252,7 +252,7 @@
                         <td colspan="7" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
                                 <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
-                                <p>{{__('No Record Found..!')}}</p>
+                                <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
                     </tr>

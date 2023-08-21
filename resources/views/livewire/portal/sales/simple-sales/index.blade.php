@@ -14,16 +14,16 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Simple Sales')}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Ventes simples')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
                     <svg class="icon me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    {{__('Simple Sales Managment')}}
+                    {{__('Gestion simple des ventes')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('View all Simple Sales within the application')}} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{__('Afficher toutes les ventes simples dans l\'application')}} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -33,28 +33,28 @@
     </div>
     <div class="row py-3">
         <div class="col-md-3">
-            <label for="search">{{__('Search')}}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{__('Search...')}}" class="form-control">
+            <label for="search">{{__('Recherche')}}: </label>
+            <input wire:model="query" id="search" type="text" placeholder="{{__('Recherche...')}}" class="form-control">
         </div>
         <div class="col-md-3">
-            <label for="orderBy">{{__('Order By')}}: </label>
+            <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="user">{{__('User')}}</option>
-                <option value="action_type">{{__('Action Type')}}</option>
-                <option value="created_at">{{__('Created Date')}}</option>
+                <option value="user">{{__('Utilisateur')}}</option>
+                <option value="action_type">{{__('Type d\'action')}}</option>
+                <option value="created_at">{{__('Date de création')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Order direction')}}: </label>
+            <label for="direction">{{__('Direction du trie')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{__('Ascending')}}</option>
-                <option value="desc">{{__('Descending')}}</option>
+                <option value="asc">{{__('Ascendante')}}</option>
+                <option value="desc">{{__('Descendante')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Items Per Page')}}: </label>
+            <label for="perPage">{{__('Éléments par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -72,8 +72,8 @@
                 <thead>
                     <tr>
                         <th class="border-bottom">{{__('Code')}}</th>
-                        <th class="border-bottom">{{__('Land title Number')}}</th>
-                        <th class="border-bottom">{{__('Location')}}</th>
+                        <th class="border-bottom">{{__('Numéro du titre foncier')}}</th>
+                        <th class="border-bottom">{{__('Localisation')}}</th>
                         <th class="border-bottom">{{__('Details')}}</th>
                         <th class="border-bottom">{{__('Contacts')}}</th>
                         <th class="border-bottom">{{__('Date ')}}</th>
@@ -103,10 +103,10 @@
                                 {{__('Region')}} : <span class="fw-bolder mx-2"> {{$lotissement->titreFoncier->region->region_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Division')}} : <span class="fw-bolder mx-2"> {{$lotissement->titreFoncier->division->division_name}} </span>
+                                {{__('Sous Region')}} : <span class="fw-bolder mx-2"> {{$lotissement->titreFoncier->division->division_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Sub Divi')}} : <span class="fw-bolder mx-2"> {{$lotissement->titreFoncier->subDivision->sub_division_name}} </span>
+                                {{__('Arrondissement')}} : <span class="fw-bolder mx-2"> {{$lotissement->titreFoncier->subDivision->sub_division_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
                                 {{__('Lieu Dit')}} : <span class="fw-bolder mx-2"> {{$lotissement->titreFoncier->lieu_dit}} </span>
@@ -115,7 +115,7 @@
                         </td>
                         <td>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Blocks')}} : <span class="fw-bolder mx-2"> {{$lotissement->blocks_count}} </span>
+                                {{__('Blocs')}} : <span class="fw-bolder mx-2"> {{$lotissement->blocks_count}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
                                 {{__('Lots')}} : <span class="fw-bolder mx-2"> {{$lotissement->parcels_count}} </span>
@@ -157,13 +157,13 @@
                     <tr>
                         <td colspan="7" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps nothing here')}} &#128540;</h4>
-                                <p>{{__('You need to create lotissement before you can perform simple sales!')}}</p>
+                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                                <p>{{__('Vous devez créer un lotissement avant de pouvoir effectuer des ventes simples.!')}}</p>
                                 @can('lotissement.create')
                                 <a href="{{route('portal.lotissements.create')}}" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                    </svg> {{__('Add a Lotissement')}}
+                                    </svg> {{__('Ajouter un Lotissement')}}
                                 </a>
                                 @endcan
                             </div>
@@ -174,7 +174,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Showing')}} {{$perPage > $lotissements_count ? $lotissements_count : $perPage  }} {{__('items of')}} {{$lotissements_count}}
+                    {{__('Montrer')}} {{$perPage > $lotissements_count ? $lotissements_count : $perPage  }} {{__('element de')}} {{$lotissements_count}}
                 </div>
                 {{ $lotissements->links() }}
             </div>

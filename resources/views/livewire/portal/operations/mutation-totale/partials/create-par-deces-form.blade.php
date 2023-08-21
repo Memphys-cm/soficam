@@ -2,7 +2,7 @@
     <a href="#" data-bs-toggle="modal" data-bs-target="#CreateMutationTotaleParDecesModal" class="btn btn-sm btn-tertiary py-2 d-inline-flex align-items-center mx-2">
         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-        </svg> {{__('New Mutation Par Deces')}}
+        </svg> {{__('Nouvelle mutation Par Deces')}}
     </a>
     <div wire:ignore.self class="modal side-layout-modal fade" id="CreateMutationTotaleParDecesModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:45%;">
@@ -10,19 +10,19 @@
                 <div class="modal-body p-0">
                     <div class="p-4 p-lg-5">
                         <div class="mb-4 mt-md-0">
-                            <h1 class="mb-0 h4"> {{ __('Create')}}{{__(' total mutation')}}</h1>
-                            <p class="px-1"> {{ __('Create')}}{{__(' a total mutation on land title')}} </p>
+                            <h1 class="mb-0 h4"> {{ __('Creer')}}{{__('  mutation totale')}}</h1>
+                            <p class="px-1"> {{ __('Creer')}}{{__(' une mutation totale du titre foncier')}} </p>
                         </div>
                         <x-form-items.form wire:submit="store">
                             <div class='form-group  mb-2'>
-                                <label for="titre_foncier_id">{{ __('Land Title Number') }}</label>
+                                <label for="titre_foncier_id">{{ __('Numero du titre foncier') }}</label>
                                 <x-input.land_title-select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers" />
                                 @error('titre_foncier_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             @if(!empty($titre_foncier_users))
-                            <span class="fw-bold py-2">{{__('Land Owners')}}</span>
+                            <span class="fw-bold py-2">{{__('Proprietaire du titre foncier')}}</span>
                             <div class='row'>
                                 @foreach($titre_foncier_users->split($titre_foncier_users->count()/2) as $row )
                                 <div class="col-md-6" data-aos="fade-right" data-aos-duration="2000">
@@ -52,7 +52,7 @@
                                     </div>
                                     @enderror
                                 </div>
-                                <div class=" col"><label for="division">{{ __('Division') }}</label>
+                                <div class=" col"><label for="division">{{ __('Sous region') }}</label>
                                     <input type="text" wire:model="division" class="form-control  @error('division') is-invalid @enderror " value="{{ old('division') }}" placeholder="" id="division" autofocus="" required="" disabled>
                                     @error('division')
                                     <div class="invalid-feedback">
@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                             <div class='form-group row mb-2'>
-                                <div class=" col"><label for="sub_division">{{ __('SubDivision') }}</label>
+                                <div class=" col"><label for="sub_division">{{ __('Arrondissement') }}</label>
                                     <input type="text" wire:model="sub_division" class="form-control  @error('sub_division') is-invalid @enderror " value="{{ old('sub_division') }}" placeholder="" id="sub_division" autofocus="" required="" disabled>
                                     @error('sub_division')
                                     <div class="invalid-feedback">
@@ -83,7 +83,7 @@
 
                             <div class='form-group row mb-2'>
                                 <div class='col'>
-                                    <label class="px-2" for="requestor_id">{{__('Requestor')}}</label>
+                                    <label class="px-2" for="requestor_id">{{__('Requerant')}}</label>
                                     <select wire:model="requestor_id" class='form-control'>
                                         <option value=''>{{__('-- Select --')}}</option>
                                         @foreach($users as $user)
@@ -95,9 +95,9 @@
                                     @enderror
                                 </div>
                                 <div class='col'>
-                                    <label class="px-2" for="certificates_propriete_id">{{__('Certificate proprietes')}}</label>
+                                    <label class="px-2" for="certificates_propriete_id">{{__('Certificat proprieté')}}</label>
                                     <select wire:model="certificates_propriete_id" class='form-control'>
-                                        <option value=''>{{__('-- Select --')}}</option>
+                                        <option value=''>{{__('-- Selectionner --')}}</option>
                                         @foreach($certificates_proprietes as $certificates_propriete)
                                         <option value='{{$certificates_propriete->id}}'>{{$certificates_propriete->certificate_proprietes_number}}</option>
                                         @endforeach
@@ -123,7 +123,7 @@
                             </div>
                             <div class='form-group row mb-2'>
                                 <div class='col'>
-                                    <label class="px-2" for="certificates_propriete_id">{{__('Add Files')}}</label>
+                                    <label class="px-2" for="certificates_propriete_id">{{__('Ajouter fichiers')}}</label>
                                     <div class="input-group">
                                         <input type="file" class="form-control" wire:model="attachments" multiple>
                                     </div>

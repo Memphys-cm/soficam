@@ -87,7 +87,7 @@
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="region_id">{{__('Region')}}</option>
                 <option value="date_de_delivrance_du_TF">{{__('Date de délivrances')}}</option>
-                <option value="created_at">{{__('Created Date')}}</option>
+                <option value="created_at">{{__('Date Creation')}}</option>
             </select>
         </div>
 

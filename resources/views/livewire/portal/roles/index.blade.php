@@ -15,24 +15,24 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="">{{ __('Dashboard') }}</a></li>
-                        <li class="breadcrumb-item active"><a href="">{{ __('Roles Management') }}</a></li>
+                        <li class="breadcrumb-item"><a href="">{{ __('Tableau de bord') }}</a></li>
+                        <li class="breadcrumb-item active"><a href="">{{ __('Gestion des roles') }}</a></li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
                     <svg class="icon me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
-                    {{__('Roles Management')}}
+                    {{__('Gestion des roles')}}
                 </h1>
-                <p class="mt-n2">{{__('Manage Roles and Permissions')}} &#128524;</p>
+                <p class="mt-n2">{{__('Gérer les rôles et les autorisations')}} &#128524;</p>
             </div>
             <div class="d-flex justify-content-between mb-2">
                 @can('role.create')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateRoleModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{__('New')}}
+                    </svg> {{__('Nouveau')}}
                 </a>
                 @endcan
 
@@ -42,7 +42,7 @@
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
                         </svg>
-                        {{__('Export')}}
+                        {{__('Exporter')}}
                     </a>
                 </div>
                 <div class="text-center mx-2" wire:loading wire:target="export">
@@ -59,24 +59,24 @@
         <div class=' pb-4'>
             <div class="row">
                 <div class="col-md-3">
-                    <label for="orderBy">{{__('Order By')}}: </label>
+                    <label for="orderBy">{{__('Trier par')}}: </label>
                     <select wire:model="orderBy" id="orderBy" class="form-select">
-                        <option value="name">{{__('Name')}}</option>
+                        <option value="name">{{__('Nom')}}</option>
                         <option value="name">{{__('Module')}}</option>
-                        <option value="created_at">{{__('Created Date')}}</option>
+                        <option value="created_at">{{__('Date Creation')}}</option>
                     </select>
                 </div>
 
                 <div class="col-md-3">
-                    <label for="direction">{{__('Order direction')}}: </label>
+                    <label for="direction">{{__('Direction du trie')}}: </label>
                     <select wire:model="orderAsc" id="direction" class="form-select">
-                        <option value="asc">{{__('Ascending')}}</option>
-                        <option value="desc">{{__('Descending')}}</option>
+                        <option value="asc">{{__('Ascendante')}}</option>
+                        <option value="desc">{{__('Descendante')}}</option>
                     </select>
                 </div>
 
                 <div class="col-md-2">
-                    <label for="perPage">{{__('Per Page')}}: </label>
+                    <label for="perPage">{{__('Par Page')}}: </label>
                     <select wire:model="perPage" id="perPage" class="form-select">
                         <option value="5">5</option>
                         <option value="10">10</option>
@@ -102,7 +102,7 @@
                         <div class="avatar-md d-flex align-items-center justify-content-center fw-bold fs-5 rounded bg-primary me-3"><span class="text-gray-50">{{ initials($role->name) }}</span></div>
                         <div>
                             <h3 class="h5 mb-0">{{ucfirst($role->name)}}</h3>
-                            <div class="fw-semi-bold text-gray-600 ">{{__('Total users with this role:')}} {{$role->users_count}}</div>
+                            <div class="fw-semi-bold text-gray-600 ">{{__('Nombre total d\'utilisateurs ayant ce rôle:')}} {{$role->users_count}}</div>
                         </div>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                             <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                             </svg>
-                            <div class="d-none d-md-block">{{__('View Employees')}}</div>
+                            <div class="d-none d-md-block">{{__('Voir les employés')}}</div>
                         </a> -->
                     </div>
                     <div>
@@ -147,14 +147,14 @@
 
                 <div class="text-center text-gray-800 mt-4">
                     <img src="{{ asset('/img/illustrations/not_found.svg') }}" class="w-25 ">
-                    <h4 class="fs-4 fw-bold my-1">{{__('Opps nothing here')}} &#128540;</h4>
-                    <p class="pt-0 mt-n1">{{__('No record found here!')}}</p>
+                    <h4 class="fs-4 fw-bold my-1">{{__('Opps rien ici')}} &#128540;</h4>
+                    <p class="pt-0 mt-n1">{{__('Aucun enregistrement n\'a été trouvé ici!')}}</p>
                 </div>
                 @can('core.role.create')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateCompanyModal" class="btn btn-sm btn-secondary py-2 mt-1 d-inline-flex align-items-center ">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{__('Add New Role')}}
+                    </svg> {{__('Ajouter un nouveau rôle')}}
                 </a>
                 @endcan
             </div>
@@ -164,7 +164,7 @@
     </div>
     <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
         <div>
-            {{__('Showing')}} {{$perPage > $roles_count ? $roles_count : $perPage  }} {{__('items of')}} {{$roles_count}}
+            {{__('Montrer')}} {{$perPage > $roles_count ? $roles_count : $perPage  }} {{__('element de')}} {{$roles_count}}
         </div>
         {{ $roles->links() }}
     </div>

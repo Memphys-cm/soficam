@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">{{ $state ? 'Update' : 'Create' }} {{ __(' Etat Cession') }}</h1>
-                        <p class="px-1"> {{ $state ? 'Update' : 'Create' }} {{ __(' Etat Cession') }} &#128522;</p>
+                        <h1 class="mb-0 h4">{{ $state ? 'Mettre à jour' : 'Creer' }} {{ __(' Etat Cession') }}</h1>
+                        <p class="px-1"> {{ $state ? 'Mettre à jour' : 'Creer' }} {{ __(' Etat Cession') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="store">
 
@@ -50,7 +50,7 @@
                             @enderror
                         </div> --}}
                         <div class="col-md-6 py-2">
-                            <label for="code">{{ __('User') }}</label>
+                            <label for="code">{{ __('Utilisateur') }}</label>
                             <x-input.select wire:model="user_id" prettyname="user_id" :options="$users->pluck('first_name', 'id')->toArray()" selected="('user_id')" />
                             @error('geometre_id')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -64,11 +64,11 @@
                             @enderror
                         </div>
                         <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Typee de Personne') }}</label>
+                            <label for="code">{{ __('Type de Personne') }}</label>
                             <select wire:model="state_assignment.type_personne" name="state_assignment.type_personne" class="form-select  @error('state_assignment.type_personne') is-invalid @enderror">
-                                <option value="">{{ __('--Select Type Person --') }}</option>
+                                <option value="">{{ __('--Sélectionner le type de personne --') }}</option>
                                 <option value="morale">{{ __('moral') }} </option>
-                                <option value="physique">{{ __('physic') }} </option>
+                                <option value="physique">{{ __('physique') }} </option>
                             </select>
                             @error('state_assignment.type_personne')
                             <div class="invalid-feedback">{{ $message }}</div>
