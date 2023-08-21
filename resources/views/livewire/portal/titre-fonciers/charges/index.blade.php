@@ -16,8 +16,8 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Land Titles Chrages') }}</li>
+                        <li class="breadcrumb-item"><a href="/">Acceuil</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Charges titre foncier') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -25,9 +25,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                         </path>
                     </svg>
-                    {{ __('Attribute a charge to a Land Title') }}
+                    {{ __('Attribute a charge to a Titre foncier') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('View all charges on Land Title') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('View all charges on Titre foncier') }} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
                 <div class="mx-2" wire:loading.remove>
@@ -98,10 +98,11 @@
             <table class="table employee-table table-hover table-bordered align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('LAND TITLE NUMBER') }}</th>
-                        <th class="border-bottom">{{ __('PROPRIATORS') }}</th>
-                        <th class="border-bottom text-center">{{ __('CHARGE') }}</th>
-                        <th class="border-bottom">{{ __('Date created') }}</th>
+                        <th class="border-bottom">{{ __('TITRES FONCIERS') }}</th>
+                        <th class="border-bottom">{{ __('PROPRIETAIRES') }}</th>
+                        <th class="border-bottom">{{ __('CHARGE') }}</th>
+                        <th class="border-bottom">{{ __('STATUT') }}</th>
+                        <th class="border-bottom">{{ __('Date creation') }}</th>
                         <th class="border-bottom">{{ __('Action') }}</th>
                     </tr>
                 </thead>
@@ -140,8 +141,8 @@
                     <tr>
                         <td colspan="10" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{ __('Opps nothing here') }} &#128540;</h4>
-                                <p>{{ __('No Record Found..!') }}</p>
+                                <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
+                                <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                             </div>
                         </td>
                     </tr>
@@ -150,7 +151,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Showing')}} {{$perPage > $charges_count ? $charges_count : $perPage  }} {{__('items of')}} {{$charges_count}}
+                    {{__('Montrer')}} {{$perPage > $charges_count ? $charges_count : $perPage  }} {{__('éléments de')}} {{$charges_count}}
                 </div>
                 {{ $charges->links()  }}
             </div>

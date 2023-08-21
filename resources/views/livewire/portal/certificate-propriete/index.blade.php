@@ -76,7 +76,7 @@
             <label for="orderBy">{{ __('Order By') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="titre_foncier_id">{{ __('Land title') }}</option>
-                <option value="numero_certificate_proprietes">{{ __('CP Number') }}</option>
+                <option value="certificate_proprietes_number">{{ __('CP Number') }}</option>
                 <option value="requestor_id">{{ __('Requestor') }}</option>
                 <option value="price">{{ __('Price') }}</option>
                 <option value="validity">{{ __('Validity') }}</option>

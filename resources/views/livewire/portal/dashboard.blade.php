@@ -5,11 +5,11 @@
 
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
                     <div>
-                        <span class="text-secondary">{{ __('Welcome') }},</span> <span
+                        <span class="text-secondary">{{ __('Bienvenue') }},</span> <span
                             class="h5 ">{{ auth()->user()->name }}</span>
                     </div>
                 </h1>
-                <p class="mt-n2">{{ __('Manage companies and their related details') }} &#128524;</p>
+                <p class="mt-n2">{{ __('Gérer les entreprises et leurs détails relatifs') }} &#128524;</p>
             </div>
             <div class="d-flex justify-content-between">
                 {{ \Str::upper(\Str::random(5)) . '' . now()->format('msu') }} <br>
@@ -169,7 +169,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-xxl-6 ps-xxl-4 pe-xxl-0">
-                            <h2 class="fs-6 fw-normal mb-1 text-gray-400">Customers</h2>
+                            <h2 class="fs-6 fw-normal mb-1 text-gray-400">Clientèle</h2>
                             <h3 class="fw-extrabold mb-1">345k</h3><small class="d-flex align-items-center"><svg
                                     class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewbox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -183,7 +183,7 @@
                                         <path fill-rule="evenodd"
                                             d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
                                             clip-rule="evenodd"></path>
-                                    </svg><span class="text-success fw-bolder">18,2%</span> Since last month</div>
+                                    </svg><span class="text-success fw-bolder">18,2%</span> Depuis le mois dernier</div>
                             </div>
                         </div>
                     </div>
@@ -212,7 +212,7 @@
                                         <path fill-rule="evenodd"
                                             d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                             clip-rule="evenodd"></path>
-                                    </svg><span class="text-danger fw-bolder">4,6%</span> Since last month</div>
+                                    </svg><span class="text-danger fw-bolder">4,6%</span> Depuis le mois dernier</div>
                             </div>
                         </div>
                     </div>
@@ -227,7 +227,7 @@
                             <div id="chart-users"></div>
                         </div>
                         <div class="col-12 col-sm-6 col-xl-12 col-xxl-6 ps-xxl-4 pe-xxl-0">
-                            <h2 class="fs-6 fw-normal mb-1 text-gray-400">Users</h2>
+                            <h2 class="fs-6 fw-normal mb-1 text-gray-400">Utilisateurs</h2>
                             <h3 class="fw-extrabold mb-1">15.3k</h3><small class="d-flex align-items-center"><svg
                                     class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewbox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -241,7 +241,7 @@
                                         <path fill-rule="evenodd"
                                             d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
                                             clip-rule="evenodd"></path>
-                                    </svg><span class="text-success fw-bolder">20%</span> Since last month</div>
+                                    </svg><span class="text-success fw-bolder">20%</span>Depuis le mois dernier</div>
                             </div>
                         </div>
                     </div>
@@ -627,14 +627,14 @@
                                     <div class="apexcharts-tooltip apexcharts-theme-light"
                                         style="left: 238.266px; top: -19.0859px;">
                                         <div class="apexcharts-tooltip-title"
-                                            style="font-family: Inter; font-size: 12px;">07 Feb</div>
+                                            style="font-family: Inter; font-size: 12px;">07 Fev</div>
                                         <div class="apexcharts-tooltip-series-group apexcharts-active"
                                             style="order: 1; display: flex;"><span class="apexcharts-tooltip-marker"
                                                 style="background-color: rgba(49, 49, 106, 0.85);"></span>
                                             <div class="apexcharts-tooltip-text"
                                                 style="font-family: Inter; font-size: 12px;">
                                                 <div class="apexcharts-tooltip-y-group"><span
-                                                        class="apexcharts-tooltip-text-label">Sales: </span><span
+                                                        class="apexcharts-tooltip-text-label">Ventes: </span><span
                                                         class="apexcharts-tooltip-text-value">$ 36k</span></div>
                                                 <div class="apexcharts-tooltip-z-group"><span
                                                         class="apexcharts-tooltip-text-z-label"></span><span
@@ -807,7 +807,7 @@
                                             <div class="apexcharts-tooltip-text"
                                                 style="font-family: Inter; font-size: 12px;">
                                                 <div class="apexcharts-tooltip-y-group"><span
-                                                        class="apexcharts-tooltip-text-label">Users: </span><span
+                                                        class="apexcharts-tooltip-text-label">Utilisateurs: </span><span
                                                         class="apexcharts-tooltip-text-value">550</span></div>
                                                 <div class="apexcharts-tooltip-z-group"><span
                                                         class="apexcharts-tooltip-text-z-label"></span><span
@@ -977,9 +977,9 @@
 
     <div class='mt-5'>
         <div class='d-flex justify-content-between align-items-end mx-2'>
-            <h5 class="h5">{{ __('Lastest Audit logs') }}</h5>
+            <h5 class="h5">{{ __('Dernière connexion') }}</h5>
             <div>
-                <a href='{{ route('portal.auditlogs.index') }}' class='btn btn-primary'>{{ __('View all') }}</a>
+                <a href='{{ route('portal.auditlogs.index') }}' class='btn btn-primary'>{{ __('Tout voir') }}</a>
             </div>
         </div>
         <div class="card mt-2">
@@ -987,10 +987,10 @@
                 <table class="table employee-table table-hover align-items-center ">
                     <thead>
                         <tr>
-                            <th class="border-bottom">{{ __('Employee') }}</th>
-                            <th class="border-bottom">{{ __('Action Type') }}</th>
-                            <th class="border-bottom">{{ __('Action Performed') }}</th>
-                            <th class="border-bottom">{{ __('Date created') }}</th>
+                            <th class="border-bottom">{{ __('Employé') }}</th>
+                            <th class="border-bottom">{{ __('Type Action') }}</th>
+                            <th class="border-bottom">{{ __('Action effectuée') }}</th>
+                            <th class="border-bottom">{{ __('Date creation') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -1022,8 +1022,8 @@
                             <tr>
                                 <td colspan="7" class="text-center">
                                     <div class="text-center text-gray-800 mt-2">
-                                        <h4 class="fs-4 fw-bold">{{ __('Opps nothing here') }} &#128540;</h4>
-                                        <p>{{ __('No Record Found..!') }}</p>
+                                        <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
+                                        <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                                     </div>
                                 </td>
                             </tr>

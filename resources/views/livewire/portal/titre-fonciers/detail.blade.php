@@ -13,15 +13,15 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">{{__('Dashboard')}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Land Title ')}}</li>
+                        <li class="breadcrumb-item"><a href="/">{{__('Tableau de Bord')}}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Titre Foncier')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
                     <svg class="icon me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    {{__('Land Title Operations')}}
+                    {{__('Operations titres fonciers')}}
                 </h1>
             </div>
             <div class="d-flex justify-content-between mb-2">
@@ -30,7 +30,7 @@
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateTitreFoncierModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{__('New')}}
+                    </svg> {{__('Nouveau')}}
                 </a>
                 @endcan
                 @can('titre_foncier.import')
@@ -39,14 +39,14 @@
                         <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                         </svg>
-                        <span class="sr-only">{{__('Operations on Land Title')}}</span>
+                        <span class="sr-only">{{__('Operations sur titres fonciers')}}</span>
                     </button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#">Autre action</a>
+                        <a class="dropdown-item" href="#">Autre chose ici</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
+                        <a class="dropdown-item" href="#">Lien séparé</a>
                     </div>
                 </div>
                 @endcan
@@ -60,13 +60,13 @@
             <!-- Tab Nav -->
             <ul class="nav nav-pills square nav-fill flex-column vertical-tab mb-3 mb-lg-0" id="tab12" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="home-tab-3" data-bs-toggle="tab" href="#tab-14" role="tab" aria-controls="tab-14" aria-selected="true"><span class="d-block">Dashboard</span></a>
+                    <a class="nav-link active" id="home-tab-3" data-bs-toggle="tab" href="#tab-14" role="tab" aria-controls="tab-14" aria-selected="true"><span class="d-block">Tableau de Bord</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="profile-tab-3" data-bs-toggle="tab" href="#tab-15" role="tab" aria-controls="tab-15" aria-selected="false"><span class="d-block">Profile</span></a>
+                    <a class="nav-link" id="profile-tab-3" data-bs-toggle="tab" href="#tab-15" role="tab" aria-controls="tab-15" aria-selected="false"><span class="d-block">Profil</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="contact-tab-3" data-bs-toggle="tab" href="#tab-16" role="tab" aria-controls="tab-16" aria-selected="false">Settings</span></a>
+                    <a class="nav-link" id="contact-tab-3" data-bs-toggle="tab" href="#tab-16" role="tab" aria-controls="tab-16" aria-selected="false">Parametres</span></a>
                 </li>
             </ul>
             <!-- End of Tab Nav -->

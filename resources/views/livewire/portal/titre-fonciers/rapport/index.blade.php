@@ -13,8 +13,8 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">{{__('Dashboard')}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Land Titles')}}</li>
+                        <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Titres Fonciers')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -23,24 +23,24 @@
                     </svg>
                     {{__('Land Titles Report')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('View all Land Titles')}} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{__('Voir tous les titres fonciers')}} &#x23F0; </p>
             </div>
         </div>
     </div>
     <div class="row py-3">
         <div class="col">
-            <label for="selectedRegion">{{__('by Regions')}}: </label>
+            <label for="selectedRegion">{{__('par Regions')}}: </label>
             <select wire:model="selectedRegion" id="selectedRegion" class="form-select">
-                <option value="">All Regions</option>
+                <option value="">Toutes les Regions</option>
                 @foreach ($regions as $region)
                     <option value="{{$region->id}}">{{$region->region_name_en}}</option>
                 @endforeach
             </select>
         </div>
         <div class="col">
-            <label for="selectedDivision">{{__('by Divisions')}}: </label>
+            <label for="selectedDivision">{{__('par Divisions')}}: </label>
             <select wire:model="selectedDivision" id="selectedDivision" class="form-select">
-                <option value="">All Divisions</option>
+                <option value="">Toutes les Divisions</option>
                 @foreach ($divisions as $division)
                     <option value="{{$division->id}}">{{$division->division_name_en}}</option>
                 @endforeach
@@ -49,7 +49,7 @@
         <div class="col">
             <label for="selectedSubDivision">{{__('by Subdivisions')}}: </label>
             <select wire:model="selectedSubDivision" id="selectedSubDivision" class="form-select">
-                <option value="">All Sub-Divisions</option>
+                <option value="">Toutes les Sub-Divisions</option>
                 @foreach ($sub_divisions as $sub_division)
                     <option value="{{$sub_division->id}}">{{$sub_division->sub_division_name_en}}</option>
                 @endforeach
@@ -58,17 +58,17 @@
     </div>
     <div class="row p-3">
         <div class="col">
-            <label for="startDate">Start Date:</label>
+            <label for="startDate">Date Debut:</label>
             <input type="date" wire:model="startDate" class="form-control" id="startDate">
         </div>
         <div class="col">
-            <label for="endDate">End Date:</label>
+            <label for="endDate">Date Fin:</label>
             <input type="date" wire:model="endDate" class="form-control" id="endDate">
         </div>
         <div class="col">
             <label for="selectedStatus">{{__('by Status')}}: </label>
             <select wire:model="selectedStatus" id="selectedStatus" class="form-select">
-                <option value="">By Status</option>
+                <option value="">Par Statut</option>
                 <option value="HYPOTHEQUE">HYPOTHEQUE</option>
                 <option value="PRENOTE">PRENOTE</option>
                 <option value="SUSPENDU">SUSPENDU</option>
@@ -78,29 +78,29 @@
     </div>
     <div class="row p-3">
         <div class="col-md-3">
-            <label for="search">{{__('Search')}}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{__('Search...')}}" class="form-control">
+            <label for="search">{{__('Recherche')}}: </label>
+            <input wire:model="query" id="search" type="text" placeholder="{{__('Recherche...')}}" class="form-control">
             <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p>
         </div>
         <div class="col-md-3">
-            <label for="orderBy">{{__('Order By')}}: </label>
+            <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="region_id">{{__('Region')}}</option>
-                <option value="date_de_delivrance_du_TF">{{__('Delivery Date')}}</option>
-                <option value="created_at">{{__('Created Date')}}</option>
+                <option value="date_de_delivrance_du_TF">{{__('Date Delivrance')}}</option>
+                <option value="created_at">{{__('Date creation')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Order direction')}}: </label>
+            <label for="direction">{{__('Trier par direction')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{__('Ascending')}}</option>
-                <option value="desc">{{__('Descending')}}</option>
+                <option value="asc">{{__('Ascendant')}}</option>
+                <option value="desc">{{__('Descendant')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Items Per Page')}}: </label>
+            <label for="perPage">{{__('Elements par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -115,14 +115,14 @@
             <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('Land Title Number')}}</th>
-                        <th class="border-bottom">{{__('Delivered Date')}}</th>
-                        <th class="border-bottom">{{__('Propriators')}}</th>
-                        <th class="border-bottom">{{__('Location')}}</th>
-                        <th class="border-bottom">{{__('Limits')}}</th>
+                        <th class="border-bottom">{{__('Numero du titre foncier')}}</th>
+                        <th class="border-bottom">{{__('Date de delivrance')}}</th>
+                        <th class="border-bottom">{{__('Proprietaires')}}</th>
+                        <th class="border-bottom">{{__('Localisation')}}</th>
+                        <th class="border-bottom">{{__('Limites')}}</th>
                         <th class="border-bottom">{{__('Coordonnees')}}</th>
-                        <th class="border-bottom">{{__('Status')}}</th>
-                        <th class="border-bottom">{{__('Date created')}}</th>
+                        <th class="border-bottom">{{__('Statut')}}</th>
+                        <th class="border-bottom">{{__('Date creation')}}</th>
                         @canany('titre_foncier.update','titre_foncier.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
                         @endcanany
@@ -157,16 +157,16 @@
                         </td>
                         <td>
                             <div class="d-flex align-items-centerpy-1">
-                                <span class="fw-bolder mx-2"> {{__('North')}} </span> {{$titrefoncier->limit_nord}}
+                                <span class="fw-bolder mx-2"> {{__('Nord')}} </span> {{$titrefoncier->limit_nord}}
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                <span class="fw-bolder mx-2"> {{__('South')}} </span> {{$titrefoncier->limit_sud}}
+                                <span class="fw-bolder mx-2"> {{__('Sud')}} </span> {{$titrefoncier->limit_sud}}
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                <span class="fw-bolder mx-2"> {{__('East')}} </span> {{$titrefoncier->limit_est}}
+                                <span class="fw-bolder mx-2"> {{__('Est')}} </span> {{$titrefoncier->limit_est}}
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                <span class="fw-bolder mx-2"> {{__('West')}} </span> {{$titrefoncier->limit_ouest}}
+                                <span class="fw-bolder mx-2"> {{__('Ouest')}} </span> {{$titrefoncier->limit_ouest}}
                             </div>
                         </td>
                         <td>
@@ -212,8 +212,8 @@
                     <tr>
                         <td colspan="9" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps nothing here')}} &#128540;</h4>
-                                <p>{{__('No Record Found..!')}}</p>
+                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                                <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
                     </tr>
@@ -222,7 +222,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Showing')}} {{$perPage > $titrefonciers_count ? $titrefonciers_count : $perPage  }} {{__('items of')}} {{$titrefonciers_count}}
+                    {{__('Montrer')}} {{$perPage > $titrefonciers_count ? $titrefonciers_count : $perPage  }} {{__('éléments de')}} {{$titrefonciers_count}}
                 </div>
                 {{ $titrefonciers->links() }}
             </div>
