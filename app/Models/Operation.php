@@ -4,15 +4,18 @@ namespace App\Models;
 
 use App\Models\TitreFoncier;
 use App\Models\MembreDuCabinet;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use App\Models\Lotissements\Parcel;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Lotissements\Lotissement;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Operation extends Model implements  HasMedia
 {

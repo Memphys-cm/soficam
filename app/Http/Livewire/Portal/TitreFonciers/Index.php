@@ -130,6 +130,16 @@ class Index extends Component
             'user_ids.*' => 'required',
         ]);
 
+        // dd($this->coordonnees);
+
+        $coords = [];
+        collect($this->coordonnees)->map(function($value, $key){
+            return ['long' => explode(',', $value, 1), 'lat' => explode(',', $value, 2)];
+        });
+        // dd(array_flatten($coords));
+
+        // /{"B1": "564321.00, 452564.00", "B2": "564335.746, 452548.271", "B3": "564315.224,452531.059", "B4": "564303.601,452544.471"}
+
         $titrefoncier = TitreFoncier::create([
             'numero_titre_foncier' => $this->numero_titre_foncier,
             'region_id' => $this->region_id,
