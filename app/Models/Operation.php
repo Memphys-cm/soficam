@@ -50,14 +50,14 @@ class Operation extends Model implements  HasMedia
         return $this->belongsTo(TitreFoncier::class);
     }
     
-    public function geomtre(): BelongsTo
+    public function geometre(): BelongsTo
     {
-        return $this->belongsTo(MembreDuCabinet::class);
+        return $this->belongsTo(MembreDuCabinet::class, 'geometre_id','id');
     }
 
     public function notaire(): BelongsTo
     {
-        return $this->belongsTo(MembreDuCabinet::class);
+        return $this->belongsTo(MembreDuCabinet::class,'notaire_id');
     }
 
     public function conservateur(): BelongsTo
@@ -98,7 +98,38 @@ class Operation extends Model implements  HasMedia
         };
     }
 
-
+    public function getGeometreStatusStyleAttribute(): String
+    {
+        return match ($this->statut_geometre) {
+            'ongoing' => 'secondary',
+            'pending_payment' => 'secondary',
+            'completed', =>'success',
+            'pending' => 'tertiary',  
+            NULL => ''
+        };
+    }
+   
+    public function getNotaireStatusStyleAttribute(): String
+    {
+        return match ($this->statut_notaire) {
+            'ongoing' => 'secondary',
+            'completed', =>'success',
+            'pending' => 'tertiary',  
+            NULL => ''
+        };
+    }
+   
+    public function getConservateurStatusStyleAttribute(): String
+    {
+        return match ($this->statut_conservateur) {
+            'ongoing' => 'secondary',
+            'pending_payment' => 'secondary',
+            'completed', =>'success',
+            'pending' => 'tertiary',  
+            NULL => ''
+        };
+    }
+   
     public static function search($query)
     {
         return empty($query) ?

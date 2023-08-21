@@ -98,7 +98,7 @@ Route::group(
         Route::prefix('operations')->group(function () {
             Route::get('mutation-totale', App\Http\Livewire\Portal\Operations\MutationTotale\Index::class)->name('portal.mutation-totale.index');
             Route::get('morcellements', App\Http\Livewire\Portal\Operations\Morcellements\Index::class)->name('portal.morcellements.index');
-            Route::get('/{operation_id}/detail-mut', App\Http\Livewire\Portal\Operations\Partials\DetailsMut::class)->name('portal.operations.detail-mut');
+            Route::get('/{operation_id}/details', App\Http\Livewire\Portal\Operations\Partials\OpsDetails::class)->name('portal.operations.details');
 
         });
 
