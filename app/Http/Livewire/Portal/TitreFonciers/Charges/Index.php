@@ -98,17 +98,39 @@ class Index extends Component
         //}
     }
 
+    private function removeCharge() {
+        $sid='ACa77985267946bd8e613944d40b9d0458';
+            $token='b7b84303df6a21c3d6f9b32d3d678103';
+            $twilio = new Client($sid, $token);
+
+            $messageBody = "Hello, your land title is now available.";
+
+            $twilio->messages->create(
+                '+237672959097',
+                [
+                    'from' => '+15856393680',
+                    'body' => $messageBody,
+                ]
+            );
+    }
+
     public function update() {
         $this->validate([
             'titre_foncier_id' => 'required',
-            'type_charge' => 'required',
         ]);
 
-        if(!empty($this->charge)) {
-            $this->charge->update([
-                'type_charge' => $this->type_charge,
-            ]);
-        }
+        $this->titre_foncier = TitreFoncier::findOrFail($this->titre_foncier_id);
+
+        $this->titre_foncier->update([
+            'etat_TF' => 'DISPONIBLE',
+        ]);
+            
+        $charge = Charge::create([
+            'titre_foncier_id' => $this->titre_foncier_id,
+            'type_charge' => 'DISPONIBLE',
+        ]);
+
+        $this->removeCharge();
 
         $this->clearFields();
 
@@ -137,10 +159,15 @@ class Index extends Component
 
     public function clearFields() {
         $this->reset([
-            'etat_TF',
             'type_charge',
             'titre_foncier_id',
-            'numero_titre_foncier'
+        ]);
+    }
+
+    public function clearField() {
+        $this->reset([
+            'etat_TF',
+            'numero_titre_foncier',
         ]);
     }
 }

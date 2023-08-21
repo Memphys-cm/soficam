@@ -37,14 +37,13 @@
                             </div>
                             @endforeach
                         </div>
-                        @endif
-                        <div class="form-group mb-2 row">
+                        @endif 
+                        <div class="form-group mb-3 row">
                             <div class="col">
                                 <label for="etat_TF">{{__('Type de Charge')}}</label>
                                 <select wire:model="etat_TF" name="etat_TF" class="form-select  @error('etat_TF') is-invalid @enderror" required="">
                                     <option value="">{{__('Selectionner le Type de Charge')}}</option>
                                     <option value="HYPOTHEQUE">{{__('HYPOTHEQUE')}}</option>
-                                    <option value="DISPONIBLE">{{__('DISPONIBLE')}}</option>
                                     <option value="PRENOTE">{{__('PRENOTE')}}</option>
                                     <option value="SUSPENDU">{{__('SUSPENDU')}}</option>
                                 </select>
@@ -53,16 +52,22 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group mb-3 row">
-                            <div class="col">
-                                <label for="price">{{ __('Price') }}</label>
-                                <input wire:model="price" class="form-control" name="price" id="price" type="text" disabled>
-                                @error('price')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col">
-
+                        <div class="p-3 shadow border rounded my-2">
+                            <h2 class="h5 mb-4">{{__('Add Files')}}</h2>
+                            <div class="d-xl-flex align-items-center">
+                                <div class="file-field">
+                                    <div class="d-flex justify-content-xl-center ms-xl-3">
+                                        <div class="d-flex"><svg class="icon text-gray-500 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <input type="file" class="form-control-file" wire:model="attachements">
+                                            <div class="d-md-block text-left">
+                                                <div class="fw-normal text-dark mb-1">{{__('Choose Files')}}</div>
+                                                <div class="text-gray small">JPG,PNG, PDF, Word,Excel. Max size of 50MB</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="d-flex justify-content-end mt-5">
