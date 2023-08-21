@@ -1,9 +1,10 @@
 <?php
 
+use App\Models\TitreFoncier;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Models\TitreFoncier;
 
 /*
 |--------------------------------------------------------------------------

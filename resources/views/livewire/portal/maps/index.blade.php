@@ -4,18 +4,27 @@
         <button class="btn btn-primary" id="normalStyleButton">Style Normal</button>
         <button class="btn btn-primary" id="satelliteStyleButton">Style Satellite</button>
     </div>
-    <div id="info-box" style="position: absolute; top: 10px; right: 10px; background-color: white; padding: 10px; border: 1px solid #ccc; z-index: 100;">
-        <h3>Informations sur le Titre Foncier sélectionné :</h3>
-        <div id="info-content"></div>
+    <div id="search-box-general"
+        style="position: absolute; top: 10px; right: 40px;  padding: 10px; z-index: 100;">
+        <input class="form-control" type="text" id="search-input-general" placeholder="Rechercher une adresse , une ville , un lieu">
+        <div id="suggestions-list" class="p-2 rounded" style="background-color: white; border: 1px solid #ccc; position: absolute; top: 60px; right: 0; left: 0; max-height: 150px; overflow-y: auto; display: none;"></div>
     </div>
+    {{-- <div id="search-box-polygons"
+        style="position: absolute; top: 10px; right: 100px; background-color: white; padding: 10px; border: 1px solid #ccc; z-index: 100;">
+        <h3>Rechercher un Polygone :</h3>
+        <input type="text" id="search-input-polygons" placeholder="Rechercher un polygone par nom">
+        <h3>Filtrer par Superficie :</h3>
+        <input type="number" id="area-filter-input" placeholder="Filtrer par superficie">
+    </div> --}}
     <script>
         mapboxgl.accessToken = "pk.eyJ1IjoiZGlsYW5lMDUiLCJhIjoiY2xreWJydjNxMGd5aDNtc2lsMG5uYnU5ayJ9.WBERCXWXNAEzQWfwc1RwlA";
         const map = new mapboxgl.Map({
             container: 'map', // container ID
-            style: 'mapbox://styles/mapbox/light-v11', // style URL
+            style: 'mapbox://styles/mapbox/satellite-streets-v11', // style URL
             center: [11.5, 6.5], // Centre géographique du Cameroun
             zoom: 6 // Zoom initial
         });
+
 
         // Coordonnées des limites géographiques du Cameroun
         var coordinates = [
@@ -25,10 +34,26 @@
 
         map.fitBounds(coordinates);
 
+        const normalStyleButton = document.getElementById('normalStyleButton');
+        normalStyleButton.addEventListener('click', () => {
+            map.setStyle('mapbox://styles/mapbox/light-v11');
+            addPolygonsToMap(); // Réajouter les polygones après avoir changé de style
+        });
+
+        // Écouteur d'événement pour le bouton de style satellite
+        const satelliteStyleButton = document.getElementById('satelliteStyleButton');
+        satelliteStyleButton.addEventListener('click', () => {
+            map.setStyle('mapbox://styles/mapbox/satellite-streets-v11');
+            addPolygonsToMap(); // Réajouter les polygones après avoir changé de style
+        });
+
+        function addSearchMarker(lngLat) {
+            new mapboxgl.Marker().setLngLat(lngLat).addTo(map);
+        }
+
         map.on('load', () => {
             // Données GeoJSON pour plusieurs polygones
-            const polygons = [
-                {
+            const polygons = [{
                     "type": "Feature",
                     "geometry": {
                         "type": "Polygon",
@@ -43,7 +68,7 @@
                         ]
                     },
                     "properties": {
-                        "name": "Polygone 1",
+                        "name": "1Poly",
                         "area": 10
                     }
                 },
@@ -62,12 +87,47 @@
                         ]
                     },
                     "properties": {
-                        "name": "Polygone 2",
+                        "name": "2Poly",
                         "area": 15
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
+                            [
+                                [
+                                    9.725483172143782,
+                                    4.072255478648543
+                                ],
+                                [
+                                    9.725483172143782,
+                                    4.0484186517613665
+                                ],
+                                [
+                                    9.756969845701235,
+                                    4.0484186517613665
+                                ],
+                                [
+                                    9.756969845701235,
+                                    4.072255478648543
+                                ],
+                                [
+                                    9.725483172143782,
+                                    4.072255478648543
+                                ]
+                            ]
+                        ]
+                    },
+                    "properties": {
+                        "name": "Polygone 3",
+                        "area": 16
                     }
                 }
                 // Ajoutez d'autres polygones de la même manière
             ];
+
 
             map.addSource('polygons', {
                 'type': 'geojson',
@@ -92,24 +152,26 @@
             // ... Votre code existant ...
 
             map.on('click', 'polygons', (e) => {
-                const features = map.queryRenderedFeatures(e.point, {
-                    layers: ['polygons']
-                });
+    const features = map.queryRenderedFeatures(e.point, {
+        layers: ['polygons']
+    });
 
-                if (!features.length) {
-                    return;
-                }
+    if (!features.length) {
+        return;
+    }
 
-                const feature = features[0];
+    const feature = features[0];
 
-                const infoContent = document.getElementById('info-content');
-                infoContent.innerHTML = `
-                    <p><strong>Nom :</strong> ${feature.properties.name}</p>
-                    <p><strong>Superficie :</strong> ${feature.properties.area} km²</p>
-                    <!-- Ajoutez d'autres propriétés de votre choix ici -->
-                `;
-            });
-
+    const coordinates = e.lngLat;
+    const popup = new mapboxgl.Popup()
+        .setLngLat(coordinates)
+        .setHTML(`
+            <h3>${feature.properties.name}</h3>
+            <p><strong>Superficie :</strong> ${feature.properties.area} km²</p>
+            <!-- Ajoutez d'autres propriétés de votre choix ici -->
+        `)
+        .addTo(map);
+});
             map.on('mousemove', 'polygons', (e) => {
                 map.getCanvas().style.cursor = 'pointer';
             });
@@ -117,6 +179,147 @@
             map.on('mouseleave', 'polygons', () => {
                 map.getCanvas().style.cursor = '';
             });
+
+            const searchInputGeneral = document.getElementById('search-input-general');
+        const suggestionsList = document.getElementById('suggestions-list');
+
+        searchInputGeneral.addEventListener('input', async function(event) {
+            const searchTerm = searchInputGeneral.value.trim();
+            if (searchTerm.length > 0) {
+                try {
+                    const response = await fetch(
+                        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(searchTerm)}.json?access_token=${mapboxgl.accessToken}`
+                    );
+                    const data = await response.json();
+                    if (data && data.features && data.features.length > 0) {
+                        const suggestions = data.features.map(feature => feature.place_name);
+                        showSuggestions(suggestions);
+                    } else {
+                        hideSuggestions();
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            } else {
+                hideSuggestions();
+            }
+        });
+
+        searchInputGeneral.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                searchForLocation(searchInputGeneral.value);
+            }
+        });
+
+        function showSuggestions(suggestions) {
+            suggestionsList.innerHTML = '';
+            suggestions.forEach(suggestion => {
+                const suggestionItem = document.createElement('div');
+                suggestionItem.innerText = suggestion;
+                suggestionItem.classList.add('suggestion-item');
+                suggestionItem.addEventListener('click', () => {
+                    searchInputGeneral.value = suggestion;
+                    searchForLocation(suggestion); // Effectuer la recherche lors du clic sur la suggestion
+                    hideSuggestions();
+                });
+                suggestionItem.addEventListener('mouseover', () => {
+                    suggestionItem.style.backgroundColor = '#f2f2f2';
+                    suggestionItem.style.cursor = 'pointer';
+                });
+                suggestionItem.addEventListener('mouseout', () => {
+                    suggestionItem.style.backgroundColor = 'white';
+                });
+                suggestionsList.appendChild(suggestionItem);
+            });
+            suggestionsList.style.display = 'block';
+        }
+
+        function hideSuggestions() {
+            suggestionsList.innerHTML = '';
+            suggestionsList.style.display = 'none';
+        }
+
+        function searchForLocation(query) {
+            fetch(
+                `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json?access_token=${mapboxgl.accessToken}`
+            )
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.features && data.features.length > 0) {
+                    const coordinates = data.features[0].geometry.coordinates;
+                    map.flyTo({
+                        center: coordinates,
+                        zoom: 12
+                    });
+                    addSearchMarker(coordinates);
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        }
+
+
+        const searchInputPolygons = document.getElementById('search-input-polygons');
+        const areaFilterInput = document.getElementById('area-filter-input');
+
+        function updateFilters() {
+            const nameFilterValue = searchInputPolygons.value.trim().toLowerCase();
+            const areaFilterValue = parseFloat(areaFilterInput.value.trim());
+
+            const filters = [];
+
+            if (nameFilterValue !== '') {
+                filters.push(['ilike', ['get', 'name'], `%${nameFilterValue}%`]);
+            }
+
+            if (!isNaN(areaFilterValue)) {
+                filters.push(['>=', ['get', 'area'], areaFilterValue]);
+            }
+
+            map.setFilter('polygons', filters);
+        }
+
+        searchInputPolygons.addEventListener('input', updateFilters);
+        areaFilterInput.addEventListener('input', updateFilters);
+
+        // Écouteur d'événement pour le clic sur un polygone
+        map.on('click', 'polygons', (e) => {
+            const features = map.queryRenderedFeatures(e.point, {
+                layers: ['polygons']
+            });
+
+            if (!features.length) {
+                return;
+            }
+
+            const feature = features[0];
+
+            const coordinates = e.lngLat;
+            map.flyTo({
+                center: coordinates,
+                zoom: 12
+            });
+
+            // Mettre en évidence le polygone sélectionné
+            map.setFilter('polygons-highlighted', ['==', 'name', feature.properties.name]);
+        });
+
+        // Ajouter une couche pour mettre en évidence les polygones sélectionnés
+        map.addLayer({
+            'id': 'polygons-highlighted',
+            'type': 'fill',
+            'source': 'polygons',
+            'layout': {},
+            'paint': {
+                'fill-color': '#00FF00', // green color fill
+                'fill-opacity': 0.5
+            },
+            'filter': ['==', 'name', '']
+        });
+
+
         });
     </script>
 </x-map-master>
