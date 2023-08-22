@@ -154,7 +154,7 @@
                 </div>
                 <div class="card p-4 ">
                     <div class='mb-2'>
-                        <button type="button" wire:click="addBlock" class="btn btn-primary">{{__('Add Block')}}</button>
+                        <button type="button" wire:click="addBlock" class="btn btn-primary">{{__('Ajouter un bloc')}}</button>
                     </div>
                     @foreach($blocks as $blockIndex => $block)
                     <fieldset class="border p-3 mb-3 rounded">

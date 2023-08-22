@@ -1,9 +1,10 @@
 <?php
 
+use App\Models\TitreFoncier;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Models\TitreFoncier;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +98,8 @@ Route::group(
         Route::prefix('operations')->group(function () {
             Route::get('mutation-totale', App\Http\Livewire\Portal\Operations\MutationTotale\Index::class)->name('portal.mutation-totale.index');
             Route::get('morcellements', App\Http\Livewire\Portal\Operations\Morcellements\Index::class)->name('portal.morcellements.index');
+            Route::get('/{operation_id}/detail-mut', App\Http\Livewire\Portal\Operations\Partials\DetailsMut::class)->name('portal.operations.detail-mut');
+
         });
 
         Route::prefix('land-sales')->group(function () {

@@ -16,11 +16,11 @@
                                 <tr>
                                     <th class="f-bold">{{ __('Surface du titre foncier') }}</th>
                                     <th> {{ __($housing_estate->land_title->superficie_du_TF_mere ?? '') }} </th>
-                                    <th class="f-bold">{{ __('REAL ESTATE DEVELOPER') }}</th>
+                                    <th class="f-bold">{{ __('PROMOTEUR IMMOBILIER') }}</th>
                                     <th> {{ $housing_estate->property_developer }} </th>
                                 </tr>
                                 <tr>
-                                    <th>{{ __('PUBLIC UTILITY AREA') }}</th>
+                                    <th>{{ __('ZONE D\'UTILITÉ PUBLIQUE') }}</th>
                                     @php
                                         $superficiePublic = 0;
                                         foreach ($housing_estate->blocks as $block) {
@@ -28,11 +28,11 @@
                                         }
                                     @endphp
                                     <th> {{ $superficiePublic }} m² </th>
-                                    <th class="f-bold">{{ __('REAL ESTATE AGENT') }}</th>
+                                    <th class="f-bold">{{ __('AGENT IMMOBILIER') }}</th>
                                     <th> {{ $housing_estate->estate_agent }} </th>
                                 </tr>
                                 <tr>
-                                    <th class="f-bold">{{ __('USEFUL AREA') }}</th>
+                                    <th class="f-bold">{{ __('ZONE UTILE') }}</th>
                                     <th> </th>
                                     <th class="f-bold">{{ __('LOTISSEUR') }}</th>
                                     <th> {{ $housing_estate->lotisser }} </th>
@@ -45,10 +45,10 @@
                                     <th> {{ $housing_estate->geometric_pratice }} </th>
                                 </tr>
                                 <tr>
-                                    <th class="f-bold">{{ __('sURFACE RESTANTE ') }}</th>
+                                    <th class="f-bold">{{ __('SURFACE RESTANTE ') }}</th>
                                     <th> {{ __($housing_estate->land_title->superficie_restant_du_TF_mere ?? '0') }}
                                     </th>
-                                    <th class="f-bold">{{ __('THE SURVEYOR') }}</th>
+                                    <th class="f-bold">{{ __('L\'ENQUÊTEUR') }}</th>
                                     <th> {{ $housing_estate->geometric }} </th>
                                 </tr>
                                 <tr>
@@ -69,7 +69,7 @@
                                     @else
                                         <th> {{ 0 }} </th>
                                     @endif
-                                    <th class="f-bold">{{ __('THE CONTROLLER') }}</th>
+                                    <th class="f-bold">{{ __('LE CONTRÔLEUR') }}</th>
                                     <th> {{ $housing_estate->controller }} </th>
                                 </tr>
                             </thead>
@@ -81,14 +81,14 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>BLOCK DESIGNATION</th>
-                                        <th>NUMBER OF LOTS PER BLOCK</th>
+                                        <th>DÉSIGNATION DU BLOC</th>
+                                        <th>NOMBRE DE LOTS PAR BLOC</th>
                                         <th>LOT NO.</th>
                                         <th>SURFACE DU LOT</th>
                                         <th>STATUT DU LOT</th>
                                         <th>STATUT DU LOT</th>
-                                        <th>NOTARY OFFICE STUDY</th>
-                                        <th>NOTARY CLERK</th>
+                                        <th>ÉTUDE DE BUREAU DE NOTAIRE</th>
+                                        <th>CLERK NOTAIRE</th>
                                         <th>SERVICE DU NOTAIRE</th>
                                         <th>GEOMETRE</th>
                                         <th>DATE</th>

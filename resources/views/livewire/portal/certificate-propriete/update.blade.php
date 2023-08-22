@@ -36,7 +36,7 @@
                             <div class="col">
                                 <label for="certificate_proprietes_type">{{__('Certificat Propriétés Type')}}</label>
                                 <select wire:model="certificate_proprietes_type" name="certificate_proprietes_type" class="form-select  @error('certificate_proprietes_type') is-invalid @enderror" required="">
-                                    <option value="">{{__('-- Select --')}}</option>
+                                    <option value="">{{__('-- Selectionner --')}}</option>
                                     <option value="personne_physique">{{__('Personne Physique')}}</option>
                                     <option value="personne_morale">{{__('Personne Morale')}}</option>
                                 </select>

@@ -77,7 +77,7 @@
                         <div class="col-md-6 py-2">
                             <label for="code">{{ __('Type D\'Operation') }}</label>
                             <select wire:model="state_assignment.type_operation" name="state_assignment.type_operation" class="form-select  @error('state_assignment.type_operation') is-invalid @enderror">
-                                <option value="">{{ __('--Select Type Operation --') }}</option>
+                                <option value="">{{ __('--Sélectionner le type d\'opération --') }}</option>
                                 <option value="bornage">{{ __('bornage') }} </option>
                                 <option value="morcellement">{{ __('morcellement') }} </option>
                                 <option value="mutation_totale">{{ __('mutation_totale') }} </option>

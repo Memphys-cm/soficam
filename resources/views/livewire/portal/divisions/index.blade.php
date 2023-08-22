@@ -170,7 +170,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Showing')}} {{$perPage > $divisions_count ? $divisions_count : $perPage  }} {{__('éléments de')}} {{$divisions_count}}
+                    {{__('Montrer')}} {{$perPage > $divisions_count ? $divisions_count : $perPage  }} {{__('éléments de')}} {{$divisions_count}}
                 </div>
                 {{ $divisions->links() }}
             </div>

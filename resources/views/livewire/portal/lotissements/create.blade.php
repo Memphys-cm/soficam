@@ -162,7 +162,7 @@
                         <div class='d-flex justify-content-between align-items-end'>
                             <div class="form-group ">
                                 <div class=''>
-                                    <label for="blockName">{{__('Block')}} {{$blockIndex+1 }} {{__('Nom')}}</label>
+                                    <label for="blockName">{{__('Bloc')}} {{$blockIndex+1 }} {{__('Nom')}}</label>
                                     <input type="text" class="form-control px-4  @error('blocks.{{ $blockIndex }}.block_name') is-invalid @enderror" wire:model="blocks.{{ $blockIndex }}.name" width="5rem;" placeholder="{{'Block No. '.$blockIndex+1}}">
                                     @error('blocks.$blockIndex.block_name')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -233,7 +233,7 @@
                             <div class="col-md-6 ">
                                 <label for="code">{{ __('Notaire') }}</label>
                                 <select wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.notaire_id" class="form-control @error('notaire_id') is-invalid @enderror">
-                                    <option value=''>{{__('-- Select --')}}</option>
+                                    <option value=''>{{__('-- Selectionner --')}}</option>
                                     @foreach($notaires as $notaire)
                                     <option wire:key="{{ $notaire->id }}" value='{{$notaire->id}}'> {{!empty($notaire->cabinet) ? $notaire->cabinet->nom_cabinet : '' }} - {{ucfirst($notaire->first_name)}} {{ucfirst($notaire->last_name)}} </option>
                                     @endforeach
@@ -304,8 +304,8 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between my-3">
-                <a type="submit" wire:click.prevent="store" class="btn btn-primary ms-auto mx-3" wire:loading.attr="disabled">{{ __('Save') }} </a>
-                <a href="{{route('portal.lotissements.index')}}" class="btn btn-gray-200 text-gray-600 ">{{ __('Close') }}</a>
+                <a type="submit" wire:click.prevent="store" class="btn btn-primary ms-auto mx-3" wire:loading.attr="disabled">{{ __('Enregistrer') }} </a>
+                <a href="{{route('portal.lotissements.index')}}" class="btn btn-gray-200 text-gray-600 ">{{ __('Fermer') }}</a>
             </div>
         </div>
     </x-form-items.form>

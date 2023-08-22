@@ -77,12 +77,12 @@
 
     <div class="row p-3">
         <div class="col-md-3">
-            <label for="search">{{ __('Search') }}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{ __('Search...') }}"
+            <label for="search">{{ __('Recherche') }}: </label>
+            <input wire:model="query" id="search" type="text" placeholder="{{ __('Recherche...') }}"
                 class="form-control">
         </div>
         <div class="col-md-3">
-            <label for="orderBy">{{ __('Order By') }}: </label>
+            <label for="orderBy">{{ __('Sens du tri') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="nom_cabinet">{{ __('Nom du bureau') }}</option>
                 <option value="description">{{ __('Description') }}</option>

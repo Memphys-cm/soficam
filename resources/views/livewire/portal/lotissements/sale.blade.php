@@ -191,7 +191,7 @@
                                         <div class="small text-gray" style="font-size: x-small;">
                                             <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
-                                            </svg> {{__('Promoteur immobiliere')}}
+                                            </svg> {{__('Promoteur immobilier')}}
                                         </div>
                                     </div>
                                 </a>
@@ -205,10 +205,10 @@
                         </div>
                         @if(!empty($lotissement->titreFoncier))
                         <div class="d-flex align-items-center mb-2">
-                            <span class="fw-bolder ">{{__('Location')}}</span> : <span class="fw-light mx-2"> {{$lotissement->titreFoncier->region->region_name}} > {{$lotissement->titreFoncier->division->division_name}} > {{$lotissement->titreFoncier->subDivision->sub_division_name}} > {{$lotissement->titreFoncier->lieu_dit}} </span>
+                            <span class="fw-bolder ">{{__('Localisation')}}</span> : <span class="fw-light mx-2"> {{$lotissement->titreFoncier->region->region_name}} > {{$lotissement->titreFoncier->division->division_name}} > {{$lotissement->titreFoncier->subDivision->sub_division_name}} > {{$lotissement->titreFoncier->lieu_dit}} </span>
                         </div>
                         <div class='mb-2'>
-                            <span class="fw-bolder mt-2">{{__('Coordinates')}}</span> : {{$lotissement->titreFoncier->coordonnees}}
+                            <span class="fw-bolder mt-2">{{__('Coordonnées')}}</span> : {{$lotissement->titreFoncier->coordonnees}}
                         </div>
                         @endif
                     </div>

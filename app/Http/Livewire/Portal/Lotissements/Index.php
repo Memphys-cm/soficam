@@ -3,10 +3,11 @@
 namespace App\Http\Livewire\Portal\Lotissements;
 
 // use PDF;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Component;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use App\Models\TitreFoncier;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Lotissements\Lotissement;
 use App\Http\Livewire\Traits\WithDataTables;
@@ -76,14 +77,13 @@ class Index extends Component
             // Autres données que vous souhaitez afficher dans la vue
         ];
 
-        $pdf = Pdf::loadView('livewire.portal.lotissements.print',$data);
+        $pdf = Pdf::loadView('livewire.portal.lotissements.print',$data)->setPaper('letter', 'landscape');
 
-        return $pdf->download('print.pdf');
 
-        // $pdf = app('dompdf.wrapper')->loadView('livewire.portal.registration.housing-estate.view-housing_estate', $data);
-        // $pdf->setPaper('A4'); // Vous pouvez également définir d'autres tailles de papier comme 'letter', 'legal', etc.
-
-        // return $pdf->stream('test.pdf');
+        return response()->streamDownload(
+            fn () => print($pdf->output()),
+            __('Report-') . Str::random('10') . ".pdf"
+        );
     }
     
 }

@@ -36,7 +36,7 @@
                             @enderror
                         </div>
                         <div class="form-group mb-3">
-                            <label class="px-2" for="name">{{__('Nom de la division ')}} <span>({{__('Fr')}})</span></label>
+                            <label class="px-2" for="name">{{__('Nom de la Sous Region ')}} <span>({{__('Fr')}})</span></label>
                             <input wire:model="division.division_name_fr" type="text" class="form-control  @error('division.division_name_fr') is-invalid @enderror" placeholder="{{__('Nord')}}" required="" name="name">
                             @error('division.division_name_fr')
                             <div class="invalid-feedback">{{$message}}</div>
@@ -45,7 +45,7 @@
                         <div class='form-group mb-4 px-1'>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" wire:model="division.status" id="division.status">
-                                <label class="form-check-label mb-0" for="division.status">{{ __('Mark as Active') }}</label>
+                                <label class="form-check-label mb-0" for="division.status">{{ __('Marquer comme actif') }}</label>
                             </div>
                         </div>
 

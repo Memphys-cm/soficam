@@ -74,7 +74,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Trier par direction')}}: </label>
+            <label for="direction">{{__('Sens du tri')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{__('Ascendant')}}</option>
                 <option value="desc">{{__('Descendant')}}</option>
@@ -206,7 +206,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Afficher')}} {{$perPage > $lotissements_count ? $lotissements_count : $perPage  }} {{__('element de')}} {{$lotissements_count}}
+                    {{__('Montrer')}} {{$perPage > $lotissements_count ? $lotissements_count : $perPage  }} {{__('element de')}} {{$lotissements_count}}
                 </div>
                 {{ $lotissements->links() }}
             </div>
