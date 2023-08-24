@@ -10,6 +10,7 @@ use App\Models\SubDivision;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use App\Models\TitreFoncier;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Livewire\Traits\WithDataTables;
 
@@ -410,6 +411,24 @@ class Index extends Component
         );
 
         $this->user_ids = [];
+    }
+
+    public function  printPdf($id)
+    {
+        $this->titrefoncier = TitreFoncier::findOrFail($id);
+        $data = [
+            'titrefoncier' => $this->titrefoncier,
+            'email' => 'john@example.com',
+            // Autres données que vous souhaitez afficher dans la vue
+        ];
+
+        $pdf = Pdf::loadView('livewire.portal.titre-fonciers.print',$data)->setPaper('a4', 'portrait');
+
+
+        return response()->streamDownload(
+            fn () => print($pdf->output()),
+            __('Report-') . Str::random('10') . ".pdf"
+        );
     }
 
     public function render()
