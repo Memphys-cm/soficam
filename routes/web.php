@@ -163,3 +163,4 @@ Route::group(
 
     }
 );
+Route::view('/print', 'livewire.portal.certificate-propriete.print');

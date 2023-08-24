@@ -31,7 +31,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">{{__('Dashboard')}}</a></li>
+                        <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
                         <li class="breadcrumb-item">{{__('Operations')}}</li>
                         <li class="breadcrumb-item active" aria-current="page">{{__('Morcellements')}}</li>
                     </ol>
@@ -42,7 +42,7 @@
                     </svg>
                     {{__('Morcellements')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('View all Morcellements')}} </p>
+                <p class="mt-n1 mx-2">{{__('Voir tous les morcellement')}} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -61,29 +61,29 @@
     </div>
     <div class="row py-3">
         <div class="col-md-3">
-            <label for="search">{{__('Search')}}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{__('Search...')}}" class="form-control">
+            <label for="search">{{__('Recherche')}}: </label>
+            <input wire:model="query" id="search" type="text" placeholder="{{__('Recherche...')}}" class="form-control">
             <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p>
         </div>
         <div class="col-md-3">
-            <label for="orderBy">{{__('Order By')}}: </label>
+            <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="region_id">{{__('Region')}}</option>
-                <option value="date_de_delivrance_du_TF">{{__('Delivery Date')}}</option>
-                <option value="created_at">{{__('Created Date')}}</option>
+                <option value="date_de_delivrance_du_TF">{{__('Date de delivrance')}}</option>
+                <option value="created_at">{{__('Date Creation')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Order direction')}}: </label>
+            <label for="direction">{{__('Trier par direction')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{__('Ascending')}}</option>
-                <option value="desc">{{__('Descending')}}</option>
+                <option value="asc">{{__('Ascendant')}}</option>
+                <option value="desc">{{__('Descendant')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Items Per Page')}}: </label>
+            <label for="perPage">{{__('Elements par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -98,12 +98,12 @@
             <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('Mutation Totale Number')}}</th>
-                        <th class="border-bottom">{{__('Land title')}}</th>
-                        <th class="border-bottom">{{__('Location')}}</th>
-                        <th class="border-bottom">{{__('Status')}}</th>
+                        <th class="border-bottom">{{__(' Nombre Mutation total')}}</th>
+                        <th class="border-bottom">{{__('Titre Foncier')}}</th>
+                        <th class="border-bottom">{{__('Localisation')}}</th>
+                        <th class="border-bottom">{{__('Statut')}}</th>
                         <th class="border-bottom">{{__('Type Operation')}}</th>
-                        <th class="border-bottom">{{__('Date created')}}</th>
+                        <th class="border-bottom">{{__('Date creation')}}</th>
                         @canany('morcellement.update','morcellement.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
                         @endcanany
@@ -121,13 +121,13 @@
                             </div>
                             <div class="d-flex justify-content-between align-items-center py-1">
                                 <span>
-                                    {{__('Land Title Number')}} : <span class="fw-bolder mx-2"> {{$morcellement->titreFoncier->numero_titre_foncier}} </span>
+                                    {{__('Numero du titre foncier')}} : <span class="fw-bolder mx-2"> {{$morcellement->titreFoncier->numero_titre_foncier}} </span>
                                 </span>
                                 <span class="fw-bolder mx-2">
                                     <span class="fw-normal badge super-badge p-2 bg-{{$morcellement->titreFoncier->EtatTFStyle}} round">{{$morcellement->titreFoncier->etat_TF}}</span>
                                 </span>
                             </div>
-                            {{__('Owners')}}
+                            {{__('Proprietaire')}}
                             <x-elements.user :options="$morcellement->titreFoncier->users->take(5)" />
                         </td>
                         <td>
@@ -135,10 +135,10 @@
                                 {{__('Region')}} : <span class="fw-bolder mx-2"> {{$morcellement->titreFoncier->region->region_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Division')}} : <span class="fw-bolder mx-2"> {{$morcellement->titreFoncier->division->division_name}} </span>
+                                {{__('Sous region')}} : <span class="fw-bolder mx-2"> {{$morcellement->titreFoncier->division->division_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Sub Divi')}} : <span class="fw-bolder mx-2"> {{$morcellement->titreFoncier->subDivision->sub_division_name}} </span>
+                                {{__('Arrondissement')}} : <span class="fw-bolder mx-2"> {{$morcellement->titreFoncier->subDivision->sub_division_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
                                 {{__('Lieu Dit')}} : <span class="fw-bolder mx-2"> {{$morcellement->titreFoncier->lieu_dit}} </span>
@@ -180,27 +180,27 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                                         </svg>
-                                        {{__('Add Coordinates')}}
+                                        {{__('Ajouter coordonnée')}}
                                     </a>
                                     <a wire:click.prevent="initData({{$morcellement->id}})" data-bs-toggle="modal" data-bs-target="#CreateAddCoordinatesModal" draggable="false" class="dropdown-item d-flex align-items-center" href="#">
 
                                         <svg class="dropdown-icon text-primary me-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                                         </svg>
-                                        {{__('Add Sales Details')}}
+                                        {{__('Ajouter Coordonnée de vente')}}
                                     </a>
                                     <a wire:click.prevent="initData({{$morcellement->id}})" data-bs-toggle="modal" data-bs-target="#CreateAddCoordinatesModal" draggable="false" class="dropdown-item d-flex align-items-center" href="#" wire:click.prevent="initData({{$morcellement->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal">
                                         <svg class="dropdown-icon text-primary me-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
                                         </svg>
-                                        {{__('Add Lorder Versement ')}}
+                                        {{__('Ajouter Lorder Versement ')}}
                                     </a>
                                     <a wire:click.prevent="initData({{$morcellement->id}})" data-bs-toggle="modal" data-bs-target="#CreateAddCoordinatesModal" draggable="false" class="dropdown-item d-flex align-items-center" href="#">
 
                                         <svg class="dropdown-icon text-primary me-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
                                         </svg>
-                                        {{__('Generate Bordereau Analytique')}}
+                                        {{__('Generer Bordereau Analytique')}}
                                     </a>
                                 </div>
                             </div>
@@ -220,8 +220,8 @@
                     <tr>
                         <td colspan="9" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps nothing here')}} &#128540;</h4>
-                                <p>{{__('No Record Found..!')}}</p>
+                                <h4 class="fs-4 fw-bold">{{__('Opps riem ici')}} &#128540;</h4>
+                                <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
                     </tr>
@@ -230,7 +230,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Showing')}} {{$perPage > $morcellements_count ? $morcellements_count : $perPage  }} {{__('items of')}} {{$morcellements_count}}
+                    {{__('Affichage')}} {{$perPage > $morcellements_count ? $morcellements_count : $perPage  }} {{__('elements de')}} {{$morcellements_count}}
                 </div>
                 {{ $morcellements->links() }}
             </div>

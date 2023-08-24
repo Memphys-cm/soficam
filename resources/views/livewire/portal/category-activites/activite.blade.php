@@ -14,7 +14,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">{{__('Dashboard')}}</a></li>
+                        <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{__('Loi Foncier')}}</li>
                     </ol>
                 </nav>
@@ -24,7 +24,7 @@
                     </svg>
                     {{__('Activites')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('View all Activites')}} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{__('Voir toutes les activités')}} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -32,7 +32,7 @@
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateUpdateActiviteModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{__('New')}}
+                    </svg> {{__('Nouveau')}}
                 </a>
                 @endcan
                 @can('category_activites_and_activite.export_n_print')
@@ -41,7 +41,7 @@
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
                         </svg>
-                        {{__('Export')}}
+                        {{__('Exporter')}}
                     </a>
                 </div>
                 <div class="text-center mx-2" wire:loading wire:target="export">
@@ -58,31 +58,31 @@
     </div>
     <div class="row p-3">
         <div class="col-md-3">
-            <label for="search">{{__('Search')}}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{__('Search...')}}" class="form-control">
+            <label for="search">{{__('Recherche')}}: </label>
+            <input wire:model="query" id="search" type="text" placeholder="{{__('Recherche...')}}" class="form-control">
             <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p>
         </div>
         <div class="col-md-3">
-            <label for="orderBy">{{__('Order By')}}: </label>
+            <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="category_activite_id">{{__('Category')}}</option>
-                <option value="nom_activite">{{__('Activity Name')}}</option>
-                <option value="value">{{__('Value')}}</option>
+                <option value="category_activite_id">{{__('Categorie')}}</option>
+                <option value="nom_activite">{{__('Nom de l\'activité')}}</option>
+                <option value="value">{{__('Valeur')}}</option>
                 <option value="type_de_facturation">{{__('Type')}}</option>
-                <option value="created_at">{{__('Created Date')}}</option>
+                <option value="created_at">{{__('Date de création')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Order direction')}}: </label>
+            <label for="direction">{{__('Sens du tri')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{__('Ascending')}}</option>
-                <option value="desc">{{__('Descending')}}</option>
+                <option value="asc">{{__('Ascendant')}}</option>
+                <option value="desc">{{__('Descendant')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Items Per Page')}}: </label>
+            <label for="perPage">{{__('Element par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -97,10 +97,10 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('Activity')}}</th>
-                        <th class="border-bottom">{{__('Price')}}</th>
-                        <th class="border-bottom">{{__('Status')}}</th>
-                        <th class="border-bottom">{{__('Date created')}}</th>
+                        <th class="border-bottom">{{__('Activité')}}</th>
+                        <th class="border-bottom">{{__('Prix')}}</th>
+                        <th class="border-bottom">{{__('Statut')}}</th>
+                        <th class="border-bottom">{{__('Date de création')}}</th>
                         @canany('category_activites_and_activite.update','category_activites_and_activite.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
                         @endcanany
@@ -153,8 +153,8 @@
                     <tr>
                         <td colspan="7" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps nothing here')}} &#128540;</h4>
-                                <p>{{__('No Record Found..!')}}</p>
+                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                                <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
                     </tr>
@@ -163,7 +163,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Showing')}} {{$perPage > $activites_count ? $activites_count : $perPage  }} {{__('items of')}} {{$activites_count}}
+                    {{__('Montrer')}} {{$perPage > $activites_count ? $activites_count : $perPage  }} {{__('éléments de')}} {{$activites_count}}
                 </div>
                 {{ $activites->links() }}
             </div>

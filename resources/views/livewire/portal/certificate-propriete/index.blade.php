@@ -2,6 +2,7 @@
     <x-alert />
     @include('livewire.portal.certificate-propriete.create')
     @include('livewire.portal.certificate-propriete.update')
+   
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -69,32 +70,32 @@
 
     <div class="row p-3">
         <div class="col-md-3">
-            <label for="search">{{ __('Search') }}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{ __('Search...') }}" class="form-control">
+            <label for="search">{{ __('Recherche') }}: </label>
+            <input wire:model="query" id="search" type="text" placeholder="{{ __('Recherche...') }}" class="form-control">
         </div>
         <div class="col-md-3">
-            <label for="orderBy">{{ __('Order By') }}: </label>
+            <label for="orderBy">{{ __('Trier par') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="titre_foncier_id">{{ __('Land title') }}</option>
-                <option value="certificate_proprietes_number">{{ __('CP Number') }}</option>
-                <option value="requestor_id">{{ __('Requestor') }}</option>
-                <option value="price">{{ __('Price') }}</option>
-                <option value="validity">{{ __('Validity') }}</option>
-                <option value="status">{{ __('Status') }}</option>
-                <option value="created_at">{{ __('Created Date') }}</option>
+                <option value="titre_foncier_id">{{ __('Titre Foncier') }}</option>
+                <option value="certificate_proprietes_number">{{ __('Numero CP') }}</option>
+                <option value="requestor_id">{{ __('Requerant') }}</option>
+                <option value="price">{{ __('Prix') }}</option>
+                <option value="validity">{{ __('Validité') }}</option>
+                <option value="status">{{ __('Statut') }}</option>
+                <option value="created_at">{{ __('Date Creation ') }}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{ __('Order direction') }}: </label>
+            <label for="direction">{{ __('Trier par direction') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{ __('Ascending') }}</option>
-                <option value="desc">{{ __('Descending') }}</option>
+                <option value="asc">{{ __('Ascendant') }}</option>
+                <option value="desc">{{ __('Descendant') }}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{ __('Items Per Page') }}: </label>
+            <label for="perPage">{{ __('Elements par page') }}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -109,14 +110,14 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('Requestor') }}</th>
-                        <th class="border-bottom">{{ __('LAND TITLE') }}</th>
-                        <th class="border-bottom">{{ __('CP NUMBER') }}</th>
-                        <th class="border-bottom">{{ __('PRICE') }}</th>
-                        <th class="border-bottom">{{ __('VALIDITY') }}</th>
-                        <th class="border-bottom">{{ __('CERTIFICATE TYPE') }}</th>
-                        <th class="border-bottom">{{ __('STATUS') }}</th>
-                        <th class="border-bottom">{{ __('Date created') }}</th>
+                        <th class="border-bottom">{{ __('Requerant') }}</th>
+                        <th class="border-bottom">{{ __('TITRE FONCIER') }}</th>
+                        <th class="border-bottom">{{ __('NUMERO CP') }}</th>
+                        <th class="border-bottom">{{ __('PRIX') }}</th>
+                        <th class="border-bottom">{{ __('VALIDITÉ') }}</th>
+                        <th class="border-bottom">{{ __('TYPE DE CERTIFICAT') }}</th>
+                        <th class="border-bottom">{{ __('STATUT') }}</th>
+                        <th class="border-bottom">{{ __('Date de création') }}</th>
                         @canany(['certificate_propriete.edit','certificate_propriete.delete'])
                         <th class="border-bottom">{{ __('Action') }}</th>
                         @endcanany
@@ -146,8 +147,9 @@
                         <td>{{ $certificatepropriete->created_at }}</td>
                         @canany(['certificate_propriete.edit','certificate_propriete.delete'])
                         <td>
+                            <button wire:click='printPdf({{$certificatepropriete->id}})' class="btn btn-primary">PDF</button>
                             @can('certificate_propriete.update')
-                            <a href='#' wire:click.prevent="initData({{ $certificatepropriete -> id }})" data-bs-toggle="modal" data-bs-target="#UpdateCertificateProprieteModal">
+                            <a href='#' wire:click.prevent="initData({{ $certificatepropriete ->id }})" data-bs-toggle="modal" data-bs-target="#UpdateCertificateProprieteModal">
                                 <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
                                     </path>
@@ -170,8 +172,8 @@
                     <tr>
                         <td colspan="10" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{ __('Opps nothing here') }} &#128540;</h4>
-                                <p>{{ __('No Record Found..!') }}</p>
+                                <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
+                                <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                             </div>
                         </td>
                     </tr>
@@ -180,7 +182,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Showing')}} {{$perPage > $certificateproprietes_count ? $certificateproprietes_count : $perPage  }} {{__('items of')}} {{$certificateproprietes_count}}
+                    {{__('Affichage')}} {{$perPage > $certificateproprietes_count ? $certificateproprietes_count : $perPage  }} {{__('éléments de')}} {{$certificateproprietes_count}}
                 </div>
                 {{ $certificateproprietes->links()  }}
             </div>

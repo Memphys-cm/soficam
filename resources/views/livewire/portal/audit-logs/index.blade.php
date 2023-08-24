@@ -12,15 +12,15 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Audit Logs')}}</li>
+                        <li class="breadcrumb-item"><a href="/">Acceuil</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Jounaux de connexion')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
                     <svg class="icon me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    {{__('Audit Logs')}}
+                    {{__('Jounal de connexion')}}
                 </h1>
                 <p class="mt-n1 mx-2">{{__('Visualiser toutes les activités réalisées dans votre espace')}} &#x23F0; </p>
             </div>
@@ -42,17 +42,17 @@
                                     </svg>
                                 </div>
                                 <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5">{{__('Total des journaux d\'audit')}}</h2>
+                                    <h2 class="fw-extrabold h5">{{__('Total des journaux de connexion')}}</h2>
                                     <h3 class="mb-1">{{numberFormat(count($logs))}}</h3>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-8 px-xl-0">
                                 <a href="" class="d-none d-sm-block">
-                                    <h2 class="h5">{{__('Total Audit Logs')}}</h2>
+                                    <h2 class="h5">{{__('Total des journaux de connexion')}}</h2>
                                     <h3 class="fw-extrabold mb-1">{{numberFormat(count($logs))}}</h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Audit Log'), count($logs)) }} {{__('recorded')}}</div>
+                                    <div>{{ \Str::plural(__('Journal de connexiob'), count($logs)) }} {{__('enregistrer')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -70,17 +70,17 @@
                                     </svg>
                                 </div>
                                 <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5">{{ \Str::plural(__('Creation Logs'), $creation_log_count) }}</h2>
+                                    <h2 class="fw-extrabold h5">{{ \Str::plural(__('Journaux de création'), $creation_log_count) }}</h2>
                                     <h3 class="mb-1">{{numberFormat($creation_log_count)}}</h3>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-8 px-xl-0">
                                 <a href="" class="d-none d-sm-block">
-                                    <h2 class="h5">{{ \Str::plural(__('Creation Logs'), $creation_log_count) }}</h2>
+                                    <h2 class="h5">{{ \Str::plural(__('Journaux de création'), $creation_log_count) }}</h2>
                                     <h3 class="fw-extrabold mb-1">{{numberFormat($creation_log_count)}}</h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Creation Logs'), $creation_log_count) }} {{__('recorded')}}</div>
+                                    <div>{{ \Str::plural(__('Journaux de création'), $creation_log_count) }} {{__('enregistrer')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -98,17 +98,17 @@
                                     </svg>
                                 </div>
                                 <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5">{{ \Str::plural(__('Update Log'), $update_log_count) }}</h2>
+                                    <h2 class="fw-extrabold h5">{{ \Str::plural(__('Journal des mises à jour'), $update_log_count) }}</h2>
                                     <h3 class="mb-1">{{numberFormat($update_log_count)}}</h3>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-8 px-xl-0">
                                 <a href="" class="d-none d-sm-block">
-                                    <h2 class="h5">{{ \Str::plural(__('Update Log'), $update_log_count) }}</h2>
+                                    <h2 class="h5">{{ \Str::plural(__('Journal des mises à jour'), $update_log_count) }}</h2>
                                     <h3 class="fw-extrabold mb-1">{{numberFormat($update_log_count)}}</h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Update Log'), $update_log_count) }} {{__('recorded')}}</div>
+                                    <div>{{ \Str::plural(__('Journal des mises à jour'), $update_log_count) }} {{__('enregistrer')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -126,17 +126,17 @@
                                     </svg>
                                 </div>
                                 <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5">{{ \Str::plural(__('Deletion Log'), $deletion_log_count) }}</h2>
+                                    <h2 class="fw-extrabold h5">{{ \Str::plural(__('Journal des suppressions'), $deletion_log_count) }}</h2>
                                     <h3 class="mb-1">{{numberFormat($deletion_log_count)}} </h3>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-8 px-xl-0">
                                 <a href="" class="d-none d-sm-block">
-                                    <h2 class="h5">{{ \Str::plural(__('Deletion Log'), $deletion_log_count) }}</h2>
+                                    <h2 class="h5">{{ \Str::plural(__('Journal des suppressions'), $deletion_log_count) }}</h2>
                                     <h3 class="fw-extrabold mb-1">{{numberFormat($deletion_log_count)}} </h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Deletion Log'), $deletion_log_count) }} {{__('recorded!')}}</div>
+                                    <div>{{ \Str::plural(__('Journal des suppressions'), $deletion_log_count) }} {{__('enregistrer!')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -149,29 +149,29 @@
 
     <div class="row p-3">
         <div class="col-md-3">
-            <label for="search">{{__('Search')}}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{__('Search...')}}" class="form-control">
+            <label for="search">{{__('Recherche')}}: </label>
+            <input wire:model="query" id="search" type="text" placeholder="{{__('Recherche...')}}" class="form-control">
             <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p>
         </div>
         <div class="col-md-3">
-            <label for="orderBy">{{__('Order By')}}: </label>
+            <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="user">{{__('User')}}</option>
-                <option value="action_type">{{__('Action Type')}}</option>
-                <option value="created_at">{{__('Created Date')}}</option>
+                <option value="user">{{__('Utilisateur')}}</option>
+                <option value="action_type">{{__('Type d\'action')}}</option>
+                <option value="created_at">{{__('Date de creation')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Order direction')}}: </label>
+            <label for="direction">{{__('Sens du tri')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{__('Ascending')}}</option>
-                <option value="desc">{{__('Descending')}}</option>
+                <option value="asc">{{__('Ascendant')}}</option>
+                <option value="desc">{{__('Descendant')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Items Per Page')}}: </label>
+            <label for="perPage">{{__('Element par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -186,10 +186,10 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('Employee')}}</th>
-                        <th class="border-bottom">{{__('Action Type')}}</th>
-                        <th class="border-bottom">{{__('Action Performed')}}</th>
-                        <th class="border-bottom">{{__('Date created')}}</th>
+                        <th class="border-bottom">{{__('Employé')}}</th>
+                        <th class="border-bottom">{{__('Type d\'action')}}</th>
+                        <th class="border-bottom">{{__('Action réalisée')}}</th>
+                        <th class="border-bottom">{{__('Date de création')}}</th>
                         @can('audit_log.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
                         @endcan
@@ -229,8 +229,8 @@
                     <tr>
                         <td colspan="7" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps nothing here')}} &#128540;</h4>
-                                <p>{{__('No Record Found..!')}}</p>
+                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                                <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
                     </tr>
@@ -239,7 +239,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Showing')}} {{$perPage > count($logs) ? count($logs) : $perPage  }} {{__('items of')}} {{count($logs)}}
+                    {{__('Montrer')}} {{$perPage > count($logs) ? count($logs) : $perPage  }} {{__('éléments de')}} {{count($logs)}}
                 </div>
                 {{ $logs->links() }}
             </div>

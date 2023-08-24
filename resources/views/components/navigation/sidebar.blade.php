@@ -88,7 +88,7 @@
                                             @can('certificate_propriete.view')
                                             <li class="nav-item {{ $request->routeIs('portal.certificate-propriete.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.certificate-propriete.index') }}" class="nav-link">
-                                                    <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Certificate Pro.') }}</span>
+                                                    <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Certificat Pro.') }}</span>
                                                 </a>
                                             </li>
                                             @endcan
@@ -423,14 +423,14 @@
                                             @can('division.view')
                                             <li class="nav-item {{ $request->routeIs('portal.divisions.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.divisions.index') }}" class="nav-link">
-                                                    <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Divisions') }}</span>
+                                                    <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Sous Regions') }}</span>
                                                 </a>
                                             </li>
                                             @endcan
                                             @can('sub_division.view')
                                             <li class="nav-item {{ $request->routeIs('portal.sub-divisions.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.sub-divisions.index') }}" class="nav-link">
-                                                    <span class="sidebar-text-contracted">SD</span> <span class="sidebar-text">{{ __('Sub-Divisions') }}</span>
+                                                    <span class="sidebar-text-contracted">SD</span> <span class="sidebar-text">{{ __('Arrondissements') }}</span>
                                                 </a>
                                             </li>
                                             @endcan
@@ -507,7 +507,7 @@
                                             @can('cabinets.view')
                                             <li class="nav-item {{ $request->routeIs('portal.cabinets.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.cabinets.index') }}" class="nav-link">
-                                                    <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('All Cabinet') }}</span>
+                                                    <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Tous les cabinets') }}</span>
                                                 </a>
                                             </li>
                                             @endcan

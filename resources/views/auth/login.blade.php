@@ -10,13 +10,13 @@
                                 <img src='/img/logo.png' class="w-50 h-auto" alt=''>
                             </div> -->
                             <div class="text-center text-md-center mb-4 mt-md-0">
-                                <h1 class="mb-0 h3">{{ __('Sign in to our platform')}}</h1>
+                                <h1 class="mb-0 h3">{{ __('Se connecter à notre plateforme')}}</h1>
                             </div>
                             <x-form-items.form method="POST" action="{{ route('login') }}" class="mt-1 form-modal needs-validation" id="">
                                 <div class='text-center'>
                                     <x-alert />
                                 </div>
-                                <div class="form-group mb-4"><label for="email">{{ __('E-Mail Address') }}</label>
+                                <div class="form-group mb-4"><label for="email">{{ __('Adresse e-mail') }}</label>
                                     <input type="email" name="email" class="form-control  " value="{{ old('email') }}" placeholder="jane.doe@app.com" id="email" autofocus="" required="" >
                                     <!-- @error('email')
                                     <div class="invalid-feedback">
@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="form-group mb-4">
-                                        <label for="password">{{ __('Password') }}</label>
+                                        <label for="password">{{ __('Mot de passe') }}</label>
                                         <input type="password" name="password" placeholder="Password" class="form-control " id="password" required="">
                                         <!-- @error('password')
                                         <div class="invalid-feedback">
@@ -37,22 +37,22 @@
                                     <div class="d-flex justify-content-between align-items-top mb-4">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                            <label class="form-check-label mb-0" for="remember">{{ __('Remember Me') }}</label>
+                                            <label class="form-check-label mb-0" for="remember">{{ __('Se souvenir de moi') }}</label>
                                         </div>
                                         <div>
                                             @if (Route::has('password.request'))
                                             <a href="{{ route('password.request') }}" class="small text-right">
-                                                {{ __('Lost Password?') }}
+                                                {{ __('Mot de passe oublié?') }}
                                             </a>
                                             @endif
                                         </div>
                                     </div>
                                 </div>
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary btn-loading px-6"> {{ __('Login') }}</button>
+                                    <button type="submit" class="btn btn-primary btn-loading px-6"> {{ __('Connexion') }}</button>
                                 </div>
                                 <div class="d-flex justify-content-center align-items-center mt-4">
-                                    <span class="fw-normal">{{__('Not a member?')}} <a href="{{route('register')}}" class="fw-bold">{{__('Sign Up')}}</a></span>
+                                    <span class="fw-normal">{{__('Pas membre?')}} <a href="{{route('register')}}" class="fw-bold">{{__('Sign Up')}}</a></span>
                                 </div>
                             </x-form-items.form>
                             <div class='d-flex justify-content-center mt-3 fw-light mb-n4'>

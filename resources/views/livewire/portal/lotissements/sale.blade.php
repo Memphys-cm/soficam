@@ -32,9 +32,9 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">{{__('Dashboard')}}</a></li>
+                        <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
                         <li class="breadcrumb-item "><a href="{{route('portal.lotissements.index')}}">{{__('Lotissements')}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Sale Lot')}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Vendre un lot')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -43,9 +43,9 @@
     <div class='row'>
         <div class='col-md-3 '>
             <div class="card p-3 mb-3">
-                <h5 class="w-auto">{{__('Simple Sale')}}</h5>
+                <h5 class="w-auto">{{__('Vente Simple')}}</h5>
                 <ul>
-                    <li>{{__('Update Land information')}}</li>
+                    <li>{{__('Mettre à jour les informations du terrain')}}</li>
                     <li>{{__('Update Promoter information')}}</li>
                 </ul>
             </div>
@@ -56,29 +56,29 @@
                 <h5 class="w-auto">{{__('Basic Stats')}}</h5>
 
                 <div class="d-flex align-items-center mb-2 border-1 border-bottom">
-                    <span class="fw-light ">{{__('Total Blocks')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->blocks)}} </span>
+                    <span class="fw-light ">{{__('Total Blocs')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->blocks)}} </span>
                 </div>
                 <div class="d-flex align-items-center mb-2 border-1 border-bottom">
                     <span class="fw-light ">{{__('Total Lots')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->parcels)}} </span>
                 </div>
                 <div class="d-flex align-items-center mb-2 border-1 border-bottom">
-                    <span class="fw-light ">{{__('Total Public Lots')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->parcels->where('type','public'))}} </span>
+                    <span class="fw-light ">{{__('Total Lots publiques')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->parcels->where('type','public'))}} </span>
                 </div>
                 <div class="d-flex align-items-center mb-2 border-1 border-bottom">
-                    <span class="fw-light ">{{__('Total Normal Lots')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->parcels->where('type','normale'))}} </span>
+                    <span class="fw-light ">{{__('Total Lot normal')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->parcels->where('type','normale'))}} </span>
                 </div>
                 <div class="d-flex align-items-center mb-2 border-1 border-bottom">
-                    <span class="fw-light ">{{__('Total Lots Sold')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->parcels->where('date_de_vente','<>',null))}} </span>
+                    <span class="fw-light ">{{__('Total Lots Vendus')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->parcels->where('date_de_vente','<>',null))}} </span>
                 </div>
                 <div class="d-flex align-items-center mb-2">
-                    <span class="fw-light ">{{__('Total Lots Remaining')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->parcels->where('date_de_vente',null))}} </span>
+                    <span class="fw-light ">{{__('Total Lots Restant')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->parcels->where('date_de_vente',null))}} </span>
                 </div>
             </div>
 
         </div>
         <div class='col-md-9'>
             <div class="card p-4 mb-3">
-                <legend class="w-auto">Informations on the Land</legend>
+                <legend class="w-auto">Informations sur le terrain</legend>
                 <div class='row gap-4'>
                     <div class="col">
                         <a href="#" class="d-flex align-items-center justify-content-between">
@@ -191,7 +191,7 @@
                                         <div class="small text-gray" style="font-size: x-small;">
                                             <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
-                                            </svg> {{__('Promoteur immobiliere')}}
+                                            </svg> {{__('Promoteur immobilier')}}
                                         </div>
                                     </div>
                                 </a>
@@ -205,15 +205,15 @@
                         </div>
                         @if(!empty($lotissement->titreFoncier))
                         <div class="d-flex align-items-center mb-2">
-                            <span class="fw-bolder ">{{__('Location')}}</span> : <span class="fw-light mx-2"> {{$lotissement->titreFoncier->region->region_name}} > {{$lotissement->titreFoncier->division->division_name}} > {{$lotissement->titreFoncier->subDivision->sub_division_name}} > {{$lotissement->titreFoncier->lieu_dit}} </span>
+                            <span class="fw-bolder ">{{__('Localisation')}}</span> : <span class="fw-light mx-2"> {{$lotissement->titreFoncier->region->region_name}} > {{$lotissement->titreFoncier->division->division_name}} > {{$lotissement->titreFoncier->subDivision->sub_division_name}} > {{$lotissement->titreFoncier->lieu_dit}} </span>
                         </div>
                         <div class='mb-2'>
-                            <span class="fw-bolder mt-2">{{__('Coordinates')}}</span> : {{$lotissement->titreFoncier->coordonnees}}
+                            <span class="fw-bolder mt-2">{{__('Coordonnées')}}</span> : {{$lotissement->titreFoncier->coordonnees}}
                         </div>
                         @endif
                     </div>
                     <div class="col">
-                        <h4 class="fs-5">{{__('Land Title Owners')}}</h4>
+                        <h4 class="fs-5">{{__('Proprietaire du titre foncier')}}</h4>
                         @if(!empty($lotissement->titreFoncier))
                         @foreach($lotissement->titreFoncier->users as $key=>$option)
                         <a href="#" class="d-flex align-items-center {{!$loop->last ? 'border-bottom' : ''}} py-1">
@@ -236,11 +236,11 @@
                 </div>
             </div>
             <div class="card p-4 ">
-                <legend class="w-auto">{{__('Blocks and Lots')}}</legend>
+                <legend class="w-auto">{{__('Blocs et Lots')}}</legend>
                 @foreach($lotissement->blocks as $block)
                 <div class='mb-3 px-3'>
                     @if(!empty($block->parcels))
-                    <span class="fw-bold pb-3"> {{__('Block Name')}} : {{$block->block_name}}</span>
+                    <span class="fw-bold pb-3"> {{__('Nom du Bloc')}} : {{$block->block_name}}</span>
                     <div class='row border border-1 fw-bold  mt-1'>
                         <span class="col py-1 text-left">{{__('Numero Lot')}}</span>
                         <span class="col py-1 text-left">{{__('Superficie Total')}}</span>

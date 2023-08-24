@@ -2,19 +2,19 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th class="f-bold"> {{ __('LAND TITLE NUMBER') }} </th>
+                <th class="f-bold"> {{ __('NUMERO DU TITRE FONCIER') }} </th>
                 <th> {{ __($housing_estate->titreFoncier->numero_titre_foncier ) }} </th>
                 <th class="f-bold">{{ __('MAETURE') }}</th>
                 <th> {{ $housing_estate->maeture }} </th>
             </tr>
             <tr>
-                <th class="f-bold">{{ __('AREA OF LAND TITLE') }}</th>
+                <th class="f-bold">{{ __('SURFACE DU TITRE FONCIER') }}</th>
                 <th> {{ __($housing_estate->titreFoncier->superficie_du_TF_mere ?? '') }} </th>
-                <th class="f-bold">{{ __('REAL ESTATE DEVELOPER') }}</th>
+                <th class="f-bold">{{ __('PROMOTEUR IMMOBILIER') }}</th>
                 <th> {{ $housing_estate->property_developer }} </th>
             </tr>
             <tr>
-                <th>{{ __('PUBLIC UTILITY AREA') }}</th>
+                <th>{{ __('ZONE D\'UTILITÉ PUBLIQUE') }}</th>
                 @php
                     $superficiePublic = 0;
                     foreach ($housing_estate->blocks as $block) {
@@ -22,37 +22,37 @@
                     }
                 @endphp
                 <th> {{ $superficiePublic }} m² </th>
-                <th class="f-bold">{{ __('REAL ESTATE AGENT') }}</th>
+                <th class="f-bold">{{ __('AGENT IMMOBILIER') }}</th>
                 <th> {{ $housing_estate->estate_agent }} </th>
             </tr>
             <tr>
-                <th class="f-bold">{{ __('USEFUL AREA') }}</th>
+                <th class="f-bold">{{ __('ZONE UTILE') }}</th>
                 <th> </th>
                 <th class="f-bold">{{ __('LOTISSER') }}</th>
                 <th> {{ $housing_estate->lotisser }} </th>
             </tr>
             <tr>
-                <th class="f-bold">{{ __('AREA SOLD') }}</th>
+                <th class="f-bold">{{ __('SURFACE VENDUE') }}</th>
                 <th> {{ __($housing_estate->titreFoncier->superficie_vendue_du_TF_mere ?? '0') }}
                 </th>
                 <th class="f-bold">{{ __('LE CABINET DE GEOMETRE') }}</th>
                 <th> {{ $housing_estate->geometric_pratice }} </th>
             </tr>
             <tr>
-                <th class="f-bold">{{ __('REMAINING AREA ') }}</th>
+                <th class="f-bold">{{ __('SURFACE RESTANTE ') }}</th>
                 <th> {{ __($housing_estate->titreFoncier->superficie_restant_du_TF_mere ?? '0') }}
                 </th>
-                <th class="f-bold">{{ __('THE SURVEYOR') }}</th>
+                <th class="f-bold">{{ __('L\'ENQUÊTEUR') }}</th>
                 <th> {{ $housing_estate->geometric }} </th>
             </tr>
             <tr>
-                <th class="f-bold">{{ __('NUMBER OF BLOCKS') }}</th>
+                <th class="f-bold">{{ __('NOMBRE DE BLOC') }}</th>
                 <th> {{ __($housing_estate->blocks->count() ?? '0') }} </th>
-                <th class="f-bold">{{ __('THE PLANNER') }}</th>
+                <th class="f-bold">{{ __('LE PLANIFICATEUR') }}</th>
                 <th> {{ $housing_estate->urbanist }} </th>
             </tr>
             <tr>
-                <th class="f-bold">{{ __('NUMBER OF LOTS') }}</th>
+                <th class="f-bold">{{ __('NOMBRE DE LOTS') }}</th>
                 @if ($housing_estate->blocks->count() > 0)
                     @php
                         $totalParcelCount = $housing_estate->blocks->sum(function ($block) {
@@ -63,7 +63,7 @@
                 @else
                     <th> {{ 0 }} </th>
                 @endif
-                <th class="f-bold">{{ __('THE CONTROLLER') }}</th>
+                <th class="f-bold">{{ __('LE CONTROLLEUR') }}</th>
                 <th> {{ $housing_estate->controller }} </th>
             </tr>
         </thead>
@@ -75,16 +75,16 @@
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>BLOCK DESIGNATION</th>
-                    <th>NUMBER OF LOTS PER BLOCK</th>
+                    <th>DÉSIGNATION DU BLOC</th>
+                    <th>NOMBRE DE LOTS PAR BLOC</th>
                     <th>LOT NO.</th>
-                    <th>LOT AREA</th>
-                    <th>LOT STATUS</th>
-                    <th>LOT STATUS</th>
-                    <th>NOTARY OFFICE STUDY</th>
-                    <th>NOTARY CLERK</th>
-                    <th>GEOMETER OFFICE</th>
-                    <th>GEOMETER</th>
+                    <th>SURFACE DU LOT</th>
+                    <th>STATUT DU LOT</th>
+                    <th>LOT STATUT</th>
+                    <th>ÉTUDE DE BUREAU DE NOTAIRE</th>
+                    <th>CLERK NOTAIRE</th>
+                    <th>SERVICE DU GEOMETRE</th>
+                    <th>GEOMETRE</th>
                     <th>DATE</th>
                 </tr>
             </thead>

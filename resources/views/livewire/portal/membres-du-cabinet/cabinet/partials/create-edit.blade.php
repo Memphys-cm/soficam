@@ -5,7 +5,7 @@
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4"> {{ __('Cabinet') }}</h1>
-                        <p class="px-1"> {{ __('Creating Cabinet') }} &#128522;</p>
+                        <p class="px-1"> {{ __('Creer Cabinet') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="store">
 
@@ -22,7 +22,7 @@
                             <div class='col'>
                                 <label class="px-2" for="region_id">{{ __('Region') }}</label>
                                 <select wire:model="region_id" name="region_id" class="form-select  @error('region_id') is-invalid @enderror" required="">
-                                    <option value="">{{ __('-- Select a Region --')}}</option>
+                                    <option value="">{{ __('-- Selectionner une Region --')}}</option>
                                     @foreach ($regions as $region)
                                     <option value="{{ $region->id }}">{{ $region->region_name }}</option>
                                     @endforeach
@@ -37,7 +37,7 @@
                             <div class='col'>
                                 <label class="px-2" for="division_id">{{ __('Division') }}</label>
                                 <select wire:model="division_id" name="division_id" class="form-select @error('division_id') is-invalid @enderror" required="">
-                                    <option value="">{{ __('-- Select a Division --')}}</option>
+                                    <option value="">{{ __('-- Selectionner une Division --')}}</option>
                                     @if (!empty($divisions))
                                     @foreach ($divisions as $division)
                                     <option value="{{ $division->id }}">{{ $division->division_name }}</option>
@@ -50,9 +50,9 @@
                             </div>
 
                             <div class='col'>
-                                <label class="px-2" for="sub_division_id">{{ __('Sub-Division') }}</label>
+                                <label class="px-2" for="sub_division_id">{{ __('Arrondissement') }}</label>
                                 <select wire:model="sub_division_id" name="sub_division_id" class="form-select @error('sub_division_id') is-invalid @enderror" required="">
-                                    <option value="">{{ __('-- Select a Sub-Division --')}}</option>
+                                    <option value="">{{ __('-- Selectionner un arrondissement--')}}</option>
                                     @if (!empty($sub_divisions))
                                     @foreach ($sub_divisions as $sub_division)
                                     <option value="{{ $sub_division->id }}">{{ $sub_division->sub_division_name }}</option>
@@ -68,8 +68,8 @@
                             <div class="col">
                                 <label for="type_cabinet">{{__('Type Cabinet')}}</label>
                                 <select wire:model="type_cabinet" name="type_cabinet" class="form-select  @error('type_cabinet') is-invalid @enderror" required="">
-                                    <option value="">{{__('-- Select --')}}</option>
-                                    <option value="geometre">{{__('Geomtre')}}</option>
+                                    <option value="">{{__('-- Selectionner --')}}</option>
+                                    <option value="geometre">{{__('Geometre')}}</option>
                                     <option value="lotisseur">{{__('Lotisseur')}}</option>
                                     <option value="maeture">{{__('Maeture')}}</option>
                                     <option value="promoteur_immobiliere">{{__('Promoteur Immobiliere')}}</option>
@@ -98,7 +98,7 @@
                         <br>
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" class="btn btn-primary btn-loading">{{ __('Create')}}</button>
+                            <button type="submit" class="btn btn-primary btn-loading">{{ __('Creer')}}</button>
                         </div>
                     </x-form-items.form>
 
@@ -116,8 +116,8 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Update Notary') }}</h1>
-                        <p class="px-1"> {{ __('Updating Notary Information') }} &#128522;</p>
+                        <h1 class="mb-0 h4"> {{ __('Mise à jour du notaire') }}</h1>
+                        <p class="px-1"> {{ __('Mise à jour du notaire') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="update">
 
@@ -147,9 +147,9 @@
                         <div class="form-group mb-3 row">
 
                             <div class='col'>
-                                <label class="px-2" for="division_id">{{ __('Division') }}</label>
+                                <label class="px-2" for="division_id">{{ __('Sous Region') }}</label>
                                 <select wire:model="division_id" name="division_id" class="form-select @error('division_id') is-invalid @enderror" required="">
-                                    <option value="">{{ __('-- Select a Division --')}}</option>
+                                    <option value="">{{ __('-- Sélectionnez une Sous Region --')}}</option>
                                     @if (!empty($divisions))
                                     @foreach ($divisions as $division)
                                     <option value="{{ $division->id }}">{{ $division->division_name }}</option>
@@ -180,7 +180,7 @@
                             <div class="col">
                                 <label for="type_cabinet">{{__('Type Cabinet')}}</label>
                                 <select wire:model="type_cabinet" name="type_cabinet" class="form-select  @error('type_cabinet') is-invalid @enderror" required="">
-                                    <option value="">{{__('-- Select --')}}</option>
+                                    <option value="">{{__('-- Selectionner --')}}</option>
                                     <option value="geomtre">{{__('Geomtre')}}</option>
                                     <option value="lotisseur">{{__('Lotisseur')}}</option>
                                     <option value="maeture">{{__('Maeture')}}</option>
@@ -213,7 +213,7 @@
 
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" class="btn btn-primary btn-loading">{{ __('Update')}}</button>
+                            <button type="submit" class="btn btn-primary btn-loading">{{ __('Mise à jour')}}</button>
                         </div>
                     </x-form-items.form>
 

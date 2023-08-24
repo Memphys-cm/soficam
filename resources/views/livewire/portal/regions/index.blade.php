@@ -15,7 +15,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">{{__('Dashboard')}}</a></li>
+                        <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
                         <li class="breadcrumb-item active">{{ __('Regions') }}</li>
                     </ol>
                 </nav>
@@ -23,9 +23,9 @@
                     <svg class="icon me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path>
                     </svg>
-                    {{__('Regions Management')}}
+                    {{__('Gestion des régions')}}
                 </h1>
-                <p class="mt-n2">{{__('Manage regions and their related details')}} &#128524;</p>
+                <p class="mt-n2">{{__('Gérer les régions et les détails qui s\'y rapportent')}} &#128524;</p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -33,14 +33,14 @@
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateUpdateRegionModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{__('New')}}
+                    </svg> {{__('Nouveau')}}
                 </a>
                 @endcan
                 @can('region.import')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#importRegionsModal" class="btn btn-sm btn-secondary py-2 d-inline-flex align-items-center">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                    </svg>{{__('Import')}}
+                    </svg>{{__('Importer')}}
                 </a>
                 @endcan
                 @can('region.export_n_print')
@@ -49,7 +49,7 @@
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
                         </svg>
-                        {{__('Export')}}
+                        {{__('Exporter')}}
                     </a>
                 </div>
                 <div class="text-center mx-2" wire:loading wire:target="export">
@@ -66,29 +66,29 @@
         <div class=' pb-4'>
             <div class="row">
                 <div class="col-md-4">
-                    <label for="search">{{__('Search')}}: </label>
-                    <input wire:model="query" id="search" type="text" placeholder="{{__('Search...')}}" class="form-control">
+                    <label for="search">{{__('Recherche')}}: </label>
+                    <input wire:model="query" id="search" type="text" placeholder="{{__('Recherche...')}}" class="form-control">
                     <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p>
                 </div>
                 <div class="col-md-3">
-                    <label for="orderBy">{{__('Order By')}}: </label>
+                    <label for="orderBy">{{__('Trier par')}}: </label>
                     <select wire:model="orderBy" id="orderBy" class="form-select">
-                        <option value="region_name_en">{{__('Name')}}</option>
+                        <option value="region_name_en">{{__('Nom')}}</option>
                         <option value="code">{{__('Code')}}</option>
-                        <option value="created_at">{{__('Created Date')}}</option>
+                        <option value="created_at">{{__('Date Creation')}}</option>
                     </select>
                 </div>
 
                 <div class="col-md-3">
-                    <label for="direction">{{__('Order direction')}}: </label>
+                    <label for="direction">{{__('Trier par direction')}}: </label>
                     <select wire:model="orderAsc" id="direction" class="form-select">
-                        <option value="asc">{{__('Ascending')}}</option>
-                        <option value="desc">{{__('Descending')}}</option>
+                        <option value="asc">{{__('Ascendant')}}</option>
+                        <option value="desc">{{__('Descendant')}}</option>
                     </select>
                 </div>
 
                 <div class="col-md-2">
-                    <label for="perPage">{{__('Per Page')}}: </label>
+                    <label for="perPage">{{__('Par page')}}: </label>
                     <select wire:model="perPage" id="perPage" class="form-select">
                         <option value="5">5</option>
                         <option value="10">10</option>
@@ -126,7 +126,7 @@
                             <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                             </svg>
-                            <div class="d-none d-md-block">{{__('Divisions')}}</div>
+                            <div class="d-none d-md-block">{{__('Sous region')}}</div>
                         </a>
                     </div>
                     <div>
@@ -153,14 +153,14 @@
             <div class='border-prim rounded p-4 d-flex justify-content-center align-items-center flex-column mx-2'>
                 <div class="text-center text-gray-800 mt-4">
                     <img src="{{ asset('/img/illustrations/not_found.svg') }}" class="w-25 ">
-                    <h4 class="fs-4 fw-bold my-1">{{__('Opps nothing here')}} &#128540;</h4>
-                    <p class="pt-0 mt-n1">{{__('No record found here!')}}</p>
+                    <h4 class="fs-4 fw-bold my-1">{{__('Opps rien ici')}} &#128540;</h4>
+                    <p class="pt-0 mt-n1">{{__('Aucun enregistrement trouvé!')}}</p>
                 </div>
                 @can('core.region.create')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateUpdateRegionModal" class="btn btn-sm btn-primary py-2 mt-3 d-inline-flex align-items-center ">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{__('Add Region')}}
+                    </svg> {{__('Ajouter reunion')}}
                 </a>
                 @endcan
             </div>
@@ -170,7 +170,7 @@
     </div>
     <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
         <div>
-            {{__('Showing')}} {{$perPage > $regions_count ? $regions_count : $perPage  }} {{__('items of')}} {{$regions_count}}
+            {{__('Montrer')}} {{$perPage > $regions_count ? $regions_count : $perPage  }} {{__('element par page')}} {{$regions_count}}
         </div>
         {{ $regions->links() }}
     </div>

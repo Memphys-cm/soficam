@@ -31,9 +31,9 @@
                                     </svg>
                                 </a>
                             </li>
-                            <li class="breadcrumb-item"><a href="/">{{__('Dashboard')}}</a></li>
+                            <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
                             <li class="breadcrumb-item "><a href="{{route('portal.lotissements.index')}}">{{__('Lotissements')}}</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{__('Create')}}</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{__('Creer')}}</li>
                         </ol>
                     </nav>
                 </div>
@@ -47,12 +47,12 @@
         <div class='row'>
             <div class='col-md-3'>
                 <div class="card p-3">
-                    <h5 class="w-auto">{{__('Edit Lotissement')}}</h5>
+                    <h5 class="w-auto">{{__('Modifier Lotissement')}}</h5>
                     <ul>
-                        <li>{{__('Update Land information')}}</li>
-                        <li>{{__('Update Promoter information')}}</li>
-                        <li>{{__('Update Blocks')}}</li>
-                        <li>{{__('Update Parcels (lots) informations ')}}</li>
+                        <li>{{__('Mise à jour des informations foncières')}}</li>
+                        <li>{{__('Mise à jour des informations sur le promoteur')}}</li>
+                        <li>{{__('Mise à jour des blocs')}}</li>
+                        <li>{{__('Mise à jour des informations sur les parcelles (lots) ')}}</li>
                     </ul>
                 </div>
             </div>
@@ -61,24 +61,24 @@
                     <legend class="w-auto">Informations on the Land</legend>
                     <div class='row form-group mb-3'>
                         <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Land Title Number') }}</label>
+                            <label for="code">{{ __('Numéro du titre foncier') }}</label>
                             <x-input.land_title-select wire:model="titre_foncier_id" prettyname="titre_foncier_id" :options="$titre_fonciers" selected="('titre_foncier_id')" />
                             @error('titre_foncier_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 py-2">
-                            <label for="">{{ __('Land Title total surface area') }}</label>
+                            <label for="">{{ __('Surface totale du titre foncier') }}</label>
                             <input type="text" class="form-control" required="" value="{{$tf_total_surface_area}}" disabled>
 
                         </div>
                         <div class="col-md-6 py-2">
-                            <label for="">{{ __('Land title surface area sold') }}</label>
+                            <label for="">{{ __('Titre foncier surface vendue') }}</label>
                             <input type="text" class="form-control" required="" value="{{$tf_total_surface_area_sold}}" disabled>
 
                         </div>
                         <div class="col-md-6 py-2">
-                            <label for="">{{ __('Land title surface area remaining') }}</label>
+                            <label for="">{{ __('Surface restante du titre foncier') }}</label>
                             <input type="text" class="form-control" required="" value="{{$tf_total_surface_area_remaining}}" disabled>
                         </div>
                     </div>
@@ -92,14 +92,14 @@
                             @enderror
                         </div>
                         <div class="col-md-3 py-2">
-                            <label for="code">{{ __('Promoter Real') }}</label>
+                            <label for="code">{{ __('Promoteur Réel') }}</label>
                             <input wire:model="promo_imo" type="text" class="form-control  @error('promo_imo') is-invalid @enderror" placeholder="..." required="" value="" name="promo_imo">
                             @error('promo_imo')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-3 py-2">
-                            <label for="code">{{ __('Real Estate Agent') }}</label>
+                            <label for="code">{{ __('Agent immobilier') }}</label>
                             <input wire:model="agent_imo" type="text" class="form-control  @error('agent_imo') is-invalid @enderror" placeholder="..." required="" value="" name="agent_imo">
                             @error('agent_imo')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -115,7 +115,7 @@
                         <div class="col-md-3 py-2">
                             <label for="code">{{ __('Cabinet Geometre') }}</label>
                             <select wire:model="cabinet_geometre_id" class="form-control @error('cabinet_geometre_id') is-invalid @enderror">
-                                <option value=''>{{__('-- Select --')}}</option>
+                                <option value=''>{{__('-- Selectionner --')}}</option>
                                 @foreach($cabinet_geometres as $lgeo)
                                 <option wire:key="{{ $lgeo->id }}" value='{{$lgeo->id}}'>{{ucfirst($lgeo->nom_cabinet)}} </option>
                                 @endforeach
@@ -154,7 +154,7 @@
                 </div>
                 <div class="card p-4 ">
                     <div class='mb-2'>
-                        <button type="button" wire:click="addBlock" class="btn btn-primary">{{__('Add Block')}}</button>
+                        <button type="button" wire:click="addBlock" class="btn btn-primary">{{__('Ajouter un bloc')}}</button>
                     </div>
                     @foreach($blocks as $blockIndex => $block)
                     <fieldset class="border p-3 mb-3 rounded">
@@ -162,7 +162,7 @@
                         <div class='d-flex justify-content-between align-items-end'>
                             <div class="form-group ">
                                 <div class=''>
-                                    <label for="blockName">{{__('Block')}} {{$blockIndex+1 }} {{__('Name')}}</label>
+                                    <label for="blockName">{{__('Bloc')}} {{$blockIndex+1 }} {{__('Nom')}}</label>
                                     <input type="text" class="form-control px-4  @error('blocks.{{ $blockIndex }}.block_name') is-invalid @enderror" wire:model="blocks.{{ $blockIndex }}.name" width="5rem;" placeholder="{{'Block No. '.$blockIndex+1}}">
                                     @error('blocks.$blockIndex.block_name')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -179,14 +179,14 @@
                                 <button type="button" wire:click="addLotPublic({{ $blockIndex }})" class="btn btn-sm btn-primary">
                                     <svg class="icon icon-xs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                    </svg>{{__('Lot Public')}}
+                                    </svg>{{__('Lot Publique')}}
                                 </button>
                                 <button type="button" wire:click="removeBlock({{ $blockIndex }})" class="btn btn-sm btn-danger">
                                     <svg class="icon icon-xs me-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
                                     </svg>
 
-                                    {{__('Block')}}
+                                    {{__('Bloc')}}
                                 </button>
                             </div>
                         </div>
@@ -206,8 +206,8 @@
                             <div class="col-md-3">
                                 <label for="statut_du_lot">{{__('Statut du Lot')}}</label>
                                 <select wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.statut_du_lot" class="form-select  @error('statut_du_lot') is-invalid @enderror" required="">
-                                    <option value="batit">{{__('Built')}}</option>
-                                    <option value="non_batit">{{__('Not built')}}</option>
+                                    <option value="batit">{{__('Construit')}}</option>
+                                    <option value="non_batit">{{__('Non construit')}}</option>
                                 </select>
                                 @error('statut_du_lot')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -236,7 +236,7 @@
                             <div class="col-md-6 ">
                                 <label for="code">{{ __('Notaire') }}</label>
                                 <select wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.notaire_id" class="form-control @error('notaire_id') is-invalid @enderror">
-                                    <option value=''>{{__('-- Select --')}}</option>
+                                    <option value=''>{{__('-- Selectionner --')}}</option>
                                     @foreach($notaires as $notaire)
                                     <option wire:key="{{ $notaire->id }}" value='{{$notaire->id}}'> {{!empty($notaire->cabinet) ? $notaire->cabinet->nom_cabinet : '' }} - {{ucfirst($notaire->first_name)}} {{ucfirst($notaire->last_name)}} </option>
                                     @endforeach
@@ -307,8 +307,8 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between my-3">
-                <a type="submit" wire:click.prevent="update" class="btn btn-primary ms-auto mx-3" wire:loading.attr="disabled">{{ __('Update') }} </a>
-                <a href="{{route('portal.lotissements.index')}}" class="btn btn-gray-200 text-gray-600 ">{{ __('Close') }}</a>
+                <a type="submit" wire:click.prevent="update" class="btn btn-primary ms-auto mx-3" wire:loading.attr="disabled">{{ __('Modifier') }} </a>
+                <a href="{{route('portal.lotissements.index')}}" class="btn btn-gray-200 text-gray-600 ">{{ __('Fermer') }}</a>
             </div>
         </div>
     </x-form-items.form>

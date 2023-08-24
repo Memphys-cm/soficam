@@ -44,6 +44,7 @@
                             </div>
                         </div>
                         <div class="p-3 shadow my-4">
+                            <h2 class="h5 mb-4">{{__('Ajouter des fichiers')}}</h2>
                             <h2 class="h5 mb-4">{{ __('Add Files') }}</h2>
                             <div class="d-xl-flex align-items-center">
                                 <div class="file-field">
@@ -56,9 +57,8 @@
                                             </svg>
                                             <input type="file" class="form-control-file" wire:model="attachements">
                                             <div class="d-md-block text-left">
-                                                <div class="fw-normal text-dark mb-1">{{ __('Choose Files') }}</div>
-                                                <div class="text-gray small">JPG,PNG, PDF, Word,Excel. Max size of 50MB
-                                                </div>
+                                                <div class="fw-normal text-dark mb-1">{{__('Choisir les fichiers')}}</div>
+                                                <div class="text-gray small">JPG,PNG, PDF, Word,Excel. Max size of 50MB</div>
                                             </div>
                                         </div>
                                     </div>

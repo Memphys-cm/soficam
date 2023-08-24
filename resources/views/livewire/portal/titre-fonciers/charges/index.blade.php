@@ -25,9 +25,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                         </path>
                     </svg>
-                    {{ __('Attribute a charge to a Titre foncier') }}
+                    {{ __('Attribuer une charge à un Titre foncier') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('View all charges on Titre foncier') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('Voir toutes les charges sur Titre foncier') }} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
                 <div class="mx-2" wire:loading.remove>
@@ -40,14 +40,14 @@
                     <a href="#" data-bs-toggle="modal" data-bs-target="#CreateChargeModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                        </svg> {{__('New')}}
+                        </svg> {{__('Nouveau')}}
                     </a>
 
                     <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center ">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
                         </svg>
-                        {{ __('Export') }}
+                        {{ __('Exporter') }}
                     </a>
                 </div>
                 <div class="text-center mx-2" wire:loading wire:target="export">
@@ -70,26 +70,26 @@
 
     <div class="row p-3">
         <div class="col-md-3">
-            <label for="search">{{ __('Search') }}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{ __('Search...') }}" class="form-control">
+            <label for="search">{{ __('Recherche') }}: </label>
+            <input wire:model="query" id="search" type="text" placeholder="{{ __('Recherche...') }}" class="form-control">
         </div>
         <div class="col-md-3">
-            <label for="orderBy">{{ __('Order By') }}: </label>
+            <label for="orderBy">{{ __('Trier par') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="created_at">{{ __('Created Date') }}</option>
+                <option value="created_at">{{ __('Datr Creation') }}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{ __('Order direction') }}: </label>
+            <label for="direction">{{ __('Direction du trie') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{ __('Ascending') }}</option>
-                <option value="desc">{{ __('Descending') }}</option>
+                <option value="asc">{{ __('Ascendante') }}</option>
+                <option value="desc">{{ __('Descendante') }}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{ __('Items Per Page') }}: </label>
+            <label for="perPage">{{ __('Element par page') }}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>

@@ -14,7 +14,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">{{__('Dashboard')}}</a></li>
+                        <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
                         <li class="breadcrumb-item">{{__('Operations')}}</li>
                         <li class="breadcrumb-item active" aria-current="page">{{__('Mutation Totale')}}</li>
                     </ol>
@@ -25,7 +25,7 @@
                     </svg>
                     {{__('Mutation Totale')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('View all Mutation Totale')}} </p>
+                <p class="mt-n1 mx-2">{{__('Voir toutes les Mutation Totale')}} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -33,7 +33,7 @@
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateMutationTotaleNormaleModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{__('New')}}
+                    </svg> {{__('Nouveau')}}
                 </a>
                 @endcan
                 @can('mutation_totale.create')
@@ -44,29 +44,29 @@
     </div>
     <div class="row py-3">
         <div class="col-md-3">
-            <label for="search">{{__('Search')}}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{__('Search...')}}" class="form-control">
+            <label for="search">{{__('Recherche')}}: </label>
+            <input wire:model="query" id="search" type="text" placeholder="{{__('Recherche...')}}" class="form-control">
             <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p>
         </div>
         <div class="col-md-3">
-            <label for="orderBy">{{__('Order By')}}: </label>
+            <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="region_id">{{__('Region')}}</option>
-                <option value="date_de_delivrance_du_TF">{{__('Delivery Date')}}</option>
-                <option value="created_at">{{__('Created Date')}}</option>
+                <option value="date_de_delivrance_du_TF">{{__('Date Delivrance')}}</option>
+                <option value="created_at">{{__('Date Creation')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Order direction')}}: </label>
+            <label for="direction">{{__('Trier par direction')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{__('Ascending')}}</option>
-                <option value="desc">{{__('Descending')}}</option>
+                <option value="asc">{{__('Ascendant')}}</option>
+                <option value="desc">{{__('Descendant')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Items Per Page')}}: </label>
+            <label for="perPage">{{__('Elements par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -81,12 +81,12 @@
             <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('Mutation Totale Number')}}</th>
-                        <th class="border-bottom">{{__('Land title')}}</th>
-                        <th class="border-bottom">{{__('Location')}}</th>
-                        <th class="border-bottom">{{__('Status')}}</th>
+                        <th class="border-bottom">{{__('Numero de la mutation totale')}}</th>
+                        <th class="border-bottom">{{__('Titre foncier')}}</th>
+                        <th class="border-bottom">{{__('Localisationtion')}}</th>
+                        <th class="border-bottom">{{__('Statut')}}</th>
                         <th class="border-bottom">{{__('Type Operation')}}</th>
-                        <th class="border-bottom">{{__('Date created')}}</th>
+                        <th class="border-bottom">{{__('Date creation')}}</th>
                         @canany('mutation_totale.update','mutation_totale.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
                         @endcanany
@@ -110,7 +110,7 @@
                                     <span class="fw-normal badge super-badge p-2 bg-{{$mutation_totale->titreFoncier->EtatTFStyle}} round">{{$mutation_totale->titreFoncier->etat_TF}}</span>
                                 </span>
                             </div>
-                            {{__('Owners')}}
+                            {{__('Proprietaire')}}
                             <x-elements.user :options="$mutation_totale->titreFoncier->users->take(5)" />
                         </td>
                         <td>
@@ -118,10 +118,10 @@
                                 {{__('Region')}} : <span class="fw-bolder mx-2"> {{$mutation_totale->titreFoncier->region->region_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Division')}} : <span class="fw-bolder mx-2"> {{$mutation_totale->titreFoncier->division->division_name}} </span>
+                                {{__('Sous region')}} : <span class="fw-bolder mx-2"> {{$mutation_totale->titreFoncier->division->division_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Sub Divi')}} : <span class="fw-bolder mx-2"> {{$mutation_totale->titreFoncier->subDivision->sub_division_name}} </span>
+                                {{__('Arrondissement')}} : <span class="fw-bolder mx-2"> {{$mutation_totale->titreFoncier->subDivision->sub_division_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
                                 {{__('Lieu Dit')}} : <span class="fw-bolder mx-2"> {{$mutation_totale->titreFoncier->lieu_dit}} </span>
@@ -175,8 +175,8 @@
                     <tr>
                         <td colspan="9" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps nothing here')}} &#128540;</h4>
-                                <p>{{__('No Record Found..!')}}</p>
+                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                                <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
                     </tr>
@@ -185,7 +185,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Showing')}} {{$perPage > $mutation_totales_count ? $mutation_totales_count : $perPage  }} {{__('items of')}} {{$mutation_totales_count}}
+                    {{__('Affichage')}} {{$perPage > $mutation_totales_count ? $mutation_totales_count : $perPage  }} {{__('element de')}} {{$mutation_totales_count}}
                 </div>
                 {{ $mutation_totales->links() }}
             </div>
