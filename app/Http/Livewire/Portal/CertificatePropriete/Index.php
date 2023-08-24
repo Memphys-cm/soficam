@@ -11,6 +11,8 @@ use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use App\Models\CertificatePropriete;
 use App\Http\Livewire\Traits\WithDataTables;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Str;
 
 
 class Index extends Component
@@ -149,6 +151,23 @@ class Index extends Component
             $this->certificatepropriete->delete();
             session()->flash('message', 'CertificatePropriete deleted successfully');
         }
+    }
+    public function  printPdf($id)
+    {
+        $this->certificatepropriete = CertificatePropriete::findOrFail($id);
+        $data = [
+            'certificatepropriete' => $this->certificatepropriete,
+            'titrefoncier' => $this->titre_fonciers,
+            // Autres données que vous souhaitez afficher dans la vue
+        ];
+
+        $pdf = Pdf::loadView('livewire.portal.certificate-propriete.print',$data)->setPaper('a4', 'portrait');
+
+
+        return response()->streamDownload(
+            fn () => print($pdf->output()),
+            __('Report-') . Str::random('10') . ".pdf"
+        );
     }
 
     public function render()

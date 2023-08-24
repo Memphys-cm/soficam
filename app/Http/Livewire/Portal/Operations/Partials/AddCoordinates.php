@@ -40,6 +40,7 @@ class AddCoordinates extends Component
     {
         $operation = Operation::findOrFail($operation_id);
         $this->operation = $operation;
+        $this->operation_type = $operation_type;
         $this->parcels = $operation->titreFoncier->parcels->where('type_de_venter', $operation_type);
         $this->geometres = MembreDuCabinet::geometre()->select('id', 'first_name', 'last_name')->get();
     }
@@ -54,7 +55,8 @@ class AddCoordinates extends Component
             'parcel_id' => 'required',
             'geometre_id' => 'required',
             'numero_ccp' =>' required',
-            'numero_reference_plan' => 'required'
+            'numero_reference_plan' => 'required',
+            'attachments' => 'required|max:150'
         ]);
 
         if(!empty($this->operation)){
@@ -78,17 +80,24 @@ class AddCoordinates extends Component
                     'lot_geometre_cabinet_id' => $geometre->cabinet->id,
                     'date_renseignement_coordonnees' => now()
                 ]);
+
+                $this->operation->parcels()->sync($lot->id);
             }
     
-            if (!empty($this->attachements)) {
-                $this->operation->addMedia($this->attachements->getRealPath())
-                    ->usingName($this->numero_reference_plan)
-                    ->toMediaCollection($this->operation_type);
-                    
+            if (!empty($this->attachments)) {
+                foreach ($this->attachments as $attachment) {
+                    $this->operation->addMedia($attachment->getRealPath())
+                        ->usingName('Plan+CCP')
+                        ->toMediaCollection($this->operation_type);
+                }
+                
                 $this->operation->update([ 'statut_geometre' => 'completed']);
             }
     
             $this->clearFields();
+            
+            $this->emitUp('flow_updated');
+
             $this->refresh(__('Operation successfully Created'), 'CreateAddCoordinatesModal');
         }
     }

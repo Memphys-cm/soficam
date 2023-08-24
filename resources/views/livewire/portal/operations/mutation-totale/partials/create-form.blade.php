@@ -8,6 +8,7 @@
                         <p class="px-1"> {{ __('Creer')}}{{__(' une mutation totale du titre foncier')}} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
+                        <input type='hidden' wire:model="operation_type" value="mutation_totale_normale">
                         <div class='form-group  mb-2'>
                             <label for="titre_foncier_id">{{ __('Numero du titre foncier') }}</label>
                             <x-input.land_title-select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers" />

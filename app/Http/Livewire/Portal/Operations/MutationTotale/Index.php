@@ -21,11 +21,13 @@ class Index extends Component
     public ?Collection $titre_foncier_users; 
     public $certificates_propriete_id, $certificates_proprietes = [], $users = [], $titre_fonciers = [], $notaires = [], $geomtres = [];
     public $titre_foncier_id, $numero_titre_foncier, $superficie_du_TF_mere;
-    public $requestor_id, $region, $division, $sub_division, $lieu_dit, $operation;
+    public $requestor_id, $region, $division, $sub_division, $lieu_dit, $operation, $operation_type;
     public $parcel_id, $parcels = [], $etat_cession_id, $etat_cessions = [];
 
 
     public $commentaires;
+    
+    public $listeners = ['flow_updated'=>'render'];
    
     public function mount()
     {
@@ -85,7 +87,7 @@ class Index extends Component
         Operation::create([
             'numero_operation' => Str::upper(Str::random(6)) . "" . now()->format('msu'),
             'titre_foncier_id' => $this->titre_foncier_id,
-            'type_operation' => 'mutation_totale_normale',
+            'type_operation' => $this->operation_type,
             'requestor_id' => $this->requestor_id,
             'certificate_prioprietes_id' => $this->certificates_propriete_id,
             'etat_cession_id' => $this->etat_cession_id,

@@ -2,6 +2,7 @@
     <x-alert />
     @include('livewire.portal.certificate-propriete.create')
     @include('livewire.portal.certificate-propriete.update')
+   
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -146,8 +147,9 @@
                         <td>{{ $certificatepropriete->created_at }}</td>
                         @canany(['certificate_propriete.edit','certificate_propriete.delete'])
                         <td>
+                            <button wire:click='printPdf({{$certificatepropriete->id}})' class="btn btn-primary">PDF</button>
                             @can('certificate_propriete.update')
-                            <a href='#' wire:click.prevent="initData({{ $certificatepropriete -> id }})" data-bs-toggle="modal" data-bs-target="#UpdateCertificateProprieteModal">
+                            <a href='#' wire:click.prevent="initData({{ $certificatepropriete ->id }})" data-bs-toggle="modal" data-bs-target="#UpdateCertificateProprieteModal">
                                 <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
                                     </path>
