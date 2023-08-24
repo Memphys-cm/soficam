@@ -29,7 +29,7 @@
             <div class="d-flex justify-content-between mb-2">
 
                 @can('titre_foncier.create')
-                <a href="#" data-bs-toggle="modal" data-bs-target="#Createimma_directeModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateImmaDirecteModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{__('New')}}
@@ -97,7 +97,8 @@
                     <tr>
                         <th class="border-bottom">{{__('Numero Reference')}}</th>
                         <th class="border-bottom">{{__('Date de Delivrance')}}</th>
-                        <th class="border-bottom">{{__('Requerants')}}</th>
+                        {{-- <th class="border-bottom">{{__('Requerants Principales')}}</th> --}}
+                        <th class="border-bottom">{{__('Requerants Secondaires')}}</th>
                         <th class="border-bottom">{{__('Localisation')}}</th>
                         <th class="border-bottom">{{__('Status')}}</th>
                         <th class="border-bottom">{{__('Date created')}}</th>
@@ -115,22 +116,30 @@
                         <td>
                             <span class="fw-normal">{{$imma_directe->date_delivrance}}</span>
                         </td>
-
-                        <td>
+                        {{-- <td>
+                            <a href="#" class="d-flex align-items-center py-1">
+                                <div class="avatar  d-flex align-items-center justify-content-center fw-bold  rounded bg-primary me-2"><span class="text-white"></span></div>
+                                <div class="d-block">
+                                    <span class="fw-bolder ">{{ucwords($imma_directe->user->name)}}</span>
+                                    <div class="small text-gray">
+                                        <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
+                                        </svg> {{$imma_directe->user->email}}
+                                        <svg class="icon icon-xxs me-1 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                        </svg> {{$imma_directe->user->primary_phone_number}} | {{$imma_directe->user->secondary_phone_number}}
+                                    </div>
+                                </div>
+                            </a>
+                        </td> --}}
+                        <td>   
                             <x-elements.user :options="$imma_directe->users->take(5)" /> 
                         </td>
                         <td>
                             <span class="fw-normal"> {{$imma_directe->localisation}} </span>
                         </td>
                         <td>
-                            @foreach(collect(json_decode($imma_directe->coordonnees,true)) as $key => $value)
-                            <div class="d-flex align-items-centerpy-1">
-                                <span class="fw-bolder mx-2"> {{ $key }} :</span> {{ $value}}
-                            </div>
-                            @endforeach
-                        </td>
-                        <td>
-                            <span class="fw-normal badge super-badge p-2 bg-{{$imma_directe->StatusStyle}} round">{{$imma_directe->Status}}</span>
+                            <span class="fw-normal badge super-badge p-2 bg-{{$imma_directe->StatusStyle}} round">{{$imma_directe->status}}</span>
                         </td>
                         <td>
                             <span class="fw-normal">{{$imma_directe->created_at->format('Y-m-d')}}</span>
