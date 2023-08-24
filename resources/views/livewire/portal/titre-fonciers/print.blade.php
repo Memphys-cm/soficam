@@ -1,3 +1,9 @@
+@php
+    use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
+    $qrCode = QrCode::size(100)->generate($titrefoncier->id);
+@endphp
+
 <div>
     <table style="margin-left:0px; margin-right:0px">
         <tr style="font-size:16px">
@@ -86,11 +92,7 @@
         <div></div>
         <div style="text-align: right">Mfou, le_________________</div>
         <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
+        <div style="padding: 12px"><img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code for Titre Foncier ID"></div>
     </div>
     <table>
         <tr>
