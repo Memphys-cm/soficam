@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('reference');
             $table->string('localisation');
-            $table->foreignId('titre_foncier_id')->index();
-            $table->foreignId('requestor_id')->index()->constrained('users');
-            $table->string('numero_bordereau_transmission');
+            $table->foreignId('titre_foncier_id')->index()->nullable();
+            $table->foreignId('user_id')->index()->constrained('users');
+            $table->string('numero_bordereau_transmission')->nullable;
             $table->string('status')->nullable();
             $table->string('StatusStyle')->nullable();
-            $table->date('date_delivrance');
+            $table->date('date_delivrance')->nullable();
             $table->json('comissions')->nullable();
             $table->timestamps();
         });
