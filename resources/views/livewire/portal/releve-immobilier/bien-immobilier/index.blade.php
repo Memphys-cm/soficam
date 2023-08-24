@@ -15,30 +15,30 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">{{__('Dashboard')}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Real Estates')}}</li>
+                        <li class="breadcrumb-item"><a href="/">{{__('Tableau de Bord')}}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Biens immobiliers')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
                     <svg class="icon me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    {{__('Real Estates')}}
+                    {{__('Biens immobiliers')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('View all Real Estates')}} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{__('Voir tous les biens immobiliers')}} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateEstateModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{__('New')}}
+                    </svg> {{__('Nouveau')}}
                 </a>
                 <div class="mx-2" wire:loading.remove>
                     <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center ">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
                         </svg>
-                        {{ __('Export') }}
+                        {{ __('Exporter') }}
                     </a>
                 </div>
             </div>
@@ -46,28 +46,28 @@
     </div>
     <div class="row p-3">
         <div class="col-md-3">
-            <label for="search">{{__('Search')}}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{__('Search...')}}" class="form-control">
+            <label for="search">{{__('Recherche')}}: </label>
+            <input wire:model="query" id="search" type="text" placeholder="{{__('Recherche...')}}" class="form-control">
             <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p>
         </div>
         <div class="col-md-3">
-            <label for="orderBy">{{__('Order By')}}: </label>
+            <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="action_type">{{__('Status Type')}}</option>
-                <option value="created_at">{{__('Created Date')}}</option>
+                <option value="action_type">{{__(' Type Statut')}}</option>
+                <option value="created_at">{{__('Date Creation ')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Order direction')}}: </label>
+            <label for="direction">{{__('Trier par direction')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{__('Ascending')}}</option>
-                <option value="desc">{{__('Descending')}}</option>
+                <option value="asc">{{__('Ascendante')}}</option>
+                <option value="desc">{{__('Descendante')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Items Per Page')}}: </label>
+            <label for="perPage">{{__('Element par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -82,14 +82,14 @@
             <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('Real Estate Number')}}</th>
-                        <th class="border-bottom">{{__('Requester')}}</th>
-                        <th class="border-bottom">{{__('Price')}}</th>
-                        <th class="border-bottom">{{__('Validity')}}</th>
-                        <th class="border-bottom">{{__('Real Estate Type')}}</th>
-                        <th class="border-bottom">{{__('Status')}}</th>
-                        <th class="border-bottom">{{__('Created By')}}</th>
-                        <th class="border-bottom">{{__('Date created')}}</th>
+                        <th class="border-bottom">{{__('Numéro de l\'immobilier')}}</th>
+                        <th class="border-bottom">{{__('Requerant')}}</th>
+                        <th class="border-bottom">{{__('Prix')}}</th>
+                        <th class="border-bottom">{{__('Validité')}}</th>
+                        <th class="border-bottom">{{__('Type de bien immobilier')}}</th>
+                        <th class="border-bottom">{{__('Statut')}}</th>
+                        <th class="border-bottom">{{__('Creer par')}}</th>
+                        <th class="border-bottom">{{__('Date creation')}}</th>
                         <th class="border-bottom">{{__('Action')}}</th>
                     </tr>
                 </thead>
@@ -151,8 +151,8 @@
                     <tr>
                         <td colspan="9" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps nothing here')}} &#128540;</h4>
-                                <p>{{__('No Record Found..!')}}</p>
+                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                                <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
                     </tr>
@@ -161,7 +161,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Showing')}} {{$perPage > $real_estates_count ? $real_estates_count : $perPage  }} {{__('items of')}} {{$real_estates_count}}
+                    {{__('Afficher ')}} {{$perPage > $real_estates_count ? $real_estates_count : $perPage  }} {{__('element de')}} {{$real_estates_count}}
                 </div>
                 {{ $real_estates->links() }}
             </div>

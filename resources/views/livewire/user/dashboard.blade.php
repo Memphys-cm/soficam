@@ -35,7 +35,7 @@
             <div class='d-flex justify-content-between align-items-end mx-2'>
                 <h5 class="h5 text-gray-600">{{__("Dernière connexion")}}</h5>
                 <div>
-                    <a href='{{route("user.auditlogs")}}' class='btn btn-secondary'>{{__("View all")}}</a>
+                    <a href='{{route("user.auditlogs")}}' class='btn btn-secondary'>{{__("Tout Voir")}}</a>
                 </div>
             </div>
             <div class="card mt-2">

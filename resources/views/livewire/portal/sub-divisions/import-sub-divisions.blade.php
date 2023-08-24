@@ -4,28 +4,28 @@
              <div class="modal-body p-0">
                  <div class="p-3 p-lg-4">
                      <div class="mb-4 mt-md-0">
-                         <h1 class="mb-0 h4">{{__('Import :name',['name'=>__('Companies')])}}</h1>
-                         <p>{{__('Import new :name from excel file',['name'=>__('Companies')])}} &#128522;</p>
+                         <h1 class="mb-0 h4">{{__('Importer :nom',['nom'=>__('Entreprise')])}}</h1>
+                         <p>{{__('Importer nouveau:nom à partir d\'un fichier Excel',['nom'=>__('Entreprise')])}} &#128522;</p>
                      </div>
-                     <x-form-items.form wire:submit="import" class="form-modal">
-                         <p>{{__('Steps you have to follow for importing new :name',['name'=>__('companies')])}}</p>
+                     <x-form-items.form wire:submit="Importer" class="form-modal">
+                         <p>{{__('Étapes à suivre pour importer de nouvelles données:nom',['nom'=>__('Entreprise')])}}</p>
                          <div class='mb-4'>
                              <ol>
-                                 <li>{{__('Download sample :name import template',['name'=>__('Company')])}} <a href="{{asset('templates/import_companies.xlsx')}}">{{__('Template')}}</a></li>
-                                 <li>{{__('Fill template with your :name data',['name'=>__('Companies')])}}</li>
-                                 <li>{{__('Upload the filled templated using below form and click on import button to import')}}</li>
+                                 <li>{{__('Télécharger un modèle d\'importation :nom',['nom'=>__('Entreprise')])}} <a href="{{asset('templates/import_companies.xlsx')}}">{{__('Template')}}</a></li>
+                                 <li>{{__('Remplir le modèle avec votre :nom donnée',['nom'=>__('Entreprises')])}}</li>
+                                 <li>{{__('Téléchargez le modèle rempli en utilisant le formulaire ci-dessous et cliquez sur le bouton d\'importation pour l\'importer.')}}</li>
                              </ol>
                          </div>
                          <div class="mb-4">
-                             <label for="company_file" class="form-label">{{__('Select file')}}</label>
+                             <label for="company_file" class="form-label">{{__('Sélectionner un fichier')}}</label>
                              <input wire:model="company_file" class="form-control @error('company_file') is-invalid @enderror" type="file" name="company_file" id="formFile" required="">
                              @error('company_file')
                              <div class="invalid-feedback">{{$message}}</div>
                              @enderror
                          </div>
                          <div class="d-flex justify-content-end">
-                             <button class="btn btn-gray-200 text-gray-600 ms-auto mx-3" type="button" data-bs-dismiss="modal">{{__('Close')}}</button>
-                             <button class=" btn btn-secondary" type="submit" wire:click.prevent="import" {{empty($company_file) ? "disabled" : '' }}>{{__('Import')}}</button>
+                             <button class="btn btn-gray-200 text-gray-600 ms-auto mx-3" type="button" data-bs-dismiss="modal">{{__('Fermer')}}</button>
+                             <button class=" btn btn-secondary" type="submit" wire:click.prevent="import" {{empty($company_file) ? "disabled" : '' }}>{{__('Importer')}}</button>
                          </div>
                      </x-form-items.form>
                  </div>

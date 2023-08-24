@@ -15,7 +15,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/">Acceuil</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ __('Immobilier') }}</li>
                     </ol>
                 </nav>
@@ -26,7 +26,7 @@
                     </svg>
                     {{ __('Immobilier') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('View all Immobilier  within the application') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('Voir tous les Immobilier dans l\'application') }} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -44,7 +44,7 @@
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
                         </svg>
-                        {{ __('Export') }}
+                        {{ __('Exporter') }}
                     </a>
                 </div>
                 <div class="text-center mx-2" wire:loading wire:target="export">
@@ -68,32 +68,32 @@
 
     <div class="row p-3">
         <div class="col-md-3">
-            <label for="search">{{ __('Search') }}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{ __('Search...') }}" class="form-control">
+            <label for="search">{{ __('Recherche') }}: </label>
+            <input wire:model="query" id="search" type="text" placeholder="{{ __('Recherche...') }}" class="form-control">
         </div>
         <div class="col-md-3">
-            <label for="orderBy">{{ __('Order By') }}: </label>
+            <label for="orderBy">{{ __('Trier par') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="type">{{ __('type') }}</option>
                 <option value="releve_number">{{ __('Releve N') }}</option>
-                <option value="requestor_id">{{ __('Requestor') }}</option>
-                <option value="price">{{ __('Price') }}</option>
-                <option value="validity">{{ __('Validity') }}</option>
-                <option value="status">{{ __('Status') }}</option>
-                <option value="created_at">{{ __('Created Date') }}</option>
+                <option value="requestor_id">{{ __('Requerant') }}</option>
+                <option value="price">{{ __('Prix') }}</option>
+                <option value="validity">{{ __('Validité') }}</option>
+                <option value="status">{{ __('Statut') }}</option>
+                <option value="created_at">{{ __('Date creation') }}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{ __('Order direction') }}: </label>
+            <label for="direction">{{ __('Direction du trie') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{ __('Ascending') }}</option>
-                <option value="desc">{{ __('Descending') }}</option>
+                <option value="asc">{{ __('Ascendante') }}</option>
+                <option value="desc">{{ __('Descendante') }}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{ __('Items Per Page') }}: </label>
+            <label for="perPage">{{ __('Elements par page') }}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -108,14 +108,14 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('Requestor') }}</th>
+                        <th class="border-bottom">{{ __('Requerant') }}</th>
                         <th class="border-bottom">{{ __('TYPE') }}</th>
-                        <th class="border-bottom">{{ __('CP NUMBER') }}</th>
-                        <th class="border-bottom">{{ __('PRICE') }}</th>
-                        <th class="border-bottom">{{ __('VALIDITY') }}</th>
-                        <th class="border-bottom">{{ __('CERTIFICATE TYPE') }}</th>
-                        <th class="border-bottom">{{ __('STATUS') }}</th>
-                        <th class="border-bottom">{{ __('Date created') }}</th>
+                        <th class="border-bottom">{{ __(' NUMERO CP') }}</th>
+                        <th class="border-bottom">{{ __('PRIX') }}</th>
+                        <th class="border-bottom">{{ __('VALIDITE') }}</th>
+                        <th class="border-bottom">{{ __(' TYPE CERTIFICATE') }}</th>
+                        <th class="border-bottom">{{ __('STATUT') }}</th>
+                        <th class="border-bottom">{{ __('Date creation') }}</th>
                         @canany(['immobilier.edit','immobilier.delete'])
                         <th class="border-bottom">{{ __('Action') }}</th>
                         @endcanany
@@ -166,8 +166,8 @@
                     <tr>
                         <td colspan="10" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{ __('Opps nothing here') }} &#128540;</h4>
-                                <p>{{ __('No Record Found..!') }}</p>
+                                <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
+                                <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                             </div>
                         </td>
                     </tr>
@@ -176,7 +176,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Showing')}} {{$perPage > $immobiliers_count ? $immobiliers_count : $perPage  }} {{__('items of')}} {{$immobiliers_count}}
+                    {{__('Montrer')}} {{$perPage > $immobiliers_count ? $immobiliers_count : $perPage  }} {{__('element de')}} {{$immobiliers_count}}
                 </div>
                 {{ $immobiliers->links()  }}
             </div>

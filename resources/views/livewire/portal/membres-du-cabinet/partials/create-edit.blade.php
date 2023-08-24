@@ -11,7 +11,7 @@
 
 
                         <div class='form-group row mb-3'>
-                            <div class=" col"><label for="first_name">{{ __('First Name*') }}</label>
+                            <div class=" col"><label for="first_name">{{ __('Prenom*') }}</label>
                                 <input type="text" wire:model="first_name" class="form-control  @error('first_name') is-invalid @enderror " value="{{ old('first_name') }}" id="first_name" autofocus="" required="">
                                 @error('first_name')
                                 <div class="invalid-feedback">
@@ -19,7 +19,7 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class=" col"><label for="last_name">{{ __('Last Name*') }}</label>
+                            <div class=" col"><label for="last_name">{{ __('Nom*') }}</label>
                                 <input type="text" wire:model="last_name" class="form-control  @error('last_name') is-invalid @enderror " value="{{ old('last_name') }}" id="last_name" autofocus="" required="">
                                 @error('last_name')
                                 <div class="invalid-feedback">
@@ -37,7 +37,7 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class=" col"><label for="post">{{ __('Post') }}</label>
+                            <div class=" col"><label for="post">{{ __('Poste') }}</label>
                                 <input type="text" wire:model="post" class="form-control  @error('post') is-invalid @enderror " value="{{ old('post') }}" id="post" autofocus="" required="">
                                 @error('post')
                                 <div class="invalid-feedback">
@@ -49,7 +49,7 @@
                         </div>
 
                         <div class='form-group row mb-3'>
-                            <div class=" col"><label for="address">{{ __('Address') }}</label>
+                            <div class=" col"><label for="address">{{ __('Adresse') }}</label>
                                 <input type="text" wire:model="address" class="form-control  @error('address') is-invalid @enderror " value="{{ old('address') }}" id="address" autofocus="" required="">
                                 @error('address')
                                 <div class="invalid-feedback">
@@ -58,7 +58,7 @@
                                 @enderror
                             </div>
 
-                            <div class=" col"><label for="phone_number">{{ __('Phone Number') }}</label>
+                            <div class=" col"><label for="phone_number">{{ __('Numero de telephone') }}</label>
                                 <input type="text" wire:model="phone_number" class="form-control  @error('phone_number') is-invalid @enderror " value="{{ old('phone_number') }}" id="phone_number" autofocus="" required="">
                                 @error('phone_number')
                                 <div class="invalid-feedback">
@@ -71,8 +71,8 @@
                             <div class="col">
                                 <label for="type_membre">{{__('Type Membre')}}</label>
                                 <select wire:model="type_membre" name="type_membre" class="form-select  @error('type_membre') is-invalid @enderror" required="">
-                                    <option value="">{{__('-- Select Type Membre --')}}</option>
-                                    <option value="geometre">{{__('Geomtre')}}</option>
+                                    <option value="">{{__('-- Selectionner Type Membre --')}}</option>
+                                    <option value="geometre">{{__('Geometre')}}</option>
                                     <option value="lotisseur">{{__('Lotisseur')}}</option>
                                     <option value="maeture">{{__('Maeture')}}</option>
                                     <option value="promoteur_immobiliere">{{__('Promoteur Immobiliere')}}</option>
@@ -88,8 +88,8 @@
                         </div>
                         <br>
                         <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" class="btn btn-primary btn-loading">{{ __('Update')}}</button>
+                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
+                            <button type="submit" class="btn btn-primary btn-loading">{{ __('Modifier')}}</button>
                         </div>
                     </x-form-items.form>
 
@@ -107,14 +107,14 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Update Notary') }}</h1>
-                        <p class="px-1"> {{ __('Updating Notary Information') }} &#128522;</p>
+                        <h1 class="mb-0 h4"> {{ __('Mettre à jour un notaire') }}</h1>
+                        <p class="px-1"> {{ __('Mise à jour des informations sur le notaire') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="update">
 
 
                         <div class='form-group row mb-3'>
-                            <div class=" col"><label for="first_name">{{ __('First Name*') }}</label>
+                            <div class=" col"><label for="first_name">{{ __('Prenom*') }}</label>
                                 <input type="text" wire:model="first_name" class="form-control  @error('first_name') is-invalid @enderror " value="{{ old('first_name') }}" id="first_name" autofocus="" required="">
                                 @error('first_name')
                                 <div class="invalid-feedback">
@@ -122,7 +122,7 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class=" col"><label for="last_name">{{ __('Last Name*') }}</label>
+                            <div class=" col"><label for="last_name">{{ __('Nom*') }}</label>
                                 <input type="text" wire:model="last_name" class="form-control  @error('last_name') is-invalid @enderror " value="{{ old('last_name') }}" id="last_name" autofocus="" required="">
                                 @error('last_name')
                                 <div class="invalid-feedback">
@@ -140,7 +140,7 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class=" col"><label for="post">{{ __('Post') }}</label>
+                            <div class=" col"><label for="post">{{ __('Poste') }}</label>
                                 <input type="text" wire:model="post" class="form-control  @error('post') is-invalid @enderror " value="{{ old('post') }}" id="post" autofocus="" required="">
                                 @error('post')
                                 <div class="invalid-feedback">
@@ -152,7 +152,7 @@
                         </div>
 
                         <div class='form-group row mb-3'>
-                            <div class=" col"><label for="address">{{ __('Address') }}</label>
+                            <div class=" col"><label for="address">{{ __('Adresse') }}</label>
                                 <input type="text" wire:model="address" class="form-control  @error('address') is-invalid @enderror " value="{{ old('address') }}" id="address" autofocus="" required="">
                                 @error('address')
                                 <div class="invalid-feedback">
@@ -161,7 +161,7 @@
                                 @enderror
                             </div>
 
-                            <div class=" col"><label for="phone_number">{{ __('Phone Number') }}</label>
+                            <div class=" col"><label for="phone_number">{{ __('Numero de telephone') }}</label>
                                 <input type="text" wire:model="phone_number" class="form-control  @error('phone_number') is-invalid @enderror " value="{{ old('phone_number') }}" id="phone_number" autofocus="" required="">
                                 @error('phone_number')
                                 <div class="invalid-feedback">
@@ -174,8 +174,8 @@
                             <div class="col">
                                 <label for="type_membre">{{__('Type Membre')}}</label>
                                 <select wire:model="type_membre" name="type_membre" class="form-select  @error('type_membre') is-invalid @enderror" required="">
-                                    <option value="">{{__('-- Select --')}}</option>
-                                    <option value="geomtre">{{__('Geomtre')}}</option>
+                                    <option value="">{{__('-- Selectionner --')}}</option>
+                                    <option value="geomtre">{{__('Geometre')}}</option>
                                     <option value="notaire">{{__('Notaire')}}</option>
                                 </select>
                                 @error('type_membre')
@@ -190,7 +190,7 @@
 
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" class="btn btn-primary btn-loading">{{ __('Update')}}</button>
+                            <button type="submit" class="btn btn-primary btn-loading">{{ __('Mettre à jour')}}</button>
                         </div>
                     </x-form-items.form>
 

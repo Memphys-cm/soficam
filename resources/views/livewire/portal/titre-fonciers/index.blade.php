@@ -206,7 +206,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Showing')}} {{$perPage > $titrefonciers_count ? $titrefonciers_count : $perPage  }} {{__('items of')}} {{$titrefonciers_count}}
+                    {{__('Montrer')}} {{$perPage > $titrefonciers_count ? $titrefonciers_count : $perPage  }} {{__('element de')}} {{$titrefonciers_count}}
                 </div>
                 {{ $titrefonciers->links() }}
             </div>

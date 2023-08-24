@@ -12,8 +12,8 @@
                  <div class="modal-body p-0">
                      <div class="p-4 p-lg-4">
                          <div class="mb-4 mt-md-0">
-                             <h1 class="mb-0 h4"> {{ __('Add Coordinates on Plot')}}</h1>
-                             <p class="px-1"> {{ __('Add coordinates on the given plot')}} </p>
+                             <h1 class="mb-0 h4"> {{ __('Ajouter des coordonnées sur le tracé')}}</h1>
+                             <p class="px-1"> {{ __('Ajouter des coordonnées sur le graphe donné')}} </p>
                          </div>
                          <x-form-items.form wire:submit="store">
                              <div class="form-group mb-2">
@@ -36,9 +36,9 @@
                              </div>
                              <div class='form-group row mb-2'>
                                  <div class='col'>
-                                     <label class="px-2" for="parcel_id">{{__('Lot Concerner')}}</label>
+                                     <label class="px-2" for="parcel_id">{{__('Préoccupation pour le lot')}}</label>
                                      <select wire:model="parcel_id" class='form-control'>
-                                         <option value=''>{{__('-- Select --')}}</option>
+                                         <option value=''>{{__('-- Selectionner --')}}</option>
                                          @foreach($parcels as $parcel)
                                          <option value='{{$parcel->id}}'> {{__('Lot '). $parcel->numero_lot}}</option>
                                          @endforeach
@@ -59,7 +59,7 @@
                              </div>
                              <div class='form-group row mb-2'>
                                  <div class='col'>
-                                     <label class="px-2" for="plan">{{__('Add Files')}}</label>
+                                     <label class="px-2" for="plan">{{__('Ajouter fichiers')}}</label>
                                      <div class="input-group">
                                          <input type="file" class="form-control" wire:model="attachments" multiple>
                                      </div>
@@ -94,7 +94,7 @@
                                  <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                  </svg>
-                                 {{__('Add Coordinate')}}
+                                 {{__('Ajouter coordonnée')}}
                              </button>
                              <div class="d-flex justify-content-end">
                                  <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>

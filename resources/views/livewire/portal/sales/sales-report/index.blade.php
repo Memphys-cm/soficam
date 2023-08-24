@@ -16,8 +16,8 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">{{ __('Dashboard') }}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Sales Report') }}</li>
+                        <li class="breadcrumb-item"><a href="/">{{ __('Tableau de bord') }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Rapport sur les ventes') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -27,9 +27,9 @@
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                         </path>
                     </svg>
-                    {{ __('All Sales Report') }}
+                    {{ __('Rapport sur toutes les ventes') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('View All Sales Report') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('Voir tous les rapports de vente') }} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -42,7 +42,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
                         </svg>
-                        {{ __('Export') }}
+                        {{ __('Exporter') }}
                     </a>
                 </div>
                 <div class="text-center mx-2" wire:loading wire:target="export">
@@ -66,36 +66,36 @@
         <div class="row ">
             <div class="row">
                 <div class="col-md-3">
-                    <label for="search">{{ __('Search') }}: </label>
-                    <input wire:model="query" id="search" type="text" placeholder="{{ __('Search...') }}"
+                    <label for="search">{{ __('Recherche') }}: </label>
+                    <input wire:model="query" id="search" type="text" placeholder="{{ __('Recherche...') }}"
                         class="form-control">
                     {{-- <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p> --}}
                 </div>
 
                 <div class="col-md-3 my-2">
-                    <label for="sale_type">{{ __('Sales Type') }}: </label>
+                    <label for="sale_type">{{ __('Type de vente') }}: </label>
                     <select wire:model="sales_type" id="sales_type" class="form-select">
-                        <option value="">{{ __('All Sales Types') }}</option>
-                        <option value="certificate_propriete">{{ __('CertificatePropriete') }}</option>
+                        <option value="">{{ __('Tous les types de vente') }}</option>
+                        <option value="certificate_propriete">{{ __('Certificat de Proprieté') }}</option>
                         <option value="immobilier">{{ __('Immobilier') }}</option>
-                        <option value="total_sale">{{ __('Total Mutation Sale') }}</option>
-                        <option value="simple_sale">{{ __('Simple Sale') }}</option>
+                        <option value="total_sale">{{ __('Vente par mutations totale ') }}</option>
+                        <option value="simple_sale">{{ __('Vente simple') }}</option>
                        
                     </select>
                 </div>
                 <div class="col-md-3 my-2">
-                    <label for="payment_status">{{ __('Payment Status') }}: </label>
+                    <label for="payment_status">{{ __('État des paiements') }}: </label>
                     <select wire:model="payment_status" id="payment_status" class="form-select">
-                        <option value="">{{ __('All') }}</option>
-                        <option value="pending_payment">{{ __('Pending Payment') }}</option>
-                        <option value="partially_paid">{{ __('Partially Paid') }}</option>
-                        <option value="totally_paid">{{ __('Totally Paid') }}</option>
+                        <option value="">{{ __('Tout') }}</option>
+                        <option value="pending_payment">{{ __('Paiement en attente') }}</option>
+                        <option value="partially_paid">{{ __('Partiellement payé') }}</option>
+                        <option value="totally_paid">{{ __('Totalement payé') }}</option>
                     </select>
                 </div>
                 <div class="col-md-3 my-2">
-                    <label for="service">{{ __('Payment Method') }}: </label>
+                    <label for="service">{{ __('Mode de paiement') }}: </label>
                     <select wire:model="payment_method" id="payment_method" class="form-select">
-                        <option value="">{{ __('All') }}</option>
+                        <option value="">{{ __('Tout') }}</option>
                         <option value="mtn_mobile_money">{{ __('MTN Mobile Money') }}</option>
                         <option value="orange_money">{{ __('Orange Money') }}</option>
                         <option value="cash">{{ __('Cash') }}</option>
@@ -104,12 +104,12 @@
                     </select>
                 </div>
                 <div class="col-md-3 my-2">
-                    <label for="startdate">{{ __('Start Period') }}</label>
+                    <label for="startdate">{{ __('Période de démarrage') }}</label>
                     <input wire:model="startdate" name="startdate" type="date"
                         class="form-control  @error('inter_start') is-invalid @enderror" required="">
                 </div>
                 <div class='col-md-3 my-2'>
-                    <label for="enddate">{{ __('End Date') }}</label>
+                    <label for="enddate">{{ __('Date de fin') }}</label>
                     <input wire:model="enddate" name="enddate" type="date"
                         class="form-control @error('enddate') is-invalid @enderror" required="">
                 </div>
@@ -134,24 +134,24 @@
         </div>
         <div class="row ">
             <div class="col">
-                <label for="orderBy">{{ __('Sort By') }}: </label>
+                <label for="orderBy">{{ __('Trier par') }}: </label>
                 <select wire:model="orderBy" id="orderBy" class="form-select">
-                    <option value="sales_type">{{ __('Sales type') }}</option>
-                    <option value="user_id">{{ __('User') }}</option>
-                    <option value="payment_method">{{ __('Payment Method') }}</option>
-                    <option value="payment_status">{{ __('Payment Status') }}</option>
-                    <option value="created_at" selected>{{ __('Created Date') }}</option>
+                    <option value="sales_type">{{ __('Type de vente') }}</option>
+                    <option value="user_id">{{ __('Utilisateur') }}</option>
+                    <option value="payment_method">{{ __('Mode de paiement') }}</option>
+                    <option value="payment_status">{{ __('Statut des paiements') }}</option>
+                    <option value="created_at" selected>{{ __('Date de création') }}</option>
                 </select>
             </div>
             <div class="col">
-                <label for="direction">{{ __('Order direction') }}: </label>
+                <label for="direction">{{ __('Direction de trie') }}: </label>
                 <select wire:model="orderAsc" id="direction" class="form-select">
-                    <option value="asc">{{ __('Ascending') }}</option>
-                    <option value="desc">{{ __('Descending') }}</option>
+                    <option value="asc">{{ __('Ascendante') }}</option>
+                    <option value="desc">{{ __('Descendante') }}</option>
                 </select>
             </div>
             <div class="col">
-                <label for="perPage">{{ __('Items Per Page') }}: </label>
+                <label for="perPage">{{ __('Éléments par page') }}: </label>
                 <select wire:model="perPage" id="perPage" class="form-select">
                     <option value="5">5</option>
                     <option value="10">10</option>
@@ -161,7 +161,7 @@
                 </select>
             </div>
             <div class="col">
-                <label for="notary">{{ __('NOTARY') }}</label>
+                <label for="notary">{{ __('NOTAIRE') }}</label>
                 <x-input.select wire:model="notary" prettyname="notary" :options="$notaries->pluck('first_name', 'id')->toArray()" selected="('notary')" />
                 @error('notary')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -174,12 +174,12 @@
             <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('User NAME') }}</th>
+                        <th class="border-bottom">{{ __('Nom de l\'utilisateur') }}</th>
                         <th class="border-bottom">{{ __('Code') }}</th>
-                        <th class="border-bottom">{{ __('Sale Amount') }}</th>
-                        <th class="border-bottom">{{ __('Payment Method') }}</th>
-                        <th class="border-bottom">{{ __('Payment Status') }}</th>
-                        <th class="border-bottom">{{ __('Date created') }}</th>
+                        <th class="border-bottom">{{ __('Montant de la vente') }}</th>
+                        <th class="border-bottom">{{ __('Mode de paiement') }}</th>
+                        <th class="border-bottom">{{ __('Statut du paiement') }}</th>
+                        <th class="border-bottom">{{ __('Date de création') }}</th>
 
                     </tr>
                 </thead>
@@ -214,8 +214,8 @@
                         <tr>
                             <td colspan="9" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
-                                    <h4 class="fs-4 fw-bold">{{ __('Opps nothing here') }} &#128540;</h4>
-                                    <p>{{ __('No Record Found..!') }}</p>
+                                    <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
+                                    <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                                 </div>
                             </td>
                         </tr>
@@ -226,8 +226,8 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{ __('Showing') }} {{ $perPage > $allsales_count ? $allsales_count : $perPage }}
-                    {{ __('items of') }} {{ $allsales_count }}
+                    {{ __('Montrer') }} {{ $perPage > $allsales_count ? $allsales_count : $perPage }}
+                    {{ __('éléments de') }} {{ $allsales_count }}
                 </div>
                 {{ $allsales->links() }}
             </div>

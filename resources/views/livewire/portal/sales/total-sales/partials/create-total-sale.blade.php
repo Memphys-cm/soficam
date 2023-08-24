@@ -4,13 +4,13 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Total Land Sale') }}</h1>
-                        <p class="px-1"> {{ __('selling a total Land') }} &#128522;</p>
+                        <h1 class="mb-0 h4"> {{ __('Total des ventes de terrains') }}</h1>
+                        <p class="px-1"> {{ __('Vente d\'une terre entière') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="store">
 
                         <div class='form-group row mb-2'>
-                            <div class=" col"><label for="titre_foncier_id">{{ __('Land Title Number') }}</label>
+                            <div class=" col"><label for="titre_foncier_id">{{ __('Numéro du titre foncier') }}</label>
                                 <x-input.select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers->pluck('numero_titre_foncier', 'id')->toArray()"  />
                                 @error('titre_foncier_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -20,7 +20,7 @@
                             <div class="col-md-6 ">
                                 <label for="code">{{ __('Notaire') }}</label>
                                 <select wire:model="notaire_id" class="form-control @error('notaire_id') is-invalid @enderror">
-                                    <option value=''>{{__('-- Select --')}}</option>
+                                    <option value=''>{{__('-- Selectionner --')}}</option>
                                     @foreach($notaires as $notaire)
                                     <option wire:key="{{ $notaire->id }}" value='{{$notaire->id}}'> {{!empty($notaire->cabinet) ? $notaire->cabinet->nom_cabinet : '' }} - {{ucfirst($notaire->first_name)}} {{ucfirst($notaire->last_name)}} </option>
                                     @endforeach
@@ -39,7 +39,7 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class=" col"><label for="division">{{ __('Division') }}</label>
+                            <div class=" col"><label for="division">{{ __('Sous Region') }}</label>
                                 <input type="text" wire:model="division" class="form-control  @error('division') is-invalid @enderror " value="{{ old('division') }}" placeholder="" id="division" autofocus="" required="" disabled>
                                 @error('division')
                                 <div class="invalid-feedback">
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <div class='form-group row mb-2'>
-                            <div class=" col"><label for="sub_division">{{ __('SubDivision') }}</label>
+                            <div class=" col"><label for="sub_division">{{ __('Arrondissement') }}</label>
                                 <input type="text" wire:model="sub_division" class="form-control  @error('sub_division') is-invalid @enderror " value="{{ old('sub_division') }}" placeholder="" id="sub_division" autofocus="" required="" disabled>
                                 @error('sub_division')
                                 <div class="invalid-feedback">
@@ -68,7 +68,7 @@
                         </div>
                         <div class='form-group row mb-2'>
                             <div class='col'>
-                                <label class="px-2" for="user_ids">{{__('Propriators')}}</label>
+                                <label class="px-2" for="user_ids">{{__('Proprietaire')}}</label>
                                 <x-input.selectmultipleusers wire:model="user_ids" prettyname="user_ids" :options="$users" selected="('user_ids')"  multiple="multiple"/>
                                 @error('user_ids')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -77,7 +77,7 @@
                         </div>
                         <div class='form-group row mb-3'>
                             <div class="col">
-                                <label for="type_de_versement">{{ __('PAYMENT TYPE*') }}</label>
+                                <label for="type_de_versement">{{ __('TYPE DE PAIEMENT*') }}</label>
                                 <select wire:model="type_de_versement"
                                     class="form-select @error('type_de_versement') is-invalid @enderror"
                                     id="type_de_versement" required="">
@@ -95,7 +95,7 @@
                                 @enderror
                             </div>
                             <div class=" col">
-                                <label for="price_per_m²">{{ __('Price(m²)*') }}</label>
+                                <label for="price_per_m²">{{ __('Prix(m²)*') }}</label>
                                 <input type="number" wire:model="price_per_m²" class="form-control  @error('price_per_m²') is-invalid @enderror " value="{{ old('price_per_m²') }}" placeholder="0" id="price_per_m²" autofocus="" required="">
                                 @error('price_per_m²')
                                 <div class="invalid-feedback">
@@ -107,7 +107,7 @@
 
                         <div class='form-group row mb-3'>
                             <div class=" col">
-                                <label for="superficie_du_TF_mere">{{ __('AREA SOLD') }}</label>
+                                <label for="superficie_du_TF_mere">{{ __('ZONE VENDUE') }}</label>
                                 <input type="number" wire:model="superficie_du_TF_mere" class="form-control  @error('superficie_du_TF_mere') is-invalid @enderror " value="{{ old('superficie_du_TF_mere') }}" placeholder="0" id="superficie_du_TF_mere" autofocus="" required="" disabled>
                                 @error('superficie_du_TF_mere')
                                 <div class="invalid-feedback">
@@ -115,7 +115,7 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class=" col"><label for="sale_amount">{{ __('Sale Amount') }}
+                            <div class=" col"><label for="sale_amount">{{ __('Montant de la vente') }}
                                     {{ __('XAF') }}</label>
                                 <input type="number" wire:model="sale_amount" class="form-control  @error('sale_amount') is-invalid @enderror " value="{{ old('sale_amount') }}" placeholder="0" id="sale_amount" autofocus="" required="" disabled>
                                 @error('sale_amount')
@@ -165,13 +165,13 @@
                             <div class="col-auto">
                                 <div class="text-end">
                                     <div class="d-flex my-1">
-                                        <div class="me-2">{{ __('Price(m²)') }} :</div>
+                                        <div class="me-2">{{ __('Prx(m²)') }} :</div>
                                         <div class="fw-semi-bold"> {{ number_format(floatval($price_per_m²)) }}
                                             {{ __('XAF') }}
                                         </div>
                                     </div>
                                     <div class="d-flex my-1">
-                                        <div class=" me-2">{{ __('SURFACE FOR SALE') }} : </div>
+                                        <div class=" me-2">{{ __('SURFACE À VENDRE') }} : </div>
                                         <div class="fw-semi-bold">{{ number_format(floatval($superficie_du_TF_mere)) }}
                                             {{ __('m²') }}
                                         </div>
@@ -194,7 +194,7 @@
                                     </div>
                                 @endif
                                     <div class="d-flex border-top border-2 my-1 py-2">
-                                        <div class=" h5 me-2">{{ __('Total Amount') }}:</div>
+                                        <div class=" h5 me-2">{{ __('Montant total') }}:</div>
                                         <div class="fw-semi-bold   h5"> {{ number_format(floatval($sale_amount)) }}
                                             {{ __('XAF') }}
                                         </div>
@@ -206,7 +206,7 @@
                                     <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                     </svg>
-                                    <span class="d-none d-sm-inline-block ms-1">{{ __('Save') }}</span>
+                                    <span class="d-none d-sm-inline-block ms-1">{{ __('Enregistrement') }}</span>
                                 </button>
                             </div>
                         </div>

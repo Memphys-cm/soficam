@@ -137,12 +137,16 @@ Route::group(
             Route::get('/', App\Http\Livewire\Portal\ImmatriculationDirecte\Index::class)->name('portal.immatriculation_directes.index');
         });
 
-        Route::get('maps', function () {
+        // <!-- Route::get('maps', function () {
 
-            return view('livewire.portal.maps.index');
+        //     return view('livewire.portal.maps.index');
 
-            // Route::get('/', App\Http\Livewire\Portal\Maps\Index::class)->name('portal.maps.index');
-        })->name('portal.maps.index');
+        //     // Route::get('/', App\Http\Livewire\Portal\Maps\Index::class)->name('portal.maps.index');
+        // })->name('portal.maps.index'); -->
+
+
+
+        Route::get('/maps', [TestController::class, 'index'])->name('portal.maps.index');
 
         Route::prefix('releve_immobilier')->group(function () {
             Route::get('/bienImmobilier', App\Http\Livewire\Portal\ReleveImmobilier\BienImmobilier\Index::class)->name('portal.bien-mmobilier.index');
@@ -162,3 +166,4 @@ Route::group(
 
     }
 );
+Route::view('/print', 'livewire.portal.certificate-propriete.print');

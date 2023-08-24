@@ -53,7 +53,7 @@
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label class="px-2" for="division_id">{{__('Division')}}</label>
+                                <label class="px-2" for="division_id">{{__('Sous Region')}}</label>
                                 <select wire:model="division_id" name="division_id" class="form-select  @error('division_id') is-invalid @enderror" required="">
                                     @foreach($divisions as $division)
                                     <option value="{{$division->id}}">{{$division->division_name}}</option>
@@ -64,7 +64,7 @@
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label class="px-2" for="sub_division_id">{{__('SubDivision')}}</label>
+                                <label class="px-2" for="sub_division_id">{{__('Arrondissement')}}</label>
                                 <select wire:model="sub_division_id" name="sub_division_id" class="form-select  @error('sub_division_id') is-invalid @enderror" required="">
                                     @foreach($sub_divisions as $sub_division)
                                     <option value="{{$sub_division->id}}">{{$sub_division->sub_division_name}}</option>
@@ -91,9 +91,9 @@
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="zone">{{__('Duplicate Number')}}</label>
+                                <label for="zone">{{__('Numéro de duplicata')}}</label>
                                 <select wire:model="zone" name="zone" class="form-select  @error('zone') is-invalid @enderror" required="">
-                                    <option value="urbaine">{{__('Urban')}}</option>
+                                    <option value="urbaine">{{__('Urbain')}}</option>
                                     <option value="rurale">{{__('Rural')}}</option>
                                 </select>
                                 @error('zone')
@@ -196,10 +196,15 @@
                             </div>
                             <div class='col'>
                                 <label for="le_conservateur">{{__('Conservateur')}}</label>
-                                <input wire:model="le_conservateur" type="text" class="form-control  @error('le_conservateur') is-invalid @enderror" placeholder="{{__('Jane Doe')}}" required="" value="" name="le_conservateur">
+                                <x-input.select wire:model="conservateur_id" prettyname="conservateur_id" :options="$conservateurs->pluck('first_name', 'id')->toArray()"
+                                    selected="('conservateur_id')" />
+                                @error('conservateur_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                {{-- <input wire:model="le_conservateur" type="text" class="form-control  @error('le_conservateur') is-invalid @enderror" placeholder="{{__('Jane Doe')}}" required="" value="" name="le_conservateur">
                                 @error('le_conservateur')
                                 <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
+                                @enderror --}}
                             </div>
                         </div>
                         <div class='col'>

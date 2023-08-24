@@ -14,7 +14,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">{{__('Dashboard')}}</a></li>
+                        <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{__('Immatriculation Directes')}}</li>
                     </ol>
                 </nav>
@@ -29,10 +29,10 @@
             <div class="d-flex justify-content-between mb-2">
 
                 @can('titre_foncier.create')
-                <a href="#" data-bs-toggle="modal" data-bs-target="#Createimma_directeModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateImmaDirecteModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{__('New')}}
+                    </svg> {{__('Nouveau')}}
                 </a>
                 @endcan
                 @can('titre_foncier.import')
@@ -45,10 +45,10 @@
                     </button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#">Autre Action</a>
+                        <a class="dropdown-item" href="#">Autre chose ici</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
+                        <a class="dropdown-item" href="#">Lien séparé</a>
                     </div>
                 </div>
                 @endcan
@@ -58,29 +58,29 @@
     </div>
     <div class="row py-3">
         <div class="col-md-3">
-            <label for="search">{{__('Search')}}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{__('Search...')}}" class="form-control">
+            <label for="search">{{__('Recherche')}}: </label>
+            <input wire:model="query" id="search" type="text" placeholder="{{__('Recherche...')}}" class="form-control">
             <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p>
         </div>
         <div class="col-md-3">
-            <label for="orderBy">{{__('Order By')}}: </label>
+            <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="region_id">{{__('Region')}}</option>
-                <option value="date_de_delivrance_du_TF">{{__('Delivery Date')}}</option>
-                <option value="created_at">{{__('Created Date')}}</option>
+                <option value="date_de_delivrance_du_TF">{{__('Date de livraison')}}</option>
+                <option value="created_at">{{__('Date de création')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Order direction')}}: </label>
+            <label for="direction">{{__('Sens du tri')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{__('Ascending')}}</option>
-                <option value="desc">{{__('Descending')}}</option>
+                <option value="asc">{{__('Ascendant')}}</option>
+                <option value="desc">{{__('Descendant')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Items Per Page')}}: </label>
+            <label for="perPage">{{__('Éléments par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -97,10 +97,11 @@
                     <tr>
                         <th class="border-bottom">{{__('Numero Reference')}}</th>
                         <th class="border-bottom">{{__('Date de Delivrance')}}</th>
-                        <th class="border-bottom">{{__('Requerants')}}</th>
+                        {{-- <th class="border-bottom">{{__('Requerants Principales')}}</th> --}}
+                        <th class="border-bottom">{{__('Requerants Secondaires')}}</th>
                         <th class="border-bottom">{{__('Localisation')}}</th>
-                        <th class="border-bottom">{{__('Status')}}</th>
-                        <th class="border-bottom">{{__('Date created')}}</th>
+                        <th class="border-bottom">{{__('Statut')}}</th>
+                        <th class="border-bottom">{{__('Date de création')}}</th>
                         @canany('titre_foncier.update','titre_foncier.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
                         @endcanany
@@ -115,22 +116,30 @@
                         <td>
                             <span class="fw-normal">{{$imma_directe->date_delivrance}}</span>
                         </td>
-
-                        <td>
+                        {{-- <td>
+                            <a href="#" class="d-flex align-items-center py-1">
+                                <div class="avatar  d-flex align-items-center justify-content-center fw-bold  rounded bg-primary me-2"><span class="text-white"></span></div>
+                                <div class="d-block">
+                                    <span class="fw-bolder ">{{ucwords($imma_directe->user->name)}}</span>
+                                    <div class="small text-gray">
+                                        <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
+                                        </svg> {{$imma_directe->user->email}}
+                                        <svg class="icon icon-xxs me-1 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                        </svg> {{$imma_directe->user->primary_phone_number}} | {{$imma_directe->user->secondary_phone_number}}
+                                    </div>
+                                </div>
+                            </a>
+                        </td> --}}
+                        <td>   
                             <x-elements.user :options="$imma_directe->users->take(5)" /> 
                         </td>
                         <td>
                             <span class="fw-normal"> {{$imma_directe->localisation}} </span>
                         </td>
                         <td>
-                            @foreach(collect(json_decode($imma_directe->coordonnees,true)) as $key => $value)
-                            <div class="d-flex align-items-centerpy-1">
-                                <span class="fw-bolder mx-2"> {{ $key }} :</span> {{ $value}}
-                            </div>
-                            @endforeach
-                        </td>
-                        <td>
-                            <span class="fw-normal badge super-badge p-2 bg-{{$imma_directe->StatusStyle}} round">{{$imma_directe->Status}}</span>
+                            <span class="fw-normal badge super-badge p-2 bg-{{$imma_directe->StatusStyle}} round">{{$imma_directe->status}}</span>
                         </td>
                         <td>
                             <span class="fw-normal">{{$imma_directe->created_at->format('Y-m-d')}}</span>
@@ -165,8 +174,8 @@
                     <tr>
                         <td colspan="9" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps nothing here')}} &#128540;</h4>
-                                <p>{{__('No Record Found..!')}}</p>
+                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                                <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
                     </tr>
@@ -175,7 +184,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Showing')}} {{$perPage > $imma_directes_count ? $imma_directes_count : $perPage  }} {{__('items of')}} {{$imma_directes_count}}
+                    {{__('Affichage')}} {{$perPage > $imma_directes_count ? $imma_directes_count : $perPage  }} {{__('éléments de')}} {{$imma_directes_count}}
                 </div>
                 {{ $imma_directes->links() }}
             </div>
