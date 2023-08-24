@@ -7,10 +7,11 @@ use App\Models\Region;
 use Livewire\Component;
 use App\Models\Division;
 use App\Models\SubDivision;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use App\Models\TitreFoncier;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Livewire\Traits\WithDataTables;
-use Illuminate\Support\Arr;
 
 class Index extends Component
 {
@@ -52,17 +53,19 @@ class Index extends Component
     public $le_conservateur;
     public $numero_ccp;
     public $attachements;
+    public $conservateurs, $conservateur_id;
 
     public  $state = 0;
 
     public ?string $query = null;
 
-    public $coordinates = ['',''];
+    public $coordinates = ['', ''];
     public $coordonnees = [];
 
 
 
-    public function addCoordinate()  {
+    public function addCoordinate()
+    {
         $this->coordinates[] = [];
     }
 
@@ -78,7 +81,10 @@ class Index extends Component
             return $role->whereIn('name', ['user'])->get();
         }])->get();
 
+        $this->conservateurs = User::role('CONSERVATEUR')->get();
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
+        $this->numero_titre_foncier = $this->generateCodeTF();
+        //    $this->generateCodeTF();
     }
 
     public function updatedRegionID($region_id)
@@ -94,8 +100,56 @@ class Index extends Component
         }
     }
 
+    public function generateCodeTF()
+    {
+        $departements = Division::all();
+        // $codesUtilises = [];
+
+        // foreach ($departements as $departement) {
+        //     $nomsBlocs = explode(' ', $departement->division_name_fr);
+        //     $count = count($nomsBlocs);
+
+        //     if ($count === 1) {
+        //         $code = substr($nomsBlocs[0], 0, 2);
+        //     } elseif ($count > 1) {
+        //         $code = substr($nomsBlocs[0], 0, 1) . substr($nomsBlocs[$count - 1], 0, 1);
+        //     }
+        //     // dump(strtoupper($code));
+        //     $departement->update(['code' => strtoupper($code)]);
+        // }
+
+        $region = Region::findOrFail($this->region_id)->code;
+        $departement = Division::findOrFail($this->division_id)->code;
+        // $arrondissement = SubDivision::findOrFail($this->sub_division_id)->code;
+
+        $numero = $region . "/" . $departement . "/" . 'A' . "/" . $this->numero_du_duplicata . "/" . $this->superficie_du_TF_mere . "/" . $this->numero_folio;
+        //  dd($numero);   
+        return ($numero);
+    }
+
+    function genererNationalCodeUnique()
+    {
+        $dernierEnregistrement = TitreFoncier::orderBy('id', 'desc')->first();
+
+        if ($dernierEnregistrement) {
+            $dernierNumero = intval(substr($dernierEnregistrement->code, 2)); // Extrait le numéro sans "TF" et convertit en nombre
+            $nouveauNumero = $dernierNumero + 1;
+        } else {
+            $nouveauNumero = 1;
+        }
+
+        // Formate le numéro avec des zéros à gauche (total 7 caractères)
+        $numeroFormate = str_pad($nouveauNumero, 7, '0', STR_PAD_LEFT);
+
+        // Concatène "TF" et le numéro formate pour obtenir le code unique
+        $codeUnique = "TF" . $numeroFormate;
+
+        return $codeUnique;
+    }
+
     public function store()
     {
+        $this->generateCodeTF();
         if (!Gate::allows('titre_foncier.create')) {
             return abort(401);
         }
@@ -133,7 +187,7 @@ class Index extends Component
         // dd($this->coordonnees);
 
         $coords = [];
-        collect($this->coordonnees)->map(function($value, $key){
+        collect($this->coordonnees)->map(function ($value, $key) {
             return ['long' => explode(',', $value, 1), 'lat' => explode(',', $value, 2)];
         });
         // dd(array_flatten($coords));
@@ -142,6 +196,7 @@ class Index extends Component
 
         $titrefoncier = TitreFoncier::create([
             'numero_titre_foncier' => $this->numero_titre_foncier,
+            'national_code' => $this->genererNationalCodeUnique(),
             'region_id' => $this->region_id,
             'division_id' => $this->division_id,
             'sub_division_id' => $this->sub_division_id,
@@ -166,16 +221,16 @@ class Index extends Component
             'limit_ouest' => $this->limit_ouest,
             'recorded_by' => auth()->user()->name,
             'nom_et_prenoms_de_largent_traitant' => $this->nom_et_prenoms_de_largent_traitant,
-            'le_conservateur' => $this->le_conservateur,
+            'conservateur_id' => $this->conservateur_id,
             'numero_ccp' => $this->numero_ccp,
         ]);
 
         $titrefoncier->users()->sync($this->user_ids);
 
-        if(!empty($this->attachements)){
+        if (!empty($this->attachements)) {
             $titrefoncier->addMedia($this->attachements->getRealPath())
-            ->usingName($titrefoncier->numero_titre_foncier)
-            ->toMediaCollection('titrefonciers');
+                ->usingName($titrefoncier->numero_titre_foncier)
+                ->toMediaCollection('titrefonciers');
         }
 
         $this->clearFields();
@@ -216,8 +271,8 @@ class Index extends Component
         $this->le_conservateur =  $titrefoncier->le_conservateur;
         $this->numero_ccp =  $titrefoncier->numero_ccp;
 
-         $this->coordinates = array_values(json_decode($titrefoncier->coordonnees, true));
-         $this->coordonnees = array_values(json_decode($titrefoncier->coordonnees, true));
+        $this->coordinates = array_values(json_decode($titrefoncier->coordonnees, true));
+        $this->coordonnees = array_values(json_decode($titrefoncier->coordonnees, true));
 
 
         $this->user_ids = $titrefoncier->users->pluck('id');
@@ -255,7 +310,7 @@ class Index extends Component
                 'limit_sud' => 'required',
                 'limit_est' => 'required',
                 'limit_ouest' => 'required',
-               
+
             ]
         );
 

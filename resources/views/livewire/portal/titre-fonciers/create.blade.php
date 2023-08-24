@@ -196,10 +196,15 @@
                             </div>
                             <div class='col'>
                                 <label for="le_conservateur">{{__('Conservateur')}}</label>
-                                <input wire:model="le_conservateur" type="text" class="form-control  @error('le_conservateur') is-invalid @enderror" placeholder="{{__('Jane Doe')}}" required="" value="" name="le_conservateur">
+                                <x-input.select wire:model="conservateur_id" prettyname="conservateur_id" :options="$conservateurs->pluck('first_name', 'id')->toArray()"
+                                    selected="('conservateur_id')" />
+                                @error('conservateur_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                {{-- <input wire:model="le_conservateur" type="text" class="form-control  @error('le_conservateur') is-invalid @enderror" placeholder="{{__('Jane Doe')}}" required="" value="" name="le_conservateur">
                                 @error('le_conservateur')
                                 <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
+                                @enderror --}}
                             </div>
                         </div>
                         <div class='col'>

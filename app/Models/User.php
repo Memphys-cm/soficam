@@ -14,6 +14,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -113,6 +114,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(TitreFoncier::class,'titrefoncier_user','user_id','titre_foncier_id')->withTimestamps();
     }
+
+    public function imma_directe_main() : BelongsToMany
+    {
+        return $this->belongsToMany(ImmatriculationDirecte::class,'requestor_id')->withTimestamps();
+    }
+
     public function certificatepropriete() : BelongsToMany
     {
         return $this->belongsToMany(CertificatePropriete::class,'titrefoncier_user','user_id','titre_foncier_id')->withTimestamps();
