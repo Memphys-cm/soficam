@@ -174,6 +174,7 @@
                                 </svg>
                             </a>
                             @endcan
+                            <button wire:click='printPdf({{$titrefoncier->id}})' class="btn btn-primary">PDF</button>
                             @can('titre_foncier.update')
                             <a href="#" wire:click.prevent="initData({{$titrefoncier->id}})" data-bs-toggle="modal" data-bs-target="#CreateTitreFoncierModal" draggable="false">
                                 <svg class="icon icon-sm text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
