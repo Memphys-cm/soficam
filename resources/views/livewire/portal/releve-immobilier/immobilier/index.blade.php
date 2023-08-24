@@ -1,8 +1,6 @@
 <div>
     <x-alert />
     @include('livewire.portal.releve-immobilier.immobilier.create-update')
-
-
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">

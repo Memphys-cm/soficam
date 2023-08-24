@@ -89,6 +89,18 @@ class Index extends Component
         $this->refresh(__('Real Estate successfully Created!'), 'CreateEstateModal');
     }
 
+    public function clearFields()
+    {
+        $this->type = '';
+        $this->releves_type = '';
+        $this->releve_reason = '';
+        $this->requestor_id = '';
+        $this->price = '';
+        $this->validity = '';
+        $this->releve_number = '';
+        $this->status = '';
+    }
+
     public function update()
     {
         $this->validate([
