@@ -14,14 +14,6 @@
                     </div>
                     <x-form-items.form wire:submit="{{ $state ? 'update' : 'store' }}">
                         <div class="form-group mb-3 row">
-                            <div class="col">
-                                <label for="code">{{ __('Requerant Principal') }}</label>
-                                <x-input.select wire:model="user_id" prettyname="user_id" :options="$users->pluck('first_name', 'id')->toArray()"
-                                    selected="('user_id')" />
-                                @error('user_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
                             <div class='col'>
                                 <label class="px-2" for="user_ids">{{ __('Requerants Secondaires') }}</label>
                                 <x-input.selectmultipleusers wire:model="user_ids" prettyname="user_ids"
@@ -30,8 +22,6 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                        </div>
-                        <div class='form-group mb-3 row'>
                             <div class="col">
                                 <label for="numero_folio">{{ __('Localisation') }}</label>
                                 <input wire:model="localisation" type="text"

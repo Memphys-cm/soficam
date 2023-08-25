@@ -84,7 +84,7 @@ class Index extends Component
 
         $this->conservateurs = User::role('CONSERVATEUR')->get();
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
-        $this->numero_titre_foncier = $this->generateCodeTF();
+        // $this->numero_titre_foncier = $this->generateCodeTF();
         //    $this->generateCodeTF();
     }
 
@@ -103,7 +103,7 @@ class Index extends Component
 
     public function generateCodeTF()
     {
-        $departements = Division::all();
+        // $departements = Division::all();
         // $codesUtilises = [];
 
         // foreach ($departements as $departement) {
@@ -433,6 +433,7 @@ class Index extends Component
 
     public function render()
     {
+    // dd('ddd');
         if (!Gate::allows('titre_foncier.view')) {
             return abort(401);
         }
