@@ -164,7 +164,6 @@
                         </td>
                         @canany('morcellement.update','morcellement.delete')
                         <td>
-
                             @can('morcellement.update')
                             <div class="btn-group">
                                 <a href="" class="text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
