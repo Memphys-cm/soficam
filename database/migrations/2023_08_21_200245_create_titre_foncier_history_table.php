@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('titre_foncier_history', function (Blueprint $table) {
             $table->id();
             $table->foreignId('titre_foncier')->index();
-            $table->foreign('requestor_id')->on('users')->index()->nullable();
+            $table->foreignId('requestor_id')->on('users')->index()->nullable();
             $table->foreignId('operation_id')->nullable();
             $table->string('superficie_initial');
             $table->string('superficie_vendue')->nullable();
