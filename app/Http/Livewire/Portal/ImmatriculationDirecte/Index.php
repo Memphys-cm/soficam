@@ -74,7 +74,7 @@ class Index extends Component
         'numero_bordereau_transmission' => 6,
         'date_delivrance' => now(),
         'reference' => Str::upper(Str::random(7)) . "" . now()->format('msu'),
-        'requestor_id' => $this->user_id,
+        // 'requestor_id' => $this->user_id,
         'localisation' => $this->localisation,
         'status' => 'Dossier Ouvert',
         'StatusStyle' => 'info',
@@ -87,7 +87,7 @@ class Index extends Component
        if(!empty($this->attachements)){
             $imma_directe->addMedia($this->attachements->getRealPath())
             ->usingName($imma_directe->reference)
-            ->toMediaCollection('immadirecstes');
+            ->toMediaCollection('immadirectes');
         }
 
         $this->clearFields();
