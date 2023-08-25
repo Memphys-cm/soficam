@@ -161,6 +161,9 @@ Route::group(
             Route::get('/', App\Http\Livewire\Portal\SuiviDossier\Index::class)->name('portal.suivi-dossier.index');
         });
 
+        Route::prefix('taxfonciere')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\Taxfonciere\Index::class)->name('portal.taxfonciere.index');
+        });
+
     }
 );
-Route::view('/print', 'livewire.portal.certificate-propriete.print');
