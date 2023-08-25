@@ -32,6 +32,11 @@ class ReleveImmobilier extends Model
         return $this->belongsTo(User::class,'requestor_id');
     }
 
+    public function titreFoncier(): HasMany
+    {
+        return $this->hasMany(TitreFoncier::class, 'titre_foncier_id');
+    }
+
     public function getStatusStyleAttribute() : String
     {
         return match ($this->status) {

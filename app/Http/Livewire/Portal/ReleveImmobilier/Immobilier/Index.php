@@ -6,7 +6,9 @@ use Carbon\Carbon;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\Sales\Sale;
+use Illuminate\Support\Str;
 use App\Models\TitreFoncier;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\ReleveImmobilier;
 use Illuminate\Support\Facades\DB;
 use App\Http\Livewire\Traits\WithDataTables;
@@ -16,15 +18,17 @@ class Index extends Component
     use WithDataTables;
 
     public $status = 'pending_payment';
-    public $validity, $releve_reason, $immobilier;
+    public $validity, $releve_reason, $immobilier, $titrefoncier;
     public $releves_type, $releve_number, $requestor_id, $price, $requestors;
-    public $certificate_propriete_id;
+    public $certificate_propriete_id, $titre_foncier_id;
     public $type = 'immobilier';
+    public $titre_foncier_options = [];
 
 
     public function mount()
     {
         $this->requestors = User::role('user')->select('id', 'first_name', 'last_name')->get();
+        $this->titrefoncier = TitreFoncier::all();
     }
     public function store()
     {
@@ -37,6 +41,7 @@ class Index extends Component
             'price' => 'required|integer',
             'validity' => 'nullable|date',
             'releve_number' => 'required',
+            'titre_foncier_id' => 'required',
             'status' => 'nullable',
 
         ]);
@@ -50,6 +55,7 @@ class Index extends Component
                 'validity' => Carbon::now()->addMonths(3),
                 'releve_number' => $this->releve_number,
                 'status' => $this->status,
+                'titre_foncier_id' => $this->titre_foncier_id,
                 'releves_type' => $this->releves_type,
                 'recorded_by' => auth()->user()->name,
             ]);
@@ -78,6 +84,16 @@ class Index extends Component
         $this->refresh(__('immobilier successfully Created!'), 'createimmobilierModal');
     }
 
+    public function loadTitreFoncierOptions()
+    {
+        if ($this->requestor_id) {
+            $requestor = User::findOrFail($this->requestor_id);
+            $this->titre_foncier_options = $requestor->titrefoncier->pluck('numero_titre_foncier', 'id')->toArray();
+        } else {
+            $this->titre_foncier_options = [];
+        }
+    }
+
     public function initData($id)
     {
         $immobilier = ReleveImmobilier::findOrFail($id);
@@ -90,6 +106,7 @@ class Index extends Component
         $this->validity =  $immobilier->validity;
         $this->releve_number =  $immobilier->releve_number;
         $this->status =  $immobilier->status;
+        $this->titre_foncier_id = $titre_foncier_id;
 
     }
     public function clearFields()
@@ -102,6 +119,7 @@ class Index extends Component
         $this->validity = '';
         $this->releve_number = '';
         $this->status = '';
+        $this->titre_foncier_id = '';
     }
 
     public function update()
@@ -152,6 +170,25 @@ class Index extends Component
             $this->refresh(__('immobilier deleted successfully'), 'DeleteModal');
         }
     }
+
+    public function  printPdf($id)
+    {
+        $this->immobilier = ReleveImmobilier::findOrFail($id);
+        $data = [
+            'immobilier' => $this->immobilier,
+            'email' => 'john@example.com',
+            // Autres données que vous souhaitez afficher dans la vue
+        ];
+
+        $pdf = Pdf::loadView('livewire.portal.releve-immobilier.immobilier.print',$data)->setPaper('a4', 'portrait');
+
+
+        return response()->streamDownload(
+            fn () => print($pdf->output()),
+            __('Report-') . Str::random('10') . ".pdf"
+        );
+    }
+
     public function render()
     {
 
