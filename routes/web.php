@@ -39,6 +39,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
         Route::get('/', App\Http\Livewire\User\AuditLogs\Index::class)->name('user.auditlogs');
     });
 
+    Route::prefix('menu')->group(function () {
+        Route::get('/paiement', App\Http\Livewire\User\Paiement\Index::class)->name('user.paiement');
+    });
 
 });
 
