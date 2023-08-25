@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Sales\Sale;
+use App\Models\TitreFoncier;
 use App\Models\Sales\Saleable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -32,9 +33,9 @@ class ReleveImmobilier extends Model
         return $this->belongsTo(User::class,'requestor_id');
     }
 
-    public function titreFoncier(): HasMany
+    public function titreFoncier(): BelongsTo
     {
-        return $this->hasMany(TitreFoncier::class, 'titre_foncier_id');
+        return $this->belongsTo(TitreFoncier::class,'titre_foncier_id');
     }
 
     public function getStatusStyleAttribute() : String

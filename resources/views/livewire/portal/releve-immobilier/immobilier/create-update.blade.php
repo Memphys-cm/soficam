@@ -13,7 +13,7 @@
                         <div class="form-group mb-3 row">
                             <div class='col'>
                                 <label class="px-2" for="requestor_id">{{ __('Requerant') }}</label>
-                                <x-input.select wire:model="requestor_id" prettyname="requestor" :options="$requestors->pluck('first_name', 'id')->toArray()" wire:change="loadTitreFoncierOptions"/>
+                                <x-input.select wire:model="requestor_id" prettyname="requestor" :options="$requestors->pluck('first_name', 'id')->toArray()" />
                                 @error('user_ids')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -54,7 +54,7 @@
 
                         <div class="form-group mb-3 row">
                             <label for="titre_foncier_id">{{__('Numéro Titre Foncier')}}</label>
-                            <x-input.select wire:model="titre_foncier_id" prettyname="titre_foncier_id" :options="$titre_foncier_options"/>
+                            <x-input.select wire:model="titre_foncier_id" prettyname="titre_foncier_id" :options="$titrefoncier->pluck('numero_titre_foncier', 'id')->toArray()" />
                             @error('titre_foncier_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

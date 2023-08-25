@@ -84,16 +84,6 @@ class Index extends Component
         $this->refresh(__('immobilier successfully Created!'), 'createimmobilierModal');
     }
 
-    public function loadTitreFoncierOptions()
-    {
-        if ($this->requestor_id) {
-            $requestor = User::findOrFail($this->requestor_id);
-            $this->titre_foncier_options = $requestor->titrefoncier->pluck('numero_titre_foncier', 'id')->toArray();
-        } else {
-            $this->titre_foncier_options = [];
-        }
-    }
-
     public function initData($id)
     {
         $immobilier = ReleveImmobilier::findOrFail($id);
