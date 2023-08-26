@@ -77,7 +77,7 @@
         <div style="margin-top: 30px; text-align:center; text-decoration:underline">SECTION II/-MODIFICATION DANS LA CONSISTANCE DE L'IMMEUBLE :</div>
         <div style="margin-top: 30px; margin-left: 30px"><b style="text-decoration: underline">SECTION II A :</b> <b>RAS</b></div>
         <div style="margin-top: 30px; margin-left: 30px"><b style="text-decoration: underline">SECTION II B :</b></div>
-        
+        <div style="margin-top: 20px"><b>BA 2. Dépôt du 12/12/1986: Retrait d'une parcelle {{$immobilier->titreFoncier->etat_TF}} d'un terrain {{$immobilier->titreFoncier->zone}}, sis à {{$immobilier->titreFoncier->subDivision->sub_division_name}}, au lieu-dit {{$immobilier->titreFoncier->lieu_dit}}, d'une superficie de {{$immobilier->titreFoncier->superficie_vendu_du_TF_mere}} au profit de NZAELE Jacques, d'un montant de 2.360.000 FCFA, objet du titre foncier n° {{$immobilier->titreFoncier->numero_titre_foncier}}/{{$immobilier->titreFoncier->division->division_name}}</b></div>
     </div>
 
 </div>
