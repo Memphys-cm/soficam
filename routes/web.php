@@ -135,6 +135,7 @@ Route::group(
 
         Route::prefix('immatriculation_directes')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\ImmatriculationDirecte\Index::class)->name('portal.immatriculation_directes.index');
+            Route::get('/process', App\Http\Livewire\Portal\ImmatriculationDirecte\Process::class)->name('portal.immatriculation_directes.process');
         });
 
         // <!-- Route::get('maps', function () {

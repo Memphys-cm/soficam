@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('reference');
             $table->string('localisation');
             $table->foreignId('titre_foncier_id')->index()->nullable();
-            $table->foreignId('user_id')->index()->constrained('users');
             $table->string('numero_bordereau_transmission')->nullable;
             $table->string('status')->nullable();
             $table->string('StatusStyle')->nullable();

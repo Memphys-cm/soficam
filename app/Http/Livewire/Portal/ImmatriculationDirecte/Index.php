@@ -9,6 +9,7 @@ use App\Models\TitreFoncier;
 use Illuminate\Support\Facades\Gate;
 use App\Models\ImmatriculationDirecte;
 use App\Http\Livewire\Traits\WithDataTables;
+use App\Models\Service;
 use Illuminate\Support\Str;
 
 class Index extends Component
@@ -19,12 +20,15 @@ class Index extends Component
     public ImmatriculationDirecte $imma_directe;
 
     public $state = 0, $price_m2, $users, $user_id, $user_ids, $comissions = [] , $localisation;
-    public $attachements;
+    public $attachements , $services , $service_id , $observation;
 
     public function mount()
     {
         $this->imma_directe = new ImmatriculationDirecte();
-        $this->users = User::role('user')->get();
+        $this->users = User::with(['roles' => function ($role) {
+            return $role->whereIn('name', ['user'])->get();
+        }])->get();
+        $this->services = Service::select('id','service_name_fr')->get();
     }
 
     public function addRow()
@@ -100,7 +104,7 @@ class Index extends Component
     {
         $this->reset(
             [
-                'requestor_id',
+                // 'requestor_id', 
                 'localisation',
                 'status',
                 'StatusStyle',

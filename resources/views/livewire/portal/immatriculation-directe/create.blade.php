@@ -15,11 +15,10 @@
                     <x-form-items.form wire:submit="{{ $state ? 'update' : 'store' }}">
                         <div class="form-group mb-3 row">
                             <div class='col'>
-                                <label class="px-2" for="user_ids">{{ __('Requerants Secondaires') }}</label>
-                                <x-input.selectmultipleusers wire:model="user_ids" prettyname="user_ids"
-                                    :options="$users" selected="('user_ids')" />
+                                <label class="px-2" for="user_ids">{{__('Requerants')}}</label>
+                                <x-input.selectmultipleusers wire:model="user_ids" prettyname="user_ids" :options="$users" selected="('user_ids')"  multiple="multiple"/>
                                 @error('user_ids')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col">

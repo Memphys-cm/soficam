@@ -30,6 +30,12 @@
     <link type="text/css" href="{{ asset('vendor/choices.js/public/assets/styles/choices.min.css')}}" rel="stylesheet">
     <link type="text/css" href="{{ asset('vendor/leaflet/dist/leaflet.css')}}" rel="stylesheet">
     <link type="text/css" href="{{ asset('css/theme.css')}}" rel="stylesheet">
+    
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/opensans-font.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/montserrat-font.css')}}">
+	<link rel="stylesheet" type="text/css" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+	<!-- Main Style Css -->
+    <link rel="stylesheet" href="{{ asset('css/style.css')}}"/>
 
     <script defer src="https://unpkg.com/alpinejs@3.9.0/dist/cdn.min.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js"></script>
@@ -39,6 +45,50 @@
         * {
             font-family: 'Poppins', sans-serif;
         }
+
+        .stepwizard-step p {
+    margin-top: 10px;
+}
+.stepwizard-row {
+    display: table-row;
+}
+.stepwizard {
+    display: table;
+    width: 100%;
+    position: relative;
+}
+.stepwizard-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    z-order: 0;
+}
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+.displayNone{
+  display: none;
+}
+
     </style>
 </head>
 
@@ -64,6 +114,7 @@
     <script src="{{ asset('vendor/choices.js/public/assets/scripts/choices.min.js')}}"></script>
     <script src="{{ asset('js/theme.js')}}"></script>
     <script src="{{ asset('js/jquery-3.6.0.min.js')}}"></script>
+	<script src="{{('js/main.js')}}"></script>
 
 
 
