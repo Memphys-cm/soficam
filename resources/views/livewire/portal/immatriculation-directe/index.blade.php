@@ -1,7 +1,7 @@
 <div>
     <x-alert />
     @include('livewire.portal.immatriculation-directe.create')
-    @include('livewire.portal.immatriculation-directe.cotation_step1')
+    @include('livewire.portal.immatriculation-directe.step.cotation_step1')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
