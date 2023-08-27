@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('titre_fonciers', function (Blueprint $table) {
-            //
-            $table->float('price')->nullable();
-            $table->float('tax_amount')->nullable();
-            $table->enum('status_tax',['payer','non_payer'])->default('non_payer');
-            $table->date('date_tax')->nullable();
+        Schema::table('releve_immobiliers', function (Blueprint $table) {
+            $table->foreignId('titre_foncier_id')->index();
         });
     }
 
@@ -25,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('titre_fonciers', function (Blueprint $table) {
+        Schema::table('releve_immobiliers', function (Blueprint $table) {
             //
         });
     }

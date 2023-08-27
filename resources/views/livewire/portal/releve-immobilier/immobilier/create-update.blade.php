@@ -50,9 +50,15 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-
                         </div>
-                        
+
+                        <div class="form-group mb-3 row">
+                            <label for="titre_foncier_id">{{__('Numéro Titre Foncier')}}</label>
+                            <x-input.select wire:model="titre_foncier_id" prettyname="titre_foncier_id" :options="$titrefoncier->pluck('numero_titre_foncier', 'id')->toArray()" />
+                            @error('titre_foncier_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                      
                         <div class='form-group mb-3 row'>
                             <div class="col">

@@ -1,5 +1,5 @@
 <div wire:ignore.self class="modal side-layout-modal fade" id="CreateChargeModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:35%;">
+    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:30%;">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
@@ -9,7 +9,7 @@
                     </div>
                     <x-form-items.form wire:submit="">
                         <div class='form-group  mb-2'>
-                            <label for="titre_foncier_id">{{ __('Numero du Titre Foncier') }}</label>
+                            <label for="titre_foncier_id">{{ __('Land Title Number') }}</label>
                             <x-input.land_title-select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers" />
                             @error('titre_foncier_id')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -17,7 +17,7 @@
                         </div>
 
                         @if(!empty($titre_foncier_users))
-                        <span class="fw-bold py-2">{{__('Propriétaires fonciers')}}</span>
+                        <span class="fw-bold py-2">{{__('Land Owners')}}</span>
                         <div class='row'>
                             @foreach($titre_foncier_users->split($titre_foncier_users->count()/2) as $row )
                             <div class="col-md-6" data-aos="fade-right" data-aos-duration="2000">
@@ -37,8 +37,8 @@
                             </div>
                             @endforeach
                         </div>
-                        @endif 
-                        <div class="form-group mb-3 row">
+                        @endif
+                        <div class="form-group mb-2 row">
                             <div class="col">
                                 <label for="etat_TF">{{__('Type de Charge')}}</label>
                                 <select wire:model="etat_TF" name="etat_TF" class="form-select  @error('etat_TF') is-invalid @enderror" required="">
@@ -52,44 +52,41 @@
                                 @enderror
                             </div>
                         </div>
-<<<<<<< HEAD
-                        <div class="form-group mb-3 row">
-                            <div class="col">
-                                <label for="price">{{ __('Prix') }}</label>
-                                <input wire:model="price" class="form-control" name="price" id="price" type="text" disabled>
-                                @error('price')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col">
-
-=======
-                        <div class="p-3 shadow border rounded my-2">
-                            <h2 class="h5 mb-4">{{__('Add Files')}}</h2>
-                            <div class="d-xl-flex align-items-center">
-                                <div class="file-field">
-                                    <div class="d-flex justify-content-xl-center ms-xl-3">
-                                        <div class="d-flex"><svg class="icon text-gray-500 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd"></path>
-                                            </svg>
-                                            <input type="file" class="form-control-file" wire:model="attachements">
-                                            <div class="d-md-block text-left">
-                                                <div class="fw-normal text-dark mb-1">{{__('Choose Files')}}</div>
-                                                <div class="text-gray small">JPG,PNG, PDF, Word,Excel. Max size of 50MB</div>
+                        <div class="form-group mb-2">
+                            <label for="price">{{ __('Prix') }}</label>
+                            <input wire:model="price" class="form-control" name="price" id="price" type="text" disabled>
+                            @error('price')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="p-3 shadow border rounded my-2">
+                                <h2 class="h5 mb-4">{{__('Add Files')}}</h2>
+                                <div class="d-xl-flex align-items-center">
+                                    <div class="file-field">
+                                        <div class="d-flex justify-content-xl-center ms-xl-3">
+                                            <div class="d-flex"><svg class="icon text-gray-500 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                <input type="file" class="form-control-file" wire:model="attachements">
+                                                <div class="d-md-block text-left">
+                                                    <div class="fw-normal text-dark mb-1">{{__('Choose Files')}}</div>
+                                                    <div class="text-gray small">JPG,PNG, PDF, Word,Excel. Max size of 50MB</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
->>>>>>> 8990fdcac9f8dc9fd79faa4dff22c9c0b87f2b5f
+                            </div>
+                            <div class="d-flex justify-content-end mt-5">
+                                <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
+                                <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('creer')}}</button>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-end mt-5">
-                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
-                            <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('creer')}}</button>
-                        </div>
-                    </x-form-items.form>
                 </div>
+                </x-form-items.form>
             </div>
         </div>
     </div>
+</div>
 </div>

@@ -10,10 +10,13 @@ use App\Models\TitreFoncier;
 use App\Models\MembreDuCabinet;
 use App\Models\CertificatePropriete;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Livewire\Traits\WithDataTables;
 use Illuminate\Database\Eloquent\Collection;
 
 class CreateParDecesForm extends Component
 {
+    use WithDataTables;
+
     public ?Collection $titre_foncier_users;
     public $certificates_propriete_id, $certificates_proprietes = [], $users = [], $titre_fonciers = [], $notaires = [], $geomtres = [];
     public $titre_foncier_id, $numero_titre_foncier, $superficie_du_TF_mere;
