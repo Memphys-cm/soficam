@@ -166,7 +166,10 @@ Route::group(
 
         Route::prefix('taxfonciere')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\Taxfonciere\Index::class)->name('portal.taxfonciere.index');
+            Route::get('/suivi-taxfoncier', App\Http\Livewire\Portal\Taxfonciere\SuiviTaxfonciere\Index::class)->name('portal.taxfonciere.suivi.index');
         });
+
+
 
     }
 );

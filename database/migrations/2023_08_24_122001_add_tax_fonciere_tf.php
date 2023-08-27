@@ -15,7 +15,7 @@ return new class extends Migration
             //
             $table->float('price')->nullable();
             $table->float('tax_amount')->nullable();
-            $table->string('status_tax')->nullable();
+            $table->enum('status_tax',['payer','non_payer'])->default('non_payer');
             $table->date('date_tax')->nullable();
         });
     }

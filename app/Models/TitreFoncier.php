@@ -82,6 +82,14 @@ class TitreFoncier extends Model implements HasMedia
             NULL => ''
         };
     }
+    public function getStatusTaxStyleAttribute(): String
+    {
+        return match ($this->status_tax) {
+            'payer' => 'success',
+            'non_payer' => 'danger',
+            NULL => ''
+        };
+    }
 
     public static function search($query)
     {
