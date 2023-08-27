@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:45%;">
         <div class="modal-content">
             <div class="modal-body p-0">
-                <div class="p-4 p-lg-5">
+                <div class="p-4 p-lg-4">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4"> {{ __('Creer')}}{{__(' morcellement')}}</h1>
                         <p class="px-1"> {{ __('Creer')}}{{__(' un morcellement sur titre foncier')}} </p>

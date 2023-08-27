@@ -109,6 +109,7 @@
                 <thead>
                     <tr>
                         <th class="border-bottom">{{ __('Requerant') }}</th>
+                        <th class="border-bottom">{{ __('Numéro Titre Foncier') }}</th>
                         <th class="border-bottom">{{ __('TYPE') }}</th>
                         <th class="border-bottom">{{ __(' NUMERO CP') }}</th>
                         <th class="border-bottom">{{ __('PRIX') }}</th>
@@ -127,6 +128,7 @@
                         <td>
                             <x-elements.user :options="$immobilier->requestor" />
                         </td>
+                        <td>{{ $immobilier->titre_foncier_id}}</td>
                         <td>{{ $immobilier->type}}</td>
                         <td>{{ $immobilier->releve_number }}</td>
 
@@ -142,6 +144,7 @@
                         <td>{{ $immobilier->created_at }}</td>
                         @canany(['immobilier.edit','immobilier.delete'])
                         <td>
+                            <button wire:click='printPdf({{$immobilier->id}})' class="btn btn-primary">PDF</button>
                             @can('immobilier.update')
                             <a href='#' wire:click.prevent="initData({{ $immobilier -> id }})" data-bs-toggle="modal" data-bs-target="#updateimmobilierModal">
                                 <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

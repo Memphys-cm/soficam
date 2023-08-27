@@ -1,6 +1,6 @@
 <div>
     @include('livewire.portal.taxfonciere.paiement')
-            <x-alert />
+    <x-alert />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
             <div class="mb-lg-0">
