@@ -12,25 +12,27 @@
                     <x-form-items.form wire:submit="update">
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="direction">Moyen de paiement </label>
-                                <select wire:model="orderAsc" id="direction" class="form-select">
+                                <label for="payment_method">Moyen de paiement </label>
+                                <select wire:model="payment_method" id="payment_method" class="form-select">
                                   
                                     <option value=""><strong>{{ __('--Selectionner--') }}</strong></option>
                                     <option value="OrangeMoney"><strong>{{ __('OrangeMoney') }}</strong></option>
                                     <option value="MobileMoney"><strong>{{ __('MobileMoney') }}</strong></option>
                                 </select>
-                                @error('type')
+                                @error('payment_method')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
+                       
+                    
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="price">{{ __('Prix du terrain') }}</label>
-                                <input wire:model="price" type="text" name="price"
-                                    class="form-control  @error('price') is-invalid @enderror"
-                                    required="" disabled>
-                                @error('price')
+                                <label for="primary_phone_number">{{ __('Numero de transaction') }}</label>
+                                <input wire:model="primary_phone_number" type="number"
+                                    class="form-control  @error('primary_phone_number') is-invalid @enderror"
+                                    placeholder="{{ __('67xxxxxxx') }}" required="">
+                                @error('primary_phone_number')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div> 
@@ -46,24 +48,27 @@
                                 @enderror
                             </div> 
                         </div>
+                        <button wire:click="confirmOrder" type="submit" class="btn btn-primary">pay</button>
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="transaction_number">{{ __('Numero de transaction') }}</label>
-                                <input wire:model="transaction_number" type="number"
-                                    class="form-control  @error('transaction_number') is-invalid @enderror"
-                                    placeholder="{{ __('67xxxxxxx') }}" required="">
-                                @error('transaction_number')
+                                <label for="status_tax">{{ __('Statut_paiement Immobilier ') }}</label>
+                                <select wire:model="status_tax" name="status_tax"
+                                    class="form-select  @error('status_tax') is-invalid @enderror" required="">
+                                    <option value="">{{ __('-- Selectionner --') }}</option>
+                                    <option value="payer">{{ __('Payer') }}</option>
+                                    <option value="non_payer">{{ __('Non Payer') }}</option>
+                                </select>
+                                @error('status_tax')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                            </div> 
+                            </div>
                         </div>
-                       
-                       
+                        
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
                                 data-bs-dismiss="modal">{{ __('Fermer') }}</button>
                             <button type="submit" wire:click.prevent="update" class="btn btn-primary btn-loading"
-                                wire:loading.attr="disabled">{{ __('Payer') }}</button>
+                                wire:loading.attr="disabled">{{ __('update') }}</button>
                         </div>
                     </x-form-items.form>
                 </div>

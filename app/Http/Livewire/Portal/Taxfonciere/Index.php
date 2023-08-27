@@ -10,7 +10,7 @@ class Index extends Component
 {
     public $numero_titre_foncier;
     public $tax_amount;
-    public $paymentStatus;
+    public $paymentStatus, $titrefoncier, $price, $transaction_number;
 
     public function paiement()
     {
@@ -27,6 +27,23 @@ class Index extends Component
         // get Transactions details $payment->transactions
     }
 
+    public function mount()
+    {
+        $titre_foncier = TitreFoncier::all();
+    }
+    public function initData($id)
+    {
+        $titrefoncier = TitreFoncier::findOrFail($id);
+
+        $this->titrefoncier = $titrefoncier;
+
+        $this->numero_titre_foncier =  $titrefoncier->numero_titre_foncier;
+        $this->price =  $titrefoncier->price;
+        $this->transaction_number =  $titrefoncier->transaction_number;
+
+        // Calculate the tax_amount (0.1% of the price)
+        $this->tax_amount = $this->price * 0.001;
+    }
 
     public function render()
     {
