@@ -2,19 +2,22 @@
 
 namespace App\Http\Livewire\Portal\Taxfonciere;
 
+use App\Http\Livewire\Traits\WithDataTables;
 use Livewire\Component;
 use App\Models\TitreFoncier;
 use Hachther\MeSomb\Operation\Payment\Collect;
 
 class Index extends Component
 {
+    use WithDataTables;
+
     public $numero_titre_foncier;
     public $tax_amount;
     public $paymentStatus, $titrefoncier, $price, $transaction_number;
 
     public function paiement()
     {
-        $request = new Collect('651897233', 1000, 'MTN', 'CM');
+        $request = new Collect('677551952', 10, 'MTN', 'CM');
 
         $payment = $request->pay();
 
@@ -31,6 +34,7 @@ class Index extends Component
     {
         $titre_foncier = TitreFoncier::all();
     }
+
     public function initData($id)
     {
         $titrefoncier = TitreFoncier::findOrFail($id);
