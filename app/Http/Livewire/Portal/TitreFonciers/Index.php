@@ -82,7 +82,7 @@ class Index extends Component
             return $role->whereIn('name', ['user'])->get();
         }])->get();
 
-        $this->conservateurs = User::role('CONSERVATEUR')->get();
+        $this->conservateurs = User::role('user')->get(); // to be updated
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
         // $this->numero_titre_foncier = $this->generateCodeTF();
         //    $this->generateCodeTF();
