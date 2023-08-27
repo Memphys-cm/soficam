@@ -9,7 +9,7 @@
                     </div>
                     <x-form-items.form wire:submit="">
                         <div class='form-group  mb-2'>
-                            <label for="titre_foncier_id">{{ __('Numero du Titre Foncier') }}</label>
+                            <label for="titre_foncier_id">{{ __('Land Title Number') }}</label>
                             <x-input.land_title-select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers" />
                             @error('titre_foncier_id')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -17,7 +17,7 @@
                         </div>
 
                         @if(!empty($titre_foncier_users))
-                        <span class="fw-bold py-2">{{__('Propriétaires fonciers')}}</span>
+                        <span class="fw-bold py-2">{{__('Land Owners')}}</span>
                         <div class='row'>
                             @foreach($titre_foncier_users->split($titre_foncier_users->count()/2) as $row )
                             <div class="col-md-6" data-aos="fade-right" data-aos-duration="2000">
@@ -52,18 +52,6 @@
                                 @enderror
                             </div>
                         </div>
-<<<<<<< HEAD
-                        <div class="form-group mb-3 row">
-                            <div class="col">
-                                <label for="price">{{ __('Prix') }}</label>
-                                <input wire:model="price" class="form-control" name="price" id="price" type="text" disabled>
-                                @error('price')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col">
-
-=======
                         <div class="p-3 shadow border rounded my-2">
                             <h2 class="h5 mb-4">{{__('Add Files')}}</h2>
                             <div class="d-xl-flex align-items-center">
@@ -80,12 +68,11 @@
                                         </div>
                                     </div>
                                 </div>
->>>>>>> 8990fdcac9f8dc9fd79faa4dff22c9c0b87f2b5f
                             </div>
                         </div>
                         <div class="d-flex justify-content-end mt-5">
-                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
-                            <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('creer')}}</button>
+                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
+                            <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('create')}}</button>
                         </div>
                     </x-form-items.form>
                 </div>
