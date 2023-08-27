@@ -13,6 +13,9 @@ use App\Models\TitreFoncier;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Livewire\Traits\WithDataTables;
+use proj4php\Proj4php;
+use proj4php\Proj;
+use proj4php\Point;
 
 class Index extends Component
 {
@@ -78,6 +81,16 @@ class Index extends Component
 
     public function mount()
     {
+        $utmCoordinates = [
+            [783771.1412, 439362.2283], [783772.7367, 439361.3785], [783772.7367, 439318.5813],
+            [783772.7367, 439268.5813], [783772.7367, 439218.5813], [783772.7367, 439116.5813],
+            [783722.7367, 439168.5813], [783672.7367, 439168.5813],[783622.7367, 439168.5813]
+        ];
+        $convertedResults = $this->convert($utmCoordinates);
+
+        dd($convertedResults);
+
+        // $this->convert();
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
@@ -101,6 +114,66 @@ class Index extends Component
         }
     }
 
+
+    public function convert($utmCoordinates)
+{
+    // Initialisez Proj4
+    $proj4 = new Proj4php();
+
+    // Créez les projections
+    $projUTM = new Proj('+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs', $proj4);
+    $projWGS84 = new Proj('EPSG:4326', $proj4);
+
+    $decimalResults = [];
+
+    foreach ($utmCoordinates as $utm) {
+        $utmX = $utm[0];
+        $utmY = $utm[1];
+
+        // Créez le point source avec les coordonnées UTM
+        $pointSrc = new Point($utmX, $utmY, $projUTM);
+
+        // Transformez le point entre les systèmes de coordonnées
+        $pointDest = $proj4->transform($projWGS84, $pointSrc);
+
+        // Ajoutez le résultat à votre tableau de résultats en coordonnées décimales
+        $decimalResults[] = $pointDest->toShortString();
+    }
+
+    return $decimalResults;
+}
+// function convertToDMS($coordinates) {
+//     $results = [];
+
+//     foreach ($coordinates as $coordinate) {
+//         $parts = explode(' ', $coordinate);
+//         $longitude = $parts[0];
+//         $latitude = $parts[1];
+
+//         // Convertir la latitude en degrés minutes secondes
+//         $latDegrees = floor($latitude);
+//         $latMinutes = floor(($latitude - $latDegrees) * 60);
+//         $latSeconds = round((($latitude - $latDegrees) * 60 - $latMinutes) * 60, 2);
+
+//         // Convertir la longitude en degrés minutes secondes
+//         $lngDegrees = floor($longitude);
+//         $lngMinutes = floor(($longitude - $lngDegrees) * 60);
+//         $lngSeconds = round((($longitude - $lngDegrees) * 60 - $lngMinutes) * 60, 2);
+
+//         // Ajouter le résultat à votre tableau de résultats
+//         $results[] = [
+//             'latitude' => "$latDegrees °$latMinutes'$latSeconds\"",
+//             'longitude' => "$lngDegrees °$lngMinutes'$lngSeconds\""
+//         ];
+//     }
+
+//     return $results;
+// }
+
+
+
+
+    
     public function generateCodeTF()
     {
         // $departements = Division::all();
@@ -147,6 +220,7 @@ class Index extends Component
 
         return $codeUnique;
     }
+
 
     public function store()
     {
@@ -422,7 +496,7 @@ class Index extends Component
             // Autres données que vous souhaitez afficher dans la vue
         ];
 
-        $pdf = Pdf::loadView('livewire.portal.titre-fonciers.print',$data)->setPaper('a4', 'portrait');
+        $pdf = Pdf::loadView('livewire.portal.titre-fonciers.print', $data)->setPaper('a4', 'portrait');
 
 
         return response()->streamDownload(
@@ -433,7 +507,7 @@ class Index extends Component
 
     public function render()
     {
-    // dd('ddd');
+        // dd('ddd');
         if (!Gate::allows('titre_foncier.view')) {
             return abort(401);
         }
