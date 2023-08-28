@@ -1,50 +1,38 @@
 <div class="container">
     <!-- this function of java Script play Camera -->
-<script src="https://reeteshghimire.com.np/wp-content/uploads/2021/05/html5-qrcode.min_.js"></script>
-<!-- Header --> 
-<div class="container-fluid header_se">
- <div class="col-md-8">
-  <div class="row">
-   <div class="col">
-    <div id="reader"></div>
-   </div>
-   <div class="col" style="padding:30px;">
-    <h4>SCAN RESULT</h4>
-    <div id="result">Result Here</div>
-   </div>
-  </div>
+    <script src="https://reeteshghimire.com.np/wp-content/uploads/2021/05/html5-qrcode.min_.js"></script>
+    <!-- Header --> 
+    <div class="container-fluid header_se">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col">
+                    <div id="reader"></div>
+                </div>
+                <div class="col" style="padding:30px;">
+                    <h4>SCAN RESULT</h4>
+                    <div id="result">Result Here</div>
+                </div>
+            </div>
 
-@push('scripts')
 
- <script type="text/javascript">
-     // after success to play camera Webcam Ajax paly to send data to Controller
-  function onScanSuccess(data) {
-    $.ajax({
-      type: "POST",
-      cache: false,
-      url : "",
-      data: {"_token": "{{ csrf_token() }}",data:data},
-      success: function(data) {
-          // after success to get Answer from controller if User Registered login user by scanner
-          // and page change to Home blade
-       if (data==1) {
-        document.getElementById('result').innerHTML = '<span class="result">'+'Logged'+'</span>';
-          $(location).attr('href', '{{url('/home')}}');
-            }
-       else{
-        return confirm('There is no user with this qr code'); 
-       }
-      }
-    })
-  }
-  var html5QrcodeScanner = new Html5QrcodeScanner(
-    "reader", { fps: 10, qrbox: 250 });
-  html5QrcodeScanner.render(onScanSuccess);
- </script>
- @endpush
+    @push('scripts')
 
- </div>
- </div>
+    <script type="text/javascript">
+        // after success to play camera Webcam Ajax paly to send data to Controller
+        <div>
+            <button wire:click="onScanSuccess">Start Scanning</button>
+            <video id="reader"></video>
+            <div id="result">{!! $scanResult !!}</div>
+        </div>
+
+        var html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader", { fps: 10, qrbox: 250 });
+        html5QrcodeScanner.render(onScanSuccess);
+    </script>
+    @endpush
+
+        </div>
+    </div>
 </div>
 
 @push('scripts')
