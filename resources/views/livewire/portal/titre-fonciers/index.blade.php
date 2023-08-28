@@ -75,7 +75,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Direction Trie')}}: </label>
+            <label for="direction">{{__('Sens du tri')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{__('Ascendant')}}</option>
                 <option value="desc">{{__('Descendant')}}</option>
@@ -129,10 +129,10 @@
                                 {{__('Region')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->region->region_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Division')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->division->division_name}} </span>
+                                {{__('Departement')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->division->division_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Sub Divi')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->subDivision->sub_division_name}} </span>
+                                {{__('Arrondissement')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->subDivision->sub_division_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
                                 {{__('Lieu Dit')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->lieu_dit}} </span>

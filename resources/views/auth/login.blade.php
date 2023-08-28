@@ -52,11 +52,11 @@
                                     <button type="submit" class="btn btn-primary btn-loading px-6"> {{ __('Connexion') }}</button>
                                 </div>
                                 <div class="d-flex justify-content-center align-items-center mt-4">
-                                    <span class="fw-normal">{{__('Pas membre?')}} <a href="{{route('register')}}" class="fw-bold">{{__('Sign Up')}}</a></span>
+                                    <span class="fw-normal">{{__('Pas membre?')}} <a href="{{route('register')}}" class="fw-bold">{{__('S\'enregistrer')}}</a></span>
                                 </div>
                             </x-form-items.form>
                             <div class='d-flex justify-content-center mt-3 fw-light mb-n4'>
-                                {{__('Change language')}} <br>
+                                {{__('changer de langue')}} <br>
                                 <a class="{{ \App::isLocale('fr') ? ' text-secondary' : ''}} mx-2" href="{{route('language-switcher',['locale'=>'fr'])}}">{{__('FR')}}</a> |
                                 <a class="{{ \App::isLocale('en') ? ' text-secondary' : ''}} mx-2" href="{{route('language-switcher',['locale'=>'en'])}}">{{__('EN')}}</a>
                             </div>
