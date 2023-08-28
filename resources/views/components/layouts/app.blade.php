@@ -58,6 +58,8 @@
     <script src="{{ asset('vendor/simple-datatables/dist/umd/simple-datatables.js')}}"></script>
     <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/instascan@1.0.0/dist/instascan.min.js"></script>
+    <script src="https://reeteshghimire.com.np/wp-content/uploads/2021/05/html5-qrcode.min_.js"></script>
     <script src="{{ asset('vendor/vanillajs-datepicker/dist/js/datepicker.min.js')}}"></script>
     <script src="{{ asset('vendor/leaflet/dist/leaflet.js')}}"></script>
     <script src="{{ asset('vendor/simplebar/dist/simplebar.min.js')}}"></script>
@@ -93,6 +95,32 @@
 
         
 
+    </script>
+
+    <script type="text/javascript">
+        // after success to play camera Webcam Ajax paly to send data to Controller
+    function onScanSuccess(data) {
+    $.ajax({
+        type: "POST",
+        cache: false,
+        url : "",
+        data: {"_token": "{{ csrf_token() }}",data:data},
+        success: function(data) {
+            // after success to get Answer from controller if User Registered login user by scanner
+            // and page change to Home blade
+        if (data==1) {
+        document.getElementById('result').innerHTML = '<span class="result">'+'Logged'+'</span>';
+            $(location).attr('href', '{{url('/home')}}');
+            }
+        else{
+        return confirm('There is no user with this qr code'); 
+        }
+        }
+    })
+    }
+    var html5QrcodeScanner = new Html5QrcodeScanner(
+    "reader", { fps: 10, qrbox: 250 });
+    html5QrcodeScanner.render(onScanSuccess);
     </script>
 
 </body>
