@@ -8,6 +8,7 @@ use App\Models\Sales\Saleable;
 use App\Models\ReleveImmobilier;
 use Illuminate\Support\Facades\DB;
 use App\Http\Livewire\Traits\WithDataTables;
+use App\Models\CertificatePropriete;
 use App\Models\EtatCession;
 
 class Index extends Component
@@ -56,22 +57,20 @@ class Index extends Component
                 Saleable::where('sale_id', $this->allsales->id)
                     ->update(['saleable_type' => 'DISPONIBLE']);
             }
-            // $this -> immobilier->update([
-            //     'status' => $this->payment_status,
-               
-            // ]);
+           
 
             // when sales is successful
             // 1. Get the saleable item for that sale.
             // 2. Query and get the instance of the saleable item class
             // 3. Update the status of this item.
 
-        //    $saleable_item =  Saleable::whereSaleId($this->allsalesId)->first();
+           $saleable_item =  Saleable::whereSaleId($this->allsalesId)->first();
 
-        //    match ($saleable_item->saleable_type){
-        //         'App\Models\EtatCession'  => EtatCession::findOrFail($saleable_item->saleable_id)->update(['status'=> 'paid']),
-        //         // 'App\Models\EtatCession'  => EtatCession::findOrFail($saleable_item->saleable_id)->update(['status'=> 'paid']),
-        //    };
+           match ($saleable_item->saleable_type){
+                'App\Models\EtatCession'  => optional(EtatCession::whereId($saleable_item->saleable_id))->update(['status'=> 'paid']),
+                'App\Models\CertificatePropriete'  => optional(CertificatePropriete::whereId($saleable_item->saleable_id))->update(['status'=> 'paid']),
+                default => ''
+           };
 
 
         });

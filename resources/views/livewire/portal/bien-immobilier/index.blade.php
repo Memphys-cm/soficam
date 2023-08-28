@@ -129,11 +129,7 @@
                             <x-elements.user :options="$bien_immobilier->requestor" />
                         </td>
                         <td>
-                            @foreach ($bien_immobilier->requestor->titrefoncier as $tf)
-                                <ol>
-                                    <li>{{ $tf->numero_titre_foncier}}</li>
-                                </ol>
-                            @endforeach
+                            {{ $bien_immobilier->titreFoncier->numero_titre_foncier}}
                         </td>
                         <td>{{ $bien_immobilier->releve_number }}</td>
 
