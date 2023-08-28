@@ -125,7 +125,7 @@ class Index extends Component
             $sale = Sale::create([
                 'user_id' => $this->user_id,
                 'sales_amount' => $this->state_assignment->cout_etat_cession,
-                'sales_type' => 'EtatCession',
+                'sales_type' => 'etat_cession',
                 'created_by' => auth()->user()->name,
             ]);
 

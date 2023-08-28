@@ -164,10 +164,14 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'charge_titre_foncier.delete'],
             ['name' => 'charge_titre_foncier.export_n_print'],
 
+            ['name' => 'sales.view'],
+            ['name' => 'sales.pay'],
+            ['name' => 'sales.delete'],
+            ['name' => 'sales.export_n_print'],
+
             ['name' => 'tax_foncier.view'],
             ['name' => 'tax_foncier.update'],
             
-
         ];
 
         $insert_data = [];

@@ -81,10 +81,14 @@ class Index extends Component
     }
 
     public function mount()
-    { 
-        //ceci est un exemple il sera supprimer plus tard
-        // $utmCoordinates = ["783771.1412, 439362.2283","783771.1412, 439362.2283"];
-        //  $convertedResults = $this->convert($utmCoordinates);
+    {
+        // $utmCoordinates = [
+        //     [783771.1412, 439362.2283], [783772.7367, 439361.3785], [783772.7367, 439318.5813],
+        //     [783772.7367, 439268.5813], [783772.7367, 439218.5813], [783772.7367, 439116.5813],
+        //     [783722.7367, 439168.5813], [783672.7367, 439168.5813], [783622.7367, 439168.5813]
+        // ];
+        // $convertedResults = $this->convert($utmCoordinates);
+
 
         // dd($convertedResults);
 
@@ -538,7 +542,6 @@ class Index extends Component
 
     public function render()
     {
-        // dd('ddd');
         if (!Gate::allows('titre_foncier.view')) {
             return abort(401);
         }

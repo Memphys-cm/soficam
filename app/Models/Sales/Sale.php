@@ -21,7 +21,7 @@ class Sale extends Model
     }
     public function saleables()
     {
-        return $this->hasMany(Saleable::class)->onDelete('cascade');
+        return $this->hasMany(Saleable::class);
     }
     public function user(): BelongsTo
     {
@@ -71,4 +71,32 @@ class Sale extends Model
             NULL => ''
         };
     }
+
+    public function getSaleTypeStyleAttribute(): String
+    {
+        return match ($this->sales_type) {
+            'etat_cession' => 'info',
+            'certificate_propriete' => 'primary',
+            'mutation_totale_normale' => 'success',
+            'mutation_totale_par_deces' => 'danger',
+            'morcellement_normale' => 'secondary',
+            'morcellement_forcee' => 'tertiary', 
+            'retrait_indivision' => 'dark',
+            default => ''
+        };
+    }
+    public function getSaleTypeTextAttribute(): String
+    {
+        return match ($this->sales_type) {
+            'etat_cession' => 'Etat Cession',
+            'certificate_propriete' => 'Certificate Propriete',
+            'mutation_totale_normale' => 'Mutation Totale',
+            'mutation_totale_par_deces' => 'Mutation Par Deces',
+            'morcellement_normale' => 'Morcellement',
+            'morcellement_forcee' => 'Morcellement Force',
+            'retrait_indivision' => 'Retrait D\'indivision',
+            default => ''
+        };
+    }
+
 }

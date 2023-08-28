@@ -2,6 +2,7 @@
 
 namespace App\Models\Sales;
 
+use App\Models\EtatCession;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,6 +15,11 @@ class Saleable extends Model
     public function sale()
     {
         return $this->belongsTo(Sale::class, 'sale_id');
+    }
+
+    public function etat_cession()
+    {
+        return $this->belongsTo(EtatCession::class, 'saleable_id');
     }
 
     public function releveImmobilier()
