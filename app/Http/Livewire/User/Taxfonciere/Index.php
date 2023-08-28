@@ -1,34 +1,34 @@
 <?php
 
-namespace App\Http\Livewire\Portal\Taxfonciere;
+namespace App\Http\Livewire\User\Taxfonciere;
 
-use App\Http\Livewire\Traits\WithDataTables;
 use Livewire\Component;
 use App\Models\TitreFoncier;
-use Hachther\MeSomb\Operation\Payment\Collect;
+use App\Http\Livewire\Traits\WithDataTables;
 
 class Index extends Component
 {
+
     use WithDataTables;
 
     public $numero_titre_foncier;
     public $tax_amount;
     public $paymentStatus, $titrefoncier, $price, $transaction_number;
 
-    public function paiement()
-    {
-        $request = new Collect('677551952', 100, 'MTN', 'CM');
+    // public function paiement()
+    // {
+    //     $request = new Collect('677551952', 100, 'MTN', 'CM');
 
-        $payment = $request->pay();
+    //     $payment = $request->pay();
 
-        if($payment->success){
-            // Fire some event,Pay someone, Alert user
-        } else {
-            // fire some event, redirect to error page
-        }
+    //     if($payment->success){
+    //         // Fire some event,Pay someone, Alert user
+    //     } else {
+    //         // fire some event, redirect to error page
+    //     }
 
-        // get Transactions details $payment->transactions
-    }
+    //     // get Transactions details $payment->transactions
+    // }
 
     public function mount()
     {
@@ -49,13 +49,17 @@ class Index extends Component
         $this->tax_amount = $this->price * 0.001;
     }
 
+    
     public function render()
     {
-        $titrefonciers = TitreFoncier:: all();
+        $titresFonciers = auth()->user()->titrefonciers;
+        // dd($titresFonciers);
+        // dd(auth()->user()->id); 
         $titrefonciers_count = TitreFoncier::count();
-        return view('livewire.portal.taxfonciere.index', [
-            'titrefonciers' => $titrefonciers,
+        return view('livewire.user.taxfonciere.index', [
+            'titresFonciers' => $titresFonciers,
             'titrefonciers_count' => $titrefonciers_count,
         ]);
     }
+
 }

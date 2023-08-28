@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Livewire\Portal\QrCode\QRCodeScanner;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,11 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 
     Route::prefix('menu')->group(function () {
         Route::get('/paiement', App\Http\Livewire\User\Paiement\Index::class)->name('user.paiement');
+    });
+
+    Route::prefix('taxfonciere')->group(function () {
+        Route::get('/', App\Http\Livewire\User\Taxfonciere\Index::class)->name('user.taxfonciere.index');
+        // Route::get('/suivi-taxfoncier', App\Http\Livewire\Portal\Taxfonciere\SuiviTaxfonciere\Index::class)->name('portal.taxfonciere.suivi.index');
     });
 
 });
@@ -150,10 +156,12 @@ Route::group(
         Route::get('/maps', [TestController::class, 'index'])->name('portal.maps.index');
 
         Route::prefix('releve_immobilier')->group(function () {
-            Route::get('/bienImmobilier', App\Http\Livewire\Portal\ReleveImmobilier\BienImmobilier\Index::class)->name('portal.bien-mmobilier.index');
             Route::get('/immobilier', App\Http\Livewire\Portal\ReleveImmobilier\Immobilier\Index::class)->name('portal.immobilier.index');
+            Route::get('/bien_immobilier', App\Http\Livewire\Portal\BienImmobilier\Index::class)->name('portal.bien_immobilier.index');
         });
-        
+    
+
+        Route::get('/scanner', QRCodeScanner::class)->name('portal.qrcode');
 
         //Categories activites
         Route::prefix('category-activites')->group(function () {

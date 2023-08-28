@@ -6,11 +6,11 @@
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4"> {{ __('Immobilier') }}</h1>
-                        <p class="px-1"> {{ __('Créer un bien immobilier') }} &#128522;</p>
+                        <p class="px-1"> {{ __('Mettre à jour un bien immobilier') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <fieldset class="border p-3 mb-5 rounded">
-                            <legend class="w-auto">Real Estates Informations</legend>
+                            <legend class="w-auto">Informations</legend>
                             <div class='form-group row mb-3'>                                
                                 <div class=" col">
                                     <label for="releve_number">{{ __('Numéro de l\'immobilier') }}</label>

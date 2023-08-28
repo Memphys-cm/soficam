@@ -2,7 +2,7 @@
     <table>
         <tr style="font-size:14px">
             <td style="text-align:center">
-                <div><strong>MINISTERE DES DOMAINES <br> ET DES AFFAIRES FONCIERES</strong></div>
+                <div><strong></strong></div>
             </td>
             <td style="width: 250px;">
 

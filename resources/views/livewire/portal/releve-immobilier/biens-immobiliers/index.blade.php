@@ -1,7 +1,7 @@
 <div>
     <x-alert />
-    @include('livewire.portal.releve-immobilier.bien-immobilier.partials.create')
-    @include('livewire.portal.releve-immobilier.bien-immobilier.partials.edit')
+    @include('livewire.portal.releve-immobilier.biens-immobiliers.created')
+    @include('livewire.portal.releve-immobilier.biens-immobiliers.edited')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -28,7 +28,7 @@
                 <p class="mt-n1 mx-2">{{__('Voir tous les biens immobiliers')}} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateEstateModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
+                <a href="" data-bs-toggle="modal" data-bs-target="#CreateEstateModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{__('Nouveau')}}
@@ -84,6 +84,7 @@
                     <tr>
                         <th class="border-bottom">{{__('Numéro de l\'immobilier')}}</th>
                         <th class="border-bottom">{{__('Requerant')}}</th>
+                        <th class="border-bottom">{{__('Numéro titre foncier')}}</th>
                         <th class="border-bottom">{{__('Prix')}}</th>
                         <th class="border-bottom">{{__('Validité')}}</th>
                         <th class="border-bottom">{{__('Type de bien immobilier')}}</th>
@@ -94,56 +95,60 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($real_estates as $real_estate)
+                    @forelse($bien_immobiliers as $bien_immobilier)
                     <tr>
                         <td>
-                            <span class="fs-normal">{{$real_estate->releve_number }}</span>
+                            <span class="fs-normal">{{$bien_immobilier->releve_number }}</span>
                         </td>
                             
                         <td>
                             <div class="d-flex align-items-center">
-                                <div class="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-primary me-3"><span class="text-white">{{initials($real_estate->requestor->first_name)}}</span></div>
-                                <div class="d-block"><span class="fw-bold">{{$real_estate->requestor->first_name}}</span>
-                                    <div class="small text-gray">{{!empty($real_estate->requestor->first_name) ? $real_estate->requestor->first_name : ''}}</div>
+                                <div class="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-primary me-3"><span class="text-white">{{initials($bien_immobilier->requestor->first_name)}}</span></div>
+                                <div class="d-block"><span class="fw-bold">{{$bien_immobilier->requestor->first_name}}</span>
+                                    <div class="small text-gray">{{!empty($bien_immobilier->requestor->first_name) ? $bien_immobilier->requestor->first_name : ''}}</div>
                                 </div> 
                             </div>
                         </td>
-
                         <td>
-                            <span class="fs-normal">{{$real_estate->price }} {{__('XAF')}}</span>
+                            <span class="fs-normal">{{$bien_immobilier->titre_foncier_id}}</span>
                         </td>
 
                         <td>
-                            <span class="fs-normal">{{$real_estate->validity}}</span>
+                            <span class="fs-normal">{{$bien_immobilier->price }} {{__('XAF')}}</span>
                         </td>
 
                         <td>
-                            <span class="fs-normal">{{$real_estate->releves_type }}</span>
+                            <span class="fs-normal">{{$bien_immobilier->validity}}</span>
                         </td>
 
                         <td>
-                            <span class="fw-normal  badge super-badge p-2  bg-{{$real_estate->status_style}} rounded">{{$real_estate->status}}</span>
+                            <span class="fs-normal">{{$bien_immobilier->releves_type }}</span>
                         </td>
 
                         <td>
-                            <span class="fs-normal">{{$real_estate->recorded_by}}</span>
+                            <span class="fw-normal  badge super-badge p-2  bg-{{$bien_immobilier->status_style}} rounded">{{$bien_immobilier->status}}</span>
+                        </td>
+
+                        <td>
+                            <span class="fs-normal">{{$bien_immobilier->recorded_by}}</span>
                         </td>
                         
                         <td>
-                            <span class="fw-normal">{{$real_estate->created_at->format('Y-m-d')}}</span>
+                            <span class="fw-normal">{{$bien_immobilier->created_at->format('Y-m-d')}}</span>
                         </td>
 
                         <td>
-                            <a href="#" wire:click.prevent="initData({{ $real_estate->id }})" data-bs-toggle="modal" data-bs-target="#EditEstateModal">
+                            <a href="#" wire:click.prevent="initData({{ $bien_immobilier->id }})" data-bs-toggle="modal" data-bs-target="#EditEstateModal">
                                 <svg class="icon icon-sm text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                 </svg>
                             </a>
-                            <a href="#" wire:click.prevent="initData({{ $real_estate->id }})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
+                            <a href="#" wire:click.prevent="initData({{ $bien_immobilier->id }})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
                                 <svg class="icon icon-sm text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                                 </svg>
                             </a>
+                            <button class="btn btn-primary" wire:click.prevent="got">test</button>
                         </td>
 
                     </tr>
@@ -161,9 +166,9 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Afficher ')}} {{$perPage > $real_estates_count ? $real_estates_count : $perPage  }} {{__('element de')}} {{$real_estates_count}}
+                    {{__('Afficher ')}} {{$perPage > $bien_immobiliers_count ? $bien_immobiliers_count : $perPage  }} {{__('element de')}} {{$bien_immobiliers_count}}
                 </div>
-                {{ $real_estates->links() }}
+                {{ $bien_immobiliers->links() }}
             </div>
         </div>
     </div>
