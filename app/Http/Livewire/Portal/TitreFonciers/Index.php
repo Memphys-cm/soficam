@@ -83,10 +83,10 @@ class Index extends Component
     public function mount()
     { 
         //ceci est un exemple il sera supprimer plus tard
-        $utmCoordinates = ["783771.1412, 439362.2283","783771.1412, 439362.2283"];
-         $convertedResults = $this->convert($utmCoordinates);
+        // $utmCoordinates = ["783771.1412, 439362.2283","783771.1412, 439362.2283"];
+        //  $convertedResults = $this->convert($utmCoordinates);
 
-        dd($convertedResults);
+        // dd($convertedResults);
 
         // $this->convert();
         $this->users = User::with(['roles' => function ($role) {
@@ -168,7 +168,7 @@ class Index extends Component
         $lon = $pointDest->x;
 
         // Ajoutez le résultat à votre tableau de résultats en coordonnées décimales
-        $decimalResults[] = "$lat, $lon";
+        $decimalResults[] = "$lon, $lat";
     }
 
     return $decimalResults;
@@ -297,6 +297,8 @@ class Index extends Component
             return ['long' => explode(',', $value, 1), 'lat' => explode(',', $value, 2)];
         });
 
+        $transform = $this->convert($this->coordonnees);
+
         // $coordonne = $this->convert($this->coordonnees);
         // dd($coordonne);
         // dd(array_flatten($coords));
@@ -323,7 +325,7 @@ class Index extends Component
             'numero_bordereau_analytique' => $this->numero_bordereau_analytique,
             'volume_du_bordereau_analytique' => $this->volume_du_bordereau_analytique,
             'date_detablissement_du_bordereau_analytique' => $this->date_detablissement_du_bordereau_analytique,
-            'coordonnees' => json_encode($this->coordonnees),
+            'coordonnees' => json_encode($transform),
             'limit_nord' => $this->limit_nord,
             'limit_sud' => $this->limit_sud,
             'limit_est' => $this->limit_est,
