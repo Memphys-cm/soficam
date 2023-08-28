@@ -163,6 +163,9 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'charge_titre_foncier.update'],
             ['name' => 'charge_titre_foncier.delete'],
             ['name' => 'charge_titre_foncier.export_n_print'],
+
+            ['name' => 'tax_foncier.view'],
+            ['name' => 'tax_foncier.update'],
             
 
         ];

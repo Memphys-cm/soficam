@@ -25,6 +25,7 @@ class Index extends Component
     public $selectedStatus = null;
     public $startDate = null;
     public $endDate = null;
+    public $createdDate = null;
     public $selectedUsers = [];
     public $paymentType = ''; 
     public $phoneNumber = ''; 
@@ -80,25 +81,10 @@ class Index extends Component
         if ($payment->success) {
             $this->update();
         } else {
-            // Return a payment failed response
             return redirect()->back()->with('error', 'Payment failed');
         }
     }
 
-    // public function confirmOrder()
-    // {
-    //     $request = new Collect('656977999', 100, 'ORANGE', 'CM');
-
-    //     $payment = $request->pay();
-
-    //     if($payment->success){
-    //         // Fire some event,Pay someone, Alert user
-    //     } else {
-    //         // fire some event, redirect to error page
-    //     }
-
-    //     // get Transactions details $payment->transactions
-    // }
     public function update()
     {
         $this->validate(
@@ -155,23 +141,16 @@ class Index extends Component
     {
 
         $titrefonciers = TitreFoncier::search($this->query)->with('users')
-            ->when($this->selectedRegion, function ($query, $regionId) {
-                return $query->where('region_id', $regionId);
-            })
-            ->when($this->selectedDivision, function ($query, $divisionId) {
-                return $query->where('division_id', $divisionId);
-            })
+         
             ->when($this->selectedSubDivision, function ($query, $subDivisionId) {
                 return $query->where('sub_division_id', $subDivisionId);
             })
-            ->when($this->startDate, function ($query) {
-                return $query->whereDate('date_de_delivrance_du_TF', '>=', $this->startDate);
-            })
-            ->when($this->endDate, function ($query) {
-                return $query->whereDate('date_de_delivrance_du_TF', '<=', $this->endDate);
-            })
+            ->when($this->createdDate, function ($query) {
+                return $query->whereDate('date_tax', '>=', $this->createdDate);
+            })            
+           
             ->when($this->selectedStatus, function ($query, $selectedStatus) {
-                return $query->where('etat_TF', $selectedStatus);
+                return $query->where('status_tax', $selectedStatus);
             })
             ->orderBy($this->orderBy, $this->orderAsc)
             ->paginate($this->perPage);
