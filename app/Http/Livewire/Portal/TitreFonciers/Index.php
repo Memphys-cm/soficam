@@ -65,6 +65,7 @@ class Index extends Component
 
     public $coordinates = ['', ''];
     public $coordonnees = [];
+    public $coordonne = [];
 
 
 
@@ -81,14 +82,14 @@ class Index extends Component
 
     public function mount()
     {
-        $utmCoordinates = [
-            [783771.1412, 439362.2283], [783772.7367, 439361.3785], [783772.7367, 439318.5813],
-            [783772.7367, 439268.5813], [783772.7367, 439218.5813], [783772.7367, 439116.5813],
-            [783722.7367, 439168.5813], [783672.7367, 439168.5813],[783622.7367, 439168.5813]
-        ];
-        $convertedResults = $this->convert($utmCoordinates);
+        // $utmCoordinates = [
+        //     [783771.1412, 439362.2283], [783772.7367, 439361.3785], [783772.7367, 439318.5813],
+        //     [783772.7367, 439268.5813], [783772.7367, 439218.5813], [783772.7367, 439116.5813],
+        //     [783722.7367, 439168.5813], [783672.7367, 439168.5813],[783622.7367, 439168.5813]
+        // ];
+        // $convertedResults = $this->convert($utmCoordinates);
 
-        dd($convertedResults);
+        // dd($convertedResults);
 
         // $this->convert();
         $this->users = User::with(['roles' => function ($role) {
@@ -230,34 +231,34 @@ class Index extends Component
         }
         // dd($this->user_ids);
 
-        $this->validate([
-            'numero_titre_foncier' => 'required',
-            'region_id' => 'required',
-            'division_id' => 'required',
-            'sub_division_id' => 'required',
-            'date_de_delivrance_du_TF' => 'required|date',
-            // 'numero_du_duplicata' => 'required|integer',
-            'groupement' => 'required',
-            'lieu_dit' => 'required',
-            'zone' => 'required',
-            'numero_folio' => 'required|integer',
-            'volume' => 'required|integer',
-            'superficie_du_TF_mere' => 'required',
-            'etat_TF' => 'required',
-            'etat_terrain' => 'required',
-            'provenance_TF' => 'required',
-            // 'numero_bordereau_analytique' => 'required',
-            // 'volume_du_bordereau_analytique' => 'required',
-            // 'date_detablissement_du_bordereau_analytique' => 'required',
-            'limit_nord' => 'required',
-            'limit_sud' => 'required',
-            'limit_est' => 'required',
-            'limit_ouest' => 'required',
-            'coordonnees' => 'required',
-            'numero_ccp' => 'required',
-            'user_ids' => 'required|array|min:1',
-            'user_ids.*' => 'required',
-        ]);
+        // $this->validate([
+        //     'numero_titre_foncier' => 'required',
+        //     'region_id' => 'required',
+        //     'division_id' => 'required',
+        //     'sub_division_id' => 'required',
+        //     'date_de_delivrance_du_TF' => 'required|date',
+        //     // 'numero_du_duplicata' => 'required|integer',
+        //     'groupement' => 'required',
+        //     'lieu_dit' => 'required',
+        //     'zone' => 'required',
+        //     'numero_folio' => 'required|integer',
+        //     'volume' => 'required|integer',
+        //     'superficie_du_TF_mere' => 'required',
+        //     'etat_TF' => 'required',
+        //     'etat_terrain' => 'required',
+        //     'provenance_TF' => 'required',
+        //     // 'numero_bordereau_analytique' => 'required',
+        //     // 'volume_du_bordereau_analytique' => 'required',
+        //     // 'date_detablissement_du_bordereau_analytique' => 'required',
+        //     'limit_nord' => 'required',
+        //     'limit_sud' => 'required',
+        //     'limit_est' => 'required',
+        //     'limit_ouest' => 'required',
+        //     'coordonnees' => 'required',
+        //     'numero_ccp' => 'required',
+        //     'user_ids' => 'required|array|min:1',
+        //     'user_ids.*' => 'required',
+        // ]);
 
         // dd($this->coordonnees);
 
@@ -265,6 +266,9 @@ class Index extends Component
         collect($this->coordonnees)->map(function ($value, $key) {
             return ['long' => explode(',', $value, 1), 'lat' => explode(',', $value, 2)];
         });
+
+        $coordonne = $this->convert($this->coordonnees);
+        // dd($coordonne);
         // dd(array_flatten($coords));
 
         // /{"B1": "564321.00, 452564.00", "B2": "564335.746, 452548.271", "B3": "564315.224,452531.059", "B4": "564303.601,452544.471"}
