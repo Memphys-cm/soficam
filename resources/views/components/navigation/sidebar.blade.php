@@ -245,7 +245,7 @@
 
                                 @can('immobilier.view')
                                 <li class="nav-item">
-                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.bien-mmobilier.index') || $request->routeIs('portal.immobilier.index') ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-rbi"><span>
+                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.bien_mmobilier.index') || $request->routeIs('portal.immobilier.index') ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-rbi"><span>
                                             <span class="sidebar-icon">
                                                 <svg class="icon icon-sm " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122" />
@@ -260,7 +260,7 @@
                                             </svg>
                                         </span>
                                     </span>
-                                    <div class="multi-level collapse {{ $request->routeIs('portal.bien-mmobilier.index') || $request->routeIs('portal.immobilier.index') ? 'show' : '' }}" role="list" id="submenu-rbi" aria-expanded="{{ $request->routeIs('portal.regions.index') || $request->routeIs('portal.division.index') || $request->routeIs('portal.sub_division.index') ? 'false' : 'true' }}">
+                                    <div class="multi-level collapse {{ $request->routeIs('portal.bien_immobilier.index') || $request->routeIs('portal.immobilier.index') ? 'show' : '' }}" role="list" id="submenu-rbi" aria-expanded="{{ $request->routeIs('portal.regions.index') || $request->routeIs('portal.division.index') || $request->routeIs('portal.sub_division.index') ? 'false' : 'true' }}">
                                         <ul class="flex-column nav">
                                             @can('immobilier.view')
                                             <li class="nav-item {{ $request->routeIs('portal.immobilier.index') ? 'active' : '' }}">
@@ -270,8 +270,8 @@
                                             </li>
                                             @endcan
                                             @can('immobilier.view')
-                                            <li class="nav-item {{ $request->routeIs('portal.bien-mmobilier.index') ? 'active' : '' }}">
-                                                <a href="{{ route('portal.bien-mmobilier.index') }}" class="nav-link">
+                                            <li class="nav-item {{ $request->routeIs('portal.bien_immobilier.index') ? 'active' : '' }}">
+                                                <a href="{{ route('portal.bien_immobilier.index') }}" class="nav-link">
                                                     <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Biens Immo') }}</span>
                                                 </a>
                                             </li>
@@ -298,7 +298,7 @@
 
                                 @can('user.view')
                                 <li class="nav-item">
-                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.sales-report.index') ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-reports"><span>
+                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.sales-report.index') || $request->routeIs('portal.taxfonciere.suivi.index') ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-reports"><span>
                                             <span class="sidebar-icon">
                                                 <svg class="icon icon-sm " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
@@ -314,12 +314,19 @@
                                             </svg>
                                         </span>
                                     </span>
-                                    <div class="multi-level collapse {{ $request->routeIs('portal.sales-report.index') ? 'show' : '' }}" role="list" id="submenu-reports" aria-expanded="{{ $request->routeIs('portal.sales-report.index')  ? 'true' : 'false' }}">
+                                    <div class="multi-level collapse {{ $request->routeIs('portal.sales-report.index') || $request->routeIs('portal.taxfonciere.suivi.index') ? 'show' : '' }}" role="list" id="submenu-reports" aria-expanded="{{ $request->routeIs('portal.sales-report.index')  ? 'true' : 'false' }}">
                                         <ul class="flex-column nav">
                                             @can('cabinet.view')
                                             <li class="nav-item {{ $request->routeIs('portal.sales-report.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.sales-report.index') }}" class="nav-link">
                                                     <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Paiements') }}</span>
+                                                </a>
+                                            </li>
+                                            @endcan
+                                            @can('tax_foncier.view')
+                                            <li class="nav-item {{ $request->routeIs('portal.taxfonciere.suivi.index') ? 'active' : '' }}">
+                                                <a href="{{ route('portal.taxfonciere.suivi.index') }}" class="nav-link">
+                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Suivi TaxFoncier') }}</span>
                                                 </a>
                                             </li>
                                             @endcan

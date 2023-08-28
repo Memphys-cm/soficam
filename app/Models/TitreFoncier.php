@@ -101,6 +101,8 @@ class TitreFoncier extends Model implements HasMedia
                 $q->orWhere('numero_titre_foncier', 'like', '%' . $query . '%');                
                 $q->orWhere('zone', 'like', '%' . $query . '%');                
                 $q->orWhere('etat_TF', 'like', '%' . $query . '%'); 
+                $q->orWhere('status_tax', 'like', '%' . $query . '%'); 
+                $q->orWhere('date_tax', 'like', '%' . $query . '%'); 
                 $q->orWhereHas('region', function ($q) use ($query) {
                     $q->where('region_name_en', 'like', '%' . $query . '%');
                     $q->where('region_name_fr', 'like', '%' . $query . '%');

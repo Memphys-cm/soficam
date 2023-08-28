@@ -19,29 +19,19 @@ class Index extends Component
     public $users, $titrefoncier;
     public ?string $query = null;
 
-    public $selectedRegion=null;
-    public $selectedDivision=null;
-    public $selectedSubDivision=null;
-    public $selectedStatus=null;
+    public $selectedRegion = null;
+    public $selectedDivision = null;
+    public $selectedSubDivision = null;
+    public $selectedStatus = null;
     public $startDate = null;
     public $endDate = null;
-    public $selectedUsers=[];
-    public $status_tax, $tax_amount, $price, $payment_method, $primary_phone_number;
+    public $createdDate = null;
+    public $selectedUsers = [];
+    public $paymentType = ''; 
+    public $phoneNumber = ''; 
+    public $status_tax, $tax_amount, $price, $payment_method;
 
-    public function confirmOrder()
-    {
-        $request = new Collect('676922042', 1000, 'MTN', 'CM');
 
-        $payment = $request->pay();
-
-        if($payment->success){
-            // Fire some event,Pay someone, Alert user
-        } else {
-            // fire some event, redirect to error page
-        }
-
-        // get Transactions details $payment->transactions
-    }
     public function mount()
     {
         $this->users = User::with(['roles' => function ($role) {
@@ -49,7 +39,7 @@ class Index extends Component
         }])->get();
         // $user = User::findOrFail(22);
         // dd($user->titrefoncier);
-       $this->titrefoncier = TitreFoncier::all();
+        $this->titrefoncier = TitreFoncier::all();
     }
 
     public function initData($id)
@@ -60,19 +50,48 @@ class Index extends Component
 
         $this->status_tax =  $titrefoncier->status_tax;
         $this->price =  $titrefoncier->price;
-     
-        
+
+
         $this->tax_amount = $this->price * 0.001;
-       
     }
-   
+
+    public function confirmOrder()
+    {
+        $rules = [
+            'paymentType' => 'required|in:MTN,ORANGE',
+        ];
+
+        if ($this->paymentType === 'MTN') {
+            $rules['phoneNumber'] = [
+                'required',
+                'regex:/(:?^6(:?(:?7)(:?\d){7}$))|(:?^6(:?(:?5[0-4])(:?\d){6}$))|(:?^6(:?(:?8)(:?\d){7}$))/',
+            ];
+        } elseif ($this->paymentType === 'ORANGE') {
+            $rules['phoneNumber'] = [
+                'required',
+                'regex:/(:?^6(:?(:?9)(:?\d){7}$))|(:?^6(:?(:?5[5-9])(:?\d){6}$))/',
+            ];
+        }
+
+        $this->validate($rules);
+
+        $request = new Collect($this->phoneNumber, $this->tax_amount, $this->paymentType, 'CM');
+        $payment = $request->pay();
+
+        if ($payment->success) {
+            $this->update();
+        } else {
+            return redirect()->back()->with('error', 'Payment failed');
+        }
+    }
+
     public function update()
     {
         $this->validate(
             [
                 'status_tax' => 'required',
-                'tax_amount' => 'required|integer', 
-               
+                'tax_amount' => 'required|integer',
+
             ]
         );
         if (!empty($this->titrefoncier)) {
@@ -81,7 +100,7 @@ class Index extends Component
                 'status_tax' => $this->status_tax,
                 'date_tax' => now(),
                 'tax_amount' => $this->tax_amount,
-           
+
             ]);
             $sale = Sale::create([
                 'sales_amount' => $this->tax_amount,
@@ -89,7 +108,7 @@ class Index extends Component
                 'payment_status' => 'totally_paid',
                 'created_by' => auth()->user()->name,
             ]);
-            dd($sale);
+            // dd($sale);
             // Create the Saleable item using only the specified information
             $saleableData = [
                 'sale_id' => $sale->id,
@@ -107,42 +126,34 @@ class Index extends Component
         $this->clearFields();
 
         $this->refresh(__('Tax Foncier successfully Updated'), 'paiement');
-
     }
 
-    public function clearFields(){
+    public function clearFields()
+    {
         $this->payment_method = '';
         $this->tax_amount = '';
         $this->status_tax = '';
         $this->price = '';
-        $this->primary_phone_number = '';
-        
+        $this->phoneNumber = '';
     }
 
     public function render()
     {
 
         $titrefonciers = TitreFoncier::search($this->query)->with('users')
-        ->when($this->selectedRegion, function ($query, $regionId) {
-            return $query->where('region_id', $regionId);
-        })
-        ->when($this->selectedDivision, function ($query, $divisionId) {
-            return $query->where('division_id', $divisionId);
-        })
-        ->when($this->selectedSubDivision, function ($query, $subDivisionId) {
-            return $query->where('sub_division_id', $subDivisionId);
-        })
-        ->when($this->startDate, function ($query) {
-            return $query->whereDate('date_de_delivrance_du_TF', '>=', $this->startDate);
-        })
-        ->when($this->endDate, function ($query) {
-            return $query->whereDate('date_de_delivrance_du_TF', '<=', $this->endDate);
-        })
-        ->when($this->selectedStatus, function ($query, $selectedStatus) {
-            return $query->where('etat_TF', $selectedStatus);
-        })
-        ->orderBy($this->orderBy, $this->orderAsc)
-        ->paginate($this->perPage);
+         
+            ->when($this->selectedSubDivision, function ($query, $subDivisionId) {
+                return $query->where('sub_division_id', $subDivisionId);
+            })
+            ->when($this->createdDate, function ($query) {
+                return $query->whereDate('date_tax', '>=', $this->createdDate);
+            })            
+           
+            ->when($this->selectedStatus, function ($query, $selectedStatus) {
+                return $query->where('status_tax', $selectedStatus);
+            })
+            ->orderBy($this->orderBy, $this->orderAsc)
+            ->paginate($this->perPage);
 
         $titrefonciers_count = TitreFoncier::count();
         $titrefonciers_with_tax = TitreFoncier::whereNotNull('tax_amount')->count();

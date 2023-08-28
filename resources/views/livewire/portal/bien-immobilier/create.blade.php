@@ -1,6 +1,6 @@
 <div wire:ignore.self class="modal side-layout-modal fade" id="CreateEstateModal" tabindex="-1" aria-labelledby="modal-form"
     style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:70%;">
+    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:45%;">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
@@ -9,7 +9,7 @@
                         <p class="px-1"> {{ __('Créer un bien immobilier') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="store">
-                        <fieldset class="border p-3 mb-5 rounded">
+                        <fieldset class="border p-3 mb-3 rounded">
                             <legend class="w-auto">Informations sur les biens immobiliers</legend>
                             <div class='form-group row mb-3'>                                
                                 <div class=" col">
@@ -57,14 +57,20 @@
                                     @enderror
                                 </div>
                             </div>
-
-                            <div class="form-group row mb-3 px-2">
+                            <div class="form-group mb-3 row mr-5 ml-5">
+                                <label for="titre_foncier_id">{{__('Numéro Titre Foncier')}}</label>
+                                <x-input.select wire:model="titre_foncier_id" prettyname="titre_foncier_id" :options="$titrefoncier->pluck('numero_titre_foncier', 'id')->toArray()" />
+                                @error('titre_foncier_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div> 
+                            <div class="form-group row mb-1 px-2">
                                 <label for="releve_reason">Pourquoi avez-vous voulu créer ce bien immobilier ? ?</label>
                                 <textarea class="form-control" wire:model="releve_reason" name="releve_reason" id="releve_reason" placeholder="Enter the reason here"></textarea>
                             </div>
                         </fieldset>
 
-                        <div class="d-flex align-items-end mt-5 d-flex justify-content-end">
+                        <div class="d-flex align-items-end mt-2 d-flex justify-content-end">
                             <button type="button" class="btn btn-sm btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
                             <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-sm btn-loading">
                                 <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
