@@ -163,6 +163,15 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'charge_titre_foncier.update'],
             ['name' => 'charge_titre_foncier.delete'],
             ['name' => 'charge_titre_foncier.export_n_print'],
+
+
+            ['name' => 'imma_directe.view'],
+            ['name' => 'imma_directe.create'],
+            ['name' => 'imma_directe.update'],
+            ['name' => 'imma_directe.coter'],
+            ['name' => 'imma_directe.ordre_versement'],
+            ['name' => 'imma_directe.view_detail'],
+            ['name' => 'imma_directe.export_n_print'],
             
 
         ];

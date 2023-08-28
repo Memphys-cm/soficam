@@ -54,7 +54,7 @@
                                 </div>
                             </div>
                         </div>
-                        @foreach ($comissions as $index => $user)
+                        {{-- @foreach ($comissions as $index => $user)
                             <div class="row my-1 py-1">
                                 <div class="col-md-5">
                                 <label>{{__('Nom')}} </label>
@@ -89,7 +89,7 @@
                             </svg>
                             {{ __('Ajouter un membre') }}</button>
                         <button class="btn btn-primary" type="submit">{{ __('Enregistrer') }}</button>
-                        <hr>
+                        <hr> --}}
 
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"

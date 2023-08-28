@@ -13,14 +13,26 @@ return new class extends Migration
     {
         Schema::create('immatriculation_directes', function (Blueprint $table) {
             $table->id();
-            $table->string('reference');
-            $table->string('localisation');
+            $table->string('reference')->nullable();
+            $table->string('localisation')->nullable();
             $table->foreignId('titre_foncier_id')->index()->nullable();
-            $table->string('numero_bordereau_transmission')->nullable;
-            $table->string('status')->nullable();
-            $table->string('StatusStyle')->nullable();
+            $table->string('numero_bordereau_transmission')->nullable();
+            $table->string('next_step')->nullable();
+            $table->string('statut')->nullable();
+            $table->string('StatutStyle')->nullable();
             $table->date('date_delivrance')->nullable();
             $table->json('comissions')->nullable();
+
+            $table->foreignId('service_id')->on('services')->index()->nullable();
+            $table->foreignId('cotation_user_id')->on('users')->index()->nullable();
+            $table->string('observation_cotation')->nullable();
+            $table->date('date_cotation')->nullable();
+            $table->enum('status_cotation', ['no_done','pending','done'])->default('no_done');
+
+            $table->float('montant_ordre_versement')->nullable();
+            $table->date('date_ordre_versement')->nullable();
+            $table->enum('status_ordre_versement', ['no_done','pending','done'])->default('no_done');
+
             $table->timestamps();
         });
     }
