@@ -10,10 +10,13 @@ use App\Models\Sales\Sale;
 use App\Models\SubDivision;
 use Illuminate\Support\Str;
 use App\Models\TitreFoncier;
+use App\Models\Region;
+use App\Models\Division;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use App\Models\ImmatriculationDirecte;
 use App\Http\Livewire\Traits\WithDataTables;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Index extends Component
 {
@@ -25,6 +28,12 @@ class Index extends Component
 
     public $state = 0, $price_m2, $users, $user_id, $user_ids, $comissions = [] , $localisation;
     public $attachements , $services , $service_id , $observation , $montant_ordre_versement;
+    public $region_id;
+    public $division_id;
+    public $sub_division_id;
+    public $regions;
+    public $divisions = [];
+    public $sub_divisions = [];
 
     public function mount()
     {
@@ -33,6 +42,20 @@ class Index extends Component
             return $role->whereIn('name', ['user'])->get();
         }])->get();
         $this->services = Service::select('id','service_name_fr')->get();
+        $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
+    }
+
+    public function updatedRegionID($region_id)
+    {
+        if (!empty($region_id)) {
+            $this->divisions = Division::whereRegionId($region_id)->get();
+        }
+    }
+    public function updatedDivisionID($division_id)
+    {
+        if (!empty($division_id)) {
+            $this->sub_divisions = SubDivision::whereDivisionId($division_id)->get();
+        }
     }
 
     public function addRow()
@@ -66,6 +89,9 @@ class Index extends Component
         'reference' => Str::upper(Str::random(7)) . "" . now()->format('msu'),
         // 'requestor_id' => $this->user_id,
         'localisation' => $this->localisation,
+        'region_id' => $this->region_id,
+        'division_id' => $this->division_id,
+        'sub_division_id' => $this->sub_division_id,
         'statut' => 'Dossier Ouvert',
         'next_step' => 'Cotation du Dossier au CSDAF',
         'StatutStyle' => 'info',
@@ -148,10 +174,31 @@ class Index extends Component
 
         DB::table('saleables')->insert($saleableData);
 
+        $this->printPdf();
 
         $this->refresh(__('Ordre de Versement Enregistrer Avec SUCCES!'), 'OrdreVersementImmaDirecteModal');
 
         $this->clearFields();
+    }
+
+    public function  printPdf()
+    {
+        // $ordre = CertificatePropriete::findOrFail($id);
+        // $data = [
+        //     'certificatepropriete' => $this->certificatepropriete,
+        //     'titrefoncier' => $this->titre_fonciers,
+        //     // Autres données que vous souhaitez afficher dans la vue
+        // ];
+
+        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.ordre-versement'
+        // ,$data
+        )->setPaper('a4', 'portrait');
+
+
+        return response()->streamDownload(
+            fn () => print($pdf->output()),
+            __('OrdreVersement-') . Str::random('10') . ".pdf"
+        );
     }
 
     public function clearFields()

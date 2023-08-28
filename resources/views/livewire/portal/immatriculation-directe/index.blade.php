@@ -177,7 +177,7 @@
                             </a>
                             @endif
                             @endcan
-
+                            {{-- <button class="btn btn-primary" wire:click="printPdf">Pdf</button> --}}
                             @can('titre_foncier.delete')
                             <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer le Dossier Ici" wire:click.prevent="initData({{$imma_directe->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
                                 <svg class="icon icon-sm text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

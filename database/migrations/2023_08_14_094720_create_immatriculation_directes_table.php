@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('reference')->nullable();
             $table->string('localisation')->nullable();
+            $table->foreignId('region_id')->index();
+            $table->foreignId('division_id')->index();
+            $table->foreignId('sub_division_id')->index();
             $table->foreignId('titre_foncier_id')->index()->nullable();
             $table->string('numero_bordereau_transmission')->nullable();
             $table->string('next_step')->nullable();
@@ -30,8 +33,16 @@ return new class extends Migration
             $table->enum('status_cotation', ['no_done','pending','done'])->default('no_done');
 
             $table->float('montant_ordre_versement')->nullable();
+            $table->string('numero_ordre_versement')->nullable();
+            $table->float("superficie_ordre_versement")->nullable();
+            $table->string('numero_arrete_ordre_versement')->nullable();
             $table->date('date_ordre_versement')->nullable();
             $table->enum('status_ordre_versement', ['no_done','pending','done'])->default('no_done');
+
+            $table->status('status_avis_publique')->nullable();
+            $table->date('date_avis_publique');
+            $table->status('status_certificat_d\'affichage')->nullable();
+            $table->date('date_certificat_d\'affichage');
 
             $table->timestamps();
         });
