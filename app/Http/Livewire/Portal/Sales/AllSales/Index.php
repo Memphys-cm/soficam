@@ -56,10 +56,7 @@ class Index extends Component
                 Saleable::where('sale_id', $this->allsales->id)
                     ->update(['saleable_type' => 'DISPONIBLE']);
             }
-            // $this -> immobilier->update([
-            //     'status' => $this->payment_status,
-               
-            // ]);
+           
 
             // when sales is successful
             // 1. Get the saleable item for that sale.
