@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Livewire\Portal\QrCode\QRCodeScanner;
 
 /*
 |--------------------------------------------------------------------------
@@ -154,10 +155,12 @@ Route::group(
         Route::get('/maps', [TestController::class, 'index'])->name('portal.maps.index');
 
         Route::prefix('releve_immobilier')->group(function () {
-            Route::get('/bienImmobilier', App\Http\Livewire\Portal\ReleveImmobilier\BienImmobilier\Index::class)->name('portal.bien-mmobilier.index');
             Route::get('/immobilier', App\Http\Livewire\Portal\ReleveImmobilier\Immobilier\Index::class)->name('portal.immobilier.index');
         });
         
+        Route::get('/bien_immobilier', App\Http\Livewire\Portal\BienImmobilier\Index::class)->name('portal.bien_immobilier.index');
+
+        Route::get('/scanner', QRCodeScanner::class)->name('portal.qrcode');
 
         //Categories activites
         Route::prefix('category-activites')->group(function () {
