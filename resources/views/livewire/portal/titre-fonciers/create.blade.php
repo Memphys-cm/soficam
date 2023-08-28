@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{$state ? __('Update') : __('Register')}}{{__(' a Land title')}}</h1>
-                        <p class="px-1"> {{$state ? __('Update') : __('Register')}}{{__(' a Land title certificate')}} </p>
+                        <h1 class="mb-0 h4"> {{$state ? __('Update') : __('Enregistrer')}}{{__(' un titre foncier')}}</h1>
+                        <p class="px-1"> {{$state ? __('Update') : __('Enregistrer')}}{{__(' un certificat foncier')}} </p>
                     </div>
                     <x-form-items.form wire:submit="{{$state ? 'update':'store'}}">
                         <div class='form-group mb-3 row'>
@@ -53,7 +53,7 @@
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label class="px-2" for="division_id">{{__('Sous Region')}}</label>
+                                <label class="px-2" for="division_id">{{__('Departement')}}</label>
                                 <select wire:model="division_id" name="division_id" class="form-select  @error('division_id') is-invalid @enderror" required="">
                                     @foreach($divisions as $division)
                                     <option value="{{$division->id}}">{{$division->division_name}}</option>
