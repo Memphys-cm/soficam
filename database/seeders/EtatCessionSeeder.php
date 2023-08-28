@@ -40,7 +40,7 @@ class EtatCessionSeeder extends Seeder
             $sale = Sale::create([
                 'user_id' => $etat_cession->user_id,
                 'sales_amount' => $etat_cession->cout_etat_cession,
-                'sales_type' => 'EtatCession',
+                'sales_type' => 'etat_cession',
                 'created_by' => User::role('super_admin')->first()->name,
             ]);
 

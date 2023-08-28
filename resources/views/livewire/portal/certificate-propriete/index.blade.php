@@ -138,9 +138,7 @@
                         <td>{{ $certificatepropriete->certificate_proprietes_type }}</td>
 
                         <td>
-                            {{-- <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $this->getStatusClass($certificatepropriete->status) }}">
-                            {{ ucfirst($certificatepropriete->status) }}
-                            </span> --}}
+                           
                             <span class="fw-normal badge super-badge p-2 bg-{{$certificatepropriete->statusStyle}} round">{{$certificatepropriete->status}}</span>
 
                         </td>

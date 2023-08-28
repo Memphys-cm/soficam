@@ -35,9 +35,9 @@ class CertificateProprieteSeeder extends Seeder
             ]);
 
             $sale = Sale::create([
-                'user_id' => $certificat_pro->user_id,
+                'user_id' => $certificat_pro->requestor_id,
                 'sales_amount' => $certificat_pro->price,
-                'sales_type' => 'CertificatePropriete',
+                'sales_type' => 'certificate_propriete',
                 'created_by' => User::role('super_admin')->first()->name,
             ]);
 

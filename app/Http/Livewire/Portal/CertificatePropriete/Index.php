@@ -60,7 +60,7 @@ class Index extends Component
             $sale = Sale::create([
                 'user_id' => $this->requestor_id,
                 'sales_amount' => $this->price,
-                'sales_type' => 'CertificatePropriete',
+                'sales_type' => 'certificate_propriete',
                 'created_by' => auth()->user()->name,
             ]);
 

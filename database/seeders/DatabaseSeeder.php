@@ -57,8 +57,8 @@ class DatabaseSeeder extends Seeder
         $user->assignRole('super_admin');
 
         $this->call(TitreFoncierSeeder::class);
-        $this->call(EtatCessionSeeder::class);
         $this->call(CertificateProprieteSeeder::class);
+        $this->call(EtatCessionSeeder::class);
         
     }
 }
