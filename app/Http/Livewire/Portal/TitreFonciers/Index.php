@@ -89,6 +89,7 @@ class Index extends Component
         // ];
         // $convertedResults = $this->convert($utmCoordinates);
 
+
         // dd($convertedResults);
 
         // $this->convert();
@@ -165,9 +166,9 @@ class Index extends Component
             // Transformez le point entre les systèmes de coordonnées
             $pointDest = $proj4->transform($projWGS84, $pointSrc);
 
-            // Ajoutez le résultat à votre tableau de résultats en coordonnées décimales
-            $decimalResults[] = $pointDest->toShortString();
-        }
+        // Ajoutez le résultat à votre tableau de résultats en coordonnées décimales
+        $decimalResults[] = "$lat, $lon";
+    }
 
         return $decimalResults;
     }
@@ -294,6 +295,8 @@ class Index extends Component
             return ['long' => explode(',', $value, 1), 'lat' => explode(',', $value, 2)];
         });
 
+        $transform = $this->convert($this->coordonnees);
+
         // $coordonne = $this->convert($this->coordonnees);
         // dd($coordonne);
         // dd(array_flatten($coords));
@@ -320,7 +323,7 @@ class Index extends Component
             'numero_bordereau_analytique' => $this->numero_bordereau_analytique,
             'volume_du_bordereau_analytique' => $this->volume_du_bordereau_analytique,
             'date_detablissement_du_bordereau_analytique' => $this->date_detablissement_du_bordereau_analytique,
-            'coordonnees' => json_encode($this->coordonnees),
+            'coordonnees' => json_encode($transform),
             'limit_nord' => $this->limit_nord,
             'limit_sud' => $this->limit_sud,
             'limit_est' => $this->limit_est,
