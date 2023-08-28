@@ -43,6 +43,11 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
         Route::get('/paiement', App\Http\Livewire\User\Paiement\Index::class)->name('user.paiement');
     });
 
+    Route::prefix('taxfonciere')->group(function () {
+        Route::get('/', App\Http\Livewire\User\Taxfonciere\Index::class)->name('user.taxfonciere.index');
+        // Route::get('/suivi-taxfoncier', App\Http\Livewire\Portal\Taxfonciere\SuiviTaxfonciere\Index::class)->name('portal.taxfonciere.suivi.index');
+    });
+
 });
 
 
