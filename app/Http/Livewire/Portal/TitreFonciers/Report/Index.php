@@ -384,10 +384,19 @@ class Index extends Component
         ->paginate($this->perPage);
 
         $titrefonciers_count = TitreFoncier::count();
+        $titrefonciers_with_tax = TitreFoncier::whereNotNull('tax_amount')->count();
+        $totalTaxAmount = TitreFoncier::sum('tax_amount');
+        $tax_paid_percentage = TitreFoncier::whereNotNull('tax_amount')->count() / TitreFoncier::count() * 100;
+
+
+
 
         return view('livewire.portal.titre-fonciers.report.index', [
             'titrefonciers' => $titrefonciers,
             'titrefonciers_count' => $titrefonciers_count,
-        ])->layout('components.layouts.dashboard');
+            'titrefonciers_with_tax' => $titrefonciers_with_tax,
+            'totalTaxAmount' => $totalTaxAmount,
+            'tax_paid_percentage' => $tax_paid_percentage,
+        ]);
     }
 }
