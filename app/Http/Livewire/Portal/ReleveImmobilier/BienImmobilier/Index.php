@@ -23,6 +23,9 @@ class Index extends Component
     {
         $this->requestors = User::role('user')->select('id', 'first_name', 'last_name')->get();
     }
+    public function cul(){
+        dd('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+    }
 
     public function initData($id)
     {
@@ -37,6 +40,7 @@ class Index extends Component
         $this->price =  $real_estate->price;
         $this->validity =  $real_estate->validity;
         $this->status =  $real_estate->status;
+        $this->requestor_id =  $real_estate->requestor_id;
 
     }
 
