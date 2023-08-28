@@ -9,7 +9,7 @@
                         <h1 class="mb-0 h4"> {{ __('Paiement de la Tax Foncier') }}</h1>
                         <p class="px-1"> {{ __('Payer une Tax Foncier') }} &#128522;</p>
                     </div>
-                    <x-form-items.form wire:submit="update">
+                    <x-form-items.form wire:submit="confirmOrder">
                         <div class='form-group mb-3 row'>
                             <div class="col">
                                 <label for="paymentType">Moyen de paiement </label>
@@ -48,7 +48,7 @@
                                 @enderror
                             </div> 
                         </div>
-                        <button wire:click="confirmOrder" type="submit" class="btn btn-primary">pay</button>
+                        {{-- <button wire:click="confirmOrder" type="submit" class="btn btn-primary">pay</button> --}}
                         <div class='form-group mb-3 row'>
                             <div class="col">
                                 <label for="status_tax">{{ __('Statut_paiement Immobilier ') }}</label>

@@ -17,7 +17,7 @@ class Index extends Component
 
     public function paiement()
     {
-        $request = new Collect('677551952', 10, 'MTN', 'CM');
+        $request = new Collect('677551952', 100, 'MTN', 'CM');
 
         $payment = $request->pay();
 

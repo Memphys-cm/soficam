@@ -68,7 +68,7 @@ class Index extends Component
         } elseif ($this->paymentType === 'ORANGE') {
             $rules['phoneNumber'] = [
                 'required',
-                'regex:/(:?^6(:?(:?9)(:?\d){7}$))|(:?^6(:?(:?5[5-9])(:?\d){6}$))/"',
+                'regex:/(:?^6(:?(:?9)(:?\d){7}$))|(:?^6(:?(:?5[5-9])(:?\d){6}$))/',
             ];
         }
 
@@ -78,41 +78,7 @@ class Index extends Component
         $payment = $request->pay();
 
         if ($payment->success) {
-            $this->validate([
-                'status_tax' => 'required',
-                'tax_amount' => 'required|integer',
-            ]);
-
-            if (!empty($this->titrefoncier)) {
-                $this->titrefoncier->update([
-                    'status_tax' => $this->status_tax,
-                    'date_tax' => now(),
-                    'tax_amount' => $this->tax_amount,
-                ]);
-
-                $sale = Sale::create([
-                    'sales_amount' => $this->tax_amount,
-                    'sales_type' => 'tax_foncier',
-                    'payment_status' => 'totally_paid',
-                    'created_by' => auth()->user()->name,
-                ]);
-
-                // Create the Saleable item using only the specified information
-                $saleableData = [
-                    'sale_id' => $sale->id,
-                    'price' => $this->tax_amount,
-                    'quantity' => 1,
-                    'saleable_id' => $this->titrefoncier->id,
-                    'saleable_type' => 'tax_foncier', // Adjust the namespace if different
-                    'created_by' => auth()->user()->name,
-                ];
-
-                DB::table('saleables')->insert($saleableData);
-            }
-
-            $this->clearFields();
-
-            $this->refresh(__('Tax Foncier successfully Updated'), 'paiement');
+            $this->update();
         } else {
             // Return a payment failed response
             return redirect()->back()->with('error', 'Payment failed');
@@ -121,7 +87,7 @@ class Index extends Component
 
     // public function confirmOrder()
     // {
-    //     $request = new Collect('676922042', 1000, 'MTN', 'CM');
+    //     $request = new Collect('656977999', 100, 'ORANGE', 'CM');
 
     //     $payment = $request->pay();
 
@@ -156,7 +122,7 @@ class Index extends Component
                 'payment_status' => 'totally_paid',
                 'created_by' => auth()->user()->name,
             ]);
-            dd($sale);
+            // dd($sale);
             // Create the Saleable item using only the specified information
             $saleableData = [
                 'sale_id' => $sale->id,
