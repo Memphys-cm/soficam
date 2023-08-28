@@ -52,10 +52,10 @@ class Index extends Component
                 'payment_status' => $this->payment_status,
             ]);
 
-            if ($this->payment_status === 'totally_paid') {
-                Saleable::where('sale_id', $this->allsales->id)
-                    ->update(['saleable_type' => 'DISPONIBLE']);
-            }
+            // if ($this->payment_status === 'totally_paid') {
+            //     Saleable::where('sale_id', $this->allsales->id)
+            //         ->update(['saleable_type' => 'DISPONIBLE']);
+            // }
             // $this -> immobilier->update([
             //     'status' => $this->payment_status,
                
