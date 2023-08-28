@@ -1,3 +1,9 @@
+@php
+    use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
+    $qrCode = QrCode::size(100)->generate($bien_immobilier->id);
+@endphp
+
 <div>
     <table style="margin-left:0px; margin-right:0px; text-align:center; margin-bottom:2px">
         <tr>
@@ -64,7 +70,7 @@
                 <th>Date de délivrance</th>
             </thead>
             <tbody>
-                @foreach ($bien_immobilier->requestor->titrefoncier as $titre_foncier)
+                @foreach ($bien_immobilier->requestor->titrefonciers as $titre_foncier)
                 <tr>
                     <td>{{ $titre_foncier->numero_titre_foncier }}</td>
                     <td>
@@ -88,5 +94,6 @@
                 @endforeach
             </tbody>
         </table>
+        <div style="padding: 12px"><img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code for Bien Immobilier ID"></div>
     </div>
 </div>
