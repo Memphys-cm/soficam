@@ -57,13 +57,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-group mb-3 row mr-5 ml-5">
-                                <label for="titre_foncier_id">{{__('Numéro Titre Foncier')}}</label>
-                                <x-input.select wire:model="titre_foncier_id" prettyname="titre_foncier_id" :options="$titrefoncier->pluck('numero_titre_foncier', 'id')->toArray()" />
-                                @error('titre_foncier_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div> 
                             <div class="form-group row mb-1 px-2">
                                 <label for="releve_reason">Pourquoi avez-vous voulu créer ce bien immobilier ? ?</label>
                                 <textarea class="form-control" wire:model="releve_reason" name="releve_reason" id="releve_reason" placeholder="Enter the reason here"></textarea>
