@@ -81,7 +81,7 @@ class Index extends Component
         if (!empty($this->titrefoncier)) {
 
             $this->titrefoncier->update([
-                'status_tax' => $this->status_tax,
+                'status_tax' => 'payer',
                 'date_tax' => now(),
                 'tax_amount' => $this->tax_amount,
 
@@ -110,6 +110,12 @@ class Index extends Component
         $this->clearFields();
 
         $this->refresh(__('Tax Foncier successfully Updated'), 'paiement');
+    }
+    public function clearFields()
+    {
+        $this->payment_method = '';
+        $this->tax_amount = '';
+        $this->phoneNumber = '';
     }
     public function render()
     {
