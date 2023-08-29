@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('releve_immobiliers', function (Blueprint $table) {
-            $table->foreignId('titre_foncier_id')->index();
+            $table->foreignId('titre_foncier_id')->nullable()->index();
         });
     }
 
