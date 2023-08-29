@@ -14,7 +14,7 @@ class QRCodeScanner extends Component
 
     public function qrCodeScanned($data)
     {
-        $this->printPdf($data);
+        return $data;
     }
 
     public function  printPdf($id)
