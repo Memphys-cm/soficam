@@ -2,27 +2,28 @@
     <table>
         <tr style="font-size:14px">
             <td style="text-align:center">
-                <div><strong></strong></div>
-            </td>
-            <td style="width: 250px;">
-
+                <div><strong>REPUBLIQUE DU CAMEROUN</strong></div>
+                <div><strong>Paix-Travail-Patrie</strong></div>
             </td>
             <td style="text-align:center">
-                <div><strong>REPUBLIQUE DU CAMEROUN</strong></div>
-
+                <div><strong></strong></div>
+            </td>
+            <td style="text-align:center">
+                <div><strong>REPUBLIC OF CAMEROON</strong></div>
+                <div><strong>Peace-Work-Fatherland</strong></div>
             </td>
         </tr>
         <tr style="mb-1">
-            <td style="text-align:center; font-size:14px">
-                <div>..............</div>
-                <div><strong>Delegation Départementale <br> DU MFOUNDI</strong></div>
+            <td style="text-align:center">
+                <div><strong>Paix-Travail-Patrie</strong></div>
             </td>
             <td style="width: 250px;">
                 <div></div>
             </td>
-            <td style="text-align:center">
-                <div><strong>Paix-Travail-Patrie</strong></div>
+            <td style="text-align:center; font-size:14px">
                 <div>..............</div>
+                <div><strong>Peace-Work-Fatherland</strong></div>
+
             </td>
         </tr>
         <tr style="mb-2">
