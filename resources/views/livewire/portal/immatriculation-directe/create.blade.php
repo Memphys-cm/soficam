@@ -1,6 +1,6 @@
 <div wire:ignore.self class="modal side-layout-modal fade" id="CreateImmaDirecteModal" tabindex="-1"
     aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:60%;">
+    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:40%;">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
@@ -15,11 +15,10 @@
                     <x-form-items.form wire:submit="{{ $state ? 'update' : 'store' }}">
                         <div class="form-group mb-3 row">
                             <div class='col'>
-                                <label class="px-2" for="user_ids">{{ __('Requerants Secondaires') }}</label>
-                                <x-input.selectmultipleusers wire:model="user_ids" prettyname="user_ids"
-                                    :options="$users" selected="('user_ids')" />
+                                <label class="px-2" for="user_ids">{{__('Requerants')}}</label>
+                                <x-input.selectmultipleusers wire:model="user_ids" prettyname="user_ids" :options="$users" selected="('user_ids')"  multiple="multiple"/>
                                 @error('user_ids')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col">
@@ -30,6 +29,41 @@
                                     name="localisation">
                                 @error('localisation')
                                     <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 row">
+                            <div class='col'>
+                                <label class="px-2" for="region_id">{{__('Region')}}</label>
+                                <select wire:model="region_id" name="region_id" class="form-select  @error('region_id') is-invalid @enderror" required="">
+                                    @foreach($regions as $region)
+                                    <option value="{{$region->id}}">{{$region->region_name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('region_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class='col'>
+                                <label class="px-2" for="division_id">{{__('Departement')}}</label>
+                                <select wire:model="division_id" name="division_id" class="form-select  @error('division_id') is-invalid @enderror" required="">
+                                    @foreach($divisions as $division)
+                                    <option value="{{$division->id}}">{{$division->division_name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('division_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class='col'>
+                                <label class="px-2" for="sub_division_id">{{__('Arrondissement')}}</label>
+                                <select wire:model="sub_division_id" name="sub_division_id" class="form-select  @error('sub_division_id') is-invalid @enderror" required="">
+                                    @foreach($sub_divisions as $sub_division)
+                                    <option value="{{$sub_division->id}}">{{$sub_division->sub_division_name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('sub_division_id')
+                                <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                         </div>
@@ -55,7 +89,7 @@
                                 </div>
                             </div>
                         </div>
-                        @foreach ($comissions as $index => $user)
+                        {{-- @foreach ($comissions as $index => $user)
                             <div class="row my-1 py-1">
                                 <div class="col-md-5">
                                 <label>{{__('Nom')}} </label>
@@ -90,7 +124,7 @@
                             </svg>
                             {{ __('Ajouter un membre') }}</button>
                         <button class="btn btn-primary" type="submit">{{ __('Enregistrer') }}</button>
-                        <hr>
+                        <hr> --}}
 
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"

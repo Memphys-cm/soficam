@@ -2,29 +2,60 @@
 
 namespace App\Http\Livewire\Portal\ImmatriculationDirecte;
 
+use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Service;
 use Livewire\Component;
+use App\Models\Sales\Sale;
 use App\Models\SubDivision;
+use Illuminate\Support\Str;
 use App\Models\TitreFoncier;
+use App\Models\Region;
+use App\Models\Division;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use App\Models\ImmatriculationDirecte;
 use App\Http\Livewire\Traits\WithDataTables;
-use Illuminate\Support\Str;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Index extends Component
 {
 
     use WithDataTables;
 
-    public ImmatriculationDirecte $imma_directe;
+    // public ImmatriculationDirecte $imma_directe;
+    public $imma_directe;
 
     public $state = 0, $price_m2, $users, $user_id, $user_ids, $comissions = [] , $localisation;
-    public $attachements;
+    public $attachements , $services , $service_id , $observation , $montant_ordre_versement;
+    public $region_id;
+    public $division_id;
+    public $sub_division_id;
+    public $regions;
+    public $divisions = [];
+    public $sub_divisions = [];
 
     public function mount()
     {
-        $this->imma_directe = new ImmatriculationDirecte();
-        $this->users = User::role('user')->get();
+        // $this->imma_directe = new ImmatriculationDirecte();
+        $this->users = User::with(['roles' => function ($role) {
+            return $role->whereIn('name', ['user'])->get();
+        }])->get();
+        $this->services = Service::select('id','service_name_fr')->get();
+        $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
+    }
+
+    public function updatedRegionID($region_id)
+    {
+        if (!empty($region_id)) {
+            $this->divisions = Division::whereRegionId($region_id)->get();
+        }
+    }
+    public function updatedDivisionID($division_id)
+    {
+        if (!empty($division_id)) {
+            $this->sub_divisions = SubDivision::whereDivisionId($division_id)->get();
+        }
     }
 
     public function addRow()
@@ -44,41 +75,27 @@ class Index extends Component
         $this->state = 1;
     }
 
-    protected array $rules = [
-        'imma_directe.reference_etat_cession' => 'sometimes',
-        'imma_directe.type_personne' => 'sometimes',
-        'imma_directe.titre_foncier_id' => 'sometimes',
-        'imma_directe.geometre_id' => 'sometimes',
-        'imma_directe.user_id' => 'sometimes',
-        'imma_directe.sub_division_id' => 'sometimes',
-        'imma_directe.lieu_dit' => 'sometimes',
-        'imma_directe.superficie_en_m2' => 'sometimes',
-        'imma_directe.type_operation' => 'sometimes',
-        'imma_directe.cout' => 'sometimes',
-        'imma_directe.frais_suplementaires' => 'sometimes',
-        'imma_directe.cout_etat_cession' => 'sometimes',
-        'imma_directe.status' => 'sometimes',
-        'imma_directe.commentaires' => 'sometimes',
-        'imma_directe.zone' => 'sometimes',
-    ];
-
     public function store()
     {
         if (!Gate::allows('lotissement.create') ) {
             return abort(401);
         }
 
+        $this->validate([
+            'localisation' => 'required',
+        ]);
         
        $imma_directe = ImmatriculationDirecte::create([
-        'titre_foncier_id' => 1,
-        'numero_bordereau_transmission' => 6,
-        'date_delivrance' => now(),
         'reference' => Str::upper(Str::random(7)) . "" . now()->format('msu'),
         // 'requestor_id' => $this->user_id,
         'localisation' => $this->localisation,
-        'status' => 'Dossier Ouvert',
-        'StatusStyle' => 'info',
-        'comissions' => json_encode($this->comissions),
+        'region_id' => $this->region_id,
+        'division_id' => $this->division_id,
+        'sub_division_id' => $this->sub_division_id,
+        'statut' => 'Dossier Ouvert',
+        'next_step' => 'Cotation du Dossier au CSDAF',
+        'StatutStyle' => 'info',
+        // 'comissions' => json_encode($this->comissions),
        ]);
 
 
@@ -96,14 +113,100 @@ class Index extends Component
 
     }
 
+    public function cotation_first_step()
+    {
+        $this->validate([
+            'service_id' => 'required',
+            'user_id' => 'required',
+        ]);
+        
+       
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'service_id' => $this->service_id,
+                'observation_cotation' => $this->observation,
+                'cotation_user_id' => $this->user_id,
+                'status_cotation' => 'done',
+                'statut' => 'coter',
+                'next_step' => 'ordre_versement',
+                'date_cotation' => Carbon::now(),
+            ]);
+        });
+
+        $this->refresh(__('Dossier D\'Immatriculation Directe Coter Avec SUCCES!'), 'CotationImmaDirecteModal');
+
+        $this->clearFields();
+    }
+
+    public function ordre_versement()
+    {
+        $this->validate([
+            'montant_ordre_versement' => 'required',
+        ]);
+        
+       
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'montant_ordre_versement' => $this->montant_ordre_versement,
+                'status_ordre_versement' => 'pending',
+                'statut' => 'Ordre de Versement en Attente de Paiement',
+                'next_step' => 'Paiement de L\'Ordre versement',
+                'date_ordre_versement' => Carbon::now(),
+            ]);
+        });
+
+        $sale = Sale::create([
+            // 'user_id' => $this->requestor_id,
+            'sales_amount' => $this->montant_ordre_versement,
+            'sales_type' => 'ordre_versement_imma_directe',
+            'created_by' => auth()->user()->name,
+        ]);
+
+        // Create the Saleable item using only the specified information
+        $saleableData = [
+            'sale_id' => $sale->id,
+            'price' => $this->montant_ordre_versement,
+            'quantity' => 1,
+            'saleable_id' => $this->imma_directe->id,
+            'saleable_type' => 'App\Models\ImmatriculationDirecte', // Adjust the namespace if different
+            'created_by' => auth()->user()->name,
+        ];
+
+        DB::table('saleables')->insert($saleableData);
+
+        $this->printPdf();
+
+        $this->refresh(__('Ordre de Versement Enregistrer Avec SUCCES!'), 'OrdreVersementImmaDirecteModal');
+
+        $this->clearFields();
+    }
+
+    public function  printPdf()
+    {
+        // $ordre = CertificatePropriete::findOrFail($id);
+        // $data = [
+        //     'certificatepropriete' => $this->certificatepropriete,
+        //     'titrefoncier' => $this->titre_fonciers,
+        //     // Autres données que vous souhaitez afficher dans la vue
+        // ];
+
+        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.ordre-versement'
+        // ,$data
+        )->setPaper('a4', 'portrait');
+
+
+        return response()->streamDownload(
+            fn () => print($pdf->output()),
+            __('OrdreVersement-') . Str::random('10') . ".pdf"
+        );
+    }
+
     public function clearFields()
     {
         $this->reset(
             [
-                'requestor_id',
+                // 'requestor_id', 
                 'localisation',
-                'status',
-                'StatusStyle',
                 'comissions',
             ]
         );
