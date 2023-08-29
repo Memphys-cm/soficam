@@ -168,7 +168,6 @@ class Index extends Component
 
         $pdf = Pdf::loadView('livewire.portal.bien-immobilier.print',$data)->setPaper('a4', 'portrait');
 
-
         return response()->streamDownload(
             fn () => print($pdf->output()),
             __('Report-') . Str::random('10') . ".pdf"

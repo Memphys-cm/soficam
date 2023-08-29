@@ -16,16 +16,29 @@
 
 
     @push('scripts')
-
     <script type="text/javascript">
       var html5QrcodeScanner = new Html5QrcodeScanner(
-          "reader", { fps: 10, qrbox: 250 });
-        html5QrcodeScanner.render(function (data) {
+        "reader", { fps: 10, qrbox: 250 });
+
+      html5QrcodeScanner.render(function (data) {
           Livewire.emit('qrCodeScanned', data);
       });
     </script>
     @endpush
 
+    @push('scripts')
+    <script type="text/javascript">
+      window.addEventListener('onScanSuccess', event => {
+          @this.call('onScanSuccess', event.detail);
+      });
+  
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+    </script>
+    @endpush
         </div>
     </div>
 </div>

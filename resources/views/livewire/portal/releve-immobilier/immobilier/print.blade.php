@@ -1,3 +1,9 @@
+@php
+    use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
+    $qrCode = QrCode::size(100)->generate($immobilier->id);
+@endphp
+
 <div>
     <table style="margin-left:0px; margin-right:0px; text-align:center; margin-bottom:2px">
         <tr>
@@ -53,7 +59,10 @@
             </td>
         </tr>
     </table>
-    <div style="padding: 12px">
+
+    <div style="padding: 12px; text-align:center; margin-top:10px"><img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code for Bien Immobilier ID"></div>
+
+    <div style="padding: 12px; margin-top:5px">
         <div style="margin-top: 20px; text-align: center"><b>RELEVE DES BIENS IMMOBILIERS N°{{$immobilier->releve_number}}/RI/MINDFCAF/41/T120</b></div>
         <div style="margin-top: 20px; margin-left: 20px"><b>Volume{{$immobilier->titreFoncier->volume}} transcrit, Folio{{$immobilier->titreFoncier->folio}} TF N°{{$immobilier->titreFoncier->numero_titre_foncier}}</b></div>
         <div style="margin-top: 20px; text-decoration: underline; margin-top:15px; text-align:center">SECTION I/- DESISGNATION ET DESCRIPTION DE L'IMMEUBLE</div>
