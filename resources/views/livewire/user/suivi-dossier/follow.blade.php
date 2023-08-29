@@ -1,7 +1,7 @@
 <div>
     <div class="container-fluid"
         style="min-height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
-        @include('livewire.portal.suivi-dossier.details')
+        @include('livewire.user.suivi-dossier.details')
 
         <div class="row d-flex align-items-center justify-content-center pt-5" style="min-height: 60vh;">
             <div class="col-md-12">
