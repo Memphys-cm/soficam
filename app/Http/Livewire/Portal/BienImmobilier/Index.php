@@ -27,7 +27,7 @@ class Index extends Component
 
     public function mount()
     {
-        $this->requestors = User::role('user')->select('id', 'first_name', 'last_name')->get();
+        $this->requestors = User::role('user')->whereHas('titrefonciers')->select('id', 'first_name', 'last_name')->get();
         $this->titrefoncier = TitreFoncier::all();
     }
     public function store()

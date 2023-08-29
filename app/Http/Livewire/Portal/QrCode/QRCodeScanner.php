@@ -6,46 +6,44 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\TitreFoncier;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\ReleveImmobilier;
 
 class QRCodeScanner extends Component
 {
-    public $scanResult = null;
+    public $scanResult = 'Result Here';
 
     public function onScanSuccess($data)
     {
-        $response = $this->checkQrCodeWithServer($data);
-
-        if ($response == 1) {
-            $this->generatePdfAndDownload($data);
-        } else {
-            $this->scanResult = 'No user found with this QR code';
+        dd('hello');
+        if ($data) {
+            $this->QRCodeData($data);
         }
     }
 
-    private function generatePdfAndDownload($data)
+    private function QRCodeData($data)
     {
-        // Vous pouvez obtenir l'ID du document à partir des données scannées
-        $documentId = $this->fetchDocumentIdFromData($data);
+        // Assuming $data contains the ID of the bien_immobilier
+        $bien_immobilier = ReleveImmobilier::findOrFail($data);
 
-        // Utilisez la fonction printPdf pour générer et télécharger le document
-        $pdfResponse = $this->printPdf($documentId);
+        if ($bien_immobilier) {
+            $this->scanResult = 'Document';
 
-        // Vous pouvez éventuellement afficher un message de succès
-        $this->scanResult = 'Document généré et téléchargé avec succès';
+            // Call the printPdf function here
+            $this->printPdf($bien_immobilier->id);
+        } else {
+            $this->scanResult = 'No matching property found with this QR code';
+        }
     }
-
 
     public function  printPdf($id)
     {
         $this->bien_immobilier = ReleveImmobilier::findOrFail($id);
         $data = [
             'bien_immobilier' => $this->bien_immobilier,
-            'email' => 'john@example.com',
             // Autres données que vous souhaitez afficher dans la vue
         ];
 
-        $pdf = Pdf::loadView('livewire.portal.titre-fonciers.print', $data)->setPaper('a4', 'portrait');
-
+        $pdf = Pdf::loadView('livewire.portal.bien-immobilier.print', $data)->setPaper('a4', 'portrait');
 
         return response()->streamDownload(
             fn () => print($pdf->output()),

@@ -57,6 +57,7 @@ class Index extends Component
     public $le_conservateur;
     public $numero_ccp;
     public $attachements;
+    public $price;
     public $conservateurs, $conservateur_id;
 
     public  $state = 0;
@@ -294,6 +295,7 @@ class Index extends Component
             'limit_ouest' => 'required',
             'coordonnees' => 'required',
             'numero_ccp' => 'required',
+            'price' => 'nullable',
             'user_ids' => 'required|array|min:1',
             'user_ids.*' => 'required',
         ]);
@@ -341,6 +343,7 @@ class Index extends Component
             'nom_et_prenoms_de_largent_traitant' => $this->nom_et_prenoms_de_largent_traitant,
             'conservateur_id' => $this->conservateur_id,
             'numero_ccp' => $this->numero_ccp,
+            'price' => $this->price,
         ]);
         
 
@@ -389,6 +392,7 @@ class Index extends Component
         $this->nom_et_prenoms_de_largent_traitant =  $titrefoncier->nom_et_prenoms_de_largent_traitant;
         $this->le_conservateur =  $titrefoncier->le_conservateur;
         $this->numero_ccp =  $titrefoncier->numero_ccp;
+        $this->price =  $titrefoncier->price;
 
         $this->coordinates = array_values(json_decode($titrefoncier->coordonnees, true));
         $this->coordonnees = array_values(json_decode($titrefoncier->coordonnees, true));
@@ -422,6 +426,7 @@ class Index extends Component
                 'etat_terrain' => 'required',
                 'provenance_TF' => 'required',
                 'numero_ccp' => 'required',
+                'price' => 'nullable',
                 // 'numero_bordereau_analytique' => 'required',
                 // 'volume_du_bordereau_analytique' => 'required',
                 // 'date_detablissement_du_bordereau_analytique' => 'required',
@@ -463,6 +468,7 @@ class Index extends Component
                 'nom_et_prenoms_de_largent_traitant' => $this->nom_et_prenoms_de_largent_traitant,
                 'le_conservateur' => $this->le_conservateur,
                 'numero_ccp' => $this->numero_ccp,
+                'price' => $this->price,
                 'coordonnees' => json_encode(getCoords($this->coordonnees)),
             ]);
         }
@@ -525,6 +531,7 @@ class Index extends Component
                 'coordonnees',
                 'user_ids',
                 'numero_ccp',
+                'price',
             ]
         );
 

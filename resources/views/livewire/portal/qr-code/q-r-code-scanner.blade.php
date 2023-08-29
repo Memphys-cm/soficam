@@ -18,16 +18,11 @@
     @push('scripts')
 
     <script type="text/javascript">
-        // after success to play camera Webcam Ajax paly to send data to Controller
-        <div>
-            <button wire:click="onScanSuccess">Start Scanning</button>
-            <video id="reader"></video>
-            <div id="result">{!! $scanResult !!}</div>
-        </div>
-
-        var html5QrcodeScanner = new Html5QrcodeScanner(
-            "reader", { fps: 10, qrbox: 250 });
-        html5QrcodeScanner.render(onScanSuccess);
+      var html5QrcodeScanner = new Html5QrcodeScanner(
+          "reader", { fps: 10, qrbox: 250 });
+        html5QrcodeScanner.render(function (data) {
+          Livewire.emit('qrCodeScanned', data);
+      });
     </script>
     @endpush
 

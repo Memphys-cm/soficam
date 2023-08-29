@@ -207,13 +207,24 @@
                                 @enderror --}}
                             </div>
                         </div>
-                        <div class='col'>
-                            <label for="numero_ccp">{{__('Numero CCP')}}</label>
-                            <input wire:model="numero_ccp" type="number" class="form-control  @error('numero_ccp') is-invalid @enderror" placeholder="{{__('Jane Doe')}}" required="" value="" name="numero_ccp">
-                            @error('numero_ccp')
-                            <div class="invalid-feedback">{{$message}}</div>
-                            @enderror
+
+                        <div class='form-group mb-4 row'>
+                            <div class='col'>
+                                <label for="numero_ccp">{{__('Numero CCP')}}</label>
+                                <input wire:model="numero_ccp" type="number" class="form-control  @error('numero_ccp') is-invalid @enderror" placeholder="{{__('Jane Doe')}}" required="" value="" name="numero_ccp">
+                                @error('numero_ccp')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class='col'>
+                                <label for="price">{{__('Prix estimatif du terrian')}}</label>
+                                <input wire:model="price" type="number" class="form-control  @error('price') is-invalid @enderror" placeholder="{{__('1000000')}}" required="" value="" name="price">
+                                @error('price')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
                         </div>
+                        
                         <div class="p-3 shadow my-4">
                             <h2 class="h5 mb-4">{{__('Ajouter fichier')}}</h2>
                             <div class="d-xl-flex align-items-center">
