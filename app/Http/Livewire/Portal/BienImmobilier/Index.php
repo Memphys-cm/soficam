@@ -41,7 +41,7 @@ class Index extends Component
             'price' => 'required|integer',
             'validity' => 'nullable|date',
             'releve_number' => 'required',
-            'titre_foncier_id' => 'required',
+            // 'titre_foncier_id' => 'required',
             'status' => 'nullable',
 
         ]);
@@ -55,7 +55,7 @@ class Index extends Component
                 'validity' => Carbon::now()->addMonths(3),
                 'releve_number' => $this->releve_number,
                 'status' => $this->status,
-                'titre_foncier_id' => $this->titre_foncier_id,
+                // 'titre_foncier_id' => $this->titre_foncier_id,
                 'releves_type' => $this->releves_type,
                 'recorded_by' => auth()->user()->name,
             ]);
