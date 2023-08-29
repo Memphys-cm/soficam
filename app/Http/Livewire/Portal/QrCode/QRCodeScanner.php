@@ -6,6 +6,7 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\TitreFoncier;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\ReleveImmobilier;
 
 class QRCodeScanner extends Component
 {
@@ -13,6 +14,7 @@ class QRCodeScanner extends Component
 
     public function onScanSuccess($data)
     {
+        dd('hello');
         if ($data) {
             $this->QRCodeData($data);
         }
