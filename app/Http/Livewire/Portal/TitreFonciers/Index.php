@@ -149,29 +149,38 @@ class Index extends Component
     {
         // Initialisez Proj4
         $proj4 = new Proj4php();
-
+    
         // Créez les projections
         $projUTM = new Proj('+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs', $proj4);
         $projWGS84 = new Proj('EPSG:4326', $proj4);
-
+    
         $decimalResults = [];
-
+    
         foreach ($utmCoordinates as $utm) {
-            $utmX = $utm[0];
-            $utmY = $utm[1];
-
+            $utmParts = explode(', ', $utm); // Sépare les coordonnées UTM en X et Y
+            $utmX = floatval($utmParts[0]);
+            $utmY = floatval($utmParts[1]);
+    
             // Créez le point source avec les coordonnées UTM
             $pointSrc = new Point($utmX, $utmY, $projUTM);
-
+    
             // Transformez le point entre les systèmes de coordonnées
             $pointDest = $proj4->transform($projWGS84, $pointSrc);
-
-        // Ajoutez le résultat à votre tableau de résultats en coordonnées décimales
-        $decimalResults[] = "$lat, $lon";
-    }
-
+    
+            // Obtenez les coordonnées lat/lon du point de destination
+            $lat = $pointDest->y;
+            $lon = $pointDest->x;
+    
+            // Ajoutez le résultat à votre tableau de résultats en coordonnées décimales
+            $decimalResults[] = "$lon, $lat";
+        }
+    
         return $decimalResults;
     }
+    
+
+    //     return $decimalResults;
+    // }
     // function convertToDMS($coordinates) {
     //     $results = [];
 
