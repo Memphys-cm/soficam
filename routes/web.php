@@ -48,6 +48,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
         Route::get('/', App\Http\Livewire\User\Taxfonciere\Index::class)->name('user.taxfonciere.index');
         // Route::get('/suivi-taxfoncier', App\Http\Livewire\Portal\Taxfonciere\SuiviTaxfonciere\Index::class)->name('portal.taxfonciere.suivi.index');
     });
+    Route::prefix('suivi-dossier')->group(function () {
+        Route::get('/', App\Http\Livewire\User\SuiviDossier\Index::class)->name('user.suivi-dossier.index');
+    });
 
 });
 
@@ -169,9 +172,6 @@ Route::group(
         });
 
         //
-        Route::prefix('suivi-dossier')->group(function () {
-            Route::get('/', App\Http\Livewire\Portal\SuiviDossier\Index::class)->name('portal.suivi-dossier.index');
-        });
 
         Route::prefix('taxfonciere')->group(function () {
             Route::get('/suivi-taxfoncier', App\Http\Livewire\Portal\Taxfonciere\SuiviTaxfonciere\Index::class)->name('portal.taxfonciere.suivi.index');
