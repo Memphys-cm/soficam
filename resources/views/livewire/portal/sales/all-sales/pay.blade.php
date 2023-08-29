@@ -1,36 +1,89 @@
-<div wire:ignore.self class="modal side-layout-modal fade" id="PayModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:45%;">
+<div wire:ignore.self class="modal side-layout-modal fade" id="updatePaySaleModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:40%;">
         <div class="modal-content">
             <div class="modal-body p-0">
-                <div class="p-4 p-lg-5">
+                <div class="p-4 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{__('Effectuer')}}{{__(' un Paiement')}}</h1>
-                        <p class="px-1"> {{__('Paiement')}} </p>
+                        <h1 class="mb-0 h4"> {{ __('Details de la vente') }}</h1>
+                        <p class="px-1"> {{ __('Mise à jour des ventes') }} &#128522;</p>
                     </div>
-                    <x-form-items.form>
-                        <fieldset class="border rounded">
-                            <div class="form-group mt-4 px-4">
-                                <div class="row mb-3">
-                                    <label for="">Choisir le réseau mobile</label>
-                                    <select class="form-control text-center" name="" id="">
-                                        <option value="">--Selectionner--</option>
-                                        <option style="background-color: orange" value="ORANGE MONEY"><b>ORANGE MONEY</b></option>
-                                        <option style="background-color: yellow" value="MTN MOBILE MONEY"><b>MTN MOBILE MONEY</b></option>
-                                    </select>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="">Numéro du payeur</label>
-                                    <input class="form-control" name="" id="" type="text" placeholder="Entrer le numero">
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="">Montant</label>
-                                    <input class="form-control" type="text" name="" id="" placeholder="Entrer le montant">
-                                </div>
+                    <x-form-items.form wire:submit="payment">
+                        @if(!empty($sale))
+                        <div class='d-flex justify-content-between align-items-end'>
+                            <div class=''>
+                                @if($sale->user)
+                                <a href="#" class="d-flex align-items-center  py-1">
+                                    <div class="avatar  d-flex align-items-center justify-content-center fw-bold  rounded bg-primary me-2"><span class="text-white">{{$sale->user->initials}}</span></div>
+                                    <div class="d-block">
+                                        <span class="fw-bolder ">{{ucwords($sale->user->name)}}</span>
+                                        <div class="small text-gray">
+                                            <svg class="icon icon-xxs me-1 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                            </svg> {{$sale->user->primary_phone_number}}
+                                        </div>
+                                    </div>
+                                </a>
+                                @endif
                             </div>
-                        </fieldset>
-                        <div class="d-flex justify-content-end mt-5">
-                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" wire:click.prevent="" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Payer')}}</button>
+                            <div class=''>
+                                <span class="fw-normal badge super-badge p-2 bg-{{$sale->sale_type_style}} round">{{$sale->sale_type_text}}</span>
+                            </div>
+                        </div>
+                        @endif
+                        @if(!empty($sale))
+                        <hr>
+
+                        @switch($sale->sales_type)
+                        @case('etat_cession')
+                        @include('livewire.portal.sales.all-sales.partials.etat_cession_partial')
+                        @break
+
+                        @default
+
+                        @endswitch
+
+                        <hr>
+                        @endif
+                        <div class='form-group mb-3 row'>
+                            <div class="col">
+                                <label for="payment_method">{{ __('MODE DE PAIEMENT') }}</label>
+                                <select wire:model="payment_method" class="form-select @error('payment_method') is-invalid @enderror" id="payment_method" required="">
+                                    <option value="cash">{{ __('Cash') }}</option>
+                                    <option value="orange_money">{{ __('Orange Money') }}</option>
+                                    <option value="mtn_mobile_money">{{ __('MTN Mobile Money') }}</option>
+                                </select>
+                                @error('payment_method')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class=" col">
+                                <label for="sales_amount">{{ __('Montant de la vente') }}
+                                    {{ __('XAF') }}</label>
+                                <input type="text" wire:model="sales_amount" class="form-control  @error('sales_amount') is-invalid @enderror " value="{{ old('sales_amount') }}" placeholder="0" id="sales_amount" autofocus="" required="" disabled>
+                                @error('sales_amount')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                        @if($payment_number)
+                        <div class="form-group mb-3">
+                            <label for="payment_number">{{ __('Nomero Paiement') }}</label>
+                            <input type="text" wire:model="payment_number" class="form-control  @error('payment_number') is-invalid @enderror " value="{{ old('payment_number') }}" placeholder="0" id="payment_number" autofocus="" required="" >
+                            @error('payment_number')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        @endif
+
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{ __('Fermer') }}</button>
+                            <button type="submit" wire:click.prevent="payment" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Payer') }}</button>
                         </div>
                     </x-form-items.form>
                 </div>

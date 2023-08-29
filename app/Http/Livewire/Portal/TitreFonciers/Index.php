@@ -85,9 +85,10 @@ class Index extends Component
         // $utmCoordinates = [
         //     [783771.1412, 439362.2283], [783772.7367, 439361.3785], [783772.7367, 439318.5813],
         //     [783772.7367, 439268.5813], [783772.7367, 439218.5813], [783772.7367, 439116.5813],
-        //     [783722.7367, 439168.5813], [783672.7367, 439168.5813],[783622.7367, 439168.5813]
+        //     [783722.7367, 439168.5813], [783672.7367, 439168.5813], [783622.7367, 439168.5813]
         // ];
         // $convertedResults = $this->convert($utmCoordinates);
+
 
         // dd($convertedResults);
 
@@ -116,65 +117,93 @@ class Index extends Component
     }
 
 
+    //     public function convert($utmCoordinates)
+    // {
+    //     // Initialisez Proj4
+    //     $proj4 = new Proj4php();
+
+    //     // Créez les projections
+    //     $projUTM = new Proj('+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs', $proj4);
+    //     $projWGS84 = new Proj('EPSG:4326', $proj4);
+
+    //     $decimalResults = [];
+
+    //     foreach ($utmCoordinates as $utm) {
+    //         $utmX = $utm[0];
+    //         $utmY = $utm[1];
+
+    //         // Créez le point source avec les coordonnées UTM
+    //         $pointSrc = new Point($utmX, $utmY, $projUTM);
+
+    //         // Transformez le point entre les systèmes de coordonnées
+    //         $pointDest = $proj4->transform($projWGS84, $pointSrc);
+
+    //         // Ajoutez le résultat à votre tableau de résultats en coordonnées décimales
+    //         $decimalResults[] = $pointDest->toShortString();
+    //     }
+
+    //     return $decimalResults;
+    // }
+
     public function convert($utmCoordinates)
-{
-    // Initialisez Proj4
-    $proj4 = new Proj4php();
+    {
+        // Initialisez Proj4
+        $proj4 = new Proj4php();
 
-    // Créez les projections
-    $projUTM = new Proj('+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs', $proj4);
-    $projWGS84 = new Proj('EPSG:4326', $proj4);
+        // Créez les projections
+        $projUTM = new Proj('+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs', $proj4);
+        $projWGS84 = new Proj('EPSG:4326', $proj4);
 
-    $decimalResults = [];
+        $decimalResults = [];
 
-    foreach ($utmCoordinates as $utm) {
-        $utmX = $utm[0];
-        $utmY = $utm[1];
+        foreach ($utmCoordinates as $utm) {
+            $utmX = $utm[0];
+            $utmY = $utm[1];
 
-        // Créez le point source avec les coordonnées UTM
-        $pointSrc = new Point($utmX, $utmY, $projUTM);
+            // Créez le point source avec les coordonnées UTM
+            $pointSrc = new Point($utmX, $utmY, $projUTM);
 
-        // Transformez le point entre les systèmes de coordonnées
-        $pointDest = $proj4->transform($projWGS84, $pointSrc);
+            // Transformez le point entre les systèmes de coordonnées
+            $pointDest = $proj4->transform($projWGS84, $pointSrc);
 
         // Ajoutez le résultat à votre tableau de résultats en coordonnées décimales
-        $decimalResults[] = $pointDest->toShortString();
+        $decimalResults[] = "$lat, $lon";
     }
 
-    return $decimalResults;
-}
-// function convertToDMS($coordinates) {
-//     $results = [];
+        return $decimalResults;
+    }
+    // function convertToDMS($coordinates) {
+    //     $results = [];
 
-//     foreach ($coordinates as $coordinate) {
-//         $parts = explode(' ', $coordinate);
-//         $longitude = $parts[0];
-//         $latitude = $parts[1];
+    //     foreach ($coordinates as $coordinate) {
+    //         $parts = explode(' ', $coordinate);
+    //         $longitude = $parts[0];
+    //         $latitude = $parts[1];
 
-//         // Convertir la latitude en degrés minutes secondes
-//         $latDegrees = floor($latitude);
-//         $latMinutes = floor(($latitude - $latDegrees) * 60);
-//         $latSeconds = round((($latitude - $latDegrees) * 60 - $latMinutes) * 60, 2);
+    //         // Convertir la latitude en degrés minutes secondes
+    //         $latDegrees = floor($latitude);
+    //         $latMinutes = floor(($latitude - $latDegrees) * 60);
+    //         $latSeconds = round((($latitude - $latDegrees) * 60 - $latMinutes) * 60, 2);
 
-//         // Convertir la longitude en degrés minutes secondes
-//         $lngDegrees = floor($longitude);
-//         $lngMinutes = floor(($longitude - $lngDegrees) * 60);
-//         $lngSeconds = round((($longitude - $lngDegrees) * 60 - $lngMinutes) * 60, 2);
+    //         // Convertir la longitude en degrés minutes secondes
+    //         $lngDegrees = floor($longitude);
+    //         $lngMinutes = floor(($longitude - $lngDegrees) * 60);
+    //         $lngSeconds = round((($longitude - $lngDegrees) * 60 - $lngMinutes) * 60, 2);
 
-//         // Ajouter le résultat à votre tableau de résultats
-//         $results[] = [
-//             'latitude' => "$latDegrees °$latMinutes'$latSeconds\"",
-//             'longitude' => "$lngDegrees °$lngMinutes'$lngSeconds\""
-//         ];
-//     }
+    //         // Ajouter le résultat à votre tableau de résultats
+    //         $results[] = [
+    //             'latitude' => "$latDegrees °$latMinutes'$latSeconds\"",
+    //             'longitude' => "$lngDegrees °$lngMinutes'$lngSeconds\""
+    //         ];
+    //     }
 
-//     return $results;
-// }
-
-
+    //     return $results;
+    // }
 
 
-    
+
+
+
     public function generateCodeTF()
     {
         // $departements = Division::all();
@@ -231,43 +260,44 @@ class Index extends Component
         }
         // dd($this->user_ids);
 
-        // $this->validate([
-        //     'numero_titre_foncier' => 'required',
-        //     'region_id' => 'required',
-        //     'division_id' => 'required',
-        //     'sub_division_id' => 'required',
-        //     'date_de_delivrance_du_TF' => 'required|date',
-        //     // 'numero_du_duplicata' => 'required|integer',
-        //     'groupement' => 'required',
-        //     'lieu_dit' => 'required',
-        //     'zone' => 'required',
-        //     'numero_folio' => 'required|integer',
-        //     'volume' => 'required|integer',
-        //     'superficie_du_TF_mere' => 'required',
-        //     'etat_TF' => 'required',
-        //     'etat_terrain' => 'required',
-        //     'provenance_TF' => 'required',
-        //     // 'numero_bordereau_analytique' => 'required',
-        //     // 'volume_du_bordereau_analytique' => 'required',
-        //     // 'date_detablissement_du_bordereau_analytique' => 'required',
-        //     'limit_nord' => 'required',
-        //     'limit_sud' => 'required',
-        //     'limit_est' => 'required',
-        //     'limit_ouest' => 'required',
-        //     'coordonnees' => 'required',
-        //     'numero_ccp' => 'required',
-        //     'user_ids' => 'required|array|min:1',
-        //     'user_ids.*' => 'required',
-        // ]);
+        $this->validate([
+            'numero_titre_foncier' => 'required',
+            'region_id' => 'required',
+            'division_id' => 'required',
+            'sub_division_id' => 'required',
+            'date_de_delivrance_du_TF' => 'required|date',
+            // 'numero_du_duplicata' => 'required|integer',
+            'groupement' => 'required',
+            'lieu_dit' => 'required',
+            'zone' => 'required',
+            'numero_folio' => 'required|integer',
+            'volume' => 'required|integer',
+            'superficie_du_TF_mere' => 'required',
+            'etat_TF' => 'required',
+            'etat_terrain' => 'required',
+            'provenance_TF' => 'required',
+            // 'numero_bordereau_analytique' => 'required',
+            // 'volume_du_bordereau_analytique' => 'required',
+            // 'date_detablissement_du_bordereau_analytique' => 'required',
+            'limit_nord' => 'required',
+            'limit_sud' => 'required',
+            'limit_est' => 'required',
+            'limit_ouest' => 'required',
+            'coordonnees' => 'required',
+            'numero_ccp' => 'required',
+            'user_ids' => 'required|array|min:1',
+            'user_ids.*' => 'required',
+        ]);
 
-        // dd($this->coordonnees);
 
         $coords = [];
         collect($this->coordonnees)->map(function ($value, $key) {
             return ['long' => explode(',', $value, 1), 'lat' => explode(',', $value, 2)];
         });
 
-        $coordonne = $this->convert($this->coordonnees);
+        $transform = $this->convert($this->coordonnees);
+
+        // $coordonne = $this->convert($this->coordonnees);
         // dd($coordonne);
         // dd(array_flatten($coords));
 
@@ -293,7 +323,7 @@ class Index extends Component
             'numero_bordereau_analytique' => $this->numero_bordereau_analytique,
             'volume_du_bordereau_analytique' => $this->volume_du_bordereau_analytique,
             'date_detablissement_du_bordereau_analytique' => $this->date_detablissement_du_bordereau_analytique,
-            'coordonnees' => json_encode($this->coordonnees),
+            'coordonnees' => json_encode($transform),
             'limit_nord' => $this->limit_nord,
             'limit_sud' => $this->limit_sud,
             'limit_est' => $this->limit_est,
@@ -303,6 +333,7 @@ class Index extends Component
             'conservateur_id' => $this->conservateur_id,
             'numero_ccp' => $this->numero_ccp,
         ]);
+        
 
         $titrefoncier->users()->sync($this->user_ids);
 
@@ -511,7 +542,6 @@ class Index extends Component
 
     public function render()
     {
-        // dd('ddd');
         if (!Gate::allows('titre_foncier.view')) {
             return abort(401);
         }

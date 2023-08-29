@@ -110,7 +110,7 @@
                 <thead>
                     <tr>
                         <th class="border-bottom">{{ __('Requerant') }}</th>
-                        <th class="border-bottom">{{ __('Numéro Titre Foncier') }}</th>
+                        {{-- <th class="border-bottom">{{ __('Numéro Titre Foncier') }}</th> --}}
                         <th class="border-bottom">{{ __(' NUMERO BIEN IMMO') }}</th>
                         <th class="border-bottom">{{ __('PRIX') }}</th>
                         <th class="border-bottom">{{ __('VALIDITE') }}</th>
@@ -128,9 +128,9 @@
                         <td>
                             <x-elements.user :options="$bien_immobilier->requestor" />
                         </td>
-                        <td>
+                        {{-- <td>
                             {{ $bien_immobilier->titreFoncier->numero_titre_foncier}}
-                        </td>
+                        </td> --}}
                         <td>{{ $bien_immobilier->releve_number }}</td>
 
                         <td>{{ $bien_immobilier->price }} {{ __('XAF') }}</td>

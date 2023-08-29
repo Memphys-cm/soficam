@@ -19,7 +19,28 @@ class EtatCession extends Model
     {
         return $this->belongsTo(User::class , 'user_id');
     }
-    
+
+    public function getStatusStyleAttribute(): String
+    {
+        return match ($this->status) {
+            'paid' => 'success',
+            'completed' => 'success',
+            'cancelled' => 'danger',
+            'pending_payment' => 'secondary',
+            default => ''
+        };
+    }
+    public function getStatusTextAttribute(): String
+    {
+        return match ($this->status) {
+            'paid' => 'Paid',
+            'cancelled' => 'Cancelled',
+            'completed' => 'Completed',
+            'pending_payment' => 'Pending Payment',
+            default => ''
+        };
+    }
+
     public static function search($query)
     {
         return empty($query) ?
