@@ -29,21 +29,24 @@
             </td>
         </tr>
     </table>
+
+    <div style="padding: 12px; text-align:center; margin-top:20px"><img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code for Bien Immobilier ID"></div>
+
     <div style="margin-top: 30px; text-decoration:underline; text-transform:uppercase; text-align:center"><b>liste des titres fonciers de Mr/Mme {{$bien_immobilier->requestor->first_name}} {{$bien_immobilier->requestor->last_name}}</b></div>
     <div style="padding: 12px; margin-top:20px">
         <table style="border:2px solid; margin:auto">
-            <thead style="text-align: center">
-                <th>Numéro Titre Foncier</th>
-                <th>Location</th>
-                <th>Charge</th>
-                <th>Statut</th>
-                <th>Date de délivrance</th>
+            <thead style="text-align: center; border:1px solid">
+                <th style="border: 1px solid">Numéro Titre Foncier</th>
+                <th style="border: 1px solid">Location</th>
+                <th style="border: 1px solid">Charge</th>
+                <th style="border: 1px solid">Statut</th>
+                <th style="border: 1px solid">Date de délivrance</th>
             </thead>
             <tbody style="text-align: center">
                 @foreach ($bien_immobilier->requestor->titrefonciers as $titre_foncier)
-                <tr>
-                    <td>{{ $titre_foncier->numero_titre_foncier }}</td>
-                    <td>
+                <tr style="border: 1px solid">
+                    <td style="border: 1px solid">{{ $titre_foncier->numero_titre_foncier }}</td>
+                    <td style="border: 1px solid">
                         <div class="d-flex align-items-centerpy-1">
                             {{__('Region')}} : <span class="fw-bolder mx-2"> {{$titre_foncier->region->region_name}} </span>
                         </div>
@@ -57,13 +60,12 @@
                             {{__('Lieu Dit')}} : <span class="fw-bolder mx-2"> {{$titre_foncier->lieu_dit}} </span>
                         </div>
                     </td>
-                    <td>{{ $titre_foncier->etat_TF }}</td>
-                    <td>{{ $titre_foncier->etat_terrain }}</td>
-                    <td>{{ $titre_foncier->date_de_delivrance_du_TF }}</td>
+                    <td style="border: 1px solid">{{ $titre_foncier->etat_TF }}</td>
+                    <td style="border: 1px solid">{{ $titre_foncier->etat_terrain }}</td>
+                    <td style="border: 1px solid">{{ $titre_foncier->date_de_delivrance_du_TF }}</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
-        <div style="padding: 12px"><img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code for Bien Immobilier ID"></div>
     </div>
 </div>
