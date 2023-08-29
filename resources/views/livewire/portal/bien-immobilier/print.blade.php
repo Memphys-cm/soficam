@@ -28,48 +28,18 @@
                 <div>--------------</div>
             </td>
         </tr>
-        <tr>
-            <td>
-                <div>DELEGATION REGIONALE DU {{$bien_immobilier->titreFoncier->region->region_name_fr}}</div>
-                <div>--------------</div>
-            </td>
-            <td>
-                <div>REGIONAL DELEGATION OF {{$bien_immobilier->titreFoncier->region->region_name_en}}</div>
-                <div>--------------</div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div>DELEGATION DEPARTEMENTALE DU {{$bien_immobilier->titreFoncier->division->division_name}}</div>
-                <div>--------------</div>
-            </td>
-            <td>
-                <div>DIVISIONAL DELEGATION OF {{$bien_immobilier->titreFoncier->division->division_name}}</div>
-                <div>--------------</div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div>CONSERVATION FONCIERE DU {{$bien_immobilier->titreFoncier->division->division_name}}</div>
-                <div>--------------</div>
-            </td>
-            <td>
-                <div>LAND'S REGISTRY OFFICE OF {{$bien_immobilier->titreFoncier->division->division_name}}</div>
-                <div>--------------</div>
-            </td>
-        </tr>
     </table>
-    <div style="margin-top: 30px; text-decoration:underline; text-transform:uppercase"><b>liste des titres fonciers de Mr/Mme {{$bien_immobilier->requestor->first_name}} {{$bien_immobilier->requestor->last_name}}</b></div>
+    <div style="margin-top: 30px; text-decoration:underline; text-transform:uppercase; text-align:center"><b>liste des titres fonciers de Mr/Mme {{$bien_immobilier->requestor->first_name}} {{$bien_immobilier->requestor->last_name}}</b></div>
     <div style="padding: 12px; margin-top:20px">
-        <table style="border:2px solid collapse; margin:auto">
-            <thead>
+        <table style="border:2px solid; margin:auto">
+            <thead style="text-align: center">
                 <th>Numéro Titre Foncier</th>
                 <th>Location</th>
                 <th>Charge</th>
                 <th>Statut</th>
                 <th>Date de délivrance</th>
             </thead>
-            <tbody>
+            <tbody style="text-align: center">
                 @foreach ($bien_immobilier->requestor->titrefonciers as $titre_foncier)
                 <tr>
                     <td>{{ $titre_foncier->numero_titre_foncier }}</td>
