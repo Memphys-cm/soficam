@@ -16,6 +16,7 @@ class QRCodeScanner extends Component
    
     public function onScanSuccess($data)
     {
+        dd('hello');
         if ($data) {
             $this->QRCodeData($data);
         }
