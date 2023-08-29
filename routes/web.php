@@ -50,6 +50,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
     });
     Route::prefix('suivi-dossier')->group(function () {
         Route::get('/', App\Http\Livewire\User\SuiviDossier\Index::class)->name('user.suivi-dossier.index');
+        Route::get('/follow', App\Http\Livewire\User\SuiviDossier\Follow::class)->name('user.suivi-dossier.follow');
+
+        
     });
 
 });

@@ -84,13 +84,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($combinedData as $item)
+                    @forelse($immatriculations as $item)
                         <tr>
-                            <td>{{ $item->proprietaire }}</td>
+                            @foreach ($item->users as $user)
+                                    <td>{{ $user->name }}</td>
+                                @endforeach
                             <td>{{ getTypeName($item) }}</td>
                             <td>{{ getStatut($item) }}</td>
                             <td>{{ $item->created_at }}</td>
-                            <td>{{ getNom($item) }}</td>
+                            <td><td class="text-center">
+                                <a class="btn btn-primary" href="{{route('follow')}}">Suivre</a>
+                            </td></td>
                         </tr>
                     @empty
                         <tr>
@@ -114,7 +118,8 @@
 </div>
 
 @php
-    function getTypeName($item) {
+    function getTypeName($item)
+    {
         if ($item instanceof \App\Models\TitreFoncier) {
             return 'Taxe foncière';
         } elseif ($item instanceof \App\Models\Lotissements\Parcel) {
@@ -123,27 +128,26 @@
             return 'Immatriculation Directe';
         }
     }
-
-    function getNom($item) {
+    
+    function getNom($item)
+    {
         if ($item instanceof \App\Models\TitreFoncier) {
             return $item->nom;
         } elseif ($item instanceof \App\Models\Lotissements\Parcel) {
             return $item->name; // Changer "name" par le nom d'attribut correct
-        } elseif ($item instanceof \App\Models\ImmatriculationDirecte) {
-            return $item->autre_nom; // Changer "autre_nom" par le nom d'attribut correct
+    } elseif ($item instanceof \App\Models\ImmatriculationDirecte) {
+        return $item->autre_nom; // Changer "autre_nom" par le nom d'attribut correct
         }
     }
-
-    function getStatut($item) {
+    
+    function getStatut($item)
+    {
         if ($item instanceof \App\Models\TitreFoncier) {
             return $item->status_tax;
         } elseif ($item instanceof \App\Models\Lotissements\Parcel) {
             return $item->status; // Changer "status" par le nom d'attribut correct
-        } elseif ($item instanceof \App\Models\ImmatriculationDirecte) {
-            return $item->le_status_tax; // Changer "le_statut" par le nom d'attribut correct
+    } elseif ($item instanceof \App\Models\ImmatriculationDirecte) {
+        return $item->le_status_tax; // Changer "le_statut" par le nom d'attribut correct
         }
     }
 @endphp
-
-
-

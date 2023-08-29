@@ -16,15 +16,14 @@ class Index extends Component
 {
     public function render()
     {
-        $user = Auth::user();
-        $titrefonciers = TitreFoncier::where('user_id', $user->id)->get();
-        $mutations = Parcel::where('user_id', $user->id)->get();
-        $immatriculations = ImmatriculationDirecte::where('user_id', $user->id)->get();
+        // $titrefonciers = auth()->user()->titrefonciers;
+        // $mutations = auth()->user()->mutations;
+        $immatriculations = auth()->user()->immatriculations;
 
-        $combinedData = $titrefonciers->concat($mutations)->concat($immatriculations);
+        // $combinedData = $titrefonciers->concat($mutations)->concat($immatriculations);
 
-        return view('livewire.user.suivi-dossier.index',[
-            'combinedData' => $combinedData,
+        return view('livewire.user.suivi-dossier.index', [
+            'immatriculations' => $immatriculations,
         ]);
     }
 }
