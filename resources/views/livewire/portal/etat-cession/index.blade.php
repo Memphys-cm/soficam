@@ -28,24 +28,17 @@
             </div>
             <div class="d-flex justify-content-between mb-2">
 
-                {{-- @can('housing_estate.create') --}}
+                @can('etat_cession.create')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateUpdateStateAssignmentModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{__('Nouveau')}}
                 </a>
-                {{-- @endcan --}}
-                {{-- @can('housing_estate.import') --}}
-                <a href="#" data-bs-toggle="modal" data-bs-target="#importstate_assignmentsModal" class="btn btn-sm btn-secondary py-2 d-inline-flex align-items-center">
-                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                    </svg>{{__('Importer')}}
-                </a>
-                {{-- @endcan --}}
-                {{-- @can('housing_estate.export_n_print') --}}
+                @endcan
+
+                @can('etat_cession.export_n_print')
                 <div class="mx-2" wire:loading.remove>
-                    <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center {
-                        {{-- {count($state_assignments) > 0 ? '' :'disabled'}} --}}
+                    <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center {{count($state_assignments) > 0 ? '' :'disabled'}}
                         ">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
@@ -61,7 +54,7 @@
                         <div class="spinner-grow text-grey-300" style="width: 0.9rem; height: 0.9rem;" role="status"></div>
                     </div>
                 </div>
-                {{-- @endcan --}}
+                @endcan
             </div>
         </div>
     </div>
@@ -142,7 +135,8 @@
                             <span class="fw-normal">{{$housing_estate->geometre->first_name ?? '' }} {{$housing_estate->geometre->last_name ?? ''}}</span>
                         </td>
                         <td>
-                            <span class="fw-normal">{{$housing_estate->status}}</span>
+                            <span class="fw-normal badge super-badge p-2 bg-{{$housing_estate->statusStyle}} round">{{$housing_estate->status}}</span>
+
                         </td>
                         <td>
                             <span class="fw-normal">{{$housing_estate->created_at->format('Y-m-d')}}</span>

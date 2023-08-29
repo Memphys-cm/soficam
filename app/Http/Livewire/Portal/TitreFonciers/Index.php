@@ -81,12 +81,16 @@ class Index extends Component
     }
 
     public function mount()
-    { 
-        //ceci est un exemple il sera supprimer plus tard
-        $utmCoordinates = ["783771.1412, 439362.2283","783771.1412, 439362.2283"];
-         $convertedResults = $this->convert($utmCoordinates);
+    {
+        // $utmCoordinates = [
+        //     [783771.1412, 439362.2283], [783772.7367, 439361.3785], [783772.7367, 439318.5813],
+        //     [783772.7367, 439268.5813], [783772.7367, 439218.5813], [783772.7367, 439116.5813],
+        //     [783722.7367, 439168.5813], [783672.7367, 439168.5813], [783622.7367, 439168.5813]
+        // ];
+        // $convertedResults = $this->convert($utmCoordinates);
 
-        dd($convertedResults);
+
+        // dd($convertedResults);
 
         // $this->convert();
         $this->users = User::with(['roles' => function ($role) {
@@ -142,70 +146,64 @@ class Index extends Component
     // }
 
     public function convert($utmCoordinates)
-{
-    // Initialisez Proj4
-    $proj4 = new Proj4php();
+    {
+        // Initialisez Proj4
+        $proj4 = new Proj4php();
 
-    // Créez les projections
-    $projUTM = new Proj('+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs', $proj4);
-    $projWGS84 = new Proj('EPSG:4326', $proj4);
+        // Créez les projections
+        $projUTM = new Proj('+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs', $proj4);
+        $projWGS84 = new Proj('EPSG:4326', $proj4);
 
-    $decimalResults = [];
+        $decimalResults = [];
 
-    foreach ($utmCoordinates as $utm) {
-        $utmParts = explode(', ', $utm); // Sépare les coordonnées UTM en X et Y
-        $utmX = floatval($utmParts[0]);
-        $utmY = floatval($utmParts[1]);
+        foreach ($utmCoordinates as $utm) {
+            $utmX = $utm[0];
+            $utmY = $utm[1];
 
-        // Créez le point source avec les coordonnées UTM
-        $pointSrc = new Point($utmX, $utmY, $projUTM);
+            // Créez le point source avec les coordonnées UTM
+            $pointSrc = new Point($utmX, $utmY, $projUTM);
 
-        // Transformez le point entre les systèmes de coordonnées
-        $pointDest = $proj4->transform($projWGS84, $pointSrc);
-
-        // Obtenez les coordonnées lat/lon du point de destination
-        $lat = $pointDest->y;
-        $lon = $pointDest->x;
+            // Transformez le point entre les systèmes de coordonnées
+            $pointDest = $proj4->transform($projWGS84, $pointSrc);
 
         // Ajoutez le résultat à votre tableau de résultats en coordonnées décimales
         $decimalResults[] = "$lat, $lon";
     }
 
-    return $decimalResults;
-}
+        return $decimalResults;
+    }
+    // function convertToDMS($coordinates) {
+    //     $results = [];
 
-// function convertToDMS($coordinates) {
-//     $results = [];
+    //     foreach ($coordinates as $coordinate) {
+    //         $parts = explode(' ', $coordinate);
+    //         $longitude = $parts[0];
+    //         $latitude = $parts[1];
 
-//     foreach ($coordinates as $coordinate) {
-//         $parts = explode(' ', $coordinate);
-//         $longitude = $parts[0];
-//         $latitude = $parts[1];
+    //         // Convertir la latitude en degrés minutes secondes
+    //         $latDegrees = floor($latitude);
+    //         $latMinutes = floor(($latitude - $latDegrees) * 60);
+    //         $latSeconds = round((($latitude - $latDegrees) * 60 - $latMinutes) * 60, 2);
 
-//         // Convertir la latitude en degrés minutes secondes
-//         $latDegrees = floor($latitude);
-//         $latMinutes = floor(($latitude - $latDegrees) * 60);
-//         $latSeconds = round((($latitude - $latDegrees) * 60 - $latMinutes) * 60, 2);
+    //         // Convertir la longitude en degrés minutes secondes
+    //         $lngDegrees = floor($longitude);
+    //         $lngMinutes = floor(($longitude - $lngDegrees) * 60);
+    //         $lngSeconds = round((($longitude - $lngDegrees) * 60 - $lngMinutes) * 60, 2);
 
-//         // Convertir la longitude en degrés minutes secondes
-//         $lngDegrees = floor($longitude);
-//         $lngMinutes = floor(($longitude - $lngDegrees) * 60);
-//         $lngSeconds = round((($longitude - $lngDegrees) * 60 - $lngMinutes) * 60, 2);
+    //         // Ajouter le résultat à votre tableau de résultats
+    //         $results[] = [
+    //             'latitude' => "$latDegrees °$latMinutes'$latSeconds\"",
+    //             'longitude' => "$lngDegrees °$lngMinutes'$lngSeconds\""
+    //         ];
+    //     }
 
-//         // Ajouter le résultat à votre tableau de résultats
-//         $results[] = [
-//             'latitude' => "$latDegrees °$latMinutes'$latSeconds\"",
-//             'longitude' => "$lngDegrees °$lngMinutes'$lngSeconds\""
-//         ];
-//     }
-
-//     return $results;
-// }
-
+    //     return $results;
+    // }
 
 
 
-    
+
+
     public function generateCodeTF()
     {
         // $departements = Division::all();
@@ -297,6 +295,8 @@ class Index extends Component
             return ['long' => explode(',', $value, 1), 'lat' => explode(',', $value, 2)];
         });
 
+        $transform = $this->convert($this->coordonnees);
+
         // $coordonne = $this->convert($this->coordonnees);
         // dd($coordonne);
         // dd(array_flatten($coords));
@@ -323,7 +323,7 @@ class Index extends Component
             'numero_bordereau_analytique' => $this->numero_bordereau_analytique,
             'volume_du_bordereau_analytique' => $this->volume_du_bordereau_analytique,
             'date_detablissement_du_bordereau_analytique' => $this->date_detablissement_du_bordereau_analytique,
-            'coordonnees' => json_encode($this->coordonnees),
+            'coordonnees' => json_encode($transform),
             'limit_nord' => $this->limit_nord,
             'limit_sud' => $this->limit_sud,
             'limit_est' => $this->limit_est,
@@ -542,7 +542,6 @@ class Index extends Component
 
     public function render()
     {
-        // dd('ddd');
         if (!Gate::allows('titre_foncier.view')) {
             return abort(401);
         }

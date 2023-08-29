@@ -81,7 +81,7 @@
                                             @can('titre_foncier.view')
                                             <li class="nav-item {{ $request->routeIs('portal.titre-fonciers.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.titre-fonciers.index') }}" class="nav-link">
-                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Tous les Titres Fonciers') }}</span>
+                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Les Titres Fonciers') }}</span>
                                                 </a>
                                             </li>
                                             @endcan
