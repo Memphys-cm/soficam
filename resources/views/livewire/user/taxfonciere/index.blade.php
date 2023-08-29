@@ -43,9 +43,9 @@
                         <th class="border-bottom">{{ __('Numéro du titre foncier') }}</th>
                         <th class="border-bottom">{{ __('Proprietaire') }}</th>
                         <th class="border-bottom">{{ __('Localisation') }}</th>
-                        <th class="border-bottom">{{ __('Tax Amount') }}</th>
-                        <th class="border-bottom">{{ __('Statut de la Tax') }}</th>
-                        <th class="border-bottom">{{ __('Date Payer') }}</th>
+                        <th class="border-bottom">{{ __('Montant de la Taxe') }}</th>
+                        <th class="border-bottom">{{ __('Statut de la Taxe') }}</th>
+                        <th class="border-bottom">{{ __('Date de Paiement') }}</th>
                         <th class="border-bottom">{{ __('Action') }}</th>
                     </tr>
                 </thead>
@@ -53,7 +53,7 @@
 
                     @forelse($titrefonciers as $titrefoncier)
                         <tr>
-                           
+
                             <td>
                                 <span class="fw-normal">{{ $titrefoncier->numero_titre_foncier }}</span>
                             </td>
@@ -94,9 +94,21 @@
                                 <span class="fw-normal">{{ $titrefoncier->date_tax }}</span>
                             </td>
                             <td>
-                                <button wire:click.prevent="initData({{ $titrefoncier->id }})" data-bs-toggle="modal"
-                                    data-bs-target="#paiement" class="btn btn-primary btn-sm"
-                                    draggable="false">Paiement</button>
+                              
+                                @if ($titrefoncier->status_tax === 'non_payer')
+                                    <button wire:click.prevent="initData({{ $titrefoncier->id }})"
+                                        data-bs-toggle="modal" data-bs-target="#paiement" class="btn btn-primary btn-sm"
+                                        draggable="false">
+                                        Paiement
+                                    </button>
+                                @else
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 30 30" stroke="green">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                      </svg>
+                                      
+                                </span>
+                                @endif
                             </td>
                         </tr>
                     @empty
