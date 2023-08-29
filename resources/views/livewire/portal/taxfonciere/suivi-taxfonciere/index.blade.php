@@ -179,13 +179,13 @@
             <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('Proprietaire') }}</th>
 
                         <th class="border-bottom">{{ __('Numéro du titre foncier') }}</th>
+                        <th class="border-bottom">{{ __('Proprietaire') }}</th>
                         <th class="border-bottom">{{ __('Localisation') }}</th>
                         <th class="border-bottom">{{ __('Tax Amount') }}</th>
                         <th class="border-bottom">{{ __('Statut de la Tax') }}</th>
-                        <th class="border-bottom">{{ __('Date Paid') }}</th>
+                        <th class="border-bottom">{{ __('Date Payer') }}</th>
                         @canany('titre_foncier.update', 'titre_foncier.delete')
                             <th class="border-bottom">{{ __('Action') }}</th>
                         @endcanany
@@ -194,16 +194,16 @@
                 <tbody>
                     @forelse($titrefonciers as $titrefoncier)
                         <tr>
+                            
+                            <td>
+                                <span class="fw-normal">{{ $titrefoncier->numero_titre_foncier }}</span>
+                            </td>
+
                             <td>
                                 @foreach ($titrefoncier->users as $user)
                                     <li>{{ $user->name }}</li>
                                 @endforeach
                             </td>
-                            <td>
-                                <span class="fw-normal">{{ $titrefoncier->numero_titre_foncier }}</span>
-                            </td>
-
-
 
                             <td>
                                 <div class="d-flex align-items-centerpy-1">
@@ -246,36 +246,6 @@
                                                     d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
                                             </svg>
                                         </a>
-
-                                        <a href='#' wire:click.prevent="initData({{ $titrefoncier->id }})"
-                                            data-bs-toggle="modal" data-bs-target="#paiement">
-                                            <svg class="icon icon-xs" xmlns="http://www.w3.org/2000/svg"
-                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                <path fill="none"
-                                                    d="M17.222,5.041l-4.443-4.414c-0.152-0.151-0.356-0.235-0.571-0.235h-8.86c-0.444,0-0.807,0.361-0.807,0.808v17.602c0,0.448,0.363,0.808,0.807,0.808h13.303c0.448,0,0.808-0.36,0.808-0.808V5.615C17.459,5.399,17.373,5.192,17.222,5.041zM15.843,17.993H4.157V2.007h7.72l3.966,3.942V17.993z">
-                                                </path>
-                                                <path fill="none"
-                                                    d="M5.112,7.3c0,0.446,0.363,0.808,0.808,0.808h8.077c0.445,0,0.808-0.361,0.808-0.808c0-0.447-0.363-0.808-0.808-0.808H5.92C5.475,6.492,5.112,6.853,5.112,7.3z">
-                                                </path>
-                                                <path fill="none"
-                                                    d="M5.92,5.331h4.342c0.445,0,0.808-0.361,0.808-0.808c0-0.446-0.363-0.808-0.808-0.808H5.92c-0.444,0-0.808,0.361-0.808,0.808C5.112,4.97,5.475,5.331,5.92,5.331z">
-                                                </path>
-                                                <path fill="none"
-                                                    d="M13.997,9.218H5.92c-0.444,0-0.808,0.361-0.808,0.808c0,0.446,0.363,0.808,0.808,0.808h8.077c0.445,0,0.808-0.361,0.808-0.808C14.805,9.58,14.442,9.218,13.997,9.218z">
-                                                </path>
-                                                <path fill="none"
-                                                    d="M13.997,11.944H5.92c-0.444,0-0.808,0.361-0.808,0.808c0,0.446,0.363,0.808,0.808,0.808h8.077c0.445,0,0.808-0.361,0.808-0.808C14.805,12.306,14.442,11.944,13.997,11.944z">
-                                                </path>
-                                                <path fill="none"
-                                                    d="M13.997,14.67H5.92c-0.444,0-0.808,0.361-0.808,0.808c0,0.447,0.363,0.808,0.808,0.808h8.077c0.445,0,0.808-0.361,0.808-0.808C14.805,15.032,14.442,14.67,13.997,14.67z">
-                                                </path>
-                                            </svg>
-
-                                        </a>
-
-                                        {{-- <button wire:click.prevent="initData({{ $titrefoncier->id }})" data-bs-toggle="modal"
-                                            data-bs-target="#paiement" class="btn btn-primary btn-sm"
-                                            draggable="false">Paiement</button> --}}
                                     @endcan
 
                                 </td>

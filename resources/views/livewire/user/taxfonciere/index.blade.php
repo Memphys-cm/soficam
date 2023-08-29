@@ -40,13 +40,12 @@
             <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('Proprietaire') }}</th>
-
                         <th class="border-bottom">{{ __('Numéro du titre foncier') }}</th>
+                        <th class="border-bottom">{{ __('Proprietaire') }}</th>
                         <th class="border-bottom">{{ __('Localisation') }}</th>
                         <th class="border-bottom">{{ __('Tax Amount') }}</th>
                         <th class="border-bottom">{{ __('Statut de la Tax') }}</th>
-                        <th class="border-bottom">{{ __('Date Paid') }}</th>
+                        <th class="border-bottom">{{ __('Date Payer') }}</th>
                         <th class="border-bottom">{{ __('Action') }}</th>
                     </tr>
                 </thead>
@@ -54,16 +53,16 @@
 
                     @forelse($titrefonciers as $titrefoncier)
                         <tr>
+                           
+                            <td>
+                                <span class="fw-normal">{{ $titrefoncier->numero_titre_foncier }}</span>
+                            </td>
+
                             <td>
                                 @foreach ($titrefoncier->users as $user)
                                     <li>{{ $user->name }}</li>
                                 @endforeach
                             </td>
-                            <td>
-                                <span class="fw-normal">{{ $titrefoncier->numero_titre_foncier }}</span>
-                            </td>
-
-
 
                             <td>
                                 <div class="d-flex align-items-centerpy-1">
