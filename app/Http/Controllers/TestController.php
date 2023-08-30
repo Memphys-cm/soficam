@@ -11,6 +11,7 @@ class TestController extends Controller
     public function index()
     {
         $titles =  TitreFoncier::all();   
-        return view('test', compact('titles'));
+        // return view('test', compact('titles'));
+        return view('first_test', compact('titles'));
     }
 }
