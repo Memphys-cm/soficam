@@ -13,6 +13,17 @@
 
             @push('scripts')
                 <script type="text/javascript">
+                    success: function(data) {
+                        // after success to get Answer from controller if User Registered login user by scanner
+                        // and page change to Home blade
+                        if (data == 1) {
+                            document.getElementById('result').innerHTML = '<span class="result">' + data + '</span>';
+                            //$(location).attr('href', '{{ url('/home') }}');
+                        } else {
+                            return confirm('There is no user with this qr code');
+                        }
+                    }
+
                     var html5QrcodeScanner = new Html5QrcodeScanner(
                         "reader", {
                             fps: 10,
@@ -24,7 +35,7 @@
                     });
                 </script>
 
-                {{--<script type="text/javascript">
+                {{-- <script type="text/javascript">
                     window.addEventListener('onScanSuccess', event => {
                         @this.call('onScanSuccess', event.detail);
                     });
@@ -34,7 +45,7 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     });
-                </script>--}}
+                </script> --}}
             @endpush
         </div>
     </div>
