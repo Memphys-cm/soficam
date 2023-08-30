@@ -34,6 +34,8 @@ class Index extends Component
     public $regions;
     public $divisions = [];
     public $sub_divisions = [];
+    public $date_debut , $date_fin;
+    public $date_convocation;
 
     public function mount()
     {
@@ -138,6 +140,26 @@ class Index extends Component
         $this->clearFields();
     }
 
+    function genererNumeroVersement()
+    {
+        $dernierEnregistrement = ImmatriculationDirecte::orderBy('id', 'desc')->first();
+
+        if ($dernierEnregistrement) {
+            $dernierNumero = intval(substr($dernierEnregistrement->code, 2)); // Extrait le numéro sans "TF" et convertit en nombre
+            $nouveauNumero = $dernierNumero + 1;
+        } else {
+            $nouveauNumero = 1;
+        }
+
+        // Formate le numéro avec des zéros à gauche (total 7 caractères)
+        $numeroFormate = str_pad($nouveauNumero, 7, '0', STR_PAD_LEFT);
+
+        // Concatène "TF" et le numéro formate pour obtenir le code unique
+        $codeUnique =  $numeroFormate."Y.30"."/MINCAF/41/T400";
+
+        return $codeUnique;
+    }
+
     public function ordre_versement()
     {
         $this->validate([
@@ -147,6 +169,8 @@ class Index extends Component
        
         DB::transaction(function () {
             $this->imma_directe->update([
+                'montant_ordre_versement' => $this->genererNumeroVersement(),
+                'superficie_ordre_versement' => $this->superficie_ordre_versement,
                 'montant_ordre_versement' => $this->montant_ordre_versement,
                 'status_ordre_versement' => 'pending',
                 'statut' => 'Ordre de Versement en Attente de Paiement',
@@ -181,16 +205,15 @@ class Index extends Component
         $this->clearFields();
     }
 
-    public function  printPdf()
+    public function printPdf()
     {
-        // $ordre = CertificatePropriete::findOrFail($id);
-        // $data = [
-        //     'certificatepropriete' => $this->certificatepropriete,
-        //     'titrefoncier' => $this->titre_fonciers,
-        //     // Autres données que vous souhaitez afficher dans la vue
-        // ];
+        // $ordre = ImmatriculationDirecte::findOrFail($id);
+        $data = [
+            'ordre' => $this->imma_directe,
+            // Autres données que vous souhaitez afficher dans la vue
+        ];
 
-        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.ordre-versement'
+        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.ordre-versement'
         // ,$data
         )->setPaper('a4', 'portrait');
 
@@ -200,6 +223,55 @@ class Index extends Component
             __('OrdreVersement-') . Str::random('10') . ".pdf"
         );
     }
+
+    public function certificat_affichage()
+    {
+        $this->validate([
+            'date_debut' => 'required',
+            'date_fin' => 'required',
+        ]);
+        
+       
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'date_debut_certificat_d\'affichage' => $this->date_debut,
+                'date_fin_certificat_d\'affichage' => $this->date_fin,
+                'status_certificat_d\'affichage' => 'done',
+                'statut' => 'Certificat D\'affichage Effectuer',
+                'next_step' => 'Convocation D\'invitation sur Le Terrain',
+            ]);
+        });
+
+        $this->refresh(__('Certificat Imprimr Avec SUCCES!'), 'CertfifcatAffichageImmaDirecteModal');
+
+        $this->clearFields();
+
+    }
+
+    public function convocation()
+    {
+        // $this->validate([
+        //     'date_debut' => 'required',
+        //     'date_fin' => 'required',
+        // ]);
+        
+       
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'date_convocation' => $this->date_convocation,
+                'comissions' => json_encode($this->comissions),
+                'status_convocation' => 'done',
+                'statut' => 'Convocationsur le Terrain Effectuer',
+                'next_step' => 'Etablissement Etat de Cession',
+            ]);
+        });
+
+        $this->refresh(__('Certificat Imprimr Avec SUCCES!'), 'ConvocationImmaDirecteModal');
+
+        $this->clearFields();
+    }
+    
+
 
     public function clearFields()
     {
