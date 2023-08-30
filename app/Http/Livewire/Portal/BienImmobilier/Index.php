@@ -27,7 +27,7 @@ class Index extends Component
 
     public function mount()
     {
-        $this->requestors = User::role('user')->select('id', 'first_name', 'last_name')->get();
+        $this->requestors = User::role('user')->whereHas('titrefonciers')->select('id', 'first_name', 'last_name')->get();
         $this->titrefoncier = TitreFoncier::all();
     }
     public function store()
@@ -167,7 +167,6 @@ class Index extends Component
         ];
 
         $pdf = Pdf::loadView('livewire.portal.bien-immobilier.print',$data)->setPaper('a4', 'portrait');
-
 
         return response()->streamDownload(
             fn () => print($pdf->output()),
