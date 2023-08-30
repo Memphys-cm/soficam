@@ -40,9 +40,13 @@ return new class extends Migration
             $table->enum('status_ordre_versement', ['no_done','pending','done'])->default('no_done');
 
             $table->string('status_avis_publique')->nullable();
-            $table->date('date_avis_publique');
+            $table->date('date_avis_publique')->nullable();
             $table->string('status_certificat_d\'affichage')->nullable();
-            $table->date('date_certificat_d\'affichage');
+            $table->date('date_debut_certificat_d\'affichage')->nullable();
+            $table->date('date_fin_certificat_d\'affichage')->nullable();
+
+            $table->date('date_convocation')->nullable();
+            $table->string('status_convocation')->nullable();
 
             $table->timestamps();
         });
