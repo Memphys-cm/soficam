@@ -67,7 +67,7 @@
         <div style="margin-top: 20px; margin-left: 20px"><b>Volume{{$immobilier->titreFoncier->volume}} transcrit, Folio{{$immobilier->titreFoncier->folio}} TF N°{{$immobilier->titreFoncier->numero_titre_foncier}}</b></div>
         <div style="margin-top: 20px; text-decoration: underline; margin-top:15px; text-align:center">SECTION I/- DESISGNATION ET DESCRIPTION DE L'IMMEUBLE</div>
         <div style="margin-top: 20px; margin-left: 15px">Immeuble urbain occupé et exploité, sis à <b style="text-transform:uppercase">{{$immobilier->titreFoncier->subDivision->sub_division_name}}</b>, au lieu dit <b style="text-transform:uppercase">{{$immobilier->titreFoncier->lieu_dit}}</b>;</div>
-        <div style="margin-top: 20px; margin-left: 15px"><b style="text-decoration: underline;">Contenance</b><b> : {{$immobilier->titreFoncier->superficie_du_TF_mere}}</b></div>
+        <div style="margin-top: 20px; margin-left: 15px"><b style="text-decoration: underline;">Contenance</b><b> : {{$immobilier->titreFoncier->superficie_du_TF_mere}} ha</b></div>
         <div style="margin-top: 20px; margin-left: 15px"><b style="text-decoration: underline;">Situation</b><b> : {{$immobilier->titreFoncier->subDivision->sub_division_name}}</b>, au lieu-dit <b>{{$immobilier->titreFoncier->lieu_dit}}</b></div>
         <div style="margin-top: 20px"><b style="margin-left:10px; text-decoration: underline;">LIMITES</b>:</div>
         <ul style="margin-left: 30px">

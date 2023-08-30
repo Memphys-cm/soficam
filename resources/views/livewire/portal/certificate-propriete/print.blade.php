@@ -1,4 +1,10 @@
- <div class="container-fluid">
+@php
+    use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
+    $qrCode = QrCode::size(100)->generate($immobilier->id);
+@endphp
+
+<div class="container-fluid">
     <table>
         <tr style="font-size:14px">
             <td style="text-align:center">
@@ -66,7 +72,7 @@
 
     </table>
 
-
+    <div style="padding: 12px; text-align:center; margin-top:10px"><img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code for Bien Immobilier ID"></div>
 
     <div style="margin-top: 10vh">
         <p></p>
