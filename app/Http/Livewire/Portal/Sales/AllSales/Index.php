@@ -34,15 +34,6 @@ class Index extends Component
         // dd($this->sales_type);
     }
 
-    // public function updatedPaymentMethod($type)
-    // {
-    //     if($type !== 'cash'){
-    //         $this->payment_number = $this->sale->user->primary_phone_number;
-    //     }else{
-    //         $this->payment_number = null; 
-    //     }
-    // }
-
     public function updatedPaymentMethod($type)
     {
         if ($this->sale && $this->sale->user) {
