@@ -36,12 +36,17 @@ class Index extends Component
     public $sub_divisions = [];
     public $date_debut , $date_fin;
     public $date_convocation , $superficie , $status , $date_status;
+    public $geometre_id , $geometres;
+    public $attachments , $quitance;
 
     public function mount()
     {
         // $this->imma_directe = new ImmatriculationDirecte();
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
+        }])->get();
+        $this->geometres = User::with(['roles' => function ($role) {
+            return $role->whereIn('name', ['geometre'])->get();
         }])->get();
         $this->services = Service::select('id','service_name_fr')->get();
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
@@ -260,6 +265,40 @@ class Index extends Component
             fn () => print($pdf->output()),
             __('OrdreVersement-') . Str::random('10') . ".pdf"
         );
+    }
+
+    public function quitance_geometre()
+    {
+        // dd('id');
+        $this->validate([
+            'geometre_id' => 'required',
+        ]);
+        
+       
+       DB::transaction(function () {
+            $this->imma_directe->update([
+                'geometre_id' => $this->geometre_id,
+                'date_geometre_enregistrer' => Carbon::now(),
+                'statut' => 'Etat de cession enregistré auprès du géomètre',
+                'next_step' => 'Enregistrement du PV de Bornage',
+            ]);
+        });
+
+
+        if (!empty($this->attachments)) {
+            foreach ($this->attachments as $attachment) {
+                $this->imma_directe->addMedia($attachment->getRealPath())
+                    ->usingName('Acte Expidition')
+                    ->toMediaCollection('imma_directe_dossier_administratif');
+            }
+        }
+
+        $this->emitUp('flow_updated');
+        
+        $this->clearFields();
+        $this->refresh(__('Geometre Enregistrer Avec Suceess et Enregistrement'), 'GeometreModal');
+
+
     }
 
     public function certificat_affichage()

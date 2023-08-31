@@ -4,6 +4,7 @@
     @include('livewire.portal.immatriculation-directe.step.cotation_step1')
     @include('livewire.portal.immatriculation-directe.step.ordre_versement')
     @include('livewire.portal.immatriculation-directe.step.edit_statut')
+    @include('livewire.portal.immatriculation-directe.step.enregistrer_geometre')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -221,6 +222,7 @@
                                 </svg>
                             </a>
                             @endcan
+                            @include('livewire.portal.immatriculation-directe.layout.action')
                         </td>
                         @endcanany
                     </tr>
