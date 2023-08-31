@@ -7,7 +7,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    @foreach ($immatriculations as $item)
+                    @foreach ($combinedData as $item)
                         <div class="modal-body">
                           <div class="d-flex align-items-center">
                               <h6>Certification des documents </h6>
@@ -37,7 +37,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                  @foreach ($immatriculations as $item)
+                  @foreach ($combinedData as $item)
                       <div class="modal-body">
                         <div class="d-flex align-items-center">
                             <h6>Certification </h6>
@@ -67,7 +67,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                  @foreach ($immatriculations as $item)
+                  @foreach ($combinedData as $item)
                       <div class="modal-body">
                         <div class="d-flex align-items-center">
                             <h6>Certification des documents </h6>
@@ -97,7 +97,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                  @foreach ($immatriculations as $item)
+                  @foreach ($combinedData as $item)
                       <div class="modal-body">
                         <div class="d-flex align-items-center">
                             <h6>Certification des documents </h6>
