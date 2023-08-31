@@ -65,8 +65,8 @@
         <div style="margin-top: 10px;font-size:19px">Le public est informe que conformément aux informations extraites
             de la
             demande y afférente,
-            M <b> {{ $imma_directe->user->first_name }} {{ $imma_directe->user->last_name }} </b> né
-            (e) le <b>{{ $imma_directe->user->date_of_birth }}</b> Sollicité l’obtention d’un titre foncier sur une
+            M <b> @foreach ($imma_directe->users as $user) {{ $user->name }} @endforeach </b> né
+            (e) le <b>@foreach ($imma_directe->users as $user) {{ $user->date_of_birth }} @endforeach</b> Sollicité l’obtention d’un titre foncier sur une
             parcelle du Domaine National d’une superficie approximative de
             <b>{{ $imma_directe->superficie_ordre_versement }} </b> dans l’Arrondissement de
             <b>{{ $imma_directe->subDivision->sub_division_name_fr }} </b> de
