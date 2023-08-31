@@ -23,7 +23,7 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class='col-12 my-1'>
+                            {{-- <div class='col-12 my-1'>
                                 <label for="code">{{ __('Superficie de L\'ordre de Versement') }}</label>
                                 <input wire:model="superficie_ordre_versement" type="number"
                                     class="form-control  @error('superficie_ordre_versement') is-invalid @enderror"
@@ -31,7 +31,7 @@
                                 @error('superficie_ordre_versement')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="d-flex justify-content-end">
