@@ -44,7 +44,7 @@ class Index extends Component
     {
         $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier', 'region_id', 'division_id', 'sub_division_id', 'lieu_dit')
             ->whereHas('parcels', function (Builder $query) {
-                $query->where('type_de_venter', 'morcellements');
+                $query->where('type_de_venter', 'simple');
             })->get();
         $this->notaires = MembreDuCabinet::notaire()->select('id', 'first_name', 'last_name')->get();
         $this->users = User::role('user')->select('id', 'first_name', 'last_name')->get();
@@ -78,7 +78,7 @@ class Index extends Component
 
     public function store()
     {
-        if (!Gate::allows('morcellement.create')) {
+        if (!Gate::allows('operation.morcellement.create')) {
             return abort(401);
         }
 
@@ -112,7 +112,7 @@ class Index extends Component
 
     public function storeGeomtreUpdates()
     {
-        if (!Gate::allows('morcellement.create')) {
+        if (!Gate::allows('operation.morcellement.create')) {
             return abort(401);
         }
 
@@ -138,7 +138,7 @@ class Index extends Component
 
     public function delete()
     {
-        if (!Gate::allows('morcellement.delete')) {
+        if (!Gate::allows('operation.morcellement.delete')) {
             return abort(401);
         }
 
@@ -166,7 +166,7 @@ class Index extends Component
     
     public function render()
     {
-        if (!Gate::allows('morcellement.view')) {
+        if (!Gate::allows('operation.morcellement.view')) {
             return abort(401);
         }
 

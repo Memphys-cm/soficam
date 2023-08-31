@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('titre_fonciers', function (Blueprint $table) {
             $table->id();
+           $table->uuid('uuid')->unique()->index();
             $table->string('numero_titre_foncier')->index();
             $table->date('date_de_delivrance_du_TF');
             $table->string('numero_du_duplicata')->nullable();

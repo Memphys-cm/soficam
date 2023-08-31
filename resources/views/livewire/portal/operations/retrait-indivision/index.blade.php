@@ -1,6 +1,6 @@
 <div>
     <x-alert />
-    @include('livewire.portal.operations.mutation-totale.partials.create-form')
+    @include('livewire.portal.operations.retrait-indivision.partials.create-form')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -16,29 +16,27 @@
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
                         <li class="breadcrumb-item">{{__('Operations')}}</li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Mutation Totale')}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Retrait Indivision')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
                     <svg class="icon me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    {{__('Mutation Totale')}}
+                    {{__('Retrait Indivision')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('Voir toutes les Mutation Totale')}} </p>
+                <p class="mt-n1 mx-2">{{__('Voir toutes les Retrait Indivision')}} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
-                @can('operation.mutation_totale.create')
+                @can('operation.retrait_indivision.create')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateMutationTotaleNormaleModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{__('Nouveau')}}
                 </a>
                 @endcan
-                @can('operation.mutation_totale.create')
-                @livewire('portal.operations.mutation-totale.partials.create-par-deces-form')
-                @endcan
+
             </div>
         </div>
     </div>
@@ -81,22 +79,22 @@
             <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('Numero de la mutation totale')}}</th>
+                        <th class="border-bottom">{{__('Numero de Retrait')}}</th>
                         <th class="border-bottom">{{__('Titre foncier')}}</th>
                         <th class="border-bottom">{{__('Localisationtion')}}</th>
                         <th class="border-bottom">{{__('Statut')}}</th>
                         <th class="border-bottom">{{__('Type Operation')}}</th>
                         <th class="border-bottom">{{__('Date creation')}}</th>
-                        @canany('operation.mutation_totale.update','operation.mutation_totale.delete')
+                        @canany('mutation_totale.update','mutation_totale.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
                         @endcanany
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($mutation_totales as $mutation_totale)
+                    @forelse($retraits as $retrait)
                     <tr>
                         <td>
-                            <a class="text-decoration-underline text-info" href="{{route('portal.operations.details',['operation_id'=>$mutation_totale->id])}}"><span class="fw-normal">{{$mutation_totale->numero_operation}}</span></a>
+                            <a class="text-decoration-underline text-info" href="{{route('portal.operations.details',['operation_id'=>$retrait->id])}}"><span class="fw-normal">{{$retrait->numero_operation}}</span></a>
                         </td>
                         <td>
                             <div class='d-flex'>
@@ -104,63 +102,71 @@
                             </div>
                             <div class="d-flex justify-content-between align-items-center py-1">
                                 <span>
-                                    {{__('Land Title Number')}} : <span class="fw-bolder mx-2"> {{$mutation_totale->titreFoncier->numero_titre_foncier}} </span>
+                                    {{__('Land Title Number')}} : <span class="fw-bolder mx-2"> {{$retrait->titreFoncier->numero_titre_foncier}} </span>
                                 </span>
                                 <span class="fw-bolder mx-2">
-                                    <span class="fw-normal badge super-badge p-2 bg-{{$mutation_totale->titreFoncier->EtatTFStyle}} round">{{$mutation_totale->titreFoncier->etat_TF}}</span>
+                                    <span class="fw-normal badge super-badge p-2 bg-{{$retrait->titreFoncier->EtatTFStyle}} round">{{$retrait->titreFoncier->etat_TF}}</span>
                                 </span>
                             </div>
                             {{__('Proprietaire')}}
-                            <x-elements.user :options="$mutation_totale->titreFoncier->users->take(5)" />
+                            <x-elements.user :options="$retrait->titreFoncier->users->take(5)" />
                         </td>
                         <td>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Region')}} : <span class="fw-bolder mx-2"> {{$mutation_totale->titreFoncier->region->region_name}} </span>
+                                {{__('Region')}} : <span class="fw-bolder mx-2"> {{$retrait->titreFoncier->region->region_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Sous region')}} : <span class="fw-bolder mx-2"> {{$mutation_totale->titreFoncier->division->division_name}} </span>
+                                {{__('Sous region')}} : <span class="fw-bolder mx-2"> {{$retrait->titreFoncier->division->division_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Arrondissement')}} : <span class="fw-bolder mx-2"> {{$mutation_totale->titreFoncier->subDivision->sub_division_name}} </span>
+                                {{__('Arrondissement')}} : <span class="fw-bolder mx-2"> {{$retrait->titreFoncier->subDivision->sub_division_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Lieu Dit')}} : <span class="fw-bolder mx-2"> {{$mutation_totale->titreFoncier->lieu_dit}} </span>
+                                {{__('Lieu Dit')}} : <span class="fw-bolder mx-2"> {{$retrait->titreFoncier->lieu_dit}} </span>
                             </div>
                         </td>
                         <td>
-                            <span class="fw-normal badge super-badge p-2 bg-{{$mutation_totale->typeOperationStyle}} round">{{$mutation_totale->type_operation_text}}</span>
+                            <span class="fw-normal badge super-badge p-2 bg-{{$retrait->typeOperationStyle}} round">{{$retrait->type_operation_text}}</span>
                         </td>
                         <td>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Statut Geometre')}} : <span class="fw-bolder mx-2">{{$mutation_totale->statut_geometre}} </span>
+                                {{__('Statut Geometre')}} : <span class="fw-bolder mx-2">{{$retrait->statut_geometre}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Statut Notaire')}} : <span class="fw-bolder mx-2"> {{$mutation_totale->statut_notaire}} </span>
+                                {{__('Statut Notaire')}} : <span class="fw-bolder mx-2"> {{$retrait->statut_notaire}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Statut Conservateur')}}: <span class="fw-bolder mx-2"> {{$mutation_totale->statut_conservateur}}</span>
+                                {{__('Statut Conservateur')}}: <span class="fw-bolder mx-2"> {{$retrait->statut_conservateur}}</span>
                             </div>
                         </td>
 
                         <td>
-                            <span class="fw-normal">{{$mutation_totale->created_at->format('Y-m-d')}}</span>
+                            <span class="fw-normal">{{$retrait->created_at->format('Y-m-d')}}</span>
                         </td>
-                        @canany('operation.mutation_totale.update','operation.mutation_totale.delete')
+                        @canany('operation.retrait_indivision.update','operation.retrait_indivision.delete')
                         <td class="">
 
                             <div class='d-flex align-items-center justify-content-center'>
 
-                                @can('operation.mutation_totale.update')
-
+                                @can('operation.add_coordinates')
                                 @livewire('portal.operations.partials.add-coordinates', ['operation_id' => $mutation_totale->id,'operation_type'=>$mutation_totale->type_operation ], key($mutation_totale->id))
+                                @endcan
+
+                                @can('operation.add_sale')
                                 @if($mutation_totale->type_operation === 'mutation_totale_normale')
                                 @livewire('portal.operations.partials.add-sales-data', ['operation_id' => $mutation_totale->id,'operation_type'=>$mutation_totale->type_operation ], key($mutation_totale->id))
                                 @endif
-                                @livewire('portal.operations.partials.add-payment-data', ['operation_id' => $mutation_totale->id,'operation_type'=>$mutation_totale->type_operation ], key($mutation_totale->id))
-                                @livewire('portal.operations.partials.generate-ba', ['operation_id' => $mutation_totale->id,'operation_type'=>$mutation_totale->type_operation ], key($mutation_totale->id))
-
                                 @endcan
-                                @can('operation.mutation_totale.delete')
+
+                                @can('operation.add_payment')
+                                @livewire('portal.operations.partials.add-payment-data', ['operation_id' => $mutation_totale->id,'operation_type'=>$mutation_totale->type_operation ], key($mutation_totale->id))
+                                @endcan
+
+                                @can('operation.generate_ba')
+                                @livewire('portal.operations.partials.generate-ba', ['operation_id' => $mutation_totale->id,'operation_type'=>$mutation_totale->type_operation ], key($mutation_totale->id))
+                                @endcan
+
+                                @can('operation.retrait_indivision.delete')
                                 <a href="#" wire:click.prevent="initData({{$mutation_totale->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
                                     <svg class="icon icon-sm text-danger me-2 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
@@ -185,9 +191,9 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Affichage')}} {{$perPage > $mutation_totales_count ? $mutation_totales_count : $perPage  }} {{__('element de')}} {{$mutation_totales_count}}
+                    {{__('Affichage')}} {{$perPage > $retraits_count ? $retraits_count : $perPage  }} {{__('element de')}} {{$retraits_count}}
                 </div>
-                {{ $mutation_totales->links() }}
+                {{ $retraits->links() }}
             </div>
         </div>
     </div>

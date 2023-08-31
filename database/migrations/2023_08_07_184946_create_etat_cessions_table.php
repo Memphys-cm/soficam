@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('etat_cessions', function (Blueprint $table) {
             $table->id();
+           $table->uuid('uuid')->unique()->index();
             $table->string('reference_etat_cession')->default(Str::upper(Str::random(6)) . "" . now()->format('msu'));
             $table->enum('type_personne',['morale','physique'])->default('physique');
             $table->enum('type_operation',['bornage','morcellement','mutation_totale', 'retrait_indivision','immatriculation_direct','concession']);

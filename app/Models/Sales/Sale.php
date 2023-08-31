@@ -6,13 +6,14 @@ use App\Models\User;
 use App\Models\Document;
 use App\Models\TitreFoncier;
 use App\Models\Sales\Saleable;
+use App\Models\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Sale extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUUID;
     protected $guarded = [];
    
     public function titreFoncier()

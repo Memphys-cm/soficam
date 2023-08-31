@@ -11,6 +11,7 @@ use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use App\Models\CertificatePropriete;
 use App\Http\Livewire\Traits\WithDataTables;
+use App\Models\Sales\Saleable;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
 
@@ -21,13 +22,14 @@ class Index extends Component
 
     public $status = 'pending_payment';
     public $validity, $certificate_proprietes_type, $certificate_propriete_reason, $certificatepropriete, $titre_fonciers;
-    public $titre_foncier_id, $certificate_proprietes_number, $requestor_id, $price, $requestors;
-    public $certificate_propriete_id;
+    public $titre_foncier_id, $requestor_id, $price, $requestors;
+    public $certificate_propriete_id, $certificate_proprietes_number;
 
     public function mount()
     {
-        $this->titre_fonciers = 
+        $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier', 'region_id', 'division_id', 'sub_division_id', 'lieu_dit')->get();
         $this->requestors = User::role('user')->select('id', 'first_name', 'last_name')->get();
+        $this->certificate_proprietes_number =  Str::upper(Str::random(7)) . "" . now()->format('msu');
     }
     public function store()
     {
@@ -53,7 +55,7 @@ class Index extends Component
                 'price' => $this->price,
                 'validity' => Carbon::now()->addMonths(3),
                 'certificate_proprietes_number' => $this->certificate_proprietes_number,
-                'status' => $this->status,
+                // 'status' => $this->status,
                 'recorded_by' => auth()->user()->name,
             ]);
 
@@ -65,16 +67,15 @@ class Index extends Component
             ]);
 
             // Create the Saleable item using only the specified information
-            $saleableData = [
+            Saleable::create([
                 'sale_id' => $sale->id,
                 'price' => $this->price,
                 'quantity' => 1,
                 'saleable_id' => $certificatepropriete->id,
                 'saleable_type' => 'App\Models\CertificatePropriete', // Adjust the namespace if different
                 'created_by' => auth()->user()->name,
-            ];
+            ]);
 
-            DB::table('saleables')->insert($saleableData);
         });
        
         $this->clearFields();

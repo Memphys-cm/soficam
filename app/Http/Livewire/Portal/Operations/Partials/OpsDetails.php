@@ -45,6 +45,10 @@ class OpsDetails extends Component
     }
     public function render()
     {
+        if
+        (!Gate::allows('operation.mutation_totale.view') || !Gate::allows('operation.retrait_indivision.view') || !Gate::allows('operation.morcellement.view')){
+            return abort('401');
+        }
         return view('livewire.portal.operations.partials.ops-details');
     }
 }

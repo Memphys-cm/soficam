@@ -130,7 +130,7 @@ class Edit extends Component
                                 'block_id' => $this->block->id,
                                 'numero_du_lot' => $lotData['numero_du_lot'],
                                 'surperficie_du_lot' => $lotData['surperficie_du_lot'],
-                                'statut_du_lot' => $lotData['statut_du_lot'],
+                                // 'statut_du_lot' => $lotData['statut_du_lot'],
                                 'type' => 'normale',
                                 'cabinet_notaire_id' => $notaire->cabinet->id,
                                 'notaire_id' => $lotData['notaire_id'],

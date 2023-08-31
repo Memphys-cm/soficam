@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Notary;
 use App\Models\Region;
 use App\Models\SubDivision;
+use App\Models\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Cabinet extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUUID;
     protected $guarded = [];
     protected $table = 'cabinets';
 

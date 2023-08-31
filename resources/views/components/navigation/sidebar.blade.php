@@ -139,7 +139,7 @@
                                     </div>
                                 </li>
                                 @endcanany
-                                @canany('region.view', 'division.view', 'sub_division.view')
+                                @canany('sales.view')
                                 <li class="nav-item">
                                     <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.total-sale.index') || $request->routeIs('portal.cabinets.index') ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-sales"><span>
                                             <span class="sidebar-icon">
@@ -158,27 +158,23 @@
                                     </span>
                                     <div class="multi-level collapse {{ $request->routeIs('portal.total-sale.index') || $request->routeIs('portal.simple-sale.index') ? 'show' : '' }}" role="list" id="submenu-sales" aria-expanded="{{ $request->routeIs('portal.regions.index') || $request->routeIs('portal.division.index') || $request->routeIs('portal.sub_division.index') ? 'false' : 'true' }}">
                                         <ul class="flex-column nav">
-                                            @can('region.view')
                                             <li class="nav-item {{ $request->routeIs('portal.simple-sale.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.simple-sale.index') }}" class="nav-link">
                                                     <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Simples') }}</span>
                                                 </a>
                                             </li>
-                                            @endcan
-                                            @can('division.view')
                                             <li class="nav-item {{ $request->routeIs('portal.total-sale.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.total-sale.index') }}" class="nav-link">
                                                     <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Mutation Totale') }}</span>
                                                 </a>
                                             </li>
-                                            @endcan
                                         </ul>
                                     </div>
                                 </li>
                                 @endcanany
-                                @canany('mutation_totale.view', 'certificate_propriete.view')
+                                @canany('operation.mutation_totale.view', 'operation.morcellement.view', 'operation.retrait_indivision.view', 'etat_cession.view')
                                 <li class="nav-item">
-                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.state_assignments.index') || $request->routeIs('portal.mutation-totale.index')  || $request->routeIs('portal.immatriculation_directes.index')  || $request->routeIs('portal.morcellements.index') ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-land-operations"><span>
+                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.mutation-totale.index') || $request->routeIs('portal.immatriculation_directes.index')  || $request->routeIs('portal.morcellements.index') || $request->routeIs('portal.retrait-indivisions.index')  || $request->routeIs('portal.etat-cession.index') ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-land-operations"><span>
                                             <span class="sidebar-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon icon-sm">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3" />
@@ -193,23 +189,23 @@
                                             </svg>
                                         </span>
                                     </span>
-                                    <div class="multi-level collapse {{ $request->routeIs('portal.mutation-totale.index') || $request->routeIs('portal.state_assignments.index')  || $request->routeIs('portal.morcellements.index') ? 'show' : '' }}" role="list" id="submenu-land-operations" aria-expanded="{{ $request->routeIs('portal.mutation-totale.index') || $request->routeIs('portal.state_assignments.index') || $request->routeIs('portal.immatriculation_directes.index')  ? 'false' : 'true' }}">
+                                    <div class="multi-level collapse {{ $request->routeIs('portal.etat-cession.index') || $request->routeIs('portal.mutation-totale.index') || $request->routeIs('portal.state_assignments.index')  || $request->routeIs('portal.morcellements.index')  || $request->routeIs('portal.retrait-indivisions.index') ?  'show' : '' }}" role="list" id="submenu-land-operations" aria-expanded="{{ $request->routeIs('portal.mutation-totale.index') || $request->routeIs('portal.etat-cession.index') || $request->routeIs('portal.immatriculation_directes.index')  ? 'false' : 'true' }}">
                                         <ul class="flex-column nav">
                                             @can('etat_cession.view')
-                                            <li class="nav-item {{ $request->routeIs('portal.state_assignments.*') ? 'active' : '' }}">
-                                                <a href="{{ route('portal.state_assignments.index') }}" class="nav-link">
+                                            <li class="nav-item {{ $request->routeIs('portal.etat-cession.index') ? 'active' : '' }}">
+                                                <a href="{{ route('portal.etat-cession.index') }}" class="nav-link">
                                                     <span class="sidebar-text">{{ __('Etat cession') }}</span>
                                                 </a>
                                             </li>
                                             @endcan
-                                            @can('mutation_totale.view')
+                                            @can('operation.mutation_totale.view')
                                             <li class="nav-item {{ $request->routeIs('portal.mutation-totale.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.mutation-totale.index') }}" class="nav-link">
                                                     <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Mutation Totale') }}</span>
                                                 </a>
                                             </li>
                                             @endcan
-                                            @can('morcellement.view')
+                                            @can('operation.morcellement.view')
                                             <li class="nav-item {{ $request->routeIs('portal.morcellements.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.morcellements.index') }}" class="nav-link">
                                                     <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Morcellement') }}</span>
@@ -217,14 +213,21 @@
                                             </li>
                                             @endcan
 
-                                            @can('mutation_totale.view')
+                                            @can('operation.retrait_indivision.view')
+                                            <li class="nav-item {{ $request->routeIs('portal.retrait-indivisions.index') ? 'active' : '' }}">
+                                                <a href="{{ route('portal.retrait-indivisions.index') }}" class="nav-link">
+                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Retrait Indiv.') }}</span>
+                                                </a>
+                                            </li>
+                                            @endcan
+
+                                            @can('operation.mutation_totale.view')
                                             <li class="nav-item {{ $request->routeIs('portal.immatriculation_directes.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.immatriculation_directes.index') }}" class="nav-link">
                                                     <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Imma Directe') }}</span>
                                                 </a>
                                             </li>
                                             @endcan
-
                                         </ul>
                                     </div>
                                 </li>

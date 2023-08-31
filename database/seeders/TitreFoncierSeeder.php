@@ -21,15 +21,16 @@ class TitreFoncierSeeder extends Seeder
         TitreFoncier::flushEventListeners();
 
         $coordinates = [
-            'B1' => 234.12,
-            'B2' => 255.12,
-            'B3' => 12.12,
-            'B4' => 567.12,
+            'B1' =>' 783771.1412,439362.2283',
+            'B2' => '783772.7367, 439361.3785',
+            'B3' => '783772.7367, 439318.5813',
+            'B4' => '783772.7367, 439268.5813',
         ];
 
         for ($i = 0; $i < 50; $i++) {
 
            $titre_foncier = TitreFoncier::create([
+                'uuid' => Str::uuid(),
                 'numero_titre_foncier' => Str::random(11),
                 'date_de_delivrance_du_TF' => fake()->date(),
                 'numero_du_duplicata' => fake()->randomNumber(5, true),

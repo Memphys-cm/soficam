@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Service;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ServiceSeeder extends Seeder
 {
@@ -16,12 +17,14 @@ class ServiceSeeder extends Seeder
         Service::flushEventListeners();
 
         Service::create([
+            'uuid' => Str::uuid(),
             'code' => '001',
             'service_name_en' => 'Cadastre',
             'service_name_fr' => 'Cadastre'
         ]);
 
         Service::create([
+            'uuid' => Str::uuid(),
             'code' => '002',
             'service_name_en' => 'MINDAF',
             'service_name_fr' => 'MINDAF'

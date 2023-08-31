@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('cabinets', function (Blueprint $table) {
             $table->id();
+           $table->uuid('uuid')->unique()->index();
             $table->foreignId('region_id')->on('regions')->nullable()->Index();
             $table->foreignId('division_id')->on('divisions')->nullable()->Index();
             $table->foreignId('sub_division_id')->on('sub_divisions')->nullable()->Index();
