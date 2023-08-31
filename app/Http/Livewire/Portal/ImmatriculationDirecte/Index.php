@@ -355,7 +355,7 @@ class Index extends Component
         $this->emitUp('flow_updated');
         
         $this->clearFields();
-        $this->refresh(__('Pv de Bornage Enregistrer Avec Suceess'), 'PvBornageModal');
+        $this->refresh(__('Dossier Administratif Mise En Forme Avec Suceess'), 'DossierAdministratifModal');
     }
 
     public function certificat_affichage()
