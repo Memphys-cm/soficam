@@ -58,8 +58,8 @@
         <div style="margin-bottom:50px; text-align: center; margin-top:50px; font-size:32px; text-transform:uppercase">
             <b>certificat d'affichage</b>
         </div>
-        <div style="text-align: justify; font-size:18px">Le Sous préfet de {{$imma_directe->subDivision->sub_division_name}} Soussigné, certifie avoir apposé du {{ $imma_directe->date_debut_certificat_d_affichage }} au
-            {{$imma_directe->date_fin_certificat_d_affichage}}, l'extrait de la demande de Titre Foncier par M. @foreach ($imma_directe->users as $user)
+        <div style="text-align: justify; font-size:18px">Le Sous préfet de {{$imma_directe->subDivision->sub_division_name}} Soussigné, certifie avoir apposé du {{ $imma_directe->date_debut_certificat_affichage }} au
+            {{$imma_directe->date_fin_certificat_affichage}}, l'extrait de la demande de Titre Foncier par M. @foreach ($imma_directe->users as $user)
                 {{$user->first_name}} {{$user->last_name}};
             @endforeach sur une parcelle du
             Domaine National située dans l'Arrondissement de {{$imma_directe->subDivision->sub_division_name}}, au lieu dit {{$imma_directe->localisation}}.</div>

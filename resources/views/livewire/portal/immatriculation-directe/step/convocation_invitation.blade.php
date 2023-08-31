@@ -1,20 +1,20 @@
 <div wire:ignore.self class="modal side-layout-modal fade" id="ConvocationImmaDirecteModal" tabindex="-1"
     aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:40%;">
+    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:75%;">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4">
-                            {{ __('Etablissement') }}{{ __('Convocation D\'un Dossier') }}
+                            {{ __('Etablissement') }}{{ __(' Convocation D\'un Dossier') }}
                         </h1>
                         <p class="px-1">
-                            {{ __('Imprimer') }}{{ __('Un Convocation D\'Invitation') }}
+                            {{ __('Imprimer') }}{{ __(' Une Convocation D\'Invitation') }}
                         </p>
                     </div>
                     <x-form-items.form wire:submit="convocation">
                         <div class="form-group mb-3 row">
-                            <div class='col-12 my-1'>
+                            <div class='col-md-6 my-1'>
                                 <label for="code">{{ __('Date Convocation') }}</label>
                                 <input wire:model="date_convocation" type="date"
                                     class="form-control  @error('date_convocation') is-invalid @enderror"
@@ -27,17 +27,29 @@
 
                           @foreach ($comissions as $index => $user)
                             <div class="row my-1 py-1">
-                                <div class="col-md-5">
+                                <div class="col-md-3">
                                 <label>{{__('Nom')}} </label>
                                     <input class="form-control  @error('comissions') is-invalid @enderror"
                                         type="text" wire:model="comissions.{{ $index }}.name"
                                         placeholder="Nom">
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-3">
                                     <label>{{__('Poste')}} </label>
                                     <input class="form-control @error('comissions') is-invalid @enderror" type="text"
                                         wire:model="comissions.{{ $index }}.position"
                                         placeholder="Poste">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">{{__('Numéro CNI')}}</label>
+                                    <input class="form-control  @error('comissions') is-invalid @enderror"
+                                        type="text" wire:model="comissions.{{ $index }}.num_cni"
+                                        placeholder="Numéro CNI">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">{{__('Téléphone')}}</label>
+                                    <input class="form-control  @error('comissions') is-invalid @enderror"
+                                        type="text" wire:model="comissions.{{ $index }}.telephone"
+                                        placeholder="Téléphone">
                                 </div>
                                 <div class="col-md-2 mb-3">
                                     <label>{{__('Action')}} </label>

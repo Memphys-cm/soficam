@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Region;
 use App\Models\Service;
 use Livewire\Component;
-use Twilio\Http\Client;
+use Twilio\Rest\Client;
 use App\Models\Division;
 use App\Models\Sales\Sale;
 use App\Models\SubDivision;
@@ -268,35 +268,6 @@ class Index extends Component
         );
     }
 
-    public function msgPortePdf($id) {
-        $msg_porte = ImmatriculationDirecte::findOrFail($id);
-
-        $sid='ACa77985267946bd8e613944d40b9d0458';
-        $token='b7b84303df6a21c3d6f9b32d3d678103';
-        $twilio = new Client($sid, $token);
-
-        $messageBody = "Hello, le message porté est disponible.";
-
-        $twilio->messages->create(
-            '+237672959097',
-            [
-                'from' => '+15856393680',
-                'body' => $messageBody,
-            ]
-        );
-
-        $data = [
-            'msg_porte' => $this->msg_porte,
-        ];
-
-        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.message-porte')->setPaper('a4', 'portrait');
-
-        return response()->streamDownload(
-            fn () => print($pdf->output()),
-            __('Message_Porté-').Str::random('10') . ".pdf"
-        );
-    }
-
     public function certificat_affichage()
     {
         $this->validate([
@@ -307,8 +278,8 @@ class Index extends Component
        
         DB::transaction(function () {
             $this->imma_directe->update([
-                'date_debut_certificat_d\'affichage' => $this->date_debut,
-                'date_fin_certificat_d\'affichage' => $this->date_fin,
+                'date_debut_certificat_affichage' => $this->date_debut,
+                'date_fin_certificat_affichage' => $this->date_fin,
                 'status_certificat_d\'affichage' => 'done',
                 'statut' => 'Certificat D\'affichage Effectuer',
                 'next_step' => 'Convocation D\'invitation sur Le Terrain',
@@ -340,20 +311,36 @@ class Index extends Component
                 'date_convocation' => $this->date_convocation,
                 'comissions' => json_encode($this->comissions),
                 'status_convocation' => 'done',
+
                 'statut' => 'Convocationsur le Terrain Effectuer',
                 'next_step' => 'Etablissement Etat de Cession',
             ]);
         });
-
-        //dd($this->imma_directe);
         $this->refresh(__('Convocation imprimée Avec SUCCES!'), 'ConvocationImmaDirecteModal');
 
         $this->clearFields();
 
+        $sid='ACa77985267946bd8e613944d40b9d0458';
+        $token='b7b84303df6a21c3d6f9b32d3d678103';
+        $twilio = new Client($sid, $token);
+
+        $messageBody = "Hello, le message porté est disponible.";
+
+        $twilio->messages->create(
+            '+237672959097',
+            [
+                'from' => '+15856393680',
+                'body' => $messageBody,
+            ]
+        );
+
+
         $data = [
             'imma_directe' => $this->imma_directe,
+            'comissions' => $this->comissions
         ];
 
+        dd($this->imma_directe, $this->comissions);
         $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.message-porte', 
         $data)->setPaper('a4', 'portrait');
 
