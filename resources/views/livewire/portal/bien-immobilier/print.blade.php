@@ -30,12 +30,12 @@
         </tr>
     </table>
 
-    <div style="padding: 12px; text-align:center; margin-top:20px"><img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code for Bien Immobilier ID"></div>
+    <div style="padding: 12px; text-align:center; margin-top:15px"><img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code for Bien Immobilier ID"></div>
 
-    <div style="margin-top: 30px; text-decoration:underline; text-transform:uppercase; text-align:center"><b>liste des titres fonciers de Mr/Mme {{$bien_immobilier->requestor->first_name}} {{$bien_immobilier->requestor->last_name}}</b></div>
+    <div style="margin-top: 15px; text-decoration:underline; text-transform:uppercase; text-align:center"><b>liste des titres fonciers de Mr/Mme {{$bien_immobilier->requestor->first_name}} {{$bien_immobilier->requestor->last_name}}</b></div>
     <div style="padding: 12px; margin-top:20px">
-        <table style="border:2px solid; margin:auto">
-            <thead style="text-align: center; border:1px solid">
+        <table border=2 style="margin:auto">
+            <thead style="text-align: center">
                 <th style="border: 1px solid">Numéro Titre Foncier</th>
                 <th style="border: 1px solid">Location</th>
                 <th style="border: 1px solid">Charge</th>

@@ -38,7 +38,7 @@
                     </svg> {{ __('Nouveau') }}
                 </a>
                 @endcan
-                <a href="{{route('portal.qrcode')}}" class="btn btn-primary">Scanner</a> 
+                <a href="" class="btn btn-primary">Scanner</a> 
                 @can('immobilier.export_n_print')
                 <div class="mx-2" wire:loading.remove>
                     <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center ">
@@ -145,6 +145,7 @@
                         <td>{{ $bien_immobilier->created_at }}</td>
                         <td>
                             <button wire:click='printPdf({{$bien_immobilier->id}})' class="btn btn-primary">PDF</button>
+                            <button wire:click='sms'>SMS</button>
                             <a href='#' wire:click.prevent="initData({{ $bien_immobilier->id }})" data-bs-toggle="modal" data-bs-target="#BienUpdateModal">
                                 <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">

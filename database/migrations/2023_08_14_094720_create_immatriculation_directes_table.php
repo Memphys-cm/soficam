@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('reference')->nullable();
             $table->string('localisation')->nullable();
+            $table->string('superficie')->nullable();
             $table->foreignId('region_id')->index();
             $table->foreignId('division_id')->index();
             $table->foreignId('sub_division_id')->index();
@@ -34,7 +35,7 @@ return new class extends Migration
 
             $table->float('montant_ordre_versement')->nullable();
             $table->string('numero_ordre_versement')->nullable();
-            $table->float("superficie_ordre_versement")->nullable();
+            // $table->float("superficie_ordre_versement")->nullable();
             $table->string('numero_arrete_ordre_versement')->nullable();
             $table->date('date_ordre_versement')->nullable();
             $table->enum('status_ordre_versement', ['no_done','pending','done'])->default('no_done');
