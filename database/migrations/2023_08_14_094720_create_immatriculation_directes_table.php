@@ -42,12 +42,24 @@ return new class extends Migration
 
             $table->string('status_avis_publique')->nullable();
             $table->date('date_avis_publique')->nullable();
-            $table->string('status_certificat_d\'affichage')->nullable();
-            $table->date('date_debut_certificat_d\'affichage')->nullable();
-            $table->date('date_fin_certificat_d\'affichage')->nullable();
+            $table->date('date_avis_publique_signe')->nullable();
+            $table->date('date_calendrier_descente')->nullable();
+            $table->date('date_delivrance_etat_cession')->nullable();
+            $table->date('date_paiement_etat_cession')->nullable();
+
+            // $table->string('status_certificat_d\'affichage')->nullable();
+            $table->date('date_debut_certificat_affichage')->nullable();
+            $table->date('date_fin_certificat_affichage')->nullable();
 
             $table->date('date_convocation')->nullable();
             $table->string('status_convocation')->nullable();
+
+            $table->foreignId('geometre_id')->on('users')->index()->nullable();
+            $table->date('date_geometre_enregistrer')->nullable();
+            $table->date('pv_enregistrer')->nullable();
+            $table->date('dossier_technique_enregistrer')->nullable();
+            $table->date('dossier_technique_complet')->nullable();
+
 
             $table->timestamps();
         });
