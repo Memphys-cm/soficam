@@ -3,6 +3,10 @@
     @include('livewire.portal.immatriculation-directe.create')
     @include('livewire.portal.immatriculation-directe.step.cotation_step1')
     @include('livewire.portal.immatriculation-directe.step.ordre_versement')
+    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+    @include('livewire.portal.immatriculation-directe.step.enregistrer_geometre')
+    @include('livewire.portal.immatriculation-directe.step.pv_bornage')
+    @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_administratif')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -153,9 +157,16 @@
                         @canany('titre_foncier.update','titre_foncier.delete')
                         <td>
                             @can('imma_directe.view_detail')
-                            <a href="#"  data-bs-placement="top" title="Voir Les Deatils du Dossier" >
+                            <a href="#" data-bs-placement="top" title="Voir Les Deatils du Dossier" >
                                 <svg class="icon icon-sm text-info" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </a>
+                            @endcan
+                            @can('imma_directe.update', $imma_directe)
+                            <a href="#"  data-bs-placement="top" title="Modifier le Staut du Dossier Ici" wire:click.prevent="initData({{$imma_directe->id}})" data-bs-toggle="modal" data-bs-target="#EditStatutModal" draggable="false">
+                                <svg class="icon icon-sm text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                 </svg>
                             </a>
                             @endcan
@@ -177,14 +188,15 @@
                             </a>
                             @endif
                             @endcan
-                            @can('imma.directe.avis', $imma_directe)
-                            <a href="#" data-bs-placement="top" title="Etablisser L'Avis Au Public" wire:click.prevent="initData({{$imma_directe->id}})" data-bs-toggle="modal" data-bs-target="#" draggable="false">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon icon-xs">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                                  </svg>                                  
-                            </a>
+                            @can('imma_directe.avis', $imma_directe)
+                           
                                 @if ($imma_directe->next_step == "Preparation Avis Au publique")
-                                    
+                                <a href="#" data-bs-placement="top" title="Etablisser L'Avis Au Public" wire:click.prevent="initData({{$imma_directe->id}})" data-bs-toggle="modal" data-bs-target="#" draggable="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon icon-xs">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                      </svg>                                  
+                                </a>
+                                @elseif ($imma_directe->next_step == "Avis Au publique En attente de signature")
                                 @endif
                             @endcan
                             @can('imma.directe.certificat', $imma_directe)
@@ -203,10 +215,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 13.5l3 3m0 0l3-3m-3 3v-6m1.06-4.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
                                   </svg>                                                                
                             </a>
-                                @if ($imma_directe->next_step == "Certificat_Affichage")
-                                    
-                                @endif
                             @endcan
+                            @include('livewire.portal.immatriculation-directe.layout.action')
                             {{-- <button class="btn btn-primary" wire:click="printPdf">Pdf</button> --}}
                             @can('titre_foncier.delete')
                             <a href="#"  data-bs-placement="top" title="Supprimer le Dossier Ici" wire:click.prevent="initData({{$imma_directe->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
