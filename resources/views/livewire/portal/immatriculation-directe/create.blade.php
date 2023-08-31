@@ -31,6 +31,16 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <div class="col">
+                                <label for="superficie">{{ __('Superficie en m2') }}</label>
+                                <input wire:model="superficie" type="number"
+                                    class="form-control  @error('superficie') is-invalid @enderror"
+                                    placeholder="{{ __('2500 m2') }}" required=""
+                                    name="superficie">
+                                @error('superficie')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="form-group mb-3 row">
                             <div class='col'>
