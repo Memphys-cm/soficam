@@ -100,7 +100,6 @@ class Index extends Component
 
         $this->conservateurs = User::role('user')->get(); // to be updated
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
-        // $this->numero_titre_foncier = $this->generateCodeTF();
         //    $this->generateCodeTF();
     }
 
@@ -115,36 +114,17 @@ class Index extends Component
         if (!empty($division_id)) {
             $this->sub_divisions = SubDivision::whereDivisionId($division_id)->get();
         }
+        $this->numero_titre_foncier = $this->generateCodeTF();
     }
 
-
-    //     public function convert($utmCoordinates)
-    // {
-    //     // Initialisez Proj4
-    //     $proj4 = new Proj4php();
-
-    //     // Créez les projections
-    //     $projUTM = new Proj('+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs', $proj4);
-    //     $projWGS84 = new Proj('EPSG:4326', $proj4);
-
-    //     $decimalResults = [];
-
-    //     foreach ($utmCoordinates as $utm) {
-    //         $utmX = $utm[0];
-    //         $utmY = $utm[1];
-
-    //         // Créez le point source avec les coordonnées UTM
-    //         $pointSrc = new Point($utmX, $utmY, $projUTM);
-
-    //         // Transformez le point entre les systèmes de coordonnées
-    //         $pointDest = $proj4->transform($projWGS84, $pointSrc);
-
-    //         // Ajoutez le résultat à votre tableau de résultats en coordonnées décimales
-    //         $decimalResults[] = $pointDest->toShortString();
-    //     }
-
-    //     return $decimalResults;
-    // }
+    public function updatedNumeroFolio()
+    {
+        $this->numero_titre_foncier = $this->generateCodeTF();
+    }
+    public function updatedNumeroDuDuplicata()
+    {
+        $this->numero_titre_foncier = $this->generateCodeTF();
+    }
 
     public function convert($utmCoordinates)
     {
@@ -158,7 +138,7 @@ class Index extends Component
         $decimalResults = [];
     
         foreach ($utmCoordinates as $utm) {
-            $utmParts = explode(', ', $utm); // Sépare les coordonnées UTM en X et Y
+            $utmParts = explode(',', $utm); // Sépare les coordonnées UTM en X et Y
             $utmX = floatval($utmParts[0]);
             $utmY = floatval($utmParts[1]);
     
@@ -211,33 +191,12 @@ class Index extends Component
     // }
 
 
-
-
-
     public function generateCodeTF()
     {
-        // $departements = Division::all();
-        // $codesUtilises = [];
-
-        // foreach ($departements as $departement) {
-        //     $nomsBlocs = explode(' ', $departement->division_name_fr);
-        //     $count = count($nomsBlocs);
-
-        //     if ($count === 1) {
-        //         $code = substr($nomsBlocs[0], 0, 2);
-        //     } elseif ($count > 1) {
-        //         $code = substr($nomsBlocs[0], 0, 1) . substr($nomsBlocs[$count - 1], 0, 1);
-        //     }
-        //     // dump(strtoupper($code));
-        //     $departement->update(['code' => strtoupper($code)]);
-        // }
-
         $region = Region::findOrFail($this->region_id)->code;
         $departement = Division::findOrFail($this->division_id)->code;
-        // $arrondissement = SubDivision::findOrFail($this->sub_division_id)->code;
-
+        $arrondissement = SubDivision::findOrFail($this->sub_division_id)->code;
         $numero = $region . "/" . $departement . "/" . 'A' . "/" . $this->numero_du_duplicata . "/" . $this->superficie_du_TF_mere . "/" . $this->numero_folio;
-        //  dd($numero);   
         return ($numero);
     }
 
@@ -264,11 +223,9 @@ class Index extends Component
 
     public function store()
     {
-        $this->generateCodeTF();
         if (!Gate::allows('titre_foncier.create')) {
             return abort(401);
         }
-        // dd($this->user_ids);
 
         $this->validate([
             'numero_titre_foncier' => 'required',
@@ -276,7 +233,7 @@ class Index extends Component
             'division_id' => 'required',
             'sub_division_id' => 'required',
             'date_de_delivrance_du_TF' => 'required|date',
-            // 'numero_du_duplicata' => 'required|integer',
+            'numero_du_duplicata' => 'required|integer',
             'groupement' => 'required',
             'lieu_dit' => 'required',
             'zone' => 'required',
@@ -307,6 +264,8 @@ class Index extends Component
         });
 
         $transform = $this->convert($this->coordonnees);
+        // dd($transform);
+
 
         // $coordonne = $this->convert($this->coordonnees);
         // dd($coordonne);
@@ -335,6 +294,7 @@ class Index extends Component
             'volume_du_bordereau_analytique' => $this->volume_du_bordereau_analytique,
             'date_detablissement_du_bordereau_analytique' => $this->date_detablissement_du_bordereau_analytique,
             'coordonnees' => json_encode($transform),
+            // 'coordonnees' => json_encode($this->coordonnees),
             'limit_nord' => $this->limit_nord,
             'limit_sud' => $this->limit_sud,
             'limit_est' => $this->limit_est,
@@ -359,6 +319,40 @@ class Index extends Component
 
         $this->refresh(__('TitreFoncier successfully Created'), 'CreateTitreFoncierModal');
     }
+
+    public function convertToUTM($decimalCoordinates)
+{
+    // Initialisez Proj4
+    $proj4 = new Proj4php();
+
+    // Créez les projections
+    $projUTM = new Proj('+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs', $proj4);
+    $projWGS84 = new Proj('EPSG:4326', $proj4);
+
+    $utmResults = [];
+
+    foreach ($decimalCoordinates as $decimal) {
+        $decimalParts = explode(',', $decimal); // Sépare les coordonnées décimales en longitude et latitude
+        $lon = floatval($decimalParts[0]);
+        $lat = floatval($decimalParts[1]);
+
+        // Créez le point source avec les coordonnées géographiques
+        $pointSrc = new Point($lon, $lat, $projWGS84);
+
+        // Transformez le point entre les systèmes de coordonnées
+        $pointDest = $proj4->transform($projUTM, $pointSrc);
+
+        // Obtenez les coordonnées UTM du point de destination
+        $utmX = $pointDest->x;
+        $utmY = $pointDest->y;
+
+        // Ajoutez le résultat à votre tableau de résultats en coordonnées UTM
+        $utmResults[] = "$utmX, $utmY";
+    }
+
+    return $utmResults;
+}
+
 
     public function initData($id)
     {
@@ -394,8 +388,8 @@ class Index extends Component
         $this->numero_ccp =  $titrefoncier->numero_ccp;
         $this->price =  $titrefoncier->price;
 
-        $this->coordinates = array_values(json_decode($titrefoncier->coordonnees, true));
-        $this->coordonnees = array_values(json_decode($titrefoncier->coordonnees, true));
+        $this->coordinates = $this->convertToUTM(array_values(json_decode($titrefoncier->coordonnees, true)));
+        $this->coordonnees = $this->convertToUTM(array_values(json_decode($titrefoncier->coordonnees, true)));
 
 
         $this->user_ids = $titrefoncier->users->pluck('id');

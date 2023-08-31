@@ -2,7 +2,7 @@
     <div id="map"></div>
     <div id="style-controls" style="position: absolute; top: 10px; left: 550px; z-index: 100;">
         <button class="btn btn-white" id="normalStyleButton">Street</button>
-        <button class="btn btn-white" id="satelliteStyleButton">Satellite</button> 
+        <button class="btn btn-white" id="satelliteStyleButton">Satellite</button>
     </div>
     <div id="search-box-general" style="position: absolute; top: 10px; right: 40px;  padding: 10px; z-index: 100;">
         <input class="form-control" type="text" id="search-input-general"
@@ -11,7 +11,7 @@
             style="background-color: white; border: 1px solid #ccc; position: absolute; top: 60px; right: 0; left: 0; max-height: 150px; overflow-y: auto; display: none;">
         </div>
     </div>
-    
+
     {{-- <div id="search-box-polygons"
         style="position: absolute; top: 10px; right: 100px; background-color: white; padding: 10px; border: 1px solid #ccc; z-index: 100;">
         <h3>Rechercher un Polygone :</h3>
@@ -29,6 +29,7 @@
             center: [11.5, 6.5], // Centre géographique du Cameroun
             zoom: 6 // Zoom initial
         });
+
 
         // var itemsFromController = @json($titles);
         // itemsFromController.forEach(function(item) {
@@ -68,9 +69,9 @@
             var transformedCoordinates = [];
 
             for (var i = 0; i < coordinatesArray.length; i++) {
-                var coords = coordinatesArray[i].split(', ');
+                var coords = coordinatesArray[i].split(',');
                 transformedCoordinates.push([parseFloat(coords[0]), parseFloat(coords[
-                1])]); // Notez l'inversion des coordonnées
+                    1])]); // Notez l'inversion des coordonnées
             }
             console.log([transformedCoordinates]);
             polygons.push({

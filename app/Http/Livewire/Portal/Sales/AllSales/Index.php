@@ -11,6 +11,7 @@ use App\Models\ReleveImmobilier;
 use Illuminate\Support\Facades\DB;
 use App\Models\CertificatePropriete;
 use App\Http\Livewire\Traits\WithDataTables;
+use App\Models\ImmatriculationDirecte;
 use App\Models\Receipt;
 use Hachther\MeSomb\Operation\Payment\Collect;
 
@@ -86,6 +87,7 @@ class Index extends Component
                 'App\Models\EtatCession'  => optional(EtatCession::whereId($saleable_item->saleable_id))->update(['status'=> 'paid']),
                 'App\Models\CertificatePropriete'  => optional(CertificatePropriete::whereId($saleable_item->saleable_id))->update(['status'=> 'active']),
                 'App\Models\Operation'  => optional(Operation::whereId($saleable_item->saleable_id))->update(['statut_conservateur'=> 'ongoing']),
+                'App\Models\ImmatriculationDirecte'  => optional(ImmatriculationDirecte::whereId($saleable_item->saleable_id))->update(['status_ordre_versement'=> 'done' , 'statut' => 'Ordre de Versement Payer', 'next_step' => 'Preparation Avis Au publique']),
                 default => ''
            };
 
