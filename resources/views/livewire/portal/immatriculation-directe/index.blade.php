@@ -5,6 +5,8 @@
     @include('livewire.portal.immatriculation-directe.step.ordre_versement')
     @include('livewire.portal.immatriculation-directe.step.edit_statut')
     @include('livewire.portal.immatriculation-directe.step.enregistrer_geometre')
+    @include('livewire.portal.immatriculation-directe.step.pv_bornage')
+    @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_administratif')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -214,6 +216,7 @@
                                   </svg>                                                                
                             </a>
                             @endcan
+                            @include('livewire.portal.immatriculation-directe.layout.action')
                             {{-- <button class="btn btn-primary" wire:click="printPdf">Pdf</button> --}}
                             @can('titre_foncier.delete')
                             <a href="#"  data-bs-placement="top" title="Supprimer le Dossier Ici" wire:click.prevent="initData({{$imma_directe->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
@@ -222,7 +225,6 @@
                                 </svg>
                             </a>
                             @endcan
-                            @include('livewire.portal.immatriculation-directe.layout.action')
                         </td>
                         @endcanany
                     </tr>
