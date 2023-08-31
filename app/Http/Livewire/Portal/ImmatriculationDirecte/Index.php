@@ -35,7 +35,7 @@ class Index extends Component
     public $divisions = [];
     public $sub_divisions = [];
     public $date_debut , $date_fin;
-    public $date_convocation , $superficie;
+    public $date_convocation , $superficie , $status , $date_status;
 
     public function mount()
     {
@@ -74,7 +74,16 @@ class Index extends Component
     public function initData($id)
     {
         $this->imma_directe = ImmatriculationDirecte::findOrFail($id);
+        $imma = $this->imma_directe;
+        // dd($imma->next_step);
         $this->state = 1;
+        if($imma->next_step === "Avis Au publique En attente de signature"){
+            // dd('enter');
+            $this->status = 'Avis Publique Signer';
+        }else if($imma->next_step === "signature decision portant calendrier de descente"){
+            // dd('enter');
+            $this->status = 'Decision portant calendrier de descente Signer';
+        }
     }
 
     public function store()
@@ -115,6 +124,35 @@ class Index extends Component
 
     }
 
+    public function edit_statut()
+    {
+        $imma = $this->imma_directe;
+        $this->validate([
+            'status' => 'required',
+            'date_status' => 'required',
+        ]);
+        if($imma->next_step == "Avis Au publique En attente de signature"){
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => 'Avis au Public Signer',
+                    'next_step' => 'signature decision portant calendrier de descente',
+                    'date_avis_publique_signe' => $this->date_status,
+                ]);
+            });
+        } else if($imma->next_step == "signature decision portant calendrier de descente"){
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => 'Decision portant portant calendrier Signer',
+                    'next_step' => 'Certificat_Affichage',
+                    'date_calendrier_descente' => $this->date_status,
+                ]);
+            });
+        }
+
+        $this->refresh(__('Statut Modifier Avec SUCCES!'), 'EditStatutModal');
+        $this->clearFields();
+    }
+
     public function cotation_first_step()
     {
         $this->validate([
@@ -135,7 +173,7 @@ class Index extends Component
             ]);
         });
 
-        $this->refresh(__('Dossier D\'Immatriculation Directe Coter Avec SUCCES!'), 'CotationImmaDirecteModal');
+        $this->refresh(__('DOSSIERt Coter Avec SUCCES!'), 'CotationImmaDirecteModal');
 
         $this->clearFields();
     }
@@ -169,7 +207,7 @@ class Index extends Component
        
         DB::transaction(function () {
             $this->imma_directe->update([
-                'montant_ordre_versement' => $this->genererNumeroVersement(),
+                'numero_ordre_versement' => $this->genererNumeroVersement(),
                 // 'superficie_ordre_versement' => $this->superficie_ordre_versement,
                 'montant_ordre_versement' => $this->montant_ordre_versement,
                 'status_ordre_versement' => 'pending',
@@ -198,7 +236,7 @@ class Index extends Component
 
         DB::table('saleables')->insert($saleableData);
 
-        $this->printPdf();
+        // $this->printPdf();
 
         $this->refresh(__('Ordre de Versement Enregistrer Avec SUCCES!'), 'OrdreVersementImmaDirecteModal');
 
