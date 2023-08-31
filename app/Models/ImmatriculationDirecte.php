@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ImmatriculationDirecte extends Model
 {
@@ -15,6 +17,14 @@ class ImmatriculationDirecte extends Model
 
     public $guarded = [];
     
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('preview')
+            ->fit(Manipulations::FIT_CROP, 300, 300)
+            ->nonQueued();
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'immatriculation_directe_user', 'user_id', 'immatriculation_directe_id')->withTimestamps();
