@@ -157,6 +157,46 @@ class Index extends Component
         }
     }
 
+    public function sms() {
+        $api_key = 'R2FtYXNwZWVkOmg4OEBWNFlUa2ZkZnFwVQ==';
+        $url = 'https://app.techsoft-web-agency.com/sms/api';
+        $from = 'TechSoft-SMS';
+        $destination = '237659351205';
+            
+        $sms = "Hello, has been added to your land title.";
+
+        $sms_body = array(
+            'action' => 'send-sms',
+            'api_key' => $api_key,
+            'to' => $destination,
+            'from' => $from,
+            'sms' => $sms
+        );
+        
+        $send_data = http_build_query($sms_body);
+        $gateway_url = $url . "?" . $send_data;
+
+        try {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $gateway_url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HTTPGET, 1);
+            $output = curl_exec($ch);
+
+            if (curl_errno($ch)) {
+                $output = curl_error($ch);
+            }
+            curl_close($ch);
+
+            var_dump($output);
+
+        }catch (Exception $exception){
+            echo $exception->getMessage();
+        }
+
+        //dd($sms_body);
+    }
+
     public function  printPdf($id)
     {
         $this->bien_immobilier = ReleveImmobilier::findOrFail($id);
@@ -166,7 +206,7 @@ class Index extends Component
             // Autres données que vous souhaitez afficher dans la vue
         ];
 
-        $pdf = Pdf::loadView('livewire.portal.bien-immobilier.print',$data)->setPaper('a4', 'portrait');
+        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.quitance',$data)->setPaper('a4', 'portrait');
 
         return response()->streamDownload(
             fn () => print($pdf->output()),
