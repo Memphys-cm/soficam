@@ -65,7 +65,7 @@
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
                                 data-bs-dismiss="modal">{{ __('Close') }}</button>
-                            <button type="submit" wire:click.prevent="certificat_affichage"
+                            <button type="submit" wire:click.prevent="convocation"
                                 class="btn btn-primary btn-loading"
                                 wire:loading.attr="disabled">{{ __('Imprimer') }}</button>
                         </div>

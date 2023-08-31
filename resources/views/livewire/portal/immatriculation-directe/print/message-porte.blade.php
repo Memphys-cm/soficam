@@ -16,51 +16,51 @@
         <tr style="mb-1">
             <td style="text-align:center; font-size:14px">
                 <div>..............</div>
-                <div>REGION DU CENTRE</div>
+                <div>REGION DE {{$imma_directe->region->region_name_fr}}</div>
             </td>
             <td style="width: 80px;">
                 <div></div>
             </td>
             <td style="text-align:center">
                 <div>..............</div>
-                <div>CENTER REGION</div>
+                <div> {{$imma_directe->region->region_name_en}} REGION</div>
             </td>
         </tr>
         <tr style="mb-2">
             <td style="text-align:center; font-size:14px">
                 <div>..............</div>
-                <div>DEPARTEMENT DU MFOUNDI</div>
+                <div>DEPARTEMENT DU  {{$imma_directe->division->division_name}}</div>
             </td>
             <td style="width: 80px;"></td>
             <td style="text-align:center; font-size:14px">
                 <div>..............</div>
-                <div>MFOUNDI DIVISION</div>
+                <div>{{$imma_directe->division->division_name}} DIVISION</div>
             </td>
         </tr>
         <tr>
             <td style="text-align:center; font-size:14px">
                 <div>..............</div>
-                <div>ARRONDISSEMENT DE YAOUNDE VII</div>
+                <div>ARRONDISSEMENT DE {{$imma_directe->subDivision->sub_division_name}}</div>
             </td>
             <td style="width: 80px;">
                 <div></div>
             </td>
             <td style="text-align:center; font-size:14px">
                 <div>..............</div>
-                <div>YAOUNDE VII SUBDIVISION</div>
+                <div>{{$imma_directe->subDivision->sub_division_name}} SUBDIVISION</div>
             </td>
         </tr>
         <tr>
             <td style="text-align:center; font-size:14px">
                 <div>..............</div>
-                <div>SOUS PREFECTURE DE NKOLBISSON</div>
+                <div>SOUS PREFECTURE DE {{$imma_directe->subDivision->sub_division_name}}</div>
             </td>
             <td style="width: 80px;">
                 <div></div>
             </td>
             <td style="text-align:center; font-size:14px">
                 <div>..............</div>
-                <div>YAOUNDE VII DIVISIONNAL OFFICE</div>
+                <div>{{$imma_directe->subDivision->sub_division_name}} DIVISIONNAL OFFICE</div>
             </td>
         </tr>
         <tr>
@@ -92,24 +92,23 @@
         <p></p>
         <p></p>
         <h1 style="text-align: center;">MESSAGE-PORTE</h1>
-        <div>
-            <h1>LE SOUS-PREFET DE L'ARRONDISSEMENT DE YAOUNDE VII <br> A</h1>
-            <p></p>
-            <ol>
+        <div><b>
+            <h1 style="text-align: center">LE SOUS-PREFET DE L'ARRONDISSEMENT DE {{$imma_directe->subDivision->sub_division_name}} <br> A</h1>
+            <ul style="margin-right: 30px">
                 <li>
-                    <h3>CHEF DU SERVICE DEPARTEMENTAL DES AFFAIRES FONCIERES DU MFOUNDI</h3>
+                    CHEF DU SERVICE DEPARTEMENTAL DES AFFAIRES FONCIERES DU {{$imma_directe->division->division_name}}
                 </li>
                 <li>
-                    <h3>CHEF DU SERVICE DEPARTEMENTAL DU CADASTRE DU MFOUNDI</h3>
+                    CHEF DU SERVICE DEPARTEMENTAL DU CADASTRE DU {{$imma_directe->division->division_name}}
                 </li>
                 <li>
-                    <h3>DELEGUE DEPARTEMENTAL DE L'HABITAT ET DU DEVELOPPEMENT URBAIN</h3>
+                    DELEGUE DEPARTEMENTAL DE L'HABITAT ET DU DEVELOPPEMENT URBAIN
                 </li>
                 <li>
-                    <h3>DELEGUE D'ARRONDISSEMENT D'AGRICULTURE ET DU DEVELOPPEMENT RURAL</h3>
+                    DELEGUE D'ARRONDISSEMENT D'AGRICULTURE ET DU DEVELOPPEMENT RURAL
                 </li>
-            </ol>
-            <p>
+            </ul></b>
+            <p style="margin-right: 20px">
             <h3 style="texte-decoration:underline"><strong>TEXTE</strong></h3>: HONNEUR VOUS IMFORMER POUR DISPOSITION
             D'USAGE À PRENDRE <strong>STOP</strong> QUE
             COMMISSION CONSULTATIVE COMPETENTEDONT VOUS ETES MEMBRES SE REUNIRA LE _____________________ À____ HEURE A

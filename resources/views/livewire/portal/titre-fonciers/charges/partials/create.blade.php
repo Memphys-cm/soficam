@@ -46,6 +46,8 @@
                                     <option value="HYPOTHEQUE">{{__('HYPOTHEQUE')}}</option>
                                     <option value="PRENOTE">{{__('PRENOTE')}}</option>
                                     <option value="SUSPENDU">{{__('SUSPENDU')}}</option>
+                                    <option value="RETRAIT">{{__('RETRAIT')}}</option>
+                                    <option value="ANNULATION">{{__('ANNULATION')}}</option>
                                 </select>
                                 @error('etat_TF')
                                 <div class="invalid-feedback">{{$message}}</div>

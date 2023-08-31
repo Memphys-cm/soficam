@@ -36,6 +36,8 @@ class Charge extends Model implements HasMedia
             'DISPONIBLE' => 'success',
             'PRENOTE' => 'secondary',
             'SUSPENDU' => 'danger',
+            'ANNULATION' => 'warning',
+            'RETRAIT' => 'success',
             NULL => ''
         };
     }

@@ -4,19 +4,20 @@ namespace App\Http\Livewire\Portal\ImmatriculationDirecte;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Region;
 use App\Models\Service;
 use Livewire\Component;
+use Twilio\Http\Client;
+use App\Models\Division;
 use App\Models\Sales\Sale;
 use App\Models\SubDivision;
 use Illuminate\Support\Str;
 use App\Models\TitreFoncier;
-use App\Models\Region;
-use App\Models\Division;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use App\Models\ImmatriculationDirecte;
 use App\Http\Livewire\Traits\WithDataTables;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class Index extends Component
 {
@@ -224,6 +225,35 @@ class Index extends Component
         );
     }
 
+    public function msgPortePdf($id) {
+        $msg_porte = ImmatriculationDirecte::findOrFail($id);
+
+        $sid='ACa77985267946bd8e613944d40b9d0458';
+        $token='b7b84303df6a21c3d6f9b32d3d678103';
+        $twilio = new Client($sid, $token);
+
+        $messageBody = "Hello, le message porté est disponible.";
+
+        $twilio->messages->create(
+            '+237672959097',
+            [
+                'from' => '+15856393680',
+                'body' => $messageBody,
+            ]
+        );
+
+        $data = [
+            'msg_porte' => $this->msg_porte,
+        ];
+
+        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.message-porte')->setPaper('a4', 'portrait');
+
+        return response()->streamDownload(
+            fn () => print($pdf->output()),
+            __('Message_Porté-').Str::random('10') . ".pdf"
+        );
+    }
+
     public function certificat_affichage()
     {
         $this->validate([
@@ -246,16 +276,22 @@ class Index extends Component
 
         $this->clearFields();
 
+        $data = [
+            'imma_directe' => $this->imma_directe,
+            // Autres données que vous souhaitez afficher dans la vue
+        ];
+        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.certificat_affichage',
+        $data)->setPaper('a4', 'portrait');
+
+        return response()->streamDownload(
+            fn () => print($pdf->output()),
+            __('Certificat_Affichage-') . Str::random('10') . ".pdf"
+        );
+
     }
 
     public function convocation()
     {
-        // $this->validate([
-        //     'date_debut' => 'required',
-        //     'date_fin' => 'required',
-        // ]);
-        
-       
         DB::transaction(function () {
             $this->imma_directe->update([
                 'date_convocation' => $this->date_convocation,
@@ -266,9 +302,22 @@ class Index extends Component
             ]);
         });
 
-        $this->refresh(__('Certificat Imprimr Avec SUCCES!'), 'ConvocationImmaDirecteModal');
+        //dd($this->imma_directe);
+        $this->refresh(__('Convocation imprimée Avec SUCCES!'), 'ConvocationImmaDirecteModal');
 
         $this->clearFields();
+
+        $data = [
+            'imma_directe' => $this->imma_directe,
+        ];
+
+        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.message-porte', 
+        $data)->setPaper('a4', 'portrait');
+
+        return response()->streamDownload(
+            fn () => print($pdf->output()),
+            __('Message_Porté-').Str::random('10') . ".pdf"
+        );
     }
     
 
