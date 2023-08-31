@@ -35,7 +35,7 @@ class Index extends Component
     public $divisions = [];
     public $sub_divisions = [];
     public $date_debut , $date_fin;
-    public $date_convocation;
+    public $date_convocation , $superficie;
 
     public function mount()
     {
@@ -89,7 +89,7 @@ class Index extends Component
         
        $imma_directe = ImmatriculationDirecte::create([
         'reference' => Str::upper(Str::random(7)) . "" . now()->format('msu'),
-        // 'requestor_id' => $this->user_id,
+        'superficie' => $this->superficie,
         'localisation' => $this->localisation,
         'region_id' => $this->region_id,
         'division_id' => $this->division_id,
@@ -170,7 +170,7 @@ class Index extends Component
         DB::transaction(function () {
             $this->imma_directe->update([
                 'montant_ordre_versement' => $this->genererNumeroVersement(),
-                'superficie_ordre_versement' => $this->superficie_ordre_versement,
+                // 'superficie_ordre_versement' => $this->superficie_ordre_versement,
                 'montant_ordre_versement' => $this->montant_ordre_versement,
                 'status_ordre_versement' => 'pending',
                 'statut' => 'Ordre de Versement en Attente de Paiement',
