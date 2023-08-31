@@ -1,7 +1,7 @@
 @php
     use SimpleSoftwareIO\QrCode\Facades\QrCode;
     
-    $qrCode = QrCode::size(100)->generate($imma_directe->id);
+    $qrCode = QrCode::size(100)->generate($immobilier->id);
 @endphp
 
 <div>
@@ -21,38 +21,38 @@
         </tr>
         <tr>
             <td style="float: left;">
-                <div>REGION DU {{ $imma_directe->region->region_name_fr }}</div>
+                <div>REGION DU {{ $immobilier->titreFoncier->region->region_name_fr }}</div>
                 <div>--------------</div>
             </td>
             <td>&nbsp;</td>
 
             <td style="float: right;">
-                <div>{{ $imma_directe->region->region_name_en }} REGION</div>
+                <div>{{ $immobilier->titreFoncier->region->region_name_en }} REGION</div>
                 <div>--------------</div>
             </td>
         </tr>
 
         <tr>
             <td style="float: left;">
-                <div>DEPARTEMENT DU {{ $imma_directe->division->division_name }}</div>
+                <div>DEPARTEMENT DU {{ $immobilier->titreFoncier->division->division_name }}</div>
                 <div>--------------</div>
             </td>
             <td>&nbsp;</td>
 
             <td style="float: right;">
-                <div>{{ $imma_directe->division->division_name }} DIVISION</div>
+                <div>{{ $immobilier->titreFoncier->division->division_name }} DIVISION</div>
                 <div>--------------</div>
             </td>
         </tr>
         <tr>
             <td style="float: left;">
-                <div>ARRONDISSEMENT DU {{ $imma_directe->subDivision->sub_division_name_fr }}</div>
+                <div>ARRONDISSEMENT DU {{ $immobilier->titreFoncier->division->division_name }}</div>
                 <div>--------------</div>
             </td>
             <td>&nbsp;</td>
 
             <td style="float: right;">
-                <div>{{ $imma_directe->subDivision->sub_division_name_en }} SUBDIVISION</div>
+                <div>{{ $immobilier->titreFoncier->division->division_name }} SUBDIVISION</div>
                 <div>--------------</div>
             </td>
         </tr>
@@ -65,14 +65,14 @@
         <div style="margin-top: 10px;font-size:19px">Le public est informe que conformément aux informations extraites
             de la
             demande y afférente,
-            M <b> {{ $imma_directe->user->first_name }} {{ $imma_directe->user->last_name }} </b> né
-            (e) le <b>{{ $imma_directe->user->date_of_birth }}</b> Sollicité l’obtention d’un titre foncier sur une
+            M <b> {{ $immobilier->requestor->first_name }} {{ $immobilier->requestor->last_name }} </b> né
+            (e) le <b>{{ $immobilier->requestor->date_of_birth }}</b> Sollicité l’obtention d’un titre foncier sur une
             parcelle du Domaine National d’une superficie approximative de
-            <b>{{ $imma_directe->superficie_ordre_versement }} </b> dans l’Arrondissement de
-            <b>{{ $imma_directe->subDivision->sub_division_name_fr }} </b> de
+            <b>{{ $immobilier->titreFoncier->superficie_du_TF_mere }} </b> dans l’Arrondissement de
+            <b>{{ $immobilier->titreFoncier->division->division_name }} </b> de
             située dans lieu-dit
-            <b>{{ $imma_directe->localisation }} </b> qu’ _______________occupe ou exploite depuis
-            <b>{{ $imma_directe->date_ordre_versement }} </b>
+            <b>{{ $immobilier->titreFoncier->lieu_dit }} </b> qu’ _______________occupe ou exploite depuis
+            <b>{{ $immobilier->titreFoncier->date_de_delivrance_du_TF }} </b>
         </div>
 
         <br>
@@ -83,7 +83,7 @@
         <div style="margin-top: 10px;font-size:19px">Selon les dispositions du Décret N2005/481 du 16 Décembre 2005 fixant les
             conditions d’obtention du titre Foncier, les oppositions ne seront plus recevables passe le délai de 30
             (trente) jours pour compter de la date de publication de l’Avis Clôture de Bornage au Bulletin des Avis
-            domaniaux et Fonciers de la Région du {{ $imma_directe->region->region_name_fr }}
+            domaniaux et Fonciers de la Région du {{ $immobilier->titreFoncier->region->region_name_fr }}
         </div>
 
 

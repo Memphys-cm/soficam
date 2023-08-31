@@ -248,22 +248,38 @@ class Index extends Component
         $this->clearFields();
     }
 
-    public function printPdf()
+    // public function  printPdf()
+    // {
+    //     // $ordre = CertificatePropriete::findOrFail($id);
+    //     // $data = [
+    //     //     'certificatepropriete' => $this->certificatepropriete,
+    //     //     'titrefoncier' => $this->titre_fonciers,
+    //     //     // Autres données que vous souhaitez afficher dans la vue
+    //     // ];
+
+    //     $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.ordre-versement'
+    //     // ,$data
+    //     )->setPaper('a4', 'portrait');
+
+
+    //     return response()->streamDownload(
+    //         fn () => print($pdf->output()),
+    //         __('OrdreVersement-') . Str::random('10') . ".pdf"
+    //     );
+    // }
+
+    public function  printPdf($id)
     {
-        // $ordre = ImmatriculationDirecte::findOrFail($id);
+        $this->imma_directe = ImmatriculationDirecte::findOrFail($id);
         $data = [
-            'ordre' => $this->imma_directe,
-            // Autres données que vous souhaitez afficher dans la vue
+            'imma_directe' => $this->imma_directe,
+        
         ];
 
-        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.ordre-versement'
-        // ,$data
-        )->setPaper('a4', 'portrait');
-
-
+        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.avis_publique',$data)->setPaper('a4', 'portrait');
         return response()->streamDownload(
             fn () => print($pdf->output()),
-            __('OrdreVersement-') . Str::random('10') . ".pdf"
+            __('Avis Au Public') . Str::random('10') . ".pdf"
         );
     }
 
