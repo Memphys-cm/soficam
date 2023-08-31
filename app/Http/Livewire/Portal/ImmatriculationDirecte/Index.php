@@ -214,6 +214,7 @@ class Index extends Component
 
         $sale = Sale::create([
             // 'user_id' => $this->requestor_id,
+            'sales_code' => $this->imma_directe->numero_ordre_versement,
             'sales_amount' => $this->montant_ordre_versement,
             'sales_type' => 'ordre_versement_imma_directe',
             'created_by' => auth()->user()->name,
