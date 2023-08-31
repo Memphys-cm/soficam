@@ -57,6 +57,7 @@ return new class extends Migration
             $table->foreignId('geometre_id')->on('users')->index()->nullable();
             $table->date('date_geometre_enregistrer')->nullable();
             $table->date('pv_enregistrer')->nullable();
+            $table->date('dossier_administratif_complet')->nullable();
             $table->date('dossier_technique_enregistrer')->nullable();
             $table->date('dossier_technique_complet')->nullable();
 

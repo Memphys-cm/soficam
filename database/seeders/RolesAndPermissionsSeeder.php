@@ -176,6 +176,7 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'imma_directe.certificat'],
             ['name' => 'imma_directe.etat_cession'],
             ['name' => 'imma_directe.geometre'],
+            ['name' => 'imma_directe.pv_bornage'],
             ['name' => 'imma_directe.export_n_print'],
 
             ['name' => 'tax_foncier.view'],

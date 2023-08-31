@@ -268,6 +268,89 @@ class Index extends Component
         );
     }
 
+    public function quitance_geometre()
+    {
+        // dd('id');
+        $this->validate([
+            'geometre_id' => 'required',
+        ]);
+        
+       
+       DB::transaction(function () {
+            $this->imma_directe->update([
+                'geometre_id' => $this->geometre_id,
+                'date_geometre_enregistrer' => Carbon::now(),
+                'statut' => 'Etat de cession enregistré auprès du géomètre',
+                'next_step' => 'Enregistrement du PV de Bornage',
+            ]);
+        });
+
+
+        if (!empty($this->attachments)) {
+            foreach ($this->attachments as $attachment) {
+                $this->imma_directe->addMedia($attachment->getRealPath())
+                    ->usingName('Acte Expidition')
+                    ->toMediaCollection('imma_directe_dossier_administratif');
+            }
+        }
+
+        $this->emitUp('flow_updated');
+        
+        $this->clearFields();
+        $this->refresh(__('Geometre Enregistrer Avec Suceess et Enregistrement'), 'GeometreModal');
+
+    }
+
+    public function pv_bornage()
+    {
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'pv_enregistrer' => Carbon::now(),
+                'statut' => 'PV enregistrer',
+                'next_step' => 'Mise en Forme du Dossier Administratif',
+            ]);
+        });
+
+
+        if (!empty($this->attachments)) {
+            foreach ($this->attachments as $attachment) {
+                $this->imma_directe->addMedia($attachment->getRealPath())
+                    ->usingName('Acte Expidition')
+                    ->toMediaCollection('imma_directe_dossier_administratif');
+            }
+        }
+
+        $this->emitUp('flow_updated');
+        
+        $this->clearFields();
+        $this->refresh(__('Pv de Bornage Enregistrer Avec Suceess'), 'PvBornageModal');
+    }
+
+    public function dossier_admin()
+    {
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'dossier_administratif_complet' => Carbon::now(),
+                'statut' => 'Dossier Administratif Mise En Forme',
+                'next_step' => 'Enregistrement Dossier Technique',
+            ]);
+        });
+
+
+        if (!empty($this->attachments)) {
+            foreach ($this->attachments as $attachment) {
+                $this->imma_directe->addMedia($attachment->getRealPath())
+                    ->usingName('Acte Expidition')
+                    ->toMediaCollection('imma_directe_dossier_administratif');
+            }
+        }
+
+        $this->emitUp('flow_updated');
+        
+        $this->clearFields();
+        $this->refresh(__('Pv de Bornage Enregistrer Avec Suceess'), 'PvBornageModal');
+    }
+
     public function certificat_affichage()
     {
         $this->validate([
