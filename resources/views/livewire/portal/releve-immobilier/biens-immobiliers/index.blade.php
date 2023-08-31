@@ -59,7 +59,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Trier par direction')}}: </label>
+            <label for="direction">{{__('Sens du trie')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{__('Ascendante')}}</option>
                 <option value="desc">{{__('Descendante')}}</option>
@@ -114,7 +114,7 @@
                         </td>
 
                         <td>
-                            <span class="fs-normal">{{$bien_immobilier->price }} {{__('XAF')}}</span>
+                            <span class="fs-normal">{{$bien_immobilier->price }} {{__('FCFA')}}</span>
                         </td>
 
                         <td>

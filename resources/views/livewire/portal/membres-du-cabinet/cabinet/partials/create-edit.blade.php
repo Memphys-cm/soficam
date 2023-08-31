@@ -35,7 +35,7 @@
                         <div class="form-group mb-3 row">
 
                             <div class='col'>
-                                <label class="px-2" for="division_id">{{ __('Division') }}</label>
+                                <label class="px-2" for="division_id">{{ __('Departement') }}</label>
                                 <select wire:model="division_id" name="division_id" class="form-select @error('division_id') is-invalid @enderror" required="">
                                     <option value="">{{ __('-- Selectionner une Division --')}}</option>
                                     @if (!empty($divisions))

@@ -34,7 +34,7 @@
                             </div>
 
                             <div class='form-group row mb-3'>
-                                <div class=" col"><label for="price">{{ __('Prix (XAF)') }}</label>
+                                <div class=" col"><label for="price">{{ __('Prix (FCFA)') }}</label>
                                     <input type="text" wire:model="price" class="form-control  @error('price') is-invalid @enderror " placeholder="345678" id="price" autofocus="" required="">
                                     @error('price')
                                         <div class="invalid-feedback">
@@ -64,7 +64,7 @@
                         </fieldset>
 
                         <div class="d-flex align-items-end mt-2 d-flex justify-content-end">
-                            <button type="button" class="btn btn-sm btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
+                            <button type="button" class="btn btn-sm btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
                             <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-sm btn-loading">
                                 <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>

@@ -52,7 +52,7 @@
                                     <h3 class="fw-extrabold mb-1">{{numberFormat(count($logs))}}</h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Journal de connexiob'), count($logs)) }} {{__('enregistrer')}}</div>
+                                    <div>{{ \Str::plural(__('Journal de connexion'), count($logs)) }} {{__('enregistrer')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                                     <h3 class="fw-extrabold mb-1">{{numberFormat($creation_log_count)}}</h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Journaux de création'), $creation_log_count) }} {{__('enregistrer')}}</div>
+                                    <div>{{ \Str::plural(__('Journaux de création'), $creation_log_count) }} {{__('Enregistrer')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                                     <h3 class="fw-extrabold mb-1">{{numberFormat($update_log_count)}}</h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Journal des mises à jour'), $update_log_count) }} {{__('enregistrer')}}</div>
+                                    <div>{{ \Str::plural(__('Journal des mises à jour'), $update_log_count) }} {{__('Enregistrer')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                                     <h3 class="fw-extrabold mb-1">{{numberFormat($deletion_log_count)}} </h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Journal des suppressions'), $deletion_log_count) }} {{__('enregistrer!')}}</div>
+                                    <div>{{ \Str::plural(__('Journal des suppressions'), $deletion_log_count) }} {{__('Enregistrer!')}}</div>
                                 </div>
                             </div>
                         </div>

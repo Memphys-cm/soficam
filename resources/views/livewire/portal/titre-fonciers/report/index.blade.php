@@ -83,7 +83,7 @@
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
-                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmount }} {{ __('XAF') }}</p>
+                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmount }} {{ __('FCFA') }}</p>
 
                     </div>
                     <div class="">
@@ -103,7 +103,7 @@
         <div class="col-md-6 col-xxl-3">
             <div class="card h-md-100 ecommerce-card-min-width">
                 <div class="card-header pb-0">
-                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Pourcentage total des Tax') }}</h6>
+                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Pourcentage total des Taxes') }}</h6>
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
@@ -136,7 +136,7 @@
             </select>
         </div>
         <div class="col">
-            <label for="selectedDivision">{{ __('par division') }}: </label>
+            <label for="selectedDivision">{{ __('par departement') }}: </label>
             <select wire:model="selectedDivision" id="selectedDivision" class="form-select">
                 <option value="">Toutes les divisions</option>
                 @foreach ($divisions as $division)
@@ -145,7 +145,7 @@
             </select>
         </div>
         <div class="col">
-            <label for="selectedSubDivision">{{ __('par subdivisions') }}: </label>
+            <label for="selectedSubDivision">{{ __('par Arrondissement') }}: </label>
             <select wire:model="selectedSubDivision" id="selectedSubDivision" class="form-select">
                 <option value="">Toutes les subdivisions</option>
                 @foreach ($sub_divisions as $sub_division)
@@ -191,7 +191,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{ __('Trier par ') }}: </label>
+            <label for="direction">{{ __('Sens du Tri ') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{ __('Ascendant') }}</option>
                 <option value="desc">{{ __('Descendant') }}</option>

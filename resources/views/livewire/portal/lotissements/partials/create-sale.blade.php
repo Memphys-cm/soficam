@@ -6,7 +6,7 @@
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4">{{ 'Vendre' }} {{ __(' Lot') }}</h1>
-                        <p class="px-1"> {{ 'Vendre' }} {{ __(' ELot') }} &#128522;</p>
+                        <p class="px-1"> {{ 'Vendre' }} {{ __(' Lot') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="store">
 
@@ -28,7 +28,7 @@
                                 <label for="code">{{ __('Notaire') }}</label>
                                 <select class="form-select" wire:model="notaire_id"
                                     class="form-control @error('notaire_id') is-invalid @enderror">
-                                    <option value=''>{{ __('-- Select --') }}</option>
+                                    <option value=''>{{ __('-- Selectionner --') }}</option>
                                     @foreach ($notaires as $notaire)
                                         <option wire:key="{{ $notaire->id }}" value='{{ $notaire->id }}'>
                                             {{ !empty($notaire->cabinet) ? $notaire->cabinet->nom_cabinet : '' }} -
@@ -122,7 +122,7 @@
                         @endif
                         <div class='form-group row mb-3'>
                             <div class=" col">
-                                <label for="superficie_du_TF_mere">{{ __('TOTAL SURFACE') }}</label>
+                                <label for="superficie_du_TF_mere">{{ __('SURFACE TOTALE ') }}</label>
                                 <input type="number" wire:model="superficie_du_TF_mere"
                                     class="form-control  @error('superficie_du_TF_mere') is-invalid @enderror "
                                     value="{{ old('superficie_du_TF_mere') }}" placeholder="0"

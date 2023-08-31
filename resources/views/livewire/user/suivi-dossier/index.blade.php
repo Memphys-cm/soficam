@@ -84,17 +84,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($immatriculations as $item)
+                    @forelse($combinedData as $item)
                         <tr>
-                            @foreach ($item->users as $user)
-                                    <td>{{ $user->name }}</td>
-                                @endforeach
+                            <td>
+                               {{ getReference($item)}}
+                            </td>
+
                             <td>{{ getTypeName($item) }}</td>
                             <td>{{ getStatut($item) }}</td>
                             <td>{{ $item->created_at }}</td>
-                            <td><td class="text-center">
-                                <a class="btn btn-primary" href="{{route('follow')}}">Suivre</a>
-                            </td></td>
+                            <td class="text-center">
+                                <a class="btn btn-primary" href="{{ route('user.suivi-dossier.follow') }}">Suivre</a>
+                            </td>
                         </tr>
                     @empty
                         <tr>
@@ -148,6 +149,15 @@
             return $item->status; // Changer "status" par le nom d'attribut correct
     } elseif ($item instanceof \App\Models\ImmatriculationDirecte) {
         return $item->le_status_tax; // Changer "le_statut" par le nom d'attribut correct
+        }
+    }
+    function getReference($item)
+    {
+        if ($item instanceof \App\Models\TitreFoncier) {
+            return $item->numero_titre_foncier;
+        } 
+     elseif ($item instanceof \App\Models\ImmatriculationDirecte) {
+        return $item->reference; // Changer "le_statut" par le nom d'attribut correct
         }
     }
 @endphp

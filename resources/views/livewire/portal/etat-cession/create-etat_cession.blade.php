@@ -67,7 +67,7 @@
                             <label for="code">{{ __('Type de Personne') }}</label>
                             <select wire:model="state_assignment.type_personne" name="state_assignment.type_personne" class="form-select  @error('state_assignment.type_personne') is-invalid @enderror">
                                 <option value="">{{ __('--Sélectionner le type de personne --') }}</option>
-                                <option value="morale">{{ __('moral') }} </option>
+                                <option value="morale">{{ __('morale') }} </option>
                                 <option value="physique">{{ __('physique') }} </option>
                             </select>
                             @error('state_assignment.type_personne')
@@ -92,9 +92,9 @@
                         <div class="col-md-6 py-2">
                             <label for="code">{{ __('Zone') }}</label>
                             <select wire:model="state_assignment.zone" name="state_assignment.zone" class="form-select  @error('state_assignment.zone') is-invalid @enderror">
-                                <option value="">{{ __('--Select Zone --') }}</option>
-                                <option value="terrain_urbain">{{ __('terrain_urbain') }} </option>
-                                <option value="terrain_rurale">{{ __('terrain_rurale') }} </option>
+                                <option value="">{{ __('--Selectionner Zone --') }}</option>
+                                <option value="terrain_urbain">{{ __('terrain urbain') }} </option>
+                                <option value="terrain_rurale">{{ __('terrain rurale') }} </option>
                             </select>
                             @error('state_assignment.zone')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -115,7 +115,7 @@
                             @enderror
                         </div>
                         <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Cout') }}</label>
+                            <label for="code">{{ __('Coût') }}</label>
                             <input wire:model="state_assignment.cout" type="number" class="form-control  @error('state_assignment.cout') is-invalid @enderror" placeholder="70000" required="" value="" name="state_assignment.cout">
                             @error('state_assignment.cout')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -129,7 +129,7 @@
                             @enderror
                         </div>
                         <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Cout_etat_cession') }}</label>
+                            <label for="code">{{ __('Coût_etat_cession') }}</label>
                             <input wire:model="state_assignment.cout_etat_cession" type="number" class="form-control  @error('state_assignment.cout_etat_cession') is-invalid @enderror" placeholder="100000" required="" value="" name="state_assignment.cout_etat_cession">
                             @error('state_assignment.cout_etat_cession')
                             <div class="invalid-feedback">{{ $message }}</div>

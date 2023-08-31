@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Mise à jour du certificat de Propriété') }}</h1>
-                        <p class="px-1"> {{ __('Mise à jour du certificat de propriété') }} &#128522;</p>
+                        <h1 class="mb-0 h4"> {{ __('Mettre à jour du certificat de Propriété') }}</h1>
+                        <p class="px-1"> {{ __('Mettre à jour du certificat de propriété') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="update">
                         <div class='form-group mb-3 row'>
@@ -77,8 +77,8 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" wire:click.prevent="update" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Update')}}</button>
+                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
+                            <button type="submit" wire:click.prevent="update" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Mettre à Jour')}}</button>
                         </div>
                     </x-form-items.form>
                 </div>

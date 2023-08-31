@@ -91,7 +91,7 @@
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="zone">{{__('Numéro de duplicata')}}</label>
+                                <label for="zone">{{__('Zone')}}</label>
                                 <select wire:model="zone" name="zone" class="form-select  @error('zone') is-invalid @enderror" required="">
                                     <option value="urbaine">{{__('Urbain')}}</option>
                                     <option value="rurale">{{__('Rural')}}</option>
@@ -269,7 +269,7 @@
 
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
-                            <button type="submit" wire:click.prevent="{{$state ? 'update':'store'}}" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{$state ? __('Update') : __('Register')}}</button>
+                            <button type="submit" wire:click.prevent="{{$state ? 'update':'store'}}" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{$state ? __('Mettre à jour') : __('Creer')}}</button>
                         </div>
                     </x-form-items.form>
                 </div>

@@ -4,12 +4,12 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{__('Add')}}{{__(' Nouvelle Charge sur Titre foncier')}}</h1>
+                        <h1 class="mb-0 h4"> {{__('Ajouter')}}{{__(' Nouvelle Charge sur Titre foncier')}}</h1>
                         <p class="px-1"> {{__('Titre foncier')}} </p>
                     </div>
                     <x-form-items.form wire:submit="">
                         <div class='form-group  mb-2'>
-                            <label for="titre_foncier_id">{{ __('Land Title Number') }}</label>
+                            <label for="titre_foncier_id">{{ __('Numero du Titre Foncier') }}</label>
                             <x-input.land_title-select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers" />
                             @error('titre_foncier_id')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -17,7 +17,7 @@
                         </div>
 
                         @if(!empty($titre_foncier_users))
-                        <span class="fw-bold py-2">{{__('Land Owners')}}</span>
+                        <span class="fw-bold py-2">{{__('Propriétaires fonciers')}}</span>
                         <div class='row'>
                             @foreach($titre_foncier_users->split($titre_foncier_users->count()/2) as $row )
                             <div class="col-md-6" data-aos="fade-right" data-aos-duration="2000">
@@ -70,7 +70,7 @@
                                                 </svg>
                                                 <input type="file" class="form-control-file" wire:model="attachements">
                                                 <div class="d-md-block text-left">
-                                                    <div class="fw-normal text-dark mb-1">{{__('Choose Files')}}</div>
+                                                    <div class="fw-normal text-dark mb-1">{{__('Choisir les fichiers')}}</div>
                                                     <div class="text-gray small">JPG,PNG, PDF, Word,Excel. Max size of 50MB</div>
                                                 </div>
                                             </div>
@@ -80,7 +80,7 @@
                             </div>
                             <div class="d-flex justify-content-end mt-5">
                                 <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
-                                <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('creer')}}</button>
+                                <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Creer')}}</button>
                             </div>
                         </div>
                 </div>

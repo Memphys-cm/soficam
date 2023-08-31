@@ -18,12 +18,13 @@ class Index extends Component
     {
         // $titrefonciers = auth()->user()->titrefonciers;
         // $mutations = auth()->user()->mutations;
-        $immatriculations = auth()->user()->immatriculations;
+        $immatriculations = auth()->user()->imma_directes;
+        $titrefonciers = auth()->user()->titrefonciers;
 
-        // $combinedData = $titrefonciers->concat($mutations)->concat($immatriculations);
+        $combinedData = $titrefonciers->concat($immatriculations);
 
         return view('livewire.user.suivi-dossier.index', [
-            'immatriculations' => $immatriculations,
+            'combinedData' => $combinedData
         ]);
     }
 }

@@ -23,7 +23,6 @@
                                 </div>
 
                                 <div class=" col"><label for="requestor_id">{{ __('Requerant') }}</label>
-                                    <label class="px-2" for="requestor_id">{{__('Requerant')}}</label>
                                     <x-input.select wire:model="requestor_id" prettyname="requestor" :options="$requestors->pluck( 'first_name','id')->toArray()" />
                                     @error('requestor_id')
                                         <div class="invalid-feedback">
@@ -66,12 +65,12 @@
                             </div> 
                             <div class="form-group row mb-1 px-2">
                                 <label for="releve_reason">Pourquoi avez-vous voulu créer ce bien immobilier ? ?</label>
-                                <textarea class="form-control" wire:model="releve_reason" name="releve_reason" id="releve_reason" placeholder="Enter the reason here"></textarea>
+                                <textarea class="form-control" wire:model="releve_reason" name="releve_reason" id="releve_reason" placeholder="Inscrivez la raison ici"></textarea>
                             </div>
                         </fieldset>
 
                         <div class="d-flex align-items-end mt-2 d-flex justify-content-end">
-                            <button type="button" class="btn btn-sm btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
+                            <button type="button" class="btn btn-sm btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
                             <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-sm btn-loading">
                                 <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>

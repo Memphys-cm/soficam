@@ -52,7 +52,7 @@
                                     </div>
                                     @enderror
                                 </div>
-                                <div class=" col"><label for="division">{{ __('Sous region') }}</label>
+                                <div class=" col"><label for="division">{{ __('Departement') }}</label>
                                     <input type="text" wire:model="division" class="form-control  @error('division') is-invalid @enderror " value="{{ old('division') }}" placeholder="" id="division" autofocus="" required="" disabled>
                                     @error('division')
                                     <div class="invalid-feedback">
@@ -111,7 +111,7 @@
                                 <div class='col'>
                                     <label class="px-2" for="etat_cession_id">{{__('Etat Cession')}}</label>
                                     <select wire:model="etat_cession_id" class='form-control'>
-                                        <option value=''>{{__('-- Select --')}}</option>
+                                        <option value=''>{{__('-- Selectionner --')}}</option>
                                         @foreach($etat_cessions as $etat_cession)
                                         <option value='{{$etat_cession->id}}'>{{$etat_cession->reference_etat_cession}}</option>
                                         @endforeach
@@ -123,7 +123,7 @@
                             </div>
                             <div class='form-group row mb-2'>
                                 <div class='col'>
-                                    <label class="px-2" for="certificates_propriete_id">{{__('Ajouter fichier')}}</label>
+                                    <label class="px-2" for="certificates_propriete_id">{{__('Ajouter les fichiers')}}</label>
                                     <div class="input-group">
                                         <input type="file" class="form-control" wire:model="attachments" multiple>
                                     </div>
@@ -138,8 +138,8 @@
                                 @enderror
                             </div>
                             <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
-                                <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Create')}}</button>
+                                <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
+                                <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Creer')}}</button>
                             </div>
                         </x-form-items.form>
                     </div>

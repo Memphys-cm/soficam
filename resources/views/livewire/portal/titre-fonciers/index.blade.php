@@ -49,7 +49,7 @@
                         <a class="dropdown-item" href="{{route('portal.mutation-totale.index')}}">{{__('Mutation totale')}}</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{route('portal.immobilier.index')}}">{{__('Releve Immo')}}</a>
-                        <a class="dropdown-item" href="{{route('portal.certificate-propriete.index')}}">{{__('Certificate Proprietes')}}</a>
+                        <a class="dropdown-item" href="{{route('portal.certificate-propriete.index')}}">{{__('Certificat Proprieté')}}</a>
                         <a class="dropdown-item" href="{{route('portal.titre-fonciers-charges.index')}}">{{__('Charges')}}</a>
                         <a class="dropdown-item" href="{{route('portal.state_assignments.index')}}">{{__('Etat Cession')}}</a>
                     </div>

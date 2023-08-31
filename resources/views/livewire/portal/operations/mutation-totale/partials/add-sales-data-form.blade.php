@@ -9,7 +9,7 @@
                     </div>
                     <x-form-items.form wire:submit="store">
                         <div class="form-group mb-2">
-                            <label for="numero_reference_acte_expidition">{{ __('Reference Acte Expidition') }}</label>
+                            <label for="numero_reference_acte_expidition">{{ __('Reference acte d\'expidition') }}</label>
                             <input type="text" wire:model="numero_reference_acte_expidition" class="form-control  @error('numero_reference_acte_expidition') is-invalid @enderror " value="{{ old('numero_reference_acte_expidition') }}" placeholder="" id="numero_reference_acte_expidition" autofocus="" required="">
                             @error('numero_reference_acte_expidition')
                             <div class="invalid-feedback">
@@ -28,7 +28,7 @@
                         </div>
                         <div class='form-group row mb-2'>
                             <div class='col'>
-                                <label class="px-2" for="certificates_propriete_id">{{__('Ajouter fichier')}}</label>
+                                <label class="px-2" for="certificates_propriete_id">{{__('Ajouter les fichiers')}}</label>
                                 <div class="input-group">
                                     <input type="file" class="form-control" wire:model="attachments" multiple>
                                 </div>

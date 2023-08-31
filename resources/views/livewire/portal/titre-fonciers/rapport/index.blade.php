@@ -21,7 +21,7 @@
                     <svg class="icon me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    {{__('Land Titles Report')}}
+                    {{__('Rapport sur les titres fonciers')}}
                 </h1>
                 <p class="mt-n1 mx-2">{{__('Voir tous les titres fonciers')}} &#x23F0; </p>
             </div>
@@ -38,7 +38,7 @@
             </select>
         </div>
         <div class="col">
-            <label for="selectedDivision">{{__('par Divisions')}}: </label>
+            <label for="selectedDivision">{{__('par Departements')}}: </label>
             <select wire:model="selectedDivision" id="selectedDivision" class="form-select">
                 <option value="">Toutes les Divisions</option>
                 @foreach ($divisions as $division)
@@ -47,7 +47,7 @@
             </select>
         </div>
         <div class="col">
-            <label for="selectedSubDivision">{{__('by Subdivisions')}}: </label>
+            <label for="selectedSubDivision">{{__('by Arrondissements')}}: </label>
             <select wire:model="selectedSubDivision" id="selectedSubDivision" class="form-select">
                 <option value="">Toutes les Sub-Divisions</option>
                 @foreach ($sub_divisions as $sub_division)
@@ -66,7 +66,7 @@
             <input type="date" wire:model="endDate" class="form-control" id="endDate">
         </div>
         <div class="col">
-            <label for="selectedStatus">{{__('by Status')}}: </label>
+            <label for="selectedStatus">{{__('Par Statut')}}: </label>
             <select wire:model="selectedStatus" id="selectedStatus" class="form-select">
                 <option value="">Par Statut</option>
                 <option value="HYPOTHEQUE">HYPOTHEQUE</option>
@@ -92,7 +92,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Direction du trie')}}: </label>
+            <label for="direction">{{__('Sens du Trie')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{__('Ascendante')}}</option>
                 <option value="desc">{{__('Descendante')}}</option>
@@ -146,7 +146,7 @@
                                 {{__('Region')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->region->region_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Sous Region')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->division->division_name}} </span>
+                                {{__('Departement')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->division->division_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
                                 {{__('Arrondissement')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->subDivision->sub_division_name}} </span>
