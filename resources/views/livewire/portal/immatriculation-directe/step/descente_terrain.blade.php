@@ -1,31 +1,20 @@
-<div wire:ignore.self class="modal side-layout-modal fade" id="ConvocationImmaDirecteModal" tabindex="-1"
+<div wire:ignore.self class="modal side-layout-modal fade" id="DescenteTerrainModal" tabindex="-1"
     aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:75%;">
+    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:45%;">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4">
-                            {{ __('Etablissement') }}{{ __(' Convocation D\'un Dossier') }}
+                            {{ __('Descente') }}{{ __(' sur le terrain') }}
                         </h1>
                         <p class="px-1">
-                            {{ __('Imprimer') }}{{ __(' Une Convocation D\'Invitation') }}
+                            {{__('Descente de la CC en vue du constat d’occupation et ou d’exploitation') }}
                         </p>
                     </div>
-                    <x-form-items.form wire:submit="convocation">
-                        <div class="form-group mb-3 row">
-                            <div class='col-md-6 my-1'>
-                                <label for="code">{{ __('Date Convocation') }}</label>
-                                <input wire:model="date_convocation" type="date"
-                                    class="form-control  @error('date_convocation') is-invalid @enderror"
-                                    placeholder="15000" required="" value="" name="date_debut">
-                                @error('date_convocation')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                          {{-- @foreach ($comissions as $index => $user)
+                    <x-form-items.form wire:submit="descente_terrain">
+                        <label for=""> {{__('Enregistrement des CNI des notables + chefs')}} </label> <br>
+                        @foreach ($comissions as $index => $user)
                             <div class="row my-1 py-1">
                                 <div class="col-md-3">
                                 <label>{{__('Nom')}} </label>
@@ -72,14 +61,23 @@
                             </svg>
                             {{ __('Ajouter un membre') }}</button>
                         <button class="btn btn-primary" type="submit">{{ __('Enregistrer') }}</button>
-                        <hr> --}}
+                        <hr>
 
-                        <div class="d-flex justify-content-end">
+                        <div class='form-group row mb-2'>
+                            <div class='col-md-12'>
+                                <label class="px-2" for="certificates_propriete_id">{{__('Ajouter Les Differents Pv')}}</label>
+                                <div class="input-group">
+                                    <input type="file" class="form-control" wire:model="attachments" multiple>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-end my-2">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
                                 data-bs-dismiss="modal">{{ __('Close') }}</button>
-                            <button type="submit" wire:click.prevent="convocation"
+                            <button type="submit" wire:click.prevent="descente_terrain"
                                 class="btn btn-primary btn-loading"
-                                wire:loading.attr="disabled">{{ __('Imprimer') }}</button>
+                                wire:loading.attr="disabled">{{__('Enregistrer La Descente sur le Terrain')}}</button>
                         </div>
                     </x-form-items.form>
                 </div>

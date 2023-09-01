@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-           $table->uuid('uuid')->unique()->index();
+           $table->uuid('uuid')->unique()->index()->nullable();
             $table->string('sales_code')->default(Str::upper(Str::random(7)) . "" . now()->format('msu'));
             $table->float('sales_amount', 10, 2);
             $table->float('sales_amount_tax_excluded', 10, 2)->nullable();
