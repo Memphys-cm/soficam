@@ -7,6 +7,7 @@
     @include('livewire.portal.immatriculation-directe.step.convocation_invitation')
     @include('livewire.portal.immatriculation-directe.step.edit_statut')
     @include('livewire.portal.immatriculation-directe.step.etat_cession')
+    @include('livewire.portal.immatriculation-directe.step.bordoreau_transmition')
     {{-- @include('livewire.portal.immatriculation-directe.step.enregistrer_geometre') --}}
     @include('livewire.portal.immatriculation-directe.step.pv_bornage')
     @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_technique')
@@ -171,9 +172,20 @@
                                                     d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                         </a>
+                                      
                                     @endcan
                                     @can('imma_directe.update', $imma_directe)
                                     <a href="#"  data-bs-placement="top" title="Modifier le Staut du Dossier Ici" wire:click.prevent="initData({{$imma_directe->id}})" data-bs-toggle="modal" data-bs-target="#EditStatutModal" draggable="false">
+                                        <svg class="icon icon-sm text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                        </svg>
+                                    </a>
+                                    <a href="#"  data-bs-placement="top" title="Etat de Cession" wire:click.prevent="initData({{$imma_directe->id}})" data-bs-toggle="modal" data-bs-target="#EtatCessionModal" draggable="false">
+                                        <svg class="icon icon-sm text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                        </svg>
+                                    </a>
+                                    <a href="#"  data-bs-placement="top" title="Bordereau de Transmission" wire:click.prevent="initData({{$imma_directe->id}})" data-bs-toggle="modal" data-bs-target="#bordoreauDeTransmitionModal" draggable="false">
                                         <svg class="icon icon-sm text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                         </svg>
@@ -208,7 +220,7 @@
 
                                             <a href="#" data-bs-placement="top" title="Etablisser L'ordre de Versement Etat de Cession"
                                             wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
-                                            data-bs-target="#EtatCessionModal" draggable="false">
+                                            data-bs-target="#OrdreVersementImmaDirecteModal" draggable="false">
                                             <svg class="icon icon-xs" stroke="currentColor" viewBox="0 0 24 24"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path fill="none"
