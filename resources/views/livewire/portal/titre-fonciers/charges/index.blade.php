@@ -34,7 +34,7 @@
                     <a href="#" data-bs-toggle="modal" data-bs-target="#EditChargeModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                        </svg> {{__('Remove')}}
+                        </svg> {{__('Retrait')}}
                     </a>
 
                     <a href="#" data-bs-toggle="modal" data-bs-target="#CreateChargeModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">

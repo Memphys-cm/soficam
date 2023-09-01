@@ -9,7 +9,7 @@
                     </div>
                     <x-form-items.form wire:submit="">
                         <div class='form-group  mb-2'>
-                            <label for="titre_foncier_id">{{ __('Land Title Number') }}</label>
+                            <label for="titre_foncier_id">{{ __('Numéro Titre Foncier') }}</label>
                             <x-input.land_title-select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers" />
                             @error('titre_foncier_id')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -17,9 +17,9 @@
                         </div>
 
                         @if(!empty($titre_foncier_users))
-                        <span class="fw-bold py-2">{{__('Land Owners')}}</span>
+                        <span class="fw-bold py-2">{{__('Propriétaires')}}</span>
                         <div class='row'>
-                            @foreach($titre_foncier_users->split($titre_foncier_users->count()/2) as $row )
+                            @foreach($titre_foncier_users->split($titre_foncier_users->count()) as $row )
                             <div class="col-md-6" data-aos="fade-right" data-aos-duration="2000">
                                 @foreach($row as $user)
                                 <a href="#" class="d-flex align-items-center  py-1">
@@ -46,20 +46,12 @@
                                     <option value="HYPOTHEQUE">{{__('HYPOTHEQUE')}}</option>
                                     <option value="PRENOTE">{{__('PRENOTE')}}</option>
                                     <option value="SUSPENDU">{{__('SUSPENDU')}}</option>
-                                    <option value="RETRAIT">{{__('RETRAIT')}}</option>
                                     <option value="ANNULATION">{{__('ANNULATION')}}</option>
                                 </select>
                                 @error('etat_TF')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                        </div>
-                        <div class="form-group mb-2">
-                            <label for="price">{{ __('Prix') }}</label>
-                            <input wire:model="price" class="form-control" name="price" id="price" type="text" disabled>
-                            @error('price')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
                         </div>
                         <div class="form-group mb-3">
                             <div class="p-3 shadow border rounded my-2">
