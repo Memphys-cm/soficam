@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('saleables', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid')->unique()->index();
+            $table->uuid('uuid')->unique()->index()->nullable();
             $table->foreignId('sale_id')->on('sales')->nullable()->index();
             $table->integer('saleable_id');
             $table->string('saleable_type');

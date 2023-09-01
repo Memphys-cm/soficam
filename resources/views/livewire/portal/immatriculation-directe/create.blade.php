@@ -88,7 +88,7 @@
                                                     d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
                                                     clip-rule="evenodd"></path>
                                             </svg>
-                                            <input type="file" class="form-control-file" wire:model="attachements">
+                                            <input type="file" class="form-control-file" wire:model="attachements" multiple>
                                             <div class="d-md-block text-left">
                                                 <div class="fw-normal text-dark mb-1">{{__('Choisir les fichiers')}}</div>
                                                 <div class="text-gray small">JPG,PNG, PDF, Word,Excel. Max size of 50MB</div>
