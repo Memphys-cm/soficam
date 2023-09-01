@@ -51,7 +51,7 @@
                         <a class="dropdown-item" href="{{route('portal.immobilier.index')}}">{{__('Releve Immo')}}</a>
                         <a class="dropdown-item" href="{{route('portal.certificate-propriete.index')}}">{{__('Certificate Proprietes')}}</a>
                         <a class="dropdown-item" href="{{route('portal.titre-fonciers-charges.index')}}">{{__('Charges')}}</a>
-                        <a class="dropdown-item" href="{{route('portal.state_assignments.index')}}">{{__('Etat Cession')}}</a>
+                        <a class="dropdown-item" href="{{route('portal.etat-cession.index')}}">{{__('Etat Cession')}}</a>
                     </div>
                 </div>
                 @endcan
