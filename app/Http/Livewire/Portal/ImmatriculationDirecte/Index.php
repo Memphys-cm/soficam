@@ -40,6 +40,21 @@ class Index extends Component
     public $date_convocation , $superficie , $status , $date_status;
     public $geometre_id , $geometres;
     public $attachments , $quitance;
+    public $coordinates = ['', ''];
+    public $coordonnees = [];
+    public $coordonne = [];
+
+    public function addCoordinate()
+    {
+        $this->coordinates[] = [];
+    }
+
+    public function removeCoordinate($coordinateIndex)
+    {
+        unset($this->coordinates[$coordinateIndex]);
+        $this->coordinates = array_values($this->coordinates);
+    }
+
 
     public function mount()
     {
@@ -121,6 +136,37 @@ class Index extends Component
         $this->clearFields();
 
         $this->refresh(__('Dossier D\'Immatriculation Directe Creer Avec SUCCES'), 'CreateImmaDirecteModal');
+    }
+
+    public function dossier_technique()
+    {
+        $coords = [];
+        collect($this->coordonnees)->map(function ($value, $key) {
+            return ['long' => explode(',', $value, 1), 'lat' => explode(',', $value, 2)];
+        });
+
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'coordonnees' => json_encode($this->coordonnees),
+                'statut' => 'Dossier technique créer',
+                'next_step' => 'Descente sur le Terrain',
+                'dossier_technique_created' => Carbon::now()
+            ]);
+        });
+
+        if (!empty($this->attachments)) {
+            foreach ($this->attachments as $attachment) {
+                $this->imma_directe->addMedia($attachment->getRealPath())
+                    ->usingName('Acte Expidition')
+                    ->toMediaCollection('imma_directe_dossier_administratif');
+            }
+        }
+
+        $this->emitUp('flow_updated');
+        
+        $this->clearFields();
+        $this->refresh(__('Dossier Technique Enregistrer'), 'DossierTechniqueModal');
+
     }
 
     public function edit_statut()
