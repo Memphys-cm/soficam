@@ -28,7 +28,7 @@ class Index extends Component
     use WithDataTables;
 
     // public ImmatriculationDirecte $imma_directe;
-    public $imma_directe;
+    public $imma_directe , $imma_file;
 
     public $state = 0, $price_m2, $users, $user_id, $user_ids, $comissions = [], $localisation;
     public $attachements, $services, $service_id, $observation, $montant_ordre_versement;
@@ -62,9 +62,9 @@ class Index extends Component
     public function mount()
     {
         // $this->imma_directe = new ImmatriculationDirecte();
-        // $imma = ImmatriculationDirecte::findOrFail(1);
-        // $mediaItems = $imma->getMedia("*");
-        // dd($mediaItems);
+        $imma = ImmatriculationDirecte::findOrFail(7);
+        $mediaItems = $imma->getMedia("*");
+        dd($mediaItems);
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
@@ -113,6 +113,9 @@ class Index extends Component
 
         $this->validate([
             'localisation' => 'required',
+            'division_id' => 'required',
+            // 'subdivision_id' => 'required',
+            'region_id' => 'required'
         ]);
 
         $imma_directe = ImmatriculationDirecte::create([
@@ -128,13 +131,15 @@ class Index extends Component
             // 'comissions' => json_encode($this->comissions),
         ]);
 
+        $this->imma_file = $imma_directe;
+
 
         $imma_directe->users()->sync($this->user_ids);
 
         if (!empty($this->attachements)) {
             foreach ($this->attachements as $attachment) {
-                $imma_directe->addMedia($this->attachement->getRealPath())
-                    ->usingName($imma_directe->reference)
+                $this->imma_file->addMedia($attachment->getRealPath())
+                    ->usingName('Pieces_Jointe_Ouverture_imma_directe')
                     ->toMediaCollection('immadirectes');
             }
         }
