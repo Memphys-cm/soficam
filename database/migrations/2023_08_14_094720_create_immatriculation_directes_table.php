@@ -43,6 +43,7 @@ return new class extends Migration
 
             $table->string('status_avis_publique')->nullable();
             $table->date('date_avis_publique')->nullable();
+            $table->date('date_avis_publique_signe')->nullable();
             $table->date('date_debut_certificat_d_affichage')->nullable();
             $table->date('date_fin_certificat_d_affichage')->nullable();
 
@@ -58,6 +59,9 @@ return new class extends Migration
             $table->foreignId('etat_cession_id')->on('etat_cessions')->index()->nullable();
             $table->date('etat_cession')->nullable();
             $table->date('etat_cession_payer')->nullable();
+
+            $table->json('coordonnees')->nullable();
+            $table->date('dossier_technique_created')->nullable();
 
 
             $table->timestamps();
