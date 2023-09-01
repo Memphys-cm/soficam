@@ -43,6 +43,7 @@ return new class extends Migration
 
             $table->string('status_avis_publique')->nullable();
             $table->date('date_avis_publique')->nullable();
+            $table->date('date_avis_publique_signe')->nullable();
             $table->date('date_debut_certificat_d_affichage')->nullable();
             $table->date('date_fin_certificat_d_affichage')->nullable();
 
