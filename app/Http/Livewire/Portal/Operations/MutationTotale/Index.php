@@ -32,7 +32,8 @@ class Index extends Component
     public function mount()
     {
         $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier', 'region_id', 'division_id', 'sub_division_id', 'lieu_dit')
-                                ->whereHas('parcels', function (Builder $query) { $query->where('type_de_venter', 'mutation_totale');})->get();
+                                ->whereHas('parcels', function (Builder $query) { $query->where('type_de_venter', 'mutation_totale');})
+                                ->get();
         $this->notaires = MembreDuCabinet::notaire()->select('id', 'first_name', 'last_name')->get();
         $this->users = User::role('user')->select('id', 'first_name', 'last_name')->get();
     }
@@ -66,7 +67,7 @@ class Index extends Component
 
     public function store()  
     {
-        if (!Gate::allows('mutation_totale.create')) {
+        if (!Gate::allows('operation.mutation_totale.create')) {
             return abort(401);
         }
 
@@ -100,7 +101,7 @@ class Index extends Component
 
     public function delete()
     {
-        if (!Gate::allows('mutation_totale.delete')) {
+        if (!Gate::allows('operation.mutation_totale.delete')) {
             return abort(401);
         }
 
@@ -128,7 +129,7 @@ class Index extends Component
 
     public function render()
     {
-        if (!Gate::allows('mutation_totale.view')) {
+        if (!Gate::allows('operation.mutation_totale.view')) {
             return abort(401);
         }
 

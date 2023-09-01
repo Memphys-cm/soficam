@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('certificate_proprietes', function (Blueprint $table) {
             $table->id();
+           $table->uuid('uuid')->unique()->index();
             $table->foreignId('titre_foncier_id')->index();
             $table->string('certificate_proprietes_number');
             $table->foreignId('requestor_id')->index()->constrained('users');

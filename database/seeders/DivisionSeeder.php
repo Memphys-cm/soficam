@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Division;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DivisionSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 1,
+            'uuid' => Str::uuid(),
             'region_id' => 1,
             'code' => '0101',
             'division_name_en' => 'DJEREM',
@@ -25,6 +27,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 2,
+            'uuid' => Str::uuid(),
             'region_id' => 1,
             'code' => '0102',
             'division_name_en' => 'FARO AND DEO',
@@ -33,6 +36,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 3,
+            'uuid' => Str::uuid(),
             'region_id' => 1,
             'code' => '0103',
             'division_name_en' => 'MAYO BANYO',
@@ -41,6 +45,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 4,
+            'uuid' => Str::uuid(),
             'region_id' => 1,
             'code' => '0104',
             'division_name_en' => 'MBERE',
@@ -49,6 +54,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 5,
+            'uuid' => Str::uuid(),
             'region_id' => 1,
             'code' => '0105',
             'division_name_en' => 'VINA',
@@ -57,6 +63,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 6,
+            'uuid' => Str::uuid(),
             'region_id' => 2,
             'code' => 'CE06',
             'division_name_en' => 'HAUTE-SANAGA',
@@ -65,6 +72,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 7,
+            'uuid' => Str::uuid(),
             'region_id' => 2,
             'code' => 'CE07',
             'division_name_en' => 'LEKIE',
@@ -73,6 +81,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 8,
+            'uuid' => Str::uuid(),
             'region_id' => 2,
             'code' => 'CE08',
             'division_name_en' => 'MBAM AND INOUBOU',
@@ -81,6 +90,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 9,
+            'uuid' => Str::uuid(),
             'region_id' => 2,
             'code' => 'CE09',
             'division_name_en' => 'MBAM AND KIM',
@@ -89,6 +99,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 10,
+            'uuid' => Str::uuid(),
             'region_id' => 2,
             'code' => 'CE10',
             'division_name_en' => 'MEFOU AND AFAMBA',
@@ -97,6 +108,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 11,
+            'uuid' => Str::uuid(),
             'region_id' => 2,
             'code' => 'CE11',
             'division_name_en' => 'MEFOU AND AKONO',
@@ -105,6 +117,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 12,
+            'uuid' => Str::uuid(),
             'region_id' => 2,
             'code' => 'CE12',
             'division_name_en' => 'MFOUNDI',
@@ -113,6 +126,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 13,
+            'uuid' => Str::uuid(),
             'region_id' => 2,
             'code' => 'CE13',
             'division_name_en' => 'NYONG AND KELLE',
@@ -121,6 +135,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 14,
+            'uuid' => Str::uuid(),
             'region_id' => 2,
             'code' => 'CE14',
             'division_name_en' => 'NYONG ADN MFOUMOU',
@@ -129,6 +144,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 15,
+            'uuid' => Str::uuid(),
             'region_id' => 2,
             'code' => 'CE15',
             'division_name_en' => 'NYONG AND SO\'O',
@@ -137,6 +153,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 16,
+            'uuid' => Str::uuid(),
             'region_id' => 3,
             'code' => 'ES16',
             'division_name_en' => 'BOUMBA AND NGOKO',
@@ -145,6 +162,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 17,
+            'uuid' => Str::uuid(),
             'region_id' => 3,
             'code' => 'ES17',
             'division_name_en' => 'HAUT AND NYONG',
@@ -153,6 +171,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 18,
+            'uuid' => Str::uuid(),
             'region_id' => 3,
             'code' => 'ES18',
             'division_name_en' => 'KADEY',
@@ -161,6 +180,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 19,
+            'uuid' => Str::uuid(),
             'region_id' => 3,
             'code' => 'ES19',
             'division_name_en' => 'LOM AND DJEREM',
@@ -169,6 +189,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 20,
+            'uuid' => Str::uuid(),
             'region_id' => 4,
             'code' => 'EN20',
             'division_name_en' => 'DIAMARE',
@@ -177,6 +198,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 21,
+            'uuid' => Str::uuid(),
             'region_id' => 4,
             'code' => 'EN21',
             'division_name_en' => 'LOGONE AND CHARI',
@@ -185,6 +207,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 22,
+            'uuid' => Str::uuid(),
             'region_id' => 4,
             'code' => 'EN22',
             'division_name_en' => 'MAYO DANAY',
@@ -193,6 +216,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 23,
+            'uuid' => Str::uuid(),
             'region_id' => 4,
             'code' => 'EN23',
             'division_name_en' => 'MAYO KANI',
@@ -201,6 +225,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 24,
+            'uuid' => Str::uuid(),
             'region_id' => 4,
             'code' => 'EN24',
             'division_name_en' => 'MAYO SAVA',
@@ -209,6 +234,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 25,
+            'uuid' => Str::uuid(),
             'region_id' => 4,
             'code' => 'EN25',
             'division_name_en' => 'MAYO TSANAGA',
@@ -217,6 +243,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 26,
+            'uuid' => Str::uuid(),
             'region_id' => 5,
             'code' => 'LT26',
             'division_name_en' => 'MOUNGO',
@@ -225,6 +252,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 27,
+            'uuid' => Str::uuid(),
             'region_id' => 5,
             'code' => 'LT27',
             'division_name_en' => 'NKAM',
@@ -233,6 +261,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 28,
+            'uuid' => Str::uuid(),
             'region_id' => 5,
             'code' => 'LT28',
             'division_name_en' => 'SANAGA MARITIME',
@@ -241,6 +270,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 29,
+            'uuid' => Str::uuid(),
             'region_id' => 5,
             'code' => 'LT29',
             'division_name_en' => 'WOURI',
@@ -249,6 +279,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 30,
+            'uuid' => Str::uuid(),
             'region_id' => 6,
             'code' => 'ND30',
             'division_name_en' => 'BENOUE',
@@ -257,6 +288,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 31,
+            'uuid' => Str::uuid(),
             'region_id' => 6,
             'code' => 'ND31',
             'division_name_en' => 'FARO',
@@ -265,6 +297,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 32,
+            'uuid' => Str::uuid(),
             'region_id' => 6,
             'code' => 'ND32',
             'division_name_en' => 'MAYO LOUTI',
@@ -273,6 +306,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 33,
+            'uuid' => Str::uuid(),
             'region_id' => 6,
             'code' => 'ND33',
             'division_name_en' => 'MAYO REY',
@@ -281,6 +315,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 34,
+            'uuid' => Str::uuid(),
             'region_id' => 7,
             'code' => 'NO34',
             'division_name_en' => 'BUI',
@@ -289,6 +324,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 35,
+            'uuid' => Str::uuid(),
             'region_id' => 7,
             'code' => 'NO35',
             'division_name_en' => 'BOYO',
@@ -297,6 +333,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 36,
+            'uuid' => Str::uuid(),
             'region_id' => 7,
             'code' => 'NO36',
             'division_name_en' => 'DONGA-MANTUNG',
@@ -305,6 +342,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 37,
+            'uuid' => Str::uuid(),
             'region_id' => 7,
             'code' => 'NO37',
             'division_name_en' => 'MENCHUM',
@@ -313,6 +351,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 38,
+            'uuid' => Str::uuid(),
             'region_id' => 7,
             'code' => 'NO38',
             'division_name_en' => 'MEZAM',
@@ -321,6 +360,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 39,
+            'uuid' => Str::uuid(),
             'region_id' => 7,
             'code' => 'NO39',
             'division_name_en' => 'MOMO',
@@ -329,6 +369,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 40,
+            'uuid' => Str::uuid(),
             'region_id' => 7,
             'code' => 'NO40',
             'division_name_en' => 'NGO-KENTUNJIA',
@@ -337,6 +378,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 41,
+            'uuid' => Str::uuid(),
             'region_id' => 8,
             'code' => 'OU41',
             'division_name_en' => 'BAMBOUTOS',
@@ -345,6 +387,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 42,
+            'uuid' => Str::uuid(),
             'region_id' => 8,
             'code' => 'NA',
             'division_name_en' => 'HAUT NKAM',
@@ -353,6 +396,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 43,
+            'uuid' => Str::uuid(),
             'region_id' => 8,
             'code' => 'NA',
             'division_name_en' => 'HAUTS PLATEAUX',
@@ -361,6 +405,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 44,
+            'uuid' => Str::uuid(),
             'region_id' => 8,
             'code' => 'NA',
             'division_name_en' => 'KOUNG KHI',
@@ -369,6 +414,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 45,
+            'uuid' => Str::uuid(),
             'region_id' => 8,
             'code' => 'NA',
             'division_name_en' => 'MENOUA',
@@ -377,6 +423,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 46,
+            'uuid' => Str::uuid(),
             'region_id' => 8,
             'code' => 'NA',
             'division_name_en' => 'MIFI',
@@ -385,6 +432,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 47,
+            'uuid' => Str::uuid(),
             'region_id' => 8,
             'code' => 'NA',
             'division_name_en' => 'NDE',
@@ -393,6 +441,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 48,
+            'uuid' => Str::uuid(),
             'region_id' => 8,
             'code' => 'NA',
             'division_name_en' => 'NOUN',
@@ -401,6 +450,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 49,
+            'uuid' => Str::uuid(),
             'region_id' => 9,
             'code' => 'SU42',
             'division_name_en' => 'DJA AND LOBO',
@@ -409,6 +459,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 50,
+            'uuid' => Str::uuid(),
             'region_id' => 9,
             'code' => 'NA',
             'division_name_en' => 'VALLEE DU NTEM',
@@ -417,6 +468,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 51,
+            'uuid' => Str::uuid(),
             'region_id' => 9,
             'code' => 'NA',
             'division_name_en' => 'MVILA',
@@ -425,6 +477,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 52,
+            'uuid' => Str::uuid(),
             'region_id' => 9,
             'code' => 'NA',
             'division_name_en' => 'OCEAN',
@@ -433,6 +486,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 53,
+            'uuid' => Str::uuid(),
             'region_id' => 10,
             'code' => 'SO43900',
             'division_name_en' => 'FAKO',
@@ -441,6 +495,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 54,
+            'uuid' => Str::uuid(),
             'region_id' => 10,
             'code' => 'NA',
             'division_name_en' => 'KUPE MANENGUBA',
@@ -449,6 +504,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 55,
+            'uuid' => Str::uuid(),
             'region_id' => 10,
             'code' => 'NA',
             'division_name_en' => 'LEBIALEM',
@@ -457,6 +513,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 56,
+            'uuid' => Str::uuid(),
             'region_id' => 10,
             'code' => 'NA',
             'division_name_en' => 'MANYU',
@@ -465,6 +522,7 @@ class DivisionSeeder extends Seeder
 
         Division::create([
             'id' => 57,
+            'uuid' => Str::uuid(),
             'region_id' => 10,
             'code' => 'NA',
             'division_name_en' => 'MEME',
@@ -472,6 +530,7 @@ class DivisionSeeder extends Seeder
         ]);
         Division::create([
             'id' => 58,
+            'uuid' => Str::uuid(),
             'region_id' => 10,
             'code' => 'NA',
             'division_name_en' => 'NDIAN',

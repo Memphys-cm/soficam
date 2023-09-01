@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('blocks', function (Blueprint $table) {
             $table->id();
+           $table->uuid('uuid')->unique()->index();
             $table->string('block_name');
             $table->foreignId('lotissement_id')->index()->constrained('lotissements');
             $table->timestamps();

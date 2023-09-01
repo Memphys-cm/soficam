@@ -99,6 +99,7 @@
                 <thead>
                     <tr>
                         <th class="border-bottom">{{ __('REQUÉRANT') }}</th>
+                        <th class="border-bottom">{{ __('REFERANCE') }}</th>
                         <th class="border-bottom">{{ __('MODE DE PAIEMENT') }}</th>
                         <th class="border-bottom">{{ __('TYPE DE VENTE') }}</th>
                         <th class="border-bottom">{{ __('Montant de la vente') }}</th>
@@ -128,6 +129,7 @@
                             @endif
                         </td>
 
+                        <td>{{ $allsale->sales_code }}</td>
                         <td>{{ $allsale->payment_method }}</td>
                         <td>{{ $allsale->sales_type }}</td>
                         <td>{{ $allsale->sales_amount }} {{ __('XAF') }}</td>

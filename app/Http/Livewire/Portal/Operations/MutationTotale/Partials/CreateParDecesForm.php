@@ -53,7 +53,7 @@ class CreateParDecesForm extends Component
 
     public function store()
     {
-        if (!Gate::allows('mutation_totale.create')) {
+        if (!Gate::allows('operation.mutation_totale.create')) {
             return abort(401);
         }
 

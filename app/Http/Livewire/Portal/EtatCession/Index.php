@@ -10,6 +10,7 @@ use App\Models\SubDivision;
 use App\Models\TitreFoncier;
 use Illuminate\Support\Facades\DB;
 use App\Http\Livewire\Traits\WithDataTables;
+use App\Models\Sales\Saleable;
 
 class Index extends Component
 {
@@ -74,11 +75,11 @@ class Index extends Component
         'state_assignment.type_personne' => 'sometimes',
         'state_assignment.titre_foncier_id' => 'sometimes',
         'state_assignment.geometre_id' => 'sometimes',
-        'state_assignment.user_id' => 'sometimes',
-        'state_assignment.sub_division_id' => 'sometimes',
-        'state_assignment.lieu_dit' => 'sometimes',
-        'state_assignment.superficie_en_m2' => 'sometimes',
-        'state_assignment.type_operation' => 'sometimes',
+        'state_assignment.user_id' => 'required',
+        'state_assignment.sub_division_id' => 'required',
+        'state_assignment.lieu_dit' => 'required',
+        'state_assignment.superficie_en_m2' => 'required',
+        'state_assignment.type_operation' => 'required',
         'state_assignment.cout' => 'sometimes',
         'state_assignment.frais_suplementaires' => 'sometimes',
         'state_assignment.cout_etat_cession' => 'sometimes',
@@ -130,20 +131,18 @@ class Index extends Component
             ]);
 
             // Create the Saleable item using only the specified information
-            $saleableData = [
+            Saleable::create([
                 'sale_id' => $sale->id,
                 'price' => $this->state_assignment->cout_etat_cession,
                 'quantity' => 1,
                 'saleable_id' => $this->state_assignment->id,
                 'saleable_type' => 'App\Models\EtatCession', // Adjust the namespace if different
                 'created_by' => auth()->user()->name,
-            ];
-
-            DB::table('saleables')->insert($saleableData);
+            ]);
         });
         $this->state = 0;
         $this->clearFields();
-        $this->refresh(__('State Assignment successfully :state!', ['state' => $this->state ? 'Updated' : 'Created']), 'CreateUpdateStateAssignmentModal');
+        $this->refresh(__('State Assignment successfully :state!', ['state' => $this->state ? 'Updated' : 'Created']), 'CreateUpdateEtatCessionModal');
     }
 
     public function delete()

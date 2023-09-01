@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Sales\Sale;
 use App\Models\EtatCession;
 use App\Models\SubDivision;
+use Illuminate\Support\Str;
 use App\Models\TitreFoncier;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +24,7 @@ class EtatCessionSeeder extends Seeder
         for ($i = 0; $i < 25; $i++) {
 
             $etat_cession = EtatCession::create([
+                'uuid' => Str::uuid(),
                 'reference_etat_cession' => fake()->randomDigitNotNull(10),
                 'type_personne' => collect(['morale','physique'])->random(),
                 'zone' => collect(['terrain_urbain','terrain_rurale'])->random(),
@@ -38,6 +40,7 @@ class EtatCessionSeeder extends Seeder
             ]);
 
             $sale = Sale::create([
+                'uuid' => Str::uuid(),
                 'user_id' => $etat_cession->user_id,
                 'sales_amount' => $etat_cession->cout_etat_cession,
                 'sales_type' => 'etat_cession',
@@ -46,6 +49,7 @@ class EtatCessionSeeder extends Seeder
 
             // Create the Saleable item using only the specified information
             $saleableData = [
+                'uuid' => Str::uuid(),
                 'sale_id' => $sale->id,
                 'price' => $etat_cession->cout_etat_cession,
                 'quantity' => 1,

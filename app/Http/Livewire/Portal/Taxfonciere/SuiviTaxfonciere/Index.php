@@ -110,16 +110,15 @@ class Index extends Component
             ]);
             // dd($sale);
             // Create the Saleable item using only the specified information
-            $saleableData = [
+            Saleable::create([
                 'sale_id' => $sale->id,
                 'price' => $this->tax_amount,
                 'quantity' => 1,
                 'saleable_id' => $this->titrefoncier->id,
                 'saleable_type' => 'tax_foncier', // Adjust the namespace if different
                 'created_by' => auth()->user()->name,
-            ];
+            ]);
 
-            DB::table('saleables')->insert($saleableData);
         }
 
 

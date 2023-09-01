@@ -9,12 +9,15 @@
                     </div>
                     <x-form-items.form wire:submit="store">
                         <div class='form-group mb-3 row'>
-                            <div class=" col"><label for="titre_foncier_id">{{ __('Numéro du titre foncier') }}</label>
-                                <x-input.select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers->pluck('numero_titre_foncier', 'id')->toArray()" selected="('titre_foncier_id')" />
+                            <div class=" col">
+                                <label for="titre_foncier_id">{{ __('Numéro du titre foncier') }}</label>
+                                <x-input.select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers->pluck('numero_titre_foncier','id')->toArray()" selected="('titre_foncier_id')" />
                                 @error('titre_foncier_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+                        </div>
+                        <div class="form-group mb-3 row">
                             <div class="col">
                                 <label for="certificate_proprietes_number">{{__('Numéro de certificat de propriété')}}</label>
                                 <input wire:model="certificate_proprietes_number" type="text" class="form-control  @error('certificate_proprietes_number') is-invalid @enderror" placeholder="{{__('1986')}}" required="">
@@ -22,9 +25,6 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-
-                        </div>
-                        <div class="form-group mb-3 row">
                             <div class='col'>
                                 <label class="px-2" for="requestor_id">{{__('Requérant')}}</label>
                                 <x-input.select wire:model="requestor_id" prettyname="requestor" :options="$requestors->pluck( 'first_name','id')->toArray()" />
@@ -32,6 +32,8 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
+                        </div>
+                        <div class='form-group mb-3 row'>
                             <div class="col">
                                 <label for="certificate_proprietes_type">{{__('Certificat Propriétés Type')}}</label>
                                 <select wire:model="certificate_proprietes_type" name="certificate_proprietes_type" class="form-select  @error('certificate_proprietes_type') is-invalid @enderror" required="">
@@ -43,23 +45,10 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                        </div>
-                        <div class='form-group mb-3 row'>
                             <div class="col">
                                 <label for="price">{{__('Prix')}}</label>
                                 <input wire:model="price" type="number" class="form-control  @error('prix') is-invalid @enderror" placeholder="{{__('')}}" required="">
                                 @error('price')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col">
-                                <label for="status">{{__('Statut du CP')}}</label>
-                                <select wire:model="status" name="status" class="form-select  @error('status') is-invalid @enderror" required="">
-                                    <option value="">{{__('-- Selectionner --')}}</option>
-                                    <option value="expired">{{__('expiré')}}</option>
-                                    <option value="active">{{__('actif')}}</option>
-                                </select>
-                                @error('status')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>

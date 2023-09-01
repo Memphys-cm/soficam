@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\SubDivision;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class SubDivisionSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class SubDivisionSeeder extends Seeder
 
         SubDivision::create([
             'id' => 1,
+              'uuid' => Str::uuid(),
             'division_id' => 1,
             'code' => '0101001',
             'total_surface_area' => 4500000000,
@@ -26,6 +28,7 @@ class SubDivisionSeeder extends Seeder
 
         SubDivision::create([
             'id' => 2,
+              'uuid' => Str::uuid(),
             'division_id' => 1,
             'code' => '0101002',
             'sub_division_name_en' => 'TIBATI',
@@ -35,6 +38,7 @@ class SubDivisionSeeder extends Seeder
 
         SubDivision::create([
             'id' => 3,
+              'uuid' => Str::uuid(),
             'division_id' => 2,
             'code' => '0102003',
             'sub_division_name_en' => 'MAYO-BALEO',
@@ -43,6 +47,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 4,
+              'uuid' => Str::uuid(),
             'division_id' => 2,
             'code' => '0101004',
             'sub_division_name_en' => 'TIGNERE',
@@ -51,6 +56,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 5,
+              'uuid' => Str::uuid(),
             'division_id' => 2,
             'code' => '0101005',
             'sub_division_name_en' => 'GALIM-TIGNERE',
@@ -59,6 +65,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 6,
+              'uuid' => Str::uuid(),
             'division_id' => 2,
             'code' => '0101006',
             'sub_division_name_en' => 'KONTCHA',
@@ -67,6 +74,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 7,
+              'uuid' => Str::uuid(),
             'division_id' => 3,
             'code' => '0101007',
             'sub_division_name_en' => 'BANYO',
@@ -75,6 +83,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 8,
+              'uuid' => Str::uuid(),
             'division_id' => 3,
             'code' => '0101008',
             'sub_division_name_en' => 'BANKIM',
@@ -83,6 +92,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 9,
+              'uuid' => Str::uuid(),
             'division_id' => 3,
             'code' => '0101009',
             'sub_division_name_en' => 'MAYO-DARLE',
@@ -91,6 +101,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 10,
+              'uuid' => Str::uuid(),
             'division_id' => 4,
             'code' => '0101010',
             'sub_division_name_en' => 'MEIGANGA',
@@ -99,6 +110,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 11,
+              'uuid' => Str::uuid(),
             'division_id' => 4,
             'code' => '0101011',
             'sub_division_name_en' => 'DJOHONG',
@@ -107,6 +119,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 12,
+              'uuid' => Str::uuid(),
             'division_id' => 4,
             'code' => '0101012',
             'sub_division_name_en' => 'DIR',
@@ -115,6 +128,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 13,
+              'uuid' => Str::uuid(),
             'division_id' => 4,
             'code' => '0101013',
             'sub_division_name_en' => 'NGAOUI',
@@ -123,6 +137,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 14,
+              'uuid' => Str::uuid(),
             'division_id' => 5,
             'code' => '0101014',
             'sub_division_name_en' => 'NGAOUNDERE 1er',
@@ -131,6 +146,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 15,
+              'uuid' => Str::uuid(),
             'division_id' => 5,
             'code' => '0101015',
             'sub_division_name_en' => 'NGAOUNDERE 2er',
@@ -139,6 +155,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 16,
+              'uuid' => Str::uuid(),
             'division_id' => 5,
             'code' => '0101016',
             'sub_division_name_en' => 'NGAOUNDERE 3er',
@@ -147,6 +164,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 17,
+              'uuid' => Str::uuid(),
             'division_id' => 5,
             'code' => '0101017',
             'sub_division_name_en' => 'BELEL',
@@ -155,6 +173,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 18,
+              'uuid' => Str::uuid(),
             'division_id' => 5,
             'code' => '0101018',
             'sub_division_name_en' => 'MBE',
@@ -163,6 +182,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 19,
+              'uuid' => Str::uuid(),
             'division_id' => 5,
             'code' => '0101019',
             'sub_division_name_en' => 'NGANHA',
@@ -171,6 +191,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 20,
+              'uuid' => Str::uuid(),
             'division_id' => 5,
             'code' => '0101020',
             'sub_division_name_en' => 'NYAMBAKA',
@@ -179,6 +200,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 21,
+              'uuid' => Str::uuid(),
             'division_id' => 5,
             'code' => '0101021',
             'sub_division_name_en' => 'MARTAP',
@@ -187,6 +209,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 22,
+              'uuid' => Str::uuid(),
             'division_id' => 6,
             'code' => 'CE 06022',
             'sub_division_name_en' => 'MBANDJOCK',
@@ -195,6 +218,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 23,
+              'uuid' => Str::uuid(),
             'division_id' => 6,
             'code' => 'CE 06023',
             'sub_division_name_en' => 'MINTA',
@@ -203,6 +227,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 24,
+              'uuid' => Str::uuid(),
             'division_id' => 6,
             'code' => 'CE 06024',
             'sub_division_name_en' => 'NANGA-EBOKO',
@@ -211,6 +236,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 25,
+              'uuid' => Str::uuid(),
             'division_id' => 6,
             'code' => 'CE 06025',
             'sub_division_name_en' => 'NKOTENG',
@@ -219,6 +245,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 26,
+              'uuid' => Str::uuid(),
             'division_id' => 6,
             'code' => 'CE 06026',
             'sub_division_name_en' => 'BIBEY',
@@ -227,6 +254,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 27,
+              'uuid' => Str::uuid(),
             'division_id' => 6,
             'code' => 'CE 06027',
             'sub_division_name_en' => 'NSEM',
@@ -235,6 +263,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 28,
+              'uuid' => Str::uuid(),
             'division_id' => 6,
             'code' => 'CE 06028',
             'sub_division_name_en' => 'LEMBE-YEZOUM',
@@ -243,6 +272,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 29,
+              'uuid' => Str::uuid(),
             'division_id' => 7,
             'code' => 'CE 07029',
             'sub_division_name_en' => 'EVODOULA',
@@ -251,6 +281,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 30,
+              'uuid' => Str::uuid(),
             'division_id' => 7,
             'code' => 'CE 07030',
             'sub_division_name_en' => 'MONATELE',
@@ -259,6 +290,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 31,
+              'uuid' => Str::uuid(),
             'division_id' => 7,
             'code' => 'CE 07031',
             'sub_division_name_en' => 'OBALA',
@@ -267,6 +299,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 32,
+              'uuid' => Str::uuid(),
             'division_id' => 7,
             'code' => 'CE 07032',
             'sub_division_name_en' => 'OKOLA',
@@ -275,6 +308,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 33,
+              'uuid' => Str::uuid(),
             'division_id' => 7,
             'code' => 'CE 07033',
             'sub_division_name_en' => 'SA\'A',
@@ -283,6 +317,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 34,
+              'uuid' => Str::uuid(),
             'division_id' => 7,
             'code' => 'CE 07034',
             'sub_division_name_en' => 'ELIG-MFOMO',
@@ -291,6 +326,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 35,
+              'uuid' => Str::uuid(),
             'division_id' => 7,
             'code' => 'CE 07035',
             'sub_division_name_en' => 'EBEBDA',
@@ -299,6 +335,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 36,
+              'uuid' => Str::uuid(),
             'division_id' => 7,
             'code' => 'CE 07036',
             'sub_division_name_en' => 'BATSCHENGA',
@@ -307,6 +344,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 37,
+              'uuid' => Str::uuid(),
             'division_id' => 7,
             'code' => 'CE 07037',
             'sub_division_name_en' => 'LOBO',
@@ -315,6 +353,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 38,
+              'uuid' => Str::uuid(),
             'division_id' => 8,
             'code' => 'CE 08038',
             'sub_division_name_en' => 'BAFIA',
@@ -323,6 +362,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 39,
+              'uuid' => Str::uuid(),
             'division_id' => 8,
             'code' => 'CE 08039',
             'sub_division_name_en' => 'BOKITO',
@@ -331,6 +371,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 40,
+              'uuid' => Str::uuid(),
             'division_id' => 8,
             'code' => 'CE 08040',
             'sub_division_name_en' => 'DEUK',
@@ -339,6 +380,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 41,
+              'uuid' => Str::uuid(),
             'division_id' => 8,
             'code' => 'CE 08041',
             'sub_division_name_en' => 'KIIKI',
@@ -347,6 +389,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 42,
+              'uuid' => Str::uuid(),
             'division_id' => 8,
             'code' => 'CE 08042',
             'sub_division_name_en' => 'KON-YAMBETTA',
@@ -355,6 +398,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 43,
+              'uuid' => Str::uuid(),
             'division_id' => 8,
             'code' => 'CE 08043',
             'sub_division_name_en' => 'MAKENENE',
@@ -363,6 +407,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 44,
+              'uuid' => Str::uuid(),
             'division_id' => 8,
             'code' => 'CE 08044',
             'sub_division_name_en' => 'NDIKINIMEKI',
@@ -371,6 +416,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 45,
+              'uuid' => Str::uuid(),
             'division_id' => 8,
             'code' => 'CE 08045',
             'sub_division_name_en' => 'NITOUKOU',
@@ -379,6 +425,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 46,
+              'uuid' => Str::uuid(),
             'division_id' => 8,
             'code' => 'CE 08046',
             'sub_division_name_en' => 'OMBESSA',
@@ -387,6 +434,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 47,
+              'uuid' => Str::uuid(),
             'division_id' => 9,
             'code' => 'CE 09047',
             'sub_division_name_en' => 'MBANGASSINA',
@@ -395,6 +443,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 48,
+              'uuid' => Str::uuid(),
             'division_id' => 9,
             'code' => 'CE 09048',
             'sub_division_name_en' => 'NGAMBE-TIKAR',
@@ -403,6 +452,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 49,
+              'uuid' => Str::uuid(),
             'division_id' => 9,
             'code' => 'CE 09049',
             'sub_division_name_en' => 'NGORO',
@@ -411,6 +461,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 50,
+              'uuid' => Str::uuid(),
             'division_id' => 9,
             'code' => 'CE 09050',
             'sub_division_name_en' => 'NTUI',
@@ -419,6 +470,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 51,
+              'uuid' => Str::uuid(),
             'division_id' => 9,
             'code' => 'CE 09051',
             'sub_division_name_en' => 'YOKO',
@@ -427,6 +479,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 52,
+              'uuid' => Str::uuid(),
             'division_id' => 10,
             'code' => 'CE 10052',
             'sub_division_name_en' => 'AFANLOUM',
@@ -435,6 +488,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 53,
+              'uuid' => Str::uuid(),
             'division_id' => 10,
             'code' => 'CE 10053',
             'sub_division_name_en' => 'ASSAMBA',
@@ -443,6 +497,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 54,
+              'uuid' => Str::uuid(),
             'division_id' => 10,
             'code' => 'CE 10054',
             'sub_division_name_en' => 'AWAE',
@@ -451,6 +506,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 55,
+              'uuid' => Str::uuid(),
             'division_id' => 10,
             'code' => 'CE 10055',
             'sub_division_name_en' => 'EDZENDOUAN',
@@ -459,6 +515,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 56,
+              'uuid' => Str::uuid(),
             'division_id' => 10,
             'code' => 'CE 10056',
             'sub_division_name_en' => 'ESSE',
@@ -467,6 +524,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 57,
+              'uuid' => Str::uuid(),
             'division_id' => 10,
             'code' => 'CE 10057',
             'sub_division_name_en' => 'MFOU',
@@ -475,6 +533,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 58,
+              'uuid' => Str::uuid(),
             'division_id' => 10,
             'code' => 'CE 10058',
             'sub_division_name_en' => 'NKOLAFAMBA',
@@ -483,6 +542,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 59,
+              'uuid' => Str::uuid(),
             'division_id' => 10,
             'code' => 'CE 10059',
             'sub_division_name_en' => 'SOA',
@@ -491,6 +551,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 60,
+              'uuid' => Str::uuid(),
             'division_id' => 11,
             'code' => 'CE 11060',
             'sub_division_name_en' => 'AKONO',
@@ -499,6 +560,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 61,
+              'uuid' => Str::uuid(),
             'division_id' => 11,
             'code' => 'CE 11061',
             'sub_division_name_en' => 'BIKOK',
@@ -507,6 +569,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 62,
+              'uuid' => Str::uuid(),
             'division_id' => 11,
             'code' => 'CE 11060',
             'sub_division_name_en' => 'MBANKOMO',
@@ -515,6 +578,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 63,
+              'uuid' => Str::uuid(),
             'division_id' => 12,
             'code' => 'CE 12063',
             'sub_division_name_en' => 'YAOUNDE I',
@@ -523,6 +587,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 64,
+            'uuid' => Str::uuid(),
             'division_id' => 12,
             'code' => 'CE 12064',
             'sub_division_name_en' => 'YAOUNDE II',
@@ -531,6 +596,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 65,
+              'uuid' => Str::uuid(),
             'division_id' => 12,
             'code' => 'CE 12065',
             'sub_division_name_en' => 'YAOUNDE III',
@@ -539,6 +605,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 66,
+              'uuid' => Str::uuid(),
             'division_id' => 12,
             'code' => 'CE 12066',
             'sub_division_name_en' => 'YAOUNDE IV',
@@ -547,6 +614,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 67,
+              'uuid' => Str::uuid(),
             'division_id' => 12,
             'code' => 'CE 12067',
             'sub_division_name_en' => 'YAOUNDE V',
@@ -555,6 +623,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 68,
+              'uuid' => Str::uuid(),
             'division_id' => 12,
             'code' => 'CE 12068',
             'sub_division_name_en' => 'YAOUNDE VI',
@@ -563,6 +632,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 69,
+              'uuid' => Str::uuid(),
             'division_id' => 12,
             'code' => 'CE 12069',
             'sub_division_name_en' => 'YAOUNDE VII',
@@ -571,6 +641,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 70,
+              'uuid' => Str::uuid(),
             'division_id' => 13,
             'code' => 'CE 13070',
             'sub_division_name_en' => 'BIYOUHA',
@@ -579,6 +650,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 71,
+              'uuid' => Str::uuid(),
             'division_id' => 13,
             'code' => 'CE 13071',
             'sub_division_name_en' => 'BONDJOCK',
@@ -587,6 +659,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 72,
+              'uuid' => Str::uuid(),
             'division_id' => 13,
             'code' => 'CE 13072',
             'sub_division_name_en' => 'BOT-MAKAK',
@@ -595,6 +668,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 73,
+              'uuid' => Str::uuid(),
             'division_id' => 13,
             'code' => 'CE 13073',
             'sub_division_name_en' => 'DIBANG',
@@ -603,6 +677,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 74,
+              'uuid' => Str::uuid(),
             'division_id' => 13,
             'code' => 'CE 13074',
             'sub_division_name_en' => 'ESEKA',
@@ -611,6 +686,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 75,
+              'uuid' => Str::uuid(),
             'division_id' => 13,
             'code' => 'CE 13075',
             'sub_division_name_en' => 'MAKAK',
@@ -619,6 +695,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 76,
+              'uuid' => Str::uuid(),
             'division_id' => 13,
             'code' => 'CE 13076',
             'sub_division_name_en' => 'MATOMB',
@@ -627,6 +704,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 77,
+              'uuid' => Str::uuid(),
             'division_id' => 13,
             'code' => 'CE 13077',
             'sub_division_name_en' => 'MESSONDO',
@@ -635,6 +713,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 78,
+              'uuid' => Str::uuid(),
             'division_id' => 13,
             'code' => 'CE 13078',
             'sub_division_name_en' => 'NGOG-MAPUBI',
@@ -643,6 +722,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 79,
+              'uuid' => Str::uuid(),
             'division_id' => 14,
             'code' => 'CE 14079',
             'sub_division_name_en' => 'AKONOLINGA',
@@ -651,6 +731,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 80,
+              'uuid' => Str::uuid(),
             'division_id' => 14,
             'code' => 'CE 14080',
             'sub_division_name_en' => 'AYOS',
@@ -659,6 +740,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 81,
+              'uuid' => Str::uuid(),
             'division_id' => 14,
             'code' => 'CE 14081',
             'sub_division_name_en' => 'ENDOM',
@@ -667,6 +749,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 82,
+              'uuid' => Str::uuid(),
             'division_id' => 14,
             'code' => 'CE 14082',
             'sub_division_name_en' => 'MENGANG',
@@ -675,6 +758,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 83,
+              'uuid' => Str::uuid(),
             'division_id' => 14,
             'code' => 'CE 14083',
             'sub_division_name_en' => 'YAKOKOMBO',
@@ -683,6 +767,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 84,
+              'uuid' => Str::uuid(),
             'division_id' => 15,
             'code' => 'CE 15084',
             'sub_division_name_en' => 'AKOEMAN',
@@ -691,6 +776,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 85,
+              'uuid' => Str::uuid(),
             'division_id' => 15,
             'code' => 'CE 15085',
             'sub_division_name_en' => 'DZENG',
@@ -699,6 +785,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 86,
+              'uuid' => Str::uuid(),
             'division_id' => 15,
             'code' => 'CE 15086',
             'sub_division_name_en' => 'MBALMAYO',
@@ -707,6 +794,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 87,
+              'uuid' => Str::uuid(),
             'division_id' => 15,
             'code' => 'CE 15087',
             'sub_division_name_en' => 'MENGUEME',
@@ -715,6 +803,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 88,
+              'uuid' => Str::uuid(),
             'division_id' => 15,
             'code' => 'CE 15088',
             'sub_division_name_en' => 'NKOL-METET',
@@ -723,6 +812,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 89,
+              'uuid' => Str::uuid(),
             'division_id' => 15,
             'code' => 'CE 15089',
             'sub_division_name_en' => 'NGOMEDZAP',
@@ -731,6 +821,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 90,
+              'uuid' => Str::uuid(),
             'division_id' => 16,
             'code' => 'ES 16090',
             'sub_division_name_en' => 'GARI-GOMBO',
@@ -739,6 +830,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 91,
+              'uuid' => Str::uuid(),
             'division_id' => 16,
             'code' => 'ES 16091',
             'sub_division_name_en' => 'MOLOUNDOU',
@@ -747,6 +839,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 92,
+              'uuid' => Str::uuid(),
             'division_id' => 16,
             'code' => 'ES 16092',
             'sub_division_name_en' => 'SALAPOUMBE',
@@ -755,6 +848,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 93,
+              'uuid' => Str::uuid(),
             'division_id' => 16,
             'code' => 'ES 16093',
             'sub_division_name_en' => 'YOKADOUMA',
@@ -763,6 +857,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 94,
+              'uuid' => Str::uuid(),
             'division_id' => 17,
             'code' => 'ES 17094',
             'sub_division_name_en' => 'ABON-MBANG',
@@ -771,6 +866,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 95,
+              'uuid' => Str::uuid(),
             'division_id' => 17,
             'code' => 'ES 17095',
             'sub_division_name_en' => 'BEBENG',
@@ -779,6 +875,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 96,
+              'uuid' => Str::uuid(),
             'division_id' => 17,
             'code' => 'ES 17096',
             'sub_division_name_en' => 'DIMAKO',
@@ -787,6 +884,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 97,
+              'uuid' => Str::uuid(),
             'division_id' => 17,
             'code' => 'ES 17097',
             'sub_division_name_en' => 'DJA',
@@ -795,6 +893,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 98,
+              'uuid' => Str::uuid(),
             'division_id' => 17,
             'code' => 'ES 17098',
             'sub_division_name_en' => 'DOUMAINTANG',
@@ -803,6 +902,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 99,
+              'uuid' => Str::uuid(),
             'division_id' => 17,
             'code' => 'ES 17099',
             'sub_division_name_en' => 'DOUME',
@@ -811,6 +911,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 100,
+              'uuid' => Str::uuid(),
             'division_id' => 17,
             'code' => 'ES 17100',
             'sub_division_name_en' => 'LOMIE',
@@ -819,6 +920,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 101,
+              'uuid' => Str::uuid(),
             'division_id' => 17,
             'code' => 'ES 17101',
             'sub_division_name_en' => 'MBOMA',
@@ -827,6 +929,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 102,
+              'uuid' => Str::uuid(),
             'division_id' => 17,
             'code' => 'ES 17102',
             'sub_division_name_en' => 'MBOUANZ',
@@ -835,6 +938,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 103,
+              'uuid' => Str::uuid(),
             'division_id' => 17,
             'code' => 'ES 17103',
             'sub_division_name_en' => 'MESSAMENA',
@@ -843,6 +947,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 104,
+              'uuid' => Str::uuid(),
             'division_id' => 17,
             'code' => 'ES 17104',
             'sub_division_name_en' => 'MESSOK',
@@ -851,6 +956,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 105,
+              'uuid' => Str::uuid(),
             'division_id' => 17,
             'code' => 'ES 17105',
             'sub_division_name_en' => 'MGUELEMENDOUKA',
@@ -859,6 +965,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 106,
+              'uuid' => Str::uuid(),
             'division_id' => 17,
             'code' => 'ES 17106',
             'sub_division_name_en' => 'NGOYLA',
@@ -867,6 +974,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 107,
+              'uuid' => Str::uuid(),
             'division_id' => 17,
             'code' => 'ES 17107',
             'sub_division_name_en' => 'SAMALOMO',
@@ -875,6 +983,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 108,
+              'uuid' => Str::uuid(),
             'division_id' => 18,
             'code' => 'ES 18108',
             'sub_division_name_en' => 'BATOURI',
@@ -883,6 +992,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 109,
+              'uuid' => Str::uuid(),
             'division_id' => 18,
             'code' => 'ES 18109',
             'sub_division_name_en' => 'BOMBE',
@@ -891,6 +1001,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 110,
+              'uuid' => Str::uuid(),
             'division_id' => 18,
             'code' => 'ES 18110',
             'sub_division_name_en' => 'KETTE',
@@ -899,6 +1010,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 111,
+              'uuid' => Str::uuid(),
             'division_id' => 18,
             'code' => 'ES 18111',
             'sub_division_name_en' => 'MBANG',
@@ -907,6 +1019,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 112,
+              'uuid' => Str::uuid(),
             'division_id' => 18,
             'code' => 'ES 18112',
             'sub_division_name_en' => 'MBOTORO',
@@ -915,6 +1028,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 113,
+              'uuid' => Str::uuid(),
             'division_id' => 18,
             'code' => 'ES 18113',
             'sub_division_name_en' => 'NDELELE',
@@ -923,6 +1037,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 114,
+              'uuid' => Str::uuid(),
             'division_id' => 18,
             'code' => 'ES 18114',
             'sub_division_name_en' => 'MDEM-NAM',
@@ -931,6 +1046,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 115,
+              'uuid' => Str::uuid(),
             'division_id' => 19,
             'code' => 'ES 19115',
             'sub_division_name_en' => 'BERTOUA 1ER',
@@ -939,6 +1055,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 116,
+              'uuid' => Str::uuid(),
             'division_id' => 19,
             'code' => 'ES 19116',
             'sub_division_name_en' => 'BERTOUA 2ER',
@@ -947,6 +1064,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 117,
+              'uuid' => Str::uuid(),
             'division_id' => 19,
             'code' => 'ES 19117',
             'sub_division_name_en' => 'BETARE-OYA',
@@ -955,6 +1073,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 118,
+              'uuid' => Str::uuid(),
             'division_id' => 19,
             'code' => 'ES 19118',
             'sub_division_name_en' => 'BELABO',
@@ -963,6 +1082,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 119,
+              'uuid' => Str::uuid(),
             'division_id' => 19,
             'code' => 'ES 19119',
             'sub_division_name_en' => 'DIANG',
@@ -971,6 +1091,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 120,
+              'uuid' => Str::uuid(),
             'division_id' => 19,
             'code' => 'ES 19120',
             'sub_division_name_en' => 'GAROUA-BOULAI',
@@ -979,6 +1100,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 121,
+              'uuid' => Str::uuid(),
             'division_id' => 19,
             'code' => 'ES 19121',
             'sub_division_name_en' => 'MANDJOU',
@@ -987,6 +1109,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 122,
+              'uuid' => Str::uuid(),
             'division_id' => 19,
             'code' => 'ES 19122',
             'sub_division_name_en' => 'NGOURA',
@@ -995,6 +1118,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 123,
+              'uuid' => Str::uuid(),
             'division_id' => 20,
             'code' => 'EN 20123',
             'sub_division_name_en' => 'BOGO',
@@ -1003,6 +1127,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 124,
+              'uuid' => Str::uuid(),
             'division_id' => 20,
             'code' => 'EN 20124',
             'sub_division_name_en' => 'DARGALA',
@@ -1011,6 +1136,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 125,
+              'uuid' => Str::uuid(),
             'division_id' => 20,
             'code' => 'EN 20125',
             'sub_division_name_en' => 'GAZAWA',
@@ -1019,6 +1145,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 126,
+              'uuid' => Str::uuid(),
             'division_id' => 20,
             'code' => 'EN 20126',
             'sub_division_name_en' => 'MAROUA 1ER',
@@ -1027,6 +1154,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 127,
+              'uuid' => Str::uuid(),
             'division_id' => 20,
             'code' => 'EN 20127',
             'sub_division_name_en' => 'MAROUA 2E',
@@ -1035,6 +1163,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 128,
+              'uuid' => Str::uuid(),
             'division_id' => 20,
             'code' => 'EN 20128',
             'sub_division_name_en' => 'MAROUA 3E',
@@ -1043,6 +1172,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 129,
+              'uuid' => Str::uuid(),
             'division_id' => 20,
             'code' => 'EN 20129',
             'sub_division_name_en' => 'MERI',
@@ -1051,6 +1181,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 130,
+              'uuid' => Str::uuid(),
             'division_id' => 20,
             'code' => 'EN 20130',
             'sub_division_name_en' => 'NDOUKOULA',
@@ -1059,6 +1190,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 131,
+              'uuid' => Str::uuid(),
             'division_id' => 20,
             'code' => 'EN 20131',
             'sub_division_name_en' => 'PETTE',
@@ -1067,6 +1199,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 132,
+              'uuid' => Str::uuid(),
             'division_id' => 21,
             'code' => 'EN 21132',
             'sub_division_name_en' => 'BLANGOUA',
@@ -1075,6 +1208,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 133,
+              'uuid' => Str::uuid(),
             'division_id' => 21,
             'code' => 'EN 21133',
             'sub_division_name_en' => 'DARAK',
@@ -1083,6 +1217,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 134,
+              'uuid' => Str::uuid(),
             'division_id' => 21,
             'code' => 'EN 21134',
             'sub_division_name_en' => 'FOTOKOL',
@@ -1091,6 +1226,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 135,
+              'uuid' => Str::uuid(),
             'division_id' => 21,
             'code' => 'EN 21135',
             'sub_division_name_en' => 'GOULFEY',
@@ -1099,6 +1235,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 136,
+              'uuid' => Str::uuid(),
             'division_id' => 21,
             'code' => 'EN 21136',
             'sub_division_name_en' => 'HILE-HALIFA',
@@ -1107,6 +1244,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 137,
+              'uuid' => Str::uuid(),
             'division_id' => 21,
             'code' => 'EN 21137',
             'sub_division_name_en' => 'KOUSSERI',
@@ -1115,6 +1253,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 138,
+              'uuid' => Str::uuid(),
             'division_id' => 21,
             'code' => 'EN 21138',
             'sub_division_name_en' => 'LOGONE-BIRNI',
@@ -1123,6 +1262,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 139,
+              'uuid' => Str::uuid(),
             'division_id' => 21,
             'code' => 'EN 21139',
             'sub_division_name_en' => 'MAKARY',
@@ -1131,6 +1271,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 140,
+              'uuid' => Str::uuid(),
             'division_id' => 21,
             'code' => 'EN 21140',
             'sub_division_name_en' => 'WAZA',
@@ -1139,6 +1280,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 141,
+              'uuid' => Str::uuid(),
             'division_id' => 21,
             'code' => 'EN 21141',
             'sub_division_name_en' => 'ZINA',
@@ -1147,6 +1289,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 142,
+              'uuid' => Str::uuid(),
             'division_id' => 22,
             'code' => 'EN 22142',
             'sub_division_name_en' => 'DATCHEKA',
@@ -1155,6 +1298,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 143,
+              'uuid' => Str::uuid(),
             'division_id' => 22,
             'code' => 'EN 22143',
             'sub_division_name_en' => 'GOBO',
@@ -1163,6 +1307,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 144,
+              'uuid' => Str::uuid(),
             'division_id' => 22,
             'code' => 'EN 22144',
             'sub_division_name_en' => 'GUERE',
@@ -1171,6 +1316,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 145,
+              'uuid' => Str::uuid(),
             'division_id' => 22,
             'code' => 'EN 22145',
             'sub_division_name_en' => 'KAI-KAI',
@@ -1179,6 +1325,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         // SubDivision::create([
         //     'id' => 145,
+        //   'uuid' => Str::uuid(),
         //     'division_id' => 22,
         //     'code' => 'EN 22145',
         //     'sub_division_name_en' => 'KAI-KAI',
@@ -1187,6 +1334,7 @@ class SubDivisionSeeder extends Seeder
         // ]);
         SubDivision::create([
             'id' => 146,
+              'uuid' => Str::uuid(),
             'division_id' => 22,
             'code' => 'EN 22146',
             'sub_division_name_en' => 'KALFOU',
@@ -1195,6 +1343,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 147,
+              'uuid' => Str::uuid(),
             'division_id' => 22,
             'code' => 'EN 22147',
             'sub_division_name_en' => 'KAR-HAY',
@@ -1203,6 +1352,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 148,
+              'uuid' => Str::uuid(),
             'division_id' => 22,
             'code' => 'EN 22148',
             'sub_division_name_en' => 'MAGA',
@@ -1211,6 +1361,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 149,
+              'uuid' => Str::uuid(),
             'division_id' => 22,
             'code' => 'EN 22149',
             'sub_division_name_en' => 'TCHATIBALI',
@@ -1219,6 +1370,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 150,
+              'uuid' => Str::uuid(),
             'division_id' => 22,
             'code' => 'EN 22150',
             'sub_division_name_en' => 'VELE',
@@ -1227,6 +1379,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 151,
+              'uuid' => Str::uuid(),
             'division_id' => 22,
             'code' => 'EN 22151',
             'sub_division_name_en' => 'WINA',
@@ -1235,6 +1388,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 152,
+              'uuid' => Str::uuid(),
             'division_id' => 22,
             'code' => 'EN 22152',
             'sub_division_name_en' => 'YAGOUA',
@@ -1243,6 +1397,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 153,
+              'uuid' => Str::uuid(),
             'division_id' => 23,
             'code' => 'EN 23153',
             'sub_division_name_en' => 'GUIDIGUIS',
@@ -1251,6 +1406,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 154,
+              'uuid' => Str::uuid(),
             'division_id' => 23,
             'code' => 'EN 23154',
             'sub_division_name_en' => 'KAELE',
@@ -1259,6 +1415,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 155,
+              'uuid' => Str::uuid(),
             'division_id' => 23,
             'code' => 'EN 23155',
             'sub_division_name_en' => 'MINDIF',
@@ -1267,6 +1424,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 156,
+              'uuid' => Str::uuid(),
             'division_id' => 23,
             'code' => 'EN 23156',
             'sub_division_name_en' => 'MOULVOUDAYE',
@@ -1275,6 +1433,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 157,
+              'uuid' => Str::uuid(),
             'division_id' => 23,
             'code' => 'EN 23157',
             'sub_division_name_en' => 'MOUTOURWA',
@@ -1283,6 +1442,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 158,
+              'uuid' => Str::uuid(),
             'division_id' => 23,
             'code' => 'EN 23158',
             'sub_division_name_en' => 'PORHI',
@@ -1291,6 +1451,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 159,
+              'uuid' => Str::uuid(),
             'division_id' => 23,
             'code' => 'EN 23159',
             'sub_division_name_en' => 'TAIBONG',
@@ -1299,6 +1460,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 160,
+              'uuid' => Str::uuid(),
             'division_id' => 24,
             'code' => 'EN 24160',
             'sub_division_name_en' => 'MORA',
@@ -1307,6 +1469,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 161,
+              'uuid' => Str::uuid(),
             'division_id' => 24,
             'code' => 'EN 24161',
             'sub_division_name_en' => 'KOLOFATA',
@@ -1315,6 +1478,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 162,
+              'uuid' => Str::uuid(),
             'division_id' => 24,
             'code' => 'EN 24162',
             'sub_division_name_en' => 'TOKOMBERE',
@@ -1323,6 +1487,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 163,
+              'uuid' => Str::uuid(),
             'division_id' => 25,
             'code' => 'EN 25163',
             'sub_division_name_en' => 'BOURRHA',
@@ -1331,6 +1496,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 164,
+              'uuid' => Str::uuid(),
             'division_id' => 25,
             'code' => 'EN 25164',
             'sub_division_name_en' => 'HINA',
@@ -1339,6 +1505,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 165,
+              'uuid' => Str::uuid(),
             'division_id' => 25,
             'code' => 'EN 25165',
             'sub_division_name_en' => 'KOZA',
@@ -1347,6 +1514,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 166,
+              'uuid' => Str::uuid(),
             'division_id' => 25,
             'code' => 'EN 25166',
             'sub_division_name_en' => 'MAYO-MASKOTA',
@@ -1355,6 +1523,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 167,
+              'uuid' => Str::uuid(),
             'division_id' => 25,
             'code' => 'EN 25167',
             'sub_division_name_en' => 'MOGODE',
@@ -1363,6 +1532,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 168,
+              'uuid' => Str::uuid(),
             'division_id' => 25,
             'code' => 'EN 25168',
             'sub_division_name_en' => 'MOKOLO',
@@ -1371,6 +1541,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 169,
+              'uuid' => Str::uuid(),
             'division_id' => 25,
             'code' => 'EN 25169',
             'sub_division_name_en' => 'SOUKELE-ROUA',
@@ -1379,6 +1550,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 170,
+              'uuid' => Str::uuid(),
             'division_id' => 26,
             'code' => 'LT 26170',
             'sub_division_name_en' => 'BARE-BAKEM',
@@ -1387,6 +1559,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 171,
+              'uuid' => Str::uuid(),
             'division_id' => 26,
             'code' => 'LT 26171',
             'sub_division_name_en' => 'DIBOMBARI',
@@ -1395,6 +1568,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 172,
+              'uuid' => Str::uuid(),
             'division_id' => 26,
             'code' => 'LT 26172',
             'sub_division_name_en' => 'FIKO',
@@ -1403,6 +1577,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 173,
+              'uuid' => Str::uuid(),
             'division_id' => 26,
             'code' => 'LT 26173',
             'sub_division_name_en' => 'LOUM',
@@ -1411,6 +1586,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 174,
+              'uuid' => Str::uuid(),
             'division_id' => 26,
             'code' => 'LT 26174',
             'sub_division_name_en' => 'MANJO',
@@ -1419,6 +1595,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 175,
+              'uuid' => Str::uuid(),
             'division_id' => 26,
             'code' => 'LT 26175',
             'sub_division_name_en' => 'MBANGA',
@@ -1427,6 +1604,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 176,
+              'uuid' => Str::uuid(),
             'division_id' => 26,
             'code' => 'LT 26176',
             'sub_division_name_en' => 'MELONG',
@@ -1435,6 +1613,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 177,
+              'uuid' => Str::uuid(),
             'division_id' => 26,
             'code' => 'LT 26177',
             'sub_division_name_en' => 'MOMBO',
@@ -1443,6 +1622,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 178,
+              'uuid' => Str::uuid(),
             'division_id' => 26,
             'code' => 'LT 26178',
             'sub_division_name_en' => 'NKONSAMBA 1er',
@@ -1451,6 +1631,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 179,
+              'uuid' => Str::uuid(),
             'division_id' => 26,
             'code' => 'LT 26179',
             'sub_division_name_en' => 'NKONSAMBA 2e',
@@ -1459,6 +1640,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 180,
+              'uuid' => Str::uuid(),
             'division_id' => 26,
             'code' => 'LT 26180',
             'sub_division_name_en' => 'NKONSAMBA 3e',
@@ -1467,6 +1649,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 181,
+              'uuid' => Str::uuid(),
             'division_id' => 26,
             'code' => 'LT 26181',
             'sub_division_name_en' => 'NLONAKO',
@@ -1475,6 +1658,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 182,
+              'uuid' => Str::uuid(),
             'division_id' => 26,
             'code' => 'LT 26182',
             'sub_division_name_en' => 'NJOMBE-PENJA',
@@ -1483,6 +1667,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 183,
+              'uuid' => Str::uuid(),
             'division_id' => 27,
             'code' => 'LT 27183',
             'sub_division_name_en' => 'NKONDJOCK',
@@ -1491,6 +1676,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 184,
+              'uuid' => Str::uuid(),
             'division_id' => 27,
             'code' => 'LT 27184',
             'sub_division_name_en' => 'NORD-MAKOMBE',
@@ -1499,6 +1685,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 185,
+              'uuid' => Str::uuid(),
             'division_id' => 27,
             'code' => 'LT 27185',
             'sub_division_name_en' => 'YABASSI',
@@ -1507,6 +1694,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 186,
+              'uuid' => Str::uuid(),
             'division_id' => 27,
             'code' => 'LT 27186',
             'sub_division_name_en' => 'YINGUI',
@@ -1515,6 +1703,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 187,
+              'uuid' => Str::uuid(),
             'division_id' => 28,
             'code' => 'LT 28187',
             'sub_division_name_en' => 'DIBAMBA',
@@ -1523,6 +1712,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 188,
+              'uuid' => Str::uuid(),
             'division_id' => 28,
             'code' => 'LT 28188',
             'sub_division_name_en' => 'DIZANGUE',
@@ -1531,6 +1721,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 189,
+              'uuid' => Str::uuid(),
             'division_id' => 28,
             'code' => 'LT 28189',
             'sub_division_name_en' => 'EDEA 1er',
@@ -1539,6 +1730,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 190,
+              'uuid' => Str::uuid(),
             'division_id' => 28,
             'code' => 'LT 28190',
             'sub_division_name_en' => 'EDEA 2e',
@@ -1547,6 +1739,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 191,
+              'uuid' => Str::uuid(),
             'division_id' => 28,
             'code' => 'LT 28191',
             'sub_division_name_en' => 'MASSOCK-SONGLOULOU',
@@ -1555,6 +1748,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 192,
+              'uuid' => Str::uuid(),
             'division_id' => 28,
             'code' => 'LT 28192',
             'sub_division_name_en' => 'MOUANKO',
@@ -1563,6 +1757,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 193,
+              'uuid' => Str::uuid(),
             'division_id' => 28,
             'code' => 'LT 28193',
             'sub_division_name_en' => 'NDOM',
@@ -1571,6 +1766,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 194,
+              'uuid' => Str::uuid(),
             'division_id' => 28,
             'code' => 'LT 28194',
             'sub_division_name_en' => 'NGAMBE',
@@ -1579,6 +1775,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 195,
+              'uuid' => Str::uuid(),
             'division_id' => 28,
             'code' => 'LT 28195',
             'sub_division_name_en' => 'NGWEI',
@@ -1587,6 +1784,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 196,
+              'uuid' => Str::uuid(),
             'division_id' => 28,
             'code' => 'LT 28196',
             'sub_division_name_en' => 'NYANON',
@@ -1595,6 +1793,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 197,
+              'uuid' => Str::uuid(),
             'division_id' => 28,
             'code' => 'LT 28197',
             'sub_division_name_en' => 'POUMA',
@@ -1603,6 +1802,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 198,
+              'uuid' => Str::uuid(),
             'division_id' => 29,
             'code' => 'LT 29198',
             'sub_division_name_en' => 'DOUALA 1er',
@@ -1611,6 +1811,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 199,
+              'uuid' => Str::uuid(),
             'division_id' => 29,
             'code' => 'LT 29199',
             'sub_division_name_en' => 'DOUALA 2e',
@@ -1619,6 +1820,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 200,
+              'uuid' => Str::uuid(),
             'division_id' => 29,
             'code' => 'LT 29200',
             'sub_division_name_en' => 'DOUALA 3e',
@@ -1627,6 +1829,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 201,
+              'uuid' => Str::uuid(),
             'division_id' => 29,
             'code' => 'LT 29201',
             'sub_division_name_en' => 'DOUALA 4e',
@@ -1635,6 +1838,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 202,
+              'uuid' => Str::uuid(),
             'division_id' => 29,
             'code' => 'LT 29202',
             'sub_division_name_en' => 'DOUALA 5e',
@@ -1643,6 +1847,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 203,
+              'uuid' => Str::uuid(),
             'division_id' => 29,
             'code' => 'LT 29203',
             'sub_division_name_en' => 'DOUALA 6e',
@@ -1651,6 +1856,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 204,
+              'uuid' => Str::uuid(),
             'division_id' => 30,
             'code' => 'LT 30204',
             'sub_division_name_en' => 'BASCHEO',
@@ -1659,6 +1865,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         // SubDivision::create([
         //     'id' => 205,
+        //   'uuid' => Str::uuid(),
         //     'division_id' => 30,
         //     'code' => 'ND 30205',
         //     'sub_division_name_en' => 'BIBEMI',
@@ -1667,6 +1874,7 @@ class SubDivisionSeeder extends Seeder
         // ]);
         SubDivision::create([
             'id' => 205,
+              'uuid' => Str::uuid(),
             'division_id' => 30,
             'code' => 'ND 30205',
             'sub_division_name_en' => 'DEMBO',
@@ -1675,6 +1883,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 206,
+              'uuid' => Str::uuid(),
             'division_id' => 30,
             'code' => 'ND 30206',
             'sub_division_name_en' => 'DEMSA',
@@ -1683,6 +1892,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 207,
+              'uuid' => Str::uuid(),
             'division_id' => 30,
             'code' => 'ND 30207',
             'sub_division_name_en' => 'GAROUA 1ER',
@@ -1691,6 +1901,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 208,
+              'uuid' => Str::uuid(),
             'division_id' => 30,
             'code' => 'ND 30208',
             'sub_division_name_en' => 'GAROUA 2E',
@@ -1699,6 +1910,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         // SubDivision::create([
         //     'id' => 209,
+        //   'uuid' => Str::uuid(),
         //     'division_id' => 30,
         //     'code' => 'ND 30209',
         //     'sub_division_name_en' => 'GAROUA 3E',
@@ -1707,6 +1919,7 @@ class SubDivisionSeeder extends Seeder
         // ]);
         SubDivision::create([
             'id' => 209,
+              'uuid' => Str::uuid(),
             'division_id' => 30,
             'code' => 'ND 30209',
             'sub_division_name_en' => 'LAGDO',
@@ -1715,6 +1928,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 210,
+              'uuid' => Str::uuid(),
             'division_id' => 30,
             'code' => 'ND 30210',
             'sub_division_name_en' => 'MAYO HOURNA',
@@ -1723,6 +1937,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 211,
+              'uuid' => Str::uuid(),
             'division_id' => 30,
             'code' => 'ND 30211',
             'sub_division_name_en' => 'PITOA',
@@ -1731,6 +1946,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 212,
+              'uuid' => Str::uuid(),
             'division_id' => 30,
             'code' => 'ND 30212',
             'sub_division_name_en' => 'TCHEBOA',
@@ -1739,6 +1955,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 213,
+              'uuid' => Str::uuid(),
             'division_id' => 30,
             'code' => 'ND 30213',
             'sub_division_name_en' => 'OUROUA',
@@ -1747,6 +1964,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 214,
+              'uuid' => Str::uuid(),
             'division_id' => 31,
             'code' => 'ND 31214',
             'sub_division_name_en' => 'BEKA',
@@ -1755,6 +1973,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 215,
+              'uuid' => Str::uuid(),
             'division_id' => 31,
             'code' => 'ND 31215',
             'sub_division_name_en' => 'POLI',
@@ -1763,6 +1982,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 216,
+              'uuid' => Str::uuid(),
             'division_id' => 32,
             'code' => 'ND 32216',
             'sub_division_name_en' => 'FIGUIL',
@@ -1771,6 +1991,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 217,
+              'uuid' => Str::uuid(),
             'division_id' => 32,
             'code' => 'ND 32217',
             'sub_division_name_en' => 'GUIDER',
@@ -1779,6 +2000,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 218,
+              'uuid' => Str::uuid(),
             'division_id' => 32,
             'code' => 'ND 32218',
             'sub_division_name_en' => 'MAYO-OULO',
@@ -1787,6 +2009,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 219,
+              'uuid' => Str::uuid(),
             'division_id' => 33,
             'code' => 'ND 33219',
             'sub_division_name_en' => 'MADINGRING',
@@ -1795,6 +2018,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 220,
+              'uuid' => Str::uuid(),
             'division_id' => 33,
             'code' => 'ND 33220',
             'sub_division_name_en' => 'REY-BOUBA',
@@ -1803,6 +2027,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 221,
+              'uuid' => Str::uuid(),
             'division_id' => 33,
             'code' => 'ND 33221',
             'sub_division_name_en' => 'TCHOLLIRE',
@@ -1811,6 +2036,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 222,
+              'uuid' => Str::uuid(),
             'division_id' => 33,
             'code' => 'ND 33222',
             'sub_division_name_en' => 'TOUBORO',
@@ -1819,6 +2045,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 223,
+              'uuid' => Str::uuid(),
             'division_id' => 34,
             'code' => 'NO 34223',
             'sub_division_name_en' => 'JAKIRI',
@@ -1827,6 +2054,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 224,
+              'uuid' => Str::uuid(),
             'division_id' => 34,
             'code' => 'NO 34224',
             'sub_division_name_en' => 'KUMBO',
@@ -1835,6 +2063,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 225,
+              'uuid' => Str::uuid(),
             'division_id' => 34,
             'code' => 'NO 34225',
             'sub_division_name_en' => 'MBVEN',
@@ -1843,6 +2072,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 226,
+              'uuid' => Str::uuid(),
             'division_id' => 34,
             'code' => 'NO 34226',
             'sub_division_name_en' => 'NKUM',
@@ -1851,6 +2081,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 227,
+              'uuid' => Str::uuid(),
             'division_id' => 34,
             'code' => 'NO 34227',
             'sub_division_name_en' => 'NONI',
@@ -1859,6 +2090,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 228,
+              'uuid' => Str::uuid(),
             'division_id' => 34,
             'code' => 'NO 34228',
             'sub_division_name_en' => 'OKU',
@@ -1867,6 +2099,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 229,
+              'uuid' => Str::uuid(),
             'division_id' => 35,
             'code' => 'NO 35229',
             'sub_division_name_en' => 'BELO',
@@ -1875,6 +2108,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 230,
+              'uuid' => Str::uuid(),
             'division_id' => 35,
             'code' => 'NO 35230',
             'sub_division_name_en' => 'BUM',
@@ -1883,6 +2117,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 231,
+              'uuid' => Str::uuid(),
             'division_id' => 35,
             'code' => 'NO 35231',
             'sub_division_name_en' => 'FUNDONG',
@@ -1891,6 +2126,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 232,
+              'uuid' => Str::uuid(),
             'division_id' => 35,
             'code' => 'NO 35232',
             'sub_division_name_en' => 'NJINIKOM',
@@ -1899,6 +2135,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 233,
+              'uuid' => Str::uuid(),
             'division_id' => 36,
             'code' => 'NO 36233',
             'sub_division_name_en' => 'AKO',
@@ -1907,6 +2144,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 234,
+              'uuid' => Str::uuid(),
             'division_id' => 36,
             'code' => 'NO 36234',
             'sub_division_name_en' => 'MISAJE',
@@ -1915,6 +2153,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 235,
+              'uuid' => Str::uuid(),
             'division_id' => 36,
             'code' => 'NO 36235',
             'sub_division_name_en' => 'NDU',
@@ -1923,6 +2162,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 236,
+              'uuid' => Str::uuid(),
             'division_id' => 36,
             'code' => 'NO 36236',
             'sub_division_name_en' => 'NKAMBE',
@@ -1931,6 +2171,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         // SubDivision::create([
         //     'id' => 237,
+        //   'uuid' => Str::uuid(),
         //     'division_id' => 36,
         //     'code' => 'NO 36237',
         //     'sub_division_name_en' => 'NWA',
@@ -1939,6 +2180,7 @@ class SubDivisionSeeder extends Seeder
         // ]);
         SubDivision::create([
             'id' => 237,
+              'uuid' => Str::uuid(),
             'division_id' => 36,
             'code' => 'NO 36237',
             'sub_division_name_en' => 'NWA',
@@ -1947,6 +2189,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 238,
+              'uuid' => Str::uuid(),
             'division_id' => 37,
             'code' => 'NO 37238',
             'sub_division_name_en' => 'FUNGOM',
@@ -1955,6 +2198,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 239,
+              'uuid' => Str::uuid(),
             'division_id' => 37,
             'code' => 'NO 37239',
             'sub_division_name_en' => 'FURU-AWA',
@@ -1963,6 +2207,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 240,
+              'uuid' => Str::uuid(),
             'division_id' => 37,
             'code' => 'NO 37240',
             'sub_division_name_en' => 'MENCHUM VALLEY',
@@ -1971,6 +2216,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 241,
+              'uuid' => Str::uuid(),
             'division_id' => 37,
             'code' => 'NO 37241',
             'sub_division_name_en' => 'WUM',
@@ -1979,6 +2225,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 242,
+              'uuid' => Str::uuid(),
             'division_id' => 38,
             'code' => 'NO 38242',
             'sub_division_name_en' => 'BALI',
@@ -1987,6 +2234,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 243,
+              'uuid' => Str::uuid(),
             'division_id' => 38,
             'code' => 'NO 38243',
             'sub_division_name_en' => 'BAFUT',
@@ -1995,6 +2243,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 244,
+              'uuid' => Str::uuid(),
             'division_id' => 38,
             'code' => 'NO 38244',
             'sub_division_name_en' => 'BAMENDA 1er',
@@ -2003,6 +2252,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 245,
+              'uuid' => Str::uuid(),
             'division_id' => 38,
             'code' => 'NO 38245',
             'sub_division_name_en' => 'BAMENDA 2e',
@@ -2011,6 +2261,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 246,
+              'uuid' => Str::uuid(),
             'division_id' => 38,
             'code' => 'NO 38246',
             'sub_division_name_en' => 'BAMENDA 3e',
@@ -2019,6 +2270,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 247,
+              'uuid' => Str::uuid(),
             'division_id' => 38,
             'code' => 'NO 38247',
             'sub_division_name_en' => 'SANTA',
@@ -2027,6 +2279,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 248,
+              'uuid' => Str::uuid(),
             'division_id' => 38,
             'code' => 'NO 38248',
             'sub_division_name_en' => 'TUBAH',
@@ -2035,6 +2288,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 249,
+              'uuid' => Str::uuid(),
             'division_id' => 39,
             'code' => 'NO 39249',
             'sub_division_name_en' => 'BATIBO',
@@ -2043,6 +2297,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 250,
+              'uuid' => Str::uuid(),
             'division_id' => 39,
             'code' => 'NO 39250',
             'sub_division_name_en' => 'MBENGWI',
@@ -2051,6 +2306,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 251,
+              'uuid' => Str::uuid(),
             'division_id' => 39,
             'code' => 'NO 39251',
             'sub_division_name_en' => 'NJIKWA',
@@ -2059,6 +2315,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 252,
+              'uuid' => Str::uuid(),
             'division_id' => 39,
             'code' => 'NO 39252',
             'sub_division_name_en' => 'NGIE',
@@ -2067,6 +2324,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 253,
+              'uuid' => Str::uuid(),
             'division_id' => 39,
             'code' => 'NO 39253',
             'sub_division_name_en' => 'WIDIKUM-MENKA',
@@ -2075,6 +2333,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 254,
+              'uuid' => Str::uuid(),
             'division_id' => 40,
             'code' => 'NO 40254',
             'sub_division_name_en' => 'BABESSI',
@@ -2083,6 +2342,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 255,
+              'uuid' => Str::uuid(),
             'division_id' => 40,
             'code' => 'NO 40255',
             'sub_division_name_en' => 'BALIKUMBAT',
@@ -2091,6 +2351,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 256,
+              'uuid' => Str::uuid(),
             'division_id' => 40,
             'code' => 'NO 40256',
             'sub_division_name_en' => 'NDOP',
@@ -2099,6 +2360,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 257,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41257',
             'sub_division_name_en' => 'MBOUDA',
@@ -2107,6 +2369,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 258,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41258',
             'sub_division_name_en' => 'GALIM',
@@ -2115,6 +2378,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 259,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41259',
             'sub_division_name_en' => 'BATCHAM',
@@ -2123,6 +2387,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 260,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41260',
             'sub_division_name_en' => 'BABADJOU',
@@ -2131,6 +2396,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 261,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41261',
             'sub_division_name_en' => 'BAFANG',
@@ -2139,6 +2405,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 262,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41262',
             'sub_division_name_en' => 'BANA',
@@ -2147,6 +2414,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 263,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41263',
             'sub_division_name_en' => 'BANDJA',
@@ -2155,6 +2423,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 264,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41264',
             'sub_division_name_en' => 'KEKEM',
@@ -2163,6 +2432,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 265,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41265',
             'sub_division_name_en' => 'BAKOU',
@@ -2171,6 +2441,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 266,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41266',
             'sub_division_name_en' => 'BANKA',
@@ -2179,6 +2450,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 267,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41267',
             'sub_division_name_en' => 'BANWA',
@@ -2187,6 +2459,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 268,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41268',
             'sub_division_name_en' => 'BAHAM',
@@ -2195,6 +2468,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 269,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41269',
             'sub_division_name_en' => 'BAMENDJOU',
@@ -2203,6 +2477,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 270,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41270',
             'sub_division_name_en' => 'BANGOU',
@@ -2211,6 +2486,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 271,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41271',
             'sub_division_name_en' => 'BATIE',
@@ -2219,6 +2495,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 272,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41272',
             'sub_division_name_en' => 'POUMOUGNE',
@@ -2227,6 +2504,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 273,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41273',
             'sub_division_name_en' => 'BAYANGAM',
@@ -2235,6 +2513,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 274,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41274',
             'sub_division_name_en' => 'DJEBEM',
@@ -2243,6 +2522,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 275,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41275',
             'sub_division_name_en' => 'DSCHANG',
@@ -2251,6 +2531,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 276,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41276',
             'sub_division_name_en' => 'PENKA-MICHEL',
@@ -2259,6 +2540,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 277,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41277',
             'sub_division_name_en' => 'FOKOUE',
@@ -2267,6 +2549,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 278,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41278',
             'sub_division_name_en' => 'NKONG-NI',
@@ -2275,6 +2558,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 279,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41279',
             'sub_division_name_en' => 'SANTCHOU',
@@ -2283,6 +2567,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 280,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41280',
             'sub_division_name_en' => 'FONGO TONGO',
@@ -2291,6 +2576,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 281,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41281',
             'sub_division_name_en' => 'BAFOUSSAM 1er',
@@ -2299,6 +2585,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 282,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41282',
             'sub_division_name_en' => 'BAFOUSSAM 2e',
@@ -2307,6 +2594,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 283,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41283',
             'sub_division_name_en' => 'BAFOUSSAM 3e',
@@ -2315,6 +2603,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 284,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41284',
             'sub_division_name_en' => 'BAGANGTE',
@@ -2323,6 +2612,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 285,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41285',
             'sub_division_name_en' => 'BAZOU',
@@ -2331,6 +2621,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 286,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41286',
             'sub_division_name_en' => 'TONGA',
@@ -2339,6 +2630,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 287,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41287',
             'sub_division_name_en' => 'BASSAMBA',
@@ -2347,6 +2639,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 288,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41288',
             'sub_division_name_en' => 'FOUMBAN',
@@ -2355,6 +2648,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 289,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41289',
             'sub_division_name_en' => 'FOUMBOT',
@@ -2363,6 +2657,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 290,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41290',
             'sub_division_name_en' => 'MALENTOUEN',
@@ -2371,6 +2666,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 291,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41291',
             'sub_division_name_en' => 'MASSANGAM',
@@ -2379,6 +2675,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 292,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41292',
             'sub_division_name_en' => 'MAGBA',
@@ -2387,6 +2684,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 293,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41293',
             'sub_division_name_en' => 'KOUTABA',
@@ -2395,6 +2693,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 294,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41294',
             'sub_division_name_en' => 'BANGOURAN',
@@ -2403,6 +2702,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 295,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41295',
             'sub_division_name_en' => 'KOUOPTAMO',
@@ -2411,6 +2711,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 296,
+              'uuid' => Str::uuid(),
             'division_id' => 41,
             'code' => 'OU 41296',
             'sub_division_name_en' => 'NJIMON',
@@ -2419,6 +2720,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 297,
+              'uuid' => Str::uuid(),
             'division_id' => 42,
             'code' => 'SU 42297',
             'sub_division_name_en' => 'BENGBIS',
@@ -2427,6 +2729,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 298,
+              'uuid' => Str::uuid(),
             'division_id' => 42,
             'code' => 'SU 42298',
             'sub_division_name_en' => 'DJOUM',
@@ -2435,6 +2738,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 299,
+              'uuid' => Str::uuid(),
             'division_id' => 42,
             'code' => 'SU 42299',
             'sub_division_name_en' => 'SANGMELIMA',
@@ -2443,6 +2747,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 300,
+              'uuid' => Str::uuid(),
             'division_id' => 42,
             'code' => 'SU 42300',
             'sub_division_name_en' => 'ZOETELE',
@@ -2451,6 +2756,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 301,
+              'uuid' => Str::uuid(),
             'division_id' => 42,
             'code' => 'SU 42301',
             'sub_division_name_en' => 'OVENG',
@@ -2459,6 +2765,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         // SubDivision::create([
         //     'id' => 302,
+        //   'uuid' => Str::uuid(),
         //     'division_id' => 42,
         //     'code' => 'SU 42301',
         //     'sub_division_name_en' => 'MINTOM',
@@ -2467,6 +2774,7 @@ class SubDivisionSeeder extends Seeder
         // ]);
         SubDivision::create([
             'id' => 302,
+              'uuid' => Str::uuid(),
             'division_id' => 42,
             'code' => 'SU 42302',
             'sub_division_name_en' => 'MEYOMESSALA',
@@ -2475,6 +2783,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 303,
+              'uuid' => Str::uuid(),
             'division_id' => 42,
             'code' => 'SU 42303',
             'sub_division_name_en' => 'MEYOMESSI',
@@ -2483,6 +2792,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 304,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SU 42304',
             'sub_division_name_en' => 'AMBAM',
@@ -2491,6 +2801,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 305,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SU 42305',
             'sub_division_name_en' => 'MA\'AN',
@@ -2499,6 +2810,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 306,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SU 42306',
             'sub_division_name_en' => 'OLAMZE',
@@ -2507,6 +2819,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 307,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SU 42307',
             'sub_division_name_en' => 'KYE OSSI',
@@ -2515,6 +2828,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         // SubDivision::create([
         //     'id' => 308,
+        //   'uuid' => Str::uuid(),
         //     'division_id' => 44,
         //     'code' => 'SU 42308',
         //     'sub_division_name_en' => 'EBOLOWA 1ER',
@@ -2523,6 +2837,7 @@ class SubDivisionSeeder extends Seeder
         // ]);
         SubDivision::create([
             'id' => 308,
+              'uuid' => Str::uuid(),
             'division_id' => 44,
             'code' => 'SU 42308',
             'sub_division_name_en' => 'EBOLOWA 2E',
@@ -2531,6 +2846,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         // SubDivision::create([
         //     'id' => 309,
+        //   'uuid' => Str::uuid(),
         //     'division_id' => 44,
         //     'code' => 'SU 42309',
         //     'sub_division_name_en' => 'BIWONG-BANE',
@@ -2539,6 +2855,7 @@ class SubDivisionSeeder extends Seeder
         // ]);
         SubDivision::create([
             'id' => 309,
+              'uuid' => Str::uuid(),
             'division_id' => 44,
             'code' => 'SU 42309',
             'sub_division_name_en' => 'MVANGAN',
@@ -2547,6 +2864,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 310,
+              'uuid' => Str::uuid(),
             'division_id' => 44,
             'code' => 'SU 42310',
             'sub_division_name_en' => 'MENGONG',
@@ -2555,6 +2873,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 311,
+              'uuid' => Str::uuid(),
             'division_id' => 44,
             'code' => 'SU 42311',
             'sub_division_name_en' => 'NGOULEMAKONG',
@@ -2563,6 +2882,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 312,
+              'uuid' => Str::uuid(),
             'division_id' => 44,
             'code' => 'SU 42312',
             'sub_division_name_en' => 'EFOULAN',
@@ -2571,6 +2891,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 313,
+              'uuid' => Str::uuid(),
             'division_id' => 44,
             'code' => 'SU 42313',
             'sub_division_name_en' => 'BIWONG BULU',
@@ -2579,6 +2900,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 314,
+              'uuid' => Str::uuid(),
             'division_id' => 44,
             'code' => 'SU 42314',
             'sub_division_name_en' => 'AKOM II',
@@ -2587,6 +2909,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 315,
+              'uuid' => Str::uuid(),
             'division_id' => 44,
             'code' => 'SU 42315',
             'sub_division_name_en' => 'CAMPO',
@@ -2595,6 +2918,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 316,
+              'uuid' => Str::uuid(),
             'division_id' => 44,
             'code' => 'SU 42316',
             'sub_division_name_en' => 'KRIBI 1er',
@@ -2603,6 +2927,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 317,
+              'uuid' => Str::uuid(),
             'division_id' => 44,
             'code' => 'SU 42317',
             'sub_division_name_en' => 'KRIBI 2e',
@@ -2611,6 +2936,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 318,
+              'uuid' => Str::uuid(),
             'division_id' => 44,
             'code' => 'SU 42318',
             'sub_division_name_en' => 'LOLODORF',
@@ -2619,6 +2945,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         // SubDivision::create([
         //     'id' => 319,
+        //   'uuid' => Str::uuid(),
         //     'division_id' => 44,
         //     'code' => 'SU 42319',
         //     'sub_division_name_en' => 'MVENGUE',
@@ -2627,6 +2954,7 @@ class SubDivisionSeeder extends Seeder
         // ]);
         SubDivision::create([
             'id' => 319,
+              'uuid' => Str::uuid(),
             'division_id' => 44,
             'code' => 'SU 42319',
             'sub_division_name_en' => 'BIPINDI',
@@ -2635,6 +2963,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 320,
+              'uuid' => Str::uuid(),
             'division_id' => 44,
             'code' => 'SU 42320',
             'sub_division_name_en' => 'LOKOUNDJE',
@@ -2643,6 +2972,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 321,
+              'uuid' => Str::uuid(),
             'division_id' => 44,
             'code' => 'SU 42321',
             'sub_division_name_en' => 'NIETE',
@@ -2651,6 +2981,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 322,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43322',
             'sub_division_name_en' => 'MUYUKA',
@@ -2659,6 +2990,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 323,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43323',
             'sub_division_name_en' => 'TIKO',
@@ -2667,6 +2999,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 324,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43324',
             'sub_division_name_en' => 'LIMBE 1er',
@@ -2675,6 +3008,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 325,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43325',
             'sub_division_name_en' => 'LIMBE 2e',
@@ -2683,6 +3017,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 326,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43326',
             'sub_division_name_en' => 'LIMBE 3e',
@@ -2691,6 +3026,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 327,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43327',
             'sub_division_name_en' => 'BUEA',
@@ -2699,6 +3035,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 328,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43328',
             'sub_division_name_en' => 'WEST-COAST',
@@ -2707,6 +3044,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 329,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43329',
             'sub_division_name_en' => 'BANGEM',
@@ -2715,6 +3053,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 330,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43330',
             'sub_division_name_en' => 'NGUTI',
@@ -2723,6 +3062,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 331,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43331',
             'sub_division_name_en' => 'TOMBEL',
@@ -2731,6 +3071,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 332,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43332',
             'sub_division_name_en' => 'FONTEM',
@@ -2739,6 +3080,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 333,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43333',
             'sub_division_name_en' => 'ALOU',
@@ -2747,6 +3089,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 334,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43334',
             'sub_division_name_en' => 'WABANE',
@@ -2755,6 +3098,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 335,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43335',
             'sub_division_name_en' => 'AKWAYA',
@@ -2763,6 +3107,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 336,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43336',
             'sub_division_name_en' => 'MAMFE',
@@ -2771,6 +3116,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 337,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43337',
             'sub_division_name_en' => 'EYUMODJOCK',
@@ -2779,6 +3125,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 338,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43338',
             'sub_division_name_en' => 'UPPER-BAYANG',
@@ -2787,6 +3134,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 339,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43339',
             'sub_division_name_en' => 'KUMBA 1er',
@@ -2795,6 +3143,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 340,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43340',
             'sub_division_name_en' => 'KUMBA 2e',
@@ -2803,6 +3152,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 341,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43341',
             'sub_division_name_en' => 'KUMBA 3e',
@@ -2811,6 +3161,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 342,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43342',
             'sub_division_name_en' => 'KONYE',
@@ -2819,6 +3170,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 343,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43343',
             'sub_division_name_en' => 'BONGE',
@@ -2827,6 +3179,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 344,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43344',
             'sub_division_name_en' => 'BAMUSSO',
@@ -2835,6 +3188,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 345,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43345',
             'sub_division_name_en' => 'EKONDO-TITI',
@@ -2843,6 +3197,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 346,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43346',
             'sub_division_name_en' => 'ISANGUELE',
@@ -2851,6 +3206,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 347,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43347',
             'sub_division_name_en' => 'MUNDEMBA',
@@ -2859,6 +3215,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 348,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43348',
             'sub_division_name_en' => 'KOMBO ABEDIMO',
@@ -2867,6 +3224,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 349,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43349',
             'sub_division_name_en' => 'KOMBO IDINTI',
@@ -2875,6 +3233,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 350,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43350',
             'sub_division_name_en' => 'IDABATO',
@@ -2883,6 +3242,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 351,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43351',
             'sub_division_name_en' => 'DIKOME-BALUE',
@@ -2891,6 +3251,7 @@ class SubDivisionSeeder extends Seeder
         ]);
         SubDivision::create([
             'id' => 352,
+              'uuid' => Str::uuid(),
             'division_id' => 43,
             'code' => 'SO 43352',
             'sub_division_name_en' => 'TOKO',

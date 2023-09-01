@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Charge;
+use App\Models\Traits\HasUUID;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use App\Models\Lotissements\Parcel;
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class TitreFoncier extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes, InteractsWithMedia;
+    use HasFactory, SoftDeletes, InteractsWithMedia, HasUUID;
 
     public $guarded = [];
 

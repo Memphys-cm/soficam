@@ -2,8 +2,9 @@
 
 namespace App\Models\Lotissements;
 
-use App\Models\Lotissements\Parcel;
 use App\Models\TitreFoncier;
+use App\Models\Traits\HasUUID;
+use App\Models\Lotissements\Parcel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Lotissement extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUUID;
 
     public $guarded = [];
 

@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Models\Cabinet;
+use App\Models\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MembreDuCabinet extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUUID;
     protected $table = 'membre_du_cabinets';
 
     protected $guarded = [];

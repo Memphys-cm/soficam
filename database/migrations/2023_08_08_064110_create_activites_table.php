@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('activites', function (Blueprint $table) {
             $table->id();
+           $table->uuid('uuid')->unique()->index();
             $table->foreignId('category_activite_id')->index();
             $table->string('nom_activite');
             $table->enum('type_de_facturation',['value','percentage','per_m2']);

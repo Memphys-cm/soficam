@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\TitreFoncier;
+use App\Models\Traits\HasUUID;
 use App\Models\MembreDuCabinet;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
@@ -19,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Operation extends Model implements  HasMedia
 {
-    use HasFactory, SoftDeletes, InteractsWithMedia;
+    use HasFactory, SoftDeletes, InteractsWithMedia, HasUUID;
 
     public $guarded = [];
 

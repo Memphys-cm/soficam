@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('lotissements', function (Blueprint $table) {
             $table->id();
+           $table->uuid('uuid')->unique()->index();
             $table->string('code');
             $table->foreignId('titre_foncier_id')->index()->constrained('titre_fonciers')->default(1);
             $table->foreignId('geometre_id')->constrained('membre_du_cabinets')->nullable();

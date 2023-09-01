@@ -68,16 +68,15 @@ class Index extends Component
             ]);
 
             // Create the Saleable item using only the specified information
-            $saleableData = [
+            Saleable::create([
                 'sale_id' => $sale->id,
                 'price' => $this->price,
                 'quantity' => 1,
                 'saleable_id' => $bien_immobilier->id,
                 'saleable_type' => 'bien_immobilier', // Adjust the namespace if different
                 'created_by' => auth()->user()->name,
-            ];
+            ]);
 
-            DB::table('saleables')->insert($saleableData);
         });
        
         $this->clearFields();

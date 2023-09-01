@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('category_activites', function (Blueprint $table) {
             $table->id();
+           $table->uuid('uuid')->unique()->index();
             $table->string('annee_loi_fin')->nullable();
             $table->string('grand_section')->nullable();
             $table->string('nom_category')->nullable();

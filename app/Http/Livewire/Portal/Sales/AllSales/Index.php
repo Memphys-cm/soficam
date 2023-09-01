@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Portal\Sales\AllSales;
 
+use App\Models\User;
+use App\Models\Receipt;
 use Livewire\Component;
 use App\Models\Operation;
 use App\Models\Sales\Sale;
@@ -10,9 +12,8 @@ use App\Models\Sales\Saleable;
 use App\Models\ReleveImmobilier;
 use Illuminate\Support\Facades\DB;
 use App\Models\CertificatePropriete;
-use App\Http\Livewire\Traits\WithDataTables;
 use App\Models\ImmatriculationDirecte;
-use App\Models\Receipt;
+use App\Http\Livewire\Traits\WithDataTables;
 use Hachther\MeSomb\Operation\Payment\Collect;
 
 class Index extends Component
@@ -21,49 +22,57 @@ class Index extends Component
     public ?Sale $sale;
     public ?Saleable $saleable;
     public $allsales, $allsalesId, $sales_amount, $sales_code, $payment_method, $payment_status, $commentaires;
-    public $sales_type, $payment_number;
+    public $sales_type, $payment_number, $requestor_id, $requestors;
 
     public function initData($id)
     {
         $sale = Sale::findOrFail($id);
         $this->sale = $sale;
         $this->saleable = $sale->saleables()->first();
+        $this->sales_type =  $sale->sales_type;
         $this->sales_amount = number_format($sale->sales_amount);
+        // dd($this->sales_type);
     }
 
     public function updatedPaymentMethod($type)
     {
-        if($type !== 'cash'){
-            $this->payment_number = $this->sale->user->primary_phone_number;
-        }else{
-            $this->payment_number = null; 
+        if ($this->sale && $this->sale->user) {
+            if ($type !== 'cash') {
+                $this->payment_number = $this->sale->user->primary_phone_number;
+            } else {
+                $this->payment_number = null;
+            }
         }
     }
 
-    public function mount(){
+    public function mount()
+    {
         $this->allsales = Sale::all();
+        $this->requestors = User::role('user')->select('id', 'first_name', 'last_name')->get();
     }
 
-    public function payment(){
+    public function payment()
+    {
 
         $this->validate([
             'payment_method' => 'required',
             'sales_amount' => 'required',
+            'requestor_id' => 'nullable',
             'payment_number' => 'required_if:payment_method,mtn_mobile_money,orange_money'
-        ]);    
+        ]);
 
         DB::transaction(function () {
 
-            if($this->payment_method !== 'cash'){
+            if ($this->payment_method !== 'cash') {
                 try {
-                    
+
                     $request = new Collect($this->payment_number, $this->sale->sales_amount, $this->payment_method == 'mtn_mobile_money' ? 'MTN' : 'ORANGE', 'CM');
-    
+
                     $payment = $request->pay();
-    
+
                     if (!$payment->success) {
                         return;
-                    } 
+                    }
                 } catch (\Throwable $th) {
                     throw $th;
                 }
@@ -73,6 +82,8 @@ class Index extends Component
                 'payment_status' => 'totally_paid',
                 'payment_number' => $this->payment_number,
                 'payment_method' => $this->payment_method,
+                'user_id' => $this->requestor_id,
+
             ]);
 
 
@@ -81,24 +92,23 @@ class Index extends Component
             // 2. Query and get the instance of the saleable item class
             // 3. Update the status of this item.
 
-           $saleable_item =  Saleable::findOrFail($this->saleable->id);
+            $saleable_item =  Saleable::findOrFail($this->saleable->id);
 
-           match ($saleable_item->saleable_type){
-                'App\Models\EtatCession'  => optional(EtatCession::whereId($saleable_item->saleable_id))->update(['status'=> 'paid']),
-                'App\Models\CertificatePropriete'  => optional(CertificatePropriete::whereId($saleable_item->saleable_id))->update(['status'=> 'active']),
-                'App\Models\Operation'  => optional(Operation::whereId($saleable_item->saleable_id))->update(['statut_conservateur'=> 'ongoing']),
-                'App\Models\ImmatriculationDirecte'  => optional(ImmatriculationDirecte::whereId($saleable_item->saleable_id))->update(['status_ordre_versement'=> 'done' , 'statut' => 'Ordre de Versement Payer', 'next_step' => 'Preparation Avis Au publique']),
+            match ($saleable_item->saleable_type) {
+                'App\Models\EtatCession'  => optional(EtatCession::whereId($saleable_item->saleable_id))->update(['status' => 'paid']),
+                'App\Models\CertificatePropriete'  => optional(CertificatePropriete::whereId($saleable_item->saleable_id))->update(['status' => 'active']),
+                'App\Models\Operation'  => optional(Operation::whereId($saleable_item->saleable_id))->update(['statut_conservateur' => 'ongoing']),
+                'App\Models\ImmatriculationDirecte'  => optional(ImmatriculationDirecte::whereId($saleable_item->saleable_id))->update(['status_ordre_versement' => 'done', 'statut' => 'Ordre de Versement Payer', 'next_step' => 'Preparation Avis Au publique']),
                 default => ''
-           };
+            };
 
-           // save receipt
+            // save receipt
 
-           Receipt::create([
+            Receipt::create([
                 'receipt_code' => $this->sale->sales_code,
                 'sale_id' => $this->sale->id,
                 'receveur_id' => auth()->user()->id,
-           ]);
-
+            ]);
         });
 
         $this->refresh(__('Sales Updated Created!'), 'updatePaySaleModal');
@@ -120,10 +130,8 @@ class Index extends Component
     {
         if ($this->allsales) {
             $this->allsales->delete();
-           
         }
         $this->refresh(__('Sale deleted successfully'), 'DeleteModal');
-
     }
 
     public function render()
@@ -132,6 +140,6 @@ class Index extends Component
         $allsaless = Sale::search($this->query)->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
 
         $allsales_count = Sale::count();
-        return view('livewire..portal.sales.all-sales.index', ['allsaless'=>$allsaless, 'allsales_count'=>$allsales_count]);
+        return view('livewire..portal.sales.all-sales.index', ['allsaless' => $allsaless, 'allsales_count' => $allsales_count]);
     }
 }

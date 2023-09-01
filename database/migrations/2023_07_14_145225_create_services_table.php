@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
+           $table->uuid('uuid')->unique()->index();
             $table->string('code');
             $table->string('service_name_en')->index();
             $table->string('service_name_fr')->index();
