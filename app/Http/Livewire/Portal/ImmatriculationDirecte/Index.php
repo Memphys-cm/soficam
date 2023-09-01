@@ -146,6 +146,13 @@ class Index extends Component
                     'date_calendrier_descente' => $this->date_status,
                 ]);
             });
+        } else if($imma_directe->next_step == "traitement du dossiser vise-enregistre"){
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => 'Dossier publié au bulletin des avis domaniaux et fonciers',
+                    'next_step' => 'Achat des bulletins',
+                ]);
+            });
         }
 
         $this->refresh(__('Statut Modifier Avec SUCCES!'), 'EditStatutModal');
@@ -403,13 +410,6 @@ class Index extends Component
 
     public function convocation()
     {
-
-        // $this->validate([
-        //     'date_debut' => 'required',
-        //     'date_fin' => 'required',
-        // ]);
-
-
         DB::transaction(function () {
             $this->imma_directe->update([
                 'date_convocation' => $this->date_convocation,
@@ -453,8 +453,6 @@ class Index extends Component
             __('Message_Porté-').Str::random('10') . ".pdf"
         );
     }
-
-
 
     public function clearFields()
     {
