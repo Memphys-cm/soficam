@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('titre_fonciers', function (Blueprint $table) {
             $table->id();
+           $table->uuid('uuid')->unique()->index();
             $table->string('numero_titre_foncier')->index();
             $table->date('date_de_delivrance_du_TF');
             $table->string('numero_du_duplicata')->nullable();
@@ -27,7 +28,7 @@ return new class extends Migration
             $table->string('superficie_du_TF_mere');
             $table->string('superficie_vendue_du_TF_mere')->nullable();
             $table->string('superficie_restant_du_TF_mere')->nullable();
-            $table->enum('etat_TF',['HYPOTHEQUE', 'DISPONIBLE', 'PRENOTE','SUSPENDU']);
+            $table->enum('etat_TF',['HYPOTHEQUE', 'DISPONIBLE', 'PRENOTE','SUSPENDU', 'RETRAIT', 'ANNULATION']);
             $table->enum('etat_terrain',['batit','non_batit']);
             $table->string('provenance_TF');
             $table->string('numero_bordereau_analytique')->nullable();

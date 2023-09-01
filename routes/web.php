@@ -107,6 +107,7 @@ Route::group(
         Route::prefix('operations')->group(function () {
             Route::get('mutation-totale', App\Http\Livewire\Portal\Operations\MutationTotale\Index::class)->name('portal.mutation-totale.index');
             Route::get('morcellements', App\Http\Livewire\Portal\Operations\Morcellements\Index::class)->name('portal.morcellements.index');
+            Route::get('retrait-indivisions', App\Http\Livewire\Portal\Operations\RetraitIndivision\Index::class)->name('portal.retrait-indivisions.index');
             Route::get('/{operation_id}/details', App\Http\Livewire\Portal\Operations\Partials\OpsDetails::class)->name('portal.operations.details');
         });
 
@@ -134,8 +135,8 @@ Route::group(
             Route::get('/{lotissement_id}/edit', App\Http\Livewire\Portal\Lotissements\Edit::class)->name('portal.lotissements.edit');
             Route::get('/{lotissement_id}/simple-sale', App\Http\Livewire\Portal\Lotissements\Sale::class)->name('portal.lotissements.simple-sale');
         });
-        Route::prefix('etat_cessions')->group(function () {
-            Route::get('/', App\Http\Livewire\Portal\EtatCession\Index::class)->name('portal.state_assignments.index');
+        Route::prefix('etat-cessions')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\EtatCession\Index::class)->name('portal.etat-cession.index');
         });
 
         Route::prefix('immatriculation_directes')->group(function () {

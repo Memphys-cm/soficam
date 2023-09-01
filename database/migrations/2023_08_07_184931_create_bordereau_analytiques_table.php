@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('bordereau_analytiques', function (Blueprint $table) {
             $table->id();
+           $table->uuid('uuid')->unique()->index();
             $table->string('numero_bordereau_analytique')->default(Str::upper(Str::random(7)) . "" . now()->format('msu'));
             $table->string('volume_du_bordereau_analytique')->nullable();
             $table->date('date_detablissement_du_bordereau_analytique')->nullable();

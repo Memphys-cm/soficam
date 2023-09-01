@@ -46,15 +46,15 @@
             </div>
             <div class="d-flex justify-content-between mb-2">
 
-                @can('morcellement.create')
+                @can('operation.morcellement.create')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateMorcellementNormaleModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{__('New')}}
                 </a>
                 @endcan
-                @can('morcellement.forcee')
-                {{-- @livewire('portal.operations.morcellements.partials.create-morcellement-forcee') --}}
+                @can('operation.morcellement.forcee')
+                 @livewire('portal.operations.morcellements.partials.create-morcellement-forcee') 
                 @endcan
             </div>
         </div>
@@ -104,7 +104,7 @@
                         <th class="border-bottom">{{__('Statut')}}</th>
                         <th class="border-bottom">{{__('Type Operation')}}</th>
                         <th class="border-bottom">{{__('Date creation')}}</th>
-                        @canany('morcellement.update','morcellement.delete')
+                        @canany('operation.morcellement.update','operation.morcellement.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
                         @endcanany
                     </tr>
@@ -162,9 +162,9 @@
                         <td>
                             <span class="fw-normal">{{$morcellement->created_at->format('Y-m-d')}}</span>
                         </td>
-                        @canany('morcellement.update','morcellement.delete')
+                        @canany('operation.morcellement.update','operation.morcellement.delete')
                         <td>
-                            @can('morcellement.update')
+                            @can('operation.morcellement.update')
                             <div class="btn-group">
                                 <a href="" class="text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <svg class="icon icon-sm text-info" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -205,7 +205,7 @@
                             </div>
 
                             @endcan
-                            @can('morcellement.delete')
+                            @can('operation.morcellement.delete')
                             <a href="#" wire:click.prevent="initData({{$morcellement->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
                                 <svg class="icon icon-sm text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>

@@ -5,6 +5,7 @@ namespace App\Models\Lotissements;
 use App\Models\User;
 use App\Models\Division;
 use App\Models\TitreFoncier;
+use App\Models\Traits\HasUUID;
 use App\Models\MembreDuCabinet;
 use App\Models\Lotissements\Block;
 use App\Models\Lotissement\Lotissement;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Parcel extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUUID;
 
     public $guarded = [];
 

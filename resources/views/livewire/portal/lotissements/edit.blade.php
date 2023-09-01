@@ -158,12 +158,11 @@
                     </div>
                     @foreach($blocks as $blockIndex => $block)
                     <fieldset class="border p-3 mb-3 rounded">
-                        <legend class="w-auto">{{ $block['block_name'] }}</legend>
                         <div class='d-flex justify-content-between align-items-end'>
                             <div class="form-group ">
                                 <div class=''>
-                                    <label for="blockName">{{__('Bloc')}} {{$blockIndex+1 }} {{__('Nom')}}</label>
-                                    <input type="text" class="form-control px-4  @error('blocks.{{ $blockIndex }}.block_name') is-invalid @enderror" wire:model="blocks.{{ $blockIndex }}.name" width="5rem;" placeholder="{{'Block No. '.$blockIndex+1}}">
+                                    <label for="blockName">{{__('Nom')}} {{__('Du')}} {{__('Bloc')}} {{$blockIndex+1 }} </label>
+                                    <input type="text" class="form-control  @error('blocks.{{ $blockIndex }}.block_name') is-invalid @enderror" wire:model="blocks.{{ $blockIndex }}.block_name" placeholder="{{'Block No. '.$blockIndex+1}}">
                                     @error('blocks.$blockIndex.block_name')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

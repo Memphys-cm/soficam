@@ -26,7 +26,8 @@ class AddSalesData extends Component
 
     public function store()
     {
-        if (!Gate::allows('mutation_totale.create')) {
+        if
+        (!Gate::allows('operation.mutation_totale.create') || !Gate::allows('operation.retrait_indivision.create') || !Gate::allows('operation.morcellement.create')) {
             return abort(401);
         }
 
@@ -71,7 +72,6 @@ class AddSalesData extends Component
             'commentaires',
         ]);
     }
-
 
     public function render()
     {

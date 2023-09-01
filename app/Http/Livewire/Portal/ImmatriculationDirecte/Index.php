@@ -4,19 +4,20 @@ namespace App\Http\Livewire\Portal\ImmatriculationDirecte;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Region;
 use App\Models\Service;
 use Livewire\Component;
+use Twilio\Rest\Client;
+use App\Models\Division;
 use App\Models\Sales\Sale;
 use App\Models\SubDivision;
 use Illuminate\Support\Str;
 use App\Models\TitreFoncier;
-use App\Models\Region;
-use App\Models\Division;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use App\Models\ImmatriculationDirecte;
 use App\Http\Livewire\Traits\WithDataTables;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class Index extends Component
 {
@@ -26,14 +27,15 @@ class Index extends Component
     // public ImmatriculationDirecte $imma_directe;
     public $imma_directe;
 
-    public $state = 0, $price_m2, $users, $user_id, $user_ids, $comissions = [] , $localisation;
-    public $attachements , $services , $service_id , $observation , $montant_ordre_versement;
+    public $state = 0, $price_m2, $users, $user_id, $user_ids, $comissions = [], $localisation;
+    public $attachements, $services, $service_id, $observation, $montant_ordre_versement;
     public $region_id;
     public $division_id;
     public $sub_division_id;
     public $regions;
     public $divisions = [];
     public $sub_divisions = [];
+  
     public $date_debut , $date_fin;
     public $date_convocation , $superficie , $status , $date_status;
     public $geometre_id , $geometres;
@@ -45,10 +47,7 @@ class Index extends Component
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
-        $this->geometres = User::with(['roles' => function ($role) {
-            return $role->whereIn('name', ['geometre'])->get();
-        }])->get();
-        $this->services = Service::select('id','service_name_fr')->get();
+        $this->services = Service::select('id', 'service_name_fr')->get();
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
     }
 
@@ -82,51 +81,45 @@ class Index extends Component
         $imma = $this->imma_directe;
         // dd($imma->next_step);
         $this->state = 1;
-        if($imma->next_step === "Avis Au publique En attente de signature"){
-            // dd('enter');
-            $this->status = 'Avis Publique Signer';
-        }else if($imma->next_step === "signature decision portant calendrier de descente"){
-            // dd('enter');
-            $this->status = 'Decision portant calendrier de descente Signer';
-        }
     }
 
     public function store()
     {
-        if (!Gate::allows('lotissement.create') ) {
+        if (!Gate::allows('lotissement.create')) {
             return abort(401);
         }
 
         $this->validate([
             'localisation' => 'required',
         ]);
-        
-       $imma_directe = ImmatriculationDirecte::create([
-        'reference' => Str::upper(Str::random(7)) . "" . now()->format('msu'),
-        'superficie' => $this->superficie,
-        'localisation' => $this->localisation,
-        'region_id' => $this->region_id,
-        'division_id' => $this->division_id,
-        'sub_division_id' => $this->sub_division_id,
-        'statut' => 'Dossier Ouvert',
-        'next_step' => 'Cotation du Dossier au CSDAF',
-        'StatutStyle' => 'info',
-        // 'comissions' => json_encode($this->comissions),
-       ]);
+
+        $imma_directe = ImmatriculationDirecte::create([
+            'reference' => Str::upper(Str::random(7)) . "" . now()->format('msu'),
+            'superficie' => $this->superficie,
+            'localisation' => $this->localisation,
+            'region_id' => $this->region_id,
+            'division_id' => $this->division_id,
+            'sub_division_id' => $this->sub_division_id,
+            'statut' => 'Dossier Ouvert',
+            'next_step' => 'Cotation du Dossier au CSDAF',
+            'StatutStyle' => 'info',
+            // 'comissions' => json_encode($this->comissions),
+        ]);
 
 
-       $imma_directe->users()->sync($this->user_ids);
+        $imma_directe->users()->sync($this->user_ids);
 
-       if(!empty($this->attachements)){
-            $imma_directe->addMedia($this->attachements->getRealPath())
-            ->usingName($imma_directe->reference)
-            ->toMediaCollection('immadirectes');
+        if (!empty($this->attachements)) {
+            foreach ($this->attachements as $attachment) {
+                $imma_directe->addMedia($this->attachement->getRealPath())
+                    ->usingName($imma_directe->reference)
+                    ->toMediaCollection('immadirectes');
+            }
         }
 
         $this->clearFields();
 
         $this->refresh(__('Dossier D\'Immatriculation Directe Creer Avec SUCCES'), 'CreateImmaDirecteModal');
-
     }
 
     public function edit_statut()
@@ -164,8 +157,8 @@ class Index extends Component
             'service_id' => 'required',
             'user_id' => 'required',
         ]);
-        
-       
+
+
         DB::transaction(function () {
             $this->imma_directe->update([
                 'service_id' => $this->service_id,
@@ -198,7 +191,7 @@ class Index extends Component
         $numeroFormate = str_pad($nouveauNumero, 7, '0', STR_PAD_LEFT);
 
         // Concatène "TF" et le numéro formate pour obtenir le code unique
-        $codeUnique =  $numeroFormate."Y.30"."/MINCAF/41/T400";
+        $codeUnique =  $numeroFormate . "Y.30" . "/MINCAF/41/T400";
 
         return $codeUnique;
     }
@@ -208,8 +201,8 @@ class Index extends Component
         $this->validate([
             'montant_ordre_versement' => 'required',
         ]);
-        
-       
+
+
         DB::transaction(function () {
             $this->imma_directe->update([
                 'numero_ordre_versement' => $this->genererNumeroVersement(),
@@ -224,6 +217,7 @@ class Index extends Component
 
         $sale = Sale::create([
             // 'user_id' => $this->requestor_id,
+            'sales_code' => $this->imma_directe->numero_ordre_versement,
             'sales_amount' => $this->montant_ordre_versement,
             'sales_type' => 'ordre_versement_imma_directe',
             'created_by' => auth()->user()->name,
@@ -241,30 +235,47 @@ class Index extends Component
 
         DB::table('saleables')->insert($saleableData);
 
-        // $this->printPdf();
 
         $this->refresh(__('Ordre de Versement Enregistrer Avec SUCCES!'), 'OrdreVersementImmaDirecteModal');
 
         $this->clearFields();
     }
-
-    public function printPdf()
+    public function  ordreDeVersementPdf($id)
     {
-        // $ordre = ImmatriculationDirecte::findOrFail($id);
+        $this->imma_directe = ImmatriculationDirecte::findOrFail($id);
         $data = [
-            'ordre' => $this->imma_directe,
-            // Autres données que vous souhaitez afficher dans la vue
+            'imma_directe' => $this->imma_directe,
         ];
 
-        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.ordre-versement'
-        // ,$data
-        )->setPaper('a4', 'portrait');
-
-
+        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.ordre-versement', $data)->setPaper('a4', 'portrait');
         return response()->streamDownload(
             fn () => print($pdf->output()),
-            __('OrdreVersement-') . Str::random('10') . ".pdf"
+            __('OrdreDeVersement') . Str::random('10') . ".pdf"
         );
+
+    }
+    public function  printAvisPdf($id)
+    {
+        $this->imma_directe = ImmatriculationDirecte::findOrFail($id);
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'date_avis_publique' => now(),
+                'statut' => 'Avis au public établir en attente de signature',
+                'next_step' => 'Avis Au publique En attente de signature',
+            ]);
+        });
+        
+        $data = [
+            'imma_directe' => $this->imma_directe,
+
+        ];
+
+        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.avis_publique', $data)->setPaper('a4', 'portrait');
+        return response()->streamDownload(
+            fn () => print($pdf->output()),
+            __('Avis Au Public') . Str::random('10') . ".pdf"
+        );
+
     }
 
     public function quitance_geometre()
@@ -347,7 +358,7 @@ class Index extends Component
         $this->emitUp('flow_updated');
         
         $this->clearFields();
-        $this->refresh(__('Pv de Bornage Enregistrer Avec Suceess'), 'PvBornageModal');
+        $this->refresh(__('Dossier Administratif Mise En Forme Avec Suceess'), 'DossierAdministratifModal');
     }
 
     public function certificat_affichage()
@@ -356,12 +367,12 @@ class Index extends Component
             'date_debut' => 'required',
             'date_fin' => 'required',
         ]);
-        
-       
+
+
         DB::transaction(function () {
             $this->imma_directe->update([
-                'date_debut_certificat_d\'affichage' => $this->date_debut,
-                'date_fin_certificat_d\'affichage' => $this->date_fin,
+                'date_debut_certificat_affichage' => $this->date_debut,
+                'date_fin_certificat_affichage' => $this->date_fin,
                 'status_certificat_d\'affichage' => 'done',
                 'statut' => 'Certificat D\'affichage Effectuer',
                 'next_step' => 'Convocation D\'invitation sur Le Terrain',
@@ -372,31 +383,76 @@ class Index extends Component
 
         $this->clearFields();
 
+
+        $data = [
+            'imma_directe' => $this->imma_directe,
+            // Autres données que vous souhaitez afficher dans la vue
+        ];
+        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.certificat_affichage',
+        $data)->setPaper('a4', 'portrait');
+
+        return response()->streamDownload(
+            fn () => print($pdf->output()),
+            __('Certificat_Affichage-') . Str::random('10') . ".pdf"
+        );
+
+
     }
+
 
     public function convocation()
     {
+
         // $this->validate([
         //     'date_debut' => 'required',
         //     'date_fin' => 'required',
         // ]);
-        
-       
+
+
         DB::transaction(function () {
             $this->imma_directe->update([
                 'date_convocation' => $this->date_convocation,
                 'comissions' => json_encode($this->comissions),
                 'status_convocation' => 'done',
+
                 'statut' => 'Convocationsur le Terrain Effectuer',
                 'next_step' => 'Etablissement Etat de Cession',
             ]);
         });
-
-        $this->refresh(__('Certificat Imprimr Avec SUCCES!'), 'ConvocationImmaDirecteModal');
+        $this->refresh(__('Convocation imprimée Avec SUCCES!'), 'ConvocationImmaDirecteModal');
 
         $this->clearFields();
+
+        $sid='ACa77985267946bd8e613944d40b9d0458';
+        $token='b7b84303df6a21c3d6f9b32d3d678103';
+        $twilio = new Client($sid, $token);
+
+        $messageBody = "Hello, le message porté est disponible.";
+
+        $twilio->messages->create(
+            '+237672959097',
+            [
+                'from' => '+15856393680',
+                'body' => $messageBody,
+            ]
+        );
+
+
+        $data = [
+            'imma_directe' => $this->imma_directe,
+            'comissions' => $this->comissions
+        ];
+
+        dd($this->imma_directe, $this->comissions);
+        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.message-porte', 
+        $data)->setPaper('a4', 'portrait');
+
+        return response()->streamDownload(
+            fn () => print($pdf->output()),
+            __('Message_Porté-').Str::random('10') . ".pdf"
+        );
     }
-    
+
 
 
     public function clearFields()

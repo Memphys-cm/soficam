@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\TitreFoncier;
+use App\Models\Traits\HasUUID;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Charge extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use HasFactory, InteractsWithMedia, HasUUID;
 
     protected $guarded = [];
 
@@ -36,6 +37,8 @@ class Charge extends Model implements HasMedia
             'DISPONIBLE' => 'success',
             'PRENOTE' => 'secondary',
             'SUSPENDU' => 'danger',
+            'ANNULATION' => 'warning',
+            'RETRAIT' => 'success',
             NULL => ''
         };
     }

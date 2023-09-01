@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Sales\Sale;
+use Illuminate\Support\Str;
 use App\Models\TitreFoncier;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
@@ -23,6 +24,7 @@ class CertificateProprieteSeeder extends Seeder
         for ($i = 0; $i < 25; $i++) {
 
             $certificat_pro = CertificatePropriete::create([
+                'uuid' => Str::uuid(),
                 'titre_foncier_id' => TitreFoncier::pluck('id')->shuffle()->first(),
                 'certificate_proprietes_type' => collect(['personne_morale', 'personne_physique'])->random(),
                 'certificate_propriete_reason' => fake()->sentence(20),
@@ -35,6 +37,7 @@ class CertificateProprieteSeeder extends Seeder
             ]);
 
             $sale = Sale::create([
+                'uuid' => Str::uuid(),
                 'user_id' => $certificat_pro->requestor_id,
                 'sales_amount' => $certificat_pro->price,
                 'sales_type' => 'certificate_propriete',
@@ -43,6 +46,7 @@ class CertificateProprieteSeeder extends Seeder
 
             // Create the Saleable item using only the specified information
             $saleableData = [
+                'uuid' => Str::uuid(),
                 'sale_id' => $sale->id,
                 'price' => $certificat_pro->price,
                 'quantity' => 1,

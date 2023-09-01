@@ -11,6 +11,7 @@ use App\Models\MembreDuCabinet;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Livewire\Traits\WithDataTables;
+use App\Models\Sales\Saleable;
 
 class AddPaymentData extends Component
 {
@@ -31,7 +32,8 @@ class AddPaymentData extends Component
 
     public function store()
     {
-        if (!Gate::allows('mutation_totale.create')) {
+        if
+        (!Gate::allows('operation.mutation_totale.create') || !Gate::allows('operation.retrait_indivision.create') || !Gate::allows('operation.morcellement.create')) {
             return abort(401);
         }
 
@@ -62,16 +64,14 @@ class AddPaymentData extends Component
                 ]);
 
                 // Create the Saleable item using only the specified information
-                $saleableData = [
+                Saleable::create([
                     'sale_id' => $sale->id,
                     'price' => $this->operation->prix,
                     'quantity' => 1,
                     'saleable_id' => $this->operation->id,
                     'saleable_type' => 'App\Models\Operation', // Adjust the namespace if different
                     'created_by' => auth()->user()->name,
-                ];
-
-                DB::table('saleables')->insert($saleableData);
+                ]);
             });
 
             $this->emitUp('flow_updated');

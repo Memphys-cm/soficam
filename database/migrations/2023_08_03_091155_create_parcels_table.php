@@ -14,6 +14,7 @@ return new class extends Migration
         
         Schema::create('parcels', function (Blueprint $table) {
             $table->id();
+           $table->uuid('uuid')->unique()->index();
             $table->foreignId('lotissement_id')->on('lotissements')->nullable()->index();
             $table->foreignId('titre_foncier_id')->on('titre_fonciers')->index();
             $table->foreignId('block_id')->on('blocks')->nullable()->index();

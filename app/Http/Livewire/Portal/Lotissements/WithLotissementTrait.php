@@ -14,7 +14,7 @@ trait WithLotissementTrait
     public $lot_geometre_id, $cabinet_lot_geometre_id;
     public String $promo_imo, $maeture, $lotisseur,  $agent_imo, $controlleur, $urbaniste;
     public $blocks = [], $blocks_delete;
-    public $newBlockName = '';
+    public $newBlockName;
     public $newLot = [
         'id'=> '',
         'type' => '',

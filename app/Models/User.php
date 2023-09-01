@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Models\Sales\Sale;
 use Illuminate\Support\Str;
 use App\Models\TitreFoncier;
+use App\Models\Traits\HasUUID;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\CertificatePropriete;
 use App\Models\ImmatriculationDirecte;
@@ -20,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasUUID;
 
     /**
      * The attributes that are mass assignable.

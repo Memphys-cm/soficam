@@ -29,14 +29,14 @@
             </div>
             <div class="d-flex justify-content-between mb-2">
 
-                @can('mutation_totale.create')
+                @can('operation.mutation_totale.create')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateMutationTotaleNormaleModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{__('Nouveau')}}
                 </a>
                 @endcan
-                @can('mutation_totale.create')
+                @can('operation.mutation_totale.create')
                 @livewire('portal.operations.mutation-totale.partials.create-par-deces-form')
                 @endcan
             </div>
@@ -87,7 +87,7 @@
                         <th class="border-bottom">{{__('Statut')}}</th>
                         <th class="border-bottom">{{__('Type Operation')}}</th>
                         <th class="border-bottom">{{__('Date creation')}}</th>
-                        @canany('mutation_totale.update','mutation_totale.delete')
+                        @canany('operation.mutation_totale.update','operation.mutation_totale.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
                         @endcanany
                     </tr>
@@ -145,12 +145,12 @@
                         <td>
                             <span class="fw-normal">{{$mutation_totale->created_at->format('Y-m-d')}}</span>
                         </td>
-                        @canany('mutation_totale.update','mutation_totale.delete')
+                        @canany('operation.mutation_totale.update','operation.mutation_totale.delete')
                         <td class="">
 
                             <div class='d-flex align-items-center justify-content-center'>
 
-                                @can('mutation_totale.update')
+                                @can('operation.mutation_totale.update')
 
                                 @livewire('portal.operations.partials.add-coordinates', ['operation_id' => $mutation_totale->id,'operation_type'=>$mutation_totale->type_operation ], key($mutation_totale->id))
                                 @if($mutation_totale->type_operation === 'mutation_totale_normale')
@@ -160,7 +160,7 @@
                                 @livewire('portal.operations.partials.generate-ba', ['operation_id' => $mutation_totale->id,'operation_type'=>$mutation_totale->type_operation ], key($mutation_totale->id))
 
                                 @endcan
-                                @can('mutation_totale.delete')
+                                @can('operation.mutation_totale.delete')
                                 <a href="#" wire:click.prevent="initData({{$mutation_totale->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
                                     <svg class="icon icon-sm text-danger me-2 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>

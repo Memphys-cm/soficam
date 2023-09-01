@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('titre_foncier_history', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique()->index();
             $table->foreignId('titre_foncier')->index();
             $table->foreignId('requestor_id')->on('users')->index()->nullable();
             $table->foreignId('operation_id')->nullable();

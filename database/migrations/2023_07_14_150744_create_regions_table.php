@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('regions', function (Blueprint $table) {
             $table->id();
+           $table->uuid('uuid')->unique()->index();
             $table->string('code');
             $table->string('region_name_en')->index();
             $table->string('region_name_fr')->index();

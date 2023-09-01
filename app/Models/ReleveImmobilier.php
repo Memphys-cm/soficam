@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Sales\Sale;
 use App\Models\TitreFoncier;
 use App\Models\Sales\Saleable;
+use App\Models\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ReleveImmobilier extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUUID;
 
 
     protected $guarded = []; 

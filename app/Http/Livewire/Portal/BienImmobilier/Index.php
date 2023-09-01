@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Portal\BienImmobilier;
 
 use Carbon\Carbon;
 use App\Models\User;
+use Camoo\Sms\Message;
 use Livewire\Component;
 use App\Models\Sales\Sale;
 use Illuminate\Support\Str;
@@ -12,6 +13,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\ReleveImmobilier;
 use Illuminate\Support\Facades\DB;
 use App\Http\Livewire\Traits\WithDataTables;
+use App\Models\Sales\Saleable;
 
 class Index extends Component
 {
@@ -66,16 +68,15 @@ class Index extends Component
             ]);
 
             // Create the Saleable item using only the specified information
-            $saleableData = [
+            Saleable::create([
                 'sale_id' => $sale->id,
                 'price' => $this->price,
                 'quantity' => 1,
                 'saleable_id' => $bien_immobilier->id,
                 'saleable_type' => 'App\Models\ReleveImmobilier', // Adjust the namespace if different
                 'created_by' => auth()->user()->name,
-            ];
+            ]);
 
-            DB::table('saleables')->insert($saleableData);
         });
        
         $this->clearFields();
@@ -158,43 +159,15 @@ class Index extends Component
     }
 
     public function sms() {
-        $api_key = 'R2FtYXNwZWVkOmg4OEBWNFlUa2ZkZnFwVQ==';
-        $url = 'https://app.techsoft-web-agency.com/sms/api';
-        $from = 'TechSoft-SMS';
-        $destination = '237659351205';
-            
-        $sms = "Hello, has been added to your land title.";
+        $oMessage = Message::create('a0dd1707bbfc53', '1bb897ed3a3afd94bbe15c07210058518e08bb95c68f1d546234606991e951e0');
+        $oMessage->from ='WhatEver'; // will be overridden
+        $oMessage->to = '+237672959097';
+        // This parameter tells our system to use the classic route to send your message.
+        $oMessage->route ='classic';
+        $oMessage->message ='Hello Kmer World! The test is a success!';
+        var_dump($oMessage->send());
 
-        $sms_body = array(
-            'action' => 'send-sms',
-            'api_key' => $api_key,
-            'to' => $destination,
-            'from' => $from,
-            'sms' => $sms
-        );
-        
-        $send_data = http_build_query($sms_body);
-        $gateway_url = $url . "?" . $send_data;
-
-        try {
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $gateway_url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_HTTPGET, 1);
-            $output = curl_exec($ch);
-
-            if (curl_errno($ch)) {
-                $output = curl_error($ch);
-            }
-            curl_close($ch);
-
-            var_dump($output);
-
-        }catch (Exception $exception){
-            echo $exception->getMessage();
-        }
-
-        //dd($sms_body);
+        //dd('sfsfsf');
     }
 
     public function  printPdf($id)
