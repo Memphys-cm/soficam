@@ -3,18 +3,19 @@
 namespace App\Models;
 
 use App\Models\Traits\HasUUID;
+use Spatie\Image\Manipulations;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class ImmatriculationDirecte extends Model
 {
-    use HasFactory, HasUUID;
+    use HasFactory, HasUUID, InteractsWithMedia;
 
     public $guarded = [];
     
