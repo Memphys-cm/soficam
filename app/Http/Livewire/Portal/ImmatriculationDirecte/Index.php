@@ -40,6 +40,21 @@ class Index extends Component
     public $date_convocation , $superficie , $status , $date_status;
     public $geometre_id , $geometres;
     public $attachments , $quitance;
+    public $coordinates = ['', ''];
+    public $coordonnees = [];
+    public $coordonne = [];
+
+    public function addCoordinate()
+    {
+        $this->coordinates[] = [];
+    }
+
+    public function removeCoordinate($coordinateIndex)
+    {
+        unset($this->coordinates[$coordinateIndex]);
+        $this->coordinates = array_values($this->coordinates);
+    }
+
 
     public function mount()
     {
@@ -121,6 +136,11 @@ class Index extends Component
         $this->clearFields();
 
         $this->refresh(__('Dossier D\'Immatriculation Directe Creer Avec SUCCES'), 'CreateImmaDirecteModal');
+    }
+
+    public function dossier_technique()
+    {
+        
     }
 
     public function edit_statut()
