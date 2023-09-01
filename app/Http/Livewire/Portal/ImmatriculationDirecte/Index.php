@@ -140,7 +140,33 @@ class Index extends Component
 
     public function dossier_technique()
     {
+        $coords = [];
+        collect($this->coordonnees)->map(function ($value, $key) {
+            return ['long' => explode(',', $value, 1), 'lat' => explode(',', $value, 2)];
+        });
+
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'coordonnees' => json_encode($this->coordonnees),
+                'statut' => 'Dossier technique créer',
+                'next_step' => 'Descente sur le Terrain',
+                'dossier_technique_created' => Carbon::now()
+            ]);
+        });
+
+        if (!empty($this->attachments)) {
+            foreach ($this->attachments as $attachment) {
+                $this->imma_directe->addMedia($attachment->getRealPath())
+                    ->usingName('Acte Expidition')
+                    ->toMediaCollection('imma_directe_dossier_administratif');
+            }
+        }
+
+        $this->emitUp('flow_updated');
         
+        $this->clearFields();
+        $this->refresh(__('Dossier Technique Enregistrer'), 'DossierTechniqueModal');
+
     }
 
     public function edit_statut()

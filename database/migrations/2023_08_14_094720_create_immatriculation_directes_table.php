@@ -61,6 +61,7 @@ return new class extends Migration
             $table->date('etat_cession_payer')->nullable();
 
             $table->json('coordonnees')->nullable();
+            $table->date('dossier_technique_created')->nullable();
 
 
             $table->timestamps();
