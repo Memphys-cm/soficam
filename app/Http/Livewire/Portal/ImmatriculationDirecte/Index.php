@@ -405,6 +405,52 @@ class Index extends Component
 
         $this->clearFields();
     }
+
+    public function etatDeCession()
+    {
+        $this->validate([
+            'etat_cession' => 'nullable',
+        ]);
+
+
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'numero_ordre_versement' => $this->genererNumeroVersement(),
+                // 'superficie_ordre_versement' => $this->superficie_ordre_versement,
+                'montant_ordre_versement' => $this->montant_ordre_versement,
+                'status_ordre_versement' => 'pending',
+                'statut' => 'Etat de Cesssion en Attente de Paiement',
+                'next_step' => 'Paiement de L\'Etat de Cession',
+                'etat_cession' => Carbon::now(),
+            ]);
+        });
+
+        $sale = Sale::create([
+            // 'user_id' => $this->requestor_id,
+            'sales_code' => $this->imma_directe->numero_ordre_versement,
+            'sales_amount' => $this->montant_ordre_versement,
+            'sales_type' => 'ordre_versement_imma_directe',
+            'created_by' => auth()->user()->name,
+        ]);
+
+        // Create the Saleable item using only the specified information
+        $saleableData = [
+            'sale_id' => $sale->id,
+            'price' => $this->montant_ordre_versement,
+            'quantity' => 1,
+            'saleable_id' => $this->imma_directe->id,
+            'saleable_type' => 'App\Models\ImmatriculationDirecte', // Adjust the namespace if different
+            'created_by' => auth()->user()->name,
+        ];
+
+        DB::table('saleables')->insert($saleableData);
+
+
+        $this->refresh(__('Ordre de Versement Enregistrer Avec SUCCES!'), 'OrdreVersementImmaDirecteModal');
+
+        $this->clearFields();
+    }
+
     public function  ordreDeVersementPdf($id)
     {
         $this->imma_directe = ImmatriculationDirecte::findOrFail($id);
