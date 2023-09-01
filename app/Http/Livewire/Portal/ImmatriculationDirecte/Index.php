@@ -21,6 +21,7 @@ use App\Http\Livewire\Traits\WithDataTables;
 use proj4php\Proj4php;
 use proj4php\Proj;
 use proj4php\Point;
+use App\Models\EtatCession;
 
 class Index extends Component
 {
@@ -58,6 +59,7 @@ class Index extends Component
         $this->coordinates = array_values($this->coordinates);
     }
 
+    public $etat_cession_id;
 
     public function mount()
     {
@@ -68,6 +70,7 @@ class Index extends Component
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
+        // $this->etat_cession = EtatCession::all();
         $this->services = Service::select('id', 'service_name_fr')->get();
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
     }
@@ -408,17 +411,11 @@ class Index extends Component
 
     public function etatDeCession()
     {
-        $this->validate([
-            'etat_cession' => 'nullable',
-        ]);
-
+       
 
         DB::transaction(function () {
             $this->imma_directe->update([
-                'numero_ordre_versement' => $this->genererNumeroVersement(),
-                // 'superficie_ordre_versement' => $this->superficie_ordre_versement,
-                'montant_ordre_versement' => $this->montant_ordre_versement,
-                'status_ordre_versement' => 'pending',
+                'etat_cession_id' => $this->etat_cession_id,
                 'statut' => 'Etat de Cesssion en Attente de Paiement',
                 'next_step' => 'Paiement de L\'Etat de Cession',
                 'etat_cession' => Carbon::now(),
