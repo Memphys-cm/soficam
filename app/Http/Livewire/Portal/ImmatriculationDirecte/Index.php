@@ -39,7 +39,7 @@ class Index extends Component
     public $date_debut , $date_fin;
     public $date_convocation , $superficie , $status , $date_status;
     public $geometre_id , $geometres;
-    public $attachments , $quitance;
+    public $attachments , $quitance, $montant_dossier_vise;
 
     public function mount()
     {
@@ -146,16 +146,58 @@ class Index extends Component
                     'date_calendrier_descente' => $this->date_status,
                 ]);
             });
-        } else if($imma_directe->next_step == "traitement du dossiser vise-enregistre"){
+        } else if($imma->next_step == "valider le paiement"){
             DB::transaction(function () {
                 $this->imma_directe->update([
                     'statut' => 'Dossier publié au bulletin des avis domaniaux et fonciers',
                     'next_step' => 'Achat des bulletins',
+                    'date_publication_dossier_vise' => $this->date_status,
+                ]);
+            });
+        } else if($imma->next_step == 'Bulletins en attente de signature par le délégué'){
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => 'Bulletins signés',
+                    'next_step' => 'Transmission du dossier complet à la Délégation Départementale',
+                    'date_signature_bulletin' => $this->date_status,
                 ]);
             });
         }
 
         $this->refresh(__('Statut Modifier Avec SUCCES!'), 'EditStatutModal');
+        $this->clearFields();
+    }
+
+    //enregistré le prix du dossier visé dans les paiements
+    public function dossier_vise() {
+        DB::transaction(function () {
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => 'Dossier-visé enregistré en attente de paiement',
+                    'next_step' => 'valider le paiement',
+                ]);
+            });
+
+            $sale = Sale::create([
+                'sales_amount' => $this->montant_dossier_vise,
+                'sales_type' => 'dossier_vise_enregistre',
+                'created_by' => auth()->user()->name,
+            ]);
+
+            // Create the Saleable item using only the specified information
+            $saleableData = [
+                'sale_id' => $sale->id,
+                'price' => $this->montant_dossier_vise,
+                'quantity' => 1,
+                'saleable_id' => $this->imma_directe->id,
+                'saleable_type' => 'App\Models\ImmatriculationDirecte', // Adjust the namespace if different
+                'created_by' => auth()->user()->name,
+            ];
+
+            DB::table('saleables')->insert($saleableData);
+        });
+
+        $this->refresh(__('La recette est appliquée Avec SUCCES!'), 'DossierViseImmaDirecteModal');
         $this->clearFields();
     }
 

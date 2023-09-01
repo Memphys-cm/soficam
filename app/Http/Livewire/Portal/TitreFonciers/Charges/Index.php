@@ -136,15 +136,6 @@ class Index extends Component
 
         $this->refresh(__('Charge successfully Updated!'), 'EditChargeModal');
     }
-
-    public function delete()
-    {
-        if (!empty($this->charge)) {
-            $this->charge->delete();
-        }
-
-        $this->refresh(__('Charge successfully deleted!'), 'DeleteModal');
-    }
    
     public function render()
     {

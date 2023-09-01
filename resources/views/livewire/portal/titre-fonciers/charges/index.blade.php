@@ -107,7 +107,6 @@
                         <th class="border-bottom">{{ __('TITRES FONCIERS') }}</th>
                         <th class="border-bottom">{{ __('PROPRIETAIRES') }}</th>
                         <th class="border-bottom">{{ __('CHARGE') }}</th>
-                        <th class="border-bottom">{{ __('STATUT') }}</th>
                         <th class="border-bottom">{{ __('Date creation') }}</th>
                         <th class="border-bottom">{{ __('Action') }}</th>
                     </tr>
