@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('superficie_du_TF_mere');
             $table->string('superficie_vendue_du_TF_mere')->nullable();
             $table->string('superficie_restant_du_TF_mere')->nullable();
-            $table->enum('etat_TF',['HYPOTHEQUE', 'DISPONIBLE', 'PRENOTE','SUSPENDU']);
+            $table->enum('etat_TF',['HYPOTHEQUE', 'DISPONIBLE', 'PRENOTE','SUSPENDU', 'RETRAIT', 'ANNULATION']);
             $table->enum('etat_terrain',['batit','non_batit']);
             $table->string('provenance_TF');
             $table->string('numero_bordereau_analytique')->nullable();

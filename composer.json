@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.1",
         "barryvdh/laravel-dompdf": "^2.0",
+        "camoo/sms": "^3.2",
         "guzzlehttp/guzzle": "^7.2",
         "hachther/laravel-mesomb": "^1.7",
         "koossaayy/laravel-mapbox": "^0.4.3",

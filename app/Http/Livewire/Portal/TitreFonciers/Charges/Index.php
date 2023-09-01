@@ -100,18 +100,18 @@ class Index extends Component
 
     private function removeCharge() {
         $sid='ACa77985267946bd8e613944d40b9d0458';
-            $token='b7b84303df6a21c3d6f9b32d3d678103';
-            $twilio = new Client($sid, $token);
+        $token='b7b84303df6a21c3d6f9b32d3d678103';
+        $twilio = new Client($sid, $token);
 
-            $messageBody = "Hello, your land title is now available.";
+        $messageBody = "Hello, your land title is now available.";
 
-            $twilio->messages->create(
-                '+237672959097',
-                [
-                    'from' => '+15856393680',
-                    'body' => $messageBody,
-                ]
-            );
+        $twilio->messages->create(
+            '+237672959097',
+            [
+                'from' => '+15856393680',
+                'body' => $messageBody,
+            ]
+        );
     }
 
     public function update() {

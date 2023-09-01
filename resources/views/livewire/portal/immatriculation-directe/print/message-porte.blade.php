@@ -1,3 +1,9 @@
+@php
+    use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
+    $qrCode = QrCode::size(100)->generate($imma_directe->id);
+@endphp
+
 <div class="container-fluid">
     <table>
         <tr style="font-size:14px">
@@ -16,51 +22,51 @@
         <tr style="mb-1">
             <td style="text-align:center; font-size:14px">
                 <div>..............</div>
-                <div>REGION DU CENTRE</div>
+                <div>REGION DE {{$imma_directe->region->region_name_fr}}</div>
             </td>
             <td style="width: 80px;">
                 <div></div>
             </td>
             <td style="text-align:center">
                 <div>..............</div>
-                <div>CENTER REGION</div>
+                <div> {{$imma_directe->region->region_name_en}} REGION</div>
             </td>
         </tr>
         <tr style="mb-2">
             <td style="text-align:center; font-size:14px">
                 <div>..............</div>
-                <div>DEPARTEMENT DU MFOUNDI</div>
+                <div>DEPARTEMENT DU  {{$imma_directe->division->division_name}}</div>
             </td>
             <td style="width: 80px;"></td>
             <td style="text-align:center; font-size:14px">
                 <div>..............</div>
-                <div>MFOUNDI DIVISION</div>
+                <div>{{$imma_directe->division->division_name}} DIVISION</div>
             </td>
         </tr>
         <tr>
             <td style="text-align:center; font-size:14px">
                 <div>..............</div>
-                <div>ARRONDISSEMENT DE YAOUNDE VII</div>
+                <div>ARRONDISSEMENT DE {{$imma_directe->subDivision->sub_division_name}}</div>
             </td>
             <td style="width: 80px;">
                 <div></div>
             </td>
             <td style="text-align:center; font-size:14px">
                 <div>..............</div>
-                <div>YAOUNDE VII SUBDIVISION</div>
+                <div>{{$imma_directe->subDivision->sub_division_name}} SUBDIVISION</div>
             </td>
         </tr>
         <tr>
             <td style="text-align:center; font-size:14px">
                 <div>..............</div>
-                <div>SOUS PREFECTURE DE NKOLBISSON</div>
+                <div>SOUS PREFECTURE DE {{$imma_directe->subDivision->sub_division_name}}</div>
             </td>
             <td style="width: 80px;">
                 <div></div>
             </td>
             <td style="text-align:center; font-size:14px">
                 <div>..............</div>
-                <div>YAOUNDE VII DIVISIONNAL OFFICE</div>
+                <div>{{$imma_directe->subDivision->sub_division_name}} DIVISIONNAL OFFICE</div>
             </td>
         </tr>
         <tr>
@@ -86,48 +92,42 @@
 
     </table>
 
+    <div style="padding: 12px; text-align:center; margin-top:10px"><img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code for Bien Immobilier ID"></div>
 
-
-    <div style="margin-top: 10vh">
-        <p></p>
-        <p></p>
-        <h1 style="text-align: center;">MESSAGE-PORTE</h1>
-        <div>
-            <h1>LE SOUS-PREFET DE L'ARRONDISSEMENT DE YAOUNDE VII <br> A</h1>
-            <p></p>
-            <ol>
+    <div style="margin-top: 20px; margin-right: 15px">
+        <div style="text-align: center; font-size: 24px">MESSAGE-PORTE</div>
+        <div style="text-align: center">o_o_o_o_o_o</div>
+        <div><b>
+            <div style="text-align: center; margin-top:20px">LE SOUS-PREFET DE L'ARRONDISSEMENT DE {{$imma_directe->subDivision->sub_division_name}} <br> A</div>
+            <ul style="margin-right: 30px; font-size: 14px">
                 <li>
-                    <h3>CHEF DU SERVICE DEPARTEMENTAL DES AFFAIRES FONCIERES DU MFOUNDI</h3>
+                    CHEF DU SERVICE DEPARTEMENTAL DES AFFAIRES FONCIERES DU {{$imma_directe->division->division_name}}
                 </li>
                 <li>
-                    <h3>CHEF DU SERVICE DEPARTEMENTAL DU CADASTRE DU MFOUNDI</h3>
+                    CHEF DU SERVICE DEPARTEMENTAL DU CADASTRE DU {{$imma_directe->division->division_name}}
                 </li>
                 <li>
-                    <h3>DELEGUE DEPARTEMENTAL DE L'HABITAT ET DU DEVELOPPEMENT URBAIN</h3>
+                    DELEGUE DEPARTEMENTAL DE L'HABITAT ET DU DEVELOPPEMENT URBAIN
                 </li>
                 <li>
-                    <h3>DELEGUE D'ARRONDISSEMENT D'AGRICULTURE ET DU DEVELOPPEMENT RURAL</h3>
+                    DELEGUE D'ARRONDISSEMENT D'AGRICULTURE ET DU DEVELOPPEMENT RURAL
                 </li>
-            </ol>
-            <p>
-            <h3 style="texte-decoration:underline"><strong>TEXTE</strong></h3>: HONNEUR VOUS IMFORMER POUR DISPOSITION
+            </ul></b>
+            <p style="text-align: justify; margin-top: 20px; font-size:14px">
+            <strong style="text-decoration: underline">TEXTE</strong>: HONNEUR VOUS IMFORMER POUR DISPOSITION
             D'USAGE À PRENDRE <strong>STOP</strong> QUE
-            COMMISSION CONSULTATIVE COMPETENTEDONT VOUS ETES MEMBRES SE REUNIRA LE _____________________ À____ HEURE A
-            LA SOUS/PREFECTURE DE YAOUNDE VII EN VUE DE PROCEDER À L'EXAMEN DU LITIGE FONCIER OPPOSANT <br>
-            M/MME___________________________________________________________________________________________________________________
-            <br>
-            ___________________________________________________________________________________________________________________________
-            <br>
-            _______________________________________________________________________________________________________________________________
-            <br>
-            ________________________________________________________________________________________________________________________________
-            </p>
-            <br>
-            <p>SIS AU QUARTIER_______________________________________________________ <strong>STOP</strong> ET
+            COMMISSION CONSULTATIVE COMPETENTEDONT VOUS ETES MEMBRES SE REUNIRA LE {{$imma_directe->date_convocation}} À____ HEURE A
+            LA SOUS/PREFECTURE DE YAOUNDE VII EN VUE DE PROCEDER À L'EXAMEN DU LITIGE FONCIER OPPOSANT 
+            M/MME <b>@foreach ($imma_directe->users as $user)
+                {{$user->first_name}} {{$user->last_name}},
+            @endforeach à @foreach ($comissions as $comission)
+                {{$comission['nom']}}
+            @endforeach </b>
+            SIS AU QUARTIER_____________________________________________ <strong>STOP</strong> ET
                 <strong>FIN</strong>.
             </p>
-            <p><strong>COPIE</strong>: AU CHEF DE VILLAGE DE :______________________ ACCOMPAGNE DE DEUX <br>
-                NOTABLES POUR PARTICIPATION EN TANT QUE MEMBRES DE LA COMMISSION ET POUR <br>
+            <p style="font-size: 14px; text-align:justify"><strong style="text-decoration: underline">COPIE</strong>: AU CHEF DE VILLAGE DE :_____________________________ ACCOMPAGNE DE DEUX
+                NOTABLES POUR PARTICIPATION EN TANT QUE MEMBRES DE LA COMMISSION ET POUR  
                 LARGE DIFFUSION AUPRES DES POPULATIONS RIVERAINES DU TERRAIN CONCERNE./.
             </p>
         </div>
@@ -138,7 +138,7 @@
                 <td>
                     <div><strong>VU,BON A PORTER</strong></div>
                 </td>
-                <td style="width: 8cm;">
+                <td style="width: 10cm;">
                     <div></div>
                 </td>
                 <td>
