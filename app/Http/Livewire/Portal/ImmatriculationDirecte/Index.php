@@ -43,7 +43,6 @@ class Index extends Component
     public $date_convocation , $superficie , $status , $date_status;
     public $geometre_id , $geometres;
     public $attachments , $quitance, $montant_dossier_vise;
-    public $attachments , $quitance;
     public $coordinates = ['', ''] , $transform;
     public $coordonnees = [];
     public $coordonne = [];
@@ -300,6 +299,8 @@ class Index extends Component
                     'statut' => 'Bulletins signés',
                     'next_step' => 'Transmission du dossier complet à la Délégation Départementale',
                     'date_signature_bulletin' => $this->date_status,
+                ]);
+            });    
         } else if($imma->next_step == "Transmission du dossier technique au CSDAF"){
             DB::transaction(function () {
                 $this->imma_directe->update([
