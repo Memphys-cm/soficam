@@ -62,9 +62,9 @@ class Index extends Component
     public function mount()
     {
         // $this->imma_directe = new ImmatriculationDirecte();
-        $imma = ImmatriculationDirecte::findOrFail(7);
-        $mediaItems = $imma->getMedia("*");
-        dd($mediaItems);
+        // $imma = ImmatriculationDirecte::findOrFail();
+        // $mediaItems = $imma->getMedia("*");
+        // dd($mediaItems);
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
@@ -131,14 +131,11 @@ class Index extends Component
             // 'comissions' => json_encode($this->comissions),
         ]);
 
-        $this->imma_file = $imma_directe;
-
-
         $imma_directe->users()->sync($this->user_ids);
 
         if (!empty($this->attachements)) {
             foreach ($this->attachements as $attachment) {
-                $this->imma_file->addMedia($attachment->getRealPath())
+                $imma_directe->addMedia($attachment->getRealPath())
                     ->usingName('Pieces_Jointe_Ouverture_imma_directe')
                     ->toMediaCollection('immadirectes');
             }
