@@ -55,7 +55,9 @@ return new class extends Migration
             $table->date('dossier_administratif_complet')->nullable();
             $table->date('dossier_technique_enregistrer')->nullable();
             $table->date('dossier_technique_complet')->nullable();
+            $table->foreignId('etat_cession_id')->on('etat_cessions')->index()->nullable();
             $table->date('etat_cession')->nullable();
+            $table->date('etat_cession_payer')->nullable();
 
 
             $table->timestamps();
