@@ -78,6 +78,7 @@ class Index extends Component
     public function initData($id)
     {
         $this->imma_directe = ImmatriculationDirecte::findOrFail($id);
+        $this->status = $this->imma_direct->next_step;
         $imma = $this->imma_directe;
         // dd($imma->next_step);
         $this->state = 1;

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('immatriculation_directes', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid')->unique()->index();
+            // $table->uuid('uuid')->unique()->index();
             $table->string('reference')->nullable();
             $table->string('localisation')->nullable();
             $table->string('superficie')->nullable();
