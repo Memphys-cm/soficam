@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class ImmatriculationDirecte extends Model
 {
-    use HasFactory, HasUUID, InteractsWithMedia;
+    use HasFactory, InteractsWithMedia;
 
     public $guarded = [];
     

@@ -3,13 +3,13 @@
 namespace App\Models\Sales;
 
 use App\Models\EtatCession;
-use App\Models\Traits\HasUUID;
+// use App\Models\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Saleable extends Model
 {
-    use HasFactory, HasUUID;
+    use HasFactory;
     protected $table = 'saleables';
     protected $guarded = [];
     

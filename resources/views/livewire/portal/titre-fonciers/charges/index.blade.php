@@ -124,6 +124,9 @@
                         <span class="fw-normal badge super-badge p-2 bg-{{$charge->EtatTFStyle}} round">{{$charge->type_charge}}</span>
                     </td>
                     <td>
+                        
+                    </td>
+                    <td>
                         <span class="fw-normal">{{$charge->created_at->format('Y-m-d')}}</span>
                     </td>
                     <td>

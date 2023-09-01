@@ -1,7 +1,7 @@
 @php
     use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-    $qrCode = QrCode::size(100)->generate($immobilier->id);
+    $qrCode = QrCode::size(100)->generate($certificatepropriete->id);
 @endphp
 
 <div class="container-fluid">

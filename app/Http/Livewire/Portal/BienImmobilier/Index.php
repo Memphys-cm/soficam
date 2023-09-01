@@ -179,7 +179,7 @@ class Index extends Component
             // Autres données que vous souhaitez afficher dans la vue
         ];
 
-        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.quitance',$data)->setPaper('a4', 'portrait');
+        $pdf = Pdf::loadView('livewire.portal.bien-immobilier.print',$data)->setPaper('a4', 'portrait');
 
         return response()->streamDownload(
             fn () => print($pdf->output()),

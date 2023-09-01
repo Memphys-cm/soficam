@@ -10,7 +10,7 @@
                     </div>
                     <x-form-items.form wire:submit="store">
                         <fieldset class="border p-3 mb-3 rounded">
-                            <legend class="w-auto">Informations sur les biens immobiliers</legend>
+                            <legend class="w-auto">{{__('Informations sur les biens immobiliers')}}</legend>
                             <div class='form-group row mb-3'>                                
                                 <div class=" col">
                                     <label for="releve_number">{{ __('Numéro de l\'immobilier') }}</label>
@@ -34,7 +34,7 @@
 
                             <div class='form-group row mb-3'>
                                 <div class=" col"><label for="price">{{ __('Prix (XAF)') }}</label>
-                                    <input type="text" wire:model="price" class="form-control  @error('price') is-invalid @enderror " placeholder="345678" id="price" autofocus="" required="">
+                                    <input type="text" wire:model="price" class="form-control  @error('price') is-invalid @enderror " placeholder="0" id="price" autofocus="" required="">
                                     @error('price')
                                         <div class="invalid-feedback">
                                             {{ $message }}
