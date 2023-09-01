@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('immatriculation_directes', function (Blueprint $table) {
             $table->id();
-            // $table->uuid('uuid')->unique()->index();
+            $table->uuid('uuid')->unique()->index()->nullable();
             $table->string('reference')->nullable();
             $table->string('localisation')->nullable();
             $table->string('superficie')->nullable();
@@ -53,15 +53,20 @@ return new class extends Migration
             $table->foreignId('geometre_id')->on('users')->index()->nullable();
             $table->date('date_geometre_enregistrer')->nullable();
             $table->date('pv_enregistrer')->nullable();
+            $table->date('dossier_technique_complet')->nullable();
             $table->date('dossier_administratif_complet')->nullable();
             $table->date('dossier_technique_enregistrer')->nullable();
-            $table->date('dossier_technique_complet')->nullable();
             $table->foreignId('etat_cession_id')->on('etat_cessions')->index()->nullable();
             $table->date('etat_cession')->nullable();
             $table->date('etat_cession_payer')->nullable();
 
             $table->json('coordonnees')->nullable();
             $table->date('dossier_technique_created')->nullable();
+            $table->date('descente_terrain')->nullable();
+            $table->date('transmission_dos_tech_csdaf')->nullable();
+            $table->date('transmission_delegue_departemental')->nullable();
+            $table->date('transmission_delegue_regional')->nullable();
+            $table->date('descente_terrain')->nullable();
 
 
             $table->timestamps();
