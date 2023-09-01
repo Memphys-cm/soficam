@@ -110,9 +110,11 @@ class Index extends Component
         $imma_directe->users()->sync($this->user_ids);
 
         if (!empty($this->attachements)) {
-            $imma_directe->addMedia($this->attachements->getRealPath())
-                ->usingName($imma_directe->reference)
-                ->toMediaCollection('immadirectes');
+            foreach ($this->attachements as $attachment) {
+                $imma_directe->addMedia($this->attachement->getRealPath())
+                    ->usingName($imma_directe->reference)
+                    ->toMediaCollection('immadirectes');
+            }
         }
 
         $this->clearFields();
