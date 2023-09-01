@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use App\Models\ImmatriculationDirecte;
 use App\Http\Livewire\Traits\WithDataTables;
+use proj4php\Proj4php;
+use proj4php\Proj;
+use proj4php\Point;
 
 class Index extends Component
 {
@@ -25,7 +28,7 @@ class Index extends Component
     use WithDataTables;
 
     // public ImmatriculationDirecte $imma_directe;
-    public $imma_directe;
+    public $imma_directe , $imma_file;
 
     public $state = 0, $price_m2, $users, $user_id, $user_ids, $comissions = [], $localisation;
     public $attachements, $services, $service_id, $observation, $montant_ordre_versement;
@@ -40,10 +43,29 @@ class Index extends Component
     public $date_convocation , $superficie , $status , $date_status;
     public $geometre_id , $geometres;
     public $attachments , $quitance, $montant_dossier_vise;
+    public $attachments , $quitance;
+    public $coordinates = ['', ''] , $transform;
+    public $coordonnees = [];
+    public $coordonne = [];
+
+    public function addCoordinate()
+    {
+        $this->coordinates[] = [];
+    }
+
+    public function removeCoordinate($coordinateIndex)
+    {
+        unset($this->coordinates[$coordinateIndex]);
+        $this->coordinates = array_values($this->coordinates);
+    }
+
 
     public function mount()
     {
         // $this->imma_directe = new ImmatriculationDirecte();
+        // $imma = ImmatriculationDirecte::findOrFail();
+        // $mediaItems = $imma->getMedia("*");
+        // dd($mediaItems);
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
@@ -92,6 +114,9 @@ class Index extends Component
 
         $this->validate([
             'localisation' => 'required',
+            'division_id' => 'required',
+            // 'subdivision_id' => 'required',
+            'region_id' => 'required'
         ]);
 
         $imma_directe = ImmatriculationDirecte::create([
@@ -107,13 +132,12 @@ class Index extends Component
             // 'comissions' => json_encode($this->comissions),
         ]);
 
-
         $imma_directe->users()->sync($this->user_ids);
 
         if (!empty($this->attachements)) {
             foreach ($this->attachements as $attachment) {
-                $imma_directe->addMedia($this->attachement->getRealPath())
-                    ->usingName($imma_directe->reference)
+                $imma_directe->addMedia($attachment->getRealPath())
+                    ->usingName('Pieces_Jointe_Ouverture_imma_directe')
                     ->toMediaCollection('immadirectes');
             }
         }
@@ -121,6 +145,122 @@ class Index extends Component
         $this->clearFields();
 
         $this->refresh(__('Dossier D\'Immatriculation Directe Creer Avec SUCCES'), 'CreateImmaDirecteModal');
+    }
+
+    public function convert($utmCoordinates)
+    {
+        // Initialisez Proj4
+        $proj4 = new Proj4php();
+    
+        // Créez les projections
+        $projUTM = new Proj('+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs', $proj4);
+        $projWGS84 = new Proj('EPSG:4326', $proj4);
+    
+        $decimalResults = [];
+    
+        foreach ($utmCoordinates as $utm) {
+            $utmParts = explode(',', $utm); // Sépare les coordonnées UTM en X et Y
+            $utmX = floatval($utmParts[0]);
+            $utmY = floatval($utmParts[1]);
+    
+            // Créez le point source avec les coordonnées UTM
+            $pointSrc = new Point($utmX, $utmY, $projUTM);
+    
+            // Transformez le point entre les systèmes de coordonnées
+            $pointDest = $proj4->transform($projWGS84, $pointSrc);
+    
+            // Obtenez les coordonnées lat/lon du point de destination
+            $lat = $pointDest->y;
+            $lon = $pointDest->x;
+    
+            // Ajoutez le résultat à votre tableau de résultats en coordonnées décimales
+            $decimalResults[] = "$lon, $lat";
+        }
+    
+        return $decimalResults;
+    }
+
+    public function dossier_technique()
+    {
+        $coords = [];
+        collect($this->coordonnees)->map(function ($value, $key) {
+            return ['long' => explode(',', $value, 1), 'lat' => explode(',', $value, 2)];
+        });
+
+        $transform = $this->convert($this->coordonnees);
+
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                // 'coordonnees' => json_encode($this->coordonnees),
+                'coordonnees' => json_encode($this->transform),
+                'statut' => 'Dossier technique créer',
+                'next_step' => 'Descente sur le Terrain',
+                'dossier_technique_created' => Carbon::now()
+            ]);
+        });
+
+        if (!empty($this->attachments)) {
+            foreach ($this->attachments as $attachment) {
+                $this->imma_directe->addMedia($attachment->getRealPath())
+                    ->usingName('Acte Expidition')
+                    ->toMediaCollection('imma_directe_dossier_administratif');
+            }
+        }
+
+        $this->emitUp('flow_updated');
+        
+        $this->clearFields();
+        $this->refresh(__('Dossier Technique Enregistrer'), 'DossierTechniqueModal');
+
+    }
+
+    public function update_dossier_technique()
+    {
+
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'dossier_administratif_complet' => Carbon::now(),
+                'statut' => 'Dossier Technique Mise En Forme',
+                'next_step' => 'Mise en Forme du Dossier Administratif',
+            ]);
+        });
+
+
+        if (!empty($this->attachments)) {
+            foreach ($this->attachments as $attachment) {
+                $this->imma_directe->addMedia($attachment->getRealPath())
+                    ->usingName('Acte Expidition')
+                    ->toMediaCollection('imma_directe_dossier_administratif');
+            }
+        }
+
+        $this->emitUp('flow_updated');
+        
+        $this->clearFields();
+        $this->refresh(__('Dossier Administratif Mise En Forme Avec Suceess'), 'DossierAdministratifModal');
+    }
+    
+    public function descente_terrain()
+    {
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'statut' => 'Descente sur le terrain effectuée',
+                'next_step' => 'Mise en Forme du Dossier Technique',
+                'descente_terrain' => Carbon::now()
+            ]);
+        });
+
+        if (!empty($this->attachments)) {
+            foreach ($this->attachments as $attachment) {
+                $this->imma_directe->addMedia($attachment->getRealPath())
+                    ->usingName('Acte Expidition')
+                    ->toMediaCollection('imma_directe_dossier_administratif');
+            }
+        }
+
+        $this->clearFields();
+        $this->refresh(__('Descente sur le terrain effectuée'), 'DescenteTerrainModal');
+
     }
 
     public function edit_statut()
@@ -160,9 +300,32 @@ class Index extends Component
                     'statut' => 'Bulletins signés',
                     'next_step' => 'Transmission du dossier complet à la Délégation Départementale',
                     'date_signature_bulletin' => $this->date_status,
+        } else if($imma->next_step == "Transmission du dossier technique au CSDAF"){
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => 'Dossier Transmis au CSDAF',
+                    'next_step' => 'transmission en signature chez le délégué',
+                    'transmission_dos_tech_csdaf' => $this->date_status,
+                ]);
+            });
+        }else if($imma->next_step == "transmission en signature chez le délégué"){
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => 'Bordereau de transmission en signature chez le délégué',
+                    'next_step' => 'Transmission Dossier Chez le Delegue Regional',
+                    'date_calendrier_descente' => $this->date_status,
+                ]);
+            });
+        }else if($imma->next_step == "Transmission Dossier Chez le Delegue Regional"){
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => 'Bordereau de transmission en signature chez le délégué',
+                    'next_step' => 'Bordereau de transmission + dossier physique transmis',
+                    'date_calendrier_descente' => $this->date_status,
                 ]);
             });
         }
+
 
         $this->refresh(__('Statut Modifier Avec SUCCES!'), 'EditStatutModal');
         $this->clearFields();
@@ -392,7 +555,7 @@ class Index extends Component
             $this->imma_directe->update([
                 'dossier_administratif_complet' => Carbon::now(),
                 'statut' => 'Dossier Administratif Mise En Forme',
-                'next_step' => 'Enregistrement Dossier Technique',
+                'next_step' => 'Transmission du dossier technique au CSDAF',
             ]);
         });
 

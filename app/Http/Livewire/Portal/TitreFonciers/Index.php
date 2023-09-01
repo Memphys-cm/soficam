@@ -310,9 +310,11 @@ class Index extends Component
         $titrefoncier->users()->sync($this->user_ids);
 
         if (!empty($this->attachements)) {
-            $titrefoncier->addMedia($this->attachements->getRealPath())
-                ->usingName($titrefoncier->numero_titre_foncier)
-                ->toMediaCollection('titrefonciers');
+            foreach ($this->attachements as $attachement) {
+                $titrefoncier->addMedia($attachement->getRealPath())
+                    ->usingName($titrefoncier->uuid)
+                    ->toMediaCollection('titrefonciers');
+            }
         }
 
         $this->clearFields();

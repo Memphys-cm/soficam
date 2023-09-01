@@ -9,7 +9,10 @@
     @include('livewire.portal.immatriculation-directe.step.dossier_vise')
     {{-- @include('livewire.portal.immatriculation-directe.step.enregistrer_geometre') --}}
     @include('livewire.portal.immatriculation-directe.step.pv_bornage')
+    @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_technique')
     @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_administratif')
+    @include('livewire.portal.immatriculation-directe.step.creation_dossier_technique')
+    @include('livewire.portal.immatriculation-directe.step.descente_terrain')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
