@@ -59,7 +59,8 @@ class Index extends Component
         $this->coordinates = array_values($this->coordinates);
     }
 
-    public $etat_cession_id;
+    public $etat_cession_id, $cout_etat_cession, $zone, $etat_cession, $superficie_en_m2;
+    public $frais_suplementaires, $cout, $commentaires;
 
     public function mount()
     {
@@ -103,8 +104,9 @@ class Index extends Component
     {
         $this->imma_directe = ImmatriculationDirecte::findOrFail($id);
         $this->status = $this->imma_directe->next_step;
-        $imma = $this->imma_directe;
-        // dd($imma->next_step);
+        $this->superficie_en_m2 = $this->imma_directe->superficie;
+        $imma_directe = $this->imma_directe;
+      
         $this->state = 1;
     }
 
@@ -409,13 +411,65 @@ class Index extends Component
         $this->clearFields();
     }
 
+    public function updated()
+    {
+        $area =  $this->imma_directe->superficie;
+        $zone = $this->zone;
+       ;
+        $this->price_m2 = match ($zone) {
+            "terrain_urbain" => ($area <= 5000) ? 25000 : ($area - 5000) * 20,
+            "terrain_rurale" => match (true) {
+                ($area <= 50000) => 25000,
+                ($area >= 50000 && $area <= 200000) => 50000,
+                default => ($area - 200000) * 1,
+            },
+            default => 0,
+        };
+        
+        $this->frais_suplementaires = 2500;
+
+        $this->cout = (int)$this->price_m2;
+
+        $this->cout_etat_cession = (int)$this->cout + (int)$this->frais_suplementaires;
+        // dd($this->cout_etat_cession);
+   
+    }
+    public function generateUniqueCode($year, $counter)
+    {
+        $counterFormatted = str_pad($counter, 5, '0', STR_PAD_LEFT);
+        return $year . 'STATE' . $counterFormatted;
+    }
     public function etatDeCession()
     {
+          // Récupérer l'année en cours au format 'yy'
+          $year = date('y');
+
+          // Récupérer le compteur depuis la base de données (par exemple en comptant les enregistrements de lotissement existants)
+          $counter = EtatCession::count() + 1;
+  
+          // Générer le code unique
+          $code = $this->generateUniqueCode($year, $counter);
+        // dd($code);
+
        
+        $this->etat_cession = EtatCession::create([
+            // 'user_id' => $this->requestor_id,
+            'zone' => $this->zone,
+            'reference_etat_cession' => $code,
+            'lieu_dit' => $this->imma_directe->localisation,
+            'superficie_en_m2' => $this->imma_directe->superficie,
+            'sub_division_id' => $this->imma_directe->sub_division_id,
+            'commentaires' => $this->commentaires,
+            'cout' => $this->cout,
+            'frais_suplementaires' => $this->frais_suplementaires,
+            'cout_etat_cession' => $this->cout_etat_cession,
+            'type_operation' => 'immatriculation_direct',
+            'status' => 'pending_payment',
+        ]);
 
         DB::transaction(function () {
             $this->imma_directe->update([
-                'etat_cession_id' => $this->etat_cession_id,
+                'etat_cession_id' => $this->etat_cession->id,
                 'statut' => 'Etat de Cesssion en Attente de Paiement',
                 'next_step' => 'Paiement de L\'Etat de Cession',
                 'etat_cession' => Carbon::now(),
@@ -424,21 +478,23 @@ class Index extends Component
 
         $sale = Sale::create([
             // 'user_id' => $this->requestor_id,
-            'sales_code' => $this->imma_directe->numero_ordre_versement,
-            'sales_amount' => $this->montant_ordre_versement,
-            'sales_type' => 'ordre_versement_imma_directe',
+            'sales_code' => $code,
+            'sales_amount' => $this->cout_etat_cession,
+            'sales_type' => 'etat_cession__imma_directe',
             'created_by' => auth()->user()->name,
         ]);
+
 
         // Create the Saleable item using only the specified information
         $saleableData = [
             'sale_id' => $sale->id,
-            'price' => $this->montant_ordre_versement,
+            'price' => $this->cout_etat_cession,
             'quantity' => 1,
             'saleable_id' => $this->imma_directe->id,
             'saleable_type' => 'App\Models\ImmatriculationDirecte', // Adjust the namespace if different
             'created_by' => auth()->user()->name,
         ];
+
 
         DB::table('saleables')->insert($saleableData);
 
