@@ -66,8 +66,11 @@ return new class extends Migration
             $table->date('transmission_dos_tech_csdaf')->nullable();
             $table->date('transmission_delegue_departemental')->nullable();
             $table->date('transmission_delegue_regional')->nullable();
-            $table->date('dossier_signe_csr_cadastre')->nullable();
-            $table->date('date_bordereau_transmission')->nullable();
+
+            $table->date('date_dossier_signe_csr_cadastre')->nullable();
+            $table->date('date_dossier_transmi_au_Mindcaf')->nullable();
+            $table->date('date_dossier_complet_transmi_CSRegional_mindcaf')->nullable();
+            $table->date('date_dossier_vise_en_attente_publication')->nullable();
 
 
 
