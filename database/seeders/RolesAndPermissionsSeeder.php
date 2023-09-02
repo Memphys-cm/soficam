@@ -196,6 +196,7 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'imma_directe.mise_en_forme_dos_tech'],
             ['name' => 'imma_directe.mise_en_forme_dos_admin'],
             ['name' => 'imma_directe.creation_dos_tech'],
+            ['name' => 'imma_directe.certificat_affichage'],
             ['name' => 'imma_directe.export_n_print'],
             
 
