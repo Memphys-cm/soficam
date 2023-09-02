@@ -53,7 +53,6 @@ class Index extends Component
     }
     public function updatedPaymentType()
     {
-        // You can perform any logic you need when paymentType changes here.
     }
 
     public function confirmOrder()
