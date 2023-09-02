@@ -42,4 +42,21 @@ class Charge extends Model implements HasMedia
             NULL => ''
         };
     }
+
+    public static function search($query)
+    {
+        return empty($query) ?
+            static::query() :
+            static::query()
+            ->where(function ($q) use ($query) {
+                $q->where('type_charge', 'like', '%' . $query . '%'); 
+                $q->orWhereHas('titreFoncier', function ($q) use ($query) {
+                    $q->where('numero_titre_foncier', 'like', '%' . $query . '%');
+                    $q->orWhereHas('users', function($q) use ($query){
+                        $q->where('first_name', 'like', '%' . $query . '%');
+                        $q->orWhere('last_name', 'like', '%' . $query . '%');
+                    });
+                });
+         });
+    }
 }

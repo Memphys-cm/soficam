@@ -19,8 +19,8 @@
                         </div>
                         <div class="form-group mb-3 row">
                             <div class="col">
-                                <label for="certificate_proprietes_number">{{__('Numéro du certificat de propriété')}}</label>
-                                <input wire:model="certificate_proprietes_number" type="text" class="form-control  @error('certificate_proprietes_number') is-invalid @enderror" placeholder="{{__('1986')}}" required="">
+                                <label for="certificate_proprietes_number">{{__('Numéro de certificat de propriété')}}</label>
+                                <input wire:model="certificate_proprietes_number" type="text" class="form-control  @error('certificate_proprietes_number') is-invalid @enderror" placeholder="{{__('')}}" required="">
                                 @error('certificate_proprietes_number')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
