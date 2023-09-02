@@ -771,16 +771,17 @@ class Index extends Component
 
   
 
-    public function convocation()
+    public function convocation($id)
     {
+        $this->imma_directe = ImmatriculationDirecte::findOrFail($id);
         DB::transaction(function () {
             $this->imma_directe->update([
                 'date_convocation' => $this->date_convocation,
                 // 'comissions' => json_encode($this->comissions),
                 'status_convocation' => 'done',
 
-                'statut' => 'Certificat transmis pour signature',
-                'next_step' => 'Signature du certficat d\'affichage',
+                'statut' => 'message porté disponible',
+                'next_step' => 'Etablissement Etat de Cession',
             ]);
         });
         $this->refresh(__('Convocation imprimée Avec SUCCES!'), 'ConvocationImmaDirecteModal');
