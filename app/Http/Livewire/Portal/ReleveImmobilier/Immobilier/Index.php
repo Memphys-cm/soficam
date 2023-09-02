@@ -12,6 +12,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\ReleveImmobilier;
 use Illuminate\Support\Facades\DB;
 use App\Http\Livewire\Traits\WithDataTables;
+use App\Models\Sales\Saleable;
 
 class Index extends Component
 {
@@ -68,16 +69,15 @@ class Index extends Component
             ]);
 
             // Create the Saleable item using only the specified information
-            $saleableData = [
+            Saleable::create([
                 'sale_id' => $sale->id,
                 'price' => $this->price,
                 'quantity' => 1,
                 'saleable_id' => $immobilier->id,
                 'saleable_type' => 'App\Models\ReleveImmobilier', // Adjust the namespace if different
                 'created_by' => auth()->user()->name,
-            ];
-
-            DB::table('saleables')->insert($saleableData);
+            ]);
+            
         });
        
         $this->clearFields();
@@ -165,7 +165,7 @@ class Index extends Component
     {
         $this->immobilier = ReleveImmobilier::findOrFail($id);
         $data = [
-            'immobilier' => $this->immobilier,
+            'element' => $this->immobilier,
             'email' => 'john@example.com',
             // Autres données que vous souhaitez afficher dans la vue
         ];
