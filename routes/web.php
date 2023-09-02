@@ -1,6 +1,8 @@
 <?php
 
+use PDF;
 use App\Models\TitreFoncier;
+use App\Models\CertificatePropriete;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
@@ -31,6 +33,25 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::any('/logout', [LoginController::class, 'logout']);
+
+Route::get('/validate-document', function(){
+
+    $certificatepropriete = CertificatePropriete::whereUuid(request('model'))->first();
+
+    if(!empty($certificatepropriete)){
+        return abort(404, __('Document not found'));
+    }
+
+    $data = [
+        'certificatepropriete' => $certificatepropriete,
+        'titrefoncier' => $certificatepropriete->titre_foncier,
+        // Autres données que vous souhaitez afficher dans la vue
+    ];
+
+    $pdf = Pdf::loadView('livewire.portal.certificate-propriete.print', $data)->setPaper('a4', 'portrait');
+
+    return  $pdf->stream($certificatepropriete->uuid.'.pdf');
+});
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function () {
     Route::get('/dashboard', App\Http\Livewire\User\Dashboard::class)->name('user.dashboard');
