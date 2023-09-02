@@ -365,6 +365,7 @@ class Index extends Component
         });
 
         $this->refresh(__('Bordoreau de Transmition Transmi Avec SUCCES!'), 'bordoreauDeTransmitionModal');
+    }    
 
     //enregistré le prix du dossier visé dans les paiements
     public function dossier_vise() {
