@@ -19,6 +19,7 @@ class Index extends Component
     public $type_charge;
     public $attachements;
     public $etat_TF;
+    public ?string $query = null;
 
     public function mount()
     {
@@ -247,7 +248,7 @@ class Index extends Component
    
     public function render()
     {
-        $charges = Charge::with('titrefoncier')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $charges = Charge::search($this->query)->with('titrefoncier')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
         $charges_count = Charge::count();
 
         return view('livewire.portal.titre-fonciers.charges.index', [

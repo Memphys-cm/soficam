@@ -384,9 +384,9 @@ class Index extends Component
         ->paginate($this->perPage);
 
         $titrefonciers_count = TitreFoncier::count();
-        $titrefonciers_with_tax = TitreFoncier::whereNotNull('tax_amount')->count();
-        $totalTaxAmount = TitreFoncier::sum('tax_amount');
-        $tax_paid_percentage = TitreFoncier::whereNotNull('tax_amount')->count() / TitreFoncier::count() * 100;
+        $titrefonciers_with_tax = TitreFoncier::whereNotNull('taxFoncier_amount')->count();
+        $totalTaxAmount = TitreFoncier::sum('taxFoncier_amount');
+        $tax_paid_percentage = TitreFoncier::whereNotNull('taxFoncier_amount')->count() / TitreFoncier::count() * 100;
 
 
 

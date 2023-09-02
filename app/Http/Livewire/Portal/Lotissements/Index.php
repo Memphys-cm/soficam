@@ -45,7 +45,7 @@ class Index extends Component
             $this->lotissement->delete();
         }
 
-        session()->flash('message', __('Lotissement and Blockd and Lots successfully deleted!'));
+        session()->flash('message', __('Lotissement, Bloc et Parcelles supprimés avec Succès!'));
 
         return redirect()->route('portal.lotissements.index');
     }
@@ -82,7 +82,7 @@ class Index extends Component
 
         return response()->streamDownload(
             fn () => print($pdf->output()),
-            __('Report-') . Str::random('10') . ".pdf"
+            __('Lotissement-') . Str::random('10') . ".pdf"
         );
     }
     

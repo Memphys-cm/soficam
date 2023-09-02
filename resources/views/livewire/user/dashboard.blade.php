@@ -27,8 +27,9 @@
         </div>
 
     </div>
-    <div class="pb-lg-6" style="padding-left: 5vh">
-        <div class="mb-3">
+    <div class="pb-lg-6 bg-transparent" style="padding-left: 5vh;border:1px solid grey; width:20%; border-radius:10px; position:absolute;left:9%">
+
+        <div class="mb-3 pt-5   ">
             <a href="{{ route('user.suivi-dossier.index') }}" class="btn btn-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-file-earmark" viewBox="0 0 16 16">

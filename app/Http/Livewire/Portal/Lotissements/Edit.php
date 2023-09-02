@@ -156,7 +156,7 @@ class Edit extends Component
             }
         }
 
-        session()->flash('message', __('Lotissement successfully updated!'));
+        session()->flash('message', __('Lotissement mis à jour avec Succès!'));
         return redirect()->route('portal.lotissements.index');
     }
 

@@ -25,15 +25,36 @@ class Index extends Component
     public $titre_foncier_id, $requestor_id, $price, $requestors;
     public $certificate_propriete_id, $certificate_proprietes_number;
 
+    function CPCode()
+    {
+        $dernierEnregistrement = CertificatePropriete::orderBy('id', 'desc')->first();
+
+        if ($dernierEnregistrement) {
+            $dernierNumero = intval(substr($dernierEnregistrement->code, 2)); // Extrait le numéro sans "TF" et convertit en nombre
+            $nouveauNumero = $dernierNumero + 1;
+        } else {
+            $nouveauNumero = 1;
+        }
+
+        // Formate le numéro avec des zéros à gauche (total 7 caractères)
+        $numeroFormate = str_pad($nouveauNumero, 7, '0', STR_PAD_LEFT);
+
+        // Concatène "TF" et le numéro formate pour obtenir le code unique
+        $codeUnique = "CP" . $numeroFormate;
+
+        return $codeUnique;
+    }
+
     public function mount()
     {
         $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier', 'region_id', 'division_id', 'sub_division_id', 'lieu_dit')->get();
         $this->requestors = User::role('user')->select('id', 'first_name', 'last_name')->get();
-        $this->certificate_proprietes_number =  Str::upper(Str::random(7)) . "" . now()->format('msu');
+        $this->certificate_proprietes_number =  $this->CPCode();
     }
+
     public function store()
     {
-        
+           
         $this->validate([
             'titre_foncier_id' => 'required',
             'certificate_proprietes_type' => 'required',
@@ -42,7 +63,7 @@ class Index extends Component
             'price' => 'required|integer',
             'validity' => 'nullable|date',
             'certificate_proprietes_number' => 'required',
-            'status' => 'required',
+            //'status' => 'required',
 
         ]);
 
@@ -88,7 +109,7 @@ class Index extends Component
 
         $this->certificatepropriete = $certificatepropriete;
 
-        $this->titre_foncier_id =  $certificatepropriete->titre_foncier_id;
+        $this->titre_foncier_id =  $certificatepropriete->titreFoncier->numero_titre_foncier;
         $this->certificate_proprietes_type =  $certificatepropriete->certificate_proprietes_type;
         $this->certificate_propriete_reason =  $certificatepropriete->certificate_propriete_reason;
         $this->requestor_id =  $certificatepropriete->requestor_id;
@@ -113,7 +134,7 @@ class Index extends Component
     public function update()
     {
         $this->validate([
-            'titre_foncier_id' => 'required',
+            //'titre_foncier_id' => 'required',
             'certificate_proprietes_type' => 'required',
             'certificate_propriete_reason' => 'required',
             'requestor_id' => 'required',
@@ -127,7 +148,7 @@ class Index extends Component
        
         DB::transaction(function () {
             $this->certificatepropriete->update([
-                'titre_foncier_id' => $this->titre_foncier_id,
+                //'titre_foncier_id' => $this->titre_foncier_id,
                 'certificate_proprietes_type' => $this->certificate_proprietes_type,
                 'certificate_propriete_reason' => $this->certificate_propriete_reason,
                 'requestor_id' => $this->requestor_id,
@@ -138,9 +159,9 @@ class Index extends Component
             ]);
         });
 
-        $this->refresh(__('CertificatePropriete Updated Created!'), 'updatecertificateproprieteModal');
-
         $this->clearFields();
+        $this->refresh(__('CertificatePropriete Updated Created!'), 'UpdateCertificateProprieteModal');
+
     }
 
     
@@ -150,8 +171,9 @@ class Index extends Component
 
             // Also delete created sales record
             $this->certificatepropriete->delete();
-            session()->flash('message', 'CertificatePropriete deleted successfully');
         }
+
+        $this->refresh(__('Certificat de propriété Supprimé avec succès'), 'DeleteModal');
     }
     public function  printPdf($id)
     {

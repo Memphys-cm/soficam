@@ -283,11 +283,11 @@ class Index extends Component
                     'date_avis_publique_signe' => $this->date_status,
                 ]);
             });
-        } else if($imma->next_step == "signature decision portant calendrier de descente"){
+        } else if($imma->next_step == "Signature du certificat d\'affichage"){
             DB::transaction(function () {
                 $this->imma_directe->update([
-                    'statut' => 'Decision portant portant calendrier Signer',
-                    'next_step' => 'Certificat_Affichage',
+                    'statut' => 'Certificat d\'affichage signé',
+                    'next_step' => 'Programmation descente sur le terrain',
                     'date_calendrier_descente' => $this->date_status,
                 ]);
             });
@@ -738,12 +738,12 @@ class Index extends Component
                 'date_debut_certificat_affichage' => $this->date_debut,
                 'date_fin_certificat_affichage' => $this->date_fin,
                 'status_certificat_d\'affichage' => 'done',
-                'statut' => 'Certificat D\'affichage Effectuer',
-                'next_step' => 'Convocation D\'invitation sur Le Terrain',
+                'statut' => 'Certificat D\'affichage transmis pour signature',
+                'next_step' => 'Signature du certificat d\'affichage',
             ]);
         });
 
-        $this->refresh(__('Certificat Imprimr Avec SUCCES!'), 'CertfifcatAffichageImmaDirecteModal');
+        $this->refresh(__('Certificat d\'affichage Imprimé Avec SUCCES!'), 'CertfifcatAffichageImmaDirecteModal');
 
         $this->clearFields();
 
@@ -773,8 +773,8 @@ class Index extends Component
                 // 'comissions' => json_encode($this->comissions),
                 'status_convocation' => 'done',
 
-                'statut' => 'Convocationsur le Terrain Effectuer',
-                'next_step' => 'Etablissement Etat de Cession',
+                'statut' => 'Certificat transmis pour signature',
+                'next_step' => 'Signature du certficat d\'affichage',
             ]);
         });
         $this->refresh(__('Convocation imprimée Avec SUCCES!'), 'ConvocationImmaDirecteModal');
