@@ -85,7 +85,32 @@
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
-                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmount }} {{ __('XAF') }}</p>
+                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmountpaid }} {{ __('XAF') }}</p>
+
+                    </div>
+                    <div class="">
+                        <svg class="icon text-success" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 1v6m0 10v6m-6-3h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v6a3 3 0 003 3z">
+                            </path>
+                        </svg>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xxl-3">
+            <div class="card h-md-100 ecommerce-card-min-width">
+                <div class="card-header pb-0">
+                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Predicted Tax Amount') }}</h6>
+                </div>
+                <div class="p-3 d-flex justify-content-between align-iterms-center">
+                    <div class="col">
+                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmountPrediction }} {{ __('XAF') }}</p>
 
                     </div>
                     <div class="">
@@ -109,7 +134,7 @@
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
-                        <p class="font-sans-serif lh-1 fs-4">{{ $tax_paid_percentage }} {{ __('%') }}</p>
+                        <p class="font-sans-serif lh-1 fs-4">{{ $percentagePaid }} {{ __('%') }}</p>
 
                     </div>
                     <div class="">
@@ -225,7 +250,7 @@
                             </td>
 
                             <td>
-                                <span class="fw-normal">{{ $titrefoncier->tax_amount }}</span>
+                                <span class="fw-normal">{{ $titrefoncier->taxFoncier_amount }} {{ __('XAF') }} </span>
                             </td>
                             <td>
                                 <span

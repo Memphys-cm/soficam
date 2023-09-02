@@ -57,7 +57,7 @@ class Index extends Component
     public $le_conservateur;
     public $numero_ccp;
     public $attachements;
-    public $price;
+    public $taxFoncier_amount;
     public $conservateurs, $conservateur_id;
 
     public  $state = 0;
@@ -114,7 +114,8 @@ class Index extends Component
         if (!empty($division_id)) {
             $this->sub_divisions = SubDivision::whereDivisionId($division_id)->get();
         }
-        $this->numero_titre_foncier = $this->generateCodeTF();
+        // dd($this->sub_divisions);
+        // $this->numero_titre_foncier = $this->generateCodeTF();
     }
 
     public function updatedNumeroFolio()
@@ -228,33 +229,33 @@ class Index extends Component
         }
 
         $this->validate([
-            'numero_titre_foncier' => 'required',
-            'region_id' => 'required',
-            'division_id' => 'required',
-            'sub_division_id' => 'required',
-            'date_de_delivrance_du_TF' => 'required|date',
-            'numero_du_duplicata' => 'required|integer',
-            'groupement' => 'required',
-            'lieu_dit' => 'required',
-            'zone' => 'required',
-            'numero_folio' => 'required|integer',
-            'volume' => 'required|integer',
-            'superficie_du_TF_mere' => 'required',
-            'etat_TF' => 'required',
-            'etat_terrain' => 'required',
-            'provenance_TF' => 'required',
-            // 'numero_bordereau_analytique' => 'required',
-            // 'volume_du_bordereau_analytique' => 'required',
-            // 'date_detablissement_du_bordereau_analytique' => 'required',
-            'limit_nord' => 'required',
-            'limit_sud' => 'required',
-            'limit_est' => 'required',
-            'limit_ouest' => 'required',
-            'coordonnees' => 'required',
-            'numero_ccp' => 'required',
-            'price' => 'nullable',
-            'user_ids' => 'required|array|min:1',
-            'user_ids.*' => 'required',
+            'numero_titre_foncier' => 'nullable',
+            // 'region_id' => 'required',
+            // 'division_id' => 'required',
+            // 'sub_division_id' => 'required',
+            // 'date_de_delivrance_du_TF' => 'required|date',
+            // 'numero_du_duplicata' => 'required|integer',
+            // 'groupement' => 'required',
+            // 'lieu_dit' => 'required',
+            // 'zone' => 'required',
+            // 'numero_folio' => 'required|integer',
+            // 'volume' => 'required|integer',
+            // 'superficie_du_TF_mere' => 'required',
+            // 'etat_TF' => 'required',
+            // 'etat_terrain' => 'required',
+            // 'provenance_TF' => 'required',
+            // // 'numero_bordereau_analytique' => 'required',
+            // // 'volume_du_bordereau_analytique' => 'required',
+            // // 'date_detablissement_du_bordereau_analytique' => 'required',
+            // 'limit_nord' => 'required',
+            // 'limit_sud' => 'required',
+            // 'limit_est' => 'required',
+            // 'limit_ouest' => 'required',
+            // 'coordonnees' => 'required',
+            // 'numero_ccp' => 'required',
+            // 'taxFoncier_amount' => 'nullable',
+            // 'user_ids' => 'required|array|min:1',
+            // 'user_ids.*' => 'required',
         ]);
 
 
@@ -266,6 +267,16 @@ class Index extends Component
         $transform = $this->convert($this->coordonnees);
         // dd($transform);
 
+        $selectedSubDivision = SubDivision::findOrFail($this->sub_division_id);
+
+        // Extract the prix_minima_m2 from the selected sub_division
+        $prixMinimaM2 = $selectedSubDivision->prix_minima_m2;
+        $taxFoncier_amount = $this->superficie_du_TF_mere * $prixMinimaM2;
+
+        // Calculate the tax_foncier based on the formula
+        $taxFoncier_amount = 0.001 * $taxFoncier_amount;
+
+        // dd($taxFoncier_amount);
 
         // $coordonne = $this->convert($this->coordonnees);
         // dd($coordonne);
@@ -275,6 +286,7 @@ class Index extends Component
 
         $titrefoncier = TitreFoncier::create([
             'numero_titre_foncier' => $this->numero_titre_foncier,
+
             'national_code' => $this->genererNationalCodeUnique(),
             'region_id' => $this->region_id,
             'division_id' => $this->division_id,
@@ -303,9 +315,10 @@ class Index extends Component
             'nom_et_prenoms_de_largent_traitant' => $this->nom_et_prenoms_de_largent_traitant,
             'conservateur_id' => $this->conservateur_id,
             'numero_ccp' => $this->numero_ccp,
-            'price' => $this->price,
+            'taxFoncier_amount' => $taxFoncier_amount,
         ]);
         
+        dd($titrefoncier);
 
         $titrefoncier->users()->sync($this->user_ids);
 
@@ -388,7 +401,7 @@ class Index extends Component
         $this->nom_et_prenoms_de_largent_traitant =  $titrefoncier->nom_et_prenoms_de_largent_traitant;
         $this->le_conservateur =  $titrefoncier->le_conservateur;
         $this->numero_ccp =  $titrefoncier->numero_ccp;
-        $this->price =  $titrefoncier->price;
+        $this->taxFoncier_amount =  $titrefoncier->taxFoncier_amount;
 
         $this->coordinates = $this->convertToUTM(array_values(json_decode($titrefoncier->coordonnees, true)));
         $this->coordonnees = $this->convertToUTM(array_values(json_decode($titrefoncier->coordonnees, true)));
@@ -422,7 +435,7 @@ class Index extends Component
                 'etat_terrain' => 'required',
                 'provenance_TF' => 'required',
                 'numero_ccp' => 'required',
-                'price' => 'nullable',
+                'taxFoncier_amount' => 'nullable',
                 // 'numero_bordereau_analytique' => 'required',
                 // 'volume_du_bordereau_analytique' => 'required',
                 // 'date_detablissement_du_bordereau_analytique' => 'required',
@@ -437,6 +450,16 @@ class Index extends Component
 
         if (!empty($this->titrefoncier)) {
 
+            $selectedSubDivision = SubDivision::findOrFail($this->sub_division_id);
+
+            // Extract the prix_minima_m2 from the selected sub_division
+            $prixMinimaM2 = $selectedSubDivision->prix_minima_m2;
+    
+            // Calculate the price based on the formula
+            $price = $this->superficie_du_TF_mere * $prixMinimaM2;
+    
+            // Calculate the tax_foncier based on the formula
+            $taxFoncier_amount = 0.001 * $price;
             $this->titrefoncier->update([
                 'numero_titre_foncier' => $this->numero_titre_foncier,
                 'region_id' => $this->region_id,
@@ -464,7 +487,7 @@ class Index extends Component
                 'nom_et_prenoms_de_largent_traitant' => $this->nom_et_prenoms_de_largent_traitant,
                 'le_conservateur' => $this->le_conservateur,
                 'numero_ccp' => $this->numero_ccp,
-                'price' => $this->price,
+                'taxFoncier_amount' => $this->taxFoncier_amount,
                 'coordonnees' => json_encode(getCoords($this->coordonnees)),
             ]);
         }
@@ -527,7 +550,6 @@ class Index extends Component
                 'coordonnees',
                 'user_ids',
                 'numero_ccp',
-                'price',
             ]
         );
 
