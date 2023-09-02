@@ -98,7 +98,6 @@
                 var jsonString = item.coordonnees;
                 var numero = item.numero_titre_foncier
                 var superficie = item.superficie_du_TF_mere
-                // var proprietaires = item.
                 var coordinatesArray = JSON.parse(jsonString);
                 var transformedCoordinates = [];
 
@@ -108,9 +107,17 @@
                         1])]); // Notez l'inversion des coordonnées
                 }
                 // console.log([transformedCoordinates]);
+                var proprietaires = [];
+
+    // Parcourez les propriétaires associés à ce titre foncier
+    item.users.forEach(function(proprietaire) {
+        proprietaires.push(proprietaire.last_name); // Vous pouvez ajuster cela en fonction de la structure réelle de votre modèle User
+    });
+    var proprietairesText = proprietaires.join('<br>');
                 polygons.push({
                     "name": numero,
                     "area": superficie,
+                    "proprietaires": proprietairesText,
                     "rings":  transformedCoordinates
                 });
                 // console.log([polygons]);
@@ -135,11 +142,12 @@
                     symbol: simpleFillSymbol,
                     attributes: {
                         name: polygonData.name,
-                        area: polygonData.area
+                        area: polygonData.area,
+                        proprietaires: polygonData.proprietaires
                     },
                     popupTemplate: {
                         title: "Numero TF: {name}",
-                        content: "Superficie Tf: {area} m2 <br> Proprietaires"
+                        content: "<b>Superficie</b> Tf: {area} m2 <br> <b>Proprietaires </b>: {proprietaires}"
                     }
                 });
                 graphicsLayer.add(polygonGraphic);
