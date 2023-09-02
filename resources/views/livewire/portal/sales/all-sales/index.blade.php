@@ -28,7 +28,7 @@
                     </svg>
                     {{ __('Gestion des ventes totales') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir toutes les ventes totales dans l\'application') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('Voir toutes les ventes totales dans l\'application') }}</p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -180,7 +180,7 @@
                     <tr>
                         <td colspan="10" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
+                                <h4 class="fs-4 fw-bold">{{ __('Liste vide') }} </h4>
                                 <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                             </div>
                         </td>

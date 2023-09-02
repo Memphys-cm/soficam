@@ -28,7 +28,7 @@
                     </svg>
                     {{ __('Payment Management') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Listes de tous vos paiements') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('Listes de tous vos paiements') }} </p>
             </div>
         </div>
     </div>
@@ -126,7 +126,7 @@
                         <tr>
                             <td colspan="10" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
-                                    <h4 class="fs-4 fw-bold">{{ __('Opps nothing here') }} &#128540;</h4>
+                                    <h4 class="fs-4 fw-bold">{{ __('Liste vide') }}</h4>
                                     <p>{{ __('No Record Found..!') }}</p>
                                 </div>
                             </td>

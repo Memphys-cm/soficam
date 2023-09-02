@@ -332,7 +332,7 @@
                                             @can('tax_foncier.view')
                                             <li class="nav-item {{ $request->routeIs('portal.taxfonciere.suivi.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.taxfonciere.suivi.index') }}" class="nav-link">
-                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Suivi TaxFoncier') }}</span>
+                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Suivi Taxe Fonciere') }}</span>
                                                 </a>
                                             </li>
                                             @endcan

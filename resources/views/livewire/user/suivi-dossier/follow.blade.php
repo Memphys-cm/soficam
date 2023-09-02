@@ -161,8 +161,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">Details</button>
                                 </div>
                             </div>
                         </div>
@@ -197,8 +195,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">Details</button>
                                 </div>
                             </div>
                         </div>
