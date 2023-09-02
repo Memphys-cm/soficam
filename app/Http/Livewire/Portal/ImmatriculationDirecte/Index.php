@@ -223,7 +223,7 @@ class Index extends Component
 
         DB::transaction(function () {
             $this->imma_directe->update([
-                'dossier_administratif_complet' => Carbon::now(),
+                'dossier_technique_complet' => Carbon::now(),
                 'statut' => 'Dossier Technique Mise En Forme',
                 'next_step' => 'Mise en Forme du Dossier Administratif',
             ]);
@@ -234,7 +234,7 @@ class Index extends Component
             foreach ($this->attachments as $attachment) {
                 $this->imma_directe->addMedia($attachment->getRealPath())
                     ->usingName('Acte Expidition')
-                    ->toMediaCollection('imma_directe_dossier_administratif');
+                    ->toMediaCollection('imma_directe_dossier_technique');
             }
         }
 
@@ -310,13 +310,23 @@ class Index extends Component
         } else if($imma->next_step == "Transmission du dossier technique au CSDAF"){
             DB::transaction(function () {
                 $this->imma_directe->update([
-                    'statut' => 'Dossier technique signe Par le CSRCadastre',
-                    'next_step' => 'Transmission du dossier technique au Délégué Régional MINDCAF',
-                    'date_dossier_signe_csr_cadastre' => $this->date_status,
+                    'statut' => 'Dossier Transmis au CsDaf',
+                    'next_step' => 'Jumelage (fusion) et préparation du Bordereau de transmission',
+                    'transmission_csdaf' => $this->date_status,
                 ]);
             });
             
-        } else if($imma->next_step == "Transmission du dossier technique au Délégué Régional MINDCAF"){
+        }else if($imma->next_step == "Jumelage (fusion) et préparation du Bordereau de transmission"){
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => 'Bordereau de Transmission Signe Par le Delegue Departemental',
+                    'next_step' => 'Jumelage (fusion) et préparation du Bordereau de transmission',
+                    'dossier_jumelage' => $this->date_status,
+                ]);
+            });
+            
+        } 
+        else if($imma->next_step == "Transmission du dossier technique au Délégué Régional MINDCAF"){
             DB::transaction(function () {
                 $this->imma_directe->update([
                     'statut' => ' Dossier technique transmis au Délègue Regional Mindcaf',

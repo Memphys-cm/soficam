@@ -54,6 +54,8 @@ return new class extends Migration
             $table->date('date_geometre_enregistrer')->nullable();
             $table->date('pv_enregistrer')->nullable();
             $table->date('dossier_technique_complet')->nullable();
+            $table->date('dossier_jumelage')->nullable();
+            $table->date('transmission_csdaf')->nullable();
             $table->date('dossier_administratif_complet')->nullable();
             $table->date('dossier_technique_enregistrer')->nullable();
             $table->foreignId('etat_cession_id')->on('etat_cessions')->index()->nullable();
