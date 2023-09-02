@@ -773,8 +773,8 @@ class Index extends Component
                 // 'comissions' => json_encode($this->comissions),
                 'status_convocation' => 'done',
 
-                'statut' => 'Convocationsur le Terrain Effectuer',
-                'next_step' => 'Etablissement Etat de Cession',
+                'statut' => 'Certificat transmis pour signature',
+                'next_step' => 'Signature du certficat d\'affichage',
             ]);
         });
         $this->refresh(__('Convocation imprimée Avec SUCCES!'), 'ConvocationImmaDirecteModal');
