@@ -283,7 +283,7 @@ class Index extends Component
                     'date_avis_publique_signe' => $this->date_status,
                 ]);
             });
-        } else if($imma->next_step == "Signature du certificat d\'affichage"){
+        } else if($imma->next_step == "Signature du certificat d'affichage"){
             DB::transaction(function () {
                 $this->imma_directe->update([
                     'statut' => 'Certificat d\'affichage signé',
@@ -780,21 +780,6 @@ class Index extends Component
         $this->refresh(__('Convocation imprimée Avec SUCCES!'), 'ConvocationImmaDirecteModal');
 
         $this->clearFields();
-
-        $sid='ACa77985267946bd8e613944d40b9d0458';
-        $token='b7b84303df6a21c3d6f9b32d3d678103';
-        $twilio = new Client($sid, $token);
-
-        $messageBody = "Hello, le message porté est disponible.";
-
-        $twilio->messages->create(
-            '+237672959097',
-            [
-                'from' => '+15856393680',
-                'body' => $messageBody,
-            ]
-        );
-
 
         $data = [
             'imma_directe' => $this->imma_directe,
