@@ -72,49 +72,149 @@ class Index extends Component
 
         $this->clearFields();
     
-        $this->refresh(__('Charge successfully Created!'), 'CreateChargeModal');
+        $this->refresh(__('Charge ajouté avec succès!'), 'CreateChargeModal');
     }
 
-    private function sendChargeMessage($charge)
-    {
+    function sendChargeMessage($charge){
         $receivers = $charge->titreFoncier->users;
 
-        /*foreach($receivers as $user) {
-            if ($user) {*/
-            $sid='ACa77985267946bd8e613944d40b9d0458';
-            $token='b7b84303df6a21c3d6f9b32d3d678103';
-            $twilio = new Client($sid, $token);
+        $sms='';
+        $userNames='';
+        $mobiles = '';
 
-            $messageBody = "Hello, a $charge->type_charge has been added to your land title.";
+        foreach($receivers as $user) {
+            if($user){
+                $userNames .= $user->first_name . ', ';
+                $mobiles .= $user->primary_phone_number . ',';
+            }
+        }
 
-            $twilio->messages->create(
-                '+237672959097',
-                [
-                    'from' => '+15856393680',
-                    'body' => $messageBody,
-                ]
+        $userNames = rtrim($userNames, ', ');
+
+        //Personnaliser le sms
+        switch ($charge->type_charge) {
+            case 'HYPOTHEQUE':
+                $sms = "Mr/Mme. $userNames, une hypothèque a été ajouté à votre titre foncier.";
+                break;
+    
+            case 'PRENOTE':
+                $sms = "Mr/Mme. $userNames, une prénotation a été ajouté à votre titre foncier.";
+                break;
+                
+            case 'SUSPENDU';
+                $sms = "Mr/Mme. $userNames, votre titre foncier a été suspendu.";
+                break;
+
+            case 'ANNULATION';
+                $sms = "Mr/Mme. $userNames, votre titre foncier a été annulé.";
+                break;
+
+            default:
+                    // Le type de charge n'est pas reconnu, vous pouvez gérer cela ici
+                break;
+        }
+                
+        if(!empty($sms)){
+            $senderid ='SOFICAM';
+            $mobiles = $mobiles = rtrim($mobiles, ',');
+            $api_key = '36v7fN66hzUD6SaBYkILlirHZo7P';
+            $url = 'https://api.queensms.net/v1/sms.php';
+
+            $sms_body = array(
+                'api_key' => $api_key,
+                'senderid' => $senderid,
+                'sms' => $sms,
+                'mobiles' => $mobiles
             );
-            //}
-        //}
+                
+            $send_data = http_build_query($sms_body);
+            $gateway_url = $url . "?" . $send_data;
+                
+            try {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $gateway_url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_HTTPGET, 1);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                $output = curl_exec($ch);
+            
+                if (curl_errno($ch)) {
+                    $output = curl_error($ch);
+                    $arr = ['echec'];
+                    return($arr);
+                }
+                else{
+                    return($output);
+                }
+                    curl_close($ch);
+            }
+                
+            catch (Exception $exception){
+                //echo $exception->getMessage();
+                $arr = ['echec'];
+                return($arr);
+            }
+        }
+
     }
 
-    private function removeCharge() {
-        $sid='ACa77985267946bd8e613944d40b9d0458';
-        $token='b7b84303df6a21c3d6f9b32d3d678103';
-        $twilio = new Client($sid, $token);
+    private function removeCharge($charge) {
+        $receivers = $charge->titreFoncier->users;
 
-        $messageBody = "Hello, your land title is now available.";
+        $sms = 'votre titre foncier est disponible';
+        $senderid ='SOFICAM';
+        $mobiles = '';
 
-        $twilio->messages->create(
-            '+237672959097',
-            [
-                'from' => '+15856393680',
-                'body' => $messageBody,
-            ]
+        foreach ($receivers as $user) {
+            if ($user) {
+                // Ajoutez le numéro de téléphone de l'utilisateur à la chaîne
+                $mobiles .= $user->primary_phone_number . ',';
+            }
+        }
+    
+        // Supprimez la virgule et l'espace en trop à la fin de la chaîne
+        $mobiles = rtrim($mobiles, ',');
+        $api_key = '36v7fN66hzUD6SaBYkILlirHZo7P';
+        $url = 'https://api.queensms.net/v1/sms.php';
+
+        $sms_body = array(
+            'api_key' => $api_key,
+            'senderid' => $senderid,
+            'sms' => $sms,
+            'mobiles' => $mobiles
         );
+    
+        $send_data = http_build_query($sms_body);
+        $gateway_url = $url . "?" . $send_data;
+    
+        try {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $gateway_url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HTTPGET, 1);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $output = curl_exec($ch);
+    
+            if (curl_errno($ch)) {
+                $output = curl_error($ch);
+                $arr = ['echec'];
+                return($arr);
+            }
+            else{
+                return($output);
+            }
+            curl_close($ch);
+        }
+    
+        catch (Exception $exception){
+            //echo $exception->getMessage();
+            $arr = ['echec'];
+            return($arr);
+        }
     }
 
     public function update() {
+        dd('hhff');
         $this->validate([
             'titre_foncier_id' => 'required',
         ]);
@@ -122,28 +222,19 @@ class Index extends Component
         $this->titre_foncier = TitreFoncier::findOrFail($this->titre_foncier_id);
 
         $this->titre_foncier->update([
-            'etat_TF' => 'DISPONIBLE',
+            'etat_TF' => 'RETRAIT',
         ]);
             
         $charge = Charge::create([
             'titre_foncier_id' => $this->titre_foncier_id,
-            'type_charge' => 'DISPONIBLE',
+            'type_charge' => 'RETRAIT',
         ]);
 
         $this->removeCharge();
 
         $this->clearFields();
 
-        $this->refresh(__('Charge successfully Updated!'), 'EditChargeModal');
-    }
-
-    public function delete()
-    {
-        if (!empty($this->charge)) {
-            $this->charge->delete();
-        }
-
-        $this->refresh(__('Charge successfully deleted!'), 'DeleteModal');
+        $this->refresh(__('Charge retirée avec succès!'), 'EditChargeModal');
     }
    
     public function render()
