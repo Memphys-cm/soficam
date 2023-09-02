@@ -250,6 +250,7 @@ class Index extends Component
             $this->imma_directe->update([
                 'statut' => 'Descente sur le terrain effectuée',
                 'next_step' => 'Mise en Forme du Dossier Technique',
+                'comissions' => json_encode($this->comissions),
                 'descente_terrain' => Carbon::now()
             ]);
         });
@@ -257,7 +258,7 @@ class Index extends Component
         if (!empty($this->attachments)) {
             foreach ($this->attachments as $attachment) {
                 $this->imma_directe->addMedia($attachment->getRealPath())
-                    ->usingName('Acte Expidition')
+                    ->usingName('Acte_Pv_Descente_Terrain')
                     ->toMediaCollection('imma_directe_dossier_administratif');
             }
         }
@@ -366,7 +367,7 @@ class Index extends Component
 
         $this->refresh(__('Bordoreau de Transmition Transmi Avec SUCCES!'), 'bordoreauDeTransmitionModal');
     }    
-
+    
     //enregistré le prix du dossier visé dans les paiements
     public function dossier_vise() {
         DB::transaction(function () {
@@ -759,7 +760,7 @@ class Index extends Component
         DB::transaction(function () {
             $this->imma_directe->update([
                 'date_convocation' => $this->date_convocation,
-                'comissions' => json_encode($this->comissions),
+                // 'comissions' => json_encode($this->comissions),
                 'status_convocation' => 'done',
 
                 'statut' => 'Convocationsur le Terrain Effectuer',
@@ -790,7 +791,7 @@ class Index extends Component
             'comissions' => $this->comissions
         ];
 
-        dd($this->imma_directe, $this->comissions);
+        // dd($this->imma_directe, $this->comissions);
         $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.message-porte', 
         $data)->setPaper('a4', 'portrait');
 
