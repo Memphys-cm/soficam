@@ -106,21 +106,13 @@ class Index extends Component
         // Générer le code unique
         $code = $this->generateUniqueCode($year, $counter);
 
-        $this->validate();
+        // $this->validate();
         if ($this->state == 0) {
             $this->state_assignment->sub_division_id = $this->subdivision_id;
             $this->state_assignment->reference_etat_cession = $code;
             $this->state_assignment->user_id = $this->user_id;
             $this->state_assignment->geometre_id = $this->geometre_id;
             $this->state_assignment->status = 'pending_payment';
-            # code...
-        } else {
-            # code...
-        }
-        
-        // $this->subdivision_id->reference_etat_cession = $code;
-        DB::transaction(function(){
-
             $this->state_assignment->save();
 
             $sale = Sale::create([
@@ -139,7 +131,17 @@ class Index extends Component
                 'saleable_type' => 'App\Models\EtatCession', // Adjust the namespace if different
                 'created_by' => auth()->user()->name,
             ]);
-        });
+            # code...
+        } else {
+            # code...
+            DB::transaction(function(){
+
+            
+            });
+        }
+        
+        // $this->subdivision_id->reference_etat_cession = $code;
+       
         $this->state = 0;
         $this->clearFields();
         $this->refresh(__('State Assignment successfully :state!', ['state' => $this->state ? 'Updated' : 'Created']), 'CreateUpdateEtatCessionModal');
