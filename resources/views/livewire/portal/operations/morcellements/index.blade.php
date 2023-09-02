@@ -113,8 +113,9 @@
                     @forelse($morcellements as $morcellement)
                     <tr>
                         <td>
-                            <span class="fw-normal">{{$morcellement->numero_operation}}</span>
+                            <a class="text-decoration-underline text-info" href="{{route('portal.operations.details',['operation_id'=>$morcellement->id])}}"><span class="fw-normal">{{$morcellement->numero_operation}}</span></a>
                         </td>
+
                         <td>
                             <div class='d-flex'>
 

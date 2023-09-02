@@ -8,6 +8,7 @@ use Livewire\Component;
 use App\Models\Operation;
 use App\Models\MembreDuCabinet;
 use App\Models\Lotissements\Parcel;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Livewire\Traits\WithDataTables;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -45,8 +46,7 @@ class OpsDetails extends Component
     }
     public function render()
     {
-        if
-        (!Gate::allows('operation.mutation_totale.view') || !Gate::allows('operation.retrait_indivision.view') || !Gate::allows('operation.morcellement.view')){
+        if (!Gate::allows('operation.mutation_totale.view') || !Gate::allows('operation.retrait_indivision.view') || !Gate::allows('operation.morcellement.view')){
             return abort('401');
         }
         return view('livewire.portal.operations.partials.ops-details');
