@@ -170,7 +170,7 @@ class Sale extends Component
 
         $this->render();
 
-        $this->refresh(__('Block Sold successfully'), 'CreateLotSaleModal');
+        $this->refresh(__('Bloc vendu avec succès'), 'CreateLotSaleModal');
     }
 
 

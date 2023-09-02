@@ -81,7 +81,7 @@ class Index extends Component
         });
        
         $this->clearFields();
-        $this->refresh(__('immobilier successfully Created!'), 'createimmobilierModal');
+        $this->refresh(__('Releve Immobilier créé avec Succès!'), 'createimmobilierModal');
     }
 
     public function initData($id)
@@ -138,7 +138,7 @@ class Index extends Component
             ]);
         });
 
-        $this->refresh(__('immobilier Updated Created!'), 'updateimmobilierModal');
+        $this->refresh(__('Relévé Immobilier modifié avec succès!'), 'updateimmobilierModal');
 
         $this->clearFields();
     }
@@ -157,7 +157,7 @@ class Index extends Component
                 $this->immobilier->delete();
             });
     
-            $this->refresh(__('immobilier deleted successfully'), 'DeleteModal');
+            $this->refresh(__('Relévé Immobilier supprimé avec succès'), 'DeleteModal');
         }
     }
 
@@ -175,7 +175,7 @@ class Index extends Component
 
         return response()->streamDownload(
             fn () => print($pdf->output()),
-            __('Report-') . Str::random('10') . ".pdf"
+            __('Releve_Immo-') . Str::random('10') . ".pdf"
         );
     }
 
