@@ -94,7 +94,7 @@
                             <td>{{ getStatut($item) }}</td>
                             <td>{{ $item->created_at }}</td>
                             <td class="text-center">
-                                <a class="btn btn-primary" href="{{ route('user.suivi-dossier.follow') }}">Suivre</a>
+                                <a class="btn btn-primary" href="{{ route('user.suivi-dossier.follow') }}">{{__('Suivre')}}</a>
                             </td>
                         </tr>
                     @empty
@@ -121,9 +121,7 @@
 @php
     function getTypeName($item)
     {
-        if ($item instanceof \App\Models\TitreFoncier) {
-            return 'Taxe foncière';
-        } elseif ($item instanceof \App\Models\Lotissements\Parcel) {
+        if ($item instanceof \App\Models\Lotissements\Parcel) {
             return 'Mutation totale';
         } elseif ($item instanceof \App\Models\ImmatriculationDirecte) {
             return 'Immatriculation Directe';
@@ -132,9 +130,7 @@
     
     function getNom($item)
     {
-        if ($item instanceof \App\Models\TitreFoncier) {
-            return $item->nom;
-        } elseif ($item instanceof \App\Models\Lotissements\Parcel) {
+        if ($item instanceof \App\Models\Lotissements\Parcel) {
             return $item->name; // Changer "name" par le nom d'attribut correct
     } elseif ($item instanceof \App\Models\ImmatriculationDirecte) {
         return $item->autre_nom; // Changer "autre_nom" par le nom d'attribut correct
@@ -143,9 +139,7 @@
     
     function getStatut($item)
     {
-        if ($item instanceof \App\Models\TitreFoncier) {
-            return $item->status_tax;
-        } elseif ($item instanceof \App\Models\Lotissements\Parcel) {
+        if ($item instanceof \App\Models\Lotissements\Parcel) {
             return $item->status; // Changer "status" par le nom d'attribut correct
     } elseif ($item instanceof \App\Models\ImmatriculationDirecte) {
         return $item->le_status_tax; // Changer "le_statut" par le nom d'attribut correct

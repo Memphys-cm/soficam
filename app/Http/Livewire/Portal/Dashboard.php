@@ -23,6 +23,7 @@ class Dashboard extends Component
     public $recentSales = [];
     public $recentCertificateUpdates = [];
 
+    
     public function mount()
     {
         $this->loadRecentActivities();
