@@ -5,7 +5,7 @@
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4">{{ 'Vendre' }} {{ __(' Lot') }}</h1>
-                        <p class="px-1"> {{ 'Vendre' }} {{ __(' ELot') }} &#128522;</p>
+                        <p class="px-1"> {{ 'Vendre' }} {{ __(' Lot') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="store">
 
@@ -24,8 +24,9 @@
 
                             <div class="col-md-6 ">
                                 <label for="code">{{ __('Notaire') }}</label>
-                                <select class="form-select" wire:model="notaire_id" class="form-control @error('notaire_id') is-invalid @enderror">
-                                    <option value=''>{{ __('-- Select --') }}</option>
+                                <select class="form-select" wire:model="notaire_id"
+                                    class="form-control @error('notaire_id') is-invalid @enderror">
+                                    <option value=''>{{ __('-- Selectionner --') }}</option>
                                     @foreach ($notaires as $notaire)
                                     <option wire:key="{{ $notaire->id }}" value='{{ $notaire->id }}'>
                                         {{ !empty($notaire->cabinet) ? $notaire->cabinet->nom_cabinet : '' }} -
@@ -108,16 +109,19 @@
                         @endif
                         <div class='form-group row mb-3'>
                             <div class=" col">
-                                <label for="surperficie_du_lot">{{ __('TOTAL SURFACE') }}</label>
-                                <input type="number" wire:model="surperficie_du_lot" class="form-control  @error('surperficie_du_lot') is-invalid @enderror " value="{{ old('surperficie_du_lot') }}" placeholder="0" id="surperficie_du_lot" autofocus="" required="" disabled>
-                                @error('surperficie_du_lot')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                                <label for="superficie_du_TF_mere">{{ __('TOTAL SURFACE') }}</label>
+                                <input type="number" wire:model="superficie_du_TF_mere"
+                                    class="form-control  @error('superficie_du_TF_mere') is-invalid @enderror "
+                                    value="{{ old('superficie_du_TF_mere') }}" placeholder="0"
+                                    id="superficie_du_TF_mere" autofocus="" required="" disabled>
+                                @error('superficie_du_TF_mere')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
                             <div class=" col"><label for="sale_amount">{{ __('Montant de la vente') }}
-                                    {{ __('XAF') }}</label>
+                                    {{ __('FCFA') }}</label>
                                 <input type="number" wire:model="sale_amount" class="form-control  @error('sale_amount') is-invalid @enderror " value="{{ old('sale_amount') }}" placeholder="0" id="sale_amount" autofocus="" required="" disabled>
                                 @error('sale_amount')
                                 <div class="invalid-feedback">

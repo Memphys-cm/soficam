@@ -12,6 +12,6 @@ class TestController extends Controller
     {
         $titles =  TitreFoncier::all();   
         // return view('test', compact('titles'));
-        return view('first_test', compact('titles'));
+        return view('first_test', compact('titles'))->layout('components.layouts.dashboard');
     }
 }

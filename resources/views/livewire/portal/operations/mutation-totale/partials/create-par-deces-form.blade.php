@@ -53,7 +53,7 @@
                                     </div>
                                     @enderror
                                 </div>
-                                <div class=" col"><label for="division">{{ __('Sous region') }}</label>
+                                <div class=" col"><label for="division">{{ __('Departement') }}</label>
                                     <input type="text" wire:model="division" class="form-control  @error('division') is-invalid @enderror " value="{{ old('division') }}" placeholder="" id="division" autofocus="" required="" disabled>
                                     @error('division')
                                     <div class="invalid-feedback">
@@ -139,8 +139,8 @@
                                 @enderror
                             </div>
                             <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
-                                <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Create')}}</button>
+                                <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
+                                <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Creer')}}</button>
                             </div>
                         </x-form-items.form>
                     </div>

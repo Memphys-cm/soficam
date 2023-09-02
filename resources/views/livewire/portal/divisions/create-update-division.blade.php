@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">{{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Division')}}</h1>
-                        <p class="px-1"> {{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Division')}} &#128522;</p>
+                        <h1 class="mb-0 h4">{{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Departement')}}</h1>
+                        <p class="px-1"> {{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Departement')}} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <div class="form-group row mb-3">
@@ -29,14 +29,14 @@
                             </div>
                         </div>
                         <div class="form-group mb-3">
-                            <label class="px-2" for="name">{{__('Division Name ')}} <span>({{__('En')}})</span></label>
+                            <label class="px-2" for="name">{{__('Nom Departement ')}} <span>({{__('En')}})</span></label>
                             <input wire:model="division.division_name_en" type="text" class="form-control  @error('division.division_name_en') is-invalid @enderror" placeholder="{{__('North')}}" required="" name="name">
                             @error('division.division_name_en')
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="form-group mb-3">
-                            <label class="px-2" for="name">{{__('Nom de la Sous Region ')}} <span>({{__('Fr')}})</span></label>
+                            <label class="px-2" for="name">{{__('Nom de la departement ')}} <span>({{__('Fr')}})</span></label>
                             <input wire:model="division.division_name_fr" type="text" class="form-control  @error('division.division_name_fr') is-invalid @enderror" placeholder="{{__('Nord')}}" required="" name="name">
                             @error('division.division_name_fr')
                             <div class="invalid-feedback">{{$message}}</div>

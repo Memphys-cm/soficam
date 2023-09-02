@@ -125,9 +125,9 @@ class User extends Authenticatable
         return $this->belongsToMany(TitreFoncier::class,'titrefoncier_user','titre_foncier_id','user_id')->withTimestamps();
     }
 
-    public function imma_directe_main() : BelongsToMany
+    public function imma_directes() : BelongsToMany
     {
-        return $this->belongsToMany(ImmatriculationDirecte::class,'requestor_id')->withTimestamps();
+        return $this->belongsToMany(ImmatriculationDirecte::class,'immatriculation_directe_user','immatriculation_directe_id','user_id')->withTimestamps();
     }
 
     public function certificatepropriete() : BelongsToMany

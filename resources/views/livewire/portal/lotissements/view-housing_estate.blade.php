@@ -41,7 +41,7 @@
                                     <th class="f-bold">{{ __('SURFACE VENDUE') }}</th>
                                     <th> {{ __($housing_estate->land_title->superficie_vendue_du_TF_mere ?? '0') }}
                                     </th>
-                                    <th class="f-bold">{{ __('LE CABINET DE GEOMETRE') }}</th>
+                                    <th class="f-bold">{{ __('CABINET DE GEOMETRE') }}</th>
                                     <th> {{ $housing_estate->geometric_pratice }} </th>
                                 </tr>
                                 <tr>
@@ -54,7 +54,7 @@
                                 <tr>
                                     <th class="f-bold">{{ __('NOMBRE DE BLOC') }}</th>
                                     <th> {{ __($housing_estate->blocks->count() ?? '0') }} </th>
-                                    <th class="f-bold">{{ __('THE PLANNER') }}</th>
+                                    <th class="f-bold">{{ __('LE PLANIFICATEUR') }}</th>
                                     <th> {{ $housing_estate->urbanist }} </th>
                                 </tr>
                                 <tr>

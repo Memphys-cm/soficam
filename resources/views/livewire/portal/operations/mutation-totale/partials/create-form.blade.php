@@ -4,7 +4,7 @@
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Creer')}}{{__('  mutation total')}}</h1>
+                        <h1 class="mb-0 h4"> {{ __('Creer')}}{{__('  mutation totale')}}</h1>
                         <p class="px-1"> {{ __('Creer')}}{{__(' une mutation totale du titre foncier')}} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
@@ -47,7 +47,7 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class=" col"><label for="division">{{ __('Sous Region') }}</label>
+                            <div class=" col"><label for="division">{{ __('Departement') }}</label>
                                 <input type="text" wire:model="division" class="form-control  @error('division') is-invalid @enderror " value="{{ old('division') }}" placeholder="" id="division" autofocus="" required="" disabled>
                                 @error('division')
                                 <div class="invalid-feedback">
@@ -57,7 +57,7 @@
                             </div>
                         </div>
                         <div class='form-group row mb-2'>
-                            <div class=" col"><label for="sub_division">{{ __('Arrondissent') }}</label>
+                            <div class=" col"><label for="sub_division">{{ __('Arrondissement') }}</label>
                                 <input type="text" wire:model="sub_division" class="form-control  @error('sub_division') is-invalid @enderror " value="{{ old('sub_division') }}" placeholder="" id="sub_division" autofocus="" required="" disabled>
                                 @error('sub_division')
                                 <div class="invalid-feedback">
@@ -92,7 +92,7 @@
                             <div class='col'>
                                 <label class="px-2" for="certificates_propriete_id">{{__('Certificat proprieté')}}</label>
                                 <select wire:model="certificates_propriete_id" class='form-control'>
-                                    <option value=''>{{__('-- Select --')}}</option>
+                                    <option value=''>{{__('-- Selectionner --')}}</option>
                                     @foreach($certificates_proprietes as $certificates_propriete)
                                     <option value='{{$certificates_propriete->id}}'>{{$certificates_propriete->certificate_proprietes_number}}</option>
                                     @endforeach
@@ -106,7 +106,7 @@
                             <div class='col'>
                                 <label class="px-2" for="etat_cession_id">{{__('Etat Cession')}}</label>
                                 <select wire:model="etat_cession_id" class='form-control'>
-                                    <option value=''>{{__('-- Select --')}}</option>
+                                    <option value=''>{{__('-- Selectionner --')}}</option>
                                     @foreach($etat_cessions as $etat_cession)
                                     <option value='{{$etat_cession->id}}'>{{$etat_cession->reference_etat_cession}}</option>
                                     @endforeach

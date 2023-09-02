@@ -82,8 +82,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
     });
     Route::prefix('suivi-dossier')->group(function () {
         Route::get('/', App\Http\Livewire\User\SuiviDossier\Index::class)->name('user.suivi-dossier.index');
+        Route::get('/follow', App\Http\Livewire\User\SuiviDossier\Follow::class)->name('user.suivi-dossier.follow');
     });
-
 });
 
 
@@ -94,7 +94,7 @@ Route::group(
         Route::get('/dashboard', App\Http\Livewire\Portal\Dashboard::class)->name('portal.dashboard');
 
         Route::get('/profile-setting', App\Http\Livewire\Portal\ProfileSetting::class)->name('portal.profile-setting');
-     
+
         // AuditLogs
         Route::prefix('auditlogs')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\AuditLogs\Index::class)->name('portal.auditlogs.index');
@@ -106,12 +106,10 @@ Route::group(
 
         Route::prefix('divisions')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\Divisions\Index::class)->name('portal.divisions.index');
-           
         });
 
         Route::prefix('sub-divisions')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\SubDivisions\Index::class)->name('portal.sub-divisions.index');
-           
         });
 
         Route::prefix('services')->group(function () {
@@ -120,31 +118,29 @@ Route::group(
 
         Route::prefix('users')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\Users\Index::class)->name('portal.users.index');
-           
         });
 
         //roles
         Route::prefix('roles')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\Roles\Index::class)->name('portal.roles.index');
         });
-        
-        
+
+
         //Land titles
         Route::prefix('titrefonciers')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\TitreFonciers\Index::class)->name('portal.titre-fonciers.index');
             Route::get('certificatepropriete', App\Http\Livewire\Portal\CertificatePropriete\Index::class)->name('portal.certificate-propriete.index');
-       
+
             Route::get('/report', App\Http\Livewire\Portal\TitreFonciers\Report\Index::class)->name('portal.titre-fonciers-report.index');
-     
+
             Route::get('/charges', App\Http\Livewire\Portal\TitreFonciers\Charges\Index::class)->name('portal.titre-fonciers-charges.index');
         });
-        
+
         Route::prefix('operations')->group(function () {
             Route::get('mutation-totale', App\Http\Livewire\Portal\Operations\MutationTotale\Index::class)->name('portal.mutation-totale.index');
             Route::get('morcellements', App\Http\Livewire\Portal\Operations\Morcellements\Index::class)->name('portal.morcellements.index');
             Route::get('retrait-indivisions', App\Http\Livewire\Portal\Operations\RetraitIndivision\Index::class)->name('portal.retrait-indivisions.index');
             Route::get('/{operation_id}/details', App\Http\Livewire\Portal\Operations\Partials\OpsDetails::class)->name('portal.operations.details');
-
         });
 
         Route::prefix('land-sales')->group(function () {
@@ -195,7 +191,7 @@ Route::group(
             Route::get('/immobilier', App\Http\Livewire\Portal\ReleveImmobilier\Immobilier\Index::class)->name('portal.immobilier.index');
             Route::get('/bien_immobilier', App\Http\Livewire\Portal\BienImmobilier\Index::class)->name('portal.bien_immobilier.index');
         });
-    
+
 
         Route::get('/scanner', QRCodeScanner::class)->name('portal.qrcode');
 
@@ -209,8 +205,5 @@ Route::group(
         Route::prefix('taxfonciere')->group(function () {
             Route::get('/suivi-taxfoncier', App\Http\Livewire\Portal\Taxfonciere\SuiviTaxfonciere\Index::class)->name('portal.taxfonciere.suivi.index');
         });
-
-
-
     }
 );

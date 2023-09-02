@@ -16,7 +16,7 @@
 
                             <h1 class="h4">{{__('Mot de passe oublié')}}?</h1>
                         </div>
-                        <p class="mb-4">{{__('Don\'t fret! Just type in your email and we will send you a code to reset your password')}}!</p>
+                        <p class="mb-4">{{__('Ne vous inquiétez pas ! Saisissez simplement votre adresse électronique et nous vous enverrons un code pour réinitialiser votre mot de passe.')}}!</p>
                         <x-form-items.form method="POST" action="{{ route('password.email') }}" class="form-modal">
                             @if (session('status'))
                             <div class="alert alert-success" role="alert">

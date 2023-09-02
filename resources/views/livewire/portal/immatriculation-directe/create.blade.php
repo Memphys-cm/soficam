@@ -78,8 +78,7 @@
                             </div>
                         </div>
                         <div class="p-3 shadow my-4">
-                            <h2 class="h5 mb-4">{{__('Ajouter des fichiers')}}</h2>
-                            <h2 class="h5 mb-4">{{ __('Add Files') }}</h2>
+                            <h2 class="h5 mb-4">{{__('Ajouter les fichiers')}}</h2>
                             <div class="d-xl-flex align-items-center">
                                 <div class="file-field">
                                     <div class="d-flex justify-content-xl-center ms-xl-3">
@@ -138,10 +137,10 @@
 
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
-                                data-bs-dismiss="modal">{{ __('Close') }}</button>
+                                data-bs-dismiss="modal">{{ __('Fermer') }}</button>
                             <button type="submit" wire:click.prevent="{{ $state ? 'update' : 'store' }}"
                                 class="btn btn-primary btn-loading"
-                                wire:loading.attr="disabled">{{ $state ? __('Update') : __('Register') }}</button>
+                                wire:loading.attr="disabled">{{ $state ? __('Mettre à jour') : __('Enregistrer') }}</button>
                         </div>
                     </x-form-items.form>
                 </div>

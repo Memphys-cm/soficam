@@ -49,10 +49,10 @@
                 <div class="card p-3">
                     <h5 class="w-auto">{{__('Modifier Lotissement')}}</h5>
                     <ul>
-                        <li>{{__('Mise à jour des informations foncières')}}</li>
-                        <li>{{__('Mise à jour des informations sur le promoteur')}}</li>
-                        <li>{{__('Mise à jour des blocs')}}</li>
-                        <li>{{__('Mise à jour des informations sur les parcelles (lots) ')}}</li>
+                        <li>{{__('Mettre à jour des informations foncières')}}</li>
+                        <li>{{__('Mettre à jour des informations sur le promoteur')}}</li>
+                        <li>{{__('Mettre à jour des blocs')}}</li>
+                        <li>{{__('Mettre à jour des informations sur les parcelles (lots) ')}}</li>
                     </ul>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                             <input type="text" class="form-control" required="" value="{{$tf_total_surface_area_remaining}}" disabled>
                         </div>
                     </div>
-                    <legend class="w-auto">{{__('Promoter Informations')}}</legend>
+                    <legend class="w-auto">{{__(' Informations Promoteur')}}</legend>
                     <div class='row form-group mb-3'>
                         <div class="col-md-3 py-2">
                             <label for="code">{{ __('Maeture') }}</label>
@@ -282,7 +282,7 @@
                                 <input type="number" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.surperficie_du_lot">
                             </div>
                             <div class="col-md-3">
-                                <label for="lotEtat">{{__('Laffectation du Lot')}}</label>
+                                <label for="lotEtat">{{__('L\'affectation du Lot')}}</label>
                                 <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.laffectation_du_lot">
                             </div>
                             <div class="col-md-3">

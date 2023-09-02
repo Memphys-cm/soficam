@@ -6,16 +6,16 @@ use App\Models\User;
 use App\Models\Document;
 use App\Models\TitreFoncier;
 use App\Models\Sales\Saleable;
-use App\Models\Traits\HasUUID;
+// use App\Models\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Sale extends Model
 {
-    use HasFactory, HasUUID;
+    use HasFactory;
     protected $guarded = [];
-   
+
     public function titreFoncier()
     {
         return $this->belongsTo(TitreFoncier::class, 'titre_foncier_id');
@@ -26,7 +26,7 @@ class Sale extends Model
     }
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
     public function documents()
     {
@@ -46,21 +46,23 @@ class Sale extends Model
                 $q->where('sales_amount', 'like', '%' . $query . '%');
                 $q->orWhere('sales_code', 'like', '%' . $query . '%');
                 $q->orWhere('sales_type', 'like', '%' . $query . '%');
-                $q->orWhere('user_id', 'like', '%' . $query . '%');
+                $q->orWhereHas('user', function ($q) use ($query) {
+                    $q->where('first_name', 'like', '%' . $query . '%');
+                    $q->orWhere('last_name', 'like', '%' . $query . '%');
+                });
                 $q->orWhere('payment_status', 'like', '%' . $query . '%');
                 $q->orWhere('service_id', 'like', '%' . $query . '%');
                 $q->orWhere('sales_type', 'like', '%' . $query . '%');
-                
             });
     }
 
-    public function getStatusStyleAttribute() : String
+    public function getStatusStyleAttribute(): String
     {
         return match ($this->payment_status) {
-             'totally_paid' => 'success',
-             'partially_paid' => 'info',
-             'pending_payment' => 'secondary',
-             NULL => ''
+            'totally_paid' => 'success',
+            'partially_paid' => 'info',
+            'pending_payment' => 'secondary',
+            NULL => ''
         };
     }
     public function getStatusTextAttribute(): String
@@ -81,7 +83,7 @@ class Sale extends Model
             'mutation_totale_normale' => 'success',
             'mutation_totale_par_deces' => 'danger',
             'morcellement_normale' => 'secondary',
-            'morcellement_forcee' => 'tertiary', 
+            'morcellement_forcee' => 'tertiary',
             'retrait_indivision' => 'dark',
             default => ''
         };
@@ -99,5 +101,4 @@ class Sale extends Model
             default => ''
         };
     }
-
 }

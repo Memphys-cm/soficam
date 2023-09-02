@@ -46,12 +46,12 @@ class Index extends Component
         // Check if both total surface for sale (superficie_du_TF_mere) and unit price per m² are set
         if (!empty($this->superficie_du_TF_mere) && !empty($this->price_per_m²)) {
             // Calculate the sale amount by multiplying superficie_du_TF_mere and price per m²
-            $this->sale_amount = $this->superficie_du_TF_mere * $this->price_per_m²;
+            $this->sale_amount = intval($this->superficie_du_TF_mere) * intval($this->price_per_m²);
 
             // Calculate the remaining_amount as the difference between sale_amount and advanced_amount
             if ($this->type_de_versement === 'tranche') {
                 if ($this->montant_versee !== null) {
-                    $this->montant_restant = $this->sale_amount - $this->montant_versee;
+                    $this->montant_restant = intval($this->sale_amount) - intval($this->montant_versee);
                 } else {
                     $this->montant_versee = 0;
                     $this->montant_restant = 0;
@@ -63,8 +63,8 @@ class Index extends Component
             }
         } else {
             // If any of the inputs is not set, set the sale amount to null or 0, depending on your preference
-            $this->sale_amount = null; // or 0
-            $this->remaining_amount = null; // or 0
+            $this->sale_amount = 0; // or 0
+            $this->remaining_amount = 0; // or 0
         }
         // dd($this->type_de_versement);
     }
@@ -81,7 +81,7 @@ class Index extends Component
     public function updatedMontantVersee()
     {
         // Recalculate the montant_restant based on the updated montant_versee
-        $this->montant_restant = $this->sale_amount - $this->montant_versee;
+        $this->montant_restant = intval($this->sale_amount) - intval($this->montant_versee);
     }
 
     public function updated($changedProperty)
@@ -184,10 +184,12 @@ class Index extends Component
     public function delete()
     {
         if ($this->sale) {
+
             $this->sale->delete();
         }
         $this->refresh(__('Sale deleted successfully'), 'DeleteModal');
     }
+
     public function clearFields()
     {
         $this->titre_foncier_id = '';
@@ -200,7 +202,7 @@ class Index extends Component
     }
     public function initData($id)
     {
-        $sale = Sale::findOrFail($id);
+        $sale = Parcel::findOrFail($id);
         $this->sale = $sale;
         $this->saleId = $id;
         $this->sale_amount = $sale->sale_amount;

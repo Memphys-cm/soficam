@@ -13,7 +13,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">{{__('Dashboard')}}</a></li>
+                        <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
                         <li class="breadcrumb-item "><a href="">{{__('Operations')}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{__('Details')}}</li>
                     </ol>
@@ -24,7 +24,7 @@
     <div class='row'>
         <div class='col-md-3 '>
             <div class="card p-3 mb-3">
-                <h5 class="w-auto">{{ __('Details of Operation') }}</h5>
+                <h5 class="w-auto">{{ __('Détails de l\'opération') }}</h5>
                 <ul class="">
                     <li class="">No.{{ $operation->numero_operation }}</li>
                     <li class="">{{ $operation->updated_at }}</li>
@@ -38,8 +38,8 @@
                 @if(!empty($medias))
                 <table>
                     <thead class="fw-light">
-                        <th class="fw-light">{{__('File Name')}}</th>
-                        <th class="fw-light">{{__('Size')}}</th>
+                        <th class="fw-light">{{__('Nom du Fichier')}}</th>
+                        <th class="fw-light">{{__('Taille')}}</th>
                     </thead>
                     <tbody>
                         @foreach($medias as $key => $media)
@@ -59,7 +59,7 @@
 
             <div class="card border-0 shadow">
                 <div class="card-header d-flex align-items-center">
-                    <h2 class="fs-5 fw-bold mb-0">{{__('Flow Stage')}}</h2>
+                    <h2 class="fs-5 fw-bold mb-0">{{__('Stade d\'écoulement')}}</h2>
                 </div>
                 <div class="card-body">
                     <div class="list-group list-group-flush list-group-timeline">
@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
                                 <div class="col ms-n2 mb-3">
-                                    <h3 class="fs-6 fw-bold mb-1">{{__('Geometre Activity')}}</h3>
+                                    <h3 class="fs-6 fw-bold mb-1">{{__('Activité Géomètre')}}</h3>
                                     <div class="d-flex align-items-center">
                                         <svg class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
@@ -93,7 +93,7 @@
                                     </div>
                                 </div>
                                 <div class="col ms-n2 mb-3">
-                                    <h3 class="fs-6 fw-bold mb-1">{{__('Notaire Activity')}}</h3>
+                                    <h3 class="fs-6 fw-bold mb-1">{{__('Activité Notaire')}}</h3>
                                     <div class="d-flex align-items-center">
                                         <svg class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
@@ -113,7 +113,7 @@
                                     </div>
                                 </div>
                                 <div class="col ms-n2 mb-3">
-                                    <h3 class="fs-6 fw-bold mb-1">{{__('Conservateur Activity')}}</h3>
+                                    <h3 class="fs-6 fw-bold mb-1">{{__('Activité Conservateur')}}</h3>
                                     <div class="d-flex align-items-center">
                                         <svg class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
@@ -129,7 +129,7 @@
         </div>
         <div class='col-md-9'>
             <div class="card p-3 mb-3">
-                <legend class="w-auto">Informations on the Land</legend>
+                <legend class="w-auto">{{__('Informations sur le terrain')}}</legend>
                 <div class='row gap-4'>
                     <div class="col">
                         <a href="#" class="d-flex align-items-center justify-content-between">
@@ -232,7 +232,7 @@
                                             <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207">
                                                 </path>
-                                            </svg> {{ __('Promoteur immobiliere') }}
+                                            </svg> {{ __('Promoteur immobilier') }}
                                         </div>
                                     </div>
                                 </a>
@@ -248,7 +248,7 @@
                                             <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207">
                                                 </path>
-                                            </svg> {{ __('Agent immobiliere') }}
+                                            </svg> {{ __('Agent immobilier') }}
                                         </div>
                                     </div>
                                 </a>
@@ -262,7 +262,7 @@
                                             <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207">
                                                 </path>
-                                            </svg> {{ __('Promoteur immobiliere') }}
+                                            </svg> {{ __('Promoteur immobilier') }}
                                         </div>
                                     </div>
                                 </a>
@@ -283,7 +283,7 @@
                                 {{ $operation->titreFoncier->lieu_dit }} </span>
                         </div>
                         <div class='mb-2'>
-                            <span class="fw-bolder mt-2">{{ __('Coordinates') }}</span> :
+                            <span class="fw-bolder mt-2">{{ __('Coordonnées') }}</span> :
                             {{ $operation->titreFoncier->coordonnees }}
                         </div>
                         @endif
