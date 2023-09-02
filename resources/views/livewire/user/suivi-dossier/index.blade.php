@@ -75,7 +75,7 @@
             <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('Proprietaires') }}</th>
+                        <th class="border-bottom">{{ __('Reference') }}</th>
                         <th class="border-bottom">{{ __('Nom Dossier') }}</th>
                         <th class="border-bottom">{{ __('Statut') }}</th>
                         <th class="border-bottom">{{ __('Date Creation') }}</th>

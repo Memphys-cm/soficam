@@ -1,8 +1,8 @@
 <div>
     <x-alert />
-    @include('livewire.portal.titre-fonciers.charges.partials.create')
-    @include('livewire.portal.titre-fonciers.charges.partials.edit')
     <x-delete-modal />
+    @include('livewire.portal.titre-fonciers.charges.create')
+    @include('livewire.portal.titre-fonciers.charges.edit')
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
             <div class="mb-lg-0">
@@ -16,8 +16,8 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Acceuil</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Charges titre foncier') }}</li>
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Charge sur Titres Fonciers') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -25,24 +25,25 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                         </path>
                     </svg>
-                    {{ __('Attribuer une nouvelle charge sur Titre foncier') }}
+                    {{ __('Attribute a charge to a Titre foncier') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir toutes les charges sur Titre foncier') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('View all charges on Titre foncier') }} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
-                <div class="mx-2" wire:loading.remove>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#EditChargeModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
-                        <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                        </svg> {{__('Retrait')}}
-                    </a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#EditChargeModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
+                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg> {{__('Retirer')}}
+                </a>
 
                     <a href="#" data-bs-toggle="modal" data-bs-target="#CreateChargeModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                        </svg> {{__('Nouveau')}}
+                        </svg> {{__('New')}}
                     </a>
 
+                {{--@can('certificate_propriete.export_n_print')--}}
+                <div class="mx-2" wire:loading.remove>
                     <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center ">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
@@ -62,6 +63,7 @@
                         </div>
                     </div>
                 </div>
+                {{--@endcan--}}
             </div>
         </div>
     </div>
@@ -76,15 +78,15 @@
         <div class="col-md-3">
             <label for="orderBy">{{ __('Trier par') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="created_at">{{ __('Date Creation') }}</option>
+                <option value="created_at">{{ __('Created Date') }}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{ __('Sens du Tri') }}: </label>
+            <label for="direction">{{ __('Order direction') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{ __('Ascending') }}</option>
-                <option value="desc">{{ __('Descending') }}</option>
+                <option value="asc">{{ __('Ascendant') }}</option>
+                <option value="desc">{{ __('Descendant') }}</option>
             </select>
         </div>
 
@@ -101,14 +103,16 @@
     </div>
     <div class="card pb-3">
         <div class="table-responsive  text-gray-700">
-            <table class="table employee-table table-hover table-bordered align-items-center ">
+            <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('TITRES FONCIERS') }}</th>
-                        <th class="border-bottom">{{ __('PROPRIETAIRES') }}</th>
+                        <th class="border-bottom">{{ __('NUMERO TITRE FONCIER') }}</th>
+                        <th class="border-bottom">{{ __('PROPRIETAIRE') }}</th>
                         <th class="border-bottom">{{ __('CHARGE') }}</th>
-                        <th class="border-bottom">{{ __('Date creation') }}</th>
+                        <th class="border-bottom">{{ __('DATE CREATION') }}</th>
+                        {{--@canany(['certificate_propriete.edit','certificate_propriete.delete'])--}}
                         <th class="border-bottom">{{ __('Action') }}</th>
+                        {{--@endcanany--}}
                     </tr>
                 </thead>
                 <tbody>
@@ -121,9 +125,6 @@
                     </td>
                     <td class="text-center">
                         <span class="fw-normal badge super-badge p-2 bg-{{$charge->EtatTFStyle}} round">{{$charge->type_charge}}</span>
-                    </td>
-                    <td>
-                        
                     </td>
                     <td>
                         <span class="fw-normal">{{$charge->created_at->format('Y-m-d')}}</span>
@@ -152,7 +153,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Montrer')}} {{$perPage > $charges_count ? $charges_count : $perPage  }} {{__('éléments de')}} {{$charges_count}}
+                    {{__('Affichage')}} {{$perPage > $charges_count ? $charges_count : $perPage  }} {{__('éléments de')}} {{$charges_count}}
                 </div>
                 {{ $charges->links()  }}
             </div>

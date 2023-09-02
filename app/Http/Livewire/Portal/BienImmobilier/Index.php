@@ -123,7 +123,7 @@ class Index extends Component
 
         ]);       
         DB::transaction(function () {
-            $this->immobilier->update([
+            $this->bien_immobilier->update([
                 'type' => $this->type,
                 'releves_type' => $this->releves_type,
                 'releve_reason' => $this->releve_reason,

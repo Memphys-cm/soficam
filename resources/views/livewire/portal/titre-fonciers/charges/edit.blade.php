@@ -2,12 +2,12 @@
     <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:30%;">
         <div class="modal-content">
             <div class="modal-body p-0">
-                <div class="p-3 p-lg-4">
+                <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{__('Retirer')}}{{__(' Charge sur Titre foncier')}}</h1>
-                        <p class="px-1"> {{__('Titre foncier')}} </p>
+                        <h1 class="mb-0 h4"> {{ __('Retirer une charge sur un Titre Foncier') }}</h1>
+                        <p class="px-1"> {{ __('Retrait de charge') }} &#128522;</p>
                     </div>
-                    <x-form-items.form wire:submit="">
+                    <x-form-items.form wire:submit="retirer">
                         <div class='form-group  mb-2'>
                             <label for="titre_foncier_id">{{ __('Numéro Titre Foncier') }}</label>
                             <x-input.land_title-select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers" />
@@ -38,26 +38,25 @@
                             @endforeach
                         </div>
                         @endif
+
                         <div class="form-group mb-2 row">
                             <div class="col">
                                 <label for="etat_TF">{{__('Type de Charge')}}</label>
-                                <input wire:model="etat_TF" name="etat_TF" class="form-control  @error('etat_TF') is-invalid @enderror" required="" value="RETRAIT" disabled>
+                                <input wire:model="etat_TF" name="etat_TF" class="form-control  @error('etat_TF') is-invalid @enderror" required="" disabled>
                                     
                                 @error('etat_TF')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group mb-3">
-                            <div class="d-flex justify-content-end mt-5">
-                                <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
-                                <button type="submit" wire:click.prevent="update" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Retirer')}}</button>
-                            </div>
+                        
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
+                            <button type="submit" wire:click.prevent="retirer" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Retirer')}}</button>
                         </div>
+                    </x-form-items.form>
                 </div>
-                </x-form-items.form>
             </div>
         </div>
     </div>
-</div>
 </div>
