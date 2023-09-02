@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Livewire\Portal\QrCode\QRCodeScanner;
+use App\Models\EtatCession;
+use App\Models\ReleveImmobilier;
 use Barryvdh\DomPDF\Facade\Pdf;
 /*
 |--------------------------------------------------------------------------
@@ -33,23 +35,33 @@ Auth::routes();
 
 Route::any('/logout', [LoginController::class, 'logout']);
 
-Route::get('/validate-document', function(){
+Route::get('/validate-document', function()
+{
+    $element = match (request('category')) {
+        'certificate_propriete' => CertificatePropriete::whereUuid(request('model'))->first(),
+        'etat_cession' => EtatCession::whereUuid(request('model'))->first(),
+        'immobilier' => ReleveImmobilier::whereUuid(request('model'))->first(),
+         default => null,
+    };
 
-    $certificatepropriete = CertificatePropriete::whereUuid(request('model'))->first();
-
-    if(empty($certificatepropriete)){
+    if (empty($element)) {
         return abort(404, __('Document not found'));
     }
 
     $data = [
-        'certificatepropriete' => $certificatepropriete,
-        'titrefoncier' => $certificatepropriete->titre_foncier,
+        'element' => $element,
+        'titrefoncier' => $element->titre_foncier,
         // Autres données que vous souhaitez afficher dans la vue
     ];
 
-    $pdf = Pdf::loadView('livewire.portal.certificate-propriete.print', $data)->setPaper('a4', 'portrait');
+    $pdf = match (request('category')) {
+        'certificate_propriete' =>  Pdf::loadView('livewire.portal.certificate-propriete.print', $data)->setPaper('a4', 'portrait'),
+        'etat_cession' =>  Pdf::loadView('livewire.portal.etat-cession.print', $data)->setPaper('a4', 'portrait'),
+        'immobilier' =>  Pdf::loadView('livewire.portal.releve-immobilier.immobilier.print', $data)->setPaper('a4', 'portrait'),
+        default => '',
+    };
 
-    return  $pdf->stream($certificatepropriete->uuid.'.pdf');
+    return  $pdf->stream($element->uuid.'.pdf');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function () {
