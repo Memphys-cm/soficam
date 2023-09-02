@@ -15,10 +15,10 @@
                     <td style="width: 375px">
                         <div style="padding-top:10px">
                             <div style="text-decoration: underline; ">TRAVAUX PLANIMÉTRIQUES ET CADASTRAUX</div>
-                            <div style="margin-top: 10px">Arrondissement de ________</div>
-                            <div>Lieu dit ________</div>
+                            <div style="margin-top: 10px">Arrondissement de {{ $imma_directe->subDivision->sub_division_name_fr }}</div>
+                            <div>Lieu dit {{ $imma_directe->localisation }}</div>
                             <div>État du terrain _________</div>
-                            <div>Superficie _________</div>
+                            <div>Superficie {{ $imma_directe->superficie_ordre_versement }} m2</div>
                             <div>Forfait pour la recette des domaines________</div>
                             <div>Majoration 10% pour le cadastre _________</div>
                             <div>Total __________</div>
