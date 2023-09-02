@@ -229,7 +229,7 @@ class Index extends Component
             'type_charge' => 'RETRAIT',
         ]);
 
-        $this->removeCharge();
+        $this->removeCharge($charge);
 
         $this->clearFields();
 

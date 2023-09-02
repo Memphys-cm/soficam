@@ -35,7 +35,7 @@
 
                             <div class='form-group row mb-3'>
                                 <div class=" col"><label for="price">{{ __('Prix (XAF)') }}</label>
-                                    <input type="text" wire:model="price" class="form-control  @error('price') is-invalid @enderror " placeholder="345678" id="price" autofocus="" required="">
+                                    <input type="text" wire:model="price" class="form-control  @error('price') is-invalid @enderror " placeholder="0" id="price" autofocus="" required="">
                                     @error('price')
                                         <div class="invalid-feedback">
                                             {{ $message }}
