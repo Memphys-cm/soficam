@@ -25,7 +25,7 @@ class TitreFoncierSeeder extends Seeder
             ["11.516213163344588,3.8722015777978243", "11.517413319973969,3.876725140525764", "11.513612823982697,3.87599338937199", "11.514479603770468,3.8710706833373365", "11.516213163344588,3.8696736939774325", "11.518546801234777,3.8692745537378244", "11.522547323331793,3.870338927293801", "11.522413972594592,3.873132901512321", "11.518813502707786,3.8760599122306587", "11.516213163344588,3.8722015777978243"]
         ];
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 2; $i++) {
 
            $titre_foncier = TitreFoncier::create([
                 'uuid' => Str::uuid(),
@@ -46,7 +46,7 @@ class TitreFoncierSeeder extends Seeder
                 'etat_terrain' => 'non_batit',
                 'provenance_TF' => 'mutation_totale',
                 'numero_bordereau_analytique' => fake()->randomNumber(6, true),
-                'coordonnees' => json_encode($coordinates[0]),
+                'coordonnees' => json_encode($coordinates[$i]),
                 'limit_nord' => fake()->sentence(),
                 'limit_sud' => fake()->sentence(),
                 'limit_est' => fake()->sentence(),
