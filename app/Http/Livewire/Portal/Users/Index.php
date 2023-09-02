@@ -28,7 +28,7 @@ class Index extends Component
     public $primary_phone_number;
     public $secondary_phone_number;
     public $address;
-    public $password;
+    public $password, $password_confirmation;
     public $user;
     public $role_name;
 

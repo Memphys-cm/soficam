@@ -1,6 +1,5 @@
 <?php
 
-use PDF;
 use App\Models\TitreFoncier;
 use App\Models\CertificatePropriete;
 use Illuminate\Support\Facades\Auth;
@@ -8,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Livewire\Portal\QrCode\QRCodeScanner;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,7 +37,7 @@ Route::get('/validate-document', function(){
 
     $certificatepropriete = CertificatePropriete::whereUuid(request('model'))->first();
 
-    if(!empty($certificatepropriete)){
+    if(empty($certificatepropriete)){
         return abort(404, __('Document not found'));
     }
 
