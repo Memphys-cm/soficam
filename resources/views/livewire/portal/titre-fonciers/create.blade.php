@@ -216,13 +216,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class='col'>
-                                <label for="price">{{__('Prix estimatif du terrian')}}</label>
-                                <input wire:model="price" type="number" class="form-control  @error('price') is-invalid @enderror" placeholder="{{__('1000000')}}" required="" value="" name="price">
-                                @error('price')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
+                         
                         </div>
                         
                         <div class="p-3 shadow my-4">
