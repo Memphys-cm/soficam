@@ -135,7 +135,7 @@
                                 {{__('Region')}} : <span class="fw-bolder mx-2"> {{$morcellement->titreFoncier->region->region_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Sous region')}} : <span class="fw-bolder mx-2"> {{$morcellement->titreFoncier->division->division_name}} </span>
+                                {{__('Departement')}} : <span class="fw-bolder mx-2"> {{$morcellement->titreFoncier->division->division_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
                                 {{__('Arrondissement')}} : <span class="fw-bolder mx-2"> {{$morcellement->titreFoncier->subDivision->sub_division_name}} </span>
@@ -219,7 +219,7 @@
                     <tr>
                         <td colspan="9" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps riem ici')}} &#128540;</h4>
+                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
                                 <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>

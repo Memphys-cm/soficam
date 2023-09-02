@@ -59,7 +59,7 @@
                              </div>
                              <div class='form-group row mb-2'>
                                  <div class='col'>
-                                     <label class="px-2" for="plan">{{__('Ajouter fichiers')}}</label>
+                                     <label class="px-2" for="plan">{{__('Ajouter les fichiers')}}</label>
                                      <div class="input-group">
                                          <input type="file" class="form-control" wire:model="attachments" multiple>
                                      </div>
@@ -97,8 +97,8 @@
                                  {{__('Ajouter coordonnée')}}
                              </button>
                              <div class="d-flex justify-content-end">
-                                 <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
-                                 <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Create')}}</button>
+                                 <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
+                                 <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Creer')}}</button>
                              </div>
                          </x-form-items.form>
                      </div>

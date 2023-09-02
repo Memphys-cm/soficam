@@ -56,7 +56,7 @@
                                 </div>
                             </x-form-items.form>
                             <div class='d-flex justify-content-center mt-3 fw-light mb-n4'>
-                                {{__('changer de langue')}} <br>
+                                {{__('Changer de langue')}} <br>
                                 <a class="{{ \App::isLocale('fr') ? ' text-secondary' : ''}} mx-2" href="{{route('language-switcher',['locale'=>'fr'])}}">{{__('FR')}}</a> |
                                 <a class="{{ \App::isLocale('en') ? ' text-secondary' : ''}} mx-2" href="{{route('language-switcher',['locale'=>'en'])}}">{{__('EN')}}</a>
                             </div>

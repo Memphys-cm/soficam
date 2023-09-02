@@ -21,7 +21,7 @@
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label class="px-2" for="activite.type_de_facturation">{{__('Category Activite')}}</label>
+                                <label class="px-2" for="activite.type_de_facturation">{{__('Categorie Activité')}}</label>
                                 <select wire:model="activite.type_de_facturation" name="activite.type_de_facturation" class="form-select  @error('activite.type_de_facturation') is-invalid @enderror" required="">
                                     <option value="value'">{{__('Valeur')}}</option>
                                     <option value="percentage">{{__('Pourcentage')}}</option>
@@ -34,7 +34,7 @@
 
                         </div>
                         <div class="form-group mb-3">
-                            <label class="px-2" for="nom_activite">{{__('Nom Activite')}}</label>
+                            <label class="px-2" for="nom_activite">{{__('Nom Activité')}}</label>
                             <input wire:model="activite.nom_activite" type="text" class="form-control  @error('activite.nom_activite') is-invalid @enderror" placeholder="{{__('par vente - 4 % du prix d’achat')}}" required="" value="" name="activite.nom_activite">
                             @error('activite.nom_activite')
                             <div class="invalid-feedback">{{$message}}</div>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
-                            <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{$state ? 'Mise à jour' : 'Creer'}} </button>
+                            <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{$state ? 'Mettre à jour' : 'Creer'}} </button>
                         </div>
                     </x-form-items.form>
                 </div>

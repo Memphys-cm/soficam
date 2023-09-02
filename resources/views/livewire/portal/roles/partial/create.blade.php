@@ -80,7 +80,7 @@
                                 </div>
                                 <!--end::Input group-->
                             </div>
-                            <div class="text-gray-800 w-100 mt-3 fs-0 fw-bold">{{__('Location Features Permissions')}}</div>
+                            <div class="text-gray-800 w-100 mt-3 fs-0 fw-bold">{{__('Localisation Caractéristiques Permissions')}}</div>
                             <div class="d-flex border-bottom border-1">
                                 <!--begin::Label-->
                                 <div class="text-gray-800 w-25">{{__('Regions')}}</div>
@@ -104,7 +104,7 @@
                             </div>
                             <div class="d-flex border-bottom border-1">
                                 <!--begin::Label-->
-                                <div class="text-gray-800 w-25">{{__('Sous Divisions')}}</div>
+                                <div class="text-gray-800 w-25">{{__('Departements')}}</div>
                                 <div>
                                     <!--begin::Wrapper-->
                                     <div class="d-flex">
@@ -125,7 +125,7 @@
                             </div>
                             <div class="d-flex border-bottom border-1">
                                 <!--begin::Label-->
-                                <div class="text-gray-800 w-25">{{__('Arrondissement')}}</div>
+                                <div class="text-gray-800 w-25">{{__('Arrondissements')}}</div>
                                 <div>
                                     <!--begin::Wrapper-->
                                     <div class="d-flex">

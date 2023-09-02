@@ -117,7 +117,7 @@
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
-                        <p class="font-sans-serif lh-1 fs-4">{{ $totalPaidAmount }} {{ __('XAF') }}</p>
+                        <p class="font-sans-serif lh-1 fs-4">{{ $totalPaidAmount }} {{ __('FCFA') }}</p>
 
                     </div>
                     <div class="">

@@ -24,7 +24,7 @@
 
                     {{__('Lotissements')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('voir tous les lotissements')}} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{__('Voir tous les lotissements')}} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -69,7 +69,7 @@
             <label for="orderBy">{{__('Trier Par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="titre_foncier_id">{{__('Numéro du titre foncier')}}</option>
-                <option value="created_at">{{__('Created Date')}}</option>
+                <option value="created_at">{{__('Date Creation')}}</option>
             </select>
         </div>
 
@@ -131,7 +131,7 @@
                                 {{__('Region')}} : <span class="fw-bolder mx-2"> {{$lotissement->titreFoncier->region->region_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Division')}} : <span class="fw-bolder mx-2"> {{$lotissement->titreFoncier->division->division_name}} </span>
+                                {{__('Departement')}} : <span class="fw-bolder mx-2"> {{$lotissement->titreFoncier->division->division_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
                                 {{__('Arrondissement')}} : <span class="fw-bolder mx-2"> {{$lotissement->titreFoncier->subDivision->sub_division_name}} </span>

@@ -17,16 +17,16 @@
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
                         <li class="breadcrumb-item " aria-current="page"><a href="{{route('portal.divisions.index')}}">{{__('Regions')}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Divisions')}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Departement')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
                     <svg class="icon me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    {{__('Divisions')}}
+                    {{__('Departements')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('Voir toutes les divisions')}} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{__('Voir toutes les departements')}} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -104,7 +104,7 @@
                 <thead>
                     <tr>
                         <th class="border-bottom">{{__('Code')}}</th>
-                        <th class="border-bottom">{{__('Nom de la division')}}</th>
+                        <th class="border-bottom">{{__('Nom du departement')}}</th>
                         <th class="border-bottom">{{__('Sous-divisions Nombre')}}</th>
                         <th class="border-bottom">{{__('Statut')}}</th>
                         <th class="border-bottom">{{__('Date de création')}}</th>

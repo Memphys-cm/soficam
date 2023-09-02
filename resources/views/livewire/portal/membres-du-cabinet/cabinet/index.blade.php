@@ -28,9 +28,9 @@
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                         </path>
                     </svg>
-                    {{ __('Cabinet Managment') }}
+                    {{ __(' Gestion Cabinet ') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('View all Cabinet  within the application') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('Voir tous les cabinets avec dans l\'application') }} &#x23F0; </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 

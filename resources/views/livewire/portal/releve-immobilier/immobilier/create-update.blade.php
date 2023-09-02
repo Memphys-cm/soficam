@@ -6,7 +6,7 @@
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('creer') }}{{ __(' Immobilier') }}</h1>
+                        <h1 class="mb-0 h4"> {{ __('Creer') }}{{ __(' Immobilier') }}</h1>
                         <p class="px-1"> {{ __('Immobilier') }} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
@@ -19,7 +19,7 @@
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="releves_type">{{ __('Releves Type') }}</label>
+                                <label for="releves_type">{{ __('Type Releves') }}</label>
                                 <select wire:model="releves_type" name="releves_type"
                                     class="form-select  @error('releves_type') is-invalid @enderror" required="">
                                     <option value="">{{ __('-- Selectionner --') }}</option>

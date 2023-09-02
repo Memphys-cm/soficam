@@ -46,14 +46,14 @@
                 <h5 class="w-auto">{{__('Vente Simple')}}</h5>
                 <ul>
                     <li>{{__('Mettre à jour les informations du terrain')}}</li>
-                    <li>{{__('Update Promoter information')}}</li>
+                    <li>{{__('Mettre à jour les informations du terrain')}}</li>
                 </ul>
             </div>
             <div class="card p-3 mb-3">
                 <h5 class="w-auto">{{__('Contacts')}}</h5>
             </div>
             <div class="card p-3">
-                <h5 class="w-auto">{{__('Basic Stats')}}</h5>
+                <h5 class="w-auto">{{__('Statistique basique')}}</h5>
 
                 <div class="d-flex align-items-center mb-2 border-1 border-bottom">
                     <span class="fw-light ">{{__('Total Blocs')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->blocks)}} </span>

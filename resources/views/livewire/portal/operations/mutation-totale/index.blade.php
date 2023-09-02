@@ -58,7 +58,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Trier par direction')}}: </label>
+            <label for="direction">{{__('Sens du Tri')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{__('Ascendant')}}</option>
                 <option value="desc">{{__('Descendant')}}</option>
@@ -118,7 +118,7 @@
                                 {{__('Region')}} : <span class="fw-bolder mx-2"> {{$mutation_totale->titreFoncier->region->region_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
-                                {{__('Sous region')}} : <span class="fw-bolder mx-2"> {{$mutation_totale->titreFoncier->division->division_name}} </span>
+                                {{__('Departement')}} : <span class="fw-bolder mx-2"> {{$mutation_totale->titreFoncier->division->division_name}} </span>
                             </div>
                             <div class="d-flex align-items-centerpy-1">
                                 {{__('Arrondissement')}} : <span class="fw-bolder mx-2"> {{$mutation_totale->titreFoncier->subDivision->sub_division_name}} </span>
@@ -185,7 +185,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Affichage')}} {{$perPage > $mutation_totales_count ? $mutation_totales_count : $perPage  }} {{__('element de')}} {{$mutation_totales_count}}
+                    {{__('Montrer')}} {{$perPage > $mutation_totales_count ? $mutation_totales_count : $perPage  }} {{__('element de')}} {{$mutation_totales_count}}
                 </div>
                 {{ $mutation_totales->links() }}
             </div>

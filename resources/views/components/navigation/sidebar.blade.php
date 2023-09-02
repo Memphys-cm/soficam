@@ -23,7 +23,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
                                                 </path>
                                             </svg>
-                                            {{ __('Logout') }}
+                                            {{ __('Deconnexion') }}
                                         </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
@@ -62,7 +62,7 @@
                                 <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
                                 @canany('titre_foncier.view', 'certificate_propriete.view')
                                 <li class="nav-item">
-                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.certificate-propriete.index') || $request->routeIs('portal.titre-fonciers-charges.index') ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-land-title"><span>
+                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.certificate-propriete.index') || $request->routeIs('portal.titre-fonciers-charges.index')? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-land-title"><span>
                                             <span class="sidebar-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon icon-sm">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
@@ -76,7 +76,7 @@
                                             </svg>
                                         </span>
                                     </span>
-                                    <div class="multi-level collapse {{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.certificate-propriete.index') || $request->routeIs('portal.titre-fonciers-charges.index') ? 'show' : '' }}" role="list" id="submenu-land-title" aria-expanded="{{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.division.index') || $request->routeIs('portal.sub_division.index') ? 'false' : 'true' }}">
+                                    <div class="multi-level collapse {{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.certificate-propriete.index') || $request->routeIs('portal.titre-fonciers-charges.index') || $request->routeIs('portal.titre-fonciers-report.index') ? 'show' : '' }}" role="list" id="submenu-land-title" aria-expanded="{{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.division.index') || $request->routeIs('portal.sub_division.index') ? 'false' : 'true' }}">
                                         <ul class="flex-column nav">
                                             @can('titre_foncier.view')
                                             <li class="nav-item {{ $request->routeIs('portal.titre-fonciers.index') ? 'active' : '' }}">
@@ -99,6 +99,9 @@
                                                 </a>
                                             </li>
                                             @endcan
+                                            {{-- @can('report_titre_foncier.view') --}}
+                                            
+                                            {{-- @endcan --}}
                                         </ul>
                                     </div>
                                 </li>
@@ -124,7 +127,7 @@
                                             @can('lotissement.view')
                                             <li class="nav-item {{ $request->routeIs('portal.lotissements.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.lotissements.index') }}" class="nav-link">
-                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Tout Voir') }}</span>
+                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Tout voir') }}</span>
                                                 </a>
                                             </li>
                                             @endcan
@@ -301,7 +304,7 @@
 
                                 @can('user.view')
                                 <li class="nav-item">
-                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.sales-report.index') || $request->routeIs('portal.taxfonciere.suivi.index') ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-reports"><span>
+                                    <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.sales-report.index') || $request->routeIs('portal.taxfonciere.suivi.index') || $request->routeIs('portal.titre-fonciers-report.index')  ? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-reports"><span>
                                             <span class="sidebar-icon">
                                                 <svg class="icon icon-sm " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
@@ -317,7 +320,7 @@
                                             </svg>
                                         </span>
                                     </span>
-                                    <div class="multi-level collapse {{ $request->routeIs('portal.sales-report.index') || $request->routeIs('portal.taxfonciere.suivi.index') ? 'show' : '' }}" role="list" id="submenu-reports" aria-expanded="{{ $request->routeIs('portal.sales-report.index')  ? 'true' : 'false' }}">
+                                    <div class="multi-level collapse {{ $request->routeIs('portal.sales-report.index') || $request->routeIs('portal.taxfonciere.suivi.index') || $request->routeIs('portal.titre-fonciers-report.index')  ? 'show' : '' }}" role="list" id="submenu-reports" aria-expanded="{{ $request->routeIs('portal.sales-report.index')  ? 'true' : 'false' }}">
                                         <ul class="flex-column nav">
                                             @can('cabinet.view')
                                             <li class="nav-item {{ $request->routeIs('portal.sales-report.index') ? 'active' : '' }}">
@@ -333,6 +336,11 @@
                                                 </a>
                                             </li>
                                             @endcan
+                                            <li class="nav-item {{ $request->routeIs('portal.titre-fonciers-report.index') ? 'active' : '' }}">
+                                                <a href="{{ route('portal.titre-fonciers-report.index') }}" class="nav-link">
+                                                    <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Statistique') }}</span>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </li>

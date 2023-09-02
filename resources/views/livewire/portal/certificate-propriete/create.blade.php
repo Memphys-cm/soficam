@@ -4,7 +4,7 @@
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{__('creer')}}{{__(' un certificat de propriété')}}</h1>
+                        <h1 class="mb-0 h4"> {{__('Creer')}}{{__(' un certificat de propriété')}}</h1>
                         <p class="px-1"> {{__(' un certificat de propriété')}} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
@@ -19,7 +19,7 @@
                         </div>
                         <div class="form-group mb-3 row">
                             <div class="col">
-                                <label for="certificate_proprietes_number">{{__('Numéro de certificat de propriété')}}</label>
+                                <label for="certificate_proprietes_number">{{__('Numéro du certificat de propriété')}}</label>
                                 <input wire:model="certificate_proprietes_number" type="text" class="form-control  @error('certificate_proprietes_number') is-invalid @enderror" placeholder="{{__('1986')}}" required="">
                                 @error('certificate_proprietes_number')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -35,7 +35,7 @@
                         </div>
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="certificate_proprietes_type">{{__('Certificat Propriétés Type')}}</label>
+                                <label for="certificate_proprietes_type">{{__('Type Certificat de Propriété')}}</label>
                                 <select wire:model="certificate_proprietes_type" name="certificate_proprietes_type" class="form-select  @error('certificate_proprietes_type') is-invalid @enderror" required="">
                                     <option value="">{{__('-- Selectionner --')}}</option>
                                     <option value="personne_physique">{{__('Personne Physique')}}</option>

@@ -14,7 +14,7 @@
 	choices.setChoiceByValue(selected);
 	}">
 	<select id="{{ $attributes['prettyname'] }}" wire-model="{{ $attributes['wire:model'] }}" wire:change="{{ $attributes['wire:change'] }}" x-ref="{{ $attributes['prettyname'] }}">
-		<option value="">{{ isset($attributes['placeholder']) ? $attributes['placeholder'] : '-- Select --' }}</option>
+		<option value="">{{ isset($attributes['placeholder']) ? $attributes['placeholder'] : '-- Selectionner --' }}</option>
 		@if(count($attributes['options'])>0)
 		@foreach($attributes['options'] as $key=>$option)
 		<option value="{{$key}}">{{$option}}</option>

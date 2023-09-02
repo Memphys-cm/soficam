@@ -58,7 +58,7 @@
             </div>
             <div class='col-md-9'>
                 <div class="card p-4 mb-3">
-                    <legend class="w-auto">Informations on the Land</legend>
+                    <legend class="w-auto">Informations sur le terrain</legend>
                     <div class='row form-group mb-3'>
                         <div class="col-md-6 py-2">
                             <label for="code">{{ __('Numéro du titre foncier') }}</label>
@@ -258,7 +258,7 @@
                             <div class="col-md-6 ">
                                 <label for="lot_geometre_id">{{ __('Geometre') }}</label>
                                 <select wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.lot_geometre_id" class="form-control @error('lot_geometre_id') is-invalid @enderror">
-                                    <option value=''>{{__('-- Select --')}}</option>
+                                    <option value=''>{{__('-- Selectionner --')}}</option>
                                     @foreach($lot_geometres as $lot_geo)
                                     <option wire:key="{{ $lot_geo->id }}" value='{{$lot_geo->id}}'> {{!empty($lot_geo->cabinet) ? $lot_geo->cabinet->nom_cabinet : '' }} - {{ucfirst($lot_geo->first_name)}} {{ucfirst($lot_geo->last_name)}} </option>
                                     @endforeach
@@ -279,7 +279,7 @@
                                 <input type="number" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.surperficie_du_lot">
                             </div>
                             <div class="col-md-3">
-                                <label for="lotEtat">{{__('Laffectation du Lot')}}</label>
+                                <label for="lotEtat">{{__('L\'affectation du Lot')}}</label>
                                 <input type="text" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.laffectation_du_lot">
                             </div>
                             <div class="col-md-3">

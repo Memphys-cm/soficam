@@ -46,7 +46,7 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class=" col"><label for="division">{{ __('Division') }}</label>
+                            <div class=" col"><label for="division">{{ __('Departement') }}</label>
                                 <input type="text" wire:model="division" class="form-control  @error('division') is-invalid @enderror " value="{{ old('division') }}" placeholder="" id="division" autofocus="" required="" disabled>
                                 @error('division')
                                 <div class="invalid-feedback">
@@ -89,7 +89,7 @@
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label class="px-2" for="certificates_propriete_id">{{__('Certificate proprietes')}}</label>
+                                <label class="px-2" for="certificates_propriete_id">{{__('Certificat proprieté')}}</label>
                                 <select wire:model="certificates_propriete_id" class='form-control'>
                                     <option value=''>{{__('-- Selectionner --')}}</option>
                                     @foreach($certificates_proprietes as $certificates_propriete)
@@ -117,7 +117,7 @@
                         </div>
                         <div class='form-group row mb-2'>
                             <div class='col'>
-                                <label class="px-2" for="certificates_propriete_id">{{__('Ajouter Fichier')}}</label>
+                                <label class="px-2" for="certificates_propriete_id">{{__('Ajouter les fichiers')}}</label>
                                 <div class="input-group">
                                     <input type="file" class="form-control" wire:model="attachments" multiple>
                                 </div>
