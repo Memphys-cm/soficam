@@ -1,9 +1,9 @@
-<div wire:ignore.self class="modal side-layout-modal fade" id="bordoreauDeTransmitionModal" tabindex="-1"
+<div wire:ignore.self class="modal fade" id="bordoreauDeTransmitionModal" tabindex="-1"
     aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:40%;">
+    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:25%;">
         <div class="modal-content">
-            <div class="modal-body p-0">
-                <div class="p-4 p-lg-5">
+            <div class="modal-body p-0 py-2">
+                <div class="p-4 p-lg-4">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4">
                             {{ __('Modification') }}{{ __('Du Statut D\'un Dossier') }}

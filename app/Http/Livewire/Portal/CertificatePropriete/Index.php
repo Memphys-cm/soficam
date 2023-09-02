@@ -157,7 +157,7 @@ class Index extends Component
     {
         $this->certificatepropriete = CertificatePropriete::findOrFail($id);
         $data = [
-            'certificatepropriete' => $this->certificatepropriete,
+            'element' => $this->certificatepropriete,
             'titrefoncier' => $this->titre_fonciers,
             // Autres données que vous souhaitez afficher dans la vue
         ];

@@ -165,7 +165,7 @@ class Index extends Component
     {
         $this->immobilier = ReleveImmobilier::findOrFail($id);
         $data = [
-            'immobilier' => $this->immobilier,
+            'element' => $this->immobilier,
             'email' => 'john@example.com',
             // Autres données que vous souhaitez afficher dans la vue
         ];

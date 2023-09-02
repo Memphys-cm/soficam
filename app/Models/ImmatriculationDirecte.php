@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use App\Models\Traits\HasUUID;
+
+use App\Models\Traits\HasUUID;
 use Spatie\Image\Manipulations;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -16,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class ImmatriculationDirecte extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use HasFactory, InteractsWithMedia, HasUUID;
 
     public $guarded = [];
     
