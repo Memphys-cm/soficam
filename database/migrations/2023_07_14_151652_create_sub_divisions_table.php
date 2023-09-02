@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('sub_division_name_fr')->index();
             $table->tinyInteger('status')->nullable()->default(1);
             $table->float('total_surface_area',100,0)->nullable();
+            $table->float('prix_minima_m2',100,0)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

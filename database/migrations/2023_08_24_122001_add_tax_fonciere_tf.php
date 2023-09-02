@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::table('titre_fonciers', function (Blueprint $table) {
             //
-            $table->float('price')->nullable();
-            $table->float('tax_amount')->nullable();
+            $table->float('taxFoncier_amount',100,0)->nullable();
             $table->enum('status_tax',['payer','non_payer'])->default('non_payer');
             $table->date('date_tax')->nullable();
         });

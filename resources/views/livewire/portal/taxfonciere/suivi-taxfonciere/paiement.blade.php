@@ -1,6 +1,5 @@
-
-<div wire:ignore.self class="modal side-layout-modal fade" id="paiement" tabindex="-1"
-    aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
+<div wire:ignore.self class="modal side-layout-modal fade" id="paiement" tabindex="-1" aria-labelledby="modal-form"
+    style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:30%;">
         <div class="modal-content">
             <div class="modal-body p-0">
@@ -10,12 +9,20 @@
                         <p class="px-1"> {{ __('Payer une Tax Foncier') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="confirmOrder">
+                        <div class='col'>
+                            <label class="px-2" for="requestor_id">{{ __('Requérant') }}</label>
+                            <x-input.select wire:model="requestor_id" prettyname="requestor" :options="$requestors->pluck('first_name', 'id')->toArray()" />
+                            @error('user_ids')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class='form-group mb-3 row'>
                             <div class="col">
                                 <label for="paymentType">Moyen de paiement </label>
                                 <select wire:model="paymentType" id="paymentType" class="form-select">
-                                  
+
                                     <option value=""><strong>{{ __('--Selectionner--') }}</strong></option>
+                                    <option value="Cash"><strong>{{ __('Cash') }}</strong></option>
                                     <option value="ORANGE"><strong>{{ __('OrangeMoney') }}</strong></option>
                                     <option value="MTN"><strong>{{ __('MobileMoney') }}</strong></option>
                                 </select>
@@ -24,34 +31,38 @@
                                 @enderror
                             </div>
                         </div>
-                       
-                    
+
+
+                        @if ($paymentType !== 'Cash')
+                            <!-- Only show the field if paymentType is not 'Cash' -->
+                            <div class='form-group mb-3 row'>
+                                <div class="col">
+                                    <label for="phoneNumber">{{ __('Numero de transaction') }}</label>
+                                    <input wire:model="phoneNumber" type="number"
+                                        class="form-control @error('phoneNumber') is-invalid @enderror"
+                                        placeholder="{{ __('67xxxxxxx') }}" required="">
+                                    @error('phoneNumber')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        @endif
+
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="phoneNumber">{{ __('Numero de transaction') }}</label>
-                                <input wire:model="phoneNumber" type="number"
-                                    class="form-control  @error('phoneNumber') is-invalid @enderror"
-                                    placeholder="{{ __('67xxxxxxx') }}" required="">
-                                @error('phoneNumber')
+                                <label for="taxFoncier_amount">{{ __('Montant de la taxe') }}</label>
+                                <input wire:model="taxFoncier_amount" type="number"
+                                    class="form-control  @error('taxFoncier_amount') is-invalid @enderror"
+                                    required="" disabled>
+                                @error('taxFoncier_amount')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                            </div> 
-                        </div>
-                        <div class='form-group mb-3 row'>
-                            <div class="col">
-                                <label for="tax_amount">{{ __('Montant de la taxe') }}</label>
-                                <input wire:model="tax_amount" type="number"
-                                    class="form-control  @error('tax_amount') is-invalid @enderror"
-                                     required="" disabled>
-                                @error('tax_amount')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div> 
+                            </div>
                         </div>
                         {{-- <button wire:click="confirmOrder" type="submit" class="btn btn-primary">pay</button> --}}
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="status_tax">{{ __('Statut_paiement Immobilier ') }}</label>
+                                <label for="status_tax">{{ __('Statut_paiement ') }}</label>
                                 <select wire:model="status_tax" name="status_tax"
                                     class="form-select  @error('status_tax') is-invalid @enderror" required="">
                                     <option value="">{{ __('-- Selectionner --') }}</option>
@@ -63,7 +74,7 @@
                                 @enderror
                             </div>
                         </div>
-                        
+
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
                                 data-bs-dismiss="modal">{{ __('Fermer') }}</button>
