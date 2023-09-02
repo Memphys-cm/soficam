@@ -21,8 +21,11 @@ class Index extends Component
     use WithDataTables;
     public ?Sale $sale;
     public ?Saleable $saleable;
-    public $allsales, $allsalesId, $sales_amount, $sales_code, $payment_method, $payment_status, $commentaires;
+    public $allsales, $allsale, $allsalesId, $sales_amount, $sales_code, $payment_status, $commentaires;
     public $sales_type, $payment_number, $requestor_id, $requestors;
+    public $selectedStatus = 'pending_payment';
+    public $user_id;
+    public $payment_method = 'cash';
 
     public function initData($id)
     {
@@ -30,8 +33,9 @@ class Index extends Component
         $this->sale = $sale;
         $this->saleable = $sale->saleables()->first();
         $this->sales_type =  $sale->sales_type;
+        $this->user_id =  $sale->user_id;
         $this->sales_amount = number_format($sale->sales_amount);
-        // dd($this->sales_type);
+        // dd($this->user_id);
     }
 
     public function updatedPaymentMethod($type)
@@ -79,12 +83,14 @@ class Index extends Component
             }
 
             $this->sale->update([
+                'user_id' => $this->user_id,
                 'payment_status' => 'totally_paid',
                 'payment_number' => $this->payment_number,
                 'payment_method' => $this->payment_method,
-                'user_id' => $this->requestor_id,
 
             ]);
+
+            // dd($this->user_id);
 
 
             // when sales is successful
@@ -128,8 +134,8 @@ class Index extends Component
 
     public function delete()
     {
-        if ($this->allsales) {
-            $this->allsales->delete();
+        if ($this->allsale) {
+            $this->allsale->delete();
         }
         $this->refresh(__('Sale deleted successfully'), 'DeleteModal');
     }
@@ -142,7 +148,9 @@ class Index extends Component
             $allsaless = Sale::search($this->query)->where('sales_type', 'dossier_vise_enregistre')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
         } else {
             # code...
-            $allsaless = Sale::search($this->query)->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+            $allsaless = Sale::search($this->query) ->when($this->selectedStatus, function ($query, $selectedStatus) {
+                return $query->where('payment_status', $selectedStatus);
+            })->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
         }
         
 

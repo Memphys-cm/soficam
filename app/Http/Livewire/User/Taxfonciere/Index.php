@@ -19,7 +19,7 @@ class Index extends Component
     public $titrefoncier, $transaction_number;
     public $paymentType = ''; 
     public $phoneNumber = ''; 
-    public $status_tax, $tax_amount, $price, $payment_method;
+    public $status_tax, $taxFoncier_amount, $price, $payment_method;
 
     public function confirmOrder()
     {
@@ -41,7 +41,7 @@ class Index extends Component
 
         $this->validate($rules);
 
-        $request = new Collect($this->phoneNumber, $this->tax_amount, $this->paymentType, 'CM');
+        $request = new Collect($this->phoneNumber, $this->taxFoncier_amount, $this->paymentType, 'CM');
         $payment = $request->pay();
 
         if ($payment->success) {
@@ -64,42 +64,39 @@ class Index extends Component
         $this->titrefoncier = $titrefoncier;
 
         $this->status_tax =  $titrefoncier->status_tax;
-        $this->price =  $titrefoncier->price;
-
-
-        $this->tax_amount = $this->price * 0.001;
+        $this->taxFoncier_amount =  $titrefoncier->taxFoncier_amount;
     }
 
     public function update()
     {
         $this->validate(
             [
-                'tax_amount' => 'required|integer',
+                'taxFoncier_amount' => 'required|integer',
 
             ]
         );
         if (!empty($this->titrefoncier)) {
-
+            $user = auth()->user(); // Get the authenticated user
             $this->titrefoncier->update([
                 'status_tax' => 'payer',
                 'date_tax' => now(),
-                'tax_amount' => $this->tax_amount,
+                'taxFoncier_amount' => $this->taxFoncier_amount,
 
             ]);
             $sale = Sale::create([
-                'sales_amount' => $this->tax_amount,
+                'user_id' => $user->id,
+                'sales_amount' => $this->taxFoncier_amount,
                 'sales_type' => 'tax_foncier',
                 'payment_status' => 'totally_paid',
                 'created_by' => auth()->user()->name,
             ]);
-            // dd($sale);
             // Create the Saleable item using only the specified information
             $saleableData = [
                 'sale_id' => $sale->id,
-                'price' => $this->tax_amount,
+                'price' => $this->taxFoncier_amount,
                 'quantity' => 1,
                 'saleable_id' => $this->titrefoncier->id,
-                'saleable_type' => 'tax_foncier', // Adjust the namespace if different
+                'saleable_type' => 'App\Models\TitreFoncier',
                 'created_by' => auth()->user()->name,
             ];
 
@@ -114,7 +111,7 @@ class Index extends Component
     public function clearFields()
     {
         $this->payment_method = '';
-        $this->tax_amount = '';
+        $this->taxFoncier_amount   = '';
         $this->phoneNumber = '';
     }
     public function render()

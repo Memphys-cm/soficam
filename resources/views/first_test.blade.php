@@ -98,6 +98,7 @@
                 var jsonString = item.coordonnees;
                 var numero = item.numero_titre_foncier
                 var superficie = item.superficie_du_TF_mere
+                // var proprietaires = item.
                 var coordinatesArray = JSON.parse(jsonString);
                 var transformedCoordinates = [];
 
@@ -137,8 +138,8 @@
                         area: polygonData.area
                     },
                     popupTemplate: {
-                        title: "{name}",
-                        content: "{area}"
+                        title: "Numero TF: {name}",
+                        content: "Superficie Tf: {area} m2 <br> Proprietaires"
                     }
                 });
                 graphicsLayer.add(polygonGraphic);

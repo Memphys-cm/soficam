@@ -65,7 +65,16 @@
             <input wire:model="query" id="search" type="text" placeholder="{{ __('Jean...') }}" class="form-control">
             {{-- <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p> --}}
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
+            <label for="selectedStatus">{{ __('par le statut') }}: </label>
+            <select wire:model="selectedStatus" id="selectedStatus" class="form-select">
+                <option value="">par le statut</option>
+                <option value="totally_paid">PAYER</option>
+                <option value="pending_payment">NON PAYER</option>
+
+            </select>
+        </div>
+        <div class="col-md-2">
             <label for="orderBy">{{ __('Trier par') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="sale_amount">{{ __('Montant de la vente') }}</option>
@@ -74,7 +83,7 @@
             </select>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label for="direction">{{ __('Direction de trie') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{ __('Ascendante') }}</option>
@@ -124,8 +133,8 @@
                                     <span class="fw-bold">{{ $allsale->user->first_name }}</span>
                                 </div>
                             </a>
-                            @else
-                            User not found
+                            {{-- @else
+                            User not found --}}
                             @endif
                         </td>
 
@@ -142,17 +151,20 @@
                         <td>{{ $allsale->created_at }}</td>
 
                         <td>
+                            @if ($allsale->payment_status === 'pending_payment')
                             <a href='#' wire:click.prevent="initData({{ $allsale->id }})" data-bs-toggle="modal" data-bs-target="#updatePaySaleModal">
                                 <svg class="icon icon-xs text-info" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
                                 </svg>
                             </a>
-                            <a href='#' data-bs-toggle="modal" data-bs-target="#updateAllSalesModal">
+                            @endif
+                          
+                            {{-- <a href='#' data-bs-toggle="modal" data-bs-target="#updateAllSalesModal">
                                 <svg class="icon icon-xs " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9.75h4.875a2.625 2.625 0 010 5.25H12M8.25 9.75L10.5 7.5M8.25 9.75L10.5 12m9-7.243V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185z" />
                                 </svg>
 
-                            </a>
+                            </a> --}}
 
                             @can('sales.delete')
                             <a href='#' wire:click.prevent="initData({{ $allsale->id }})" data-bs-toggle="modal" data-bs-target="#DeleteModal">

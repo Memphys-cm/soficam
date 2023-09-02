@@ -45,6 +45,7 @@ class Sale extends Model
             ->where(function ($q) use ($query) {
                 $q->where('sales_amount', 'like', '%' . $query . '%');
                 $q->orWhere('sales_code', 'like', '%' . $query . '%');
+                $q->orWhere('payment_status', 'like', '%' . $query . '%'); 
                 $q->orWhere('sales_type', 'like', '%' . $query . '%');
                 $q->orWhereHas('user', function ($q) use ($query) {
                     $q->where('first_name', 'like', '%' . $query . '%');

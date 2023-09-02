@@ -19,7 +19,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{ __('Tableau de bord') }}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Titres fonciers') }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Taxe foncieres') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -29,9 +29,9 @@
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                         </path>
                     </svg>
-                    {{ __('Rapport sur les titres fonciers') }}
+                    {{ __('Rapport sur les Taxe Foncieres') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir tous les titres fonciers') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('Voir tous les Taxe Foncieres') }} &#x23F0; </p>
             </div>
         </div>
     </div>
