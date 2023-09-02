@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\Service;
 use App\Models\Sales\Sale;
 use Illuminate\Support\Str;
 use App\Models\TitreFoncier;
@@ -112,6 +113,11 @@ class User extends Authenticatable
             false => __('Banned'),
             NULL => __('Active'),
         };
+    }
+
+    public function serivce() : BelongsTo
+    {
+        return $this->belongsTo(Service::class, 'service_id');
     }
 
     public function titrefonciers() : BelongsToMany

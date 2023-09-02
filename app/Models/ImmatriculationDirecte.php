@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasUUID;
+// use App\Models\Traits\HasUUID;
 use Spatie\Image\Manipulations;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;

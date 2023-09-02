@@ -11,6 +11,7 @@ class EtatCession extends Model
 {
     use HasFactory, HasUUID;
 
+    protected $guarded = [];    
     public function geometre() : BelongsTo
     {
         return $this->belongsTo(User::class , 'geometre_id');

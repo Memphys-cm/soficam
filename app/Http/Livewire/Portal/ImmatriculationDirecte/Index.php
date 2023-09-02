@@ -21,6 +21,7 @@ use App\Http\Livewire\Traits\WithDataTables;
 use proj4php\Proj4php;
 use proj4php\Proj;
 use proj4php\Point;
+use App\Models\EtatCession;
 
 class Index extends Component
 {
@@ -42,7 +43,7 @@ class Index extends Component
     public $date_debut , $date_fin;
     public $date_convocation , $superficie , $status , $date_status;
     public $geometre_id , $geometres;
-    public $attachments , $quitance;
+    public $attachments , $quitance, $montant_dossier_vise;
     public $coordinates = ['', ''] , $transform;
     public $coordonnees = [];
     public $coordonne = [];
@@ -58,6 +59,8 @@ class Index extends Component
         $this->coordinates = array_values($this->coordinates);
     }
 
+    public $etat_cession_id, $cout_etat_cession, $zone, $etat_cession, $superficie_en_m2;
+    public $frais_suplementaires, $cout, $commentaires, $code, $numero_bordereau_transmission;
 
     public function mount()
     {
@@ -68,6 +71,7 @@ class Index extends Component
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
+        // $this->etat_cession = EtatCession::all();
         $this->services = Service::select('id', 'service_name_fr')->get();
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
     }
@@ -100,8 +104,9 @@ class Index extends Component
     {
         $this->imma_directe = ImmatriculationDirecte::findOrFail($id);
         $this->status = $this->imma_directe->next_step;
-        $imma = $this->imma_directe;
-        // dd($imma->next_step);
+        $this->superficie_en_m2 = $this->imma_directe->superficie;
+        $imma_directe = $this->imma_directe;
+      
         $this->state = 1;
     }
 
@@ -285,34 +290,112 @@ class Index extends Component
                     'date_calendrier_descente' => $this->date_status,
                 ]);
             });
+        } else if($imma->next_step == "valider le paiement"){
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => 'Dossier publié au bulletin des avis domaniaux et fonciers',
+                    'next_step' => 'Achat des bulletins',
+                    'date_publication_dossier_vise' => $this->date_status,
+                ]);
+            });
+        } else if($imma->next_step == 'Bulletins en attente de signature par le délégué'){
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => 'Bulletins signés',
+                    'next_step' => 'Transmission du dossier complet à la Délégation Départementale',
+                    'date_signature_bulletin' => $this->date_status,
+                ]);
+            });    
         } else if($imma->next_step == "Transmission du dossier technique au CSDAF"){
             DB::transaction(function () {
                 $this->imma_directe->update([
-                    'statut' => 'Dossier Transmis au CSDAF',
-                    'next_step' => 'transmission en signature chez le délégué',
-                    'transmission_dos_tech_csdaf' => $this->date_status,
+                    'statut' => 'Dossier technique signe Par le CSRCadastre',
+                    'next_step' => 'Transmission du dossier technique au Délégué Régional MINDCAF',
+                    'date_dossier_signe_csr_cadastre' => $this->date_status,
                 ]);
             });
-        }else if($imma->next_step == "transmission en signature chez le délégué"){
+            
+        } else if($imma->next_step == "Transmission du dossier technique au Délégué Régional MINDCAF"){
             DB::transaction(function () {
                 $this->imma_directe->update([
-                    'statut' => 'Bordereau de transmission en signature chez le délégué',
-                    'next_step' => 'Transmission Dossier Chez le Delegue Regional',
-                    'date_calendrier_descente' => $this->date_status,
+                    'statut' => ' Dossier technique transmis au Délègue Regional Mindcaf',
+                    'next_step' => 'Cotation du dossier complet d\’immatriculation directe au CSRDAF ',
+                    'date_dossier_transmi_au_Mindcaf' => $this->date_status,
                 ]);
             });
-        }else if($imma->next_step == "Transmission Dossier Chez le Delegue Regional"){
+        } else if($imma->next_step == "Cotation du dossier complet d\’immatriculation directe au CSRDAF"){
             DB::transaction(function () {
                 $this->imma_directe->update([
-                    'statut' => 'Bordereau de transmission en signature chez le délégué',
-                    'next_step' => 'Bordereau de transmission + dossier physique transmis',
-                    'date_calendrier_descente' => $this->date_status,
+                    'statut' => 'Dossier complet transmis  au CSRegional Mindcaf',
+                    'next_step' => ' Transmission du dossier complet au Délégué Régional MINDCAF ',
+                    'date_dossier_complet_transmi_CSRegional_mindcaf' => $this->date_status,
+                ]);
+            });
+        } else if($imma->next_step == "Transmission du dossier complet au Délégué Régional MINDCAF"){
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => 'Dossier Vise et en attente de publication',
+                    'next_step' => 'Traitement du dossier visé-enregistré',
+                    'date_dossier_vise_en_attente_publication' => $this->date_status,
                 ]);
             });
         }
 
 
         $this->refresh(__('Statut Modifier Avec SUCCES!'), 'EditStatutModal');
+        $this->clearFields();
+    }
+
+    public function bordoreauDeTransmitionStatu(){
+
+        $this->validate([
+            'numero_bordereau_transmission' => 'required',
+           
+        ]);
+
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'statut' => 'Bordereau de transmission + dossier physique transmis',
+                'next_step' => 'Cotation du dossier technique au CRDC pour contrôle',
+                'numero_bordereau_transmission' => $this->numero_bordereau_transmission,
+                'date_bordereau_transmission' => now(),
+
+
+            ]);
+        });
+
+        $this->refresh(__('Bordoreau de Transmition Transmi Avec SUCCES!'), 'bordoreauDeTransmitionModal');
+
+    //enregistré le prix du dossier visé dans les paiements
+    public function dossier_vise() {
+        DB::transaction(function () {
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => 'Dossier-visé enregistré en attente de paiement',
+                    'next_step' => 'valider le paiement',
+                ]);
+            });
+
+            $sale = Sale::create([
+                'sales_amount' => $this->montant_dossier_vise,
+                'sales_type' => 'dossier_vise_enregistre',
+                'created_by' => auth()->user()->name,
+            ]);
+
+            // Create the Saleable item using only the specified information
+            $saleableData = [
+                'sale_id' => $sale->id,
+                'price' => $this->montant_dossier_vise,
+                'quantity' => 1,
+                'saleable_id' => $this->imma_directe->id,
+                'saleable_type' => 'App\Models\ImmatriculationDirecte', // Adjust the namespace if different
+                'created_by' => auth()->user()->name,
+            ];
+
+            DB::table('saleables')->insert($saleableData);
+        });
+
+        $this->refresh(__('La recette est appliquée Avec SUCCES!'), 'DossierViseImmaDirecteModal');
         $this->clearFields();
     }
 
@@ -405,6 +488,110 @@ class Index extends Component
 
         $this->clearFields();
     }
+
+    // public function updated()
+    // {
+    //     $area =  $this->imma_directe->superficie;
+    //     $zone = $this->zone;
+    //    ;
+    //     $this->price_m2 = match ($zone) {
+    //         "terrain_urbain" => ($area <= 5000) ? 25000 : ($area - 5000) * 20,
+    //         "terrain_rurale" => match (true) {
+    //             ($area <= 50000) => 25000,
+    //             ($area >= 50000 && $area <= 200000) => 50000,
+    //             default => ($area - 200000) * 1,
+    //         },
+    //         default => 0,
+    //     };
+        
+    //     $this->frais_suplementaires = 2500;
+
+    //     $this->cout = (int)$this->price_m2;
+
+    //     $this->cout_etat_cession = (int)$this->cout + (int)$this->frais_suplementaires;
+    //     // dd($this->cout_etat_cession);
+   
+    // }
+    public function generateUniqueCode($year, $counter)
+    {
+        $counterFormatted = str_pad($counter, 5, '0', STR_PAD_LEFT);
+        return $year . 'STATE' . $counterFormatted;
+    }
+    public function etatDeCession()
+    {
+          // Récupérer l'année en cours au format 'yy'
+          $year = date('y');
+
+          // Récupérer le compteur depuis la base de données (par exemple en comptant les enregistrements de lotissement existants)
+          $counter = EtatCession::count() + 1;
+  
+          // Générer le code unique
+          $this->code = $this->generateUniqueCode($year, $counter);
+        // dd($code);
+
+       
+        $this->etat_cession = EtatCession::create([
+            // 'user_id' => $this->requestor_id,
+            'zone' => $this->zone,
+            'reference_etat_cession' => $this->code,
+            'lieu_dit' => $this->imma_directe->localisation,
+            'superficie_en_m2' => $this->imma_directe->superficie,
+            'sub_division_id' => $this->imma_directe->sub_division_id,
+            'commentaires' => $this->commentaires,
+            'cout' => $this->cout,
+            'frais_suplementaires' => $this->frais_suplementaires,
+            'cout_etat_cession' => $this->cout_etat_cession,
+            'type_operation' => 'immatriculation_direct',
+            'status' => 'pending_payment',
+        ]);
+
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'etat_cession_id' => $this->etat_cession->id,
+                'statut' => 'Etat de Cesssion en Attente de Paiement',
+                'next_step' => 'Paiement de L\'Etat de Cession',
+                'etat_cession' => Carbon::now(),
+            ]);
+
+            $sale = Sale::create([
+                // 'user_id' => $this->requestor_id,
+                'sales_code' => $this->code,
+                'sales_amount' => $this->cout_etat_cession,
+                'sales_type' => 'etat_cession__imma_directe',
+                'created_by' => auth()->user()->name,
+            ]);
+    
+    
+            // Create the Saleable item using only the specified information
+            $saleableData = [
+                'sale_id' => $sale->id,
+                'price' => $this->cout_etat_cession,
+                'quantity' => 1,
+                'saleable_id' => $this->imma_directe->id,
+                'saleable_type' => 'App\Models\ImmatriculationDirecte', // Adjust the namespace if different
+                'created_by' => auth()->user()->name,
+            ];
+    
+    
+            DB::table('saleables')->insert($saleableData);
+    
+        });
+
+        $data = [
+            'imma_directe' => $this->imma_directe,
+        ];
+
+        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.quitance', $data)->setPaper('a4', 'portrait');
+        return response()->streamDownload(
+            fn () => print($pdf->output()),
+            __('OrdreDeVersement') . Str::random('10') . ".pdf"
+        );
+
+        $this->refresh(__('Etat de Cession Enregistrer Avec SUCCES!'), 'EtatCessionModal');
+
+        $this->clearFields();
+    }
+
     public function  ordreDeVersementPdf($id)
     {
         $this->imma_directe = ImmatriculationDirecte::findOrFail($id);
@@ -564,16 +751,10 @@ class Index extends Component
 
     }
 
+  
 
     public function convocation()
     {
-
-        // $this->validate([
-        //     'date_debut' => 'required',
-        //     'date_fin' => 'required',
-        // ]);
-
-
         DB::transaction(function () {
             $this->imma_directe->update([
                 'date_convocation' => $this->date_convocation,
@@ -618,8 +799,6 @@ class Index extends Component
         );
     }
 
-
-
     public function clearFields()
     {
         $this->reset(
@@ -627,6 +806,7 @@ class Index extends Component
                 // 'requestor_id', 
                 'localisation',
                 'comissions',
+                'numero_bordereau_transmission',
             ]
         );
 

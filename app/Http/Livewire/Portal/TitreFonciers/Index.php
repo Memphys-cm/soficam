@@ -548,7 +548,7 @@ class Index extends Component
 
         return response()->streamDownload(
             fn () => print($pdf->output()),
-            __('Report-') . Str::random('10') . ".pdf"
+            __('Bordereau-analytique-TF-') . Str::random('10') . ".pdf"
         );
     }
 

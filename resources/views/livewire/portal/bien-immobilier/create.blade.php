@@ -10,10 +10,10 @@
                     </div>
                     <x-form-items.form wire:submit="store">
                         <fieldset class="border p-3 mb-3 rounded">
-                            <legend class="w-auto">Informations sur les biens immobiliers</legend>
+                            <legend class="w-auto">Informations sur le bien immobilier</legend>
                             <div class='form-group row mb-3'>                                
                                 <div class=" col">
-                                    <label for="releve_number">{{ __('Numéro de l\'immobilier') }}</label>
+                                    <label for="releve_number">{{ __('Numéro relévé bien immo') }}</label>
                                     <input type="text" wire:model="releve_number" class="form-control  @error('releve_number') is-invalid @enderror " placeholder="RENXXXXXX" id="releve_number" autofocus="" required="">
                                     @error('releve_number')
                                         <div class="invalid-feedback">

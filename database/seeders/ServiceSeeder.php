@@ -29,5 +29,11 @@ class ServiceSeeder extends Seeder
             'service_name_en' => 'MINDAF',
             'service_name_fr' => 'MINDAF'
         ]);
+        Service::create([
+            'uuid' => Str::uuid(),
+            'code' => '003',
+            'service_name_en' => 'SDAAF',
+            'service_name_fr' => 'SDAAF'
+        ]);
     }
 }

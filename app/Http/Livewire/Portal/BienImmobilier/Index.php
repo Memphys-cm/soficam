@@ -158,18 +158,6 @@ class Index extends Component
         }
     }
 
-    public function sms() {
-        $oMessage = Message::create('a0dd1707bbfc53', '1bb897ed3a3afd94bbe15c07210058518e08bb95c68f1d546234606991e951e0');
-        $oMessage->from ='WhatEver'; // will be overridden
-        $oMessage->to = '+237672959097';
-        // This parameter tells our system to use the classic route to send your message.
-        $oMessage->route ='classic';
-        $oMessage->message ='Hello Kmer World! The test is a success!';
-        var_dump($oMessage->send());
-
-        //dd('sfsfsf');
-    }
-
     public function  printPdf($id)
     {
         $this->bien_immobilier = ReleveImmobilier::findOrFail($id);
@@ -183,7 +171,7 @@ class Index extends Component
 
         return response()->streamDownload(
             fn () => print($pdf->output()),
-            __('Report-') . Str::random('10') . ".pdf"
+            __('Bien-Immobilier-') . Str::random('10') . ".pdf"
         );
     }
 

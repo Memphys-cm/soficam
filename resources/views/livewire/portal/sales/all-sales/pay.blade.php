@@ -54,7 +54,7 @@
                             <hr>
                         @endif
 
-                        @if ($sales_type === 'ordre_versement_imma_directe')
+                        @if ($sales_type === 'ordre_versement_imma_directe' || $sales_type ===  'etat_cession__imma_directe')
 
                             <div class='col'>
                                 <label class="px-2" for="requestor_id">{{ __('Requérant') }}</label>

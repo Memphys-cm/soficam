@@ -137,7 +137,14 @@ class Index extends Component
     public function render()
     {
 
-        $allsaless = Sale::search($this->query)->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        if (auth()->user()->service == 'SDAAF') {
+            # code...
+            $allsaless = Sale::search($this->query)->where('sales_type', 'dossier_vise_enregistre')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        } else {
+            # code...
+            $allsaless = Sale::search($this->query)->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        }
+        
 
         $allsales_count = Sale::count();
         return view('livewire..portal.sales.all-sales.index', ['allsaless' => $allsaless, 'allsales_count' => $allsales_count]);

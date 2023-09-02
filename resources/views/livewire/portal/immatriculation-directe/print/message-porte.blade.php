@@ -116,14 +116,20 @@
             <p style="text-align: justify; margin-top: 20px; font-size:14px">
             <strong style="text-decoration: underline">TEXTE</strong>: HONNEUR VOUS IMFORMER POUR DISPOSITION
             D'USAGE À PRENDRE <strong>STOP</strong> QUE
-            COMMISSION CONSULTATIVE COMPETENTEDONT VOUS ETES MEMBRES SE REUNIRA LE {{$imma_directe->date_convocation}} À____ HEURE A
-            LA SOUS/PREFECTURE DE YAOUNDE VII EN VUE DE PROCEDER À L'EXAMEN DU LITIGE FONCIER OPPOSANT 
-            M/MME <b>@foreach ($imma_directe->users as $user)
-                {{$user->first_name}} {{$user->last_name}},
-            @endforeach à @foreach ($comissions as $comission)
-                {{$comission['nom']}}
-            @endforeach </b>
-            SIS AU QUARTIER_____________________________________________ <strong>STOP</strong> ET
+            COMMISSION CONSULTATIVE COMPETENTEDONT VOUS ETES MEMBRES SE REUNIRA LE {{$imma_directe->date_convocation}} À ____ HEURE A
+            LA SOUS/PREFECTURE DE {{$imma_directe->subDivision->sub_division_name}} EN VUE DE PROCEDER À L'EXAMEN DU LITIGE FONCIER OPPOSANT 
+            M/MME <b> 
+            @if (count($imma_directe->users) === 1)
+                @foreach ($imma_directe->users as $user)
+                    {{$user->first_name}} {{$user->last_name}},
+                @endforeach
+            @else
+                @foreach ($imma_directe->users->take(1) as $user)
+                    {{$user->first_name}} {{$user->last_name}}, et consorts
+                @endforeach
+            @endif
+                 </b>
+            SIS AU QUARTIER {{$imma_directe->localisatiion}} <strong>STOP</strong> ET
                 <strong>FIN</strong>.
             </p>
             <p style="font-size: 14px; text-align:justify"><strong style="text-decoration: underline">COPIE</strong>: AU CHEF DE VILLAGE DE :_____________________________ ACCOMPAGNE DE DEUX
@@ -149,7 +155,7 @@
             </tr>
             <tr style="font-size:14px">
                 <td>
-                    <div><strong>YAOUNDE 7 LE</strong></div>
+                    <div><strong>{{$imma_directe->subDivision->sub_division_name}} LE</strong></div>
                 </td>
             </tr>
             <tr style="font-size:14px">
