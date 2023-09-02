@@ -32,9 +32,7 @@ class Index extends Component
     public function mount()
     {
         $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier', 'region_id', 'division_id', 'sub_division_id', 'lieu_dit')
-            ->whereHas('parcels', function (Builder $query) {
-                $query->where('type_de_venter', 'retrait_indivision');
-            })->get();
+            ->has('users','>=', 2)->get();
         $this->notaires = MembreDuCabinet::notaire()->select('id', 'first_name', 'last_name')->get();
         $this->users = User::role('user')->select('id', 'first_name', 'last_name')->get();
     }
@@ -84,6 +82,27 @@ class Index extends Component
             return;
             session()->flash('message', __('Certificate propriete provided is in valid'));
         }
+
+        $titre_foncier = TitreFoncier::findOrFail($this->titre_foncier_id);
+        $lot = Parcel::create([
+            'titre_foncier_id' => $this->titre_foncier_id,
+            'numero_du_lot' => fake()->randomDigitNot(2),
+            'surperficie_du_lot' =>  $titre_foncier->superficie_du_TF_mere,
+            'superficie_a_vendre' =>  'totale',
+            'superficie_vendu' =>  $titre_foncier->superficie_du_TF_mere,
+            'statut_du_lot' =>  $titre_foncier->etat_terrain,
+            'type' => 'normale',
+            'type_de_venter' => 'mutation_totale',
+            'type_de_versement' => $this->type_de_versement,
+            'prix_du_m2' =>  $this->price_per_m²,
+            'superficie_restant' =>  $this->price_per_m²,
+            'prix_du_m2' =>  $this->price_per_m²,
+            'montant_de_la_vente' =>  $this->sale_amount,
+            'montant_versee' =>  $this->montant_versee,
+            'montant_restant' =>  $this->montant_restant,
+            'commentaire_du_notaire' => $this->commentaires,
+            'date_de_vente' => empty($this->date_de_vente) ? now() : $this->date_de_vente,
+        ]);
 
         Operation::create([
             'numero_operation' => Str::upper(Str::random(6)) . "" . now()->format('msu'),
