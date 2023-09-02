@@ -46,7 +46,7 @@ class TitreFoncierSeeder extends Seeder
                 'etat_terrain' => 'non_batit',
                 'provenance_TF' => 'mutation_totale',
                 'numero_bordereau_analytique' => fake()->randomNumber(6, true),
-                'coordonnees' => $coordinates[0],
+                'coordonnees' => json_encode($coordinates[0]),
                 'limit_nord' => fake()->sentence(),
                 'limit_sud' => fake()->sentence(),
                 'limit_est' => fake()->sentence(),
