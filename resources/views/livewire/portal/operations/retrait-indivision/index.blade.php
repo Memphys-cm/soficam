@@ -149,21 +149,21 @@
                             <div class='d-flex align-items-center justify-content-center'>
 
                                 @can('operation.add_coordinates')
-                                @livewire('portal.operations.partials.add-coordinates', ['operation_id' => $mutation_totale->id,'operation_type'=>$mutation_totale->type_operation ], key($mutation_totale->id))
+                                @livewire('portal.operations.partials.add-coordinates', ['operation_id' => $retrait->id,'operation_type'=>$retrait->type_operation ], key($retrait->id))
                                 @endcan
 
                                 @can('operation.add_sale')
-                                @if($mutation_totale->type_operation === 'mutation_totale_normale')
-                                @livewire('portal.operations.partials.add-sales-data', ['operation_id' => $mutation_totale->id,'operation_type'=>$mutation_totale->type_operation ], key($mutation_totale->id))
+                                @if($retrait->type_operation === 'retrait_normale')
+                                @livewire('portal.operations.partials.add-sales-data', ['operation_id' => $retrait->id,'operation_type'=>$retrait->type_operation ], key($retrait->id))
                                 @endif
                                 @endcan
 
                                 @can('operation.add_payment')
-                                @livewire('portal.operations.partials.add-payment-data', ['operation_id' => $mutation_totale->id,'operation_type'=>$mutation_totale->type_operation ], key($mutation_totale->id))
+                                @livewire('portal.operations.partials.add-payment-data', ['operation_id' => $retrait->id,'operation_type'=>$retrait->type_operation ], key($retrait->id))
                                 @endcan
 
                                 @can('operation.generate_ba')
-                                @livewire('portal.operations.partials.generate-ba', ['operation_id' => $mutation_totale->id,'operation_type'=>$mutation_totale->type_operation ], key($mutation_totale->id))
+                                @livewire('portal.operations.partials.generate-ba', ['operation_id' => $retrait->id,'operation_type'=>$retrait->type_operation ], key($retrait->id))
                                 @endcan
 
                                 @can('operation.retrait_indivision.delete')

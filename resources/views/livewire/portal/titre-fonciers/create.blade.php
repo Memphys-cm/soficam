@@ -113,11 +113,10 @@
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="zone">{{ __('Zone') }}</label>
-                                <select wire:model="zone" name="zone"
-                                    class="form-select  @error('zone') is-invalid @enderror" required="">
-                                    <option value="urbaine">{{ __('Urbain') }}</option>
-                                    <option value="rurale">{{ __('Rural') }}</option>
+                                <label for="zone">{{__('Zone')}}</label>
+                                <select wire:model="zone" name="zone" class="form-select  @error('zone') is-invalid @enderror" required="">
+                                    <option value="urbaine">{{__('Urbain')}}</option>
+                                    <option value="rurale">{{__('Rural')}}</option>
                                 </select>
                                 @error('zone')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -126,10 +125,8 @@
                         </div>
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="numero_folio">{{ __('Numéro de dossier') }}</label>
-                                <input wire:model="numero_folio" type="number"
-                                    class="form-control  @error('numero_folio') is-invalid @enderror"
-                                    placeholder="{{ __('34') }}" required="" name="name">
+                                <label for="numero_folio">{{__('Numéro Folio')}}</label>
+                                <input wire:model="numero_folio" type="number" class="form-control  @error('numero_folio') is-invalid @enderror" placeholder="{{__('34')}}" required="" name="name">
                                 @error('numero_folio')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

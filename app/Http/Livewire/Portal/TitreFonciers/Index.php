@@ -21,6 +21,7 @@ class Index extends Component
 {
     use WithDataTables;
 
+    const PERCENTAGE_TAX_FONCIER = 0.001;
     public ?TitreFoncier $titrefoncier;
     public $users;
     public $user_ids = [];
@@ -69,6 +70,7 @@ class Index extends Component
     public $coordonne = [];
 
 
+    public $region_code, $division_code;
 
     public function addCoordinate()
     {
@@ -83,121 +85,88 @@ class Index extends Component
 
     public function mount()
     {
-        // $utmCoordinates = [
-        //     '783771.1412, 439362.2283', '783772.7367, 439361.3785', '783772.7367, 439318.5813',
-        //     '783772.7367, 439268.5813', '783772.7367, 439218.5813', '783772.7367, 439116.5813',
-        //     '783722.7367, 439168.5813', '783672.7367, 439168.5813', '783622.7367, 439168.5813'
-        // ];
-        // $convertedResults = $this->convert($utmCoordinates);
-
-
-        // dd($convertedResults);
-
-        // $this->convert();
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
-
         $this->conservateurs = User::role('user')->get(); // to be updated
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
-        //    $this->generateCodeTF();
+      
     }
 
     public function updatedRegionID($region_id)
     {
         if (!empty($region_id)) {
             $this->divisions = Division::whereRegionId($region_id)->get();
+            $this->region_code = Region::whereId($region_id)->first()->code;
+
+            $this->numero_titre_foncier = $this->generateCodeTF();
         }
+
     }
     public function updatedDivisionID($division_id)
     {
         if (!empty($division_id)) {
             $this->sub_divisions = SubDivision::whereDivisionId($division_id)->get();
+            $this->division_code = Division::whereId($division_id)->first()->code;
+            $this->numero_titre_foncier = $this->generateCodeTF();
         }
-        // dd($this->sub_divisions);
-        // $this->numero_titre_foncier = $this->generateCodeTF();
+        
     }
 
     public function updatedNumeroFolio()
     {
         $this->numero_titre_foncier = $this->generateCodeTF();
     }
+
     public function updatedNumeroDuDuplicata()
     {
         $this->numero_titre_foncier = $this->generateCodeTF();
+    }
+
+    public function updatedSuperficieDuTFMere($value)
+    {
+        if($value){
+            $this->superficie_du_TF_mere = $value;
+            $this->numero_titre_foncier = $this->generateCodeTF();
+        }
     }
 
     public function convert($utmCoordinates)
     {
         // Initialisez Proj4
         $proj4 = new Proj4php();
-    
+
         // Créez les projections
         $projUTM = new Proj('+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs', $proj4);
         $projWGS84 = new Proj('EPSG:4326', $proj4);
-    
+
         $decimalResults = [];
-    
+
         foreach ($utmCoordinates as $utm) {
             $utmParts = explode(',', $utm); // Sépare les coordonnées UTM en X et Y
             $utmX = floatval($utmParts[0]);
             $utmY = floatval($utmParts[1]);
-    
+
             // Créez le point source avec les coordonnées UTM
             $pointSrc = new Point($utmX, $utmY, $projUTM);
-    
+
             // Transformez le point entre les systèmes de coordonnées
             $pointDest = $proj4->transform($projWGS84, $pointSrc);
-    
+
             // Obtenez les coordonnées lat/lon du point de destination
             $lat = $pointDest->y;
             $lon = $pointDest->x;
-    
+
             // Ajoutez le résultat à votre tableau de résultats en coordonnées décimales
             $decimalResults[] = "$lon, $lat";
         }
-    
+
         return $decimalResults;
     }
-    
-
-    //     return $decimalResults;
-    // }
-    // function convertToDMS($coordinates) {
-    //     $results = [];
-
-    //     foreach ($coordinates as $coordinate) {
-    //         $parts = explode(' ', $coordinate);
-    //         $longitude = $parts[0];
-    //         $latitude = $parts[1];
-
-    //         // Convertir la latitude en degrés minutes secondes
-    //         $latDegrees = floor($latitude);
-    //         $latMinutes = floor(($latitude - $latDegrees) * 60);
-    //         $latSeconds = round((($latitude - $latDegrees) * 60 - $latMinutes) * 60, 2);
-
-    //         // Convertir la longitude en degrés minutes secondes
-    //         $lngDegrees = floor($longitude);
-    //         $lngMinutes = floor(($longitude - $lngDegrees) * 60);
-    //         $lngSeconds = round((($longitude - $lngDegrees) * 60 - $lngMinutes) * 60, 2);
-
-    //         // Ajouter le résultat à votre tableau de résultats
-    //         $results[] = [
-    //             'latitude' => "$latDegrees °$latMinutes'$latSeconds\"",
-    //             'longitude' => "$lngDegrees °$lngMinutes'$lngSeconds\""
-    //         ];
-    //     }
-
-    //     return $results;
-    // }
-
 
     public function generateCodeTF()
     {
-        $region = Region::findOrFail($this->region_id)->code;
-        $departement = Division::findOrFail($this->division_id)->code;
-        $arrondissement = SubDivision::findOrFail($this->sub_division_id)->code;
-        $numero = $region . "/" . $departement . "/" . 'A' . "/" . $this->numero_du_duplicata . "/" . $this->superficie_du_TF_mere . "/" . $this->numero_folio;
+        $numero = $this->region_code . "/" . $this->division_code . "/" . 'A' . "/" . $this->numero_du_duplicata . "/" . $this->superficie_du_TF_mere . "/" . $this->numero_folio;
         return ($numero);
     }
 
@@ -230,63 +199,49 @@ class Index extends Component
 
         $this->validate([
             'numero_titre_foncier' => 'nullable',
-            // 'region_id' => 'required',
-            // 'division_id' => 'required',
-            // 'sub_division_id' => 'required',
-            // 'date_de_delivrance_du_TF' => 'required|date',
-            // 'numero_du_duplicata' => 'required|integer',
-            // 'groupement' => 'required',
-            // 'lieu_dit' => 'required',
-            // 'zone' => 'required',
-            // 'numero_folio' => 'required|integer',
-            // 'volume' => 'required|integer',
-            // 'superficie_du_TF_mere' => 'required',
-            // 'etat_TF' => 'required',
-            // 'etat_terrain' => 'required',
-            // 'provenance_TF' => 'required',
-            // // 'numero_bordereau_analytique' => 'required',
-            // // 'volume_du_bordereau_analytique' => 'required',
-            // // 'date_detablissement_du_bordereau_analytique' => 'required',
-            // 'limit_nord' => 'required',
-            // 'limit_sud' => 'required',
-            // 'limit_est' => 'required',
-            // 'limit_ouest' => 'required',
-            // 'coordonnees' => 'required',
-            // 'numero_ccp' => 'required',
-            // 'taxFoncier_amount' => 'nullable',
-            // 'user_ids' => 'required|array|min:1',
-            // 'user_ids.*' => 'required',
+            'region_id' => 'required',
+            'division_id' => 'required',
+            'sub_division_id' => 'required',
+            'date_de_delivrance_du_TF' => 'required|date',
+            'numero_du_duplicata' => 'required|integer',
+            'groupement' => 'required',
+            'lieu_dit' => 'required',
+            'zone' => 'required',
+            'numero_folio' => 'required|integer',
+            'volume' => 'required|integer',
+            'superficie_du_TF_mere' => 'required',
+            'etat_TF' => 'required',
+            'etat_terrain' => 'required',
+            'provenance_TF' => 'required',
+            // 'numero_bordereau_analytique' => 'required',
+            // 'volume_du_bordereau_analytique' => 'required',
+            // 'date_detablissement_du_bordereau_analytique' => 'required',
+            'limit_nord' => 'required',
+            'limit_sud' => 'required',
+            'limit_est' => 'required',
+            'limit_ouest' => 'required',
+            'coordonnees' => 'required',
+            'numero_ccp' => 'required',
+            'taxFoncier_amount' => 'nullable',
+            'user_ids' => 'required|array|min:1',
+            'user_ids.*' => 'required',
         ]);
 
 
-        $coords = [];
-        collect($this->coordonnees)->map(function ($value, $key) {
-            return ['long' => explode(',', $value, 1), 'lat' => explode(',', $value, 2)];
-        });
-
         $transform = $this->convert($this->coordonnees);
-        // dd($transform);
 
         $selectedSubDivision = SubDivision::findOrFail($this->sub_division_id);
 
         // Extract the prix_minima_m2 from the selected sub_division
         $prixMinimaM2 = $selectedSubDivision->prix_minima_m2;
-        $taxFoncier_amount = $this->superficie_du_TF_mere * $prixMinimaM2;
+        $taxFoncier_amount_perm2 = $this->superficie_du_TF_mere * $prixMinimaM2;
 
         // Calculate the tax_foncier based on the formula
-        $taxFoncier_amount = 0.001 * $taxFoncier_amount;
+        $taxFoncier_amount = self::PERCENTAGE_TAX_FONCIER * $taxFoncier_amount_perm2;
 
-        // dd($taxFoncier_amount);
-
-        // $coordonne = $this->convert($this->coordonnees);
-        // dd($coordonne);
-        // dd(array_flatten($coords));
-
-        // /{"B1": "564321.00, 452564.00", "B2": "564335.746, 452548.271", "B3": "564315.224,452531.059", "B4": "564303.601,452544.471"}
 
         $titrefoncier = TitreFoncier::create([
             'numero_titre_foncier' => $this->numero_titre_foncier,
-
             'national_code' => $this->genererNationalCodeUnique(),
             'region_id' => $this->region_id,
             'division_id' => $this->division_id,
@@ -317,8 +272,6 @@ class Index extends Component
             'numero_ccp' => $this->numero_ccp,
             'taxFoncier_amount' => $taxFoncier_amount,
         ]);
-        
-        dd($titrefoncier);
 
         $titrefoncier->users()->sync($this->user_ids);
 
@@ -336,37 +289,37 @@ class Index extends Component
     }
 
     public function convertToUTM($decimalCoordinates)
-{
-    // Initialisez Proj4
-    $proj4 = new Proj4php();
+    {
+        // Initialisez Proj4
+        $proj4 = new Proj4php();
 
-    // Créez les projections
-    $projUTM = new Proj('+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs', $proj4);
-    $projWGS84 = new Proj('EPSG:4326', $proj4);
+        // Créez les projections
+        $projUTM = new Proj('+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs', $proj4);
+        $projWGS84 = new Proj('EPSG:4326', $proj4);
 
-    $utmResults = [];
+        $utmResults = [];
 
-    foreach ($decimalCoordinates as $decimal) {
-        $decimalParts = explode(',', $decimal); // Sépare les coordonnées décimales en longitude et latitude
-        $lon = floatval($decimalParts[0]);
-        $lat = floatval($decimalParts[1]);
+        foreach ($decimalCoordinates as $decimal) {
+            $decimalParts = explode(',', $decimal); // Sépare les coordonnées décimales en longitude et latitude
+            $lon = floatval($decimalParts[0]);
+            $lat = floatval($decimalParts[1]);
 
-        // Créez le point source avec les coordonnées géographiques
-        $pointSrc = new Point($lon, $lat, $projWGS84);
+            // Créez le point source avec les coordonnées géographiques
+            $pointSrc = new Point($lon, $lat, $projWGS84);
 
-        // Transformez le point entre les systèmes de coordonnées
-        $pointDest = $proj4->transform($projUTM, $pointSrc);
+            // Transformez le point entre les systèmes de coordonnées
+            $pointDest = $proj4->transform($projUTM, $pointSrc);
 
-        // Obtenez les coordonnées UTM du point de destination
-        $utmX = $pointDest->x;
-        $utmY = $pointDest->y;
+            // Obtenez les coordonnées UTM du point de destination
+            $utmX = $pointDest->x;
+            $utmY = $pointDest->y;
 
-        // Ajoutez le résultat à votre tableau de résultats en coordonnées UTM
-        $utmResults[] = "$utmX, $utmY";
+            // Ajoutez le résultat à votre tableau de résultats en coordonnées UTM
+            $utmResults[] = "$utmX, $utmY";
+        }
+
+        return $utmResults;
     }
-
-    return $utmResults;
-}
 
 
     public function initData($id)
@@ -454,10 +407,10 @@ class Index extends Component
 
             // Extract the prix_minima_m2 from the selected sub_division
             $prixMinimaM2 = $selectedSubDivision->prix_minima_m2;
-    
+
             // Calculate the price based on the formula
             $price = $this->superficie_du_TF_mere * $prixMinimaM2;
-    
+
             // Calculate the tax_foncier based on the formula
             $taxFoncier_amount = 0.001 * $price;
             $this->titrefoncier->update([
