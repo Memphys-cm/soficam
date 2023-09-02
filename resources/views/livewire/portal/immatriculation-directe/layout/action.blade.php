@@ -1,4 +1,4 @@
-@can('imma_directe.avis', $imma_directe)
+@can('imma_directe.enregistrer_geometre', $imma_directe)
     @if ($imma_directe->next_step == 'Etat de cession enregistré auprès du géomètre')
         <a href="#" data-bs-placement="top" title="Enregistrer Le Geometre"
             wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal" data-bs-target="#GeometreModal"
@@ -12,7 +12,7 @@
     @endif
 @endcan
 
-@can('imma_directe.avis', $imma_directe)
+@can('imma_directe.enregistrement_pv_bornage', $imma_directe)
     @if ($imma_directe->next_step == 'Enregistrement du PV de Bornage')
         <a href="#" data-bs-placement="top" title="Enregistrer Le Pv de Bornage"
             wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal" data-bs-target="#PvBornageModal"
@@ -26,7 +26,7 @@
     @endif
 @endcan
 
-@can('imma_directe.avis', $imma_directe)
+@can('imma_directe.mise_en_forme_dos_tech', $imma_directe)
     @if ($imma_directe->next_step == 'Mise en Forme du Dossier Technique')
         <a href="#" data-bs-placement="top" title="Mise en Forme du Dossier Technique"
             wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal" data-bs-target="#DossierTechniqueModal"
@@ -40,7 +40,7 @@
     @endif
 @endcan
 
-@can('imma_directe.avis', $imma_directe)
+@can('imma_directe.mise_en_forme_dos_admin', $imma_directe)
     @if ($imma_directe->next_step == 'Mise en Forme du Dossier Administratif')
         <a href="#" data-bs-placement="top" title="Mise en Forme du Dossier Administratif"
             wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal" data-bs-target="#DossierAdministratifModal"
@@ -54,7 +54,7 @@
     @endif
 @endcan
 
-@can('imma_directe.avis', $imma_directe)
+@can('imma_directe.creation_dos_tech', $imma_directe)
     {{-- @if ($imma_directe->next_step == 'Mise en Forme du Dossier Administratif') --}}
         <a href="#" data-bs-placement="top" title="Creation Dossier Technique"
             wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal" data-bs-target="#DossierTechniqueModal"
@@ -68,7 +68,7 @@
     {{-- @endif --}}
 @endcan
 
-@can('imma_directe.avis', $imma_directe)
+@can('imma_directe.descente_terrain', $imma_directe)
     {{-- @if ($imma_directe->next_step == 'Mise en Forme du Dossier Administratif') --}}
         <a href="#" data-bs-placement="top" title="Descente sur le terrain"
             wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal" data-bs-target="#DescenteTerrainModal"

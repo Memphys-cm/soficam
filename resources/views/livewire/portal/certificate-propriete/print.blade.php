@@ -1,9 +1,8 @@
 @php
-    use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-    $qrCode = QrCode::size(100)->generate($certificatepropriete->id);
+$qrCode = QrCode::size(100)->generate(url("validate-document?model={$certificatepropriete->uuid}&category=certificate_propriete"));
 @endphp
-
 <div class="container-fluid">
     <table>
         <tr style="font-size:14px">
@@ -72,15 +71,15 @@
 
     </table>
 
-    <div style="padding: 12px; text-align:center; margin-top:10px"><img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code for Bien Immobilier ID"></div>
+    <div style="padding: 12px; text-align:center; margin-top:10px">
+        <img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code">
+    </div>
 
     <div style="margin-top: 10vh">
         <p></p>
         <p></p>
-        <p></p>
-        <p></p>
-        <h3 style="text-align: center;">CERTIFICAT DE PROPRIETE N°{{$certificatepropriete->certificate_proprietes_number}}/CP/MINDCAF/2/35/T600</h3> 
-       <div>
+        <h3 style="text-align: center;">CERTIFICAT DE PROPRIETE N°{{$certificatepropriete->certificate_proprietes_number}}/CP/MINDCAF/2/35/T600</h3>
+        <div>
             <p>Le Conservateur de la Propriété et des Droits Fonciers du Département de {{$certificatepropriete->titreFoncier->division->division_name}}, soussigné
                 certifie que
                 l'immeuble rural non bati, exploité sis à <strong>{{$certificatepropriete->titreFoncier->zone}}</strong> au lieu dit
@@ -92,9 +91,8 @@
             <p>Appartient en toute propriété:</p>
             <ol>
                 @foreach ($certificatepropriete->titreFoncier->users as $user)
-                    <li>{{$user->first_name}} {{$user->last_name}}</li>
+                <li>{{$user->first_name}} {{$user->last_name}}</li>
                 @endforeach
-                
             </ol>
             <p>Pour l'avoir acquis par Immatriculation Directe</p>
             <p>Ledit Titre Foncier sur lequel le Duplicatum N°1 a été délivré: est à ce jour grevé d'une <strong>Clause
@@ -113,13 +111,13 @@
         <p></p>
         <table style="margin-top:5vh">
             <tr style="font-size:14px">
-                <td >
+                <td>
                     <div>Coût:<strong>{{$certificatepropriete->price}}</strong></div>
                 </td>
                 <td style="width: 8cm;">
                     <div></div>
                 </td>
-                <td >
+                <td>
                     <div>{{$certificatepropriete->titreFoncier->division->division_name}}, le <strong>______________</strong></div>
                 </td>
             </tr>
@@ -130,11 +128,11 @@
             </tr>
             <tr style="font-size:14px">
                 <td>
-                    <div><strong>Validité:03mois</strong></div>
+                    <div><strong>Validité: 03 mois</strong></div>
                 </td>
             </tr>
         </table>
 
 
     </div>
-</div> 
+</div>

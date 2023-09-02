@@ -1,0 +1,16 @@
+
+@include('livewire.portal.immatriculation-directe.create')
+@include('livewire.portal.immatriculation-directe.step.cotation_step1')
+@include('livewire.portal.immatriculation-directe.step.ordre_versement')
+@include('livewire.portal.immatriculation-directe.step.certificat_affichage')
+@include('livewire.portal.immatriculation-directe.step.convocation_invitation')
+@include('livewire.portal.immatriculation-directe.step.edit_statut')
+@include('livewire.portal.immatriculation-directe.step.etat_cession')
+@include('livewire.portal.immatriculation-directe.step.bordoreau_transmition')
+@include('livewire.portal.immatriculation-directe.step.dossier_vise')
+{{-- @include('livewire.portal.immatriculation-directe.step.enregistrer_geometre') --}}
+@include('livewire.portal.immatriculation-directe.step.pv_bornage')
+@include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_technique')
+@include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_administratif')
+@include('livewire.portal.immatriculation-directe.step.creation_dossier_technique')
+@include('livewire.portal.immatriculation-directe.step.descente_terrain')
