@@ -40,7 +40,7 @@
                                      <select wire:model="parcel_id" class='form-control'>
                                          <option value=''>{{__('-- Selectionner --')}}</option>
                                          @foreach($parcels as $parcel)
-                                         <option value='{{$parcel->id}}'> {{__('Lot '). $parcel->numero_lot}}</option>
+                                         <option value='{{$parcel->id}}'> {{__('Lot '). $parcel->numero_du_lot }} - {{$parcel->surperficie_du_lot}} M<sup>2</sup></option>
                                          @endforeach
                                      </select>
                                      @error('parcel_id')

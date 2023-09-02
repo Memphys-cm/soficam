@@ -41,7 +41,10 @@ class AddCoordinates extends Component
         $operation = Operation::findOrFail($operation_id);
         $this->operation = $operation;
         $this->operation_type = $operation_type;
-        $this->parcels = $operation->titreFoncier->parcels->where('type_de_venter', $operation_type);
+
+        // dd($operation_type );
+        
+        $this->parcels = $operation->titreFoncier->parcels->where('type_de_venter', $operation_type == 'morcellement_normale' ? 'simple' : $operation_type);
         $this->geometres = MembreDuCabinet::geometre()->select('id', 'first_name', 'last_name')->get();
     }
 

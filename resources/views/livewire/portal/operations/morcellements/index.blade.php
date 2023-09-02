@@ -54,7 +54,7 @@
                 </a>
                 @endcan
                 @can('operation.morcellement.forcee')
-                 @livewire('portal.operations.morcellements.partials.create-morcellement-forcee') 
+                @livewire('portal.operations.morcellements.partials.create-morcellement-forcee')
                 @endcan
             </div>
         </div>
@@ -164,46 +164,22 @@
                         </td>
                         @canany('operation.morcellement.update','operation.morcellement.delete')
                         <td>
-                            @can('operation.morcellement.update')
-                            <div class="btn-group">
-                                <a href="" class="text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <svg class="icon icon-sm text-info" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
+                            @can('operation.add_coordinates')
+                            @livewire('portal.operations.partials.add-coordinates', ['operation_id' => $morcellement->id,'operation_type'=>$morcellement->type_operation ], key($morcellement->id))
+                            @endcan
 
-                                    <span class="visually-hidden">Toggle Dropdown</span>
-                                </a>
-                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
-                                    <a href="#" class="dropdown-item d-flex align-items-center" wire:click.prevent="initData({{$morcellement->id}})" data-bs-toggle="modal" data-bs-target="#CreateAddCoordinatesModal" draggable="false">
-                                        <svg class="dropdown-icon text-primary me-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                                        </svg>
-                                        {{__('Ajouter coordonnée')}}
-                                    </a>
-                                    <a wire:click.prevent="initData({{$morcellement->id}})" data-bs-toggle="modal" data-bs-target="#CreateAddCoordinatesModal" draggable="false" class="dropdown-item d-flex align-items-center" href="#">
+                            @can('operation.add_sale')
+                            @if($morcellement->type_operation === 'morcellement_normale')
+                            @livewire('portal.operations.partials.add-sales-data', ['operation_id' => $morcellement->id,'operation_type'=>$morcellement->type_operation ], key($morcellement->id))
+                            @endif
+                            @endcan
 
-                                        <svg class="dropdown-icon text-primary me-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                                        </svg>
-                                        {{__('Ajouter Coordonnée de vente')}}
-                                    </a>
-                                    <a wire:click.prevent="initData({{$morcellement->id}})" data-bs-toggle="modal" data-bs-target="#CreateAddCoordinatesModal" draggable="false" class="dropdown-item d-flex align-items-center" href="#" wire:click.prevent="initData({{$morcellement->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal">
-                                        <svg class="dropdown-icon text-primary me-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
-                                        </svg>
-                                        {{__('Ajouter Lorder Versement ')}}
-                                    </a>
-                                    <a wire:click.prevent="initData({{$morcellement->id}})" data-bs-toggle="modal" data-bs-target="#CreateAddCoordinatesModal" draggable="false" class="dropdown-item d-flex align-items-center" href="#">
+                            @can('operation.add_payment')
+                            @livewire('portal.operations.partials.add-payment-data', ['operation_id' => $morcellement->id,'operation_type'=>$morcellement->type_operation ], key($morcellement->id))
+                            @endcan
 
-                                        <svg class="dropdown-icon text-primary me-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
-                                        </svg>
-                                        {{__('Generer Bordereau Analytique')}}
-                                    </a>
-                                </div>
-                            </div>
-
+                            @can('operation.generate_ba')
+                            @livewire('portal.operations.partials.generate-ba', ['operation_id' => $morcellement->id,'operation_type'=>$morcellement->type_operation ], key($morcellement->id))
                             @endcan
                             @can('operation.morcellement.delete')
                             <a href="#" wire:click.prevent="initData({{$morcellement->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
