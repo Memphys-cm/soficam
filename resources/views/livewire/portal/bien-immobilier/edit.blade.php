@@ -60,7 +60,7 @@
                                 <label for="price">{{ __('Prix') }}</label>
                                 <input wire:model="price" type="number"
                                     class="form-control  @error('price') is-invalid @enderror"
-                                    placeholder="{{ __('') }}" required="">
+                                    placeholder="{{ __('0') }}" required="">
                                 @error('price')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

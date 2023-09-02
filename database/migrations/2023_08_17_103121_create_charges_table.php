@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('charges', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique()->index();
-            $table->foreignId('titre_foncier_id')->on('titre_onciers')->index();
+            $table->foreignId('titre_foncier_id')->on('titre_fonciers')->index();
             $table->string('type_charge');
             $table->timestamps();
         });

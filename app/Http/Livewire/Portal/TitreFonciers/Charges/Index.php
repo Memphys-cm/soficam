@@ -14,12 +14,11 @@ class Index extends Component
 {
     use WithDataTables;
 
-    public ?Charge $charge;
+    public $charge;
     public $titre_foncier_id, $titre_fonciers, $numero_titre_foncier;
     public $type_charge;
     public $attachements;
     public $etat_TF;
-    //public $phone_number = '+237672959097';
 
     public function mount()
     {
@@ -36,21 +35,12 @@ class Index extends Component
         }
     }
 
-    public function initData($id) {
-        $charge = Charge::findOrFail($id);
-
-        $this->charge = $charge;
-        $this->titre_foncier_id = $charge->titreFoncier->numero_titre_foncier;
-        $this->type_charge = $charge->type_charge;
-    }
-
     public function store() 
     {   
         $this->validate([
             'titre_foncier_id' => 'required',
             'etat_TF' => 'required',
         ]);
-
         $this->titre_foncier = TitreFoncier::findOrFail($this->titre_foncier_id);
 
         $this->titre_foncier->update([
@@ -75,21 +65,31 @@ class Index extends Component
         $this->refresh(__('Charge ajouté avec succès!'), 'CreateChargeModal');
     }
 
+    public function initData($id) {
+        $charge = Charge::findOrFail($id);
+
+        $this->charge = $charge;
+
+        $this->type_charge = $charge->type_charge;
+    }
+
     function sendChargeMessage($charge){
         $receivers = $charge->titreFoncier->users;
 
         $sms='';
         $userNames='';
-        $mobiles = '';
+        $mobiles = "";
 
         foreach($receivers as $user) {
             if($user){
-                $userNames .= $user->first_name . ', ';
-                $mobiles .= $user->primary_phone_number . ',';
+                $userNames .= $user->first_name . ',';
+                $mobiles .= "$user->primary_phone_number,";
             }
         }
 
-        $userNames = rtrim($userNames, ', ');
+        //retirer la virgule en fin de chaine
+        $userNames = rtrim($userNames, ',');
+        $mobiles = rtrim($mobiles, ',');
 
         //Personnaliser le sms
         switch ($charge->type_charge) {
@@ -116,7 +116,7 @@ class Index extends Component
                 
         if(!empty($sms)){
             $senderid ='SOFICAM';
-            $mobiles = $mobiles = rtrim($mobiles, ',');
+            $mobiles = $mobiles;
             $api_key = '36v7fN66hzUD6SaBYkILlirHZo7P';
             $url = 'https://api.queensms.net/v1/sms.php';
 
@@ -168,7 +168,7 @@ class Index extends Component
         foreach ($receivers as $user) {
             if ($user) {
                 // Ajoutez le numéro de téléphone de l'utilisateur à la chaîne
-                $mobiles .= $user->primary_phone_number . ',';
+                $mobiles .= "$user->primary_phone_number,";
             }
         }
     
@@ -213,8 +213,7 @@ class Index extends Component
         }
     }
 
-    public function update() {
-        dd('hhff');
+    public function retirer() {
         $this->validate([
             'titre_foncier_id' => 'required',
         ]);
@@ -230,11 +229,20 @@ class Index extends Component
             'type_charge' => 'RETRAIT',
         ]);
 
-        $this->removeCharge();
+        $this->removeCharge($charge);
 
         $this->clearFields();
 
         $this->refresh(__('Charge retirée avec succès!'), 'EditChargeModal');
+    }
+
+    public function delete()
+    {
+        if (!empty($this->charge)) {
+            $this->charge->delete();
+        }
+
+        $this->refresh(__('Charge Supprimé de l\'historique avec succès'), 'DeleteModal');
     }
    
     public function render()
@@ -254,11 +262,5 @@ class Index extends Component
             'titre_foncier_id',
         ]);
     }
-
-    public function clearField() {
-        $this->reset([
-            'etat_TF',
-            'numero_titre_foncier',
-        ]);
-    }
+    
 }
