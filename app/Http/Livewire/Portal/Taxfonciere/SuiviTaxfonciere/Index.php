@@ -170,7 +170,7 @@ class Index extends Component
         $totalTaxAmountpaid = TitreFoncier::where('status_tax', 'payer')->sum('taxFoncier_amount');
         $totalTaxAmountPaid = TitreFoncier::where('status_tax', 'payer')->sum('taxFoncier_amount');
         $tax_paid_percentage = TitreFoncier::whereNotNull('taxFoncier_amount')->count();
-        $percentagePaid = ($totalTaxAmountPaid / $totalTaxAmountPrediction) * 100;
+        $percentagePaid = ($totalTaxAmountPaid / ($totalTaxAmountPrediction === 0 ? 1 : $totalTaxAmountPrediction) ) * 100;
 
         return view('livewire.portal.taxfonciere.suivi-taxfonciere.index',  [
             'titrefonciers' => $titrefonciers,
