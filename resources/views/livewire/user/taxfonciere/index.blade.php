@@ -84,7 +84,7 @@
                             </td>
 
                             <td>
-                                <span class="fw-normal">{{ $titrefoncier->tax_amount }}</span>
+                                <span class="fw-normal">{{ $titrefoncier->taxFoncier_amount }} {{ __('XAF') }}</span>
                             </td>
                             <td>
                                 <span

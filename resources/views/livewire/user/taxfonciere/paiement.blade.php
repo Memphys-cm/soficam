@@ -39,11 +39,11 @@
                         </div>
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="tax_amount">{{ __('Montant de la taxe') }}</label>
-                                <input wire:model="tax_amount" type="number"
-                                    class="form-control  @error('tax_amount') is-invalid @enderror"
+                                <label for="taxFoncier_amount">{{ __('Montant de la taxe') }}</label>
+                                <input wire:model="taxFoncier_amount" type="number"
+                                    class="form-control  @error('taxFoncier_amount') is-invalid @enderror"
                                      required="" disabled>
-                                @error('tax_amount')
+                                @error('taxFoncier_amount')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div> 

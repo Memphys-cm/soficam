@@ -101,6 +101,7 @@ class Index extends Component
 
             ]
         );
+        
         if (!empty($this->titrefoncier)) {
 
             $this->titrefoncier->update([
