@@ -47,6 +47,7 @@ class Index extends Component
     public $coordinates = ['', ''] , $transform;
     public $coordonnees = [];
     public $coordonne = [];
+    public $detect = 0;
 
     public function addCoordinate()
     {
@@ -108,6 +109,7 @@ class Index extends Component
         $imma_directe = $this->imma_directe;
       
         $this->state = 1;
+        $this->detect = 1;
     }
 
     public function store()
@@ -503,26 +505,30 @@ class Index extends Component
 
     public function updated()
     {
-        $area =  $this->imma_directe->superficie;
-        $zone = $this->zone;
-       ;
-        $this->price_m2 = match ($zone) {
-            "terrain_urbain" => ($area <= 5000) ? 25000 : ($area - 5000) * 20,
-            "terrain_rurale" => match (true) {
-                ($area <= 50000) => 25000,
-                ($area >= 50000 && $area <= 200000) => 50000,
-                default => ($area - 200000) * 1,
-            },
-            default => 0,
-        };
-        
-        $this->frais_suplementaires = 2500;
-
-        $this->cout = (int)$this->price_m2;
-
-        $this->cout_etat_cession = (int)$this->cout + (int)$this->frais_suplementaires;
-        // dd($this->cout_etat_cession);
-   
+        if($this->detect ==1)
+        {
+            $area =  $this->imma_directe->superficie;
+            $zone = $this->zone;
+           ;
+            $this->price_m2 = match ($zone) {
+                "terrain_urbain" => ($area <= 5000) ? 25000 : ($area - 5000) * 20,
+                "terrain_rurale" => match (true) {
+                    ($area <= 50000) => 25000,
+                    ($area >= 50000 && $area <= 200000) => 50000,
+                    default => ($area - 200000) * 1,
+                },
+                default => 0,
+            };
+            
+            $this->frais_suplementaires = 2500;
+    
+            $this->cout = (int)$this->price_m2;
+    
+            $this->cout_etat_cession = (int)$this->cout + (int)$this->frais_suplementaires;
+            // dd($this->cout_etat_cession);
+       
+        }
+       
     }
     public function generateUniqueCode($year, $counter)
     {
