@@ -40,7 +40,7 @@ class Index extends Component
             'service_name_fr' => $this->service_name_fr,
             'service_name_en' => $this->service_name_en,
             'code' => $this->code,
-            'status' => $this->status,
+            'status' => !empty($this->status) ? $this->status : 1,
         ]);
 
         $this->clearFields();
@@ -72,7 +72,7 @@ class Index extends Component
             'service_name_fr' => $this->service_name_fr,
             'service_name_en' => $this->service_name_en,
             'code' => $this->code,
-            'status' => $this->status,
+            'status' => !empty($this->status) ? $this->status : 1,
         ]);
 
         $this->state = 1;

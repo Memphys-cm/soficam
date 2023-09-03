@@ -154,7 +154,7 @@
     </div>
 
 
-    <div class="row p-3">
+    <div class="row py-3">
         <div class="col-md-3">
             <label for="search">{{ __('Recherche') }}: </label>
             <input wire:model="query" id="search" type="text" placeholder="{{ __('Jean...') }}"

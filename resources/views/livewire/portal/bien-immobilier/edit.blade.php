@@ -1,16 +1,16 @@
 {{-- update modal --}}
 <div wire:ignore.self class="modal side-layout-modal fade" id="BienUpdateModal" tabindex="-1"
     aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:45%;">
+    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:35%;">
         <div class="modal-content">
             <div class="modal-body p-0">
-                <div class="p-4 p-lg-5">
+                <div class="p-4 p-lg-4">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4"> {{ __('Mise à jour du Bien Immobilier') }}</h1>
                         <p class="px-1"> {{ __('Mise à jour du Bien Immobilier') }}</p>
                     </div>
                     <x-form-items.form wire:submit="update">
-                        <div class='form-group mb-3 row'>
+                        <div class='form-group mb-2 row'>
                             <div class="col">
                                 <label for="type">{{ __('Type') }}</label>
                                 <input wire:model="type" name="type"
@@ -30,7 +30,7 @@
                             </div>
 
                         </div>
-                        <div class="form-group mb-3 row">
+                        <div class="form-group mb-2 row">
                             <div class='col'>
                                 <label class="px-2" for="requestor_id">{{ __('Requérant') }}</label>
                                 <x-input.select wire:model="requestor_id" prettyname="requestor" :options="$requestors->pluck('first_name', 'id')->toArray()" />
@@ -51,7 +51,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class='form-group mb-3 row'>
+                        <div class='form-group mb-2 row'>
                             <div class="col">
                                 <label for="price">{{ __('Prix') }}</label>
                                 <input wire:model="price" type="number"
@@ -64,7 +64,7 @@
                             <div class="col">
                             </div>
                         </div>
-                        <div class='form-group mb-3 row'>
+                        <div class='form-group mb-2 row'>
                             <div class="col">
                                 <label for="releve_reason">{{ __('Raison Releve') }}</label>
                                 <textarea rows="6" wire:model="releve_reason"
