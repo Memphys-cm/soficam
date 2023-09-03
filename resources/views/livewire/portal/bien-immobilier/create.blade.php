@@ -43,9 +43,9 @@
                             <div class=" col">
                                 <label for="releves_type">{{ __('Type Personne') }}</label>
                                 <select wire:model="releves_type" class="form-control" name="releves_type" id="releves_type">
-                                    <option value="">--Select type--</option>
-                                    <option value="personne_physique">Personne Physique</option>
-                                    <option value="personne_morale">Personne Morale</option>
+                                    <option value="">{{__('--Selectionner le type--')}}</option>
+                                    <option value="personne_physique">{{__('Personne Physique')}}</option>
+                                    <option value="personne_morale">{{__('Personne Morale')}}</option>
                                 </select>
                                 @error('releves_type')
                                 <div class="invalid-feedback">

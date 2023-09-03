@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\User\Paiement;
 
+use App\Models\Receipt;
 use Livewire\Component;
 use App\Models\Operation;
 use App\Models\Sales\Sale;

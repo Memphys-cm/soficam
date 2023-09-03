@@ -1,8 +1,7 @@
 <div>
     <x-alert />
-    @include('livewire.portal.etat-cession.create-etat_cession')
-    @include('livewire.portal.etat-cession.edit-etat_cession')
-    <x-alert-notif />
+    @include('livewire.portal.releve-immobilier.biens-immobiliers.created')
+    @include('livewire.portal.releve-immobilier.biens-immobiliers.edited')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -16,47 +15,32 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Etat Cession')}}</li>
+                        <li class="breadcrumb-item"><a href="/">{{__('Tableau de Bord')}}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Biens immobiliers')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
                     <svg class="icon me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    {{__('Affectation d\'état')}}
+                    {{__('Biens immobiliers')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('Voir Tous les Etats de Cession')}} </p>
+                <p class="mt-n1 mx-2">{{__('Voir tous les biens immobiliers')}}</p>
             </div>
             <div class="d-flex justify-content-between mb-2">
-
-                @can('etat_cession.create')
-                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateEtatCessionModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
+                <a href="" data-bs-toggle="modal" data-bs-target="#CreateEstateModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{__('Nouveau')}}
                 </a>
-                @endcan
-
-                @can('etat_cession.export_n_print')
                 <div class="mx-2" wire:loading.remove>
-                    <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center {{count($state_assignments) > 0 ? '' :'disabled'}}
-                        ">
+                    <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center ">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
                         </svg>
-                        {{__('Exporter')}}
+                        {{ __('Exporter') }}
                     </a>
                 </div>
-                <div class="text-center mx-2" wire:loading wire:target="export">
-                    <div class="text-center">
-                        <div class="spinner-grow text-grey-300" style="width: 0.9rem; height: 0.9rem;" role="status"></div>
-                        <div class="spinner-grow text-grey-300" style="width: 0.9rem; height: 0.9rem;" role="status"></div>
-                        <div class="spinner-grow text-grey-300" style="width: 0.9rem; height: 0.9rem;" role="status"></div>
-                        <div class="spinner-grow text-grey-300" style="width: 0.9rem; height: 0.9rem;" role="status"></div>
-                    </div>
-                </div>
-                @endcan
             </div>
         </div>
     </div>
@@ -69,104 +53,110 @@
         <div class="col-md-3">
             <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="type_operation">{{__('Opération')}}</option>
-                <option value="type_personne">{{__('Type Personne')}}</option>
-                <option value="zone">{{__('Zone')}}</option>
-                <option value="user_id">{{__('Requérant')}}</option>
-                <option value="geometre_id">{{__('Géomètre')}}</option>
-                <option value="created_at">{{__('Date de création')}}</option>
+                <option value="action_type">{{__(' Type Statut')}}</option>
+                <option value="created_at">{{__('Date Creation ')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Sens du tri')}}: </label>
+            <label for="direction">{{__('Sens du trie')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{__('Ascendant')}}</option>
-                <option value="desc">{{__('Descendant')}}</option>
+                <option value="asc">{{__('Ascendante')}}</option>
+                <option value="desc">{{__('Descendante')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Éléments par page')}}: </label>
+            <label for="perPage">{{__('Element par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="15">15</option>
                 <option value="20">20</option>
                 <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
             </select>
         </div>
     </div>
     <div class="card pb-3">
         <div class="table-responsive  text-gray-700">
-            <table class="table employee-table table-hover align-items-center ">
+            <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('Requérant')}}</th>
-                        <th class="border-bottom">{{__('reférence')}}</th>
-                        <th class="border-bottom">{{__('personne')}}</th>
-                        <th class="border-bottom">{{__('opération')}}</th>
-                        <th class="border-bottom">{{__('Zone')}}</th>
-                        <th class="border-bottom">{{__('Géomètre')}}</th>
+                        <th class="border-bottom">{{__('Numéro de l\'immobilier')}}</th>
+                        <th class="border-bottom">{{__('Requerant')}}</th>
+                        <th class="border-bottom">{{__('Numéro titre foncier')}}</th>
+                        <th class="border-bottom">{{__('Prix')}}</th>
+                        <th class="border-bottom">{{__('Validité')}}</th>
+                        <th class="border-bottom">{{__('Type de bien immobilier')}}</th>
                         <th class="border-bottom">{{__('Statut')}}</th>
-                        <th class="border-bottom">{{__('Date Création')}}</th>
-                        {{-- @canany('housing_estate.update','housing_estate.delete') --}}
+                        <th class="border-bottom">{{__('Creer par')}}</th>
+                        <th class="border-bottom">{{__('Date creation')}}</th>
                         <th class="border-bottom">{{__('Action')}}</th>
-                        {{-- @endcanany --}}
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($state_assignments as $housing_estate)
+                    @forelse($bien_immobiliers as $bien_immobilier)
                     <tr>
                         <td>
-                            <x-elements.user :options="$housing_estate->user" />
+                            <span class="fs-normal">{{$bien_immobilier->releve_number }}</span>
+                        </td>
+                            
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-primary me-3"><span class="text-white">{{initials($bien_immobilier->requestor->first_name)}}</span></div>
+                                <div class="d-block"><span class="fw-bold">{{$bien_immobilier->requestor->first_name}}</span>
+                                    <div class="small text-gray">{{!empty($bien_immobilier->requestor->first_name) ? $bien_immobilier->requestor->first_name : ''}}</div>
+                                </div> 
+                            </div>
                         </td>
                         <td>
-                            <span class="fw-normal">{{$housing_estate->reference_etat_cession}}</span>
+                            <span class="fs-normal">{{$bien_immobilier->titre_foncier_id}}</span>
                         </td>
-                        <td class="text-center"> {{ $housing_estate->type_personne }} </td>
-                        <td>
-                            <span class="fw-normal">{{$housing_estate->type_operation}}</span>
-                        </td>
-                        <td>
-                            <span class="fw-normal">{{$housing_estate->zone}}</span>
-                        </td>
-                        <td>
-                            <span class="fw-normal">{{$housing_estate->geometre->first_name ?? '' }} {{$housing_estate->geometre->last_name ?? ''}}</span>
-                        </td>
-                        <td>
-                            <span class="fw-normal badge super-badge p-2 bg-{{$housing_estate->statusStyle}} round">{{$housing_estate->status}}</span>
 
-                        </td>
                         <td>
-                            <span class="fw-normal">{{$housing_estate->created_at->format('Y-m-d')}}</span>
+                            <span class="fs-normal">{{$bien_immobilier->price }} {{__('FCFA')}}</span>
                         </td>
-                        {{-- @canany('housing_estate.update','housing_estate.delete') --}}
+
                         <td>
-                            {{-- @can('housing_estate.update') --}}
-                            <a href="#" wire:click.prevent="initData({{$housing_estate->id}})" data-bs-toggle="modal" data-bs-target="#UpdateEtatCessionModal" draggable="false">
+                            <span class="fs-normal">{{$bien_immobilier->validity}}</span>
+                        </td>
+
+                        <td>
+                            <span class="fs-normal">{{$bien_immobilier->releves_type }}</span>
+                        </td>
+
+                        <td>
+                            <span class="fw-normal  badge super-badge p-2  bg-{{$bien_immobilier->status_style}} rounded">{{$bien_immobilier->status}}</span>
+                        </td>
+
+                        <td>
+                            <span class="fs-normal">{{$bien_immobilier->recorded_by}}</span>
+                        </td>
+                        
+                        <td>
+                            <span class="fw-normal">{{$bien_immobilier->created_at->format('Y-m-d')}}</span>
+                        </td>
+
+                        <td>
+                            <a href="#" wire:click.prevent="initData({{ $bien_immobilier->id }})" data-bs-toggle="modal" data-bs-target="#EditEstateModal">
                                 <svg class="icon icon-sm text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                 </svg>
                             </a>
-                            {{-- @endcan --}}
-                            {{-- @can('housing_estate.delete') --}}
-                            <a href="#" wire:click.prevent="initData({{$housing_estate->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
+                            <a href="#" wire:click.prevent="initData({{ $bien_immobilier->id }})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
                                 <svg class="icon icon-sm text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                                 </svg>
                             </a>
-                            {{-- @endcan --}}
+                            <button class="btn btn-primary" wire:click.prevent="got">test</button>
                         </td>
-                        {{-- @endcanany --}}
+
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="10" class="text-center">
+                        <td colspan="9" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                                <h4 class="fs-4 fw-bold">{{__('Liste vide')}}</h4>
                                 <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
@@ -176,9 +166,9 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Montrer')}} {{$perPage > $state_assignments_count ? $state_assignments_count : $perPage  }} {{__(' éléments sur ')}} {{$state_assignments_count}}
+                    {{__('Afficher ')}} {{$perPage > $bien_immobiliers_count ? $bien_immobiliers_count : $perPage  }} {{__('element de')}} {{$bien_immobiliers_count}}
                 </div>
-                {{ $state_assignments->links() }}
+                {{ $bien_immobiliers->links() }}
             </div>
         </div>
     </div>

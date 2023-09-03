@@ -31,7 +31,7 @@
                     </svg>
                     {{ __('Rapport sur les Taxe Foncières') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir tous les Taxes Foncières') }} </p>
+                <p class="mt-n1 mx-2">{{ __('Voir tous les Taxe Foncieres') }} </p>
             </div>
         </div>
     </div>

@@ -22,7 +22,7 @@ class Index extends Component
     public $last_name;
     public $sexe;
     public $email;
-    public $is_active;
+    public $is_active = 1;
     public $id_card_number;
     public $date_of_birth;
     public $place_of_birth;
@@ -35,6 +35,7 @@ class Index extends Component
 
     public $roles;
     public $role_id;
+    public $selectedStatus, $selectedSexe;
 
     public ?string $query=null;
 
@@ -55,7 +56,7 @@ class Index extends Component
         'primary_phone_number' => 'required',
         'secondary_phone_number' => 'sometimes',
         'address' => 'sometimes',
-        'password' => 'required|confirm',
+        'password' => 'required|confirmed',
     ];
 
     public function mount()
@@ -129,6 +130,8 @@ class Index extends Component
             'password' => empty($this->password) ? $this->user->password : bcrypt($this->password),
         ]);
 
+        // dd($this->is_active);
+
         if ($this->user->getRoleNames()->first() != $this->role_name) {
             $this->user->syncRoles($this->role_name);
         }
@@ -183,7 +186,14 @@ class Index extends Component
             return abort(401);
         }
 
-        $users = User::search($this->query)->with('roles')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $users = User::search($this->query)->with('roles')
+        ->when($this->selectedStatus, function ($query, $selectedStatus) {
+            return $query->where('is_active', $selectedStatus);
+        })
+        ->when($this->selectedSexe, function ($query, $selectedSexe) {
+            return $query->where('sexe', $selectedSexe);
+        })
+        ->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
 
         $total_users = User::with(['roles' => function ($role) {
             return $role->whereNotIn('name', ['super_admin'])->get();

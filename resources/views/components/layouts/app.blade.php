@@ -124,6 +124,8 @@
     <script src="{{ asset('vendor/choices.js/public/assets/scripts/choices.min.js')}}"></script>
     <script src="{{ asset('js/theme.js')}}"></script>
     <script src="{{ asset('js/jquery-3.6.0.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 
 

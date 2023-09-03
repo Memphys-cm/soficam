@@ -115,7 +115,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-end mt-3 mb-4 ">
-                                    <span class="fw-normal">{{__('Vous avez déjà un compte?')}} <a href="{{route('login')}}" class="fw-bold">{{__('Sign In')}}</a></span>
+                                    <span class="fw-normal">{{__('Vous avez déjà un compte?')}} <a href="{{route('login')}}" class="fw-bold">{{__('S\'inscrire')}}</a></span>
                                     <button type="submit" class="btn btn-primary btn-loading px-6"> {{ __('Enregistrer') }}</button>
                                 </div>
                             </x-form-items.form>

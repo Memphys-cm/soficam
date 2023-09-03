@@ -42,7 +42,7 @@
                                 <label for="releves_type">{{ __(' Type Personne') }}</label>
                                 <select wire:model="releves_type" name="releves_type"
                                     class="form-select  @error('releves_type') is-invalid @enderror" required="">
-                                    <option value="">{{ __('-- Selectionner --') }}</option>
+                                    <option value="">{{ __('--Selectionner le type--') }}</option>
                                     <option value="personne_physique">{{ __('Personne Physique') }}</option>
                                     <option value="personne_morale">{{ __('Personne Morale') }}</option>
                                 </select>

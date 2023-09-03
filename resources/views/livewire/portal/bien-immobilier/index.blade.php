@@ -74,7 +74,7 @@
         <div class="col-md-3">
             <label for="orderBy">{{ __('Trier par') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="releve_number">{{ __('Releve N') }}</option>
+                <option value="releve_number">{{ __('Relevé N') }}</option>
                 <option value="requestor_id">{{ __('Requérant') }}</option>
                 <option value="price">{{ __('Prix') }}</option>
                 <option value="validity">{{ __('Validité') }}</option>
@@ -108,10 +108,10 @@
                 <thead>
                     <tr>
                         <th class="border-bottom">{{ __('Requérant') }}</th>
-                        <th class="border-bottom">{{ __(' NUMÉRO BIEN IMMO') }}</th>
+                        <th class="border-bottom">{{ __('NUMÉRO BIEN IMMO') }}</th>
                         <th class="border-bottom">{{ __('PRIX') }}</th>
                         <th class="border-bottom">{{ __('VALIDITÉ') }}</th>
-                        <th class="border-bottom">{{ __(' TYPE PERSONNE') }}</th>
+                        <th class="border-bottom">{{ __('TYPE PERSONNE') }}</th>
                         <th class="border-bottom">{{ __('STATUT') }}</th>
                         <th class="border-bottom">{{ __('Date creation') }}</th>
                         @canany(['immobilier.edit','immobilier.delete'])
@@ -127,7 +127,7 @@
                         </td>
                         <td>{{ $bien_immobilier->releve_number }}</td>
 
-                        <td>{{ $bien_immobilier->price }} {{ __('XAF') }}</td>
+                        <td>{{ $bien_immobilier->price }} {{ __('FCFA') }}</td>
                         <td>{{ $bien_immobilier->validity }}</td>
                         <td>{{ $bien_immobilier->releves_type }}</td>
 
@@ -169,7 +169,7 @@
                     <tr>
                         <td colspan="10" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{ __('Liste Vide') }} </h4>
+                                <h4 class="fs-4 fw-bold">{{ __('Liste vide') }} &#128540;</h4>
                                 <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                             </div>
                         </td>

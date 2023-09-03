@@ -25,7 +25,7 @@ return new class extends Migration
             $table->foreignId('service_id')->nullable()->index()->constrained();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->tinyInteger('is_active')->default(1);
+            $table->boolean('is_active')->default(1);
             $table->enum('preferred_language',['en','fr'])->default('fr');
             $table->enum('sexe',['M','F'])->nullable();
             $table->string('password');

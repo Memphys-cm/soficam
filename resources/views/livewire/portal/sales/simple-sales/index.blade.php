@@ -157,7 +157,7 @@
                     <tr>
                         <td colspan="7" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Liste Vide')}} </h4>
+                                <h4 class="fs-4 fw-bold">{{__('Liste vide')}} </h4>
                                 <p>{{__('Vous devez créer un lotissement avant de pouvoir effectuer des ventes simples.!')}}</p>
                                 @can('lotissement.create')
                                 <a href="{{route('portal.lotissements.create')}}" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
