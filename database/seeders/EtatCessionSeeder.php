@@ -27,7 +27,7 @@ class EtatCessionSeeder extends Seeder
                 'uuid' => Str::uuid(),
                 'reference_etat_cession' => fake()->randomDigitNotNull(10),
                 'type_personne' => collect(['morale','physique'])->random(),
-                'zone' => collect(['terrain_urbain','terrain_rurale'])->random(),
+                'zone' => collect(['urbain','rurale'])->random(),
                 'type_operation' => collect(['bornage', 'morcellement', 'mutation_totale', 'retrait_indivision', 'immatriculation_direct', 'concession'])->random(),
                 'status' => collect(['pending_payment', 'paid', 'cancelled', 'completed'])->random(),
                 'titre_foncier_id' => TitreFoncier::pluck('id')->shuffle()->first(),

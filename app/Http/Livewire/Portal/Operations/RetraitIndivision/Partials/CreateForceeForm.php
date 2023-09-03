@@ -1,19 +1,15 @@
 <?php
 
-namespace App\Http\Livewire\Portal\Operations\MutationTotale\Partials;
+namespace App\Http\Livewire\Portal\Operations\RetraitIndivision\Partials;
 
 use App\Models\User;
 use Livewire\Component;
-use App\Models\Operation;
-use Illuminate\Support\Str;
 use App\Models\TitreFoncier;
 use App\Models\MembreDuCabinet;
-use App\Models\CertificatePropriete;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Livewire\Traits\WithDataTables;
 use Illuminate\Database\Eloquent\Collection;
 
-class CreateParDecesForm extends Component
+class CreateForceeForm extends Component
 {
     use WithDataTables;
 
@@ -23,7 +19,6 @@ class CreateParDecesForm extends Component
     public $requestor_id, $region, $division, $sub_division, $lieu_dit;
     public $parcel_id, $parcels = [], $etat_cession_id, $etat_cessions = [];
     public $commentaires;
-    public $attachements;
 
 
     public function mount()
@@ -72,7 +67,7 @@ class CreateParDecesForm extends Component
             session()->flash('message', __('Certificate propriete provided is in valid'));
         }
 
-        $operation =  Operation::create([
+        Operation::create([
             'numero_operation' => Str::upper(Str::random(6)) . "" . now()->format('msu'),
             'titre_foncier_id' => $this->titre_foncier_id,
             'type_operation' => 'mutation_totale_par_deces',
@@ -82,14 +77,6 @@ class CreateParDecesForm extends Component
             'validite_CP' => $cp->validity,
         ]);
 
-        if (!empty($this->attachements)) {
-            foreach ($this->attachements as $attachement) {
-                $operation->addMedia($attachement->getRealPath())
-                    ->usingName('Numero CA')
-                    ->toMediaCollection('operations');
-            }
-        }
-        
         $this->clearFields();
         $this->refresh(__('Mutation Totale par Deces successfully Created'), 'CreateMutationTotaleParDecesModal');
     }
@@ -106,6 +93,6 @@ class CreateParDecesForm extends Component
 
     public function render()
     {
-        return view('livewire.portal.operations.mutation-totale.partials.create-par-deces-form');
+        return view('livewire.portal.operations.retrait-indivision.partials.create-forcee-form');
     }
 }

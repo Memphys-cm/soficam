@@ -25,7 +25,7 @@ class Index extends Component
     public $parcel_id, $parcels = [], $etat_cession_id, $etat_cessions = [];
 
 
-    public $commentaires;
+    public $commentaires, $attachements;
 
     public $listeners = ['flow_updated' => 'render'];
 
@@ -83,31 +83,10 @@ class Index extends Component
             session()->flash('message', __('Certificate propriete provided is in valid'));
         }
 
-        $titre_foncier = TitreFoncier::findOrFail($this->titre_foncier_id);
-        $lot = Parcel::create([
-            'titre_foncier_id' => $this->titre_foncier_id,
-            'numero_du_lot' => fake()->randomDigitNot(2),
-            'surperficie_du_lot' =>  $titre_foncier->superficie_du_TF_mere,
-            'superficie_a_vendre' =>  'totale',
-            'superficie_vendu' =>  $titre_foncier->superficie_du_TF_mere,
-            'statut_du_lot' =>  $titre_foncier->etat_terrain,
-            'type' => 'normale',
-            'type_de_venter' => 'mutation_totale',
-            'type_de_versement' => $this->type_de_versement,
-            'prix_du_m2' =>  $this->price_per_m²,
-            'superficie_restant' =>  $this->price_per_m²,
-            'prix_du_m2' =>  $this->price_per_m²,
-            'montant_de_la_vente' =>  $this->sale_amount,
-            'montant_versee' =>  $this->montant_versee,
-            'montant_restant' =>  $this->montant_restant,
-            'commentaire_du_notaire' => $this->commentaires,
-            'date_de_vente' => empty($this->date_de_vente) ? now() : $this->date_de_vente,
-        ]);
-
         Operation::create([
             'numero_operation' => Str::upper(Str::random(6)) . "" . now()->format('msu'),
             'titre_foncier_id' => $this->titre_foncier_id,
-            'type_operation' => $this->operation_type,
+            'type_operation' => 'retrait_indivision_normale',
             'requestor_id' => $this->requestor_id,
             'certificate_prioprietes_id' => $this->certificates_propriete_id,
             'etat_cession_id' => $this->etat_cession_id,

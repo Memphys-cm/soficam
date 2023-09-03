@@ -236,7 +236,7 @@
                                 </li>
                                 @endcanany
 
-                                @can('etat_cession.view')
+                                @can('map.view')
                                 <li class="nav-item {{ $request->routeIs('portal.maps.*') ? 'active' : '' }}">
                                     <a href="{{ route('portal.maps.index') }}" class="nav-link">
                                         <span class="sidebar-icon">

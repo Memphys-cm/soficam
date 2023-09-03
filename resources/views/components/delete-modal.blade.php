@@ -8,7 +8,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                         <h1 class="mb-0 h2 fw-bolder">{{__('Êtes vous sûre?')}}</h1>
-                        <p class="pt-2">{{__('Aucun enregistrement n\'a été trouvé Vous ne pourrez pas revenir en arrière.!')}} &#128522;</p>
+                        <p class="pt-2">{{__('Aucun enregistrement n\'a été trouvé Vous ne pourrez pas revenir en arrière.!')}}</p>
                     </div>
                     <div class="d-flex justify-content-center">
                         <button type="button" wire:click="delete" class="btn btn-danger mx-3" data-dismiss="modal">{{__('Confirmer')}}</button>

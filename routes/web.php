@@ -67,6 +67,7 @@ Route::get('/validate-document', function()
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function () {
     Route::get('/dashboard', App\Http\Livewire\User\Dashboard::class)->name('user.dashboard');
 
+    Route::get('/profile-setting', App\Http\Livewire\User\ProfileSetting::class)->name('user.profile-setting');
     //AuditLogs
     Route::prefix('auditlogs')->group(function () {
         Route::get('/', App\Http\Livewire\User\AuditLogs\Index::class)->name('user.auditlogs');
@@ -185,7 +186,22 @@ Route::group(
 
 
 
-        Route::get('/maps', [TestController::class, 'index'])->name('portal.maps.index');
+        // Route::get('/maps', [TestController::class, 'index'])->name('portal.maps.index');
+
+        Route::get('/maps', function () {
+            // Supposons que vous avez un pointId, remplacez-le par l'ID approprié
+            $pointId = 1; // Remplacez 1 par l'ID du point que vous souhaitez récupérer
+            // $point = PointModel::find($pointId);11.516213163344588,3.8722015777978243
+            // Extrayez les coordonnées du modèle
+            $longitude = 11.516213163344588;
+            $latitude = 3.8722015777978243;
+        
+            // Récupérez également vos titres fonciers avec les utilisateurs associés
+            $titles = TitreFoncier::with('users')->get();
+        
+            // Passez les coordonnées et les titres fonciers à la vue
+            return view('first_test', compact('titles', 'longitude', 'latitude'))->layout('components.layouts.dashboard');
+        })->name('portal.maps.index');
 
         Route::prefix('releve_immobilier')->group(function () {
             Route::get('/immobilier', App\Http\Livewire\Portal\ReleveImmobilier\Immobilier\Index::class)->name('portal.immobilier.index');

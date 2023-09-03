@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignId('sub_division_id')->index();
             $table->string('groupement')->nullable();
             $table->string('lieu_dit')->nullable();
-            $table->enum('zone',['urbaine','rurale']);
+            $table->enum('zone',['urbain','rurale']);
             $table->string('numero_folio')->nullable();
             $table->string('volume')->nullable();
             $table->string('superficie_du_TF_mere');

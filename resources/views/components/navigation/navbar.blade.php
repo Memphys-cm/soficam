@@ -7,7 +7,7 @@
                     </svg>
                 </button> -->
                 <div class="text-primary fs-5 mt-n3" wire:poll.750ms>
-                    {{ now()->ISOformat('LLLL') }}
+                    {{ ucfirst(now()->ISOformat('LLLL')) }}
                 </div>
             </div>
 

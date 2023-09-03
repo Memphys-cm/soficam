@@ -37,8 +37,165 @@
                                     <!--end::Checkbox-->
                                 </div>
                             </div>
+
+
+
+                            <div class="text-gray-800 w-100 mt-3 fs-0 fw-bold">{{__('Titre Foncier, Lotissement, Charges, Immobilier et Tax Fonciers Permissions')}}</div>
+                            <div class="d-flex border-bottom border-1">
+                                <!--begin::Label-->
+                                <div class="text-gray-800 w-25">{{__('Titre Foncier')}}</div>
+                                <div>
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex">
+                                        <!--begin::Checkbox-->
+                                        <label class="form-check form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" value="" wire:model="selectAllTitreFoncierPermissions">
+                                            <span class="form-check-label">{{__('Tout')}}</span>
+                                        </label>
+                                        @foreach($TitreFoncierPermissions as $key => $value)
+                                        <label class="form-check  form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" wire:model="selectedTitreFoncierPermissions" value="{{$value}}">
+                                            <span class="form-check-label">{{__($key)}}</span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <div class="d-flex border-bottom border-1">
+                                <!--begin::Label-->
+                                <div class="text-gray-800 w-25">{{__('Lotissement')}}</div>
+                                <div>
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex">
+                                        <!--begin::Checkbox-->
+                                        <label class="form-check form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" value="" wire:model="selectAllLotissementPermissions">
+                                            <span class="form-check-label">{{__('Tout')}}</span>
+                                        </label>
+                                        @foreach($LotissementPermissions as $key => $value)
+                                        <label class="form-check  form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" wire:model="selectedLotissementPermissions" value="{{$value}}">
+                                            <span class="form-check-label">{{__($key)}}</span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <div class="d-flex border-bottom border-1">
+                                <!--begin::Label-->
+                                <div class="text-gray-800 w-25">{{__('Charges sur Titre Foncier')}}</div>
+                                <div>
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex">
+                                        <!--begin::Checkbox-->
+                                        <label class="form-check form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" value="" wire:model="selectAllChargesPermissions">
+                                            <span class="form-check-label">{{__('Tout')}}</span>
+                                        </label>
+                                        @foreach($ChargesPermissions as $key => $value)
+                                        <label class="form-check  form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" wire:model="selectedChargesPermissions" value="{{$value}}">
+                                            <span class="form-check-label">{{__($key)}}</span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <div class="d-flex border-bottom border-1">
+                                <!--begin::Label-->
+                                <div class="text-gray-800 w-25">{{__('Immobilier')}}</div>
+                                <div>
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex">
+                                        <!--begin::Checkbox-->
+                                        <label class="form-check form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" value="" wire:model="selectAllImmobilierPermissions">
+                                            <span class="form-check-label">{{__('Tout')}}</span>
+                                        </label>
+                                        @foreach($ImmobilierPermissions as $key => $value)
+                                        <label class="form-check  form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" wire:model="selectedImmobilierPermissions" value="{{$value}}">
+                                            <span class="form-check-label">{{__($key)}}</span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <div class="d-flex border-bottom border-1">
+                                <!--begin::Label-->
+                                <div class="text-gray-800 w-25">{{__('Tax Foncier')}}</div>
+                                <div>
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex">
+                                        <!--begin::Checkbox-->
+                                        <label class="form-check form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" value="" wire:model="selectAllTaxFoncierPermissions">
+                                            <span class="form-check-label">{{__('Tout')}}</span>
+                                        </label>
+                                        @foreach($TaxFoncierPermissions as $key => $value)
+                                        <label class="form-check  form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" wire:model="selectedTaxFoncierPermissions" value="{{$value}}">
+                                            <span class="form-check-label">{{__($key)}}</span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+
+                            <div class="text-gray-800 w-100 mt-3 fs-0 fw-bold">{{__('Immatriculation Direct Permissions')}}</div>
+                            <div class="d-flex border-bottom border-1">
+                                <!--begin::Label-->
+                                <div class="text-gray-800 w-25">{{__('Immatriculation Direct')}}</div>
+                                <div>
+                                    <!--begin::Wrapper-->
+                                    <div class="">
+                                        <!--begin::Checkbox-->
+                                        <label class="form-check form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" value="" wire:model="selectAllImmaDirectPermissions">
+                                            <span class="form-check-label">{{__('Tout')}}</span>
+                                        </label>
+                                        @foreach($ImmaDirectPermissions as $key => $value)
+                                        <label class="form-check  form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" wire:model="selectedImmaDirectPermissions" value="{{$value}}">
+                                            <span class="form-check-label">{{__($key)}}</span>
+                                        </label>
+
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+
+                            <div class="text-gray-800 w-100 mt-3 fs-0 fw-bold">{{__('Sales and Payments Permissions')}}</div>
+                            <div class="d-flex border-bottom border-1">
+                                <!--begin::Label-->
+                                <div class="text-gray-800 w-25">{{__('Ventes et Paiements')}}</div>
+                                <div>
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex">
+                                        <!--begin::Checkbox-->
+                                        <label class="form-check form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" value="" wire:model="selectAllSalesPermissions">
+                                            <span class="form-check-label">{{__('Tout')}}</span>
+                                        </label>
+                                        @foreach($SalesPermissions as $key => $value)
+                                        <label class="form-check  form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" wire:model="selectedSalesPermissions" value="{{$value}}">
+                                            <span class="form-check-label">{{__($key)}}</span>
+                                        </label>
+
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
                             <div class="text-gray-800 w-100 mt-3 fs-0 fw-bold">{{__('Permissions des utilisateurs et des éléments de service')}}</div>
-                            <div class="d-flex border-top border-bottom border-1">
+                            <div class="d-flex border-bottom">
                                 <!--begin::Label-->
                                 <div class="text-gray-800 w-25">{{__('Utilisateurs')}}</div>
                                 <div>
@@ -80,6 +237,178 @@
                                 </div>
                                 <!--end::Input group-->
                             </div>
+                            <div class="d-flex border-top border-bottom border-1">
+                                <!--begin::Label-->
+                                <div class="text-gray-800 w-25">{{__('Cabinets')}}</div>
+                                <div>
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex">
+                                        <!--begin::Checkbox-->
+                                        <label class="form-check form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" value="" wire:model="selectAllCabinetPermissions">
+                                            <span class="form-check-label">{{__('Tout')}}</span>
+                                        </label>
+                                        @foreach($CabinetPermissions as $key => $value)
+                                        <label class="form-check  form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" wire:model="selectedCabinetPermissions" value="{{$value}}">
+                                            <span class="form-check-label">{{__($key)}}</span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <div class="d-flex border-top border-bottom border-1">
+                                <!--begin::Label-->
+                                <div class="text-gray-800 w-25">{{__('Membres du Cabinet')}}</div>
+                                <div>
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex">
+                                        <!--begin::Checkbox-->
+                                        <label class="form-check form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" value="" wire:model="selectAllMembreCabinetPermissions">
+                                            <span class="form-check-label">{{__('Tout')}}</span>
+                                        </label>
+                                        @foreach($MembreCabinetPermissions as $key => $value)
+                                        <label class="form-check  form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" wire:model="selectedMembreCabinetPermissions" value="{{$value}}">
+                                            <span class="form-check-label">{{__($key)}}</span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+
+                            <div class="text-gray-800 w-100 mt-3 fs-0 fw-bold">{{__('Operations Permissions')}}</div>
+                            <div class="d-flex border-bottom border-1">
+                                <!--begin::Label-->
+                                <div class="text-gray-800 w-25">{{__('Operation Generale')}}</div>
+                                <div>
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex">
+                                        <!--begin::Checkbox-->
+                                        <label class="form-check form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" value="" wire:model="selectAllGenOpsPermissions">
+                                            <span class="form-check-label">{{__('Tout')}}</span>
+                                        </label>
+                                        @foreach($GenOpsPermissions as $key => $value)
+                                        <label class="form-check  form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" wire:model="selectedGenOpsPermissions" value="{{$value}}">
+                                            <span class="form-check-label">{{__($key)}}</span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <div class="d-flex border-bottom border-1">
+                                <!--begin::Label-->
+                                <div class="text-gray-800 w-25">{{__('Mutation Totale')}}</div>
+                                <div>
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex">
+                                        <!--begin::Checkbox-->
+                                        <label class="form-check form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" value="" wire:model="selectAllMutationTotalePermissions">
+                                            <span class="form-check-label">{{__('Tout')}}</span>
+                                        </label>
+                                        @foreach($MutationTotalePermissions as $key => $value)
+                                        <label class="form-check  form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" wire:model="selectedMutationTotalePermissions" value="{{$value}}">
+                                            <span class="form-check-label">{{__($key)}}</span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <div class="d-flex border-bottom border-1">
+                                <!--begin::Label-->
+                                <div class="text-gray-800 w-25">{{__('Morcellement')}}</div>
+                                <div>
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex">
+                                        <!--begin::Checkbox-->
+                                        <label class="form-check form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" value="" wire:model="selectAllMorcellementPermissions">
+                                            <span class="form-check-label">{{__('Tout')}}</span>
+                                        </label>
+                                        @foreach($MorcellementPermissions as $key => $value)
+                                        <label class="form-check  form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" wire:model="selectedMorcellementPermissions" value="{{$value}}">
+                                            <span class="form-check-label">{{__($key)}}</span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <div class="d-flex border-bottom border-1">
+                                <!--begin::Label-->
+                                <div class="text-gray-800 w-25">{{__('Retrait Indivision')}}</div>
+                                <div>
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex">
+                                        <!--begin::Checkbox-->
+                                        <label class="form-check form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" value="" wire:model="selectAllRetraitPermissions">
+                                            <span class="form-check-label">{{__('Tout')}}</span>
+                                        </label>
+                                        @foreach($RetraitPermissions as $key => $value)
+                                        <label class="form-check  form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" wire:model="selectedRetraitPermissions" value="{{$value}}">
+                                            <span class="form-check-label">{{__($key)}}</span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <div class="d-flex border-bottom border-1">
+                                <!--begin::Label-->
+                                <div class="text-gray-800 w-25">{{__('Etat Cession')}}</div>
+                                <div>
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex">
+                                        <!--begin::Checkbox-->
+                                        <label class="form-check form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" value="" wire:model="selectAllEtatCessionPermissions">
+                                            <span class="form-check-label">{{__('Tout')}}</span>
+                                        </label>
+                                        @foreach($EtatCessionPermissions as $key => $value)
+                                        <label class="form-check  form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" wire:model="selectedEtatCessionPermissions" value="{{$value}}">
+                                            <span class="form-check-label">{{__($key)}}</span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <div class="d-flex border-bottom border-1">
+                                <!--begin::Label-->
+                                <div class="text-gray-800 w-25">{{__('Certificate Propriete')}}</div>
+                                <div>
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex">
+                                        <!--begin::Checkbox-->
+                                        <label class="form-check form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" value="" wire:model="selectAllCertificateProprietePermissions">
+                                            <span class="form-check-label">{{__('Tout')}}</span>
+                                        </label>
+                                        @foreach($CertificateProprietePermissions as $key => $value)
+                                        <label class="form-check  form-check-custom form-check-solid me-3 me-lg-20">
+                                            <input class="form-check-input" type="checkbox" wire:model="selectedCertificateProprietePermissions" value="{{$value}}">
+                                            <span class="form-check-label">{{__($key)}}</span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+
+
                             <div class="text-gray-800 w-100 mt-3 fs-0 fw-bold">{{__('Localisation Caractéristiques Permissions')}}</div>
                             <div class="d-flex border-bottom border-1">
                                 <!--begin::Label-->

@@ -9,6 +9,7 @@ use App\Models\Lotissements\Block;
 use App\Models\Lotissements\Parcel;
 use App\Models\Lotissements\Lotissement;
 use App\Http\Livewire\Traits\WithDataTables;
+use App\Models\TitreFoncier;
 
 class Sale extends Component
 {
@@ -137,8 +138,8 @@ class Sale extends Component
 
         $this->validate([
             'superficie_a_vendre' => 'required',
-
         ]);
+
         if ($this->type_de_versement === 'cash') {
             $defaultMontantVersee = 0;
             $defaultMontantRestant = 0;
@@ -146,7 +147,10 @@ class Sale extends Component
             $defaultMontantVersee = $this->montant_versee ?? 0;
             $defaultMontantRestant = $this->montant_restant ?? 0;
         }
+
         $notaire = MembreDuCabinet::findOrFail($this->notaire_id);
+
+        $tf = TitreFoncier::findOrFail($this->parcel->titre_foncier_id);
 
         $this->parcel->update([
             'surperficie_du_lot' =>  $this->surperficie_du_lot,
@@ -158,12 +162,26 @@ class Sale extends Component
             'type_de_venter' => 'simple',
             'type_de_versement' => $this->payment_method,
             'prix_du_m2' =>  $this->price_per_m_square,
-            'superficie_restant' =>  $this->price_per_m_square,
+            'superficie_restant' =>  $this->superficie_restant,
             'montant_de_la_vente' =>  $this->sale_amount,
             'montant_versee' =>  $this->montant_versee,
             'montant_restant' => $this->montant_restant,
             'commentaire_du_notaire' => $this->commentaire_du_notaire,
             'date_de_vente' => empty($this->date_de_vente) ? now() : $this->date_de_vente,
+        ]);
+
+        $this->parcel->users()->sync($this->user_ids);
+
+        $tf_sup_vendu = 0;
+        if ($this->superficie_a_vendre === 'partielle') {
+            $tf_sup_vendu = intval($this->superficie_vendu) + intval($tf->superficie_vendue_du_TF_mere);
+        } else {
+            $tf_sup_vendu = intval($this->surperficie_du_lot) + intval($tf->superficie_vendue_du_TF_mere);
+        }
+
+        $tf->update([
+            'superficie_vendue_du_TF_mere' => $tf_sup_vendu,
+            'superficie_restant_du_TF_mere' => intval($tf->superficie_du_TF_mere) - intval($tf_sup_vendu),
         ]);
 
         $this->clearFields();

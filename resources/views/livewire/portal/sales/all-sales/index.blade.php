@@ -77,8 +77,8 @@
         <div class="col-md-2">
             <label for="orderBy">{{ __('Trier par') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="sale_amount">{{ __('Montant de la vente') }}</option>
-                <option value="sale_type">{{ __('Type de vente') }}</option>
+                <option value="sales_amount">{{ __('Montant de la vente') }}</option>
+                <option value="sales_type">{{ __('Type de vente') }}</option>
                 <option value="created_at">{{ __('Date de création') }}</option>
             </select>
         </div>

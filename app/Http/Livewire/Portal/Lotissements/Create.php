@@ -74,12 +74,12 @@ class Create extends Component
         'titre_foncier_id' => $this->titre_foncier_id,
         'geometre_id' => $this->geometre_id,
         'geometre_cabinet_id' => $geometre->cabinet->id,
-        'maeture' => $this->maeture,
-        'promoteur_immobiliere' => $this->promo_imo,
-        'lotisseur' => $this->lotisseur,
-        'agent_immobiliere' => $this->agent_imo,
-        'urbaniste' => $this->urbaniste,
-        'controlleur' => $this->controlleur,
+        'maeture' => !empty($this->maeture) ? $this->maeture : '' ,
+        'promoteur_immobiliere' => !empty($this->promo_imo) ? $this->promo_imo : '' ,
+        'lotisseur' => !empty($this->lotisseur) ? $this->lotisseur : '' ,
+        'agent_immobiliere' => !empty($this->agent_imo) ? $this->agent_imo : '' ,
+        'urbaniste' => !empty($this->urbaniste) ? $this->urbaniste : '' ,
+        'controlleur' =>!empty($this->controlleur) ? $this->controlleur : '',
        ]);
 
         if ($this->state == 0) {

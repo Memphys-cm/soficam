@@ -284,8 +284,8 @@ class Index extends Component
                     'next_step' => 'signature decision portant calendrier de descente',
                     'date_avis_publique_signe' => $this->date_status,
                 ]);
-            });
-        } else if($imma->next_step == "Signature du certificat d'affichage"){
+ 
+        } else if($imma->next_step == "Signature du certficat d'affichage"){
             DB::transaction(function () {
                 $this->imma_directe->update([
                     'statut' => 'Certificat d\'affichage signé',
@@ -503,33 +503,29 @@ class Index extends Component
         $this->clearFields();
     }
 
-    public function updated()
-    {
-        if($this->detect ==1)
-        {
-            $area =  $this->imma_directe->superficie;
-            $zone = $this->zone;
-           ;
-            $this->price_m2 = match ($zone) {
-                "terrain_urbain" => ($area <= 5000) ? 25000 : ($area - 5000) * 20,
-                "terrain_rurale" => match (true) {
-                    ($area <= 50000) => 25000,
-                    ($area >= 50000 && $area <= 200000) => 50000,
-                    default => ($area - 200000) * 1,
-                },
-                default => 0,
-            };
-            
-            $this->frais_suplementaires = 2500;
-    
-            $this->cout = (int)$this->price_m2;
-    
-            $this->cout_etat_cession = (int)$this->cout + (int)$this->frais_suplementaires;
-            // dd($this->cout_etat_cession);
-       
-        }
-       
-    }
+    // public function updated()
+    // {
+    //     $area =  $this->imma_directe->superficie;
+    //     $zone = $this->zone;
+    //    ;
+    //     $this->price_m2 = match ($zone) {
+    //         "terrain_urbain" => ($area <= 5000) ? 25000 : ($area - 5000) * 20,
+    //         "terrain_rurale" => match (true) {
+    //             ($area <= 50000) => 25000,
+    //             ($area >= 50000 && $area <= 200000) => 50000,
+    //             default => ($area - 200000) * 1,
+    //         },
+    //         default => 0,
+    //     };
+        
+    //     $this->frais_suplementaires = 2500;
+
+    //     $this->cout = (int)$this->price_m2;
+
+    //     $this->cout_etat_cession = (int)$this->cout + (int)$this->frais_suplementaires;
+    //     // dd($this->cout_etat_cession);
+   
+    // }
     public function generateUniqueCode($year, $counter)
     {
         $counterFormatted = str_pad($counter, 5, '0', STR_PAD_LEFT);
