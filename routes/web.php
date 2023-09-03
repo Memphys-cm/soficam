@@ -67,6 +67,7 @@ Route::get('/validate-document', function()
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function () {
     Route::get('/dashboard', App\Http\Livewire\User\Dashboard::class)->name('user.dashboard');
 
+    Route::get('/profile-setting', App\Http\Livewire\User\ProfileSetting::class)->name('user.profile-setting');
     //AuditLogs
     Route::prefix('auditlogs')->group(function () {
         Route::get('/', App\Http\Livewire\User\AuditLogs\Index::class)->name('user.auditlogs');
