@@ -5,19 +5,19 @@
                  <div class="p-3 p-lg-4">
                      <div class="mb-4 mt-md-0">
                          <h1 class="mb-0 h4">{{__('Importer :nom',['nom'=>__('Entreprise')])}}</h1>
-                         <p>{{__('Importer nouveau :nom à partir d\'un fichier Excel',['nom'=>__('Entreprise')])}} &#128522;</p>
+                         <p>{{__('Importer nouveau :nom à partir d\'un fichier Excel',['nom'=>__('Entreprise')])}}</p>
                      </div>
                      <x-form-items.form wire:submit="import" class="form-modal">
                          <p>{{__('Etapes à suivre pour importer un nouveau :nom',['nom'=>__('Entreprise')])}}</p>
                          <div class='mb-4'>
                              <ol>
                                  <li>{{__('Télécharger l\'exemple de modèle d\'importation :nom modèle d\'importation',['nom'=>__('Entreprise')])}} <a href="{{asset('templates/import_companies.xlsx')}}">{{__('Modèle')}}</a></li>
-                                 <li>{{__('Remplir le modèle avec votre :name data',['name'=>__('Entreprises')])}}</li>
-                                 <li>{{__('Téléchargez le modèle rempli en utilisant le formulaire ci-dessous et cliquez sur le bouton d\'importation pour l\'importer.')}}</li>
+                                 <li>{{__('Remplir le modèle avec votre :nom donnée',['name'=>__('Entreprises')])}}</li>
+                                 <li>{{__('Télécharger le modèle rempli en utilisant le formulaire ci-dessous et cliquez sur le bouton d\'importation pour l\'importer.')}}</li>
                              </ol>
                          </div>
                          <div class="mb-4">
-                             <label for="company_file" class="form-label">{{__('Selectionner fichier')}}</label>
+                             <label for="company_file" class="form-label">{{__('Sélectionner fichier')}}</label>
                              <input wire:model="company_file" class="form-control @error('company_file') is-invalid @enderror" type="file" name="company_file" id="formFile" required="">
                              @error('company_file')
                              <div class="invalid-feedback">{{$message}}</div>

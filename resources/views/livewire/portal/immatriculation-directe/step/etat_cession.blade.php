@@ -16,7 +16,7 @@
                                 <label for="code">{{ __('Zone') }}</label>
                                 <select wire:model="zone" name="zone"
                                     class="form-select  @error('zone') is-invalid @enderror">
-                                    <option value="">{{ __('--Select Zone --') }}</option>
+                                    <option value="">{{ __('--Sélectionner la Zone --') }}</option>
                                     <option value="terrain_urbain">{{ __('terrain_urbain') }} </option>
                                     <option value="terrain_rurale">{{ __('terrain_rurale') }} </option>
                                 </select>
@@ -26,7 +26,7 @@
                             </div>
                           
                             <div class="col-md-6 py-2">
-                                <label for="code">{{ __('superficie_en_m2') }}</label>
+                                <label for="code">{{ __('superficie en m²') }}</label>
                                 <input wire:model="superficie_en_m2" type="number"
                                     class="form-control  @error('superficie_en_m2') is-invalid @enderror"
                                     placeholder="25000" required="" value=""
@@ -36,7 +36,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 py-2">
-                                <label for="code">{{ __('Cout') }}</label>
+                                <label for="code">{{ __('Coût') }}</label>
                                 <input wire:model="cout" type="number"
                                     class="form-control  @error('cout') is-invalid @enderror"
                                     placeholder="70000" required="" value="" name="cout">
@@ -45,7 +45,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 py-2">
-                                <label for="code">{{ __('Frais Supplemetaires') }}</label>
+                                <label for="code">{{ __('Frais Supplémentaires') }}</label>
                                 <input wire:model="frais_suplementaires" type="number"
                                     class="form-control  @error('frais_suplementaires') is-invalid @enderror"
                                     placeholder="15000" required="" value=""
@@ -55,7 +55,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 py-2">
-                                <label for="code">{{ __('Cout_etat_cession') }}</label>
+                                <label for="code">{{ __('Coût état cession') }}</label>
                                 <input wire:model="cout_etat_cession" type="number"
                                     class="form-control  @error('cout_etat_cession') is-invalid @enderror"
                                     placeholder="100000" required="" value=""
@@ -79,9 +79,9 @@
                         <div class="d-flex justify-content-end py-2">
                             <button type="button" wire:click.prevent="clearFields"
                                 class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
-                                data-bs-dismiss="modal">{{ __('Close') }}</button>
+                                data-bs-dismiss="modal">{{ __('Fermer') }}</button>
                             <button type="submit" class="btn btn-primary btn-loading"
-                                wire:loading.attr="disabled">{{ ('Creer') }} </button>
+                                wire:loading.attr="disabled">{{ ('Créer') }} </button>
                         </div>
                     </x-form-items.form>
                 </div>

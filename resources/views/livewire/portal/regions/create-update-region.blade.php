@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">{{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Region')}}</h1>
-                        <p class="px-1"> {{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Region')}} &#128522;</p>
+                        <h1 class="mb-0 h4">{{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Région')}}</h1>
+                        <p class="px-1"> {{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Région')}} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <div class='form-group mb-3'>
@@ -23,7 +23,7 @@
                             @enderror
                         </div>
                         <div class="form-group mb-3">
-                            <label for="name">{{__('Nom Region ')}} <span>({{__('French')}})</span></label>
+                            <label for="name">{{__('Nom de la Région ')}} <span>({{__('French')}})</span></label>
                             <input wire:model="region.region_name_fr" type="text" class="form-control  @error('region.region_name_fr') is-invalid @enderror" placeholder="{{__('Nord')}}" required="" name="name">
                             @error('region.region_name_fr')
                             <div class="invalid-feedback">{{$message}}</div>
@@ -32,7 +32,7 @@
                         <div class='form-group mb-4 px-1'>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" wire:model="region.status" id="region.status">
-                                <label class="form-check-label mb-0" for="region.status">{{ __('Marquer comme active') }}</label>
+                                <label class="form-check-label mb-0" for="region.status">{{ __('Marquer comme actif') }}</label>
                             </div>
                         </div>
 

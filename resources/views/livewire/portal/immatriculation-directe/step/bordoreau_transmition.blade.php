@@ -15,7 +15,7 @@
                     <x-form-items.form wire:submit="bordoreauDeTransmitionStatu">
                         <div class="form-group mb-3 row">
                             <div class="col-md-12">
-                                <label for="numero_bordereau_transmission">{{ __('Numero Bordereau Transmission') }}</label>
+                                <label for="numero_bordereau_transmission">{{ __('Numéro Bordereau Transmission') }}</label>
                                 <input wire:model="numero_bordereau_transmission" type="text"
                                     class="form-control  @error('numero_bordereau_transmission') is-invalid @enderror"
                                     placeholder="{{ __('') }}" required=""
@@ -28,7 +28,7 @@
                         
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
-                                data-bs-dismiss="modal">{{ __('Close') }}</button>
+                                data-bs-dismiss="modal">{{ __('Fermer') }}</button>
                             <button type="submit" wire:click.prevent="bordoreauDeTransmitionStatu"
                                 class="btn btn-primary btn-loading"
                                 wire:loading.attr="disabled">{{__('Modifier le Statut')}}</button>

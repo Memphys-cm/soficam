@@ -4,13 +4,13 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">{{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Activite')}}</h1>
-                        <p class="px-1"> {{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Activite')}} &#128522;</p>
+                        <h1 class="mb-0 h4">{{$state ? 'Mettre à jour' : 'Créer'}} {{__(' Activité')}}</h1>
+                        <p class="px-1"> {{$state ? 'Mettre à jour' : 'Créer'}} {{__(' Activité')}}</p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <div class="form-group row mb-3">
                             <div class='col'>
-                                <label class="px-2" for="activite.category_activite_id">{{__('Catégorie Activite')}}</label>
+                                <label class="px-2" for="activite.category_activite_id">{{__('Catégorie Activité')}}</label>
                                 <select wire:model="activite.category_activite_id" name="activite.category_activite_id" class="form-select  @error('activite.category_activite_id') is-invalid @enderror" required="">
                                     @foreach($categories as $category_activite)
                                     <option value="{{$category_activite->id}}">{{$category_activite->grand_section." -> ".$category_activite->nom_category}}</option>
@@ -21,7 +21,7 @@
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label class="px-2" for="activite.type_de_facturation">{{__('Categorie Activité')}}</label>
+                                <label class="px-2" for="activite.type_de_facturation">{{__('Catégorie Activité')}}</label>
                                 <select wire:model="activite.type_de_facturation" name="activite.type_de_facturation" class="form-select  @error('activite.type_de_facturation') is-invalid @enderror" required="">
                                     <option value="value'">{{__('Valeur')}}</option>
                                     <option value="percentage">{{__('Pourcentage')}}</option>
@@ -42,7 +42,7 @@
                         </div>
                         <div class="form-group row mb-3">
                             <div class="col">
-                                <label class="px-2" for="name">{{__('Valeur/Pourcentage/m2')}}</label>
+                                <label class="px-2" for="name">{{__('Valeur/Pourcentage/m²')}}</label>
                                 <input wire:model="activite.value" type="text" class="form-control  @error('activite.value') is-invalid @enderror" placeholder="{{__('1')}}" required="" name="name">
                                 @error('activite.value')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
-                            <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{$state ? 'Mettre à jour' : 'Creer'}} </button>
+                            <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{$state ? 'Mettre à jour' : 'Créer'}} </button>
                         </div>
                     </x-form-items.form>
                 </div>

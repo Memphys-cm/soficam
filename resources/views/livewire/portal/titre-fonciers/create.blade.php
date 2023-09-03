@@ -6,7 +6,7 @@
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4">
-                            {{ $state ? __('Mettre à jour') : __('Enregistrer') }}{{ __(' un titre foncier') }}</h1>
+                            {{ $state ? __('Mettre à jour') : __('Enregistrer') }}{{ __(' un Titre Toncier') }}</h1>
                         <p class="px-1">
                             {{ $state ? __('Mettre à jour') : __('Enregistrer') }}{{ __(' un certificat foncier') }}
                         </p>
@@ -14,7 +14,7 @@
                     <x-form-items.form wire:submit="{{ $state ? 'update' : 'store' }}">
                         <div class='form-group mb-3 row'>
                             <div class='col'>
-                                <label for="numero_titre_foncier">{{ __('Numero du Titre Foncier') }}</label>
+                                <label for="numero_titre_foncier">{{ __('Numéro du Titre Foncier') }}</label>
                                 <input wire:model="numero_titre_foncier" type="text"
                                     class="form-control  @error('numero_titre_foncier') is-invalid @enderror"
                                     placeholder="10056/234/NW09" required="" value=""
@@ -24,7 +24,7 @@
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="date_de_delivrance_du_TF">{{ __('Délivrance du titre foncier') }}</label>
+                                <label for="date_de_delivrance_du_TF">{{ __('Délivrance du Titre Foncier') }}</label>
                                 <input wire:model="date_de_delivrance_du_TF" type="date"
                                     class="form-control  @error('date_de_delivrance_du_TF') is-invalid @enderror"
                                     placeholder="{{ __('1986') }}" required="" name="name">
@@ -44,7 +44,7 @@
                         </div>
                         <div class="form-group mb-3 row">
                             <div class='col'>
-                                <label class="px-2" for="user_ids">{{ __('Proprietaires') }}</label>
+                                <label class="px-2" for="user_ids">{{ __('Propriétaires') }}</label>
                                 <x-input.selectmultipleusers wire:model="user_ids" prettyname="user_ids"
                                     :options="$users" selected="('user_ids')" multiple="multiple" />
                                 @error('user_ids')
@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group mb-3 row">
                             <div class='col'>
-                                <label class="px-2" for="region_id">{{ __('Region') }}</label>
+                                <label class="px-2" for="region_id">{{ __('Région') }}</label>
                                 <select wire:model="region_id" name="region_id"
                                     class="form-select  @error('region_id') is-invalid @enderror" required="">
                                     <option value="">{{ __('--Sélectionner--') }}</option> 
@@ -67,7 +67,7 @@
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label class="px-2" for="division_id">{{ __('Departement') }}</label>
+                                <label class="px-2" for="division_id">{{ __('Département') }}</label>
                                 <select wire:model="division_id" name="division_id" class="form-select @error('division_id') is-invalid @enderror" required="">
                                     <option value="">{{ __('--Sélectionner--') }}</option> 
                                     @foreach ($divisions as $division)
@@ -141,7 +141,7 @@
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label for="superficie_du_TF_mere">{{ __('Superficie Titre foncier parent') }}</label>
+                                <label for="superficie_du_TF_mere">{{ __('Superficie Titre Foncier parent') }}</label>
                                 <input wire:model="superficie_du_TF_mere" type="number"
                                     class="form-control  @error('superficie_du_TF_mere') is-invalid @enderror"
                                     placeholder="{{ __('1200m2') }}" required="" value=""
@@ -153,13 +153,13 @@
                         </div>
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="etat_TF">{{ __('État du titre foncier') }}</label>
+                                <label for="etat_TF">{{ __('Charge du Titre Foncier') }}</label>
                                 <select wire:model="etat_TF" name="etat_TF"
                                     class="form-select  @error('etat_TF') is-invalid @enderror" required="">
                                     <option value="">{{ __('Sélectionner état du titre foncier') }}</option>
-                                    <option value="HYPOTHEQUE">{{ __('HYPOTHEQUE') }}</option>
-                                    <option value="DISPONIBLE">{{ __('DISPONIBLE') }}</option>
-                                    <option value="PRENOTE">{{ __('PRENOTE') }}</option>
+                                    <option value="HYPOTHEQUE">{{ __('HYPOTHÈQUE') }}</option>
+                                    <option value="RETRAIT">{{ __('RETRAIT') }}</option>
+                                    <option value="PRENOTE">{{ __('PRENOTATION') }}</option>
                                     <option value="SUSPENDU">{{ __('SUSPENDU') }}</option>
                                 </select>
                                 @error('etat_TF')
@@ -178,7 +178,7 @@
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="provenance_TF">{{ __('Source du titre foncier') }}</label>
+                                <label for="provenance_TF">{{ __('Source du Titre Foncier') }}</label>
                                 <input wire:model="provenance_TF" type="text"
                                     class="form-control  @error('provenance_TF') is-invalid @enderror"
                                     placeholder="{{ __('Lotissement') }}" required="" name="name">
@@ -189,7 +189,7 @@
                         </div>
                         <div class='form-group mb-3 row'>
                             <div class='col'>
-                                <label for="limit_nord">{{ __('Limite nord') }}</label>
+                                <label for="limit_nord">{{ __('Limite Nord') }}</label>
                                 <input wire:model="limit_nord" type="text"
                                     class="form-control  @error('limit_nord') is-invalid @enderror"
                                     placeholder="{{ __('Road') }}" required="" value=""
@@ -199,7 +199,7 @@
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label for="limit_sud">{{ __('Limite sud') }}</label>
+                                <label for="limit_sud">{{ __('Limite Sud') }}</label>
                                 <input wire:model="limit_sud" type="text"
                                     class="form-control  @error('limit_sud') is-invalid @enderror"
                                     placeholder="{{ __('Road') }}" required="" value=""
@@ -282,7 +282,7 @@
                                             <input type="file" class="form-control-file"
                                                 wire:model="attachements">
                                             <div class="d-md-block text-left">
-                                                <div class="fw-normal text-dark mb-1">{{ __('Choose Files') }}</div>
+                                                <div class="fw-normal text-dark mb-1">{{ __('Choisir Fichier') }}</div>
                                                 <div class="text-gray small">JPG,PNG, PDF, Word,Excel. Max size of 50MB
                                                 </div>
                                             </div>
@@ -294,7 +294,7 @@
                         @foreach ($coordinates as $coordinateIndex => $coordinate)
                             <div class='form-group mb-2 d-flex align-items-end justify-content-between'>
                                 <div class=''>
-                                    <label for="coordonnees.{{ $coordinateIndex }}">{{ __('Coordonnees') }} -
+                                    <label for="coordonnees.{{ $coordinateIndex }}">{{ __('Coordonnées') }} -
                                         B{{ $loop->iteration }}</label>
                                     <input wire:model="coordonnees.{{ $coordinateIndex }}" type="text"
                                         step="0.0001"
@@ -331,7 +331,7 @@
                                 data-bs-dismiss="modal">{{ __('Fermer') }}</button>
                             <button type="submit" wire:click.prevent="{{ $state ? 'update' : 'store' }}"
                                 class="btn btn-primary btn-loading"
-                                wire:loading.attr="disabled">{{ $state ? __('Mettre à jour') : __('Creer') }}</button>
+                                wire:loading.attr="disabled">{{ $state ? __('Mettre à jour') : __('Créer') }}</button>
                         </div>
                     </x-form-items.form>
                 </div>

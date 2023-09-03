@@ -32,7 +32,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{ __('Tableau de bord') }}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Immatriculation Directes') }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Immatriculations Directes') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -44,7 +44,7 @@
                     </svg>
                     {{__('Immatriculation Directes')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir Toutes les Immatriculation Directes') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('Voir Toutes les Immatriculations Directes') }} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -68,7 +68,7 @@
                                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                     clip-rule="evenodd"></path>
                             </svg>
-                            <span class="sr-only">{{ __('Operations on Land Title') }}</span>
+                            <span class="sr-only">{{ __('Opérations sur les Titres Fonciers') }}</span>
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">Action</a>
@@ -93,8 +93,8 @@
         <div class="col-md-3">
             <label for="orderBy">{{ __('Trier par') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="region_id">{{ __('Region') }}</option>
-                <option value="date_de_delivrance_du_TF">{{ __('Date de livraison') }}</option>
+                <option value="region_id">{{ __('Région') }}</option>
+                <option value="date_de_delivrance_du_TF">{{ __('Date de délivrance') }}</option>
                 <option value="created_at">{{ __('Date de création') }}</option>
             </select>
         </div>
@@ -123,10 +123,10 @@
             <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('Numero Reference') }}</th>
+                        <th class="border-bottom">{{ __('Numero Reférence') }}</th>
                         {{-- <th class="border-bottom">{{ __('Date de Delivrance') }}</th> --}}
                         {{-- <th class="border-bottom">{{__('Requerants Principales')}}</th> --}}
-                        <th class="border-bottom">{{ __('Requerants Secondaires') }}</th>
+                        <th class="border-bottom">{{ __('Requérants Secondaires') }}</th>
                         <th class="border-bottom">{{ __('Localisation') }}</th>
                         <th class="border-bottom">{{ __('Superficie') }}</th>
                         <th class="border-bottom">{{ __('Statut') }}</th>
@@ -440,7 +440,7 @@
                         <tr>
                             <td colspan="9" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
-                                    <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
+                                    <h4 class="fs-4 fw-bold">{{ __('Liste Vide') }} </h4>
                                     <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                                 </div>
                             </td>
@@ -450,8 +450,8 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{ __('Affichage') }} {{ $perPage > $imma_directes_count ? $imma_directes_count : $perPage }}
-                    {{ __('éléments de') }} {{ $imma_directes_count }}
+                    {{ __('Montrer') }} {{ $perPage > $imma_directes_count ? $imma_directes_count : $perPage }}
+                    {{ __(' éléments sur ') }} {{ $imma_directes_count }}
                 </div>
                 {{ $imma_directes->links() }}
             </div>

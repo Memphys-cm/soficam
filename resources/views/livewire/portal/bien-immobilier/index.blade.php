@@ -16,7 +16,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Acceuil</a></li>
+                        <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ __('Biens Immobiliers') }}</li>
                     </ol>
                 </nav>
@@ -27,7 +27,7 @@
                     </svg>
                     {{ __('Bien Immobilier') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir tous les Biens Immobiliers dans l\'application') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('Voir tous les Biens Immobiliers dans l\'application') }} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -74,9 +74,8 @@
         <div class="col-md-3">
             <label for="orderBy">{{ __('Trier par') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="type">{{ __('type') }}</option>
                 <option value="releve_number">{{ __('Releve N') }}</option>
-                <option value="requestor_id">{{ __('Requerant') }}</option>
+                <option value="requestor_id">{{ __('Requérant') }}</option>
                 <option value="price">{{ __('Prix') }}</option>
                 <option value="validity">{{ __('Validité') }}</option>
                 <option value="status">{{ __('Statut') }}</option>
@@ -85,7 +84,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{ __('Direction du trie') }}: </label>
+            <label for="direction">{{ __('Sens du tri') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{ __('Ascendante') }}</option>
                 <option value="desc">{{ __('Descendante') }}</option>
@@ -93,7 +92,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{ __('Elements par page') }}: </label>
+            <label for="perPage">{{ __('Eléments par page') }}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -108,10 +107,10 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('Requerant') }}</th>
-                        <th class="border-bottom">{{ __(' NUMERO BIEN IMMO') }}</th>
+                        <th class="border-bottom">{{ __('Requérant') }}</th>
+                        <th class="border-bottom">{{ __(' NUMÉRO BIEN IMMO') }}</th>
                         <th class="border-bottom">{{ __('PRIX') }}</th>
-                        <th class="border-bottom">{{ __('VALIDITE') }}</th>
+                        <th class="border-bottom">{{ __('VALIDITÉ') }}</th>
                         <th class="border-bottom">{{ __(' TYPE PERSONNE') }}</th>
                         <th class="border-bottom">{{ __('STATUT') }}</th>
                         <th class="border-bottom">{{ __('Date creation') }}</th>
@@ -170,7 +169,7 @@
                     <tr>
                         <td colspan="10" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
+                                <h4 class="fs-4 fw-bold">{{ __('Liste Vide') }} </h4>
                                 <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                             </div>
                         </td>
@@ -180,7 +179,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Montrer')}} {{$perPage > $bien_immobiliers_count ? $bien_immobiliers_count : $perPage  }} {{__('element de')}} {{$bien_immobiliers_count}}
+                    {{__('Montrer')}} {{$perPage > $bien_immobiliers_count ? $bien_immobiliers_count : $perPage  }} {{__('éléments sur')}} {{$bien_immobiliers_count}}
                 </div>
                 {{ $bien_immobiliers->links()  }}
             </div>

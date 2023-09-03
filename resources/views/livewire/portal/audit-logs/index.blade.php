@@ -13,16 +13,16 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">Acceuil</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Jounaux de connexion')}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Journal de connexion')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
                     <svg class="icon me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    {{__('Jounal de connexion')}}
+                    {{__('Journal de connexion')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('Visualiser toutes les activités réalisées dans votre espace')}} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{__('Visualiser toutes les activités réalisées dans votre espace')}} </p>
             </div>
             <div class="mb-2 mx-3">
 
@@ -52,7 +52,7 @@
                                     <h3 class="fw-extrabold mb-1">{{numberFormat(count($logs))}}</h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Journal de connexion'), count($logs)) }} {{__('enregistrer')}}</div>
+                                    <div>{{ \Str::plural(__('Journaux de connexion'), count($logs)) }} {{__('Enregistrés')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                                     <h3 class="fw-extrabold mb-1">{{numberFormat($creation_log_count)}}</h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Journaux de création'), $creation_log_count) }} {{__('Enregistrer')}}</div>
+                                    <div>{{ \Str::plural(__('Journaux de création'), $creation_log_count) }} {{__('Enregistrés')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                                     <h3 class="fw-extrabold mb-1">{{numberFormat($update_log_count)}}</h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Journal des mises à jour'), $update_log_count) }} {{__('Enregistrer')}}</div>
+                                    <div>{{ \Str::plural(__('Journaux des mises à jour'), $update_log_count) }} {{__('Enregistrés')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                                     <h3 class="fw-extrabold mb-1">{{numberFormat($deletion_log_count)}} </h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Journal des suppressions'), $deletion_log_count) }} {{__('Enregistrer!')}}</div>
+                                    <div>{{ \Str::plural(__('Journaux des suppressions'), $deletion_log_count) }} {{__('Enregistrés!')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -158,7 +158,7 @@
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="user">{{__('Utilisateur')}}</option>
                 <option value="action_type">{{__('Type d\'action')}}</option>
-                <option value="created_at">{{__('Date de creation')}}</option>
+                <option value="created_at">{{__('Date de création')}}</option>
             </select>
         </div>
 
@@ -171,7 +171,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Element par page')}}: </label>
+            <label for="perPage">{{__('Elément par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -186,7 +186,7 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('Employé')}}</th>
+                        <th class="border-bottom">{{__('Employé(s)')}}</th>
                         <th class="border-bottom">{{__('Type d\'action')}}</th>
                         <th class="border-bottom">{{__('Action réalisée')}}</th>
                         <th class="border-bottom">{{__('Date de création')}}</th>
@@ -229,7 +229,7 @@
                     <tr>
                         <td colspan="7" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                                <h4 class="fs-4 fw-bold">{{__('Liste Vide')}} </h4>
                                 <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
@@ -239,7 +239,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Montrer')}} {{$perPage > count($logs) ? count($logs) : $perPage  }} {{__('éléments de')}} {{count($logs)}}
+                    {{__('Montrer')}} {{$perPage > count($logs) ? count($logs) : $perPage  }} {{__('éléments sur ')}} {{count($logs)}}
                 </div>
                 {{ $logs->links() }}
             </div>

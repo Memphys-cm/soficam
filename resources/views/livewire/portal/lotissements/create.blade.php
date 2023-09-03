@@ -33,7 +33,7 @@
                             </li>
                             <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
                             <li class="breadcrumb-item "><a href="{{route('portal.lotissements.index')}}">{{__('Lotissements')}}</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{__('Creer')}}</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{__('Créer')}}</li>
                         </ol>
                     </nav>
                 </div>
@@ -47,7 +47,7 @@
         <div class='row'>
             <div class='col-md-3'>
                 <div class="card p-3">
-                    <h5 class="w-auto">{{__('Creer Lotissement')}}</h5>
+                    <h5 class="w-auto">{{__('Créer Lotissement')}}</h5>
                     <ul>
                         <li>{{__('Enregistrer les informations foncières')}}</li>
                         <li>{{__('Enregistrer les informations relatives au promoteur')}}</li>
@@ -61,24 +61,24 @@
                     <legend class="w-auto">Informations sur le terrain</legend>
                     <div class='row form-group mb-3'>
                         <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Numéro du titre foncier') }}</label>
+                            <label for="code">{{ __('Numéro du Titre Foncier') }}</label>
                             <x-input.land_title-select wire:model="titre_foncier_id" prettyname="titre_foncier_id" :options="$titre_fonciers" selected="('titre_foncier_id')" />
                             @error('titre_foncier_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 py-2">
-                            <label for="">{{ __('Surface totale du titre foncier') }}</label>
+                            <label for="">{{ __('Surface totale du Titre Foncier') }}</label>
                             <input type="text" class="form-control" required="" value="{{$tf_total_surface_area}}" disabled>
 
                         </div>
                         <div class="col-md-6 py-2">
-                            <label for="">{{ __('Titre foncier surface vendue') }}</label>
+                            <label for="">{{ __('Surface vendue Titre Foncier') }}</label>
                             <input type="text" class="form-control" required="" value="{{$tf_total_surface_area_sold}}" disabled>
 
                         </div>
                         <div class="col-md-6 py-2">
-                            <label for="">{{ __('Surface restante du titre foncier') }}</label>
+                            <label for="">{{ __('Surface restante du Titre Foncier') }}</label>
                             <input type="text" class="form-control" required="" value="{{$tf_total_surface_area_remaining}}" disabled>
                         </div>
                     </div>
@@ -113,9 +113,9 @@
                             @enderror
                         </div>
                         <div class="col-md-3 py-2">
-                            <label for="code">{{ __('Cabinet Geometre') }}</label>
+                            <label for="code">{{ __('Cabinet Géomètre') }}</label>
                             <select wire:model="cabinet_geometre_id" class="form-control @error('cabinet_geometre_id') is-invalid @enderror">
-                                <option value=''>{{__('-- Selectionner --')}}</option>
+                                <option value=''>{{__('-- Sélectionner --')}}</option>
                                 @foreach($cabinet_geometres as $lgeo)
                                 <option wire:key="{{ $lgeo->id }}" value='{{$lgeo->id}}'>{{ucfirst($lgeo->nom_cabinet)}} </option>
                                 @endforeach
@@ -125,9 +125,9 @@
                             @enderror
                         </div>
                         <div class="col-md-3 py-2">
-                            <label for="code">{{ __('Geometre') }}</label>
+                            <label for="code">{{ __('Géomètre') }}</label>
                             <select wire:model="geometre_id" class="form-control @error('geometre_id') is-invalid @enderror">
-                                <option value=''>{{__('-- Selectionner --')}}</option>
+                                <option value=''>{{__('-- Sélectionner --')}}</option>
                                 @foreach($geometres as $geo)
                                 <option wire:key="{{ $geo->id }}" value='{{$geo->id}}'>{{ucfirst($geo->first_name)}} {{ucfirst($geo->last_name)}} </option>
                                 @endforeach
@@ -144,7 +144,7 @@
                             @enderror
                         </div>
                         <div class="col-md-3 py-2">
-                            <label for="code">{{ __('Controlleur') }}</label>
+                            <label for="code">{{ __('Contrôleur') }}</label>
                             <input wire:model="controlleur" type="text" class="form-control  @error('controlleur') is-invalid @enderror" placeholder="controlleur" required="" value="" name="controlleur">
                             @error('controlleur')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -194,7 +194,7 @@
                         @if ($lot['type'] != 'public')
                         <div class="row form-group mt-3 mb-2">
                             <div class="col-md-3">
-                                <label for="numero_du_lot">{{__('Numero du Lot')}}</label>
+                                <label for="numero_du_lot">{{__('Numéro du Lot')}}</label>
                                 <input type="number" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.numero_du_lot">
                             </div>
                             <div class="col-md-3">
@@ -204,7 +204,7 @@
                             <div class="col-md-3">
                                 <label for="statut_du_lot">{{__('Statut du Lot')}}</label>
                                 <select wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.statut_du_lot" class="form-select  @error('statut_du_lot') is-invalid @enderror" required="">
-                                    <option value="">{{__('--Selectionner--')}}</option>
+                                    <option value="">{{__('--Sélectionner--')}}</option>
                                     <option value="batit">{{__('Construit')}}</option>
                                     <option value="non_batit">{{__('Non construit')}}</option>
                                 </select>
@@ -232,7 +232,7 @@
                             <div class="col-md-6 ">
                                 <label for="code">{{ __('Notaire') }}</label>
                                 <select wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.notaire_id" class="form-control @error('notaire_id') is-invalid @enderror">
-                                    <option value=''>{{__('-- Selectionner --')}}</option>
+                                    <option value=''>{{__('-- Sélectionner --')}}</option>
                                     @foreach($notaires as $notaire)
                                     <option wire:key="{{ $notaire->id }}" value='{{$notaire->id}}'> {{!empty($notaire->cabinet) ? $notaire->cabinet->nom_cabinet : '' }} - {{ucfirst($notaire->first_name)}} {{ucfirst($notaire->last_name)}} </option>
                                     @endforeach
@@ -256,9 +256,9 @@
                             </div>
                             --}} -->
                             <div class="col-md-6 ">
-                                <label for="lot_geometre_id">{{ __('Geometre') }}</label>
+                                <label for="lot_geometre_id">{{ __('Géomètre') }}</label>
                                 <select wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.lot_geometre_id" class="form-control @error('lot_geometre_id') is-invalid @enderror">
-                                    <option value=''>{{__('-- Selectionner --')}}</option>
+                                    <option value=''>{{__('-- Sélectionner --')}}</option>
                                     @foreach($lot_geometres as $lot_geo)
                                     <option wire:key="{{ $lot_geo->id }}" value='{{$lot_geo->id}}'> {{!empty($lot_geo->cabinet) ? $lot_geo->cabinet->nom_cabinet : '' }} - {{ucfirst($lot_geo->first_name)}} {{ucfirst($lot_geo->last_name)}} </option>
                                     @endforeach
@@ -271,7 +271,7 @@
                         @else
                         <div class="row form-group mt-3 mb-2">
                             <div class="col-md-3">
-                                <label for="numero_du_lot">{{__('Numero du Lot')}}</label>
+                                <label for="numero_du_lot">{{__('Numéro du Lot')}}</label>
                                 <input type="number" class="form-control" wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.numero_du_lot">
                             </div>
                             <div class="col-md-3">

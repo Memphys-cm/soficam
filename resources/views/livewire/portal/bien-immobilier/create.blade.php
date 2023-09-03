@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Immobilier') }}</h1>
-                        <p class="px-1"> {{ __('Créer un bien immobilier') }} &#128522;</p>
+                        <h1 class="mb-0 h4"> {{ __('Bien Immobilier') }}</h1>
+                        <p class="px-1"> {{ __('Créer un bien immobilier') }} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
 
@@ -67,7 +67,7 @@
                                 <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                 </svg>
-                                <span class="d-none d-sm-inline-block ms-1">{{ __('Enregistrer') }}</span>
+                                <span class="d-none d-sm-inline-block ms-1">{{ __('Créer') }}</span>
                             </button>
                         </div>
                     </x-form-items.form>

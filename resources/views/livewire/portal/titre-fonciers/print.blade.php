@@ -90,15 +90,15 @@
             <b>{{$user->first_name}} {{$user->last_name}}</b>; 
         @endforeach</div>
         <div></div>
-        <div style="text-align: right">Mfou, le_________________</div>
+        <div style="text-align: right">, {{$titrefoncier->subDivision->sub_division_name}} le_________________</div>
         <p></p>
         <div style="padding: 12px"><img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code for Titre Foncier ID"></div>
     </div>
     <table>
         <tr>
-            <td style="text-align: left"><div>Coût : 35660FCFA</div></td>
-            <td style="text-align: center"><div>Quittance N°:</div></td>
-            <td style="text-align: right"><div>DU: {{$titrefoncier->date_de_delivrance_du_TF}}</div></td>
+            <td style="text-align: left; width:5cm">Coût : 35660FCFA</td>
+            <td style="text-align: center; width:5cm">Quittance N°:</td>
+            <td style="text-align: right; width:5cm">DU: {{$titrefoncier->date_de_delivrance_du_TF}}</td>
         </tr>
     </table>
 </div>
