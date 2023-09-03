@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\CertificatePropriete;
 use App\Models\ImmatriculationDirecte;
 use App\Models\Lotissements\Lotissement;
+use App\Providers\AppServiceProvider;
 
 class Dashboard extends Component
 {
