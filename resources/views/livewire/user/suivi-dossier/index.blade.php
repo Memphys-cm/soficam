@@ -80,14 +80,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($combinedData as $item)
+                        @forelse($immatriculations as $item)
                         <tr>
                             <td>
-                                {{ getReference($item)}}
+                                {{$item->reference}}
                             </td>
 
-                            <td>{{ getTypeName($item) }}</td>
-                            <td>{{ getStatut($item) }}</td>
+                            <td>{{__('Immatriculation Directe') }}</td>
+                            <td>{{ $item ->statut }}</td>
                             <td>{{ $item->created_at }}</td>
                             <td class="text-center">
                                 <a class="btn btn-primary" href="{{ route('user.suivi-dossier.follow') }}">{{__('Suivre')}}</a>
@@ -123,8 +123,6 @@
             return 'Immatriculation Directe';
         }
     }
-    }
-
     function getNom($item)
     {
         if ($item instanceof \App\Models\Lotissements\Parcel) {
