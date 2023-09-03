@@ -4,13 +4,13 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Total des ventes de terrains') }}</h1>
-                        <p class="px-1"> {{ __('Vente d\'une terre entière') }} &#128522;</p>
+                        <h1 class="mb-0 h4"> {{ __('Vente totale de terrain') }}</h1>
+                        <p class="px-1"> {{ __('Vente d\'une terre entière') }} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
 
                         <div class='form-group row mb-2'>
-                            <div class=" col"><label for="titre_foncier_id">{{ __('Numéro du titre foncier') }}</label>
+                            <div class=" col"><label for="titre_foncier_id">{{ __('Numéro du Titre Foncier') }}</label>
                                 <x-input.select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers->pluck('numero_titre_foncier', 'id')->toArray()"  />
                                 @error('titre_foncier_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class='form-group row mb-2'>
-                            <div class=" col"><label for="region">{{ __('Region') }}</label>
+                            <div class=" col"><label for="region">{{ __('Région') }}</label>
                                 <input type="text" wire:model="region" class="form-control  @error('region') is-invalid @enderror " value="{{ old('region') }}" placeholder="" id="region" autofocus="" required="" disabled>
                                 @error('region')
                                 <div class="invalid-feedback">
@@ -39,7 +39,7 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class=" col"><label for="division">{{ __('Sous Region') }}</label>
+                            <div class=" col"><label for="division">{{ __('Département') }}</label>
                                 <input type="text" wire:model="division" class="form-control  @error('division') is-invalid @enderror " value="{{ old('division') }}" placeholder="" id="division" autofocus="" required="" disabled>
                                 @error('division')
                                 <div class="invalid-feedback">
@@ -68,7 +68,7 @@
                         </div>
                         <div class='form-group row mb-2'>
                             <div class='col'>
-                                <label class="px-2" for="user_ids">{{__('Proprietaire')}}</label>
+                                <label class="px-2" for="user_ids">{{__('Propriétaire(s)')}}</label>
                                 <x-input.selectmultipleusers wire:model="user_ids" prettyname="user_ids" :options="$users" selected="('user_ids')"  multiple="multiple"/>
                                 @error('user_ids')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -77,7 +77,7 @@
                         </div>
                         <div class='form-group row mb-3'>
                             <div class="col">
-                                <label for="type_de_versement">{{ __('TYPE DE PAIEMENT*') }}</label>
+                                <label for="type_de_versement">{{ __('Type de paiement*') }}</label>
                                 <select wire:model="type_de_versement"
                                     class="form-select @error('type_de_versement') is-invalid @enderror"
                                     id="type_de_versement" required="">
@@ -107,7 +107,7 @@
 
                         <div class='form-group row mb-3'>
                             <div class=" col">
-                                <label for="superficie_du_TF_mere">{{ __('ZONE VENDUE') }}</label>
+                                <label for="superficie_du_TF_mere">{{ __('Zone vendue') }}</label>
                                 <input type="number" wire:model="superficie_du_TF_mere" class="form-control  @error('superficie_du_TF_mere') is-invalid @enderror " value="{{ old('superficie_du_TF_mere') }}" placeholder="0" id="superficie_du_TF_mere" autofocus="" required="" disabled>
                                 @error('superficie_du_TF_mere')
                                 <div class="invalid-feedback">
@@ -128,7 +128,7 @@
                         @if ($type_de_versement === 'tranche')
                         <div class='form-group row mb-3'>
                             <div class="col">
-                                <label for="montant_versee">{{ __('Montant Versee(XAF)') }}</label>
+                                <label for="montant_versee">{{ __('Montant Versé(XAF)') }}</label>
                                 <input type="number" wire:model="montant_versee"
                                     class="form-control @error('montant_versee') is-invalid @enderror"
                                     value="{{ old('montant_versee') }}" placeholder="0" id="montant_versee"
@@ -171,7 +171,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex my-1">
-                                        <div class=" me-2">{{ __('SURFACE À VENDRE') }} : </div>
+                                        <div class=" me-2">{{ __('Surface à vendre') }} : </div>
                                         <div class="fw-semi-bold">{{ number_format(floatval($superficie_du_TF_mere)) }}
                                             {{ __('m²') }}
                                         </div>
@@ -179,7 +179,7 @@
 
                                     @if ($type_de_versement === 'tranche')
                                     <div class="d-flex border-top border-2 my-1 py-2">
-                                        <div class=" me-2">{{ __('Montant Versee') }} : </div>
+                                        <div class=" me-2">{{ __('Montant Versé') }} : </div>
                                         <div class="fw-semi-bold">
                                             {{ number_format(floatval($montant_versee)) }}
                                             {{ __('XAF') }}
@@ -206,7 +206,7 @@
                                     <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                     </svg>
-                                    <span class="d-none d-sm-inline-block ms-1">{{ __('Enregistrement') }}</span>
+                                    <span class="d-none d-sm-inline-block ms-1">{{ __('Enregistrer') }}</span>
                                 </button>
                             </div>
                         </div>

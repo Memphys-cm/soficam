@@ -16,7 +16,7 @@
                         </div>
                         <x-form-items.form wire:submit="store">
                             <div class="form-group mb-2">
-                                <label for="numero_reference_acte_expidition">{{ __('Reference Acte Expidition') }}</label>
+                                <label for="numero_reference_acte_expidition">{{ __('Reférence Acte Expidition') }}</label>
                                 <input type="text" wire:model="numero_reference_acte_expidition" class="form-control  @error('numero_reference_acte_expidition') is-invalid @enderror " value="{{ old('numero_reference_acte_expidition') }}" placeholder="" id="numero_reference_acte_expidition" autofocus="" required="">
                                 @error('numero_reference_acte_expidition')
                                 <div class="invalid-feedback">
@@ -52,7 +52,7 @@
 
                             <div class="d-flex justify-content-end">
                                 <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
-                                <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Creer')}}</button>
+                                <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Créer')}}</button>
                             </div>
                         </x-form-items.form>
                     </div>

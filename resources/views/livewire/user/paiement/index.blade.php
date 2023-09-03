@@ -17,11 +17,9 @@
                     <svg class="icon icon-lg me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
                     </svg>
-                    <span>
-                        {{__('Payment Management')}}
-                    </span>
+                    {{ __('Paiements') }}
                 </h1>
-                <p class="text-gray-800">{{__('Afficher les paiements en attent')}} &#129297; </p>
+                <p class="text-gray-800">{{__('Afficher les paiements en attente')}} </p>
             </div>
             <div class=''>
 
@@ -37,8 +35,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
                                 </svg>
                                 <div class="mb-3 mb-md-0">
-                                    <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($allsales_count)}} {{ __(\Str::plural('Creation log', $allsales_count)) }} </h5>
-                                    <div class=" text-gray-500 ">{{__('enregistré!')}} &#128516;</div>
+                                    <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($allsales_count)}} {{ __(\Str::plural('Audit création', $allsales_count)) }} </h5>
+                                    <div class=" text-gray-500 ">{{__('enregistré!')}} </div>
                                 </div>
                             </div>
                         </a>
@@ -52,8 +50,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                                 <div class="mb-3 mb-md-0">
-                                    <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($allsales_count)}} {{ __(\Str::plural('Update log', $allsales_count)) }} </h5>
-                                    <div class=" text-gray-500 ">{{__('enregistré!')}} &#128516;</div>
+                                    <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($allsales_count)}} {{ __(\Str::plural('Audit mise à jour', $allsales_count)) }} </h5>
+                                    <div class=" text-gray-500 ">{{__('enregistré!')}} </div>
                                 </div>
                             </div>
                         </a>
@@ -67,8 +65,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                                 </svg>
                                 <div class="mb-3 mb-md-0">
-                                    <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($allsales_count)}} {{ __(\Str::plural('Deletion log', $allsales_count)) }}</h5>
-                                    <div class="text-gray-500 ">{{__('enregistré!')}} &#128560;</div>
+                                    <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($allsales_count)}} {{ __(\Str::plural('Audit suppression', $allsales_count)) }}</h5>
+                                    <div class="text-gray-500 ">{{__('enregistré!')}} </div>
                                 </div>
                             </div>
                         </a>
@@ -90,7 +88,7 @@
                 </select>
             </div>
             <div class="col-md-3 mb-2">
-                <label for="direction">{{__('Sens de trie')}}: </label>
+                <label for="direction">{{__('Sens de tri')}}: </label>
                 <select wire:model="orderAsc" id="direction" class="form-select">
                     <option value="asc">{{__('Ascendant ')}}</option>
                     <option value="desc">{{__('Descendant')}}</option>
@@ -116,13 +114,13 @@
                 <table class="table employee-table table-hover align-items-center ">
                     <thead>
                         <tr>
-                            <th class="border-bottom">{{ __('REQUESTOR') }}</th>
-                            <th class="border-bottom">{{ __('PAYMENT METHOD') }}</th>
-                            <th class="border-bottom">{{ __('SALE TYPE') }}</th>
-                            <th class="border-bottom">{{ __('Sale amount') }}</th>
-                            <th class="border-bottom">{{ __('Payment Status') }}</th>
-                            <th class="border-bottom">{{ __('Created By') }}</th>
-                            <th class="border-bottom">{{ __('Date created') }}</th>
+                            <th class="border-bottom">{{ __('REQUÉRANT') }}</th>
+                            <th class="border-bottom">{{ __('MÉTHODE DE PAIEMENT') }}</th>
+                            <th class="border-bottom">{{ __('TYPE DE VENTE') }}</th>
+                            <th class="border-bottom">{{ __('PRIX VENTE') }}</th>
+                            <th class="border-bottom">{{ __('STATUT DU PAIEMENT') }}</th>
+                            <th class="border-bottom">{{ __('Créé par') }}</th>
+                            <th class="border-bottom">{{ __('Date création') }}</th>
                             <th class="border-bottom">{{ __('Action') }}</th>
                         </tr>
                     </thead>
@@ -168,7 +166,7 @@
                         <tr>
                             <td colspan="7" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
-                                    <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                                    <h4 class="fs-4 fw-bold">{{__('Liste Vide')}} </h4>
                                     <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                                 </div>
                             </td>
@@ -178,7 +176,7 @@
                 </table>
                 <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                     <div>
-                        {{__('Montrer')}} {{$perPage > $allsales_count ? $allsales_count : $perPage  }} {{__('Element de')}} {{$allsales_count}}
+                        {{__('Montrer')}} {{$perPage > $allsales_count ? $allsales_count : $perPage  }} {{__('Éléments sur')}} {{$allsales_count}}
                     </div>
                     {{ $allsaless->links() }}
                 </div>

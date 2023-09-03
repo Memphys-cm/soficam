@@ -17,8 +17,8 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Acceuil</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Simple Sales') }}</li>
+                        <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Vente Totale') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -28,7 +28,7 @@
                     </svg>
                     {{ __('Gestion des ventes totales') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir toutes les ventes totales dans l\'application') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('Voir toutes les ventes totales dans l\'application') }}  </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -84,7 +84,7 @@
         </div>
 
         <div class="col-md-2">
-            <label for="direction">{{ __('Direction de trie') }}: </label>
+            <label for="direction">{{ __('Sens du tri') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{ __('Ascendante') }}</option>
                 <option value="desc">{{ __('Descendante') }}</option>
@@ -92,7 +92,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{ __('Element par page') }}: </label>
+            <label for="perPage">{{ __('Éléments par page') }}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -108,7 +108,7 @@
                 <thead>
                     <tr>
                         <th class="border-bottom">{{ __('REQUÉRANT') }}</th>
-                        <th class="border-bottom">{{ __('REFERANCE') }}</th>
+                        <th class="border-bottom">{{ __('REFÉRENCE') }}</th>
                         <th class="border-bottom">{{ __('MODE DE PAIEMENT') }}</th>
                         <th class="border-bottom">{{ __('TYPE DE VENTE') }}</th>
                         <th class="border-bottom">{{ __('Montant de la vente') }}</th>
@@ -190,8 +190,8 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{ __('Affichage') }} {{ $perPage > $allsales_count ? $allsales_count : $perPage }}
-                    {{ __('element de') }} {{ $allsales_count }}
+                    {{ __('Montrer') }} {{ $perPage > $allsales_count ? $allsales_count : $perPage }}
+                    {{ __(' éléments sur') }} {{ $allsales_count }}
                 </div>
                 {{ $allsaless->links() }}
             </div>
