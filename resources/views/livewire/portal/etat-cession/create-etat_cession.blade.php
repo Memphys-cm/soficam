@@ -57,7 +57,7 @@
                     @enderror
                 </div>
                 <div class="col-md-6 py-2">
-                    <label for="code">{{ __('Geometre') }}</label>
+                    <label for="code">{{ __('Géomètre') }}</label>
                     <x-input.select wire:model="geometre_id" prettyname="geometre_id" :options="$geometres->pluck('first_name', 'id')->toArray()" selected="('geometre_id')" />
                     @error('geometre_id')
                     <div class="invalid-feedback">{{ $message }}</div>

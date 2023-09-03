@@ -16,8 +16,8 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
-                        <li class="breadcrumb-item " aria-current="page"><a href="{{route('portal.divisions.index')}}">{{__('Regions')}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Departement')}}</li>
+                        <li class="breadcrumb-item " aria-current="page"><a href="{{route('portal.divisions.index')}}">{{__('Régions')}}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Département')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -26,7 +26,7 @@
                     </svg>
                     {{__('Departements')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('Voir toutes les departements')}}</p>
+                <p class="mt-n1 mx-2">{{__('Voir tous les Départements')}} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -80,7 +80,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Trier par direction')}}: </label>
+            <label for="direction">{{__('Sens du tri')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{__('Ascendant')}}</option>
                 <option value="desc">{{__('Descendant')}}</option>
@@ -104,8 +104,8 @@
                 <thead>
                     <tr>
                         <th class="border-bottom">{{__('Code')}}</th>
-                        <th class="border-bottom">{{__('Nom du departement')}}</th>
-                        <th class="border-bottom">{{__('Sous-divisions Nombre')}}</th>
+                        <th class="border-bottom">{{__('Nom du Département')}}</th>
+                        <th class="border-bottom">{{__('Nombre d\'Arrondissements')}}</th>
                         <th class="border-bottom">{{__('Statut')}}</th>
                         <th class="border-bottom">{{__('Date de création')}}</th>
                         @canany('division.update','division.delete')
@@ -160,7 +160,7 @@
                     <tr>
                         <td colspan="7" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Liste vide')}} </h4>
+                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
                                 <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
@@ -170,7 +170,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Montrer')}} {{$perPage > $divisions_count ? $divisions_count : $perPage  }} {{__('éléments de')}} {{$divisions_count}}
+                    {{__('Montrer')}} {{$perPage > $divisions_count ? $divisions_count : $perPage  }} {{__('éléments sur ')}} {{$divisions_count}}
                 </div>
                 {{ $divisions->links() }}
             </div>

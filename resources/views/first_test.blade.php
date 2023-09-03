@@ -38,7 +38,8 @@
 
             const view = new MapView({
                 map: map,
-                center: [11.5, 6.5], //Longitude, latitude
+                center: [{{ $longitude }}, {{ $latitude }}], //Longitude, latitude
+                // center: [11.5, 6.5], //Longitude, latitude
                 zoom: 13,
                 container: "viewDiv"
             });
@@ -207,6 +208,24 @@
             });
 
             view.ui.add(search, "top-right"); //Add to the map
+            
+//             const search = new Search({
+//     view: view,
+//     sources: [
+//         {
+//             featureLayer: graphicsLayer, // Utilisez votre couche de graphiques (graphicsLayer) comme source de recherche
+//             searchFields: ["name", "proprietaires"], // Champs de recherche, incluez les champs "name" et "proprietaires"
+//             displayField: "name", // Champ à afficher dans les résultats de la recherche (vous pouvez choisir "proprietaires" si vous préférez)
+//             exactMatch: false, // Correspondance exacte non requise
+//             outFields: ["*"], // Renvoyer tous les attributs
+//             name: "Titres Fonciers", // Nom de la source de recherche
+//         }
+//     ], 
+//     resultGraphicEnabled: true, // Afficher le résultat en tant que graphique sur la carte
+// });
+
+// // Ajoutez le widget de recherche à l'interface utilisateur de la carte
+// view.ui.add(search, "top-right");
 
         });
     </script>

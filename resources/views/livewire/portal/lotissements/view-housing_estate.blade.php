@@ -8,13 +8,13 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th class="f-bold"> {{ __('Numero titre foncier') }} </th>
+                                    <th class="f-bold"> {{ __('Numéro Titre Foncier') }} </th>
                                     <th> {{ __($housing_estate->land_title->numero_titre_foncier ?? '') }} </th>
                                     <th class="f-bold">{{ __('MAETURE') }}</th>
                                     <th> {{ $housing_estate->maeture }} </th>
                                 </tr>
                                 <tr>
-                                    <th class="f-bold">{{ __('Surface du titre foncier') }}</th>
+                                    <th class="f-bold">{{ __('Surface du Titre Foncier') }}</th>
                                     <th> {{ __($housing_estate->land_title->superficie_du_TF_mere ?? '') }} </th>
                                     <th class="f-bold">{{ __('PROMOTEUR IMMOBILIER') }}</th>
                                     <th> {{ $housing_estate->property_developer }} </th>
@@ -41,7 +41,7 @@
                                     <th class="f-bold">{{ __('SURFACE VENDUE') }}</th>
                                     <th> {{ __($housing_estate->land_title->superficie_vendue_du_TF_mere ?? '0') }}
                                     </th>
-                                    <th class="f-bold">{{ __('CABINET DE GEOMETRE') }}</th>
+                                    <th class="f-bold">{{ __('CABINET DE GÉOMÈTRE') }}</th>
                                     <th> {{ $housing_estate->geometric_pratice }} </th>
                                 </tr>
                                 <tr>
@@ -52,13 +52,13 @@
                                     <th> {{ $housing_estate->geometric }} </th>
                                 </tr>
                                 <tr>
-                                    <th class="f-bold">{{ __('NOMBRE DE BLOC') }}</th>
+                                    <th class="f-bold">{{ __('NOMBRE DE BLOCS') }}</th>
                                     <th> {{ __($housing_estate->blocks->count() ?? '0') }} </th>
                                     <th class="f-bold">{{ __('LE PLANIFICATEUR') }}</th>
                                     <th> {{ $housing_estate->urbanist }} </th>
                                 </tr>
                                 <tr>
-                                    <th class="f-bold">{{ __('NOMBRE LE LOTS') }}</th>
+                                    <th class="f-bold">{{ __('NOMBRE DE LOTS') }}</th>
                                     @if ($housing_estate->blocks->count() > 0)
                                         @php
                                             $totalParcelCount = $housing_estate->blocks->sum(function ($block) {
@@ -90,7 +90,7 @@
                                         <th>ÉTUDE DE BUREAU DE NOTAIRE</th>
                                         <th>CLERK NOTAIRE</th>
                                         <th>SERVICE DU NOTAIRE</th>
-                                        <th>GEOMETRE</th>
+                                        <th>GÉOMÈTRE</th>
                                         <th>DATE</th>
                                     </tr>
                                 </thead>

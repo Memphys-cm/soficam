@@ -17,7 +17,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">Acceuil</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Users')}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Utilisateurs')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -26,7 +26,7 @@
                     </svg>
                     {{__('Gestion des utilisateurs')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('Afficher tous les utilisateurs de l\'application')}} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{__('Afficher tous les utilisateurs de l\'application')}} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -103,13 +103,13 @@
                                     </svg>
                                 </div>
                                 <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5">{{ \Str::plural(__('Active User'), $total_active_users) }}</h2>
+                                    <h2 class="fw-extrabold h5">{{ \Str::plural(__('Utilisateurs Actif'), $total_active_users) }}</h2>
                                     <h3 class="mb-1">{{numberFormat(!is_null($total_active_users) ? $total_active_users : 0 )}}</h3>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-8 px-xl-0">
                                 <a href="" class="d-none d-sm-block">
-                                    <h2 class="h5">{{ \Str::plural(__('Active User'), $total_active_users) }}</h2>
+                                    <h2 class="h5">{{ \Str::plural(__('Utilisateurs Actif'), $total_active_users) }}</h2>
                                     <h3 class="fw-extrabold mb-1">{{numberFormat(!is_null($total_active_users) ? $total_active_users : 0 )}}</h3>
                                 </a>
                             </div>
@@ -128,13 +128,13 @@
                                     </svg>
                                 </div>
                                 <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5">{{ \Str::plural(__('Inactive User'), $total_inactive_users) }}</h2>
+                                    <h2 class="fw-extrabold h5">{{ \Str::plural(__('Utilisateurs Inactif'), $total_inactive_users) }}</h2>
                                     <h3 class="mb-1">{{numberFormat(!is_null($total_inactive_users) ? $total_inactive_users : 0 )}} </h3>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-8 px-xl-0">
                                 <a href="" class="d-none d-sm-block">
-                                    <h2 class="h5">{{ \Str::plural(__('Inactive User'), !is_null($total_inactive_users) ? $total_inactive_users : 0 ) }}</h2>
+                                    <h2 class="h5">{{ \Str::plural(__('Utilisateurs Inactif'), !is_null($total_inactive_users) ? $total_inactive_users : 0 ) }}</h2>
                                     <h3 class="fw-extrabold mb-1">{{numberFormat(!is_null($total_inactive_users) ? $total_inactive_users : 0 )}} </h3>
                                 </a>
                             </div>
@@ -156,12 +156,12 @@
             <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="first_name">{{__('Utilisateurs')}}</option>
-                <option value="created_at">{{__('Date creation')}}</option>
+                <option value="created_at">{{__('Date création')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Direction du trie')}}: </label>
+            <label for="direction">{{__('Sens du tri')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{__('Ascendant')}}</option>
                 <option value="desc">{{__('Descendant')}}</option>
@@ -169,7 +169,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Elements par page')}}: </label>
+            <label for="perPage">{{__('Eléments par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -184,11 +184,11 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('Utilisateurs')}}</th>
+                        <th class="border-bottom">{{__('Utilisateur(s)')}}</th>
                         <th class="border-bottom">{{__('Service')}}</th>
-                        <th class="border-bottom">{{__('Role')}}</th>
+                        <th class="border-bottom">{{__('Rôle')}}</th>
                         <th class="border-bottom">{{__('Statut')}}</th>
-                        <th class="border-bottom">{{__('Date creation')}}</th>
+                        <th class="border-bottom">{{__('Date création')}}</th>
                         @canany('user.update','user.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
                         @endcanany
@@ -252,6 +252,7 @@
                         <td colspan="7" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
                                 <h4 class="fs-4 fw-bold">{{__('Liste vide')}}</h4>
+                                <h4 class="fs-4 fw-bold">{{__('Liste Vide')}} </h4>
                                 <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
@@ -261,7 +262,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Montrer')}} {{$perPage > $total_users ? $total_users : $perPage  }} {{__('element de')}} {{$total_users}}
+                    {{__('Montrer')}} {{$perPage > $total_users ? $total_users : $perPage  }} {{__('élément de')}} {{$total_users}}
                 </div>
                 {{ $users->links() }}
             </div>

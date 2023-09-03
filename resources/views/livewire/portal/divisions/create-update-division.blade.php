@@ -4,13 +4,13 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">{{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Departement')}}</h1>
-                        <p class="px-1"> {{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Departement')}} &#128522;</p>
+                        <h1 class="mb-0 h4">{{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Département')}}</h1>
+                        <p class="px-1"> {{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Département')}} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <div class="form-group row mb-3">
                             <div class='col'>
-                                <label class="px-2" for="division.region_id">{{__('Region')}}</label>
+                                <label class="px-2" for="division.region_id">{{__('Région')}}</label>
                                 <select wire:model="division.region_id" name="division.region_id" class="form-select  @error('division.region_id') is-invalid @enderror" required="">
                                     @foreach($regions as $region)
                                     <option value="{{$region->id}}">{{$region->region_name}}</option>
@@ -29,14 +29,14 @@
                             </div>
                         </div>
                         <div class="form-group mb-3">
-                            <label class="px-2" for="name">{{__('Nom Departement ')}} <span>({{__('En')}})</span></label>
+                            <label class="px-2" for="name">{{__('Division Name ')}} <span>({{__('En')}})</span></label>
                             <input wire:model="division.division_name_en" type="text" class="form-control  @error('division.division_name_en') is-invalid @enderror" placeholder="{{__('North')}}" required="" name="name">
                             @error('division.division_name_en')
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="form-group mb-3">
-                            <label class="px-2" for="name">{{__('Nom de la departement ')}} <span>({{__('Fr')}})</span></label>
+                            <label class="px-2" for="name">{{__('Nom Département ')}} <span>({{__('Fr')}})</span></label>
                             <input wire:model="division.division_name_fr" type="text" class="form-control  @error('division.division_name_fr') is-invalid @enderror" placeholder="{{__('Nord')}}" required="" name="name">
                             @error('division.division_name_fr')
                             <div class="invalid-feedback">{{$message}}</div>
@@ -51,7 +51,7 @@
 
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
-                            <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{$state ? 'Mettre à jour' : 'Creer'}} </button>
+                            <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{$state ? 'Mettre à jour' : 'Créer'}} </button>
                         </div>
                     </x-form-items.form>
                 </div>

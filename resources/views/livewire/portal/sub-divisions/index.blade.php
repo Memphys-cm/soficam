@@ -16,8 +16,8 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{__('Tableeau de Bord')}}</a></li>
-                        <li class="breadcrumb-item " aria-current="page"><a href="{{route('portal.regions.index')}}">{{__('Regions')}}</a></li>
-                        <li class="breadcrumb-item " aria-current="page"><a href="{{route('portal.divisions.index')}}">{{__('Divisions')}}</a></li>
+                        <li class="breadcrumb-item " aria-current="page"><a href="{{route('portal.regions.index')}}">{{__('Régions')}}</a></li>
+                        <li class="breadcrumb-item " aria-current="page"><a href="{{route('portal.divisions.index')}}">{{__('Départements')}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{__('Arrondissements')}}</li>
                     </ol>
                 </nav>
@@ -27,7 +27,7 @@
                     </svg>
                     {{__('Arrondissements')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('voir tous Arrondissements')}} </p>
+                <p class="mt-n1 mx-2">{{__('Voir tous Arrondissements')}} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -81,7 +81,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Direction du Trie')}}: </label>
+            <label for="direction">{{__('Sens du Tri')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{__('Ascendant')}}</option>
                 <option value="desc">{{__('Descendant')}}</option>
@@ -89,7 +89,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Element par page')}}: </label>
+            <label for="perPage">{{__('Éléments par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -108,7 +108,7 @@
                         <th class="border-bottom">{{__('Nom Arrondissement')}}</th>
                         <th class="border-bottom">{{__('Surface totale')}}</th>
                         <th class="border-bottom">{{__('Statut')}}</th>
-                        <th class="border-bottom">{{__('Date creation')}}</th>
+                        <th class="border-bottom">{{__('Date création')}}</th>
                         @canany('sub_division.update','sub_division.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
                         @endcanany
@@ -161,7 +161,7 @@
                     <tr>
                         <td colspan="7" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Liste vide')}}</h4>
+                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
                                 <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
@@ -171,7 +171,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Affichage')}} {{$perPage > $sub_divisions_count ? $sub_divisions_count : $perPage  }} {{__('element par')}} {{$sub_divisions_count}}
+                    {{__('Montrer')}} {{$perPage > $sub_divisions_count ? $sub_divisions_count : $perPage  }} {{__('éléments sur ')}} {{$sub_divisions_count}}
                 </div>
                 {{ $sub_divisions->links() }}
             </div>

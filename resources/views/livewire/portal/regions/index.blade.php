@@ -16,16 +16,16 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
-                        <li class="breadcrumb-item active">{{ __('Regions') }}</li>
+                        <li class="breadcrumb-item active">{{ __('Régions') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
                     <svg class="icon me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path>
                     </svg>
-                    {{__('Gestion des régions')}}
+                    {{__('Gestion des Régions')}}
                 </h1>
-                <p class="mt-n2">{{__('Gérer les régions et les détails qui s\'y rapportent')}} &#128524;</p>
+                <p class="mt-n2">{{__('Gérer les Régions et les détails qui s\'y rapportent')}} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -80,7 +80,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <label for="direction">{{__('Trier par direction')}}: </label>
+                    <label for="direction">{{__('Sens du tri')}}: </label>
                     <select wire:model="orderAsc" id="direction" class="form-select">
                         <option value="asc">{{__('Ascendant')}}</option>
                         <option value="desc">{{__('Descendant')}}</option>
@@ -88,7 +88,7 @@
                 </div>
 
                 <div class="col-md-2">
-                    <label for="perPage">{{__('Par page')}}: </label>
+                    <label for="perPage">{{__('Éléments par page')}}: </label>
                     <select wire:model="perPage" id="perPage" class="form-select">
                         <option value="5">5</option>
                         <option value="10">10</option>
@@ -111,7 +111,7 @@
                             <div class="avatar p-4 d-flex align-items-center justify-content-center fw-bold fs-5 rounded bg-primary me-3"><span class="text-gray-50">{{initials($region->region_name)}}</span></div>
                             <div>
                                 <h3 class="h6 mb-0">{{$region->region_name}} ({{$region->code}})</h3>
-                                <p class="text-xs fw-lighter"> {{numberFormat(count($region->divisions))}} {{__('Divisions')}}</p>
+                                <p class="text-xs fw-lighter"> {{numberFormat(count($region->divisions))}} {{__('Départements')}}</p>
                             </div>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                             <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                             </svg>
-                            <div class="d-none d-md-block">{{__('Sous region')}}</div>
+                            <div class="d-none d-md-block">{{__('Départements')}}</div>
                         </a>
                     </div>
                     <div>
@@ -170,7 +170,7 @@
     </div>
     <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
         <div>
-            {{__('Montrer')}} {{$perPage > $regions_count ? $regions_count : $perPage  }} {{__('element par page')}} {{$regions_count}}
+            {{__('Montrer')}} {{$perPage > $regions_count ? $regions_count : $perPage  }} {{__('éléments sur ')}} {{$regions_count}}
         </div>
         {{ $regions->links() }}
     </div>

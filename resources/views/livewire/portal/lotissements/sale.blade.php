@@ -53,7 +53,7 @@
                 <h5 class="w-auto">{{__('Contacts')}}</h5>
             </div>
             <div class="card p-3">
-                <h5 class="w-auto">{{__('Statistique basique')}}</h5>
+                <h5 class="w-auto">{{__('Statistiques basique')}}</h5>
 
                 <div class="d-flex align-items-center mb-2 border-1 border-bottom">
                     <span class="fw-light ">{{__('Total Blocs')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->blocks)}} </span>
@@ -62,7 +62,7 @@
                     <span class="fw-light ">{{__('Total Lots')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->parcels)}} </span>
                 </div>
                 <div class="d-flex align-items-center mb-2 border-1 border-bottom">
-                    <span class="fw-light ">{{__('Total Lots publiques')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->parcels->where('type','public'))}} </span>
+                    <span class="fw-light ">{{__('Total Lots publics')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->parcels->where('type','public'))}} </span>
                 </div>
                 <div class="d-flex align-items-center mb-2 border-1 border-bottom">
                     <span class="fw-light ">{{__('Total Lot normal')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->parcels->where('type','normale'))}} </span>
@@ -71,7 +71,7 @@
                     <span class="fw-light ">{{__('Total Lots Vendus')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->parcels->where('date_de_vente','<>',null))}} </span>
                 </div>
                 <div class="d-flex align-items-center mb-2">
-                    <span class="fw-light ">{{__('Total Lots Restant')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->parcels->where('date_de_vente',null))}} </span>
+                    <span class="fw-light ">{{__('Total Lots Restants')}}</span> : <span class="fw-bolder mx-2">{{count($lotissement->parcels->where('date_de_vente',null))}} </span>
                 </div>
             </div>
 
@@ -167,7 +167,7 @@
                                         <div class="small text-gray" style="font-size: x-small;">
                                             <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
-                                            </svg> {{__('Promoteur immobiliere')}}
+                                            </svg> {{__('Promoteur immobilier')}}
                                         </div>
                                     </div>
                                 </a>
@@ -180,7 +180,7 @@
                                         <div class="small text-gray" style="font-size: x-small;">
                                             <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
-                                            </svg> {{__('Agent immobiliere')}}
+                                            </svg> {{__('Agent immobilier')}}
                                         </div>
                                     </div>
                                 </a>
@@ -213,7 +213,7 @@
                         @endif
                     </div>
                     <div class="col">
-                        <h4 class="fs-5">{{__('Proprietaire du titre foncier')}}</h4>
+                        <h4 class="fs-5">{{__('Proprietaire du Titre Foncier')}}</h4>
                         @if(!empty($lotissement->titreFoncier))
                         @foreach($lotissement->titreFoncier->users as $key=>$option)
                         <a href="#" class="d-flex align-items-center {{!$loop->last ? 'border-bottom' : ''}} py-1">
@@ -242,7 +242,7 @@
                     @if(!empty($block->parcels))
                     <span class="fw-bold pb-3"> {{__('Nom du Bloc')}} : {{$block->block_name}}</span>
                     <div class='row border border-1 fw-bold  mt-1'>
-                        <span class="col py-1 text-left">{{__('Numero Lot')}}</span>
+                        <span class="col py-1 text-left">{{__('Numéro Lot')}}</span>
                         <span class="col py-1 text-left">{{__('Superficie Total')}}</span>
                         <span class="col py-1 text-left"> {{__('Statut Lot')}}</span>
                         <span class="col py-1 text-left"> {{__('Type Lot')}}</span>

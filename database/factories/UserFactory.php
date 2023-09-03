@@ -20,6 +20,7 @@ class UserFactory extends Factory
         return [
             'first_name' => fake()->name(),
             'last_name' => fake()->name(),
+            'sexe' => fake()->randomElement(['M', 'F']),
             'id_card_number' => Str::random(11),
             'date_of_birth' => fake()->date(),
             'place_of_birth' => fake()->country(),

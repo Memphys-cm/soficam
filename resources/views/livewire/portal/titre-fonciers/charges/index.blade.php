@@ -16,8 +16,8 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Charge sur Titres Fonciers') }}</li>
+                        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Charges sur les Titres Fonciers') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -25,9 +25,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                         </path>
                     </svg>
-                    {{ __('Attribute a charge to a Titre foncier') }}
+                    {{ __('Historique des charges sur les Titres Fonciers') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('View all charges on Titre foncier') }}</p>
+                <p class="mt-n1 mx-2">{{ __('Voir toutes les charges sur les Titres Fonciers') }} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
                 <a href="#" data-bs-toggle="modal" data-bs-target="#EditChargeModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
@@ -39,7 +39,7 @@
                     <a href="#" data-bs-toggle="modal" data-bs-target="#CreateChargeModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                        </svg> {{__('New')}}
+                        </svg> {{__('Nouveau')}}
                     </a>
 
                 {{--@can('certificate_propriete.export_n_print')--}}
@@ -78,12 +78,12 @@
         <div class="col-md-3">
             <label for="orderBy">{{ __('Trier par') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="created_at">{{ __('Created Date') }}</option>
+                <option value="created_at">{{ __('Date de création') }}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{ __('Order direction') }}: </label>
+            <label for="direction">{{ __('Sens du Tri') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{ __('Ascendant') }}</option>
                 <option value="desc">{{ __('Descendant') }}</option>
@@ -91,7 +91,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{ __('Elements par page') }}: </label>
+            <label for="perPage">{{ __('Eléments par page') }}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -106,10 +106,10 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('NUMERO TITRE FONCIER') }}</th>
-                        <th class="border-bottom">{{ __('PROPRIETAIRE') }}</th>
+                        <th class="border-bottom">{{ __('NUMÉRO TITRE FONCIER') }}</th>
+                        <th class="border-bottom">{{ __('PROPRIÉTAIRE(S)') }}</th>
                         <th class="border-bottom">{{ __('CHARGE') }}</th>
-                        <th class="border-bottom">{{ __('DATE CREATION') }}</th>
+                        <th class="border-bottom">{{ __('DATE CRÉATION') }}</th>
                         {{--@canany(['certificate_propriete.edit','certificate_propriete.delete'])--}}
                         <th class="border-bottom">{{ __('Action') }}</th>
                         {{--@endcanany--}}
@@ -143,7 +143,7 @@
                     <tr>
                         <td colspan="10" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{ __('Liste vide') }}</h4>
+                                <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
                                 <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                             </div>
                         </td>
@@ -153,7 +153,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Affichage')}} {{$perPage > $charges_count ? $charges_count : $perPage  }} {{__('éléments de')}} {{$charges_count}}
+                    {{__('Montrer')}} {{$perPage > $charges_count ? $charges_count : $perPage  }} {{__('éléments sur')}} {{$charges_count}}
                 </div>
                 {{ $charges->links()  }}
             </div>

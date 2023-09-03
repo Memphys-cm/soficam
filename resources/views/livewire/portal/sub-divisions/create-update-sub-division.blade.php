@@ -4,12 +4,12 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">{{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Sous Region')}}</h1>
-                        <p class="px-1"> {{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Sous Region')}} &#128522;</p>
+                        <h1 class="mb-0 h4">{{$state ? 'Mettre à jour' : 'Créer'}} {{__(' Arrondissement')}}</h1>
+                        <p class="px-1"> {{$state ? 'Mettre à jour' : 'Créer'}} {{__(' Arrondissement')}}</p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <div class='form-group mb-3'>
-                            <label class="px-2" for="sub_division.division_id">{{__('Sous Region')}}</label>
+                            <label class="px-2" for="sub_division.division_id">{{__('Département')}}</label>
                             <select wire:model="sub_division.division_id" name="sub_division.division_id" class="form-select  @error('sub_division.division_id') is-invalid @enderror" required="">
                                 @foreach($divisions as $division)
                                 <option value="{{$division->id}}">{{$division->division_name}}</option>
@@ -49,16 +49,25 @@
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
+                        <div class="form-group mb-3">
+                            <label class="px-2" for="prix_minima_m2">{{__('Prix Minima au metre carre ')}} <span>({{__('Fr')}})</span></label>
+                            <input wire:model="sub_division.prix_minima_m2" type="text" class="form-control  @error('sub_division.prix_minima_m2') is-invalid @enderror" placeholder="{{__('0')}}" required="" name="name">
+                            @error('sub_division.prix_minima_m2')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
                         <div class='form-group mb-4 px-1'>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" wire:model="sub_division.status" id="sub_division.status">
-                                <label class="form-check-label mb-0" for="sub_division.status">{{ __('Mark as Active') }}</label>
+                                <label class="form-check-label mb-0" for="sub_division.status">{{ __('Marquer comme actif') }}</label>
                             </div>
                         </div>
+                        
+                        
 
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
-                            <button type="submit" wire:click.prevent="store" class="btn btn-primary " wire:loading.attr="disabled">{{$state ? 'Mettre à jour' : 'Creer'}} </button>
+                            <button type="submit" wire:click.prevent="store" class="btn btn-primary " wire:loading.attr="disabled">{{$state ? 'Mettre à jour' : 'Créer'}} </button>
                         </div>
                     </x-form-items.form>
                 </div>

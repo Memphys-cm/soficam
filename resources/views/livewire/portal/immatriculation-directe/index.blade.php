@@ -32,7 +32,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{ __('Tableau de bord') }}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Immatriculation Directes') }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Immatriculations Directes') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -44,7 +44,7 @@
                     </svg>
                     {{__('Immatriculation Directes')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir Toutes les Immatriculation Directes') }} </p>
+                <p class="mt-n1 mx-2">{{ __('Voir Toutes les Immatriculations Directes') }} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -68,7 +68,7 @@
                                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                     clip-rule="evenodd"></path>
                             </svg>
-                            <span class="sr-only">{{ __('Operations on Land Title') }}</span>
+                            <span class="sr-only">{{ __('Opérations sur les Titres Fonciers') }}</span>
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">Action</a>
@@ -93,8 +93,8 @@
         <div class="col-md-3">
             <label for="orderBy">{{ __('Trier par') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="region_id">{{ __('Region') }}</option>
-                <option value="date_de_delivrance_du_TF">{{ __('Date de livraison') }}</option>
+                <option value="region_id">{{ __('Région') }}</option>
+                <option value="date_de_delivrance_du_TF">{{ __('Date de délivrance') }}</option>
                 <option value="created_at">{{ __('Date de création') }}</option>
             </select>
         </div>
@@ -123,10 +123,10 @@
             <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('Numero Reference') }}</th>
+                        <th class="border-bottom">{{ __('Numero Reférence') }}</th>
                         {{-- <th class="border-bottom">{{ __('Date de Delivrance') }}</th> --}}
                         {{-- <th class="border-bottom">{{__('Requerants Principales')}}</th> --}}
-                        <th class="border-bottom">{{ __('Requerants Secondaires') }}</th>
+                        <th class="border-bottom">{{ __('Requérants Secondaires') }}</th>
                         <th class="border-bottom">{{ __('Localisation') }}</th>
                         <th class="border-bottom">{{ __('Superficie') }}</th>
                         <th class="border-bottom">{{ __('Statut') }}</th>
@@ -273,12 +273,9 @@
                                         @if ($imma_directe->next_step == 'Preparation Avis Au publique')
                                             <a href="#" data-bs-placement="top" title="Etablisser L'Avis Au Public"
                                                 wire:click.prevent='printAvisPdf({{ $imma_directe->id }})' draggable="false">
-                                                <svg class="icon icon-sm text-gray-500" xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                    stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
-                                                </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon icon-sm text-gray-500">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+                                                  </svg>                                                  
                                             </a>
                                         @endif
                                     @endcan
@@ -302,11 +299,9 @@
                                         title="Imprimer Le certificat D'affichage"
                                         wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
                                         data-bs-target="#ConvocationImmaDirecteModal" draggable="false">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-4 -8 50 50"
-                                            stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M9 13.5l3 3m0 0l3-3m-3 3v-6m1.06-4.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
-                                        </svg>
+                                        <svg class="icon icon-xs" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 10.5v6m3-3H9m4.06-7.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+                                          </svg>                                          
                                     </a>
                                     @endif
                                     @endcan
@@ -440,7 +435,7 @@
                         <tr>
                             <td colspan="9" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
-                                    <h4 class="fs-4 fw-bold">{{ __('Liste vide') }}</h4>
+                                    <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
                                     <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                                 </div>
                             </td>
@@ -450,8 +445,8 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{ __('Affichage') }} {{ $perPage > $imma_directes_count ? $imma_directes_count : $perPage }}
-                    {{ __('éléments de') }} {{ $imma_directes_count }}
+                    {{ __('Montrer') }} {{ $perPage > $imma_directes_count ? $imma_directes_count : $perPage }}
+                    {{ __(' éléments sur ') }} {{ $imma_directes_count }}
                 </div>
                 {{ $imma_directes->links() }}
             </div>

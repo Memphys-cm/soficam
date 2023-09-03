@@ -55,6 +55,8 @@ class Service extends Model
             static::query()
             ->where(function ($q) use ($query) {
                 $q->where('service_name_en', 'like', '%' . $query . '%');
+                $q->where('status', 'like', '%' . $query . '%');
+                $q->where('code', 'like', '%' . $query . '%');
          });
     }
 }

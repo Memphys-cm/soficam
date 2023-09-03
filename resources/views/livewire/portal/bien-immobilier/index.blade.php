@@ -16,7 +16,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Acceuil</a></li>
+                        <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ __('Biens Immobiliers') }}</li>
                     </ol>
                 </nav>
@@ -27,7 +27,7 @@
                     </svg>
                     {{ __('Bien Immobilier') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir tous les Biens Immobiliers dans l\'application') }}</p>
+                <p class="mt-n1 mx-2">{{ __('Voir tous les Biens Immobiliers dans l\'application') }} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -74,9 +74,8 @@
         <div class="col-md-3">
             <label for="orderBy">{{ __('Trier par') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="type">{{ __('type') }}</option>
                 <option value="releve_number">{{ __('Releve N') }}</option>
-                <option value="requestor_id">{{ __('Requerant') }}</option>
+                <option value="requestor_id">{{ __('Requérant') }}</option>
                 <option value="price">{{ __('Prix') }}</option>
                 <option value="validity">{{ __('Validité') }}</option>
                 <option value="status">{{ __('Statut') }}</option>
@@ -85,7 +84,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{ __('Direction du trie') }}: </label>
+            <label for="direction">{{ __('Sens du tri') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{ __('Ascendante') }}</option>
                 <option value="desc">{{ __('Descendante') }}</option>
@@ -93,7 +92,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{ __('Elements par page') }}: </label>
+            <label for="perPage">{{ __('Eléments par page') }}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -108,16 +107,16 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('Requerant') }}</th>
-                        <th class="border-bottom">{{ __(' NUMERO BIEN IMMO') }}</th>
+                        <th class="border-bottom">{{ __('Requérant') }}</th>
+                        <th class="border-bottom">{{ __(' NUMÉRO BIEN IMMO') }}</th>
                         <th class="border-bottom">{{ __('PRIX') }}</th>
-                        <th class="border-bottom">{{ __('VALIDITE') }}</th>
+                        <th class="border-bottom">{{ __('VALIDITÉ') }}</th>
                         <th class="border-bottom">{{ __(' TYPE PERSONNE') }}</th>
                         <th class="border-bottom">{{ __('STATUT') }}</th>
                         <th class="border-bottom">{{ __('Date creation') }}</th>
-                        {{--@canany(['immobilier.edit','immobilier.delete'])--}}
+                        @canany(['immobilier.edit','immobilier.delete'])
                         <th class="border-bottom">{{ __('Action') }}</th>
-                        {{--@endcanany--}}
+                        @endcanany
                     </tr>
                 </thead>
                 <tbody>
@@ -138,31 +137,39 @@
 
                         </td>
                         <td>{{ $bien_immobilier->created_at }}</td>
+                        @canany(['immobilier.edit','immobilier.delete'])
                         <td>
+                            @if($bien_immobilier->status !== 'pending_payment')
+                            <a href="#" title="Télécharger document" wire:click.prevent='printPdf({{$bien_immobilier->id}})'>
+                                <svg class="icon icon-xs text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
+                                </svg>
+                            </a>
+                            @endif
+                            @can('immobilier.update')
                             <a href='#' title="Editer" wire:click.prevent="initData({{ $bien_immobilier->id }})" data-bs-toggle="modal" data-bs-target="#BienUpdateModal">
                                 <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
                                     </path>
                                 </svg>
                             </a>
-                            <a href="#" title="Télécharger document" wire:click.prevent='printPdf({{$bien_immobilier->id}})'>
-                                <svg class="icon icon-sm text-gray-500"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
-                                </svg>
-                            </a>
+                            @endcan
+                            @can('immobilier.delete')
                             <a href='#' wire:click.prevent="initData({{ $bien_immobilier->id }})" data-bs-toggle="modal" data-bs-target="#DeleteModal">
                                 <svg class="icon icon-xs text-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
                                     </path>
                                 </svg>
                             </a>
+                            @endcan
                         </td>
+                        @endcanany
                     </tr>
                     @empty
                     <tr>
                         <td colspan="10" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{ __('Liste vide') }}</h4>
+                                <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
                                 <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                             </div>
                         </td>
@@ -172,7 +179,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Montrer')}} {{$perPage > $bien_immobiliers_count ? $bien_immobiliers_count : $perPage  }} {{__('element de')}} {{$bien_immobiliers_count}}
+                    {{__('Montrer')}} {{$perPage > $bien_immobiliers_count ? $bien_immobiliers_count : $perPage  }} {{__('éléments sur')}} {{$bien_immobiliers_count}}
                 </div>
                 {{ $bien_immobiliers->links()  }}
             </div>

@@ -36,6 +36,7 @@ return new class extends Migration
             $table->date('date_de_letude_notaire')->nullable();
             $table->longText('commentaire_du_notaire')->nullable();
             $table->enum('type_de_venter',['simple','mutation_totale'])->default('simple');
+            $table->enum('type_de_operation',['vente','mutation_totale_normale', 'mutation_totale_par_deces','retrait_indivision_normale','retrait_indivision_forcee'])->nullable()->default('vente');
             $table->enum('superficie_a_vendre',['totale','partielle'])->nullable();
             $table->float('prix_du_m2',30,2)->nullable();
             $table->bigInteger('superficie_vendu')->nullable();

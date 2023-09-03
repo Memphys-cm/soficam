@@ -25,6 +25,7 @@ class Index extends Component
         'sub_division.sub_division_name_en' => 'required',
         'sub_division.code' => 'required',
         'sub_division.division_id' => 'required',
+        'sub_division.prix_minima_m2' => 'required',
         'sub_division.status' => 'sometimes',
         'sub_division.total_surface_area' => 'sometimes|integer'
     ];
@@ -48,7 +49,7 @@ class Index extends Component
         $this->sub_division->save();
 
         $this->state = 0;
-
+        $this->clearFields();
         $this->refresh(__('SubDivision successfully :state!', ['state' => $this->state ? 'Updated' : 'Created']), 'CreateUpdateSubDivisionModal');
     }
 
@@ -74,6 +75,23 @@ class Index extends Component
         $this->state = 0;
 
         $this->refresh(__('SubDivision successfully deleted!'), 'DeleteModal');
+    }
+    public function clearFields()
+    {
+        $this->reset(
+            [
+                'code',
+                'division_id',
+                'superficie_vendu',
+                'sub_division_name_en',
+                'sub_division_name_fr',
+                'total_surface_area',
+                'prix_minima_m2',
+                'status',
+               
+            ]
+        );
+
     }
 
     public function render()

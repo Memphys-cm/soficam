@@ -15,7 +15,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Loi Fonciére')}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Loi Foncière')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -65,7 +65,7 @@
         <div class="col-md-3">
             <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="category_activite_id">{{__('Categorie')}}</option>
+                <option value="category_activite_id">{{__('Catégorie')}}</option>
                 <option value="nom_activite">{{__('Nom de l\'activité')}}</option>
                 <option value="value">{{__('Valeur')}}</option>
                 <option value="type_de_facturation">{{__('Type')}}</option>
@@ -82,7 +82,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Element par page')}}: </label>
+            <label for="perPage">{{__('Elément par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -153,7 +153,7 @@
                     <tr>
                         <td colspan="7" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Liste vide')}}</h4>
+                                <h4 class="fs-4 fw-bold">{{__('Liste Vide')}}</h4>
                                 <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
@@ -163,7 +163,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Montrer')}} {{$perPage > $activites_count ? $activites_count : $perPage  }} {{__('éléments de')}} {{$activites_count}}
+                    {{__('Montrer')}} {{$perPage > $activites_count ? $activites_count : $perPage  }} {{__('éléments sur ')}} {{$activites_count}}
                 </div>
                 {{ $activites->links() }}
             </div>

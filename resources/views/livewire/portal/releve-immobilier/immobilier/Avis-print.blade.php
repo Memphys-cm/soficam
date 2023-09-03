@@ -1,7 +1,7 @@
 @php
-    use SimpleSoftwareIO\QrCode\Facades\QrCode;
-    
-    $qrCode = QrCode::size(100)->generate($immobilier->id);
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
+$qrCode = QrCode::size(100)->generate(url("validate-document?model={$element->uuid}&category=immobilier"));
 @endphp
 
 <div>
@@ -90,8 +90,8 @@
 
         <div style="margin-top: 20px;font-size:19px"><b>AMPLITIONS </b>:
         </div>
-<br>
-<br>
+        <br>
+        <br>
         <div style="margin-top: 10px; display: flex;font-size:19px">
 
             <table>
