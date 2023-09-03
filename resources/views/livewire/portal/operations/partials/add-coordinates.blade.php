@@ -17,7 +17,7 @@
                          </div>
                          <x-form-items.form wire:submit="store">
                              <div class="form-group mb-2">
-                                 <label for="numero_ccp">{{ __('Numero CCP') }}</label>
+                                 <label for="numero_ccp">{{ __('Numéro CCP') }}</label>
                                  <input type="text" wire:model="numero_ccp" class="form-control  @error('numero_ccp') is-invalid @enderror " value="{{ old('numero_ccp') }}" placeholder="" id="numero_ccp" autofocus="" required="">
                                  @error('numero_ccp')
                                  <div class="invalid-feedback">
@@ -26,7 +26,7 @@
                                  @enderror
                              </div>
                              <div class="form-group mb-2">
-                                 <label for="geometre_id">{{ __('Geometre') }}</label>
+                                 <label for="geometre_id">{{ __('Géomètre') }}</label>
                                  <x-input.select :options="$geometres->pluck('first_name','id')->toArray()" wire:model="geometre_id" prettyname="geometre_id" />
                                  @error('geometre_id')
                                  <div class="invalid-feedback">
@@ -49,7 +49,7 @@
                                  </div>
                              </div>
                              <div class="form-group mb-2">
-                                 <label for="numero_reference_plan">{{ __('Numero Reference du plan') }}</label>
+                                 <label for="numero_reference_plan">{{ __('Numéro Reférence du plan') }}</label>
                                  <input type="text" wire:model="numero_reference_plan" class="form-control  @error('numero_reference_plan') is-invalid @enderror " value="{{ old('numero_reference_plan') }}" placeholder="" id="numero_reference_plan" autofocus="" required="">
                                  @error('numero_reference_plan')
                                  <div class="invalid-feedback">
@@ -76,7 +76,7 @@
                              @foreach($coordinates as $coordinateIndex => $coordinate)
                              <div class='form-group mb-2 d-flex align-items-end justify-content-between'>
                                  <div class=''>
-                                     <label for="coordonnees.{{$coordinateIndex}}">{{__('Coordonnees')}} - B{{ $loop->iteration }}</label>
+                                     <label for="coordonnees.{{$coordinateIndex}}">{{__('Coordonnées')}} - B{{ $loop->iteration }}</label>
                                      <input wire:model="coordonnees.{{$coordinateIndex}}" type="text" step="0.0001" class="form-control col-md-12 @error('coordonnees') is-invalid @enderror" placeholder="{{__('45.XXXXX')}}" required="" value="" name="coordonnees">
                                      @error('coordonnees')
                                      <div class="invalid-feedback">{{$message}}</div>
@@ -98,7 +98,7 @@
                              </button>
                              <div class="d-flex justify-content-end">
                                  <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
-                                 <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Creer')}}</button>
+                                 <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Créer')}}</button>
                              </div>
                          </x-form-items.form>
                      </div>

@@ -16,7 +16,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
-                        <li class="breadcrumb-item">{{__('Operations')}}</li>
+                        <li class="breadcrumb-item">{{__('Opérations')}}</li>
                         <li class="breadcrumb-item active" aria-current="page">{{__('Mutation Totale')}}</li>
                     </ol>
                 </nav>
@@ -26,7 +26,7 @@
                     </svg>
                     {{__('Mutation Totale')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('Voir toutes les Mutation Totale')}} </p>
+                <p class="mt-n1 mx-2">{{__('Voir toutes les Mutations Totales')}} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -52,14 +52,14 @@
         <div class="col-md-3">
             <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="region_id">{{__('Region')}}</option>
-                <option value="date_de_delivrance_du_TF">{{__('Date Delivrance')}}</option>
-                <option value="created_at">{{__('Date Creation')}}</option>
+                <option value="region_id">{{__('Région')}}</option>
+                <option value="date_de_delivrance_du_TF">{{__('Date Délivrance')}}</option>
+                <option value="created_at">{{__('Date Création')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Sens du Tri')}}: </label>
+            <label for="direction">{{__('Sens du tri')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{__('Ascendant')}}</option>
                 <option value="desc">{{__('Descendant')}}</option>
@@ -67,7 +67,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Elements par page')}}: </label>
+            <label for="perPage">{{__('Éléments par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -82,12 +82,12 @@
             <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('Numero de la mutation totale')}}</th>
-                        <th class="border-bottom">{{__('Titre foncier')}}</th>
-                        <th class="border-bottom">{{__('Localisationtion')}}</th>
+                        <th class="border-bottom">{{__('Numéro de la mutation totale')}}</th>
+                        <th class="border-bottom">{{__('Titre Foncier')}}</th>
+                        <th class="border-bottom">{{__('Localisation')}}</th>
                         <th class="border-bottom">{{__('Statut')}}</th>
-                        <th class="border-bottom">{{__('Type Operation')}}</th>
-                        <th class="border-bottom">{{__('Date creation')}}</th>
+                        <th class="border-bottom">{{__('Type Opération')}}</th>
+                        <th class="border-bottom">{{__('Date création')}}</th>
                         @canany('operation.mutation_totale.update','operation.mutation_totale.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
                         @endcanany
@@ -193,7 +193,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Montrer')}} {{$perPage > $mutation_totales_count ? $mutation_totales_count : $perPage  }} {{__('element de')}} {{$mutation_totales_count}}
+                    {{__('Montrer')}} {{$perPage > $mutation_totales_count ? $mutation_totales_count : $perPage  }} {{__('eléments sur ')}} {{$mutation_totales_count}}
                 </div>
                 {{ $mutation_totales->links() }}
             </div>

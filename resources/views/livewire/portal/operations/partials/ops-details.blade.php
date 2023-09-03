@@ -14,8 +14,8 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
-                        <li class="breadcrumb-item "><a href="">{{__('Operations')}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Details')}}</li>
+                        <li class="breadcrumb-item "><a href="">{{__('Opérations')}}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Détails')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -289,7 +289,7 @@
                         @endif
                     </div>
                     <div class="col">
-                        <h4 class="fs-5">{{ __('Land Title Owners') }}</h4>
+                        <h4 class="fs-5">{{ __('Propriétaire(s) du Titre Foncier') }}</h4>
                         @if (!empty($operation->titreFoncier))
                         @foreach ($operation->titreFoncier->users as $key => $option)
                         <a href="#" class="d-flex align-items-center {{ !$loop->last ? 'border-bottom' : '' }} py-1">
@@ -316,7 +316,7 @@
                 </div>
             </div>
             <div class="card p-4 mb-2">
-                <legend class="w-auto">{{ __('Geometre') }}</legend>
+                <legend class="w-auto">{{ __('Géomètre') }}</legend>
 
                 @if(!empty($operation->geometre_id))
                 <div class='d-flex justify-content-between'>

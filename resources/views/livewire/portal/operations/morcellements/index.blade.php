@@ -32,7 +32,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
-                        <li class="breadcrumb-item">{{__('Operations')}}</li>
+                        <li class="breadcrumb-item">{{__('Opérations')}}</li>
                         <li class="breadcrumb-item active" aria-current="page">{{__('Morcellements')}}</li>
                     </ol>
                 </nav>
@@ -42,7 +42,7 @@
                     </svg>
                     {{__('Morcellements')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('Voir tous les morcellement')}} </p>
+                <p class="mt-n1 mx-2">{{__('Voir tous les morcellements')}} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -50,7 +50,7 @@
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateMorcellementNormaleModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{__('New')}}
+                    </svg> {{__('Nouveau')}}
                 </a>
                 @endcan
                 @can('operation.morcellement.forcee')
@@ -68,14 +68,14 @@
         <div class="col-md-3">
             <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="region_id">{{__('Region')}}</option>
-                <option value="date_de_delivrance_du_TF">{{__('Date de delivrance')}}</option>
-                <option value="created_at">{{__('Date Creation')}}</option>
+                <option value="region_id">{{__('Région')}}</option>
+                <option value="date_de_delivrance_du_TF">{{__('Date de délivrance')}}</option>
+                <option value="created_at">{{__('Date Création')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Trier par direction')}}: </label>
+            <label for="direction">{{__('Sens du tri')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{__('Ascendant')}}</option>
                 <option value="desc">{{__('Descendant')}}</option>
@@ -83,7 +83,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Elements par page')}}: </label>
+            <label for="perPage">{{__('Éléments par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -98,12 +98,12 @@
             <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__(' Nombre Mutation total')}}</th>
+                        <th class="border-bottom">{{__(' Nombre Mutation totale')}}</th>
                         <th class="border-bottom">{{__('Titre Foncier')}}</th>
                         <th class="border-bottom">{{__('Localisation')}}</th>
                         <th class="border-bottom">{{__('Statut')}}</th>
-                        <th class="border-bottom">{{__('Type Operation')}}</th>
-                        <th class="border-bottom">{{__('Date creation')}}</th>
+                        <th class="border-bottom">{{__('Type Opération')}}</th>
+                        <th class="border-bottom">{{__('Date création')}}</th>
                         @canany('operation.morcellement.update','operation.morcellement.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
                         @endcanany
@@ -206,7 +206,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Affichage')}} {{$perPage > $morcellements_count ? $morcellements_count : $perPage  }} {{__('elements de')}} {{$morcellements_count}}
+                    {{__('Montrer')}} {{$perPage > $morcellements_count ? $morcellements_count : $perPage  }} {{__('éléments sur')}} {{$morcellements_count}}
                 </div>
                 {{ $morcellements->links() }}
             </div>

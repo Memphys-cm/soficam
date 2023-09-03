@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div>
     <table style="padding: 2px">
         <tr style="font-size: 12px">
             <td>
@@ -40,40 +40,4 @@
             </td>
         </tr>
     </table>
-
-
-
-    <div style="margin-top: 10vh; font-size:14px">
-      
-        <h3 style="text-align: center;">ORDRE DE VERSEMENT DES FRAIS DE LA REDEVANCES FONCIERES D'UNE CONCESSION
-                <br>
-                N°_____________________/OVRVF/DDM/CF/YAOUNDE</h3>
-        <p></p>
-        <p></p>
-        <div>
-            <p style="margin-top: 10px">
-                Le Receveur des Domaines du {{ $imma_directe->division->division_name }} est autorisé à percevoir de
-                Mme/Mlle/M @foreach ($imma_directe->users as $user)
-                    {{ $user->name }}
-                @endforeach . Pour le    compte de l'exercise budgé 2022 la somme de {{ $imma_directe->montant_ordre_versement }}  frans CFA
-                représentant la redevance fonciere d'un lot du domaine national acquis en concession provisoire, sis a
-                {{ $imma_directe->localisation }} Arrondissement de {{ $imma_directe->subDivision->sub_division_name_fr }} d'une superficie de
-                {{ $imma_directe->superficie }} m2 autorise par Arrete N
-
-            </p>
-            <table style="margin-top:5vh">
-                <tr style="font-size:14px">
-                    <td style="width: 320px;">
-                        <div></div>
-                    </td>
-
-                    <td style="text-align:center; font-size:14px">
-                        <p>{{ $imma_directe->subDivision->sub_division_name_fr }}, le........................................................................</p>
-                        <p>Le Chef de Service Departemental des Affaires Foncieres de <br> {{ $imma_directe->division->division_name }}   </p>
-                    </td>
-                </tr>
-            </table>
-
-
-        </div>
-    </div>
+</div>

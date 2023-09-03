@@ -2,7 +2,6 @@
     <x-alert />
     @include('livewire.portal.users.create-user')
     @include('livewire.portal.users.edit-user')
-    @include('livewire.portal.users.import-users')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">

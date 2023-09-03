@@ -5,63 +5,45 @@
 @endphp
 
 <div>
-    <table style="margin-left:0px; margin-right:0px">
-        <tr style="font-size:16px">
-            <td style="text-align:center">
-                <div><strong>N° BUREAU DE</strong></div>
-                <div><em>OFFICE OF</em></div>
+    <table style="padding: 2px">
+        <tr style="font-size: 12px">
+            <td>
+                <div style="text-align: center"><b>
+                    <div>REPUBLIQUE DU CAMEROUN</div>
+                    <div>PAIX-TRAVAIL-PATRIE</div>
+                    <div>--------</div>
+                    <div>MINISTERE DES DOMAINES DU CADASTRE ET</div> 
+                    <div>DES AFFAIRES FONCIERES</div>
+                    <div>--------</div>
+                    <div>SECRETARIAT GENERAL</div>
+                    <div>--------</div>
+                    <div>DIVISION DES ETUDES, DE LA PLANIFICATION</div> 
+                    <div>ET DE LA COOPERATION</div>
+                    <div>--------</div>
+                    <div>CELLULE DES ETUDES ET DE LA PLANIFICATION</div>
+                    <div>--------</div></b>
+                </div>
             </td>
-            <td style="text-align:center">
-                <div><strong>REPUBLIQUE DU CAMEROUN</strong></div>
-                <div><em>REPUBLIC OF CAMEROON</em></div>
+            <td style="width: 4cm; text-align: center;">
+                {{--<img src="{{ asset('img/doc_img/images.jpeg') }}" style="margin-top: 10px; margin-bottom: 10px;">--}}
             </td>
-            <td style="align-content: flex-end">
-                <div style="text-align:center"><strong>N° DU BORDEREAU</strong></div>
-                <div style="text-align:center"><em>N° OF SLIP</em></div>
+            <td>
+                <div style="text-align: center"><b>
+                    <div>REPUBLIC OF CAMEROON</div>
+                    <div>PEACE-WORK-FATHERLAND</div>
+                    <div>--------</div>
+                    <div>MINISTRY OF STATE PROPERTY, SURVEYS</div> 
+                    <div>AND LAND TENURE</div>
+                    <div>--------</div>
+                    <div>SECRETARIAT GENERAL</div>
+                    <div>--------</div>
+                    <div>DEPARTMENT OF STUDIES, PLANNING</div> 
+                    <div>AND COOPERATION</div>
+                    <div>--------</div>
+                    <div>UNIT OF STUDIES AND PLANNING</div>
+                    <div>--------</div></b>
+                </div>
             </td>
-        </tr>
-        <tr style="mb-1">
-            <td style="text-align:center; font-size:16px">
-                <div>________</div>
-                <div><strong>DEPOT</strong></div>
-            </td>
-            <td style="text-align:center; font-size:16px">
-                <div><strong>CONSERVATION FONCIERE DE LA {{$titrefoncier->division->division_name}}</strong></div>
-                <div><em>LAND'S CONSERVATION OF {{$titrefoncier->division->division_name}}</em></div>
-                <div>--------------</div>
-            </td>
-            <td style="text-align:center">
-                <div>|___________|</div>
-            </td>
-        </tr>
-        <tr style="mb-2">
-            <td></td>
-            <td style="text-align:center; font-size:16px">
-                <div><strong>LIVRE FONCIER DU DEPARTEMENT DE LA {{$titrefoncier->division->division_name}}</strong></div>
-                <div><em>REGISTER OF PROPRIETOR OF {{$titrefoncier->division->division_name}}</em></div>
-            </td>
-        </tr>
-        <tr>
-            <td style="font-size:12px">
-                <div>Du___20___</div>
-                <div>Vol___N°___</div>
-                <div>Vol___N°___</div>
-            </td>
-            <td style="text-align:center; font-size:16px">
-                <div><strong>TITRE FONCIER N°</strong></div>
-                <div><em>LAND CERTIFICATE N°</em> {{$titrefoncier->numero_titre_foncier}}</div>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td style="text-align:center">
-                <div style="font-size:18px"><strong>BORDEREAU ANALYTIQUE</strong></div>
-                <div style="font-size: 14px">(ABSTRACT OF THE CERTIFICATE)</div>
-            </td>
-        </tr>
-        <tr style="font-size:12px">
-            <div>Mention à la Section</div>
-            <div>Referred to in Section________</div>
         </tr>
     </table>
 

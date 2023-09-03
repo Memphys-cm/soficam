@@ -15,8 +15,8 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Acceuil</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Immobilier') }}</li>
+                        <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Relevé Immobilier') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -24,9 +24,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                         </path>
                     </svg>
-                    {{ __('Immobilier') }}
+                    {{ __('Relevé Immobilier') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir tous les Immobilier dans l\'application') }}</p>
+                <p class="mt-n1 mx-2">{{ __('Voir tous les Relevés Immobiliers dans l\'application') }} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -34,7 +34,7 @@
                 <a href="#" data-bs-toggle="modal" data-bs-target="#createimmobilierModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{ __('New') }}
+                    </svg> {{ __('Nouveau') }}
                 </a>
                 @endcan
 
@@ -75,17 +75,17 @@
             <label for="orderBy">{{ __('Trier par') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="type">{{ __('type') }}</option>
-                <option value="releve_number">{{ __('Releve N') }}</option>
-                <option value="requestor_id">{{ __('Requerant') }}</option>
+                <option value="releve_number">{{ __('Relevé N') }}</option>
+                <option value="requestor_id">{{ __('Requérant') }}</option>
                 <option value="price">{{ __('Prix') }}</option>
                 <option value="validity">{{ __('Validité') }}</option>
                 <option value="status">{{ __('Statut') }}</option>
-                <option value="created_at">{{ __('Date creation') }}</option>
+                <option value="created_at">{{ __('Date création') }}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{ __('Direction du trie') }}: </label>
+            <label for="direction">{{ __('Sens du tri') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{ __('Ascendante') }}</option>
                 <option value="desc">{{ __('Descendante') }}</option>
@@ -93,7 +93,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{ __('Elements par page') }}: </label>
+            <label for="perPage">{{ __('Éléments par page') }}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -108,13 +108,13 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('Requerant') }}</th>
+                        <th class="border-bottom">{{ __('Requérant') }}</th>
                         <th class="border-bottom">{{ __('Numéro Titre Foncier') }}</th>
                         <th class="border-bottom">{{ __('TYPE') }}</th>
-                        <th class="border-bottom">{{ __(' NUMERO CP') }}</th>
+                        <th class="border-bottom">{{ __(' NUMÉRO CP') }}</th>
                         <th class="border-bottom">{{ __('PRIX') }}</th>
-                        <th class="border-bottom">{{ __('VALIDITE') }}</th>
-                        <th class="border-bottom">{{ __(' TYPE CERTIFICATE') }}</th>
+                        <th class="border-bottom">{{ __('VALIDITÉ') }}</th>
+                        <th class="border-bottom">{{ __(' TYPE PERSONNE') }}</th>
                         <th class="border-bottom">{{ __('STATUT') }}</th>
                         <th class="border-bottom">{{ __('Date creation') }}</th>
                         @canany(['immobilier.edit','immobilier.delete'])
@@ -186,7 +186,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Montrer')}} {{$perPage > $immobiliers_count ? $immobiliers_count : $perPage  }} {{__('element de')}} {{$immobiliers_count}}
+                    {{__('Montrer')}} {{$perPage > $immobiliers_count ? $immobiliers_count : $perPage  }} {{__('éléments sur')}} {{$immobiliers_count}}
                 </div>
                 {{ $immobiliers->links()  }}
             </div>

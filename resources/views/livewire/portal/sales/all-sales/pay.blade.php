@@ -60,7 +60,7 @@
                         @endif
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="payment_method">{{ __('MODE DE PAIEMENT') }}</label>
+                                <label for="payment_method">{{ __('Mode de paiement') }}</label>
                                 <select wire:model="payment_method" class="form-select @error('payment_method') is-invalid @enderror" id="payment_method" required="">
                                     <option value="">{{ __('--Selectionner--') }}</option>
                                     <option value="cash">{{ __('Cash') }}</option>

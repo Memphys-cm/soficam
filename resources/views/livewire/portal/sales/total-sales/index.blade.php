@@ -32,8 +32,8 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Ventes simples') }}</li>
+                        <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Ventes totales') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -51,7 +51,7 @@
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateMutationTotalModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{ __('New') }}
+                    </svg> {{ __('Nouveau') }}
                 </a>
                 {{-- @endcan --}}
 
@@ -93,12 +93,12 @@
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="sale_amount">{{ __('Montant de la vente') }}</option>
                 <option value="sale_type">{{ __('Type de vente') }}</option>
-                <option value="created_at">{{ __('Date de Creation') }}</option>
+                <option value="created_at">{{ __('Date de Création') }}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{ __('Direction du trie') }}: </label>
+            <label for="direction">{{ __('sens du tri') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{ __('Ascendante') }}</option>
                 <option value="desc">{{ __('Descendante') }}</option>
@@ -124,7 +124,7 @@
                         <th class="border-bottom">{{ __('REQUÉRANT') }}</th>
                         <th class="border-bottom">{{ __('PAIEMENT') }}</th>
                         <th class="border-bottom">{{ __('Détails de la vente') }}</th>
-                        <th class="border-bottom">{{ __('Date created') }}</th>
+                        <th class="border-bottom">{{ __('Date création') }}</th>
                         <th class="border-bottom">{{ __('Action') }}</th>
                         {{-- @endcanany --}}
                     </tr>
@@ -214,8 +214,8 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{ __('Affichage') }} {{ $perPage > $parcels_count ? $parcels_count : $perPage }}
-                    {{ __('element de') }} {{ $parcels_count }}
+                    {{ __('Montrer') }} {{ $perPage > $parcels_count ? $parcels_count : $perPage }}
+                    {{ __(' éléments sur ') }} {{ $parcels_count }}
                 </div>
                 {{ $parcels->links() }}
             </div>

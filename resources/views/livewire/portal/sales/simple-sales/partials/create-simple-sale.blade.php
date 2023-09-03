@@ -6,15 +6,15 @@
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4"> {{ __('Vente simple de terrain') }}</h1>
-                        <p class="px-1"> {{ __('Vente d\'un simple terrain') }} &#128522;</p>
+                        <p class="px-1"> {{ __('Vente simple d\'un terrain') }} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
 
                         <fieldset class="border p-3">
-                            <legend class="w-auto">Informations sur les titres fonciers</legend>
+                            <legend class="w-auto">Informations sur le Titres Foncier</legend>
                             <div class='form-group row mb-3'>
 
-                                <div class=" col"><label for="titre_foncier_id">{{ __('Numéro du titre foncier') }}</label>
+                                <div class=" col"><label for="titre_foncier_id">{{ __('Numéro du Titre Foncier') }}</label>
                                     <x-input.select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers->pluck('numero_titre_foncier', 'id')->toArray()"
                                         selected="('titre_foncier_id')" />
                                     @error('titre_foncier_id')
@@ -34,7 +34,7 @@
                                     @enderror
                                 </div>
 
-                                <div class=" col"><label for="notary_id">{{ __('NOTAIRE') }}</label>
+                                <div class=" col"><label for="notary_id">{{ __('Notaire') }}</label>
                                     <x-input.select wire:model="notary_id" prettyname="notary" :options="$notarys->pluck('name', 'id')->toArray()"
                                         selected="('notary_id')" />
                                     @error('notary_id')
@@ -45,7 +45,7 @@
                             </div>
 
                             <div class='form-group row mb-3'>
-                                <div class=" col"><label for="first_name">{{ __('TITRE FONCIER SUPERFICIE') }}</label>
+                                <div class=" col"><label for="first_name">{{ __('Superficie du terrain ') }}</label>
                                     <input type="text" wire:model="first_name"
                                         class="form-control  @error('first_name') is-invalid @enderror "
                                         value="{{ old('first_name') }}" placeholder="" id="first_name" autofocus=""
@@ -57,7 +57,7 @@
                                     @enderror
                                 </div>
 
-                                <div class=" col"><label for="last_name">{{ __('ZONE D\'UTILITÉ PUBLIQUE') }}</label>
+                                <div class=" col"><label for="last_name">{{ __('Zone d\'utlité publique') }}</label>
                                     <input type="text" wire:model="last_name"
                                         class="form-control  @error('last_name') is-invalid @enderror "
                                         value="{{ old('last_name') }}" placeholder="" id="last_name" autofocus=""
@@ -68,7 +68,7 @@
                                         </div>
                                     @enderror
                                 </div>
-                                <div class=" col"><label for="email">{{ __('ZONE VENDUE') }}</label>
+                                <div class=" col"><label for="email">{{ __('Zone vendue') }}</label>
                                     <input type="text" wire:model="email"
                                         class="form-control  @error('email') is-invalid @enderror "
                                         value="{{ old('email') }}" placeholder="" id="email" autofocus=""
@@ -82,7 +82,7 @@
                             </div>
                             <div class='form-group row mb-3'>
 
-                                <div class=" col"><label for="address">{{ __('REMAINING AREA') }}</label>
+                                <div class=" col"><label for="address">{{ __('Surface restante') }}</label>
                                     <input type="text" wire:model="address"
                                         class="form-control  @error('address') is-invalid @enderror "
                                         value="{{ old('address') }}" placeholder="" id="address" autofocus=""
@@ -93,7 +93,7 @@
                                         </div>
                                     @enderror
                                 </div>
-                                <div class=" col"><label for="date_of_birth">{{ __('NOMBRE DE BLOCS') }}</label>
+                                <div class=" col"><label for="date_of_birth">{{ __('Nombre de blocs') }}</label>
                                     <input type="text" wire:model="date_of_birth"
                                         class="form-control  @error('date_of_birth') is-invalid @enderror "
                                         value="{{ old('date_of_birth') }}" placeholder="" id="date_of_birth"
@@ -104,7 +104,7 @@
                                         </div>
                                     @enderror
                                 </div>
-                                <div class=" col"><label for="place_of_birth">{{ __('NOMBRE DE LOTS') }}</label>
+                                <div class=" col"><label for="place_of_birth">{{ __('Nombre de lots') }}</label>
                                     <input type="text" wire:model="place_of_birth"
                                         class="form-control  @error('place_of_birth') is-invalid @enderror "
                                         value="{{ old('place_of_birth') }}" placeholder="" id="place_of_birth"
@@ -117,7 +117,7 @@
                                 </div>
                             </div>
                             <div class='form-group row mb-3'>
-                                <div class=" col"><label for="region_id">{{ __('Region') }}</label>
+                                <div class=" col"><label for="region_id">{{ __('Région') }}</label>
                                     <input type="text" wire:model="region_id"
                                         class="form-control  @error('region_id') is-invalid @enderror "
                                         value="{{ old('region_id') }}" placeholder="" id="region_id"
@@ -128,7 +128,7 @@
                                         </div>
                                     @enderror
                                 </div>
-                                <div class=" col"><label for="division_id">{{ __('Sous Region') }}</label>
+                                <div class=" col"><label for="division_id">{{ __('Département') }}</label>
                                     <input type="text" wire:model="division_id"
                                         class="form-control  @error('division_id') is-invalid @enderror "
                                         value="{{ old('division_id') }}" placeholder="" id="division_id"
@@ -165,7 +165,7 @@
                                         </div>
                                     @enderror
                                 </div>
-                                <div class=" col"><label for="superficie_du_TF_mere">{{ __('TITRE FONCIER SUPERFICIE') }}</label>
+                                <div class=" col"><label for="superficie_du_TF_mere">{{ __('Superficie du terrain') }}</label>
                                     <input type="text" wire:model="superficie_du_TF_mere"
                                         class="form-control  @error('superficie_du_TF_mere') is-invalid @enderror "
                                         value="{{ old('superficie_du_TF_mere') }}" placeholder="" id="superficie_du_TF_mere" autofocus=""
@@ -177,7 +177,7 @@
                                     @enderror
                                 </div>
 
-                                <div class=" col"><label for="numero_titre_foncier">{{ __('ZONE D\'UTILITÉ PUBLIQUE') }}</label>
+                                <div class=" col"><label for="numero_titre_foncier">{{ __('Zone d\'utilité publique') }}</label>
                                     <input type="text" wire:model="numero_titre_foncier"
                                         class="form-control  @error('numero_titre_foncier') is-invalid @enderror "
                                         value="{{ old('numero_titre_foncier') }}" placeholder="" id="numero_titre_foncier" autofocus=""
@@ -247,11 +247,11 @@
                                 </div>
 
                                 <div class="col">
-                                    <label for="payment_type">{{ __('TYPE DE PAIEMENT') }}</label>
+                                    <label for="payment_type">{{ __('Type de paiement') }}</label>
                                     <select wire:model="payment_type"
                                         class="form-select @error('payment_type') is-invalid @enderror"
                                         id="payment_type" required="">
-                                        <option value="">{{ __('-- selectionner type de paiement --') }}
+                                        <option value="">{{ __('-- sélectionner type de paiement --') }}
                                         </option>
                                         <option value="cash" @if (old('payment_type') === 'cash') selected @endif>Cash
                                         </option>
@@ -271,7 +271,7 @@
 
 
                                 <div class=" col"><label
-                                        for="number_of_lots_sold">{{ __('NOMBRE DE LOTS VENDUS') }}</label>
+                                        for="number_of_lots_sold">{{ __('Nombre de lots vendus') }}</label>
                                     <input type="number" wire:model="number_of_lots_sold"
                                         class="form-control  @error('number_of_lots_sold') is-invalid @enderror "
                                         value="{{ old('number_of_lots_sold') }}" placeholder="0"
@@ -286,7 +286,7 @@
 
 
                                 <div class=" col"><label
-                                        for="number_of_lots_remaining">{{ __('NOMBRE DE LOTS RESTANTS') }}</label>
+                                        for="number_of_lots_remaining">{{ __('Nombre de lots restants') }}</label>
                                     <input type="number" wire:model="number_of_lots_remaining"
                                         class="form-control  @error('number_of_lots_remaining') is-invalid @enderror "
                                         value="{{ old('number_of_lots_remaining') }}" placeholder="0"
@@ -312,7 +312,7 @@
                                     @enderror
                                 </div>
                                 <div class=" col">
-                                    <label for="superficie_du_TF_mere">{{ __('ZONE VENDUE') }}</label>
+                                    <label for="superficie_du_TF_mere">{{ __('Zone vendue') }}</label>
                                     <input type="number" wire:model="superficie_du_TF_mere"
                                         class="form-control  @error('superficie_du_TF_mere') is-invalid @enderror "
                                         value="{{ old('superficie_du_TF_mere') }}" placeholder="0" id="superficie_du_TF_mere"
@@ -430,13 +430,13 @@
                                         </td>
                                     </tr>
                                     <tr class="border-top">
-                                        <th class="text-900">{{ __('SURFACE À VENDRE') }} </th>
+                                        <th class="text-900">{{ __('Surface à vendre') }} </th>
                                         <td class="fw-semi-bold">{{ number_format(floatval($superficie_du_TF_mere)) }}
                                             {{ __('m²') }}
                                         </td>
                                     </tr>
                                     <tr class="border-top">
-                                        <th class="text-900">{{ __('Balance') }}:</th>
+                                        <th class="text-900">{{ __('Prix') }}:</th>
                                         <td class="fw-semi-bold">
                                             {{ number_format(!empty($balance) ? floatval($balance) : 0) }}
                                             {{ __('XAF') }}

@@ -27,7 +27,7 @@
                         </svg>
                         {{ __('Suivi Dossier') }}
                     </h1>
-                    <p class="mt-n1 mx-2">{{ __('Voir tous les Dossier') }} &#x23F0; </p>
+                    <p class="mt-n1 mx-2">{{ __('Voir tous les Dossiers') }}  </p>
                 </div>
 
             </div>
@@ -71,10 +71,10 @@
                 <table class="table employee-table table-bordered table-hover align-items-center ">
                     <thead>
                         <tr>
-                            <th class="border-bottom">{{ __('Reference') }}</th>
+                            <th class="border-bottom">{{ __('Reférence') }}</th>
                             <th class="border-bottom">{{ __('Nom Dossier') }}</th>
                             <th class="border-bottom">{{ __('Statut') }}</th>
-                            <th class="border-bottom">{{ __('Date Creation') }}</th>
+                            <th class="border-bottom">{{ __('Date Création') }}</th>
                             <th class="border-bottom">{{ __('Action') }}</th>
 
                         </tr>
@@ -107,7 +107,7 @@
                 </table>
                 <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                     <div>
-                        {{ __('Montrer') }} {{ __('element de') }}
+                        {{ __('Montrer') }} {{ __('élément sur ') }}
                     </div>
                 </div>
             </div>

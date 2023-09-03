@@ -1,78 +1,55 @@
 @php
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-$qrCode = QrCode::format('png')->size(100)->generate(url("validate-document?model={$element->uuid}&category=certificate_propriete"));
+QrCode::format('png')->size(100)->generate(url("validate-document?model={$element->uuid}&category=certificate_propriete"));
+
 @endphp
 <div class="container-fluid">
-    <table>
-        <tr style="font-size:14px">
-            <td style="text-align:center">
-                <div><strong>REPUBLIQUE DU CAMEROUN</strong></div>
-                <div>Paix-Travail-Patrie</div>
+    <table style="padding: 2px">
+        <tr style="font-size: 12px">
+            <td>
+                <div style="text-align: center"><b>
+                    <div>REPUBLIQUE DU CAMEROUN</div>
+                    <div>PAIX-TRAVAIL-PATRIE</div>
+                    <div>--------</div>
+                    <div>MINISTERE DES DOMAINES DU CADASTRE ET</div> 
+                    <div>DES AFFAIRES FONCIERES</div>
+                    <div>--------</div>
+                    <div>SECRETARIAT GENERAL</div>
+                    <div>--------</div>
+                    <div>DIVISION DES ETUDES, DE LA PLANIFICATION</div> 
+                    <div>ET DE LA COOPERATION</div>
+                    <div>--------</div>
+                    <div>CELLULE DES ETUDES ET DE LA PLANIFICATION</div>
+                    <div>--------</div></b>
+                </div>
             </td>
-            <td style="width: 80px;">
-
+            <td style="width: 4cm; text-align: center;">
+                {{--<img src="{{ asset('img/doc_img/images.jpeg') }}" style="margin-top: 10px; margin-bottom: 10px;">--}}
             </td>
-            <td style="text-align:center">
-                <div><strong>REPUBLIC OF CAMEROON</strong></div>
-                <div>Peace-Work-Fatherland</div>
-            </td>
-        </tr>
-        <tr style="mb-1">
-            <td style="text-align:center; font-size:14px">
-                <div>..............</div>
-                <div>MINISTERE DES DOMAINES DU <br> CADASTRE ET DES AFFAIRES FONCIERES</div>
-            </td>
-            <td style="width: 80px;">
-                <div></div>
-            </td>
-            <td style="text-align:center">
-                <div>..............</div>
-                <div>MINISTRY OF STATE PROPERTY <br> CCCC AND LAND TITLE</div>
-            </td>
-        </tr>
-        <tr style="mb-2">
-            <td style="text-align:center; font-size:14px">
-                <div>..............</div>
-                <div>DELEGATION REGIONALE DU {{$element->titreFoncier->region->region_name}}</div>
-            </td>
-            <td style="width: 80px;"></td>
-            <td style="text-align:center; font-size:14px">
-                <div>..............</div>
-                <div>REGIONAL DELEGATION OF {{$element->titreFoncier->region->region_name}}</div>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align:center; font-size:14px">
-                <div>..............</div>
-                <div>DELEGATION DEPARTEMENTALE DE <br> {{$element->titreFoncier->division->division_name}} </div>
-            </td>
-            <td style="width: 80px;">
-                <div></div>
-            </td>
-            <td style="text-align:center; font-size:14px">
-                <div>..............</div>
-                <div>DIVISIONAL DELEGATION OF <br> {{$element->titreFoncier->division->division_name}}</div>
+            <td>
+                <div style="text-align: center"><b>
+                    <div>REPUBLIC OF CAMEROON</div>
+                    <div>PEACE-WORK-FATHERLAND</div>
+                    <div>--------</div>
+                    <div>MINISTRY OF STATE PROPERTY, SURVEYS</div> 
+                    <div>AND LAND TENURE</div>
+                    <div>--------</div>
+                    <div>SECRETARIAT GENERAL</div>
+                    <div>--------</div>
+                    <div>DEPARTMENT OF STUDIES, PLANNING</div> 
+                    <div>AND COOPERATION</div>
+                    <div>--------</div>
+                    <div>UNIT OF STUDIES AND PLANNING</div>
+                    <div>--------</div></b>
+                </div>
             </td>
         </tr>
-        <tr>
-            <td style="text-align:center; font-size:14px">
-                <div>..............</div>
-                <div>CONSERVATION FONCIERE DE <br> {{$element->titreFoncier->division->division_name}}</div>
-            </td>
-            <td style="width: 80px;">
-                <div></div>
-            </td>
-            <td style="text-align:center; font-size:14px">
-                <div>..............</div>
-                <div>LAND'S REGISTRATION OFFICE<br>OF {{$element->titreFoncier->division->division_name}}</div>
-            </td>
-        </tr>
-
     </table>
 
     <div style="padding: 12px; text-align:center; margin-top:10px">
         <img src="{{'data:image/png;base64,'. base64_encode($qrCode) }} " alt="QR Code">
+        
         <!-- <img src="$qrCode" alt="QR Code"> -->
         <!-- <img src="data:image/png;base64, {!! base64_encode($qrCode) !!} "> -->
     </div>
@@ -80,7 +57,7 @@ $qrCode = QrCode::format('png')->size(100)->generate(url("validate-document?mode
     <div style="margin-top: 8vh">
         <p></p>
         <h3 style="text-align: center;">CERTIFICAT DE PROPRIETE N°{{$element->certificate_proprietes_number}}/CP/MINDCAF/2/35/T600</h3>
-        <div>
+        <div style="font-size: 14px">
             <p>Le Conservateur de la Propriété et des Droits Fonciers du Département de {{$element->titreFoncier->division->division_name}}, soussigné
                 certifie que
                 l'immeuble rural non bati, exploité sis à <strong>{{$element->titreFoncier->zone}}</strong> au lieu dit
