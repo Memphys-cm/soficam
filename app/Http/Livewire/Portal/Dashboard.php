@@ -30,6 +30,7 @@ class Dashboard extends Component
     public $start_date_tf , $end_date_tf;
     public $end_date_dos , $start_date_dos;
 
+    
     public function mount()
     {
         $this->loadRecentActivities();
