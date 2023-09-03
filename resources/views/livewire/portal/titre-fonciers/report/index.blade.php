@@ -128,8 +128,8 @@
     <div class='card px-3 mb-3'>
         <div class="row py-3">
             <div class="col">
-                <label for="selectedRegion">{{ __('Par Région') }}: </label>
-                <select wire:model="selectedRegion" id="selectedRegion" class="form-select">
+                <label for="region_id">{{ __('Par Région') }}: </label>
+                <select wire:model="region_id" id="region_id" class="form-select">
                     <option value="">Toutes les régions</option>
                     @foreach ($regions as $region)
                         <option value="{{ $region->id }}">{{ $region->region_name_en }}</option>
@@ -137,8 +137,8 @@
                 </select>
             </div>
             <div class="col">
-                <label for="selectedDivision">{{ __('Par Département') }}: </label>
-                <select wire:model="selectedDivision" id="selectedDivision" class="form-select">
+                <label for="division_id">{{ __('Par Département') }}: </label>
+                <select wire:model="division_id" id="division_id" class="form-select">
                     <option value="">Tous les Départements</option>
                     @foreach ($divisions as $division)
                         <option value="{{ $division->id }}">{{ $division->division_name_en }}</option>
@@ -146,8 +146,8 @@
                 </select>
             </div>
             <div class="col">
-                <label for="selectedSubDivision">{{ __('Par Arrondissement') }}: </label>
-                <select wire:model="selectedSubDivision" id="selectedSubDivision" class="form-select">
+                <label for="sub_division_id">{{ __('Par Arrondissement') }}: </label>
+                <select wire:model="sub_division_id" id="sub_division_id" class="form-select">
                     <option value="">Tous les Arrondissements</option>
                     @foreach ($sub_divisions as $sub_division)
                         <option value="{{ $sub_division->id }}">{{ $sub_division->sub_division_name_en }}</option>

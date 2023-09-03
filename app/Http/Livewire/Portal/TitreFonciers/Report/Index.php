@@ -362,13 +362,13 @@ class Index extends Component
         }
 
         $titrefonciers = TitreFoncier::search($this->query)->with('users')
-        ->when($this->selectedRegion, function ($query, $regionId) {
+        ->when($this->region_id, function ($query, $regionId) {
             return $query->where('region_id', $regionId);
         })
-        ->when($this->selectedDivision, function ($query, $divisionId) {
+        ->when($this->division_id, function ($query, $divisionId) {
             return $query->where('division_id', $divisionId);
         })
-        ->when($this->selectedSubDivision, function ($query, $subDivisionId) {
+        ->when($this->sub_division_id, function ($query, $subDivisionId) {
             return $query->where('sub_division_id', $subDivisionId);
         })
         ->when($this->startDate, function ($query) {
