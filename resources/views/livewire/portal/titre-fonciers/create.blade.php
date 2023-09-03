@@ -115,8 +115,8 @@
                             <div class="col">
                                 <label for="zone">{{__('Zone')}}</label>
                                 <select wire:model="zone" name="zone" class="form-select  @error('zone') is-invalid @enderror" required="">
-                                    <option value="urbaine">{{__('Urbain')}}</option>
-                                    <option value="rurale">{{__('Rural')}}</option>
+                                    <option value="urbain">{{__('Urbain')}}</option>
+                                    <option value="rurale">{{__('Rurale')}}</option>
                                 </select>
                                 @error('zone')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -144,7 +144,7 @@
                                 <label for="superficie_du_TF_mere">{{ __('Superficie Titre foncier parent') }}</label>
                                 <input wire:model="superficie_du_TF_mere" type="number"
                                     class="form-control  @error('superficie_du_TF_mere') is-invalid @enderror"
-                                    placeholder="{{ __('12hac') }}" required="" value=""
+                                    placeholder="{{ __('1200m2') }}" required="" value=""
                                     name="superficie_du_TF_mere">
                                 @error('superficie_du_TF_mere')
                                     <div class="invalid-feedback">{{ $message }}</div>

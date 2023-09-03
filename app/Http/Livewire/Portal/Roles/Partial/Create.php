@@ -11,7 +11,8 @@ use App\Http\Livewire\Traits\WithDataTables;
 class Create extends Component
 {
 
-    use WithUserAndServicePermissions, WithLocationPermissions, WithRolePermissions, WithAuditLogPermissions;
+    use WithUserAndServicePermissions, WithLocationPermissions, WithRolePermissions, WithAuditLogPermissions, WithOperationPermissions,
+    WithTitreFoncierPermissions, WithImmaDirectPermissions, withSalesPermissions;
 
     public $name;
     public $role;
@@ -44,7 +45,21 @@ class Create extends Component
                     $this->selectedSubDivisionPermissions,
                     $this->selectedUserPermissions,
                     $this->selectedServicePermissions,
+                    $this->selectedMembreCabinetPermissions,
+                    $this->selectedCabinetPermissions,
                     $this->selectedAuditLogPermissions,
+                    $this->selectedGenOpsPermissions,
+                    $this->selectedMorcellementPermissions,
+                    $this->selectedMutationTotalePermissions,
+                    $this->selectedRetraitPermissions,
+                    $this->selectedEtatCessionPermissions,
+                    $this->selectedTitreFoncierPermissions,
+                    $this->selectedLotissementPermissions,
+                    $this->selectedChargesPermissions,
+                    $this->selectedImmobilierPermissions,
+                    $this->selectedTaxFoncierPermissions,
+                    $this->selectedImmaDirectPermissions,
+                    $this->selectedSalesPermissions,
                 ]);
             }
 
@@ -60,6 +75,10 @@ class Create extends Component
         $this->locationPermissionClearFields();
         $this->rolePermissionClearFields();
         $this->auditLogPermissionClearFields();
+        $this->operationsPermissionClearFields();
+        $this->titreFonciersPermissionClearFields();
+        $this->immaDirectPermissionClearFields();
+        $this->salesPermissionClearFields();
         $this->reset(['name']);
     }
 

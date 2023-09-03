@@ -56,7 +56,7 @@
                 @endcan
             </div>
         </div>
-        <div class=' pb-4'>
+        <div class='pb-4'>
             <div class="row">
                 <div class="col-md-3">
                     <label for="orderBy">{{__('Trier par')}}: </label>
