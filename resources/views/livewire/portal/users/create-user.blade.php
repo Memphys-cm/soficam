@@ -67,15 +67,6 @@
                             </div>
 
                             <div class=" col">
-                                <label for="id_card_number">{{ __('Numéro CNI') }}</label>
-                                <input type="text" wire:model="id_card_number" class="form-control  @error('id_card_number') is-invalid @enderror " value="{{ old('id_card_number') }}" placeholder="112233445566" id="id_card_number" autofocus="" required="">
-                                @error('id_card_number')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-                            <div class=" col">
                                 <label for="date_of_birth">{{ __('Date de Naissance') }}</label>
                                 <input type="date" wire:model="date_of_birth" class="form-control  @error('date_of_birth') is-invalid @enderror " value="{{ old('date_of_birth') }}" placeholder="Edea" id="date_of_birth" autofocus="" required="">
                                 @error('date_of_birth')
