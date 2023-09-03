@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('reference_etat_cession')->default(Str::upper(Str::random(6)) . "" . now()->format('msu'));
             $table->enum('type_personne',['morale','physique'])->default('physique');
             $table->enum('type_operation',['bornage','morcellement','mutation_totale', 'retrait_indivision','immatriculation_direct','concession']);
-            $table->enum('zone',['terrain_urbain','terrain_rurale']);
+            $table->enum('zone',['urbain','rurale']);
             $table->foreignId('titre_foncier_id')->nullable();
             $table->foreignId('geometre_id')->on('users')->nullable();
             $table->foreignId('user_id')->nullable();

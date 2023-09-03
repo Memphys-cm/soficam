@@ -23,6 +23,7 @@ class CreateParDecesForm extends Component
     public $requestor_id, $region, $division, $sub_division, $lieu_dit;
     public $parcel_id, $parcels = [], $etat_cession_id, $etat_cessions = [];
     public $commentaires;
+    public $attachements;
 
 
     public function mount()
@@ -71,7 +72,7 @@ class CreateParDecesForm extends Component
             session()->flash('message', __('Certificate propriete provided is in valid'));
         }
 
-        Operation::create([
+        $operation =  Operation::create([
             'numero_operation' => Str::upper(Str::random(6)) . "" . now()->format('msu'),
             'titre_foncier_id' => $this->titre_foncier_id,
             'type_operation' => 'mutation_totale_par_deces',
@@ -81,6 +82,14 @@ class CreateParDecesForm extends Component
             'validite_CP' => $cp->validity,
         ]);
 
+        if (!empty($this->attachements)) {
+            foreach ($this->attachements as $attachement) {
+                $operation->addMedia($attachement->getRealPath())
+                    ->usingName('Numero CA')
+                    ->toMediaCollection('operations');
+            }
+        }
+        
         $this->clearFields();
         $this->refresh(__('Mutation Totale par Deces successfully Created'), 'CreateMutationTotaleParDecesModal');
     }

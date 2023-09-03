@@ -2,6 +2,7 @@
     <x-alert />
     @include('livewire.portal.operations.mutation-totale.partials.create-form')
     <x-delete-modal />
+    <x-alert-notif />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
             <div class="mb-lg-0">

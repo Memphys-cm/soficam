@@ -255,7 +255,7 @@
         </a> --}}
                                         @endif
                                         @if ($imma_directe->statut == 'Ordre de Versement en Attente de Paiement')
-                                            <a href="#" data-bs-placement="top" title="Etablisser L'ordre de Versement"
+                                            <a href="#" data-bs-placement="top" title="Imprimer L'ordre de Versement"
                                                 wire:click.prevent='ordreDeVersementPdf({{ $imma_directe->id }})'
                                                 draggable="false">
                                                 <svg class="icon icon-sm text-gray-500" xmlns="http://www.w3.org/2000/svg"
@@ -296,12 +296,27 @@
                                             </a>
                                         @endif
                                     @endcan
-                                    @can('imma_directe.convocation', $imma_directe)
+                                    @can('imma_directe.certificat_affichage', $imma_directe)
                                     @if ($imma_directe->next_step == 'signature decision portant calendrier de descente')
                                     <a href="#" data-bs-placement="top"
-                                        title="Imprimer La convocation D'Invitation sur le Terrain"
+                                        title="Imprimer Le certificat D'affichage"
                                         wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
                                         data-bs-target="#ConvocationImmaDirecteModal" draggable="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-4 -8 50 50"
+                                            stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M9 13.5l3 3m0 0l3-3m-3 3v-6m1.06-4.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+                                        </svg>
+                                    </a>
+                                    @endif
+                                    @endcan
+
+                                    @can('imma_directe.convocation', $imma_directe)
+                                    @if ($imma_directe->next_step == 'Programmation descente sur le terrain')
+                                    <a href="#" data-bs-placement="top"
+                                        title="Imprimer La convocation D'Invitation sur le Terrain"
+                                        wire:click.prevent="convocation({{ $imma_directe->id }})" data-bs-toggle="modal"
+                                        data-bs-target="" draggable="false">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-4 -8 50 50"
                                             stroke-width="1.5" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -342,7 +357,7 @@
                                     @endcan
 
                                     @can('imma_directe.mise_en_forme_dos_tech', $imma_directe)
-                                        @if ($imma_directe->descente_terrain != null)
+                                        @if ($imma_directe->descente_terrain !== null)
                                             <a href="#" data-bs-placement="top"
                                                 title="Mise en Forme du Dossier Technique"
                                                 wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
@@ -357,7 +372,7 @@
                                     @endcan
 
                                     @can('imma_directe.mise_en_forme_dos_admin', $imma_directe)
-                                        @if ($imma_directe->descente_terrain == null)
+                                        @if ($imma_directe->descente_terrain !== null)
                                             <a href="#" data-bs-placement="top"
                                                 title="Mise en Forme du Dossier Administratif"
                                                 wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
@@ -378,7 +393,7 @@
                                     @endcan
 
                                     @can('imma_directe.creation_dos_tech', $imma_directe)
-                                        {{-- @if ($imma_directe->next_step == 'Mise en Forme du Dossier Administratif') --}}
+                                        @if ($imma_directe->descente_terrain !== null)
                                         <a href="#" data-bs-placement="top" title="Creation Dossier Technique"
                                             wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
                                             data-bs-target="#DossierTechniqueModal" draggable="false">
@@ -388,7 +403,7 @@
                                                     d="M9 13.5l3 3m0 0l3-3m-3 3v-6m1.06-4.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
                                             </svg>
                                         </a>
-                                        {{-- @endif --}}
+                                        @endif  
                                     @endcan
 
                                     @can('imma_directe.descente_terrain', $imma_directe)
