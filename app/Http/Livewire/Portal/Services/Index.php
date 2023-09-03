@@ -75,11 +75,11 @@ class Index extends Component
             'status' => !empty($this->status) ? $this->status : 1,
         ]);
 
-        $this->state = 1;
+        $this->state = 0;
 
         $this->clearFields();
 
-        $this->refresh(__('Service successfully :state!', ['state' => $this->state ? 'Updated' : 'Created']), 'CreateUpdateServiceModal');
+        $this->refresh(__('Service successfully Updated!'), 'UpdateServiceModal');
     }
 
     public function delete()
