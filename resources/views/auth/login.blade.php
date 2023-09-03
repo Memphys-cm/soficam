@@ -1,8 +1,8 @@
 <x-layouts.app>
-    <main class="pt-5" wire:ignore>
+    <main class="pt-5" wire:ignore style="background-image: url('../img/bg.jpeg'); background-position: center; background-repeat: no-repeat; background-size: cover;">
         <section class="d-flex align-items-center my-5 py-5 mt-lg-6 mb-lg-5">
             <div class="container">
-                <div class="row justify-content-center form-bg-image" data-background-lg="{{asset('img/illustrations/signin.svg')}}">
+                <div class="row justify-content-center form-bg-image" data-background-lg="">
 
                     <div class="col-12 d-flex align-items-center justify-content-center ">
                         <div class="bg-white shadow border-0 rounded border-light p-4 px-lg-5 pt-lg-4 pb-lg-5 w-100 fmxw-500">
@@ -17,7 +17,7 @@
                                     <x-alert />
                                 </div>
                                 <div class="form-group mb-4"><label for="email">{{ __('Adresse e-mail') }}</label>
-                                    <input type="email" name="email" class="form-control  " value="{{ old('email') }}" placeholder="jane.doe@app.com" id="email" autofocus="" required="" >
+                                    <input type="email" name="email" class="form-control  " value="{{ old('email') }}" placeholder="jane.doe@app.com" id="email" autofocus="" required="">
                                     <!-- @error('email')
                                     <div class="invalid-feedback">
                                         {{ $message }}

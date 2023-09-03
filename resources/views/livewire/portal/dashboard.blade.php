@@ -68,6 +68,7 @@
                         {{-- <p class="font-sans-serif lh-1 fs-4">{{ $all_cabinet_geometre }} {{ __('Burreaux D\'Etudes') }}</p>
                         <p class="font-sans-serif lh-1 fs-4">{{ $all_notaire_membre }} {{ __('Notaires et Claire de Notaires') }}</p>
                         <p class="font-sans-serif lh-1 fs-4">{{ $all_geometre_membre }} {{ __('Geometres') }}</p> --}}
+
                     </div>
                     <div class="">
                         <svg class="icon text-info " xmlns="http://www.w3.org/2000/svg" fill="none"

@@ -5,7 +5,7 @@
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4"> {{ __('Cabinet') }}</h1>
-                        <p class="px-1"> {{ __('Creer Cabinet') }} &#128522;</p>
+                        <p class="px-1"> {{ __('Créer Cabinet') }}</p>
                     </div>
                     <x-form-items.form wire:submit="store">
 
@@ -20,7 +20,7 @@
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label class="px-2" for="region_id">{{ __('Region') }}</label>
+                                <label class="px-2" for="region_id">{{ __('Région') }}</label>
                                 <select wire:model="region_id" name="region_id" class="form-select  @error('region_id') is-invalid @enderror" required="">
                                     <option value="">{{ __('-- Selectionner une Region --')}}</option>
                                     @foreach ($regions as $region)
@@ -35,7 +35,7 @@
                         <div class="form-group mb-3 row">
 
                             <div class='col'>
-                                <label class="px-2" for="division_id">{{ __('Departement') }}</label>
+                                <label class="px-2" for="division_id">{{ __('Département') }}</label>
                                 <select wire:model="division_id" name="division_id" class="form-select @error('division_id') is-invalid @enderror" required="">
                                     <option value="">{{ __('-- Selectionner une Division --')}}</option>
                                     @if (!empty($divisions))
@@ -68,14 +68,14 @@
                             <div class="col">
                                 <label for="type_cabinet">{{__('Type Cabinet')}}</label>
                                 <select wire:model="type_cabinet" name="type_cabinet" class="form-select  @error('type_cabinet') is-invalid @enderror" required="">
-                                    <option value="">{{__('-- Selectionner --')}}</option>
-                                    <option value="geometre">{{__('Geometre')}}</option>
+                                    <option value="">{{__('-- Sélectionner --')}}</option>
+                                    <option value="geometre">{{__('Géomètre')}}</option>
                                     <option value="lotisseur">{{__('Lotisseur')}}</option>
                                     <option value="maeture">{{__('Maeture')}}</option>
-                                    <option value="promoteur_immobiliere">{{__('Promoteur Immobiliere')}}</option>
-                                    <option value="agent_immobiliere">{{__('Agent Immobiliere')}}</option>
+                                    <option value="promoteur_immobiliere">{{__('Promoteur Immobilier')}}</option>
+                                    <option value="agent_immobiliere">{{__('Agent Immobilier')}}</option>
                                     <option value="urbaniste">{{__('Urbaniste')}}</option>
-                                    <option value="controlleur">{{__('Controlleur')}}</option>
+                                    <option value="controlleur">{{__('Contrôleur')}}</option>
                                     <option value="notaire">{{__('Notaire')}}</option>
                                 </select>
                                 @error('type_cabinet')
@@ -97,8 +97,8 @@
                         </div>
                         <br>
                         <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" class="btn btn-primary btn-loading">{{ __('Creer')}}</button>
+                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
+                            <button type="submit" class="btn btn-primary btn-loading">{{ __('Créer')}}</button>
                         </div>
                     </x-form-items.form>
 

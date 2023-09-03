@@ -18,10 +18,10 @@
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
                       </svg>
                       <span>
-                          {{__('Tax foncier sur mes titres fonciers')}}
+                          {{__('Taxe foncière sur mes Titres Fonciers')}}
                       </span>
                   </h1>
-                  <p class="text-gray-800">{{ __('Voir tous les Tax Foncier sur titres fonciers') }} &#x23F0; </p>
+                  <p class="text-gray-800">{{ __('Voir toutes les Taxes Foncières sur Titres Fonciers') }}  </p>
               </div>
               <div class=''>
 
@@ -38,7 +38,7 @@
                                   </svg>
                                   <div class="mb-3 mb-md-0">
                                       <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($titrefonciers_count)}} {{ __(\Str::plural('Creation log', $titrefonciers_count)) }} </h5>
-                                      <div class=" text-gray-500 ">{{__('enregistré!')}} &#128516;</div>
+                                      <div class=" text-gray-500 ">{{__('enregistré!')}} </div>
                                   </div>
                               </div>
                           </a>
@@ -53,7 +53,7 @@
                                   </svg>
                                   <div class="mb-3 mb-md-0">
                                       <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($titrefonciers_count)}} {{ __(\Str::plural('Update log', $titrefonciers_count)) }} </h5>
-                                      <div class=" text-gray-500 ">{{__('enregistré!')}} &#128516;</div>
+                                      <div class=" text-gray-500 ">{{__('enregistré!')}} </div>
                                   </div>
                               </div>
                           </a>
@@ -68,7 +68,7 @@
                                   </svg>
                                   <div class="mb-3 mb-md-0">
                                       <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($titrefonciers_count)}} {{ __(\Str::plural('Deletion log', $titrefonciers_count)) }}</h5>
-                                      <div class="text-gray-500 ">{{__('enregistré!')}} &#128560;</div>
+                                      <div class="text-gray-500 ">{{__('enregistré!')}} </div>
                                   </div>
                               </div>
                           </a>
@@ -86,18 +86,18 @@
                   <label for="orderBy">{{__('Trier par')}}: </label>
                   <select wire:model="orderBy" id="orderBy" class="form-select">
                       <option value="action_type">{{__('Type d\'action')}}</option>
-                      <option value="created_at">{{__('Date Creation')}}</option>
+                      <option value="created_at">{{__('Date Création')}}</option>
                   </select>
               </div>
               <div class="col-md-3 mb-2">
-                  <label for="direction">{{__('Sens de trie')}}: </label>
+                  <label for="direction">{{__('Sens de tri')}}: </label>
                   <select wire:model="orderAsc" id="direction" class="form-select">
                       <option value="asc">{{__('Ascendant ')}}</option>
                       <option value="desc">{{__('Descendant')}}</option>
                   </select>
               </div>
               <div class="col-md-3 mb-2">
-                  <label for="perPage">{{__('Element par page')}}: </label>
+                  <label for="perPage">{{__('ÉlémentS par page')}}: </label>
                   <select wire:model="perPage" id="perPage" class="form-select">
                       <option value="5">5</option>
                       <option value="10">10</option>
@@ -117,7 +117,7 @@
                       <thead>
                           <tr>
                               <th class="border-bottom">{{ __('Numéro du titre foncier') }}</th>
-                              <th class="border-bottom">{{ __('Proprietaire') }}</th>
+                              <th class="border-bottom">{{ __('PropriÉtaire(s)') }}</th>
                               <th class="border-bottom">{{ __('Localisation') }}</th>
                               <th class="border-bottom">{{ __('Montant de la Taxe') }}</th>
                               <th class="border-bottom">{{ __('Statut de la Taxe') }}</th>
@@ -206,7 +206,7 @@
           <div class='border-prim rounded p-4 d-flex justify-content-center align-items-center flex-column'>
               <img src="{{asset('/img/empty.svg')}}" alt='{{__("Empty")}}' class="text-center  w-25 h-25">
               <div class="text-center text-gray-800 mt-2">
-                  <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                  <h4 class="fs-4 fw-bold">{{__('Liste Vide')}}</h4>
                   <p>{{__('Aucun enregistrement trouvé..!')}}</p>
               </div>
           </div>

@@ -285,7 +285,6 @@ class Index extends Component
                     'date_avis_publique_signe' => $this->date_status,
                 ]);
             });
- 
         } else if($imma->next_step == "Signature du certficat d'affichage"){
             DB::transaction(function () {
                 $this->imma_directe->update([

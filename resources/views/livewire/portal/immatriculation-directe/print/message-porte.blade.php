@@ -5,91 +5,46 @@
 @endphp
 
 <div class="container-fluid">
-    <table>
-        <tr style="font-size:14px">
-            <td style="text-align:center">
-                <div><strong>REPUBLIQUE DU CAMEROUN</strong></div>
-                <div>Paix-Travail-Patrie</div>
+    <table style="padding: 2px">
+        <tr style="font-size: 12px">
+            <td>
+                <div style="text-align: center"><b>
+                    <div>REPUBLIQUE DU CAMEROUN</div>
+                    <div>PAIX-TRAVAIL-PATRIE</div>
+                    <div>--------</div>
+                    <div>MINISTERE DES DOMAINES DU CADASTRE ET</div> 
+                    <div>DES AFFAIRES FONCIERES</div>
+                    <div>--------</div>
+                    <div>SECRETARIAT GENERAL</div>
+                    <div>--------</div>
+                    <div>DIVISION DES ETUDES, DE LA PLANIFICATION</div> 
+                    <div>ET DE LA COOPERATION</div>
+                    <div>--------</div>
+                    <div>CELLULE DES ETUDES ET DE LA PLANIFICATION</div>
+                    <div>--------</div></b>
+                </div>
             </td>
-            <td style="width: 80px;">
-
+            <td style="width: 4cm; text-align: center;">
+                {{--<img src="{{ asset('img/doc_img/images.jpeg') }}" style="margin-top: 10px; margin-bottom: 10px;">--}}
             </td>
-            <td style="text-align:center">
-                <div><strong>REPUBLIC OF CAMEROON</strong></div>
-                <div>Peace-Work-Fatherland</div>
-            </td>
-        </tr>
-        <tr style="mb-1">
-            <td style="text-align:center; font-size:14px">
-                <div>..............</div>
-                <div>REGION DE {{$imma_directe->region->region_name_fr}}</div>
-            </td>
-            <td style="width: 80px;">
-                <div></div>
-            </td>
-            <td style="text-align:center">
-                <div>..............</div>
-                <div> {{$imma_directe->region->region_name_en}} REGION</div>
-            </td>
-        </tr>
-        <tr style="mb-2">
-            <td style="text-align:center; font-size:14px">
-                <div>..............</div>
-                <div>DEPARTEMENT DU  {{$imma_directe->division->division_name}}</div>
-            </td>
-            <td style="width: 80px;"></td>
-            <td style="text-align:center; font-size:14px">
-                <div>..............</div>
-                <div>{{$imma_directe->division->division_name}} DIVISION</div>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align:center; font-size:14px">
-                <div>..............</div>
-                <div>ARRONDISSEMENT DE {{$imma_directe->subDivision->sub_division_name}}</div>
-            </td>
-            <td style="width: 80px;">
-                <div></div>
-            </td>
-            <td style="text-align:center; font-size:14px">
-                <div>..............</div>
-                <div>{{$imma_directe->subDivision->sub_division_name}} SUBDIVISION</div>
+            <td>
+                <div style="text-align: center"><b>
+                    <div>REPUBLIC OF CAMEROON</div>
+                    <div>PEACE-WORK-FATHERLAND</div>
+                    <div>--------</div>
+                    <div>MINISTRY OF STATE PROPERTY, SURVEYS</div> 
+                    <div>AND LAND TENURE</div>
+                    <div>--------</div>
+                    <div>SECRETARIAT GENERAL</div>
+                    <div>--------</div>
+                    <div>DEPARTMENT OF STUDIES, PLANNING</div> 
+                    <div>AND COOPERATION</div>
+                    <div>--------</div>
+                    <div>UNIT OF STUDIES AND PLANNING</div>
+                    <div>--------</div></b>
+                </div>
             </td>
         </tr>
-        <tr>
-            <td style="text-align:center; font-size:14px">
-                <div>..............</div>
-                <div>SOUS PREFECTURE DE {{$imma_directe->subDivision->sub_division_name}}</div>
-            </td>
-            <td style="width: 80px;">
-                <div></div>
-            </td>
-            <td style="text-align:center; font-size:14px">
-                <div>..............</div>
-                <div>{{$imma_directe->subDivision->sub_division_name}} DIVISIONNAL OFFICE</div>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align:center; font-size:14px">
-                <div>..............</div>
-                <div>BUREAU DES AFFAIRES ADMINISTRATIVES <br> JURIDIQUES ET POLITIQUES</div>
-                <div>..............</div>
-            </td>
-            <td style="width: 80px;">
-                <div></div>
-            </td>
-            <td style="text-align:center; font-size:14px">
-                <div>..............</div>
-                <div>ADMINISTRATIVE JURIDICS AND <br> POLITICALS <br> AFFAIRS OFFICE</div>
-                <div>..............</div>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align:center; font-size:14px">
-                <div>N°_________________/MP/JO6_07/BAAJP</div>
-            </td>
-        </tr>
-
     </table>
 
     <div style="padding: 12px; text-align:center; margin-top:10px"><img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code for Bien Immobilier ID"></div>
@@ -97,9 +52,9 @@
     <div style="margin-top: 20px; margin-right: 15px">
         <div style="text-align: center; font-size: 24px">MESSAGE-PORTE</div>
         <div style="text-align: center">o_o_o_o_o_o</div>
-        <div><b>
+        <div style="font-size: 14px"><b>
             <div style="text-align: center; margin-top:20px">LE SOUS-PREFET DE L'ARRONDISSEMENT DE {{$imma_directe->subDivision->sub_division_name}} <br> A</div>
-            <ul style="margin-right: 30px; font-size: 14px">
+            <ul style="margin-right: 30px">
                 <li>
                     CHEF DU SERVICE DEPARTEMENTAL DES AFFAIRES FONCIERES DU {{$imma_directe->division->division_name}}
                 </li>

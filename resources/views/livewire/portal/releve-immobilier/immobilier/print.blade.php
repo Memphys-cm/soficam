@@ -5,64 +5,51 @@ $qrCode = QrCode::size(100)->generate( url("validate-document?model={$element->u
 @endphp
 
 <div>
-    <table style="margin-left:0px; margin-right:0px; text-align:center; margin-bottom:2px">
-        <tr>
+    <table style="padding: 2px">
+        <tr style="font-size: 12px">
             <td>
-                <div>REPUBLIQUE DU CAMEROUN</div>
-                <div>Paix - Travail - Patrie</div>
-                <div>--------------</div>
+                <div style="text-align: center"><b>
+                    <div>REPUBLIQUE DU CAMEROUN</div>
+                    <div>PAIX-TRAVAIL-PATRIE</div>
+                    <div>--------</div>
+                    <div>MINISTERE DES DOMAINES DU CADASTRE ET</div> 
+                    <div>DES AFFAIRES FONCIERES</div>
+                    <div>--------</div>
+                    <div>SECRETARIAT GENERAL</div>
+                    <div>--------</div>
+                    <div>DIVISION DES ETUDES, DE LA PLANIFICATION</div> 
+                    <div>ET DE LA COOPERATION</div>
+                    <div>--------</div>
+                    <div>CELLULE DES ETUDES ET DE LA PLANIFICATION</div>
+                    <div>--------</div></b>
+                </div>
+            </td>
+            <td style="width: 4cm; text-align: center;">
+                {{--<img src="{{ asset('img/doc_img/images.jpeg') }}" style="margin-top: 10px; margin-bottom: 10px;">--}}
             </td>
             <td>
-                <div>REPUBLIC OF CAMEROON</div>
-                <div>Peace - Work - Fatherland</div>
-                <div>--------------</div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div>MINISTERE DES DOMAINES, DU CADASTRE ET DES AFFAIRES FONCIERES</div>
-                <div>--------------</div>
-            </td>
-            <td>
-                <div>MINISTRY OF STATE PROPERTY SURVEYS AND LAND TENURE</div>
-                <div>--------------</div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div>DELEGATION REGIONALE DU {{$element->titreFoncier->region->region_name_fr}}</div>
-                <div>--------------</div>
-            </td>
-            <td>
-                <div>REGIONAL DELEGATION OF {{$element->titreFoncier->region->region_name_en}}</div>
-                <div>--------------</div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div>DELEGATION DEPARTEMENTALE DU {{$element->titreFoncier->division->division_name}}</div>
-                <div>--------------</div>
-            </td>
-            <td>
-                <div>DIVISIONAL DELEGATION OF {{$element->titreFoncier->division->division_name}}</div>
-                <div>--------------</div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div>CONSERVATION FONCIERE DU {{$element->titreFoncier->division->division_name}}</div>
-                <div>--------------</div>
-            </td>
-            <td>
-                <div>LAND'S REGISTRY OFFICE OF {{$element->titreFoncier->division->division_name}}</div>
-                <div>--------------</div>
+                <div style="text-align: center"><b>
+                    <div>REPUBLIC OF CAMEROON</div>
+                    <div>PEACE-WORK-FATHERLAND</div>
+                    <div>--------</div>
+                    <div>MINISTRY OF STATE PROPERTY, SURVEYS</div> 
+                    <div>AND LAND TENURE</div>
+                    <div>--------</div>
+                    <div>SECRETARIAT GENERAL</div>
+                    <div>--------</div>
+                    <div>DEPARTMENT OF STUDIES, PLANNING</div> 
+                    <div>AND COOPERATION</div>
+                    <div>--------</div>
+                    <div>UNIT OF STUDIES AND PLANNING</div>
+                    <div>--------</div></b>
+                </div>
             </td>
         </tr>
     </table>
 
     <div style="padding: 12px; text-align:center; margin-top:10px"><img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code for Bien element ID"></div>
 
-    <div style="padding: 12px; margin-top:5px">
+    <div style="padding: 12px; margin-top:5px; font-size: 14px">
         <div style="margin-top: 20px; text-align: center"><b>RELEVE DES BIENS elementS N°{{$element->releve_number}}/RI/MINDFCAF/41/T120</b></div>
         <div style="margin-top: 20px; margin-left: 20px"><b>Volume{{$element->titreFoncier->volume}} transcrit, Folio{{$element->titreFoncier->folio}} TF N°{{$element->titreFoncier->numero_titre_foncier}}</b></div>
         <div style="margin-top: 20px; text-decoration: underline; margin-top:15px; text-align:center">SECTION I/- DESISGNATION ET DESCRIPTION DE L'IMMEUBLE</div>
