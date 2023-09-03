@@ -10,7 +10,9 @@ use App\Models\AuditLog;
 use App\Models\Sales\Sale;
 use App\Models\TitreFoncier;
 use App\Models\MembreDuCabinet;
+use Illuminate\Support\Facades\DB;
 use App\Models\CertificatePropriete;
+use App\Models\ImmatriculationDirecte;
 use App\Models\Lotissements\Lotissement;
 
 class Dashboard extends Component
@@ -23,6 +25,9 @@ class Dashboard extends Component
     public $recentTransactions = [];
     public $recentSales = [];
     public $recentCertificateUpdates = [];
+    public $start_date , $end_date;
+    public $start_date_tf , $end_date_tf;
+    public $end_date_dos , $start_date_dos;
 
     public function mount()
     {
@@ -99,6 +104,7 @@ class Dashboard extends Component
     public function render()
     {
         $all_titres_fonciers = TitreFoncier::count();
+        $dossier_traites = ImmatriculationDirecte::count();
         $usersWithTitreFoncier = User::whereHas('titrefonciers')->get();
         $total_users = $usersWithTitreFoncier->count();
         $tf_homme = $usersWithTitreFoncier->where('sexe', 'M')->count();
@@ -113,6 +119,11 @@ class Dashboard extends Component
         $logs = AuditLog::orderBy('created_at', 'desc')->get()->take(10);
         $allsales = Sale::where('payment_status', 'totally_paid')->count();
         $totalPaidAmount = Sale::where('payment_status', 'totally_paid')->sum('sales_amount');
+        $totalSalesAmount = DB::table('sales')->sum('sales_amount');
+        $filter_amount = Sale::whereBetween('created_at', [$this->start_date, $this->end_date])->get()->sum('sales_amount');
+        $filter_tf = TitreFoncier::whereBetween('created_at', [$this->start_date_tf, $this->end_date_tf])->get()->count();
+
+
 
         return view('livewire.portal.dashboard', [
             'logs' => $logs,
@@ -128,6 +139,10 @@ class Dashboard extends Component
             'all_cabinet_geometre' => $all_cabinet_geometre,
             'all_notaire_membre' => $all_notaire_membre,
             'all_geometre_membre' => $all_geometre_membre,
+            'dossier_traites' => $dossier_traites,
+            'totalSalesAmount' => $totalSalesAmount,
+            'filter_amount' => $filter_amount,
+            'filter_tf' => $filter_tf
         ])->layout('components.layouts.dashboard');
     }
 }
