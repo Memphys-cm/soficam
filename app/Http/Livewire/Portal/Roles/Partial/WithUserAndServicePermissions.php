@@ -27,13 +27,37 @@ trait WithUserAndServicePermissions
         'Export & Print' => 'service.export_n_print',
     ];
 
+    public $selectedMembreCabinetPermissions = [];
+    public $selectAllMembreCabinetPermissions = false;
+    public $MembreCabinetPermissions = [
+        'View' => 'membre_du_cabinet.view',
+        'Update' => 'membre_du_cabinet.update',
+        'Delete' => 'membre_du_cabinet.delete',
+        'Create' => 'membre_du_cabinet.create',
+        'Export & Print' => 'membre_du_cabinet.export_n_print',
+    ];
+    public $selectedCabinetPermissions = [];
+    public $selectAllCabinetPermissions = false;
+    public $CabinetPermissions = [
+        'View' => 'cabinet.view',
+        'Update' => 'cabinet.update',
+        'Delete' => 'cabinet.delete',
+        'Create' => 'cabinet.create',
+        'Import' => 'cabinet.import',
+        'Export & Print' => 'service.export_n_print',
+    ];
+
     public function userAndServicePermissionClearFields()
     {
         $this->reset([
             'selectedUserPermissions',
             'selectAllServicePermissions',
             'selectedServicePermissions',
-            'selectAllUserPermissions'
+            'selectAllUserPermissions',
+            'selectedMembreCabinetPermissions',
+            'selectAllCabinetPermissions',
+            'selectedMembreCabinetPermissions',
+            'selectAllCabinetPermissions',
         ]);
     }
 
@@ -66,6 +90,36 @@ trait WithUserAndServicePermissions
             ];
         } else {
             $this->selectedServicePermissions = [];
+        }
+    }
+    public function updatedSelectAllMembreCabinetPermissions($value)
+    {
+        if ($value) {
+            $this->selectedMembreCabinetPermissions = [
+                'membre_du_cabinet.create',
+                'membre_du_cabinet.view',
+                'membre_du_cabinet.update',
+                'membre_du_cabinet.delete',
+                'membre_du_cabinet.import',
+                'membre_du_cabinet.export_n_print',
+            ];
+        } else {
+            $this->selectedMembreCabinetPermissions = [];
+        }
+    }
+    public function updatedSelectAllCabinetPermissions($value)
+    {
+        if ($value) {
+            $this->selectedCabinetPermissions = [
+                'cabinet.create',
+                'cabinet.view',
+                'cabinet.update',
+                'cabinet.delete',
+                'cabinet.import',
+                'cabinet.export_n_print',
+            ];
+        } else {
+            $this->selectedCabinetPermissions = [];
         }
     }
 }

@@ -40,18 +40,19 @@ class Index extends Component
             if(count($this->role->users) <= 0) {
                 $this->role->syncPermissions([]);
                 $this->role->delete();
+                $this->refreshModal(__('Role and Permissions successfully deleted!'), 'DeleteModal');
             }else{
                 $this->refreshModal(__('Role cannot be deleted as it is still assigned to users!'), '');
             }
         }
 
-        $this->refreshModal(__('Role and Permissions successfully deleted!'), 'DeleteModal');
+
     }
 
     public function refreshModal($message, $modal)
     {
         //Close the active modal
-        $this->dispatch('cancel', $modal);
+        $this->emit('cancel', $modal);
         session()->flash('message', $message);
     }
 

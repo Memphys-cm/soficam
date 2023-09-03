@@ -1,13 +1,13 @@
-<div wire:ignore.self class="modal side-layout-modal fade" id="CreateEtatCessionModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
+<div wire:ignore.self class="modal side-layout-modal fade" id="UpdateEtatCessionModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:45%;">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">{{ __('Creer') }} {{ __(' Etat Cession') }}</h1>
-                        <p class="px-1"> {{ __('Creer') }} {{ __(' Etat Cession') }} &#128522;</p>
+                        <h1 class="mb-0 h4">{{ __('Maitre a jour') }} {{ __(' Etat Cession') }}</h1>
+                        <p class="px-1"> {{ __('Maitre a jour') }} {{ __(' Etat Cession') }} &#128522;</p>
                     </div>
-                    <x-form-items.form wire:submit="store">
+                    <x-form-items.form wire:submit="update">
 
                         <div class='row form-group mb-3'>
                             {{-- <div class="col-md-6 py-2">
@@ -19,17 +19,16 @@
                         </div> --}}
                         <div class="col-md-6 py-2">
                             <label for="code">{{ __('Titre Foncier') }}</label>
-                            <x-input.land_title-select wire:model="titre_foncier_id" prettyname="titre_foncier_id" :options="$land_titles" selected="('titre_foncier_id')" />
+                            <x-input.land_title-select wire:model="titre_foncier_id" prettyname="titre_foncier_id" :options="$land_titles" selected="({{$titre_foncier_id}})" />
                             @error('land_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 py-2">
                             <label for="code">{{ __('Arrondissement') }}</label>
-                            <select wire:model="sub_division_id" name="sub_division_id" class="form-select  @error('sub_division_id') is-invalid @enderror">
+                            <select wire:model="sub_division_id" class="form-select  @error('sub_division_id') is-invalid @enderror">
                                 @foreach ($subdivisions as $subdivision)
                                 <option value="{{$subdivision->id}}">{{ __($subdivision->sub_division_name_en) }} </option>
-
                                 @endforeach
                             </select>
                             @error('sub_division_id')
@@ -57,7 +56,7 @@
                     @enderror
                 </div>
                 <div class="col-md-6 py-2">
-                    <label for="code">{{ __('Géomètre') }}</label>
+                    <label for="code">{{ __('Geometre') }}</label>
                     <x-input.select wire:model="geometre_id" prettyname="geometre_id" :options="$geometres->pluck('first_name', 'id')->toArray()" selected="('geometre_id')" />
                     @error('geometre_id')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -147,7 +146,7 @@
 
             <div class="d-flex justify-content-end py-2">
                 <button type="button" wire:click.prevent="clearFields" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{ __('Close') }}</button>
-                <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Creer') }} </button>
+                <button type="submit" wire:click.prevent="update" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Maitre a jour') }} </button>
             </div>
             </x-form-items.form>
         </div>

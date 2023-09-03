@@ -80,12 +80,10 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'titre_foncier.create'],
             ['name' => 'titre_foncier.update'],
             ['name' => 'titre_foncier.delete'],
+            ['name' => 'map.view'],
             
-            ['name' => 'titre_foncier.import'],
             ['name' => 'titre_foncier.export_n_print'],
             
-            ['name' => 'titre_foncier.operations.view'],
-
             ['name' => 'profile.view'],
             ['name' => 'profile.update'],
             ['name' => 'profile.delete'],
@@ -108,26 +106,19 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'certificate_propriete.delete'],
             ['name' => 'certificate_propriete.export_n_print'],
 
-            ['name' => 'etat_cession.view'],
-            ['name' => 'etat_cession.create'],
-            ['name' => 'etat_cession.update'],
-            ['name' => 'etat_cession.delete'],
-            ['name' => 'etat_cession.export_n_print'],
-
             ['name' => 'lotissement.view'],
             ['name' => 'lotissement.create'],
             ['name' => 'lotissement.update'],
             ['name' => 'lotissement.delete'],
             ['name' => 'lotissement.export_n_print'],
             ['name' => 'lotissement.sale'],
-            ['name' => 'lotissement.add_coordinates'],
 
             ['name' => 'operation.mutation_totale.view'],
             ['name' => 'operation.mutation_totale.create'],
             ['name' => 'operation.mutation_totale.update'],
             ['name' => 'operation.mutation_totale.delete'],
-            ['name' => 'operation.mutation_totale.export_n_print'],
             ['name' => 'operation.mutation_totale.sale'],
+            ['name' => 'operation.mutation_totale.export_n_print'],
             ['name' => 'operation.mutation_totale.par_deces'],
 
             ['name' => 'operation.add_coordinates'],
@@ -140,7 +131,6 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'operation.morcellement.update'],
             ['name' => 'operation.morcellement.delete'],
             ['name' => 'operation.morcellement.export_n_print'],
-            ['name' => 'operation.morcellement.sale'],
             ['name' => 'operation.morcellement.forcee'],
 
             ['name' => 'operation.retrait_indivision.view'],
@@ -148,7 +138,6 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'operation.retrait_indivision.update'],
             ['name' => 'operation.retrait_indivision.delete'],
             ['name' => 'operation.retrait_indivision.export_n_print'],
-            ['name' => 'operation.retrait_indivision.sale'],
             ['name' => 'operation.retrait_indivision.forcee'],
 
             ['name' => 'membre_du_cabinet.view'],
