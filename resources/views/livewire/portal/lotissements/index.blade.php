@@ -24,7 +24,7 @@
 
                     {{__('Lotissements')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('Voir tous les lotissements')}} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{__('Voir tous les lotissements')}} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -68,7 +68,7 @@
         <div class="col-md-3">
             <label for="orderBy">{{__('Trier Par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="titre_foncier_id">{{__('Numéro du titre foncier')}}</option>
+                <option value="titre_foncier_id">{{__('Numéro du Titre Foncier')}}</option>
                 <option value="created_at">{{__('Date Creation')}}</option>
             </select>
         </div>
@@ -100,9 +100,9 @@
                 <thead>
                     <tr>
                         <th class="border-bottom">{{__('Code')}}</th>
-                        <th class="border-bottom">{{__('Numero du titre foncier')}}</th>
+                        <th class="border-bottom">{{__('Numero du Titre Foncier')}}</th>
                         <th class="border-bottom">{{__('Location')}}</th>
-                        <th class="border-bottom">{{__('Details')}}</th>
+                        <th class="border-bottom">{{__('Détails')}}</th>
                         <th class="border-bottom">{{__('Contacts')}}</th>
                         <th class="border-bottom">{{__('Date ')}}</th>
                         @canany('lotissement.update','lotissement.delete')
@@ -200,7 +200,7 @@
                     <tr>
                         <td colspan="7" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                                <h4 class="fs-4 fw-bold">{{__('Liste Vide')}} </h4>
                                 <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
@@ -210,7 +210,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Montrer')}} {{$perPage > $lotissements_count ? $lotissements_count : $perPage  }} {{__('element de')}} {{$lotissements_count}}
+                    {{__('Montrer')}} {{$perPage > $lotissements_count ? $lotissements_count : $perPage  }} {{__('éléments sur')}} {{$lotissements_count}}
                 </div>
                 {{ $lotissements->links() }}
             </div>

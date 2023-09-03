@@ -15,7 +15,7 @@
                     <x-form-items.form wire:submit="{{ $state ? 'update' : 'store' }}">
                         <div class="form-group mb-3 row">
                             <div class='col-md-12 my-2'>
-                                <label class="px-2" for="user_ids">{{__('Requerants')}}</label>
+                                <label class="px-2" for="user_ids">{{__('Requérants')}}</label>
                                 <x-input.selectmultipleusers wire:model="user_ids" prettyname="user_ids" :options="$users" selected="('user_ids')"  multiple="multiple"/>
                                 @error('user_ids')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -32,7 +32,7 @@
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="superficie">{{ __('Superficie en m2') }}</label>
+                                <label for="superficie">{{ __('Superficie en m²') }}</label>
                                 <input wire:model="superficie" type="number"
                                     class="form-control  @error('superficie') is-invalid @enderror"
                                     placeholder="{{ __('2500 m2') }}" required=""
@@ -44,7 +44,7 @@
                         </div>
                         <div class="form-group mb-3 row">
                             <div class='col'>
-                                <label class="px-2" for="region_id">{{__('Region')}}</label>
+                                <label class="px-2" for="region_id">{{__('Région')}}</label>
                                 <select wire:model="region_id" name="region_id" class="form-select  @error('region_id') is-invalid @enderror" required="">
                                     @foreach($regions as $region)
                                     <option value="{{$region->id}}">{{$region->region_name}}</option>
@@ -55,7 +55,7 @@
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label class="px-2" for="division_id">{{__('Departement')}}</label>
+                                <label class="px-2" for="division_id">{{__('Département')}}</label>
                                 <select wire:model="division_id" name="division_id" class="form-select  @error('division_id') is-invalid @enderror" required="">
                                     @foreach($divisions as $division)
                                     <option value="{{$division->id}}">{{$division->division_name}}</option>

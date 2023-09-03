@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{__('Creer Utilisateur')}}</h1>
-                        <p class="px-1"> {{__('Create un nouvel Utilisateur')}} &#128522;</p>
+                        <h1 class="mb-0 h4"> {{__('Créer Utilisateur')}}</h1>
+                        <p class="px-1"> {{__('Créer un nouvel Utilisateur')}}</p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <div class='form-group row mb-3'>
@@ -22,7 +22,7 @@
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label class="px-2" for="role_name">{{__('Role')}}</label>
+                                <label class="px-2" for="role_name">{{__('Rôle')}}</label>
                                 <select wire:model="role_name" name="role_name" class="form-select  @error('role_name') is-invalid @enderror" required="">
                                     @foreach($roles as $role)
                                     <option value="{{$role->id}}">{{$role->name}}</option>
@@ -35,7 +35,7 @@
                         </div>
 
                         <div class='form-group row mb-3'>
-                            <div class=" col"><label for="first_name">{{ __('Prenom') }}</label>
+                            <div class=" col"><label for="first_name">{{ __('Prénom') }}</label>
                                 <input type="text" wire:model="first_name" class="form-control  @error('first_name') is-invalid @enderror " value="{{ old('first_name') }}" placeholder="Jane" id="first_name" autofocus="" required="">
                                 @error('first_name')
                                 <div class="invalid-feedback">
@@ -53,7 +53,7 @@
                             </div>
                         </div>
                         <div class='form-group row mb-3'>
-                            <div class=" col"><label for="id_card_number">{{ __('Numero CNI') }}</label>
+                            <div class=" col"><label for="id_card_number">{{ __('Numéro CNI') }}</label>
                                 <input type="text" wire:model="id_card_number" class="form-control  @error('id_card_number') is-invalid @enderror " value="{{ old('id_card_number') }}" placeholder="112233445566" id="id_card_number" autofocus="" required="">
                                 @error('id_card_number')
                                 <div class="invalid-feedback">
@@ -141,7 +141,7 @@
 
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
-                            <button type="submit" wire:click.prevent="store" class="btn btn-primary" wire:loading.attr="disabled">{{__('Creer')}} </button>
+                            <button type="submit" wire:click.prevent="store" class="btn btn-primary" wire:loading.attr="disabled">{{__('Créer')}} </button>
                         </div>
                     </x-form-items.form>
                 </div>

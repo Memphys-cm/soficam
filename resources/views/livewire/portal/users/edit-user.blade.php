@@ -5,7 +5,7 @@
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4"> {{__('Mettre à jour Utilisateur')}}</h1>
-                        <p class="px-1"> {{__('Modifier details Utilisateur')}} &#128522;</p>
+                        <p class="px-1"> {{__('Modifier details Utilisateur')}}</p>
                     </div>
                     <x-form-items.form wire:submit="update">
                         <div class='form-group row mb-3'>
@@ -22,7 +22,7 @@
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label class="px-2" for="role_name">{{__('Role')}}</label>
+                                <label class="px-2" for="role_name">{{__('Rôle')}}</label>
                                 <select wire:model="role_name" name="role_name" class="form-select  @error('role_name') is-invalid @enderror" required="">
                                     @foreach($roles as $role)
                                     <option value="{{$role->name}}">{{$role->name}}</option>
@@ -53,7 +53,7 @@
                             </div>
                         </div>
                         <div class='form-group row mb-3'>
-                            <div class=" col"><label for="id_card_number">{{ __('Numero CNI') }}</label>
+                            <div class=" col"><label for="id_card_number">{{ __('Numéro CNI') }}</label>
                                 <input type="text" wire:model="id_card_number" class="form-control  @error('id_card_number') is-invalid @enderror " value="{{ old('id_card_number') }}" placeholder="112233445566" id="id_card_number" autofocus="" required="">
                                 @error('id_card_number')
                                 <div class="invalid-feedback">

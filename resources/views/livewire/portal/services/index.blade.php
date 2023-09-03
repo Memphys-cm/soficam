@@ -25,7 +25,7 @@
                     </svg>
                     {{__('Services')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('Voir tous les services')}} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{__('Voir tous les services')}} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -80,7 +80,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Direction du trie')}}: </label>
+            <label for="direction">{{__('Sens du tri')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{__('Ascendant')}}</option>
                 <option value="desc">{{__('Descendant')}}</option>
@@ -160,7 +160,7 @@
                     <tr>
                         <td colspan="7" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                                <h4 class="fs-4 fw-bold">{{__('Liste Vide')}} </h4>
                                 <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
@@ -170,7 +170,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Afficher')}} {{$perPage > $services_count ? $services_count : $perPage  }} {{__('element de')}} {{$services_count}}
+                    {{__('Montrer')}} {{$perPage > $services_count ? $services_count : $perPage  }} {{__('éléments sur ')}} {{$services_count}}
                 </div>
                 {{ $services->links() }}
             </div>

@@ -6,10 +6,10 @@
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4">
-                            {{ __('Deposition') }}{{ __(' de la quittance de l\'état de cession auprès du géomètre désigné') }}
+                            {{ __('Déposition') }}{{ __(' de la quittance de l\'état de cession auprès du géomètre désigné') }}
                         </h1>
                         <p class="px-1">
-                            {{__('Deposer') }}{{ __('  la quittance de l\'état de cession auprès du géomètre désigné') }}
+                            {{__('Déposer') }}{{ __('  la quittance de l\'état de cession auprès du géomètre désigné') }}
                         </p>
                     </div>
                     <x-form-items.form wire:submit="quitance_geometre">
@@ -33,7 +33,7 @@
                         
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
-                                data-bs-dismiss="modal">{{ __('Close') }}</button>
+                                data-bs-dismiss="modal">{{ __('Fermer') }}</button>
                             <button type="submit" wire:click.prevent="quitance_geometre"
                                 class="btn btn-primary btn-loading"
                                 wire:loading.attr="disabled">{{__('Enregistrer')}}</button>

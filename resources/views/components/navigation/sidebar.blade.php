@@ -184,7 +184,7 @@
                                                 </svg>
 
                                             </span>
-                                            <span class="sidebar-text">{{ __('Operations') }}</span>
+                                            <span class="sidebar-text">{{ __('Opérations') }}</span>
                                         </span>
                                         <span class="link-arrow">
                                             <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -244,7 +244,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
                                             </svg>
                                         </span>
-                                        <span class="sidebar-text">{{ __('Cartes') }}</span>
+                                        <span class="sidebar-text">{{ __('Carte') }}</span>
                                     </a>
                                 </li>
                                 @endcan
@@ -258,7 +258,7 @@
                                                 </svg>
 
                                             </span>
-                                            <span class="sidebar-text">{{ __('Releve Biens') }}</span>
+                                            <span class="sidebar-text">{{ __('Relévés Biens') }}</span>
                                         </span>
                                         <span class="link-arrow">
                                             <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -271,7 +271,7 @@
                                             @can('immobilier.view')
                                             <li class="nav-item {{ $request->routeIs('portal.immobilier.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.immobilier.index') }}" class="nav-link">
-                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Releve Immo') }}</span>
+                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Relévé Immo') }}</span>
                                                 </a>
                                             </li>
                                             @endcan
@@ -297,7 +297,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
                                             </svg>
                                         </span>
-                                        <span class="sidebar-text">{{ __('Paiements') }}</span>
+                                        <span class="sidebar-text">{{ __('Recettes') }}</span>
                                     </a>
                                 </li>
                                 @endcan
@@ -332,13 +332,13 @@
                                             @can('tax_foncier.view')
                                             <li class="nav-item {{ $request->routeIs('portal.taxfonciere.suivi.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.taxfonciere.suivi.index') }}" class="nav-link">
-                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Suivi TaxFoncier') }}</span>
+                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Suivi Taxe Foncière') }}</span>
                                                 </a>
                                             </li>
                                             @endcan
                                             <li class="nav-item {{ $request->routeIs('portal.titre-fonciers-report.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.titre-fonciers-report.index') }}" class="nav-link">
-                                                    <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Statistique') }}</span>
+                                                    <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Statistiques') }}</span>
                                                 </a>
                                             </li>
                                         </ul>
@@ -434,14 +434,14 @@
                                             @can('region.view')
                                             <li class="nav-item {{ $request->routeIs('portal.regions.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.regions.index') }}" class="nav-link">
-                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Regions') }}</span>
+                                                    <span class="sidebar-text-contracted">R</span> <span class="sidebar-text">{{ __('Régions') }}</span>
                                                 </a>
                                             </li>
                                             @endcan
                                             @can('division.view')
                                             <li class="nav-item {{ $request->routeIs('portal.divisions.index') ? 'active' : '' }}">
                                                 <a href="{{ route('portal.divisions.index') }}" class="nav-link">
-                                                    <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Sous Regions') }}</span>
+                                                    <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Départements') }}</span>
                                                 </a>
                                             </li>
                                             @endcan
@@ -483,7 +483,7 @@
                                             </svg>
 
                                         </span>
-                                        <span class="sidebar-text">{{ __('Roles & Permissions') }}</span>
+                                        <span class="sidebar-text">{{ __('Rôles & Permissions') }}</span>
                                     </a>
                                 </li>
                                 @endcan
@@ -512,7 +512,7 @@
 
 
                                             </span>
-                                            <span class="sidebar-text">{{ __('Cabinet') }}</span>
+                                            <span class="sidebar-text">{{ __('Cabinets') }}</span>
                                         </span>
                                         <span class="link-arrow">
                                             <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

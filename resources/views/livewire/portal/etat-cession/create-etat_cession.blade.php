@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">{{ $state ? 'Mettre à jour' : 'Creer' }} {{ __(' Etat Cession') }}</h1>
-                        <p class="px-1"> {{ $state ? 'Mettre à jour' : 'Creer' }} {{ __(' Etat Cession') }} &#128522;</p>
+                        <h1 class="mb-0 h4">{{ $state ? 'Mettre à jour' : 'Créer' }} {{ __(' Etat Cession') }}</h1>
+                        <p class="px-1"> {{ $state ? 'Mettre à jour' : 'Créer' }} {{ __(' Etat Cession') }} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
 
@@ -57,7 +57,7 @@
                     @enderror
                 </div>
                 <div class="col-md-6 py-2">
-                    <label for="code">{{ __('Geometre') }}</label>
+                    <label for="code">{{ __('Géomètre') }}</label>
                     <x-input.select wire:model="geometre_id" prettyname="geometre_id" :options="$geometres->pluck('first_name', 'id')->toArray()" selected="('geometre_id')" />
                     @error('geometre_id')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -101,35 +101,35 @@
                     @enderror
                 </div>
                 <div class="col-md-6 py-2">
-                    <label for="code">{{ __('Lieu_dit') }}</label>
+                    <label for="code">{{ __('Lieu-dit') }}</label>
                     <input wire:model="state_assignment.lieu_dit" type="text" class="form-control  @error('state_assignment.lieu_dit') is-invalid @enderror" placeholder="Logpom" required="" value="" name="state_assignment.lieu_dit">
                     @error('state_assignment.lieu_dit')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-md-6 py-2">
-                    <label for="code">{{ __('superficie_en_m2') }}</label>
+                    <label for="code">{{ __('superficie en m²') }}</label>
                     <input wire:model="state_assignment.superficie_en_m2" type="number" class="form-control  @error('state_assignment.superficie_en_m2') is-invalid @enderror" placeholder="25000" required="" value="" name="state_assignment.superficie_en_m2">
                     @error('state_assignment.superficie_en_m2')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-md-6 py-2">
-                    <label for="code">{{ __('Cout') }}</label>
+                    <label for="code">{{ __('Coût') }}</label>
                     <input wire:model="state_assignment.cout" type="number" class="form-control  @error('state_assignment.cout') is-invalid @enderror" placeholder="70000" required="" value="" name="state_assignment.cout">
                     @error('state_assignment.cout')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-md-6 py-2">
-                    <label for="code">{{ __('Frais Supplemetaires') }}</label>
+                    <label for="code">{{ __('Frais Supplémentaires') }}</label>
                     <input wire:model="state_assignment.frais_suplementaires" type="number" class="form-control  @error('state_assignment.frais_suplementaires') is-invalid @enderror" placeholder="15000" required="" value="" name="state_assignment.frais_suplementaires">
                     @error('state_assignment.frais_suplementaires')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-md-6 py-2">
-                    <label for="code">{{ __('Cout_etat_cession') }}</label>
+                    <label for="code">{{ __('Coût Etat Cession') }}</label>
                     <input wire:model="state_assignment.cout_etat_cession" type="number" class="form-control  @error('state_assignment.cout_etat_cession') is-invalid @enderror" placeholder="100000" required="" value="" name="state_assignment.cout_etat_cession">
                     @error('state_assignment.cout_etat_cession')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -146,8 +146,8 @@
             </div>
 
             <div class="d-flex justify-content-end py-2">
-                <button type="button" wire:click.prevent="clearFields" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{ __('Close') }}</button>
-                <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ $state ? 'Update' : 'Create' }} </button>
+                <button type="button" wire:click.prevent="clearFields" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{ __('Fermer') }}</button>
+                <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ $state ? 'Mettre à jour' : 'Créer' }} </button>
             </div>
             </x-form-items.form>
         </div>

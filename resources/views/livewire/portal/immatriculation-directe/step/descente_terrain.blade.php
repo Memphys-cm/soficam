@@ -65,7 +65,7 @@
 
                         <div class='form-group row mb-2'>
                             <div class='col-md-12'>
-                                <label class="px-2" for="certificates_propriete_id">{{__('Ajouter Les Differents Pv')}}</label>
+                                <label class="px-2" for="certificates_propriete_id">{{__('Ajouter Les Differents PV')}}</label>
                                 <div class="input-group">
                                     <input type="file" class="form-control" wire:model="attachments" multiple>
                                 </div>
@@ -74,7 +74,7 @@
                         
                         <div class="d-flex justify-content-end my-2">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
-                                data-bs-dismiss="modal">{{ __('Close') }}</button>
+                                data-bs-dismiss="modal">{{ __('Fermer') }}</button>
                             <button type="submit" wire:click.prevent="descente_terrain"
                                 class="btn btn-primary btn-loading"
                                 wire:loading.attr="disabled">{{__('Enregistrer La Descente sur le Terrain')}}</button>
