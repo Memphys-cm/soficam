@@ -16,6 +16,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -40,6 +41,7 @@ class User extends Authenticatable
         'secondary_phone_number',
         'address',
         'email',
+        'is_active',
         'password',
         'service_id',
     ];
@@ -143,6 +145,8 @@ class User extends Authenticatable
             ->where(function ($q) use ($query) {
                 $q->where('first_name', 'like', '%' . $query . '%');
                 $q->orWhere('last_name', 'like', '%' . $query . '%'); 
+                $q->orWhere('is_active', 'like', '%' . $query . '%'); 
+                $q->orWhere('sexe', 'like', '%' . $query . '%'); 
             });
     }
 
