@@ -72,7 +72,7 @@ $qrCode = QrCode::format('png')->size(100)->generate(url("validate-document?mode
     </table>
 
     <div style="padding: 12px; text-align:center; margin-top:10px">
-        <img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code">
+        <img src="{{'data:image/png;base64,'. base64_encode($qrCode) }} " alt="QR Code">
         <!-- <img src="$qrCode" alt="QR Code"> -->
         <!-- <img src="data:image/png;base64, {!! base64_encode($qrCode) !!} "> -->
     </div>
