@@ -12,7 +12,7 @@
                             <div class="row mb-2">
                                 <label for="">{{__('Choisir le réseau mobile')}}</label>
                                 <select wire:model="payment_method" class="form-select @error('payment_method') is-invalid @enderror" id="payment_method" required="">
-                                    <option value="">{{ __('--Selectionner--') }}</option>
+                                    <option value="">{{ __('--Sélectionner--') }}</option>
                                     <option value="orange_money">{{ __('Orange Money') }}</option>
                                     <option value="mtn_mobile_money">{{ __('MTN Mobile Money') }}</option>
                                 </select>
