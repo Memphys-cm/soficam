@@ -284,6 +284,7 @@ class Index extends Component
                     'next_step' => 'signature decision portant calendrier de descente',
                     'date_avis_publique_signe' => $this->date_status,
                 ]);
+            });
  
         } else if($imma->next_step == "Signature du certficat d'affichage"){
             DB::transaction(function () {
