@@ -102,7 +102,6 @@ class Index extends Component
 
             match ($saleable_item->saleable_type) {
                 'App\Models\EtatCession'  => optional(EtatCession::whereId($saleable_item->saleable_id))->update(['status' => 'paid']),
-                'App\Models\ReleveImmobilier'  => optional(ReleveImmobilier::whereId($saleable_item->saleable_id))->update(['status' => 'active']),
                 'App\Models\CertificatePropriete'  => optional(CertificatePropriete::whereId($saleable_item->saleable_id))->update(['status' => 'active']),
                 'App\Models\Operation'  => optional(Operation::whereId($saleable_item->saleable_id))->update(['statut_conservateur' => 'ongoing']),
                 'App\Models\ReleveImmobilier'  => optional(ReleveImmobilier::whereId($saleable_item->saleable_id))->update(['status' => 'active']),

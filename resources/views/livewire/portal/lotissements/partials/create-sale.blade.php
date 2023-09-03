@@ -109,12 +109,12 @@
                         @endif
                         <div class='form-group row mb-3'>
                             <div class=" col">
-                                <label for="superficie_du_TF_mere">{{ __('TOTAL SURFACE') }}</label>
-                                <input type="number" wire:model="superficie_du_TF_mere"
-                                    class="form-control  @error('superficie_du_TF_mere') is-invalid @enderror "
-                                    value="{{ old('superficie_du_TF_mere') }}" placeholder="0"
-                                    id="superficie_du_TF_mere" autofocus="" required="" disabled>
-                                @error('superficie_du_TF_mere')
+                                <label for="surperficie_du_lot">{{ __('TOTAL SURFACE') }}</label>
+                                <input type="number" wire:model="surperficie_du_lot"
+                                    class="form-control  @error('surperficie_du_lot') is-invalid @enderror "
+                                    value="{{ old('surperficie_du_lot') }}" placeholder="0"
+                                    id="surperficie_du_lot" autofocus="" required="" disabled>
+                                @error('surperficie_du_lot')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

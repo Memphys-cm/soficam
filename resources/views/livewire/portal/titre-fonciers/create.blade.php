@@ -280,7 +280,7 @@
                                                     clip-rule="evenodd"></path>
                                             </svg>
                                             <input type="file" class="form-control-file"
-                                                wire:model="attachements">
+                                                wire:model="attachements" multiple="multiple">
                                             <div class="d-md-block text-left">
                                                 <div class="fw-normal text-dark mb-1">{{ __('Choisir Fichier') }}</div>
                                                 <div class="text-gray small">JPG,PNG, PDF, Word,Excel. Max size of 50MB
