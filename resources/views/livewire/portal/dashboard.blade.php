@@ -9,7 +9,7 @@
                             class="h5 ">{{ auth()->user()->name }}</span>
                     </div>
                 </h1>
-                <p class="mt-n2">{{ __('Gérer les entreprises et leurs détails relatifs') }} &#128524;</p>
+                <p class="mt-n2">{{ __('Gérer les entreprises et leurs détails relatifs') }} ;</p>
             </div>
             <div class="d-flex justify-content-between">
                 {{ \Str::upper(\Str::random(5)) . '' . now()->format('msu') }} <br>
@@ -96,7 +96,7 @@
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
-                        <p class="font-sans-serif lh-1 fs-4">{{ $allsales }} {{ 'Ventes' }}</p>
+                        <p class="font-sans-serif lh-1 fs-4">{{ $allsales }} {{ __('Ventes') }}</p>
                     </div>
                     <div class="">
                         <svg class="icon text-info" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -155,7 +155,7 @@
 
     </div>
 
-    <h4>Activité récente</h4>
+    <h4>{{__('Activité récente')}}</h4>
 
 
     <div class="row">
@@ -169,7 +169,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-xxl-6 ps-xxl-4 pe-xxl-0">
-                            <h2 class="fs-6 fw-normal mb-1 text-gray-400">Clientèle</h2>
+                            <h2 class="fs-6 fw-normal mb-1 text-gray-400">{{__('Clientèle')}}</h2>
                             <h3 class="fw-extrabold mb-1">345k</h3><small class="d-flex align-items-center"><svg
                                     class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewbox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -183,7 +183,7 @@
                                         <path fill-rule="evenodd"
                                             d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
                                             clip-rule="evenodd"></path>
-                                    </svg><span class="text-success fw-bolder">18,2%</span> Depuis le mois dernier</div>
+                                    </svg><span class="text-success fw-bolder">18,2%</span>{{__('Depuis le mois dernier')}}</div>
                             </div>
                         </div>
                     </div>
@@ -198,7 +198,7 @@
                             <div id="chart-revenue"></div>
                         </div>
                         <div class="col-12 col-xxl-6 ps-xxl-4 pe-xl-0">
-                            <h2 class="fs-6 fw-normal mb-1 text-gray-400">Revenue</h2>
+                            <h2 class="fs-6 fw-normal mb-1 text-gray-400">{{__('Revenue')}}</h2>
                             <h3 class="fw-extrabold mb-1">$253,594</h3><small class="d-flex align-items-center"><svg
                                     class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewbox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
