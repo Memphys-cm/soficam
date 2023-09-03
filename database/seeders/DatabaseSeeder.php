@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use Faker\Factory as FakerFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -36,10 +37,10 @@ class DatabaseSeeder extends Seeder
                 return $user->assignRole($user_role);
             }
         });
-
         \App\Models\User::create([
             'first_name' => fake()->name(),
             'last_name' => fake()->name(),
+            'sexe' => 'M', // Ajouter le sexe généré aléatoirement
             'id_card_number' => Str::random(11),
             'date_of_birth' => fake()->date(),
             'place_of_birth' => fake()->country(),
