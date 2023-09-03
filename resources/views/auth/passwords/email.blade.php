@@ -23,7 +23,7 @@
                                 {{ session('status') }}
                             </div>
                             @endif
-                            <div class="mb-4"><label for="email">Votre adresse e-mail</label>
+                            <div class="mb-4"><label for="email">{{__('Votre adresse e-mail')}}</label>
                                 <div class="form-group">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="example@domain.com" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
