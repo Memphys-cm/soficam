@@ -17,7 +17,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+                        <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ __('Demande de Certificat de Propriété') }}</li>
                     </ol>
                 </nav>

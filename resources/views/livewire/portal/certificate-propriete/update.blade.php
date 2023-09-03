@@ -4,7 +4,7 @@
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Mise à jour du certificat de Propriété') }}</h1>
+                        <h1 class="mb-0 h4"> {{ __('Mise à jour du Certificat de Propriété') }}</h1>
                         <p class="px-1"> {{ __('Certificat de Propriété') }}</p>
                     </div>
                     <x-form-items.form wire:submit="update">
@@ -47,7 +47,7 @@
                         </div>
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="price">{{__('Prix')}}</label>
+                                <label for="price">{{__('Prix (FCFA)')}}</label>
                                 <input wire:model="price" type="number" class="form-control  @error('prix') is-invalid @enderror" placeholder="{{__('')}}" required="">
                                 @error('price')
                                 <div class="invalid-feedback">{{$message}}</div>

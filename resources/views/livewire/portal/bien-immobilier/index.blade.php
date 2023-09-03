@@ -79,15 +79,15 @@
                 <option value="price">{{ __('Prix') }}</option>
                 <option value="validity">{{ __('Validité') }}</option>
                 <option value="status">{{ __('Statut') }}</option>
-                <option value="created_at">{{ __('Date creation') }}</option>
+                <option value="created_at">{{ __('Date crÉation') }}</option>
             </select>
         </div>
 
         <div class="col-md-3">
             <label for="direction">{{ __('Sens du tri') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{ __('Ascendante') }}</option>
-                <option value="desc">{{ __('Descendante') }}</option>
+                <option value="asc">{{ __('Ascendant') }}</option>
+                <option value="desc">{{ __('Descendant') }}</option>
             </select>
         </div>
 
