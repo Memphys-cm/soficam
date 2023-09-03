@@ -125,89 +125,93 @@
         </div>
 
     </div>
-    <div class="row py-3">
-        <div class="col">
-            <label for="selectedRegion">{{ __('Par Région') }}: </label>
-            <select wire:model="selectedRegion" id="selectedRegion" class="form-select">
-                <option value="">Toutes les régions</option>
-                @foreach ($regions as $region)
-                    <option value="{{ $region->id }}">{{ $region->region_name_en }}</option>
-                @endforeach
-            </select>
+    <div class='card px-3 mb-3'>
+        <div class="row py-3">
+            <div class="col">
+                <label for="selectedRegion">{{ __('Par Région') }}: </label>
+                <select wire:model="selectedRegion" id="selectedRegion" class="form-select">
+                    <option value="">Toutes les régions</option>
+                    @foreach ($regions as $region)
+                        <option value="{{ $region->id }}">{{ $region->region_name_en }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col">
+                <label for="selectedDivision">{{ __('Par Département') }}: </label>
+                <select wire:model="selectedDivision" id="selectedDivision" class="form-select">
+                    <option value="">Tous les Départements</option>
+                    @foreach ($divisions as $division)
+                        <option value="{{ $division->id }}">{{ $division->division_name_en }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col">
+                <label for="selectedSubDivision">{{ __('Par Arrondissement') }}: </label>
+                <select wire:model="selectedSubDivision" id="selectedSubDivision" class="form-select">
+                    <option value="">Tous les Arrondissements</option>
+                    @foreach ($sub_divisions as $sub_division)
+                        <option value="{{ $sub_division->id }}">{{ $sub_division->sub_division_name_en }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
-        <div class="col">
-            <label for="selectedDivision">{{ __('Par Département') }}: </label>
-            <select wire:model="selectedDivision" id="selectedDivision" class="form-select">
-                <option value="">Tous les Départements</option>
-                @foreach ($divisions as $division)
-                    <option value="{{ $division->id }}">{{ $division->division_name_en }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="col">
-            <label for="selectedSubDivision">{{ __('Par Arrondissement') }}: </label>
-            <select wire:model="selectedSubDivision" id="selectedSubDivision" class="form-select">
-                <option value="">Tous les Arrondissements</option>
-                @foreach ($sub_divisions as $sub_division)
-                    <option value="{{ $sub_division->id }}">{{ $sub_division->sub_division_name_en }}</option>
-                @endforeach
-            </select>
+        <div class="row py-3">
+            <div class="col">
+                <label for="startDate">Date de début:</label>
+                <input type="date" wire:model="startDate" class="form-control" id="startDate">
+            </div>
+            <div class="col">
+                <label for="endDate">Date de fin:</label>
+                <input type="date" wire:model="endDate" class="form-control" id="endDate">
+            </div>
+            <div class="col">
+                <label for="selectedStatus">{{ __('Par la Charge ') }}: </label>
+                <select wire:model="selectedStatus" id="selectedStatus" class="form-select">
+                    <option value="">par le statut</option>
+                    <option value="HYPOTHEQUE">HYPOTHÈQUE</option>
+                    <option value="PRENOTE">PRENOTATION</option>
+                    <option value="SUSPENDU">SUSPENDU</option>
+                    <option value="RETRAIT">RETRAIT</option>
+                    <option value="ANNULATION">ANNULÉ</option>
+                </select>
+            </div>
         </div>
     </div>
-    <div class="row py-3">
-        <div class="col">
-            <label for="startDate">Date de début:</label>
-            <input type="date" wire:model="startDate" class="form-control" id="startDate">
-        </div>
-        <div class="col">
-            <label for="endDate">Date de fin:</label>
-            <input type="date" wire:model="endDate" class="form-control" id="endDate">
-        </div>
-        <div class="col">
-            <label for="selectedStatus">{{ __('Par la Charge ') }}: </label>
-            <select wire:model="selectedStatus" id="selectedStatus" class="form-select">
-                <option value="">par le statut</option>
-                <option value="HYPOTHEQUE">HYPOTHÈQUE</option>
-                <option value="PRENOTE">PRENOTATION</option>
-                <option value="SUSPENDU">SUSPENDU</option>
-                <option value="RETRAIT">RETRAIT</option>
-                <option value="ANNULATION">ANNULÉ</option>
-            </select>
-        </div>
-    </div>
-    <div class="row p-3">
-        <div class="col-md-3">
-            <label for="search">{{ __('Recherche') }}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{ __('Recherche...') }}"
-                class="form-control">
-            <p class="badge badge-info" wire:model="resultCount">{{ $resultCount }}</p>
-        </div>
-        <div class="col-md-3">
-            <label for="orderBy">{{ __('Trier par') }}: </label>
-            <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="region_id">{{ __('Région') }}</option>
-                <option value="date_de_delivrance_du_TF">{{ __('Date de délivrance') }}</option>
-                <option value="created_at">{{ __('Date Creation') }}</option>
-            </select>
-        </div>
-
-        <div class="col-md-3">
-            <label for="direction">{{ __('Sens du Tri ') }}: </label>
-            <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{ __('Ascendant') }}</option>
-                <option value="desc">{{ __('Descendant') }}</option>
-            </select>
-        </div>
-
-        <div class="col-md-3">
-            <label for="perPage">{{ __('Éléments par page') }}: </label>
-            <select wire:model="perPage" id="perPage" class="form-select">
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-                <option value="25">25</option>
-            </select>
+    <div class='card px-3 mb-3'>
+        <div class="row py-3">
+            <div class="col-md-3">
+                <label for="search">{{ __('Recherche') }}: </label>
+                <input wire:model="query" id="search" type="text" placeholder="{{ __('Recherche...') }}"
+                    class="form-control">
+                <p class="badge badge-info" wire:model="resultCount">{{ $resultCount }}</p>
+            </div>
+            <div class="col-md-3">
+                <label for="orderBy">{{ __('Trier par') }}: </label>
+                <select wire:model="orderBy" id="orderBy" class="form-select">
+                    <option value="region_id">{{ __('Région') }}</option>
+                    <option value="date_de_delivrance_du_TF">{{ __('Date de délivrance') }}</option>
+                    <option value="created_at">{{ __('Date Creation') }}</option>
+                </select>
+            </div>
+    
+            <div class="col-md-3">
+                <label for="direction">{{ __('Sens du Tri ') }}: </label>
+                <select wire:model="orderAsc" id="direction" class="form-select">
+                    <option value="asc">{{ __('Ascendant') }}</option>
+                    <option value="desc">{{ __('Descendant') }}</option>
+                </select>
+            </div>
+    
+            <div class="col-md-3">
+                <label for="perPage">{{ __('Éléments par page') }}: </label>
+                <select wire:model="perPage" id="perPage" class="form-select">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                </select>
+            </div>
         </div>
     </div>
     <div class="card pb-3">

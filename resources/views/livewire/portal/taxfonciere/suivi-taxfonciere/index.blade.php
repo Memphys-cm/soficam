@@ -35,8 +35,8 @@
             </div>
         </div>
     </div>
-    <div class="row g-3 mb-3">
-        <div class="col-md-6 col-xxl-2">
+    <div class="row  mb-3">
+        <div class="col">
             <div class="card h-md-100 ecommerce-card-min-width">
                 <div class="card-header pb-0">
                     <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Nombre total de Titre Foncier') }}</h6>
@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xxl-2">
+        <div class="col">
             <div class="card h-md-100 ecommerce-card-min-width">
                 <div class="card-header pb-0">
                     <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Nombre total de TF avec Tax') }}</h6>
@@ -78,7 +78,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xxl-2">
+        <div class="col">
             <div class="card h-md-100 ecommerce-card-min-width">
                 <div class="card-header pb-0">
                     <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Taux de Recouvrement') }}</h6>
@@ -103,7 +103,7 @@
             </div>
         </div>
 
-        <div class="col-md-6 col-xxl-2">
+        <div class="col">
             <div class="card h-md-100 ecommerce-card-min-width">
                 <div class="card-header pb-0">
                     <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Predicted Tax Amount') }}</h6>
@@ -121,13 +121,11 @@
                             </path>
                         </svg>
 
-
-
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xxl-2">
+        <div class="col">
             <div class="card h-md-100 ecommerce-card-min-width">
                 <div class="card-header pb-0">
                     <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Pourcentage total des Tax') }}</h6>
