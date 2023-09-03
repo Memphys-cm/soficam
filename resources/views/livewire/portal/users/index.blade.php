@@ -146,20 +146,38 @@
     <x-alert />
 
     <div class="row p-3">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label for="search">{{__('Recherche')}}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{__('Recherche...')}}" class="form-control">
+            <input wire:model="query" id="search" type="text" placeholder="{{__('Atangana...')}}" class="form-control">
             <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="first_name">{{__('Utilisateurs')}}</option>
                 <option value="created_at">{{__('Date création')}}</option>
             </select>
         </div>
+        <div class="col-md-2">
+            <label for="selectedStatus">{{ __('Trier par statut') }}: </label>
+            <select wire:model="selectedStatus" id="selectedStatus" class="form-select">
+                <option value="">par statut</option>
+                <option value="false">Inactive</option>
+                <option value="1">Active</option>
+                
 
-        <div class="col-md-3">
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label for="selectedSexe">{{ __('Trier par Sexe') }}: </label>
+            <select wire:model="selectedSexe" id="selectedSexe" class="form-select">
+                
+                <option value="">par Sexe</option>
+                <option value="M">Homme</option>
+                <option value="F">Femme</option>
+            </select>
+        </div>
+        <div class="col-md-2">
             <label for="direction">{{__('Sens du tri')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{__('Ascendant')}}</option>
@@ -167,7 +185,7 @@
             </select>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label for="perPage">{{__('Eléments par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
@@ -187,6 +205,7 @@
                         <th class="border-bottom">{{__('Service')}}</th>
                         <th class="border-bottom">{{__('Rôle')}}</th>
                         <th class="border-bottom">{{__('Statut')}}</th>
+                        <th class="border-bottom">{{__('Sexe')}}</th>
                         <th class="border-bottom">{{__('Date création')}}</th>
                         @canany('user.update','user.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
@@ -222,6 +241,9 @@
                         </td>
                         <td>
                             <span class="fw-normal  badge super-badge p-2  bg-{{$user->status_style}} rounded">{{$user->status_text}}</span>
+                        </td>
+                        <td>
+                            <span class="fw-normal">{{$user->sexe}}</span>
                         </td>
                         <td>
                             <span class="fw-normal">{{$user->created_at->format('Y-m-d')}}</span>
