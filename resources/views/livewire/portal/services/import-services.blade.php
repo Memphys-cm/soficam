@@ -8,7 +8,7 @@
                          <p>{{__('Importer nouveau :nom à partir d\'un fichier Excel',['nom'=>__('entreprises')])}} &#128522;</p>
                      </div>
                      <x-form-items.form wire:submit="import" class="form-modal">
-                         <p>{{__('Steps you have to follow for importing new :nom',['nom'=>__('entreprises')])}}</p>
+                         <p>{{__('Étapes à suivre pour importer un nouveau :nom',['nom'=>__('entreprises')])}}</p>
                          <div class='mb-4'>
                              <ol>
                                  <li>{{__('Télécharger un modèle d\'importation :nom',['nom'=>__('entreprise')])}} <a href="{{asset('templates/import_companies.xlsx')}}">{{__('Modèle')}}</a></li>

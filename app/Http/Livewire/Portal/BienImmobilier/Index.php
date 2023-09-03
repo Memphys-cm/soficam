@@ -119,7 +119,7 @@ class Index extends Component
             'price' => 'required|integer',
             'validity' => 'nullable|date',
             'releve_number' => 'required',
-            'status' => 'nullable',
+            //'status' => 'nullable',
 
         ]);       
         DB::transaction(function () {
@@ -131,7 +131,7 @@ class Index extends Component
                 'price' => $this->price,
                 'validity' => Carbon::now()->addMonths(3),
                 'releve_number' => $this->releve_number,
-                'status' => $this->status,
+                //'status' => $this->status,
             ]);
         });
 

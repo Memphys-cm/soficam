@@ -1,11 +1,11 @@
 <div wire:ignore.self class="modal side-layout-modal fade" id="EditUserModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:65%;">
+    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:45%;">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4"> {{__('Mettre à jour Utilisateur')}}</h1>
-                        <p class="px-1"> {{__('Modifier details Utilisateur')}} &#128522;</p>
+                        <p class="px-1"> {{__('Modifier details Utilisateur')}}</p>
                     </div>
                     <x-form-items.form wire:submit="update">
                         <div class='form-group row mb-3'>
@@ -22,7 +22,7 @@
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label class="px-2" for="role_name">{{__('Role')}}</label>
+                                <label class="px-2" for="role_name">{{__('Rôle')}}</label>
                                 <select wire:model="role_name" name="role_name" class="form-select  @error('role_name') is-invalid @enderror" required="">
                                     @foreach($roles as $role)
                                     <option value="{{$role->name}}">{{$role->name}}</option>
@@ -53,6 +53,7 @@
                             </div>
                         </div>
                         <div class='form-group row mb-3'>
+
                             <div class='col'>
                                 <label class="px-2" for="role_name">{{__('Sexe')}}</label>
                                 <select wire:model="sexe" name="sexe" class="form-select  @error('sexe') is-invalid @enderror" required="">
@@ -64,6 +65,12 @@
                                 </select>
                                 @error('sexe')
                                 <div class="invalid-feedback">{{$message}}</div>
+                            <div class=" col"><label for="id_card_number">{{ __('Numéro CNI') }}</label>
+                                <input type="text" wire:model="id_card_number" class="form-control  @error('id_card_number') is-invalid @enderror " value="{{ old('id_card_number') }}" placeholder="112233445566" id="id_card_number" autofocus="" required="">
+                                @error('id_card_number')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                                 @enderror
                             </div>
                             <div class="col"><label for="date_of_birth">{{ __('Date de naissance') }}</label>
@@ -124,7 +131,7 @@
                             <div class=" col"><label for="email">{{ __('Adresse Email ') }}</label>
                                 <input type="email" wire:model="email" class="form-control  @error('email') is-invalid @enderror " value="{{ old('email') }}" placeholder="jane.doe@app.com" id="email" autofocus="" required="">
                                 @error('email')
-                                <div class="invalid-feedback">
+                                <div clas>>>>>>> mains="invalid-feedback">
                                     {{ $message }}
                                 </div>
                                 @enderror

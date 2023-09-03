@@ -6,17 +6,17 @@
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4">
-                            {{ __('Deposition') }}{{ __(' de la quittance de l\'état de cession auprès du géomètre désigné') }}
+                            {{ __('Déposition') }}{{ __(' de la quittance de l\'état de cession auprès du géomètre désigné') }}
                         </h1>
                         <p class="px-1">
-                            {{__('Deposer') }}{{ __('  la quittance de l\'état de cession auprès du géomètre désigné') }}
+                            {{__('Déposer') }}{{ __('  la quittance de l\'état de cession auprès du géomètre désigné') }}
                         </p>
                     </div>
                     <x-form-items.form wire:submit="dossier_technique">
                         @foreach($coordinates as $coordinateIndex => $coordinate)
                         <div class='form-group mb-2 d-flex align-items-end justify-content-between'>
                             <div class=''>
-                                <label for="coordonnees.{{$coordinateIndex}}">{{__('Coordonnees')}} - B{{ $loop->iteration }}</label>
+                                <label for="coordonnees.{{$coordinateIndex}}">{{__('Coordonneés')}} - B{{ $loop->iteration }}</label>
                                 <input wire:model="coordonnees.{{$coordinateIndex}}" type="text" step="0.0001" class="form-control col-md-12 @error('coordonnees') is-invalid @enderror" placeholder="{{__('45.XXXXX')}}" required="" value="" name="coordonnees">
                                 @error('coordonnees')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -48,7 +48,7 @@
                         
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
-                                data-bs-dismiss="modal">{{ __('Close') }}</button>
+                                data-bs-dismiss="modal">{{ __('Fermer') }}</button>
                             <button type="submit" wire:click.prevent="dossier_technique"
                                 class="btn btn-primary btn-loading"
                                 wire:loading.attr="disabled">{{__('Enregistrer Le Dossier Technique')}}</button>

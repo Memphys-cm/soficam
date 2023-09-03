@@ -1,6 +1,8 @@
 <div>
     <x-alert />
     @include('livewire.portal.etat-cession.create-etat_cession')
+    @include('livewire.portal.etat-cession.edit-etat_cession')
+    <x-alert-notif />
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -15,21 +17,21 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Etat Cessions')}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Etat Cession')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
                     <svg class="icon me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    {{__('affectations_d\'état')}}
+                    {{__('Affectation d\'état')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('Voir Tous les Etats Cessions')}} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{__('Voir Tous les Etats de Cession')}} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
                 @can('etat_cession.create')
-                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateUpdateEtatCessionModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateEtatCessionModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{__('Nouveau')}}
@@ -67,11 +69,11 @@
         <div class="col-md-3">
             <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="type_operation">{{__('Operation')}}</option>
+                <option value="type_operation">{{__('Opération')}}</option>
                 <option value="type_personne">{{__('Personne')}}</option>
                 <option value="zone">{{__('Zone')}}</option>
-                <option value="user_id">{{__('Requerant')}}</option>
-                <option value="geometre_id">{{__('Geometre')}}</option>
+                <option value="user_id">{{__('Requérant')}}</option>
+                <option value="geometre_id">{{__('Géomètre')}}</option>
                 <option value="created_at">{{__('Date de création')}}</option>
             </select>
         </div>
@@ -102,14 +104,14 @@
             <table class="table employee-table table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('Requerant')}}</th>
-                        <th class="border-bottom">{{__('reference')}}</th>
+                        <th class="border-bottom">{{__('Requérant')}}</th>
+                        <th class="border-bottom">{{__('reférence')}}</th>
                         <th class="border-bottom">{{__('personne')}}</th>
-                        <th class="border-bottom">{{__('operation')}}</th>
+                        <th class="border-bottom">{{__('opération')}}</th>
                         <th class="border-bottom">{{__('Zone')}}</th>
-                        <th class="border-bottom">{{__('Geometre')}}</th>
+                        <th class="border-bottom">{{__('Géomètre')}}</th>
                         <th class="border-bottom">{{__('Statut')}}</th>
-                        <th class="border-bottom">{{__('Date Creation')}}</th>
+                        <th class="border-bottom">{{__('Date Création')}}</th>
                         {{-- @canany('housing_estate.update','housing_estate.delete') --}}
                         <th class="border-bottom">{{__('Action')}}</th>
                         {{-- @endcanany --}}
@@ -144,7 +146,7 @@
                         {{-- @canany('housing_estate.update','housing_estate.delete') --}}
                         <td>
                             {{-- @can('housing_estate.update') --}}
-                            <a href="#" wire:click.prevent="initData({{$housing_estate->id}})" data-bs-toggle="modal" data-bs-target="#CreateUpdateEtatCessionModal" draggable="false">
+                            <a href="#" wire:click.prevent="initData({{$housing_estate->id}})" data-bs-toggle="modal" data-bs-target="#UpdateEtatCessionModal" draggable="false">
                                 <svg class="icon icon-sm text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                 </svg>
@@ -164,7 +166,7 @@
                     <tr>
                         <td colspan="10" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                                <h4 class="fs-4 fw-bold">{{__('Liste Vide')}} </h4>
                                 <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
@@ -174,7 +176,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Affichage')}} {{$perPage > $state_assignments_count ? $state_assignments_count : $perPage  }} {{__('éléments de')}} {{$state_assignments_count}}
+                    {{__('Montrer')}} {{$perPage > $state_assignments_count ? $state_assignments_count : $perPage  }} {{__(' éléments sur ')}} {{$state_assignments_count}}
                 </div>
                 {{ $state_assignments->links() }}
             </div>

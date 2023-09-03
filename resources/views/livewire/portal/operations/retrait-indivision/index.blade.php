@@ -37,6 +37,10 @@
                 </a>
                 @endcan
 
+                @can('operation.retrait_indivision.forcee')
+                @livewire('portal.operations.retrait-indivision.partials.create-forcee-form')
+                @endcan
+
             </div>
         </div>
     </div>

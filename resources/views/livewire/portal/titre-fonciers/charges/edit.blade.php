@@ -5,7 +5,7 @@
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4"> {{ __('Retirer une charge sur un Titre Foncier') }}</h1>
-                        <p class="px-1"> {{ __('Retrait de charge') }} &#128522;</p>
+                        <p class="px-1"> {{ __('Retrait de charge') }}</p>
                     </div>
                     <x-form-items.form wire:submit="retirer">
                         <div class='form-group  mb-2'>

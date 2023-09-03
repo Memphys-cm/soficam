@@ -39,7 +39,7 @@
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="superficie_a_vendre">{{ __('Sup a Vendre') }}</label>
+                                <label for="superficie_a_vendre">{{ __('Sup à Vendre') }}</label>
                                 <select wire:model="superficie_a_vendre" class="form-select @error('superficie_a_vendre') is-invalid @enderror" id="superficie_a_vendre" required="">
                                     <option value="">{{ __('-- sélectionner le type de surface --') }}
                                     </option>
@@ -109,12 +109,12 @@
                         @endif
                         <div class='form-group row mb-3'>
                             <div class=" col">
-                                <label for="superficie_du_TF_mere">{{ __('TOTAL SURFACE') }}</label>
-                                <input type="number" wire:model="superficie_du_TF_mere"
-                                    class="form-control  @error('superficie_du_TF_mere') is-invalid @enderror "
-                                    value="{{ old('superficie_du_TF_mere') }}" placeholder="0"
-                                    id="superficie_du_TF_mere" autofocus="" required="" disabled>
-                                @error('superficie_du_TF_mere')
+                                <label for="surperficie_du_lot">{{ __('TOTAL SURFACE') }}</label>
+                                <input type="number" wire:model="surperficie_du_lot"
+                                    class="form-control  @error('surperficie_du_lot') is-invalid @enderror "
+                                    value="{{ old('surperficie_du_lot') }}" placeholder="0"
+                                    id="surperficie_du_lot" autofocus="" required="" disabled>
+                                @error('surperficie_du_lot')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -136,7 +136,7 @@
                         @if ($type_de_versement === 'tranche')
                         <div class='form-group row mb-3'>
                             <div class="col">
-                                <label for="montant_versee">{{ __('Montant Versee(Fcfa)') }}</label>
+                                <label for="montant_versee">{{ __('Montant Versé(Fcfa)') }}</label>
                                 <input type="number" wire:model="montant_versee" class="form-control @error('montant_versee') is-invalid @enderror" value="{{ old('montant_versee') }}" placeholder="0" id="montant_versee" autofocus="" required="">
                                 @error('montant_versee')
                                 <div class="invalid-feedback">
@@ -201,7 +201,7 @@
                                     </div>
                                     @if ($type_de_versement === 'tranche')
                                     <div class="d-flex border-top border-2 my-1 py-2">
-                                        <div class=" me-2">{{ __('Montant Versee') }} : </div>
+                                        <div class=" me-2">{{ __('Montant Versé') }} : </div>
                                         <div class="fw-semi-bold">
                                             {{ number_format(floatval($montant_versee)) }}
                                             {{ __('XAF') }}

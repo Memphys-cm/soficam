@@ -37,7 +37,7 @@ class TitreFoncierSeeder extends Seeder
                 'sub_division_id' => SubDivision::pluck('id')->shuffle()->first(),
                 'groupement' => fake()->name(),
                 'lieu_dit' => fake()->name(),
-                'zone' => 'urbaine',
+                'zone' => 'urbain',
                 'numero_folio' => Str::random(2),
                 'volume' => Str::random(2),
                 'superficie_du_TF_mere' => fake()->randomNumber(6, true),

@@ -32,7 +32,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{ __('Tableau de bord') }}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Immatriculation Directes') }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Immatriculations Directes') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -44,7 +44,7 @@
                     </svg>
                     {{__('Immatriculation Directes')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir Toutes les Immatriculation Directes') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('Voir Toutes les Immatriculations Directes') }} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -68,7 +68,7 @@
                                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                     clip-rule="evenodd"></path>
                             </svg>
-                            <span class="sr-only">{{ __('Operations on Land Title') }}</span>
+                            <span class="sr-only">{{ __('Opérations sur les Titres Fonciers') }}</span>
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">Action</a>
@@ -93,8 +93,8 @@
         <div class="col-md-3">
             <label for="orderBy">{{ __('Trier par') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="region_id">{{ __('Region') }}</option>
-                <option value="date_de_delivrance_du_TF">{{ __('Date de livraison') }}</option>
+                <option value="region_id">{{ __('Région') }}</option>
+                <option value="date_de_delivrance_du_TF">{{ __('Date de délivrance') }}</option>
                 <option value="created_at">{{ __('Date de création') }}</option>
             </select>
         </div>
@@ -123,10 +123,10 @@
             <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{ __('Numero Reference') }}</th>
+                        <th class="border-bottom">{{ __('Numero Reférence') }}</th>
                         {{-- <th class="border-bottom">{{ __('Date de Delivrance') }}</th> --}}
                         {{-- <th class="border-bottom">{{__('Requerants Principales')}}</th> --}}
-                        <th class="border-bottom">{{ __('Requerants Secondaires') }}</th>
+                        <th class="border-bottom">{{ __('Requérants Secondaires') }}</th>
                         <th class="border-bottom">{{ __('Localisation') }}</th>
                         <th class="border-bottom">{{ __('Superficie') }}</th>
                         <th class="border-bottom">{{ __('Statut') }}</th>
@@ -293,15 +293,30 @@
                                             </a>
                                         @endif
                                     @endcan
-                                    @can('imma_directe.convocation', $imma_directe)
+                                    @can('imma_directe.certificat_affichage', $imma_directe)
                                     @if ($imma_directe->next_step == 'signature decision portant calendrier de descente')
                                     <a href="#" data-bs-placement="top"
-                                        title="Imprimer La convocation D'Invitation sur le Terrain"
+                                        title="Imprimer Le certificat D'affichage"
                                         wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
                                         data-bs-target="#ConvocationImmaDirecteModal" draggable="false">
                                         <svg class="icon icon-xs" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 10.5v6m3-3H9m4.06-7.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
                                           </svg>                                          
+                                    </a>
+                                    @endif
+                                    @endcan
+
+                                    @can('imma_directe.convocation', $imma_directe)
+                                    @if ($imma_directe->next_step == 'Programmation descente sur le terrain')
+                                    <a href="#" data-bs-placement="top"
+                                        title="Imprimer La convocation D'Invitation sur le Terrain"
+                                        wire:click.prevent="convocation({{ $imma_directe->id }})" data-bs-toggle="modal"
+                                        data-bs-target="" draggable="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-4 -8 50 50"
+                                            stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M9 13.5l3 3m0 0l3-3m-3 3v-6m1.06-4.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+                                        </svg>
                                     </a>
                                     @endif
                                     @endcan
@@ -420,7 +435,7 @@
                         <tr>
                             <td colspan="9" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
-                                    <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
+                                    <h4 class="fs-4 fw-bold">{{ __('Liste Vide') }} </h4>
                                     <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                                 </div>
                             </td>
@@ -430,8 +445,8 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{ __('Affichage') }} {{ $perPage > $imma_directes_count ? $imma_directes_count : $perPage }}
-                    {{ __('éléments de') }} {{ $imma_directes_count }}
+                    {{ __('Montrer') }} {{ $perPage > $imma_directes_count ? $imma_directes_count : $perPage }}
+                    {{ __(' éléments sur ') }} {{ $imma_directes_count }}
                 </div>
                 {{ $imma_directes->links() }}
             </div>

@@ -9,7 +9,7 @@
                             {{ __('Cotation') }}{{ __(' D\'un Dossier') }}
                         </h1>
                         <p class="px-1">
-                            {{__('Coter') }}{{ __(' un Dossier D\'Immatriculation Directe au CSCAF') }}
+                            {{__('Coter') }}{{ __(' un Dossier D\'Immatriculation Directe au CSDAF') }}
                         </p>
                     </div>
                     <x-form-items.form wire:submit="cotation_first_step">

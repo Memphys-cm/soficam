@@ -96,5 +96,4 @@ trait WithLocationPermissions
         }
     }
 
-
 }
