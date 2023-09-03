@@ -53,15 +53,20 @@
                             </div>
                         </div>
                         <div class='form-group row mb-3'>
-                            <div class=" col"><label for="id_card_number">{{ __('Numero CNI') }}</label>
-                                <input type="text" wire:model="id_card_number" class="form-control  @error('id_card_number') is-invalid @enderror " value="{{ old('id_card_number') }}" placeholder="112233445566" id="id_card_number" autofocus="" required="">
-                                @error('id_card_number')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                            <div class='col'>
+                                <label class="px-2" for="role_name">{{__('Sexe')}}</label>
+                                <select wire:model="sexe" name="sexe" class="form-select  @error('sexe') is-invalid @enderror" required="">
+                                    {{-- @foreach($roles as $role) --}}
+                                    <option value="">{{__('Selectionner Le sexe')}}</option>
+                                    <option value="M">{{__('Masculin')}}</option>
+                                    <option value="F">{{__('Feminin')}}</option>
+                                    {{-- @endforeach --}}
+                                </select>
+                                @error('sexe')
+                                <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class=" col"><label for="date_of_birth">{{ __('Date de naissance') }}</label>
+                            <div class="col"><label for="date_of_birth">{{ __('Date de naissance') }}</label>
                                 <input type="date" wire:model="date_of_birth" class="form-control  @error('date_of_birth') is-invalid @enderror " value="{{ old('date_of_birth') }}" placeholder="Edea" id="date_of_birth" autofocus="" required="">
                                 @error('date_of_birth')
                                 <div class="invalid-feedback">
@@ -70,13 +75,24 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group mb-3"><label for="place_of_birth">{{ __('Lieu de naissance') }}</label>
+                        <div class="form-group row mb-3">
+                            <div class=" col"><label for="id_card_number">{{ __('Numero CNI') }}</label>
+                                <input type="text" wire:model="id_card_number" class="form-control  @error('id_card_number') is-invalid @enderror " value="{{ old('id_card_number') }}" placeholder="112233445566" id="id_card_number" autofocus="" required="">
+                                @error('id_card_number')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="col">
+                            {{ __('Lieu de naissance') }}</label>
                             <input type="text" wire:model="place_of_birth" class="form-control  @error('place_of_birth') is-invalid @enderror " value="{{ old('place_of_birth') }}" placeholder="Edea" id="place_of_birth" autofocus="" required="">
                             @error('place_of_birth')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                             @enderror
+                        </div>
                         </div>
                         <div class='form-group row mb-3'>
                             <div class=" col"><label for="primary_phone_number">{{ __('Numéro de téléphone principal') }}</label>

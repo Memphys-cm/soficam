@@ -20,6 +20,7 @@ class Index extends Component
 
     public $first_name;
     public $last_name;
+    public $sexe;
     public $email;
     public $is_active;
     public $id_card_number;
@@ -45,6 +46,7 @@ class Index extends Component
         'first_name' => 'required',
         'last_name' => 'required',
         'email' => 'required|email',
+        'sexe' => 'required',
         'is_active' => 'sometimes',
         'service_id' => 'sometimes',
         'id_card_number' => 'required',
@@ -74,6 +76,7 @@ class Index extends Component
         $user = User::create([
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
+            'sexe' => $this->sexe,
             'email' => $this->email,
             'service_id' => $this->service_id,
             'id_card_number' => $this->id_card_number,
@@ -113,6 +116,7 @@ class Index extends Component
         $this->user->update([
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
+            'sexe' => $this->sexe,
             'email' => $this->email,
             'service_id' => $this->service_id,
             'id_card_number' => $this->id_card_number,
@@ -140,6 +144,7 @@ class Index extends Component
 
         $this->first_name = $user->first_name;
         $this->last_name = $user->last_name;
+        $this->sexe = $user->sexe;
         $this->email = $user->email;
         $this->service_id = $user->service_id;
         $this->is_active = $user->is_active;
