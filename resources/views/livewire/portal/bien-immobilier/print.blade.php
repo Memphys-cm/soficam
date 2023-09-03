@@ -1,7 +1,7 @@
 @php
-    use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-    $qrCode = QrCode::size(100)->generate($bien_immobilier->id);
+$qrCode = QrCode::size(100)->generate(url("validate-document?model={$element->uuid}&category=bien_immobilier"));
 @endphp
 
 <div>

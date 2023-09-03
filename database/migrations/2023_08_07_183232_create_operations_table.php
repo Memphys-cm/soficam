@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
            $table->uuid('uuid')->unique()->index();
             $table->string('numero_operation');
-            $table->enum('type_operation', ['mutation_totale_normale','mutation_totale_par_deces','morcellement_normale', 'morcellement_forcee', 'retrait_indivision'])->default('mutation_totale_normale');
+            $table->enum('type_operation', ['mutation_totale_normale','mutation_totale_par_deces','morcellement_normale', 'morcellement_forcee', 'retrait_indivision_normale', 'retrait_indivision_forcee'])->default('mutation_totale_normale');
             $table->foreignId('requestor_id')->on('users')->nullable();
             $table->foreignId('titre_foncier_id')->nullable();
             $table->foreignId('certificate_prioprietes_id')->nullable();

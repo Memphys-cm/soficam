@@ -1,38 +1,29 @@
 <?php
 
-namespace App\Http\Livewire\Portal\Operations\RetraitIndivision;
+namespace App\Http\Livewire\Portal\Operations\RetraitIndivision\Partials;
 
 use App\Models\User;
 use Livewire\Component;
-use App\Models\Operation;
-use Illuminate\Support\Str;
 use App\Models\TitreFoncier;
 use App\Models\MembreDuCabinet;
-use App\Models\CertificatePropriete;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Livewire\Traits\WithDataTables;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 
-class Index extends Component
+class CreateForceeForm extends Component
 {
     use WithDataTables;
 
     public ?Collection $titre_foncier_users;
     public $certificates_propriete_id, $certificates_proprietes = [], $users = [], $titre_fonciers = [], $notaires = [], $geomtres = [];
     public $titre_foncier_id, $numero_titre_foncier, $superficie_du_TF_mere;
-    public $requestor_id, $region, $division, $sub_division, $lieu_dit, $operation, $operation_type, $retrait_indivision;
+    public $requestor_id, $region, $division, $sub_division, $lieu_dit;
     public $parcel_id, $parcels = [], $etat_cession_id, $etat_cessions = [];
+    public $commentaires;
 
-
-    public $commentaires, $attachements;
-
-    public $listeners = ['flow_updated' => 'render'];
 
     public function mount()
     {
-        $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier', 'region_id', 'division_id', 'sub_division_id', 'lieu_dit')
-            ->has('users','>=', 2)->get();
+        $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier', 'region_id', 'division_id', 'sub_division_id', 'lieu_dit')->get();
         $this->notaires = MembreDuCabinet::notaire()->select('id', 'first_name', 'last_name')->get();
         $this->users = User::role('user')->select('id', 'first_name', 'last_name')->get();
     }
@@ -50,22 +41,15 @@ class Index extends Component
             $this->division = $tf->division->division_name;
             $this->titre_foncier_users = $tf->users;
             $this->certificates_proprietes = $tf->certificatesProprietes;
-            $this->etat_cessions = $tf->etatCessionsPaid->where('type_operation', 'retrait_indivision');
+            $this->etat_cessions = $tf->etatCessionsPaid->where('type_operation', 'mutation_totale');
             $this->parcels = $tf->parcels;
         } else {
         }
     }
 
-    public function initData($id)
-    {
-        $operation = Operation::findOrFail($id);
-        $this->retrait_indivision = $operation;
-        $this->operation = $operation;
-    }
-
     public function store()
     {
-        if (!Gate::allows('operation.retrait_indivision.create')) {
+        if (!Gate::allows('operation.mutation_totale.create')) {
             return abort(401);
         }
 
@@ -73,7 +57,7 @@ class Index extends Component
             'titre_foncier_id' => 'required',
             'requestor_id' => 'required',
             'etat_cession_id' => 'sometimes',
-            'certificates_propriete_id' => 'required',
+            'certificates_propriete_id' => 'sometimes',
         ]);
 
         $cp = CertificatePropriete::findOrFail($this->certificates_propriete_id);
@@ -86,7 +70,7 @@ class Index extends Component
         Operation::create([
             'numero_operation' => Str::upper(Str::random(6)) . "" . now()->format('msu'),
             'titre_foncier_id' => $this->titre_foncier_id,
-            'type_operation' => 'retrait_indivision_normale',
+            'type_operation' => 'mutation_totale_par_deces',
             'requestor_id' => $this->requestor_id,
             'certificate_prioprietes_id' => $this->certificates_propriete_id,
             'etat_cession_id' => $this->etat_cession_id,
@@ -94,26 +78,8 @@ class Index extends Component
         ]);
 
         $this->clearFields();
-        $this->refresh(__('Mutation Totale successfully Created'), 'CreateMutationTotaleNormaleModal');
+        $this->refresh(__('Mutation Totale par Deces successfully Created'), 'CreateMutationTotaleParDecesModal');
     }
-
-    public function delete()
-    {
-        if (!Gate::allows('operation.retrait_indivision.delete')) {
-            return abort(401);
-        }
-
-        if (!empty($this->mutation_totale)) {
-
-            // $this->mutation_totale->users()->delete();
-
-            $this->mutation_totale->delete();
-        }
-
-
-        $this->refresh(__('Operation successfully deleted!'), 'DeleteModal');
-    }
-
 
     public function clearFields()
     {
@@ -127,16 +93,6 @@ class Index extends Component
 
     public function render()
     {
-        if (!Gate::allows('operation.retrait_indivision.view')) {
-            return abort(401);
-        }
-
-        $retraits = Operation::search($this->query)->mutationTotale()->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
-        $retraits_count = Operation::mutationTotale()->count();
-
-        return view('livewire.portal.operations.retrait-indivision.index', [
-            'retraits' => $retraits,
-            'retraits_count' => $retraits_count,
-        ])->layout('components.layouts.dashboard');
+        return view('livewire.portal.operations.retrait-indivision.partials.create-forcee-form');
     }
 }
