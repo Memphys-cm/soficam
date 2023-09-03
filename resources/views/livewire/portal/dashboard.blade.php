@@ -68,7 +68,7 @@
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
-                        <p class="font-sans-serif lh-1 fs-4">{{ $all_cabinet_notaire }} {{ __('Cabinet') }}</p>
+                        <p class="font-sans-serif lh-1 fs-4">{{ $all_cabinet_notaire }} {{ __('Cabinet(s)') }}</p>
                     </div>
                     <div class="">
                         <svg class="icon text-info " xmlns="http://www.w3.org/2000/svg" fill="none"

@@ -12,8 +12,8 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Acceuil</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Profile settings')}}</li>
+                        <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Paramètres du profil')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -68,7 +68,7 @@
                         </div>
                         <div class="form-group mb-4 row">
                             <div class='col-md-6 col-xs-12'>
-                                <label for="phone_number">{{__('Numero de telephone')}}</label>
+                                <label for="phone_number">{{__('Numéro de téléphone')}}</label>
                                 <input wire:model="phone_number" type="text" class="form-control  @error('phone_number') is-invalid @enderror" value="{{auth()->user()->phone}}" name="phone_number">
                                 @error('phone_number')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -85,7 +85,7 @@
                         <div class='form-group mb-4'>
                             <label for="preferred_language">{{__('Sélectionner la langue de notification préférée')}}</label>
                             <select wire:model="preferred_language" name="preferred_language" class="form-select  @error('preferred_language') is-invalid @enderror" required="">
-                                <option value="">{{__('Select status')}}</option>
+                                <option value="">{{__('Sélectionner')}}</option>
                                 <option value="en">{{__('Anglais')}}</option>
                                 <option value="fr">{{__('Français')}}</option>
                             </select>
@@ -94,7 +94,7 @@
                             @enderror
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="submit" wire:click.prevent="updateProfile" class="btn btn-secondary btn-loading">{{__('Update')}} </button>
+                            <button type="submit" wire:click.prevent="updateProfile" class="btn btn-secondary btn-loading">{{__('Mettre à jour')}} </button>
                         </div>
                     </x-form-items.form>
                 </div>

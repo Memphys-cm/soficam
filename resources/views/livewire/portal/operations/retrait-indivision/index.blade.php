@@ -15,7 +15,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
-                        <li class="breadcrumb-item">{{__('Operations')}}</li>
+                        <li class="breadcrumb-item">{{__('Opérations')}}</li>
                         <li class="breadcrumb-item active" aria-current="page">{{__('Retrait Indivision')}}</li>
                     </ol>
                 </nav>
@@ -25,7 +25,7 @@
                     </svg>
                     {{__('Retrait Indivision')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('Voir toutes les Retrait Indivision')}} </p>
+                <p class="mt-n1 mx-2">{{__('Voir tous les Retraits d\'Indivision')}} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -56,7 +56,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Trier par direction')}}: </label>
+            <label for="direction">{{__('Sens du tri')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{__('Ascendant')}}</option>
                 <option value="desc">{{__('Descendant')}}</option>
@@ -64,7 +64,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Elements par page')}}: </label>
+            <label for="perPage">{{__('Éléments par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -79,12 +79,12 @@
             <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('Numero de Retrait')}}</th>
-                        <th class="border-bottom">{{__('Titre foncier')}}</th>
+                        <th class="border-bottom">{{__('Numéro de Retrait')}}</th>
+                        <th class="border-bottom">{{__('Titre Foncier')}}</th>
                         <th class="border-bottom">{{__('Localisationtion')}}</th>
                         <th class="border-bottom">{{__('Statut')}}</th>
-                        <th class="border-bottom">{{__('Type Operation')}}</th>
-                        <th class="border-bottom">{{__('Date creation')}}</th>
+                        <th class="border-bottom">{{__('Type Opération')}}</th>
+                        <th class="border-bottom">{{__('Date création')}}</th>
                         @canany('mutation_totale.update','mutation_totale.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
                         @endcanany
@@ -181,7 +181,7 @@
                     <tr>
                         <td colspan="9" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                                <h4 class="fs-4 fw-bold">{{__('Liste Vide')}} </h4>
                                 <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
@@ -191,7 +191,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Affichage')}} {{$perPage > $retraits_count ? $retraits_count : $perPage  }} {{__('element de')}} {{$retraits_count}}
+                    {{__('Montrer')}} {{$perPage > $retraits_count ? $retraits_count : $perPage  }} {{__(' éléments sur')}} {{$retraits_count}}
                 </div>
                 {{ $retraits->links() }}
             </div>

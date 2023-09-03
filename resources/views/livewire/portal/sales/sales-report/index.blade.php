@@ -29,7 +29,7 @@
                     </svg>
                     {{ __('Rapport sur toutes les ventes') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir tous les rapports de vente') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('Voir tous les rapports de vente') }} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -99,8 +99,8 @@
                         <option value="mtn_mobile_money">{{ __('MTN Mobile Money') }}</option>
                         <option value="orange_money">{{ __('Orange Money') }}</option>
                         <option value="cash">{{ __('Cash') }}</option>
-                        <option value="cheque">{{ __('Cheque') }}</option>
-                        <option value="bank_transfer">{{ __('Bank Transfer') }}</option>
+                        <option value="cheque">{{ __('Chèque') }}</option>
+                        <option value="bank_transfer">{{ __('Transfert Bancaire') }}</option>
                     </select>
                 </div>
                 <div class="col-md-3 my-2">
@@ -144,7 +144,7 @@
                 </select>
             </div>
             <div class="col">
-                <label for="direction">{{ __('Direction de trie') }}: </label>
+                <label for="direction">{{ __('Sens du tri') }}: </label>
                 <select wire:model="orderAsc" id="direction" class="form-select">
                     <option value="asc">{{ __('Ascendante') }}</option>
                     <option value="desc">{{ __('Descendante') }}</option>
@@ -214,7 +214,7 @@
                         <tr>
                             <td colspan="9" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
-                                    <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
+                                    <h4 class="fs-4 fw-bold">{{ __('Liste') }} </h4>
                                     <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                                 </div>
                             </td>
@@ -227,7 +227,7 @@
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
                     {{ __('Montrer') }} {{ $perPage > $allsales_count ? $allsales_count : $perPage }}
-                    {{ __('éléments de') }} {{ $allsales_count }}
+                    {{ __('éléments sur') }} {{ $allsales_count }}
                 </div>
                 {{ $allsales->links() }}
             </div>

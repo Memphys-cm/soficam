@@ -4,19 +4,19 @@
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Creer')}}{{__(' morcellement')}}</h1>
-                        <p class="px-1"> {{ __('Creer')}}{{__(' un morcellement sur titre foncier')}} </p>
+                        <h1 class="mb-0 h4"> {{ __('Créer')}}{{__(' morcellement')}}</h1>
+                        <p class="px-1"> {{ __('Créer')}}{{__(' un morcellement sur Titre Foncier')}} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <div class='form-group  mb-2'>
-                            <label for="titre_foncier_id">{{ __('Numero du Titre Foncier') }}</label>
+                            <label for="titre_foncier_id">{{ __('Numéro du Titre Foncier') }}</label>
                             <x-input.land_title-select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers" />
                             @error('titre_foncier_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         @if(!empty($titre_foncier_users))
-                        <span class="fw-bold py-2">{{__('Proprietaire du terrain')}}</span>
+                        <span class="fw-bold py-2">{{__('Propriétaire(s) du terrain')}}</span>
                         <div class='row'>
                             @foreach($titre_foncier_users->split($titre_foncier_users->count()/2) as $row )
                             <div class="col-md-6" data-aos="fade-right" data-aos-duration="2000">
@@ -38,7 +38,7 @@
                         </div>
                         @endif
                         <div class='form-group row mb-2'>
-                            <div class=" col"><label for="region">{{ __('Region') }}</label>
+                            <div class=" col"><label for="region">{{ __('Région') }}</label>
                                 <input type="text" wire:model="region" class="form-control  @error('region') is-invalid @enderror " value="{{ old('region') }}" placeholder="" id="region" autofocus="" required="" disabled>
                                 @error('region')
                                 <div class="invalid-feedback">
@@ -46,7 +46,7 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class=" col"><label for="division">{{ __('Departement') }}</label>
+                            <div class=" col"><label for="division">{{ __('Département') }}</label>
                                 <input type="text" wire:model="division" class="form-control  @error('division') is-invalid @enderror " value="{{ old('division') }}" placeholder="" id="division" autofocus="" required="" disabled>
                                 @error('division')
                                 <div class="invalid-feedback">
@@ -77,7 +77,7 @@
 
                         <div class='form-group row mb-2'>
                             <div class='col'>
-                                <label class="px-2" for="requestor_id">{{__('Requerant')}}</label>
+                                <label class="px-2" for="requestor_id">{{__('Requérant')}}</label>
                                 <select wire:model="requestor_id" class='form-control'>
                                     <option value=''>{{__('-- Select --')}}</option>
                                     @foreach($users as $user)
@@ -132,8 +132,8 @@
                             @enderror
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Create')}}</button>
+                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
+                            <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Créer')}}</button>
                         </div>
                     </x-form-items.form>
                 </div>

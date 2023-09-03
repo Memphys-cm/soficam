@@ -32,8 +32,8 @@
                             @enderror
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="button"  wire:click.prevent="clearFields"  class="btn btn-light text-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" wire:click.prevent="update" class="btn btn-primary btn-sm btn-loading">{{__('Update')}}</button>
+                            <button type="button"  wire:click.prevent="clearFields"  class="btn btn-light text-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
+                            <button type="submit" wire:click.prevent="update" class="btn btn-primary btn-sm btn-loading">{{__('Mettre à jour')}}</button>
                         </div>
                     </x-form-items.form>
                 </div>

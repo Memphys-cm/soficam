@@ -6,20 +6,20 @@
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Creer') }}{{ __(' Immobilier') }}</h1>
-                        <p class="px-1"> {{ __('Immobilier') }} </p>
+                        <h1 class="mb-0 h4"> {{ __('Créer') }}{{ __(' Relevé Immobilier') }}</h1>
+                        <p class="px-1"> {{ __('Relevé Immobilier') }} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <div class="form-group mb-3 row">
                             <div class='col'>
-                                <label class="px-2" for="requestor_id">{{ __('Requerant') }}</label>
+                                <label class="px-2" for="requestor_id">{{ __('Requérant') }}</label>
                                 <x-input.select wire:model="requestor_id" prettyname="requestor" :options="$requestors->pluck('first_name', 'id')->toArray()" />
                                 @error('user_ids')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="releves_type">{{ __('Type Releves') }}</label>
+                                <label for="releves_type">{{ __('Type Personne') }}</label>
                                 <select wire:model="releves_type" name="releves_type"
                                     class="form-select  @error('releves_type') is-invalid @enderror" required="">
                                     <option value="">{{ __('-- Selectionner --') }}</option>
@@ -62,7 +62,7 @@
                      
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="releve_reason">{{ __('Raison Releve') }}</label>
+                                <label for="releve_reason">{{ __('Raison du Relevé Immo') }}</label>
                                 <textarea rows="6" wire:model="releve_reason" class="form-control @error('releve_reason') is-invalid @enderror"
                                     id="releve_reason" autofocus="" required=""></textarea>
                                 @error('releve_reason')
@@ -76,7 +76,7 @@
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
                                 data-bs-dismiss="modal">{{ __('Fermer') }}</button>
                             <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading"
-                                wire:loading.attr="disabled">{{ __('Creer') }}</button>
+                                wire:loading.attr="disabled">{{ __('Créer') }}</button>
                         </div>
                     </x-form-items.form>
                 </div>
@@ -93,8 +93,8 @@
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Mise à jour du certificat de propriété') }}</h1>
-                        <p class="px-1"> {{ __('Mise à jour du certificat de propriété') }} &#128522;</p>
+                        <h1 class="mb-0 h4"> {{ __('Mise à jour du Relevé Immobilier') }}</h1>
+                        <p class="px-1"> {{ __('Mise à jour du Relevé Immobilier') }} </p>
                     </div>
                     <x-form-items.form wire:submit="update">
                         <div class='form-group mb-3 row'>
@@ -111,7 +111,7 @@
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="releve_number">{{ __('Numero Releve') }}</label>
+                                <label for="releve_number">{{ __('Numéro Relevé') }}</label>
                                 <input wire:model="releve_number" type="text"
                                     class="form-control  @error('releve_number') is-invalid @enderror"
                                     placeholder="{{ __('1986') }}" required="">
@@ -123,14 +123,14 @@
                         </div>
                         <div class="form-group mb-3 row">
                             <div class='col'>
-                                <label class="px-2" for="requestor_id">{{ __('Requerant') }}</label>
+                                <label class="px-2" for="requestor_id">{{ __('Requérant') }}</label>
                                 <x-input.select wire:model="requestor_id" prettyname="requestor" :options="$requestors->pluck('first_name', 'id')->toArray()" />
                                 @error('user_ids')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="releves_type">{{ __(' Type Releves') }}</label>
+                                <label for="releves_type">{{ __(' Type Personne') }}</label>
                                 <select wire:model="releves_type" name="releves_type"
                                     class="form-select  @error('releves_type') is-invalid @enderror" required="">
                                     <option value="">{{ __('-- Selectionner --') }}</option>
@@ -153,7 +153,7 @@
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="status">{{ __('Statut Immobilier ') }}</label>
+                                <label for="status">{{ __('Statut du Relevé Immo ') }}</label>
                                 <select wire:model="status" name="status"
                                     class="form-select  @error('status') is-invalid @enderror" required="">
                                     <option value="">{{ __('-- Selectionner --') }}</option>
@@ -167,7 +167,7 @@
                         </div>
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="releve_reason">{{ __('Raison Releve') }}</label>
+                                <label for="releve_reason">{{ __('Raison du Relevé Immo') }}</label>
                                 <textarea rows="6" wire:model="releve_reason"
                                     class="form-control @error('releve_reason') is-invalid @enderror" id="releve_reason" autofocus=""
                                     required=""></textarea>

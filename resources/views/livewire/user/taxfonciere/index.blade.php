@@ -19,7 +19,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{ __('Tableau de bord') }}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Titres fonciers') }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Taxes foncières') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -29,9 +29,9 @@
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                         </path>
                     </svg>
-                    {{ __('Tax foncier sur mes titres fonciers') }}
+                    {{ __('Taxe Foncière sur mes Titres Fonciers') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir tous les Tax Foncier sur titres fonciers') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('Voir toutes les Taxes Foncières sur les Titres Fonciers') }}  </p>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
                 <thead>
                     <tr>
                         <th class="border-bottom">{{ __('Numéro du titre foncier') }}</th>
-                        <th class="border-bottom">{{ __('Proprietaire') }}</th>
+                        <th class="border-bottom">{{ __('Propriétaire(s)') }}</th>
                         <th class="border-bottom">{{ __('Localisation') }}</th>
                         <th class="border-bottom">{{ __('Montant de la Taxe') }}</th>
                         <th class="border-bottom">{{ __('Statut de la Taxe') }}</th>
@@ -115,7 +115,7 @@
                         <tr>
                             <td colspan="9" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
-                                    <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
+                                    <h4 class="fs-4 fw-bold">{{ __('Liste vide') }} </h4>
                                     <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                                 </div>
                             </td>

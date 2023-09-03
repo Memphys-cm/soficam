@@ -13,7 +13,7 @@
                                 <div class="row mb-3">
                                     <label for="">Choisir le réseau mobile</label>
                                     <select class="form-control text-center" name="" id="">
-                                        <option value="">--Selectionner--</option>
+                                        <option value="">--Sélectionner--</option>
                                         <option style="background-color: orange" value="ORANGE MONEY"><b>ORANGE MONEY</b></option>
                                         <option style="background-color: yellow" value="MTN MOBILE MONEY"><b>MTN MOBILE MONEY</b></option>
                                     </select>
@@ -29,7 +29,7 @@
                             </div>
                         </fieldset>
                         <div class="d-flex justify-content-end mt-5">
-                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
+                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
                             <button type="submit" wire:click.prevent="" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Payer')}}</button>
                         </div>
                     </x-form-items.form>
