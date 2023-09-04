@@ -32,11 +32,15 @@ class Operation extends Model implements  HasMedia
             ->nonQueued();
     }
 
-    function scopeMutationTotale($query)
+    public function scopeRetraitIndivision($query)
+    {
+        return $query->where('type_operation', 'retrait_indivision_normale')->orWhere('type_operation', 'retrait_indivision_forcee');
+    }
+    public function scopeMutationTotale($query)
     {
         return $query->where('type_operation', 'mutation_totale_normale')->orWhere('type_operation', 'mutation_totale_par_deces');
     }
-    function scopeMorcellements($query)
+    public function scopeMorcellements($query)
     {
         return $query->where('type_operation', 'morcellement_normale')->orWhere('type_operation', 'morcellement_forcee');
     }
@@ -82,8 +86,9 @@ class Operation extends Model implements  HasMedia
             'mutation_totale_normale' => 'info',
             'mutation_totale_par_deces' => 'primary',
             'morcellement_normale' =>'secondary',
-            'morcellement_forcee' => 'tertiary', 
-            'retrait_indivision' => 'dark', 
+            'morcellement_forcee' => 'tertiary',
+            'retrait_indivision_normale' => 'gray-500',
+            'retrait_indivision_forcee' => 'success', 
             NULL => ''
         };
     }
@@ -94,7 +99,8 @@ class Operation extends Model implements  HasMedia
             'mutation_totale_par_deces' => 'Mutation Par Deces',
             'morcellement_normale' => 'Morcellement',
             'morcellement_forcee' => 'Morcellement Force',
-            'retrait_indivision' => 'Retrait D\'indivision',
+            'retrait_indivision_normale' => 'Retrait D\'indivision',
+            'retrait_indivision_forcee' => 'Retrait D\'indivision Forcee',
             NULL => ''
         };
     }

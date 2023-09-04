@@ -167,6 +167,7 @@ class Index extends Component
     public function generateCodeTF()
     {
         $numero = $this->region_code . "/" . $this->division_code . "/" . 'A' . "/" . $this->numero_du_duplicata . "/" . $this->superficie_du_TF_mere . "/" . $this->numero_folio;
+
         return ($numero);
     }
 
