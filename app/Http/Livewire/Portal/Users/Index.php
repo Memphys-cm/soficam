@@ -22,7 +22,7 @@ class Index extends Component
     public $last_name;
     public $sexe;
     public $email;
-    public $is_active = 1;
+    public $is_active;
     public $id_card_number;
     public $date_of_birth;
     public $place_of_birth;
