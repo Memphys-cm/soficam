@@ -18,7 +18,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Vente Totale') }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Recettes Totales') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -28,7 +28,7 @@
                     </svg>
                     {{ __('Gestion des ventes totales') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir toutes les ventes totales dans l\'application') }}</p>
+                <p class="mt-n1 mx-2">{{ __('Voir toutes les Recettes totales dans l\'application') }}</p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
