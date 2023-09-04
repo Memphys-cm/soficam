@@ -69,8 +69,8 @@
             <label for="selectedStatus">{{ __('par le statut') }}: </label>
             <select wire:model="selectedStatus" id="selectedStatus" class="form-select">
                 <option value="">par le statut</option>
-                <option value="totally_paid">PAYER</option>
-                <option value="pending_payment">NON PAYER</option>
+                <option value="totally_paid">Payé</option>
+                <option value="pending_payment">Non payé</option>
 
             </select>
         </div>
