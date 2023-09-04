@@ -15,6 +15,16 @@
                     <x-form-items.form wire:submit="create_tf">
                         <div class="form-group mb-3 row">
                             <div class="col-md-12">
+                                <label for="volume">{{ __('Numero Duplicata') }}</label>
+                                <input wire:model="duplicata" type="number"
+                                    class="form-control  @error('duplicata') is-invalid @enderror"
+                                    placeholder="{{ __('') }}" required=""
+                                    name="duplicata" >
+                                @error('duplicata')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
                                 <label for="volume">{{ __('Volume') }}</label>
                                 <input wire:model="volume" type="number"
                                     class="form-control  @error('volume') is-invalid @enderror"

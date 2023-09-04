@@ -40,7 +40,7 @@ class Index extends Component
     public $regions;
     public $divisions = [];
     public $sub_divisions = [];
-  
+    public $etat_terrain , $source;
     public $date_debut , $date_fin;
     public $date_convocation , $superficie , $status , $date_status;
     public $geometre_id , $geometres;
@@ -49,6 +49,7 @@ class Index extends Component
     public $limit_sud;
     public $limit_est;
     public $limit_ouest;
+    public $duplicata;
     public $coordinates = ['', ''] , $transform;
     public $coordonnees = [];
     public $coordonne = [];
@@ -137,6 +138,7 @@ class Index extends Component
             'region_id' => $this->region_id,
             'zone' => $this->zone,
             'etat_terrain' => $this->etat_terrain,
+            'source_terrain' => $this->source,
             'superficie' => $this->superficie,
             'division_id' => $this->division_id,
             'sub_division_id' => $this->sub_division_id,
@@ -1015,6 +1017,33 @@ class Index extends Component
         }
     }
 
+    public function generateCodeTF()
+    {
+        $numero = $this->imma_directe->region->region_name_fr . "/" . $this->imma_directe->division->division_name_fr . "/" . 'A' . "/" . $this->duplicata . "/" . $this->imma_dircte->superficie . "/" . $this->folio;
+        return ($numero);
+    }
+
+    function genererNationalCodeUnique()
+    {
+        $dernierEnregistrement = TitreFoncier::orderBy('id', 'desc')->first();
+
+        if ($dernierEnregistrement) {
+            $dernierNumero = intval(substr($dernierEnregistrement->code, 2)); // Extrait le numéro sans "TF" et convertit en nombre
+            $nouveauNumero = $dernierNumero + 1;
+        } else {
+            $nouveauNumero = 1;
+        }
+
+        // Formate le numéro avec des zéros à gauche (total 7 caractères)
+        $numeroFormate = str_pad($nouveauNumero, 7, '0', STR_PAD_LEFT);
+
+        // Concatène "TF" et le numéro formate pour obtenir le code unique
+        $codeUnique = "TF" . $numeroFormate;
+
+        return $codeUnique;
+    }
+
+
     public function create_tf()
     {
         $this->validate([
@@ -1034,7 +1063,7 @@ class Index extends Component
         });
 
         $titrefoncier = TitreFoncier::create([
-            'numero_titre_foncier' => $this->numero_titre_foncier,
+            'numero_titre_foncier' => $this->generateCodeTF(),
             'national_code' => $this->genererNationalCodeUnique(),
             'region_id' => $this->imma_directe->region_id,
             'division_id' => $this->imma_directe->division_id,
