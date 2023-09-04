@@ -44,7 +44,7 @@
                                         @enderror
                                     </div>
                                     <div class=" col"><label for="date_of_birth">{{ __('Date de naissance') }}</label>
-                                        <input type="date" name="date_of_birth" class="form-control  @error('date_of_birth') is-invalid @enderror " value="{{ old('date_of_birth') }}" placeholder="Edea" id="date_of_birth" autofocus="" required="">
+                                        <input type="date" name="date_of_birth" class="form-control  @error('date_of_birth') is-invalid @enderror " value="{{ old('date_of_birth') }}" placeholder="01/01/1967" id="date_of_birth" autofocus="" required="">
                                         @error('date_of_birth')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -70,7 +70,7 @@
                                         @enderror
                                     </div>
                                     <div class=" col"><label for="secondary_phone_number">{{ __('Autre numéro de téléphone') }}</label>
-                                        <input type="text" name="secondary_phone_number" class="form-control  @error('secondary_phone_number') is-invalid @enderror " value="{{ old('secondary_phone_number') }}" placeholder="Doe" id="secondary_phone_number" autofocus="" required="">
+                                        <input type="text" name="secondary_phone_number" class="form-control  @error('secondary_phone_number') is-invalid @enderror " value="{{ old('secondary_phone_number') }}" placeholder="6xxxxxxxx" id="secondary_phone_number" autofocus="" required="">
                                         @error('secondary_phone_number')
                                         <div class="invalid-feedback">
                                             {{ $message }}
