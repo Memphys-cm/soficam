@@ -148,7 +148,6 @@
                 <div class="text-center text-gray-800 mt-4">
                     <img src="{{ asset('/img/illustrations/not_found.svg') }}" class="w-25 ">
                     <h4 class="fs-4 fw-bold my-1">{{__('Liste vide')}}</h4>
-                    <p class="pt-0 mt-n1">{{__('Aucun enregistrement n\'a été trouvé ici!')}}</p>
                 </div>
                 @can('core.role.create')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateCompanyModal" class="btn btn-sm btn-secondary py-2 mt-1 d-inline-flex align-items-center ">
@@ -164,7 +163,7 @@
     </div>
     <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
         <div>
-            {{__('Montrer')}} {{$perPage > $roles_count ? $roles_count : $perPage  }} {{__('éléments sur')}} {{$roles_count}}
+            {{__('Montrer')}} {{$perPage > $roles_count ? $roles_count : $perPage  }} {{__(' éléments sur')}} {{$roles_count}}
         </div>
         {{ $roles->links() }}
     </div>

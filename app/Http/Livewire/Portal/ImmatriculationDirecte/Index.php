@@ -285,7 +285,7 @@ class Index extends Component
                     'date_avis_publique_signe' => $this->date_status,
                 ]);
             });
-        } else if($imma->next_step == "Signature du certficat d'affichage"){
+        } else if($imma->next_step == "Signature du certificat d'affichage"){
             DB::transaction(function () {
                 $this->imma_directe->update([
                     'statut' => 'Certificat d\'affichage signé',
@@ -828,9 +828,8 @@ class Index extends Component
 
         DB::transaction(function () {
             $this->imma_directe->update([
-                'date_debut_certificat_affichage' => $this->date_debut,
-                'date_fin_certificat_affichage' => $this->date_fin,
-                'status_certificat_d\'affichage' => 'done',
+                'date_debut_certificat_d_affichage' => $this->date_debut,
+                'date_fin_certificat_d_affichage' => $this->date_fin,
                 'statut' => 'Certificat D\'affichage transmis pour signature',
                 'next_step' => 'Signature du certificat d\'affichage',
             ]);
