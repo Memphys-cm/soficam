@@ -37,7 +37,7 @@
                                 </svg>
                                 <div class="mb-3 mb-md-0">
                                     <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($creation_log_count)}} {{ __(\Str::plural('Audit de création', $creation_log_count)) }} </h5>
-                                    <div class=" text-gray-500 ">{{__('enregistré!')}} &#128516;</div>
+                                    <div class=" text-gray-500 ">{{__('enregistré!')}}</div>
                                 </div>
                             </div>
                         </a>
@@ -52,7 +52,7 @@
                                 </svg>
                                 <div class="mb-3 mb-md-0">
                                     <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($update_log_count)}} {{ __(\Str::plural('Audit de mises à jour', $update_log_count)) }} </h5>
-                                    <div class=" text-gray-500 ">{{__('enregistré!')}} &#128516;</div>
+                                    <div class=" text-gray-500 ">{{__('enregistré!')}}</div>
                                 </div>
                             </div>
                         </a>
