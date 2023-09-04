@@ -171,7 +171,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Elément par page')}}: </label>
+            <label for="perPage">{{__('Éléments par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>

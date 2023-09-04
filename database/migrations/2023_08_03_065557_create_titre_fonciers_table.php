@@ -39,6 +39,7 @@ return new class extends Migration
             $table->foreignId('conservateur_id')->on('users')->nullable();
             $table->string('numero_ccp')->nullable();
             $table->json('coordonnees')->nullable();
+            $table->json('coordonnees_utm')->nullable();
             $table->string('limit_nord');
             $table->string('limit_sud');
             $table->string('limit_est');

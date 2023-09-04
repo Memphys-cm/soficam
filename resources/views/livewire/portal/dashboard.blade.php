@@ -1,5 +1,5 @@
 <div>
-    <div class='pb-3'>
+    {{-- <div class='pb-3'>
         <div class="d-flex justify-content-between w-100 flex-wrap mb-0 align-items-center">
             <div class="mb-lg-0">
 
@@ -15,7 +15,7 @@
                 {{ \Str::upper(\Str::random(5)) . '' . now()->format('msu') }} <br>
             </div>
         </div>
-    </div>
+    </div> --}}
     <h4>Statistiques globales</h4>
 
     <div class="row g-3 mb-3">
@@ -139,17 +139,18 @@
 
     <div class="row">
         <div class="col-12 col-sm-6 col-xl-4 mb-4">
-            <div class="card border-0 shadow">
+            <div class="card border-0 shadow h-100">
                 <div class="card-body">
                     <div class="row d-block d-xxl-flex align-items-center">
                         <span class="mb-2">  {{__('Filtrer Les Titres Fonciers Sur Une periode')}} </span> <br>
                         <div class="d-flex justify-content-around">
-                            <input  type="date" wire:model="start_date_tf" class="form-control me-2">
-                            <input  type="date" wire:model="end_date_tf" class="form-control me-2">
+                            <span class="mt-2 me-2"> <input  type="date" wire:model="start_date_tf" class="form-control me-2">
+                            
+                                <span class="mt-2 me-2"><input  type="date" wire:model="end_date_tf" class="form-control me-2">
                         </div>
                         <div class="col-12 col-xxl-8 ps-xxl-4 pe-xxl-0 my-1">
                             {{-- <h2 class="fs-6 fw-normal mb-1 text-gray-400 my-1"> {{__('nombres Titres Fonciers sur une periode')}} </h2> --}}
-                             <h4 class=" mb-1">  <span> {{__('Nombres')}} </span>  <span class="fw-extrabold"> {{number_format($filter_tf > 0 ? $filter_tf : 0)}} </span>  </h4><small class="d-flex align-items-center"><svg
+                             <h4 class=" mb-1">  <span> {{__('')}} </span>  <span class="fw-extrabold"> {{number_format($filter_tf > 0 ? $filter_tf : 0)}} </span>  </h4><small class="d-flex align-items-center"><svg
                                     class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewbox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
@@ -171,17 +172,17 @@
             </div>
         </div>
         <div class="col-12 col-sm-6 col-xl-4 mb-4">
-            <div class="card border-0 shadow">
+            <div class="card border-0 shadow h-100">
                 <div class="card-body">
                     <div class="row d-block d-xxl-flex align-items-center">
                         <span class="mb-2">  {{__('Nombres de Dossiers traités sur une periode')}} </span> <br>
                         <div class="d-flex justify-content-around">
-                            <input  type="date" wire:model="start_date_dos" class="form-control me-2">
-                            <input  type="date" wire:model="end_date_dos" class="form-control me-2">
+                          <span class="mt-2 me-2"> {{__('Du')}} </span>  <input  type="date" wire:model="start_date_dos" class="form-control me-2">
+                           <span class="mt-2 me-2"> {{__('Au')}} </span>  <input  type="date" wire:model="end_date_dos" class="form-control me-2">
                         </div>
                         <div class="col-12 col-xxl-8 ps-xxl-4 pe-xxl-0 my-1">
                             {{-- <h2 class="fs-6 fw-normal mb-1 text-gray-400 my-1"> {{__('nombres Titres Fonciers sur une periode')}} </h2> --}}
-                             <h4 class=" mb-1">  <span> {{__('Nombres')}} </span>  <span class="fw-extrabold"> {{number_format($filter_tf > 0 ? $filter_tf : 0)}} </span>  </h4><small class="d-flex align-items-center"><svg
+                             <h4 class=" mb-1">  <span> {{__('')}} </span>  <span class="fw-extrabold"> {{number_format($filter_tf > 0 ? $filter_tf : 0)}} </span>  </h4><small class="d-flex align-items-center"><svg
                                     class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewbox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
@@ -205,7 +206,7 @@
             </div>
         </div>
         <div class="col-12 col-sm-6 col-xl-4 mb-4">
-            <div class="card border-0 shadow">
+            <div class="card border-0 shadow ">
                 <div class="card-body">
                     <div class="row d-block d-xxl-flex align-items-center">
                         <span class="mb-2">  {{__('Recettes Enregistrees sur une periode')}} </span> <br>
@@ -215,7 +216,7 @@
                         </div>
                         <div class="col-12 col-xxl-8 ps-xxl-4 pe-xxl-0 my-1">
                             {{-- <h2 class="fs-6 fw-normal mb-1 text-gray-400 my-1"> {{__('nombres Titres Fonciers sur une periode')}} </h2> --}}
-                             <h4 class=" mb-1">  <span> {{__('Nombres')}} </span>  <span class="fw-extrabold">   {{number_format($filter_amount > 0 ? $filter_amount : 0)}} {{__('FCFA')}} </span>  </h4><small class="d-flex align-items-center"><svg
+                             <h4 class=" mb-1">  <span> {{__('')}} </span>  <span class="fw-extrabold">   {{number_format($filter_amount > 0 ? $filter_amount : 0)}} {{__('FCFA')}} </span>  </h4><small class="d-flex align-items-center"><svg
                                     class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewbox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
@@ -245,7 +246,7 @@
 
     <div class="row">
         <div class="col-12 col-sm-6 col-xl-4 mb-4">
-            <div class="card border-0 shadow">
+            <div class="card border-0 shadow h-100">
                 <div class="card-body">
                     <div class="row d-block d-xxl-flex align-items-center">
                         <div class="col-12 col-xxl-6 px-xxl-0 mb-3 mb-xxl-0" style="position: relative;">

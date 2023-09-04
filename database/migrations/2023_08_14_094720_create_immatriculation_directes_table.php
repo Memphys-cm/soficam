@@ -78,6 +78,20 @@ return new class extends Migration
             $table->date('date_dossier_complet_transmi_CSRegional_mindcaf')->nullable();
             $table->date('date_dossier_vise_en_attente_publication')->nullable();
 
+            $table->foreignId('service_dossier_complet_id')->on('services')->index()->nullable();
+            $table->foreignId('user_dossier_complet_id')->on('users')->index()->nullable();
+            $table->longText('observation_dossier_complet')->nullable();
+            $table->date('date_dossier_complet_vise_coter')->nullable();
+
+            $table->string('numero_redevance_fonciere')->nullable();
+            $table->date('ordre_redevance_fonciere')->nullable();
+            $table->float('montant_ordre_redevance_fonciere')->nullable();
+
+            $table->foreignId('cadre_id')->on('users')->index()->nullable();
+            $table->longText('observation_cotation_cadre')->nullable();
+            $table->date('date_cotation_cadre')->nullable();
+
+            $table->string('numero_serie')->nullable();
 
 
             $table->timestamps();

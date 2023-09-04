@@ -53,7 +53,7 @@
                         </div>
                         <div class='form-group mb-2 row'>
                             <div class="col">
-                                <label for="price">{{ __('Prix') }}</label>
+                                <label for="price">{{ __('Prix (FCFA)') }}</label>
                                 <input wire:model="price" type="number"
                                     class="form-control  @error('price') is-invalid @enderror"
                                     placeholder="{{ __('0') }}" required="">
@@ -66,7 +66,7 @@
                         </div>
                         <div class='form-group mb-2 row'>
                             <div class="col">
-                                <label for="releve_reason">{{ __('Raison Releve') }}</label>
+                                <label for="releve_reason">{{ __('Pourquoi voulez vous créer ce bien immobilier ? ') }}</label>
                                 <textarea rows="6" wire:model="releve_reason"
                                     class="form-control @error('releve_reason') is-invalid @enderror" id="releve_reason" autofocus=""
                                     required=""></textarea>

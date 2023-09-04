@@ -111,9 +111,9 @@ class User extends Authenticatable
     public function getStatusTextAttribute()
     {
         return match ($this->is_active) {
-            true => __('Active'),
-            false => __('Banned'),
-            NULL => __('Active'),
+            true => __('Actif'),
+            false => __('Banit'),
+            NULL => __('Actif'),
         };
     }
 
