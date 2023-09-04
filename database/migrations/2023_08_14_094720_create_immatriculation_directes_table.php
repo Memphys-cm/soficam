@@ -16,13 +16,13 @@ return new class extends Migration
             $table->uuid('uuid')->unique()->index()->nullable();
             $table->string('reference')->nullable();
             $table->string('localisation')->nullable();
-            $table->string('superficie')->nullable();
             $table->foreignId('region_id')->index();
             $table->foreignId('division_id')->index();
             $table->foreignId('sub_division_id')->index();
-            $table->foreignId('sub_division_id')->index();
             $table->string('zone')->nullable();
             $table->string('etat_terrain')->nullable();
+            $table->string('duplicata')->nullable();
+            $table->string('source_terrain')->nullable();
             $table->float('superficie')->nullable();
             $table->string('volume')->nullable();
             $table->string('folio')->nullable();

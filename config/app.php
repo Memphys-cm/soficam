@@ -141,6 +141,8 @@ return [
 
     'maintenance' => [
         'driver' => 'file',
+        // 'driver' => 'imagick',
+
         // 'store'  => 'redis',
     ],
 
