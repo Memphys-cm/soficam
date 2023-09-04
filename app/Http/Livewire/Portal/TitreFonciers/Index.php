@@ -127,7 +127,7 @@ class Index extends Component
     {
         if($value){
             $this->superficie_du_TF_mere = $value;
-            $this->numero_titre_foncier = $this->generateCodeTF();
+            // $this->numero_titre_foncier = $this->generateCodeTF();
         }
     }
 
@@ -166,7 +166,7 @@ class Index extends Component
 
     public function generateCodeTF()
     {
-        $numero = $this->region_code . "/" . $this->division_code . "/" . 'A' . "/" . $this->numero_du_duplicata . "/" . $this->superficie_du_TF_mere . "/" . $this->numero_folio;
+        $numero = $this->region_code . "/" . $this->division_code . "/" . 'A' . "/" . $this->numero_du_duplicata;
         return ($numero);
     }
 
