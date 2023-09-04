@@ -1,21 +1,21 @@
-<div wire:ignore.self class="modal side-layout-modal fade" id="ConvocationImmaDirecteModal" tabindex="-1"
+<div wire:ignore.self class="modal fade" id="ConvocationImmaDirecteModal" tabindex="-1"
     aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:75%;">
+    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:25%;">
         <div class="modal-content">
-            <div class="modal-body p-0">
-                <div class="p-4 p-lg-5">
+            <div class="modal-body p-0 py-2">
+                <div class="p-4 p-lg-4">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4">
-                            {{ __('Etablissement') }}{{ __(' Convocation D\'un Dossier') }}
+                            {{ __('Impression Du Message Porte') }}
                         </h1>
                         <p class="px-1">
-                            {{ __('Imprimer') }}{{ __(' Une Convocation D\'Invitation') }}
+                            {{ __('Imprimer Le Message POrter') }}
                         </p>
                     </div>
                     <x-form-items.form wire:submit="convocation">
                         <div class="form-group mb-3 row">
-                            <div class='col-md-6 my-1'>
-                                <label for="code">{{ __('Date Convocation') }}</label>
+                            <div class='col-md-12 my-1'>
+                                <label for="code">{{ __('Date Message Porte') }}</label>
                                 <input wire:model="date_convocation" type="date"
                                     class="form-control  @error('date_convocation') is-invalid @enderror"
                                     placeholder="15000" required="" value="" name="date_debut">
@@ -24,56 +24,6 @@
                                 @enderror
                             </div>
                         </div>
-
-                          {{-- @foreach ($comissions as $index => $user)
-                            <div class="row my-1 py-1">
-                                <div class="col-md-3">
-                                <label>{{__('Nom')}} </label>
-                                    <input class="form-control  @error('comissions') is-invalid @enderror"
-                                        type="text" wire:model="comissions.{{ $index }}.name"
-                                        placeholder="Nom">
-                                </div>
-                                <div class="col-md-3">
-                                    <label>{{__('Poste')}} </label>
-                                    <input class="form-control @error('comissions') is-invalid @enderror" type="text"
-                                        wire:model="comissions.{{ $index }}.position"
-                                        placeholder="Poste">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="">{{__('Numéro CNI')}}</label>
-                                    <input class="form-control  @error('comissions') is-invalid @enderror"
-                                        type="text" wire:model="comissions.{{ $index }}.num_cni"
-                                        placeholder="Numéro CNI">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="">{{__('Téléphone')}}</label>
-                                    <input class="form-control  @error('comissions') is-invalid @enderror"
-                                        type="text" wire:model="comissions.{{ $index }}.telephone"
-                                        placeholder="Téléphone">
-                                </div>
-                                <div class="col-md-2 mb-3">
-                                    <label>{{__('Action')}} </label>
-                                    <a type="button" wire:click="removeRow({{ $index }})" class="btn-icon ">
-                                        <svg class="icon icon-sm text-danger me-1" fill="currentColor"
-                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        @endforeach
-                        <button class="btn btn-info" type="button" wire:click="addRow">
-                            <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                            </svg>
-                            {{ __('Ajouter un membre') }}</button>
-                        <button class="btn btn-primary" type="submit">{{ __('Enregistrer') }}</button>
-                        <hr> --}}
-
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
                                 data-bs-dismiss="modal">{{ __('Fermer') }}</button>

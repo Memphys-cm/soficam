@@ -281,7 +281,7 @@ class Index extends Component
             DB::transaction(function () {
                 $this->imma_directe->update([
                     'statut' => 'Avis au Public Signer',
-                    'next_step' => 'signature decision portant calendrier de descente',
+                    'next_step' => 'Instruction du Dossier – Élaboration du certificat d’affichage',
                     'date_avis_publique_signe' => $this->date_status,
                 ]);
             });
