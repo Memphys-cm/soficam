@@ -1,20 +1,20 @@
 <div>
-    <a href="#" data-bs-toggle="modal" data-bs-target="#CreateMutationTotaleParDecesModal" class="btn btn-sm btn-tertiary py-2 d-inline-flex align-items-center mx-2">
+    <a href="#" data-bs-toggle="modal" data-bs-target="#CreateRetraitIndivisionForceeModal" class="btn btn-sm btn-tertiary py-2 d-inline-flex align-items-center mx-2">
         <svg class="icon icon-xs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
         </svg> {{__('Nouvelle Retrait Indivision Forcee')}}
     </a>
-    <div wire:ignore.self class="modal side-layout-modal fade" id="CreateMutationTotaleParDecesModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
+    <div wire:ignore.self class="modal side-layout-modal fade" id="CreateRetraitIndivisionForceeModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:45%;">
             <div class="modal-content">
                 <div class="modal-body p-0">
                     <div class="p-4 p-lg-5">
                         <div class="mb-4 mt-md-0">
-                            <h1 class="mb-0 h4"> {{ __('Créer')}}{{__('  mutation totale')}}</h1>
-                            <p class="px-1"> {{ __('Créer')}}{{__(' une mutation totale du Titre Foncier')}} </p>
+                            <h1 class="mb-0 h4"> {{ __('Créer')}}{{__('  Retrait Indivision Forcee')}}</h1>
+                            <p class="px-1"> {{ __('Créer')}}{{__(' une Retrait Indivision Forcee du Titre Foncier')}} </p>
                         </div>
                         <x-form-items.form wire:submit="store">
-                            <input type='hidden' wire:model="operation_type" value="mutation_totale_par_deces">
+                            <input type='hidden' wire:model="operation_type" value="retrait_indivision_forcee_par_deces">
                             <div class='form-group  mb-2'>
                                 <label for="titre_foncier_id">{{ __('Numéro du Titre Foncier') }}</label>
                                 <x-input.land_title-select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers" />
