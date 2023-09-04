@@ -2,7 +2,7 @@
     <main class="pt-5" wire:ignore>
         <section class="d-flex align-items-center mt-lg-6 mb-lg-5">
             <div class="container">
-                <div class="row justify-content-center form-bg-image" data-background-lg="{{asset('img/illustrations/signin.svg')}}">
+                <div class="row justify-content-center form-bg-image" data-background-lg="">
 
                     <div class="col-12 d-flex align-items-center justify-content-center ">
                         <div class="bg-white shadow border-0 rounded border-light p-4 px-lg-5 pt-lg-4 pb-lg-5 col-md-7 col-sm-12">
