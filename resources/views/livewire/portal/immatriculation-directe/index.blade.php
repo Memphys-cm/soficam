@@ -9,7 +9,7 @@
     @include('livewire.portal.immatriculation-directe.step.etat_cession')
     @include('livewire.portal.immatriculation-directe.step.bordoreau_transmition')
     @include('livewire.portal.immatriculation-directe.step.dossier_vise')
-    {{-- @include('livewire.portal.immatriculation-directe.step.enregistrer_geometre') --}}
+    @include('livewire.portal.immatriculation-directe.step.enregistrer_geometre')
     @include('livewire.portal.immatriculation-directe.step.pv_bornage')
     @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_technique')
     @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_administratif')
@@ -18,6 +18,7 @@
     @include('livewire.portal.immatriculation-directe.step.cotation_step2')
     @include('livewire.portal.immatriculation-directe.step.ordre_redevance_fonciere')
     @include('livewire.portal.immatriculation-directe.step.cotation_cadre')
+    @include('livewire.portal.immatriculation-directe.step.creer_titre_foncier')
 
     <x-delete-modal />
     <div class='p-0'>
@@ -342,7 +343,7 @@
 
 
                                     @can('imma_directe.enregistrer_geometre', $imma_directe)
-                                        @if ($imma_directe->next_step == 'Etat de cession enregistré auprès du géomètre')
+                                        @if ($imma_directe->next_step == 'Dépôt de la quittance de l’état de cession auprès du géomètre désigné')
                                             <a href="#" data-bs-placement="top" title="Enregistrer Le Geometre"
                                                 wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
                                                 data-bs-target="#GeometreModal" draggable="false">
@@ -369,10 +370,10 @@
                                         @endif
                                     @endcan
 
-                                    @can('imma_directe.mise_en_forme_dos_tech', $imma_directe)
-                                        @if ($imma_directe->descente_terrain !== null)
+                                    @can('imma_directe.dossier_tech_create', $imma_directe)
+                                        @if ($imma_directe->next_step !== "Creation Du Dossier Technique")
                                             <a href="#" data-bs-placement="top"
-                                                title="Mise en Forme du Dossier Technique"
+                                                title="Creation Du Dossier Technique"
                                                 wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
                                                 data-bs-target="#DossierTechniqueModal" draggable="false">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="icon icon-xs"
@@ -462,6 +463,23 @@
                                         </a>
                                         {{-- @endif --}}
                                     @endcan
+
+                                    @can('imma_directe.avis', $imma_directe)
+                                        {{-- @if ($imma_directe->next_step == "procedures interne et creation du titre foncier") --}}
+                                        <a href="#" data-bs-placement="top"
+                                            title="Creer Titre Foncier"
+                                            wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
+                                            data-bs-target="#CreerTitreFoncier" draggable="false">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="icon icon-xs"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M9 13.5l3 3m0 0l3-3m-3 3v-6m1.06-4.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+                                            </svg>
+                                        </a>
+                                        {{-- @endif --}}
+                                    @endcan
+
+                                    
                                     @can('imma_directe.ordre_versement', $imma_directe)
                                         {{-- @if ($imma_directe->dossier_technique_created != null) --}}
                                         <a href="#" data-bs-placement="top"

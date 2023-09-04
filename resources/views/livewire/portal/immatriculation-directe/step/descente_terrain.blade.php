@@ -13,6 +13,48 @@
                         </p>
                     </div>
                     <x-form-items.form wire:submit="descente_terrain">
+                        <div class='form-group mb-3 row'>
+                            <div class='col'>
+                                <label for="limit_nord">{{ __('Limite Nord') }}</label>
+                                <input wire:model="limit_nord" type="text"
+                                    class="form-control  @error('limit_nord') is-invalid @enderror"
+                                    placeholder="{{ __('Road') }}" required="" value=""
+                                    name="limit_nord">
+                                @error('limit_nord')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class='col'>
+                                <label for="limit_sud">{{ __('Limite Sud') }}</label>
+                                <input wire:model="limit_sud" type="text"
+                                    class="form-control  @error('limit_sud') is-invalid @enderror"
+                                    placeholder="{{ __('Road') }}" required="" value=""
+                                    name="limit_sud">
+                                @error('limit_sud')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class='col'>
+                                <label for="limit_est">{{ __('Limite Est') }}</label>
+                                <input wire:model="limit_est" type="text"
+                                    class="form-control  @error('limit_est') is-invalid @enderror"
+                                    placeholder="{{ __('Road') }}" required="" value=""
+                                    name="limit_est">
+                                @error('limit_est')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class='col'>
+                                <label for="limit_ouest">{{ __('Limite Ouest') }}</label>
+                                <input wire:model="limit_ouest" type="text"
+                                    class="form-control  @error('limit_ouest') is-invalid @enderror"
+                                    placeholder="{{ __('Road') }}" required="" value=""
+                                    name="limit_ouest">
+                                @error('limit_ouest')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                         <label for=""> {{__('Enregistrement des CNI des notables + chefs')}} </label> <br>
                         @foreach ($comissions as $index => $user)
                             <div class="row my-1 py-1">

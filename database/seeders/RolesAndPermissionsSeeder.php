@@ -187,6 +187,7 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'imma_directe.creation_dos_tech'],
             ['name' => 'imma_directe.certificat_affichage'],
             ['name' => 'imma_directe.bulletion_avis'],
+            ['name' => 'imma_directe.dossier_tech_create'],
             ['name' => 'imma_directe.cadre'],
             ['name' => 'imma_directe.export_n_print'],
             
