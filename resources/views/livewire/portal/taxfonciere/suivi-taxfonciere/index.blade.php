@@ -110,7 +110,7 @@
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
-                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmountPrediction }} {{ __('XAF') }}</p>
+                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmountPrediction }} {{ __('FCFA') }}</p>
 
                     </div>
                     <div class="">
@@ -234,11 +234,11 @@
                                         {{ $titrefoncier->region->region_name }} </span>
                                 </div>
                                 <div class="d-flex align-items-centerpy-1">
-                                    {{ __('Division') }} : <span class="fw-bolder mx-2">
+                                    {{ __('Departement') }} : <span class="fw-bolder mx-2">
                                         {{ $titrefoncier->division->division_name }} </span>
                                 </div>
                                 <div class="d-flex align-items-centerpy-1">
-                                    {{ __('Sub Divi') }} : <span class="fw-bolder mx-2">
+                                    {{ __('Arrondissement') }} : <span class="fw-bolder mx-2">
                                         {{ $titrefoncier->subDivision->sub_division_name }} </span>
                                 </div>
                                 <div class="d-flex align-items-centerpy-1">
@@ -250,7 +250,7 @@
                             <td>
                                 <span class="fw-normal">
                                     @if ($titrefoncier->taxFoncier_amount !== null)
-                                        {{ $titrefoncier->taxFoncier_amount }} {{ __('XAF') }}
+                                        {{ $titrefoncier->taxFoncier_amount }} {{ __('FCFA') }}
                                     @endif
                                 </span>
                             </td>

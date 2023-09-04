@@ -45,7 +45,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('Service successfully :state!', ['state' => $this->state ? 'Updated' : 'Created']), 'CreateUpdateServiceModal');
+        $this->refresh(__('Service réussi :state!', ['state' => $this->state ? 'mis à jour' : 'Créer']), 'CreateUpdateServiceModal');
     }
 
     public function initData($id)
@@ -79,7 +79,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('Service successfully Updated!'), 'UpdateServiceModal');
+        $this->refresh(__('Service mis à jour avec succès !'), 'UpdateServiceModal');
     }
 
     public function delete()
@@ -97,7 +97,7 @@ class Index extends Component
 
         $this->state = 0;
 
-        $this->refresh(__('Service successfully deleted!'), 'DeleteModal');
+        $this->refresh(__('Service supprimé avec succès !'), 'DeleteModal');
     }
 
 

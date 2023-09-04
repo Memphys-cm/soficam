@@ -162,7 +162,7 @@
                             <div class="form-group ">
                                 <div class=''>
                                     <label for="blockName">{{__('Bloc')}} {{$blockIndex+1 }} {{__('Nom')}}</label>
-                                    <input type="text" class="form-control px-4  @error('blocks.{{ $blockIndex }}.block_name') is-invalid @enderror" wire:model="blocks.{{ $blockIndex }}.block_name"  placeholder="{{'Block No. '.$blockIndex+1}}">
+                                    <input type="text" class="form-control px-4  @error('blocks.{{ $blockIndex }}.block_name') is-invalid @enderror" wire:model="blocks.{{ $blockIndex }}.block_name"  placeholder="{{'Bloc No. '.$blockIndex+1}}">
                                     @error('blocks.$blockIndex.block_name')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

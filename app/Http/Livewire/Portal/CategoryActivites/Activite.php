@@ -76,7 +76,7 @@ class Activite extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('Activites successfully deleted!'), 'DeleteModal');
+        $this->refresh(__('Activités supprimées avec succès!'), 'DeleteModal');
     }
 
 

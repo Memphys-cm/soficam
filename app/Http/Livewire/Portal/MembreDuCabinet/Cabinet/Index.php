@@ -66,7 +66,7 @@ class Index extends Component
 
         // Show success message, reset fields, and close the modal
         $this->clearFields();
-        $this->refresh(__('Notary Office successfully Created!'), 'CreatecabinetModal');
+        $this->refresh(__('Création d\'un cabinet notaire réussie !'), 'CreatecabinetModal');
 
     }
 
@@ -93,7 +93,7 @@ class Index extends Component
         });
 
         $this->clearFields();
-        $this->refresh(__('Notary Office successfully Created!'), 'UpdateCabinetModal');
+        $this->refresh(__('Création d\'un cabinet notaire réussie'), 'UpdateCabinetModal');
 
     }
 
@@ -114,7 +114,7 @@ class Index extends Component
     {
         if ($this->cabinet) {
             $this->cabinet->delete();
-            $this->refresh(__('Notary Office successfully deleted!'), 'DeleteModal');
+            $this->refresh(__('Suppression du cabinet notaire réussie!'), 'DeleteModal');
         }
     }
 

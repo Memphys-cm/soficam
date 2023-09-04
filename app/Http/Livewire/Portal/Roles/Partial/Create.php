@@ -65,7 +65,7 @@ class Create extends Component
 
             $this->emit('roleCreated');
         } catch (\Throwable $th) {
-            $this->refresh(__('Something went wrong!'), 'CreateRoleModal');
+            $this->refresh(__('Quelque chose n\'a pas fonctionné !'), 'CreateRoleModal');
         }
     }
    

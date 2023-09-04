@@ -97,7 +97,7 @@ class Index extends Component
             }
         });
 
-        $this->refresh(__('Sales Updated Created!'), 'updatePaySaleModal');
+        $this->refresh(__('Ventes mises à jour Créées!'), 'updatePaySaleModal');
 
         $this->clearFields();
     }

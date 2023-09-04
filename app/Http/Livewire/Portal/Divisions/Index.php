@@ -47,7 +47,7 @@ class Index extends Component
 
         $this->state = 0;
 
-        $this->refresh(__('Division successfully :state!', ['state' => $this->state ? 'Updated' : 'Created']), 'CreateUpdateDivisionModal');
+        $this->refresh(__('Departement a été :state!', ['state' => $this->state ? 'Mise à jour' : 'Créé']), 'CreateUpdateDivisionModal');
     }
 
     public function initData($id)
@@ -71,7 +71,7 @@ class Index extends Component
 
         $this->state = 0;
 
-        $this->refresh(__('Division successfully deleted!'), 'DeleteModal');
+        $this->refresh(__('Departement supprimé avec succès!'), 'DeleteModal');
     }
 
     public function render()

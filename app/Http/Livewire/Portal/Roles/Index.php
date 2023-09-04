@@ -40,9 +40,9 @@ class Index extends Component
             if(count($this->role->users) <= 0) {
                 $this->role->syncPermissions([]);
                 $this->role->delete();
-                $this->refreshModal(__('Role and Permissions successfully deleted!'), 'DeleteModal');
+                $this->refreshModal(__('Rôle et autorisations supprimés avec succès!'), 'DeleteModal');
             }else{
-                $this->refreshModal(__('Role cannot be deleted as it is still assigned to users!'), '');
+                $this->refreshModal(__('Le rôle ne peut pas être supprimé car il est toujours attribué aux utilisateurs.!'), '');
             }
         }
 

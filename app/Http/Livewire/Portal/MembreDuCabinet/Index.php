@@ -78,7 +78,7 @@ class Index extends Component
 
         // Show success message, reset fields, and close the modal
         $this->clearFields();
-        $this->refresh(__('Membre du Cabinet successfully Created!'), 'CreateMembreModal');
+        $this->refresh(__('Membre du Cabinet créé avec succès!'), 'CreateMembreModal');
 
     }
 
@@ -108,7 +108,7 @@ class Index extends Component
         });
         $this->clearFields();
 
-        $this->refresh(__('Membre du Cabinet  Successfully Updated!'), 'EditMembeModal');
+        $this->refresh(__('Membre du Cabinet mis à jour avec succès!'), 'EditMembeModal');
 
     }
 
@@ -132,7 +132,7 @@ class Index extends Component
     {
         if ($this->membre_du_cabinet) {
             $this->membre_du_cabinet->delete();
-            $this->refresh(__('Membre du Cabinet successfully deleted!'), 'DeleteModal');
+            $this->refresh(__('Membre du Cabinet supprimé avec succès!'), 'DeleteModal');
         }
     }
 

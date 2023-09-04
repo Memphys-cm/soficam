@@ -92,7 +92,7 @@ class Index extends Component
 
         $user->assignRole($this->role_name);
 
-        $this->refresh(__('User successfully Created!'), 'CreateUserModal');
+        $this->refresh(__('Utilisateur créé avec succès!'), 'CreateUserModal');
     }
 
     public function update()
@@ -136,7 +136,7 @@ class Index extends Component
             $this->user->syncRoles($this->role_name);
         }
 
-        $this->refresh(__('User successfully updated!'), 'EditUserModal');
+        $this->refresh(__('Mise à jour de l\'utilisateur réussie!'), 'EditUserModal');
     }
 
     public function initData($id)
@@ -176,7 +176,7 @@ class Index extends Component
 
         $this->state = 0;
 
-        $this->refresh(__('User successfully deleted!'), 'DeleteModal');
+        $this->refresh(__('Utilisateur supprimé avec succès!'), 'DeleteModal');
     }
 
     public function render()

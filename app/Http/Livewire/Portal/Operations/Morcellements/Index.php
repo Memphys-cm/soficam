@@ -93,7 +93,7 @@ class Index extends Component
 
         if ($cp->validity->lt(now())) {
             return;
-            session()->flash('message', __('Certificate propriete provided is in valid'));
+            session()->flash('message', __('Le certificat de propriété fourni est en cours de validité'));
         }
 
         Operation::create([
@@ -107,7 +107,7 @@ class Index extends Component
         ]);
 
         $this->clearFields();
-        $this->refresh(__('Morcellement Totale successfully Created'), 'CreateMorcellementNormaleModal');
+        $this->refresh(__('Morcellement créé avec succès'), 'CreateMorcellementNormaleModal');
     }
 
     public function storeGeomtreUpdates()
@@ -133,7 +133,7 @@ class Index extends Component
         ]);
 
         $this->clearFields();
-        $this->refresh(__('Mutation Totale successfully Created'), 'CreateMutationTotaleModal');
+        $this->refresh(__('Mutation Totale créée avec succès'), 'CreateMutationTotaleModal');
     }
 
     public function delete()
@@ -150,7 +150,7 @@ class Index extends Component
         }
 
 
-        $this->refresh(__('Operation successfully deleted!'), 'DeleteModal');
+        $this->refresh(__('Opération supprimée avec succès!'), 'DeleteModal');
     }
 
 

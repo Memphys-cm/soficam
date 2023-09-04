@@ -60,7 +60,7 @@ class AddSalesData extends Component
             $this->emitUp('flow_updated');
             
             $this->clearFields();
-            $this->refresh(__('Operation successfully Created'), 'CreateAddSalesDataModal');
+            $this->refresh(__('Opération réussie Créée'), 'CreateAddSalesDataModal');
         }
     }
 

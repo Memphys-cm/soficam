@@ -50,7 +50,7 @@ class Index extends Component
 
         $this->state = 0;
         $this->clearFields();
-        $this->refresh(__('SubDivision successfully :state!', ['state' => $this->state ? 'Updated' : 'Created']), 'CreateUpdateSubDivisionModal');
+        $this->refresh(__('Arrondissement reussi :state!', ['state' => $this->state ? 'Mis à jour' : 'Créer']), 'CreateUpdateSubDivisionModal');
     }
 
     public function initData($id)
@@ -74,7 +74,7 @@ class Index extends Component
 
         $this->state = 0;
 
-        $this->refresh(__('SubDivision successfully deleted!'), 'DeleteModal');
+        $this->refresh(__('Arrondissement supprimée avec succès!'), 'DeleteModal');
     }
     public function clearFields()
     {

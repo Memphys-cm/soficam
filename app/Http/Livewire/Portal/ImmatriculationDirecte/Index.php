@@ -150,7 +150,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('Dossier D\'Immatriculation Directe Creer Avec SUCCES'), 'CreateImmaDirecteModal');
+        $this->refresh(__('Dossier D\'Immatriculation Directe Creé Avec SUCCES'), 'CreateImmaDirecteModal');
     }
 
     public function convert($utmCoordinates)
@@ -216,7 +216,7 @@ class Index extends Component
         $this->emitUp('flow_updated');
         
         $this->clearFields();
-        $this->refresh(__('Dossier Technique Enregistrer'), 'DossierTechniqueModal');
+        $this->refresh(__('Dossier Technique Enregistré'), 'DossierTechniqueModal');
 
     }
 
@@ -764,7 +764,7 @@ class Index extends Component
         $this->emitUp('flow_updated');
         
         $this->clearFields();
-        $this->refresh(__('Geometre Enregistrer Avec Suceess et Enregistrement'), 'GeometreModal');
+        $this->refresh(__('Geometre Enregistrer Avec Succes et Enregistrement'), 'GeometreModal');
 
     }
 
