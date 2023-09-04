@@ -189,7 +189,7 @@
                                         </svg>
                                     </a>
                                     @can('imma_directe.etat_cession', $imma_directe)
-                                        @if ($imma_directe->next_step != null)
+                                        @if ($imma_directe->next_step === "Délivrance de l’état de cession et paiement")
                                             <a href="#" data-bs-placement="top" title="Etat de Cession"
                                                 wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
                                                 data-bs-target="#EtatCessionModal" draggable="false">

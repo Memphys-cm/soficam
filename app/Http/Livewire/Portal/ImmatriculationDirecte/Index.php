@@ -867,7 +867,7 @@ class Index extends Component
                 'status_convocation' => 'done',
 
                 'statut' => 'message porté disponible',
-                'next_step' => 'Etablissement Etat de Cession',
+                'next_step' => 'Délivrance de l’état de cession et paiement',
             ]);
         });
         $this->refresh(__('Convocation imprimée Avec SUCCES!'), 'ConvocationImmaDirecteModal');
