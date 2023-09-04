@@ -1,14 +1,14 @@
-<div wire:ignore.self class="modal side-layout-modal fade" id="CreateMutationTotaleNormaleModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
+<div wire:ignore.self class="modal side-layout-modal fade" id="CreateRetraitIndivisionNormaleModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:45%;">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Créer')}}{{__('  mutation total')}}</h1>
-                        <p class="px-1"> {{ __('Créer')}}{{__(' une mutation totale du Titre Foncier')}} </p>
+                        <h1 class="mb-0 h4"> {{ __('Créer')}}{{__(' Retrait Indivision ')}}</h1>
+                        <p class="px-1"> {{ __('Créer')}}{{__(' une Retrait Indivision du Titre Foncier')}} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
-                        <input type='hidden' wire:model="operation_type" value="mutation_totale_normale">
+                        <input type='hidden' wire:model="operation_type" value="retrait_indivision_normale">
                         <div class='form-group  mb-2'>
                             <label for="titre_foncier_id">{{ __('Numero du titre foncier') }}</label>
                             <x-input.land_title-select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers" />
