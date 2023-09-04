@@ -261,7 +261,7 @@ class Index extends Component
             'volume_du_bordereau_analytique' => $this->volume_du_bordereau_analytique,
             'date_detablissement_du_bordereau_analytique' => $this->date_detablissement_du_bordereau_analytique,
             'coordonnees' => json_encode($transform),
-            // 'coordonnees' => json_encode($this->coordonnees),
+            'coordonnees_utm' => json_encode($this->coordonnees),
             'limit_nord' => $this->limit_nord,
             'limit_sud' => $this->limit_sud,
             'limit_est' => $this->limit_est,
