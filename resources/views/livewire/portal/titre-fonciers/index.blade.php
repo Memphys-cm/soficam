@@ -99,6 +99,7 @@
                 <thead>
                     <tr>
                         <th class="border-bottom">{{__('Numéro Titre Foncier')}}</th>
+                        <th class="border-bottom">{{__('Numéro Conservation')}}</th>
                         <th class="border-bottom">{{__('Date Délivrance')}}</th>
                         <th class="border-bottom">{{__('Propriétaire(s)')}}</th>
                         <th class="border-bottom">{{__('Localisation')}}</th>
@@ -119,9 +120,11 @@
                             <span class="fw-normal">{{$titrefoncier->numero_titre_foncier}}</span>
                         </td>
                         <td>
+                            <span class="fw-normal">{{$titrefoncier->numero_conservation}}</span>
+                        </td>
+                        <td>
                             <span class="fw-normal">{{$titrefoncier->date_de_delivrance_du_TF}}</span>
                         </td>
-
                         <td>
                             <x-elements.user :options="$titrefoncier->users->take(5)" />
                         </td>
