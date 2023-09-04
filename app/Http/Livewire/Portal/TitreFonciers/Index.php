@@ -199,7 +199,7 @@ class Index extends Component
         }
 
         $this->validate([
-            'numero_titre_foncier' => 'nullable',
+            'numero_titre_foncier' => 'required|unique:titrefonciers',
             'region_id' => 'required',
             'division_id' => 'required',
             'sub_division_id' => 'required',
@@ -330,7 +330,7 @@ class Index extends Component
 
         $this->titrefoncier = $titrefoncier;
 
-        $this->numero_titre_foncier =  $titrefoncier->numero_titre_foncier;
+        $this->numero_titre_foncier =  $titrefoncier->numero_conservation;
         $this->region_id =  $titrefoncier->region_id;
         $this->division_id =  $titrefoncier->division_id;
         $this->sub_division_id =  $titrefoncier->sub_division_id;
