@@ -16,7 +16,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+                        <li class="breadcrumb-item"><a href="/">{{__('Dashbord')}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ __('Charges sur les Titres Fonciers') }}</li>
                     </ol>
                 </nav>
@@ -83,7 +83,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{ __('Sens du Tri') }}: </label>
+            <label for="direction">{{ __('Sens du tri') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{ __('Ascendant') }}</option>
                 <option value="desc">{{ __('Descendant') }}</option>
@@ -143,7 +143,7 @@
                     <tr>
                         <td colspan="10" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
+                                <h4 class="fs-4 fw-bold">{{ __('Liste vide') }}</h4>
                                 <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                             </div>
                         </td>

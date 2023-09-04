@@ -6,9 +6,9 @@
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4">
-                            {{ $state ? __('Mettre à jour') : __('Enregistrer') }}{{ __(' un Titre Toncier') }}</h1>
+                            {{ $state ? __('Mettre à jour') : __('Enregistrer') }}{{ __('un titre foncier') }}</h1>
                         <p class="px-1">
-                            {{ $state ? __('Mettre à jour') : __('Enregistrer') }}{{ __(' un certificat foncier') }}
+                            {{ $state ? __('Mettre à jour') : __('Enregistrer') }}{{ __('un certificat foncier') }}
                         </p>
                     </div>
                     <x-form-items.form wire:submit="{{ $state ? 'update' : 'store' }}">
@@ -115,7 +115,7 @@
                             <div class="col">
                                 <label for="zone">{{__('Zone')}}</label>
                                 <select wire:model="zone" name="zone" class="form-select  @error('zone') is-invalid @enderror" required="">
-                                    <option value="urbain">{{__('Urbain')}}</option>
+                                    <option value="urbain">{{__('Urbaine')}}</option>
                                     <option value="rurale">{{__('Rurale')}}</option>
                                 </select>
                                 @error('zone')
@@ -132,7 +132,7 @@
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="volume">{{ __('volume') }}</label>
+                                <label for="volume">{{ __('Volume') }}</label>
                                 <input wire:model="volume" type="number"
                                     class="form-control  @error('volume') is-invalid @enderror"
                                     placeholder="{{ __('124') }}" required="" name="name">
@@ -192,7 +192,7 @@
                                 <label for="limit_nord">{{ __('Limite Nord') }}</label>
                                 <input wire:model="limit_nord" type="text"
                                     class="form-control  @error('limit_nord') is-invalid @enderror"
-                                    placeholder="{{ __('Road') }}" required="" value=""
+                                    placeholder="{{ __('Route') }}" required="" value=""
                                     name="limit_nord">
                                 @error('limit_nord')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -202,7 +202,7 @@
                                 <label for="limit_sud">{{ __('Limite Sud') }}</label>
                                 <input wire:model="limit_sud" type="text"
                                     class="form-control  @error('limit_sud') is-invalid @enderror"
-                                    placeholder="{{ __('Road') }}" required="" value=""
+                                    placeholder="{{ __('Route') }}" required="" value=""
                                     name="limit_sud">
                                 @error('limit_sud')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -212,7 +212,7 @@
                                 <label for="limit_est">{{ __('Limite Est') }}</label>
                                 <input wire:model="limit_est" type="text"
                                     class="form-control  @error('limit_est') is-invalid @enderror"
-                                    placeholder="{{ __('Road') }}" required="" value=""
+                                    placeholder="{{ __('Route') }}" required="" value=""
                                     name="limit_est">
                                 @error('limit_est')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -224,7 +224,7 @@
                                 <label for="limit_ouest">{{ __('Limite Ouest') }}</label>
                                 <input wire:model="limit_ouest" type="text"
                                     class="form-control  @error('limit_ouest') is-invalid @enderror"
-                                    placeholder="{{ __('Road') }}" required="" value=""
+                                    placeholder="{{ __('Route') }}" required="" value=""
                                     name="limit_ouest">
                                 @error('limit_ouest')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -234,7 +234,7 @@
                                 <label for="nom_et_prenoms_de_largent_traitant">{{ __('Agent Traitant') }}</label>
                                 <input wire:model="nom_et_prenoms_de_largent_traitant" type="text"
                                     class="form-control  @error('nom_et_prenoms_de_largent_traitant') is-invalid @enderror"
-                                    placeholder="{{ __('Road') }}" required="" value=""
+                                    placeholder="{{ __('Route') }}" required="" value=""
                                     name="nom_et_prenoms_de_largent_traitant">
                                 @error('nom_et_prenoms_de_largent_traitant')
                                     <div class="invalid-feedback">{{ $message }}</div>

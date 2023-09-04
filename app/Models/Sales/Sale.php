@@ -69,7 +69,7 @@ class Sale extends Model
     public function getStatusTextAttribute(): String
     {
         return match ($this->payment_status) {
-            'totally_paid' => 'Totally Paid',
+            'totalement_payé' => 'Totally Paid',
             'partially_paid' => 'Partially Paid',
             'pending_payment' => 'Pending Payment',
             NULL => ''

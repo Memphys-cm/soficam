@@ -58,7 +58,7 @@
         <div class="col-md-6 col-xxl-4">
             <div class="card h-md-100 ecommerce-card-min-width">
                 <div class="card-header pb-0">
-                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Dossiers Traites') }}</h6>
+                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Dossiers Traités') }}</h6>
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
@@ -135,7 +135,7 @@
 
     </div>
   
-  <h4>Activité récente</h4>
+  <h4>{{__('Activité récente')}}</h4>
 
     <div class="row">
         <div class="col-12 col-sm-6 col-xl-4 mb-4">
@@ -174,7 +174,7 @@
             <div class="card border-0 shadow">
                 <div class="card-body">
                     <div class="row d-block d-xxl-flex align-items-center">
-                        <span class="mb-2">  {{__('Nombres de Dossiers traites sur une periode')}} </span> <br>
+                        <span class="mb-2">  {{__('Nombres de Dossiers traités sur une periode')}} </span> <br>
                         <div class="d-flex justify-content-around">
                             <input  type="date" wire:model="start_date_dos" class="form-control me-2">
                             <input  type="date" wire:model="end_date_dos" class="form-control me-2">
@@ -196,7 +196,7 @@
                                             d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
                                             clip-rule="evenodd"></path>
                                     </svg> 
-                                    <span class="text-success fw-bolder">18,2%</span> Depuis le mois dernier
+                                    <span class="text-success fw-bolder">18,2%</span>{{__('Depuis le mois dernier')}}
                                 </div>
                             </div>
                         </div>
@@ -230,7 +230,7 @@
                                             d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
                                             clip-rule="evenodd"></path>
                                     </svg>
-                                    <span class="text-success fw-bolder">18,2%</span> Depuis le mois dernier
+                                    <span class="text-success fw-bolder">18,2%</span>{{__('Depuis le mois dernier')}}
                                 </div>
                             </div>
                         </div>
@@ -380,7 +380,7 @@
                                             <div class="apexcharts-tooltip-text"
                                                 style="font-family: Inter; font-size: 12px;">
                                                 <div class="apexcharts-tooltip-y-group"><span
-                                                        class="apexcharts-tooltip-text-label">Clients: </span><span
+                                                        class="apexcharts-tooltip-text-label">{{__('Clients:')}}</span><span
                                                         class="apexcharts-tooltip-text-value">650</span></div>
                                                 <div class="apexcharts-tooltip-z-group"><span
                                                         class="apexcharts-tooltip-text-z-label"></span><span
@@ -623,7 +623,7 @@
                                             <div class="apexcharts-tooltip-text"
                                                 style="font-family: Inter; font-size: 12px;">
                                                 <div class="apexcharts-tooltip-y-group"><span
-                                                        class="apexcharts-tooltip-text-label">Ventes: </span><span
+                                                        class="apexcharts-tooltip-text-label">{{__('Ventes:')}}</span><span
                                                         class="apexcharts-tooltip-text-value">$ 36k</span></div>
                                                 <div class="apexcharts-tooltip-z-group"><span
                                                         class="apexcharts-tooltip-text-z-label"></span><span
@@ -796,7 +796,7 @@
                                             <div class="apexcharts-tooltip-text"
                                                 style="font-family: Inter; font-size: 12px;">
                                                 <div class="apexcharts-tooltip-y-group"><span
-                                                        class="apexcharts-tooltip-text-label">Utilisateurs: </span><span
+                                                        class="apexcharts-tooltip-text-label">{{__('Utilisateurs:')}}</span><span
                                                         class="apexcharts-tooltip-text-value">550</span></div>
                                                 <div class="apexcharts-tooltip-z-group"><span
                                                         class="apexcharts-tooltip-text-z-label"></span><span
@@ -1011,7 +1011,7 @@
                             <tr>
                                 <td colspan="7" class="text-center">
                                     <div class="text-center text-gray-800 mt-2">
-                                        <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
+                                        <h4 class="fs-4 fw-bold">{{ __('Liste vide') }} &#128540;</h4>
                                         <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                                     </div>
                                 </td>

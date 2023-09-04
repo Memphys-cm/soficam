@@ -15,7 +15,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{__('Tableau de Bord')}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Titres Fonciers')}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Titres fonciers')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">

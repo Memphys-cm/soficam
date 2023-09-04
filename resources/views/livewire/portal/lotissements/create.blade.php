@@ -58,7 +58,7 @@
             </div>
             <div class='col-md-9'>
                 <div class="card p-4 mb-3">
-                    <legend class="w-auto">Informations sur le terrain</legend>
+                    <legend class="w-auto">{{__('Informations sur le terrain')}}</legend>
                     <div class='row form-group mb-3'>
                         <div class="col-md-6 py-2">
                             <label for="code">{{ __('Numéro du Titre Foncier') }}</label>

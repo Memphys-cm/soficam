@@ -66,7 +66,7 @@
             <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p>
         </div>
         <div class="col-md-3">
-            <label for="orderBy">{{__('Trier Par')}}: </label>
+            <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="titre_foncier_id">{{__('Numéro du Titre Foncier')}}</option>
                 <option value="created_at">{{__('Date Creation')}}</option>
@@ -82,7 +82,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Element par page')}}: </label>
+            <label for="perPage">{{__('Elément par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -200,7 +200,7 @@
                     <tr>
                         <td colspan="7" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                                <h4 class="fs-4 fw-bold">{{__('Liste vide')}}</h4>
                                 <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>

@@ -42,7 +42,7 @@
                             <div class="col">
                                 <label for="etat_TF">{{__('Type de Charge')}}</label>
                                 <select wire:model="etat_TF" name="etat_TF" class="form-select  @error('etat_TF') is-invalid @enderror" required="">
-                                    <option value="">{{__('Selectionner le Type de Charge')}}</option>
+                                    <option value="">{{__('--Selectionner le Type de Charge--')}}</option>
                                     <option value="HYPOTHEQUE">{{__('HYPOTHEQUE')}}</option>
                                     <option value="PRENOTE">{{__('PRENOTE')}}</option>
                                     <option value="SUSPENDU">{{__('SUSPENDU')}}</option>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <div class="p-3 shadow border rounded my-2">
-                                <h2 class="h5 mb-4">{{__('Attacher Documents')}}</h2>
+                                <h2 class="h5 mb-4">{{__('Ajouter fichier')}}</h2>
                                 <div class="d-xl-flex align-items-center">
                                     <div class="file-field">
                                         <div class="d-flex justify-content-xl-center ms-xl-3">
