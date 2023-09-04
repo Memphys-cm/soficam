@@ -204,8 +204,7 @@
                         <tr>
                             <td colspan="9" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
-                                    <h4 class="fs-4 fw-bold">{{ __('Liste') }} </h4>
-                                    <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
+                                    <h4 class="fs-4 fw-bold">{{ __('Liste Vide') }} </h4>
                                 </div>
                             </td>
                         </tr>

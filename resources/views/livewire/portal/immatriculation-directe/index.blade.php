@@ -48,7 +48,7 @@
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                         </path>
                     </svg>
-                    {{ __('Immatriculation Directes') }}
+                    {{ __('Immatriculations Directes') }}
                 </h1>
                 <p class="mt-n1 mx-2">{{ __('Voir Toutes les Immatriculations Directes') }} </p>
             </div>
@@ -309,21 +309,6 @@
                                             </a>
                                         @endif
                                     @endcan
-                                    @can('imma_directe.convocation', $imma_directe)
-                                        @if ($imma_directe->next_step == 'signature decision portant calendrier de descente')
-                                            <a href="#" data-bs-placement="top"
-                                                title="Etablisser Le Message Porter"
-                                                wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
-                                                data-bs-target="#ConvocationImmaDirecteModal" draggable="false">
-                                                <svg class="icon icon-xs" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                    class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M12 10.5v6m3-3H9m4.06-7.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
-                                                </svg>
-                                            </a>
-                                        @endif
-                                    @endcan
 
                                     @can('imma_directe.convocation', $imma_directe)
                                         @if ($imma_directe->next_step == 'Programmation descente sur le terrain')
@@ -331,10 +316,8 @@
                                                 title="Imprimer La convocation D'Invitation sur le Terrain"
                                                 wire:click.prevent="convocation({{ $imma_directe->id }})"
                                                 data-bs-toggle="modal" data-bs-target="" draggable="false">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-4 -8 50 50"
-                                                    stroke-width="1.5" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M9 13.5l3 3m0 0l3-3m-3 3v-6m1.06-4.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+                                                <svg class="icon icon-sm text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
                                                 </svg>
                                             </a>
                                         @endif
@@ -402,6 +385,16 @@
 
                                     @can('imma_directe.certificat_affichage', $imma_directe)
                                         @if ($imma_directe->next_step == "Instruction du Dossier – Élaboration du certificat d’affichage")
+                                            <a href="#" data-bs-placement="top" title="Elaborer certificat d'affichage"
+                                                wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
+                                                data-bs-target="#CertfifcatAffichageImmaDirecteModal" draggable="false">
+                                                <svg class="icon icon-sm text-gray-500" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                                    </path>
+                                                </svg>
+                                            </a>
                                         @endif
                                     @endcan
 
@@ -517,8 +510,7 @@
                         <tr>
                             <td colspan="9" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
-                                    <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
-                                    <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
+                                    <h4 class="fs-4 fw-bold">{{ __('Liste Vide') }} </h4>
                                 </div>
                             </td>
                         </tr>

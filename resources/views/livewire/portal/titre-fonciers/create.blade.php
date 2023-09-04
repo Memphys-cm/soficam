@@ -156,7 +156,7 @@
                                 <label for="etat_TF">{{ __('Charge du Titre Foncier') }}</label>
                                 <select wire:model="etat_TF" name="etat_TF"
                                     class="form-select  @error('etat_TF') is-invalid @enderror" required="">
-                                    <option value="">{{ __('Sélectionner état du titre foncier') }}</option>
+                                    <option value="">{{ __('Sélectionner Charge') }}</option>
                                     <option value="HYPOTHEQUE">{{ __('HYPOTHÈQUE') }}</option>
                                     <option value="RETRAIT">{{ __('RETRAIT') }}</option>
                                     <option value="PRENOTE">{{ __('PRENOTATION') }}</option>
@@ -181,7 +181,7 @@
                                 <label for="provenance_TF">{{ __('Source du Titre Foncier') }}</label>
                                 <input wire:model="provenance_TF" type="text"
                                     class="form-control  @error('provenance_TF') is-invalid @enderror"
-                                    placeholder="{{ __('Lotissement') }}" required="" name="name">
+                                    placeholder="{{ __('') }}" required="" name="name">
                                 @error('provenance_TF')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -259,7 +259,7 @@
                                 <label for="numero_ccp">{{ __('Numero CCP') }}</label>
                                 <input wire:model="numero_ccp" type="number"
                                     class="form-control  @error('numero_ccp') is-invalid @enderror"
-                                    placeholder="{{ __('Jane Doe') }}" required="" value=""
+                                    placeholder="{{ __('') }}" required="" value=""
                                     name="numero_ccp">
                                 @error('numero_ccp')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -283,7 +283,7 @@
                                                 wire:model="attachements" multiple="multiple">
                                             <div class="d-md-block text-left">
                                                 <div class="fw-normal text-dark mb-1">{{ __('Choisir Fichier') }}</div>
-                                                <div class="text-gray small">JPG,PNG, PDF, Word,Excel. Max size of 50MB
+                                                <div class="text-gray small">JPG,PNG, PDF, Word,Excel. Taille Max 50MB
                                                 </div>
                                             </div>
                                         </div>

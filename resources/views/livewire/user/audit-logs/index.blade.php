@@ -37,7 +37,7 @@
                                 </svg>
                                 <div class="mb-3 mb-md-0">
                                     <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($creation_log_count)}} {{ __(\Str::plural('Audit de création', $creation_log_count)) }} </h5>
-                                    <div class=" text-gray-500 ">{{__('enregistré!')}}</div>
+                                    <div class=" text-gray-500 ">{{__('enregistré!')}} </div>
                                 </div>
                             </div>
                         </a>
@@ -51,8 +51,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                                 <div class="mb-3 mb-md-0">
-                                    <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($update_log_count)}} {{ __(\Str::plural('Audit de mises à jour', $update_log_count)) }} </h5>
-                                    <div class=" text-gray-500 ">{{__('enregistré!')}}</div>
+                                    <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($update_log_count)}} {{ __(\Str::plural('Audit de Modification', $update_log_count)) }} </h5>
+                                    <div class=" text-gray-500 ">{{__('enregistré!')}} </div>
                                 </div>
                             </div>
                         </a>
@@ -67,7 +67,7 @@
                                 </svg>
                                 <div class="mb-3 mb-md-0">
                                     <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($deletion_log_count)}} {{ __(\Str::plural('Audit de suppression', $deletion_log_count)) }}</h5>
-                                    <div class="text-gray-500 ">{{__('enregistré!')}} &#128560;</div>
+                                    <div class="text-gray-500 ">{{__('enregistré!')}} </div>
                                 </div>
                             </div>
                         </a>
@@ -96,7 +96,7 @@
                 </select>
             </div>
             <div class="col-md-3 mb-2">
-                <label for="perPage">{{__('Élément par page')}}: </label>
+                <label for="perPage">{{__('Éléments par page')}}: </label>
                 <select wire:model="perPage" id="perPage" class="form-select">
                     <option value="5">5</option>
                     <option value="10">10</option>
@@ -147,7 +147,6 @@
                             <td colspan="7" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
                                     <h4 class="fs-4 fw-bold">{{__('Liste vide')}} </h4>
-                                    <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                                 </div>
                             </td>
                         </tr>
