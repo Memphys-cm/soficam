@@ -199,7 +199,7 @@ class Index extends Component
 
         $this->validate([
             'numero_titre_foncier' => 'required|unique:titrefonciers',
-            'numero_conservation' => 'required|unique:titrefonciers',
+            // 'numero_conservation' => 'required|unique:titrefonciers',
             'region_id' => 'required',
             'division_id' => 'required',
             'sub_division_id' => 'required',
