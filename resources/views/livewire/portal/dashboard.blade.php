@@ -230,8 +230,8 @@
 
     <div class="row">
         <div class="col-12 col-sm-6 col-xl-4 mb-4">
-            <div class="card border-0 shadow h-100">
-                <div class="card-body">
+            <div class="card card-body border-0 shadow h-100">
+                <div class="">
                     <div class="row d-block d-xxl-flex align-items-center">
                         <div class="col-12 col-xxl-6 px-xxl-0 mb-3 mb-xxl-0" style="position: relative;">
                             <div id="chart-customers" style="min-height: 140px;">
