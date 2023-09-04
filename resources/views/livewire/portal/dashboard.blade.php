@@ -20,7 +20,7 @@
 
     <div class="row g-3 mb-3">
         <div class="col-md-6 col-xxl-4">
-            <div class="card h-md-100 ecommerce-card-min-width">
+            <div class="card h-md-100 ecommerce-card-min-width" style="height: 180px;">
                 <div class="card-header pb-0">
                     <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Titres Fonciers') }}</h6>
                 </div>
@@ -56,7 +56,7 @@
         </div>
 
         <div class="col-md-6 col-xxl-4">
-            <div class="card h-md-100 ecommerce-card-min-width">
+            <div class="card h-md-100 ecommerce-card-min-width" style="height: 180px;">
                 <div class="card-header pb-0">
                     <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Dossiers Traités') }}</h6>
                 </div>
@@ -83,7 +83,7 @@
         </div>
 
         <div class="col-md-6 col-xxl-4">
-            <div class="card h-md-100 ecommerce-card-min-width">
+            <div class="card h-md-100 ecommerce-card-min-width" style="height: 180px;">
                 <div class="card-header pb-0">
                     <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Revenues') }}</h6>
                 </div>
@@ -144,9 +144,9 @@
                     <div class="row d-block d-xxl-flex align-items-center">
                         <span class="mb-2">  {{__('Filtrer Les Titres Fonciers sur une période')}} </span> <br>
                         <div class="d-flex justify-content-around">
-                            <span class="mt-2 me-2"> <input  type="date" wire:model="start_date_tf" class="form-control me-2">
+                            <span class="mt-2 me-2"> {{__('Du')}} </span> <input  type="date" wire:model="start_date_tf" class="form-control me-2">
                             
-                                <span class="mt-2 me-2"><input  type="date" wire:model="end_date_tf" class="form-control me-2">
+                                <span class="mt-2 me-2"> {{__('Au')}} </span> <input  type="date" wire:model="end_date_tf" class="form-control me-2">
                         </div>
                         <div class="col-12 col-xxl-8 ps-xxl-4 pe-xxl-0 my-1">
                             {{-- <h2 class="fs-6 fw-normal mb-1 text-gray-400 my-1"> {{__('nombres Titres Fonciers sur une periode')}} </h2> --}}

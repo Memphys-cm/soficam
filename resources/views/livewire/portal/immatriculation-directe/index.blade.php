@@ -189,7 +189,7 @@
                                         </svg>
                                     </a>
                                     @can('imma_directe.etat_cession', $imma_directe)
-                                        @if ($imma_directe->next_step === 'Etablissement Etat de Cession')
+                                        @if ($imma_directe->next_step != null)
                                             <a href="#" data-bs-placement="top" title="Etat de Cession"
                                                 wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
                                                 data-bs-target="#EtatCessionModal" draggable="false">
@@ -203,7 +203,7 @@
                                         @endif
                                     @endcan
                                     @can('imma_directe.bordereau_transmission', $imma_directe)
-                                        @if ($imma_directe->next_step == 'umelage (fusion) et préparation du Bordereau de transmission')
+                                        @if ($imma_directe->next_step == 'jumelage (fusion) et préparation du Bordereau de transmission')
                                             <a href="#" data-bs-placement="top" title="Bordereau de Transmission"
                                                 wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
                                                 data-bs-target="#bordoreauDeTransmitionModal" draggable="false">
@@ -308,10 +308,10 @@
                                             </a>
                                         @endif
                                     @endcan
-                                    @can('imma_directe.certificat_affichage', $imma_directe)
+                                    @can('imma_directe.convocation', $imma_directe)
                                         @if ($imma_directe->next_step == 'signature decision portant calendrier de descente')
                                             <a href="#" data-bs-placement="top"
-                                                title="Imprimer Le certificat D'affichage"
+                                                title="Etablisser Le Message Porter"
                                                 wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
                                                 data-bs-target="#ConvocationImmaDirecteModal" draggable="false">
                                                 <svg class="icon icon-xs" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -400,7 +400,7 @@
                                     @endcan
 
                                     @can('imma_directe.certificat_affichage', $imma_directe)
-                                        @if ($imma_directe->date_avis_publique_signe != null)
+                                        @if ($imma_directe->next_step == "Instruction du Dossier – Élaboration du certificat d’affichage")
                                         @endif
                                     @endcan
 
