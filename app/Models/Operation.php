@@ -87,7 +87,8 @@ class Operation extends Model implements  HasMedia
             'mutation_totale_par_deces' => 'primary',
             'morcellement_normale' =>'secondary',
             'morcellement_forcee' => 'tertiary', 
-            'retrait_indivision' => 'dark', 
+            'retrait_indivision_normale' => 'dark', 
+            'retrait_indivision_forcee' => 'success', 
             NULL => ''
         };
     }
@@ -98,7 +99,8 @@ class Operation extends Model implements  HasMedia
             'mutation_totale_par_deces' => 'Mutation Par Deces',
             'morcellement_normale' => 'Morcellement',
             'morcellement_forcee' => 'Morcellement Force',
-            'retrait_indivision' => 'Retrait D\'indivision',
+            'retrait_indivision_normale' => 'Retrait D\'indivision',
+            'retrait_indivision_forcee' => 'Retrait D\'indivision Forcee',
             NULL => ''
         };
     }
