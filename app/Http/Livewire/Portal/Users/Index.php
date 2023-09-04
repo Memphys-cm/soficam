@@ -22,7 +22,7 @@ class Index extends Component
     public $last_name;
     public $sexe;
     public $email;
-    public $is_active = 1;
+    public $is_active;
     public $id_card_number;
     public $date_of_birth;
     public $place_of_birth;
@@ -86,7 +86,7 @@ class Index extends Component
             'primary_phone_number' => $this->primary_phone_number,
             'secondary_phone_number' => $this->secondary_phone_number,
             'address' => $this->address,
-            'is_active' => $this->is_active === "true" ?  1 : 0,
+            'is_active' => $this->is_active === true ?  1 : 0,
             'password' => bcrypt($this->password),
         ]);
 
@@ -126,7 +126,7 @@ class Index extends Component
             'primary_phone_number' => $this->primary_phone_number,
             'secondary_phone_number' => $this->secondary_phone_number,
             'address' => $this->address,
-            'is_active' => $this->is_active === "true" ?  1 : 0,
+            'is_active' => $this->is_active === true ?  1 : 0,
             'password' => empty($this->password) ? $this->user->password : bcrypt($this->password),
         ]);
 
@@ -144,13 +144,12 @@ class Index extends Component
         $user = User::findOrFail($id);
 
         // $service = Service::findOrFail($user->service_id);
-
         $this->first_name = $user->first_name;
         $this->last_name = $user->last_name;
         $this->sexe = $user->sexe;
         $this->email = $user->email;
         $this->service_id = $user->service_id;
-        $this->is_active = $user->is_active;
+        $this->is_active = $user->is_active === false ? 0 : 1;
         $this->id_card_number = $user->id_card_number;
         $this->date_of_birth = $user->date_of_birth;
         $this->place_of_birth = $user->place_of_birth;

@@ -22,6 +22,6 @@ class Index extends Component
 
         return view('livewire.user.suivi-dossier.index', [
             'immatriculations' => $immatriculations
-        ]);
+        ])->layout('components.layouts.user.master');
     }
 }

@@ -28,6 +28,6 @@ class Follow extends Component
 
         return view('livewire.user.suivi-dossier.follow', [
             'combinedData' => $combinedData,
-        ]);
+        ])->layout('components.layouts.user.master');
     }
 }
