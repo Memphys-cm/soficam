@@ -11,8 +11,8 @@
 
                         <div class='form-group row mb-3'>
                             <div class=" col">
-                                <label for="releve_number">{{ __('Numéro relévé bien immo') }}</label>
-                                <input type="text" wire:model="releve_number" class="form-control  @error('releve_number') is-invalid @enderror " placeholder="RENXXXXXX" id="releve_number" autofocus="" required="">
+                                <label for="releve_number">{{ __('Numéro relévé Bien Immo') }}</label>
+                                <input type="text" wire:model="releve_number" class="form-control  @error('releve_number') is-invalid @enderror " placeholder="" id="releve_number" autofocus="" required="">
                                 @error('releve_number')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -20,7 +20,7 @@
                                 @enderror
                             </div>
 
-                            <div class=" col"><label for="requestor_id">{{ __('Réquerant') }}</label>
+                            <div class=" col"><label for="requestor_id">{{ __('Requérant') }}</label>
                                 <x-input.select wire:model="requestor_id" prettyname="requestor" :options="$requestors->pluck( 'first_name','id')->toArray()" />
                                 @error('requestor_id')
                                 <div class="invalid-feedback">
