@@ -47,7 +47,7 @@
                             </div>
                             <div class="col">
                                 <label for="releve_number">{{ __('Numéro du relevé') }}</label>
-                                <input wire:model="releve_number" type="text" class="form-control  @error('releve_number') is-invalid @enderror" placeholder="{{ __('1986') }}" required="">
+                                <input wire:model="releve_number" type="text" class="form-control  @error('releve_number') is-invalid @enderror" placeholder="{{ __('') }}" required="">
                                 @error('releve_number')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

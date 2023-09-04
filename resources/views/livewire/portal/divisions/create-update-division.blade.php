@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">{{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Département')}}</h1>
-                        <p class="px-1"> {{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Département')}} </p>
+                        <h1 class="mb-0 h4">{{$state ? 'Mettre à jour' : 'Créer'}} {{__(' Département')}}</h1>
+                        <p class="px-1"> {{$state ? 'Mettre à jour' : 'Créer'}} {{__(' Département')}} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <div class="form-group row mb-3">

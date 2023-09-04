@@ -70,7 +70,7 @@
             <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="type_operation">{{__('Opération')}}</option>
-                <option value="type_personne">{{__('Personne')}}</option>
+                <option value="type_personne">{{__('Type Personne')}}</option>
                 <option value="zone">{{__('Zone')}}</option>
                 <option value="user_id">{{__('Requérant')}}</option>
                 <option value="geometre_id">{{__('Géomètre')}}</option>

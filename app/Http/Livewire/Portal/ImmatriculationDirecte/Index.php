@@ -799,6 +799,65 @@ class Index extends Component
         );
     }
 
+    public function sms($id) {
+        $imma_directe = ImmatriculationDirecte::findOrFail($id);
+        $receivers = $imma_directe->users;
+
+        $userNames='';
+        $mobiles = "";
+
+        foreach($receivers as $user) {
+            if($user){
+                $userNames .= $user->first_name . ',';
+                $mobiles .= "$user->primary_phone_number,";
+            }
+        }
+
+        //retirer la virgule en fin de chaine
+        $userNames = rtrim($userNames, ',');
+        $mobiles = rtrim($mobiles, ',');
+
+        $sms = "Mr/Mme. $userNames, votre dossier d'immatriculation directe et à l'étape $imma_directe->statut";
+        $senderid ='SOFICAM';
+        $api_key = '36v7fN66hzUD6SaBYkILlirHZo7P';
+        $url = 'https://api.queensms.net/v1/sms.php';
+
+        $sms_body = array(
+            'api_key' => $api_key,
+            'senderid' => $senderid,
+            'sms' => $sms,
+            'mobiles' => $mobiles
+        );
+    
+        $send_data = http_build_query($sms_body);
+        $gateway_url = $url . "?" . $send_data;
+    
+        try {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $gateway_url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HTTPGET, 1);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $output = curl_exec($ch);
+    
+            if (curl_errno($ch)) {
+                $output = curl_error($ch);
+                $arr = ['echec'];
+                return($arr);
+            }
+            else{
+                return($output);
+            }
+            curl_close($ch);
+        }
+    
+        catch (Exception $exception){
+            //echo $exception->getMessage();
+            $arr = ['echec'];
+            return($arr);
+        }
+    }
+
     public function clearFields()
     {
         $this->reset(
