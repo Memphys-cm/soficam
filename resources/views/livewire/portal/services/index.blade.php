@@ -160,8 +160,7 @@
                     <tr>
                         <td colspan="7" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
-                                <p>{{__('Aucun enregistrement trouvé..!')}}</p>
+                                <h4 class="fs-4 fw-bold">{{__('Liste Vide')}} </h4>
                             </div>
                         </td>
                     </tr>
@@ -170,7 +169,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Montrer')}} {{$perPage > $services_count ? $services_count : $perPage  }} {{__('éléments sur ')}} {{$services_count}}
+                    {{__('Montrer')}} {{$perPage > $services_count ? $services_count : $perPage  }} {{__(' éléments sur ')}} {{$services_count}}
                 </div>
                 {{ $services->links() }}
             </div>

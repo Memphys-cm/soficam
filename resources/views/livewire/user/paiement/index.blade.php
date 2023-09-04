@@ -50,7 +50,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                                 <div class="mb-3 mb-md-0">
-                                    <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($allsales_count)}} {{ __(\Str::plural('Audit mise à jour', $allsales_count)) }} </h5>
+                                    <h5 class="text-gray-700 fw-bold mb-0">{{numberFormat($allsales_count)}} {{ __(\Str::plural('Audit de Modification', $allsales_count)) }} </h5>
                                     <div class=" text-gray-500 ">{{__('enregistré!')}} </div>
                                 </div>
                             </div>
@@ -167,7 +167,6 @@
                             <td colspan="7" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
                                     <h4 class="fs-4 fw-bold">{{__('Liste Vide')}} </h4>
-                                    <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                                 </div>
                             </td>
                         </tr>
@@ -186,7 +185,7 @@
         <div class='border-prim rounded p-4 d-flex justify-content-center align-items-center flex-column'>
             <img src="{{asset('/img/empty.svg')}}" alt='{{__("Empty")}}' class="text-center  w-25 h-25">
             <div class="text-center text-gray-800 mt-2">
-                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}};</h4>
+                <h4 class="fs-4 fw-bold">{{__('Liste Vide')}};</h4>
                 <p>{{__('L\'enregistrement du salaire anticipé a fonctionné pour les voir ici!')}}</p>
             </div>
         </div>
