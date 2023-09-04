@@ -1,5 +1,5 @@
 <div>
-    <div class='pb-3'>
+    {{-- <div class='pb-3'>
         <div class="d-flex justify-content-between w-100 flex-wrap mb-0 align-items-center">
             <div class="mb-lg-0">
 
@@ -15,7 +15,7 @@
                 {{ \Str::upper(\Str::random(5)) . '' . now()->format('msu') }} <br>
             </div>
         </div>
-    </div>
+    </div> --}}
     <h4>Statistiques globales</h4>
 
     <div class="row g-3 mb-3">
