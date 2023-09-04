@@ -15,7 +15,7 @@
                         <div class='form-group mb-3 row'>
                             <div class='col'>
                                 <label for="numero_titre_foncier">{{ __('Numéro du Titre Foncier') }}</label>
-                                <input wire:model="numero_titre_foncier" type="text"
+                                <input wire:model.defer="numero_titre_foncier" type="text"
                                     class="form-control  @error('numero_titre_foncier') is-invalid @enderror"
                                     placeholder="" required="" value=""
                                     name="numero_titre_foncier">
