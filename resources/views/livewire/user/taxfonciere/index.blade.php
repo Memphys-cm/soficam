@@ -93,15 +93,15 @@
 
                               <td>
                                   <div class="d-flex align-items-centerpy-1">
-                                      {{ __('Region') }} : <span class="fw-bolder mx-2">
+                                      {{ __('Région') }} : <span class="fw-bolder mx-2">
                                           {{ $titrefoncier->region->region_name }} </span>
                                   </div>
                                   <div class="d-flex align-items-centerpy-1">
-                                      {{ __('Division') }} : <span class="fw-bolder mx-2">
+                                      {{ __('Département') }} : <span class="fw-bolder mx-2">
                                           {{ $titrefoncier->division->division_name }} </span>
                                   </div>
                                   <div class="d-flex align-items-centerpy-1">
-                                      {{ __('Sub Divi') }} : <span class="fw-bolder mx-2">
+                                      {{ __('Arrondissement') }} : <span class="fw-bolder mx-2">
                                           {{ $titrefoncier->subDivision->sub_division_name }} </span>
                                   </div>
                                   <div class="d-flex align-items-centerpy-1">
