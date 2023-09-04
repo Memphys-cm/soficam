@@ -103,7 +103,8 @@
                         <th class="border-bottom">{{__('Propriétaires')}}</th>
                         <th class="border-bottom">{{__('Localisation')}}</th>
                         <th class="border-bottom">{{__('Limites')}}</th>
-                        <th class="border-bottom">{{__('Coordonnées')}}</th>
+                        <th class="border-bottom">{{__('Coordonnées utm')}}</th>
+                        <th class="border-bottom">{{__('Coordonnées long , lat')}}</th>
                         <th class="border-bottom">{{__('Statut')}}</th>
                         <th class="border-bottom">{{__('Date Création')}}</th>
                         @canany('titre_foncier.update','titre_foncier.delete')
@@ -151,6 +152,13 @@
                             <div class="d-flex align-items-centerpy-1">
                                 <span class="fw-bolder mx-2"> {{__('Ouest')}} </span> {{$titrefoncier->limit_ouest}}
                             </div>
+                        </td>
+                        <td>
+                            @foreach(collect(json_decode($titrefoncier->coordonnees_utm,true)) as $key => $value)
+                            <div class="d-flex align-items-centerpy-1">
+                                <span class="fw-bolder mx-2"> {{ $key }} :</span> {{ $value}}
+                            </div>
+                            @endforeach
                         </td>
                         <td>
                             @foreach(collect(json_decode($titrefoncier->coordonnees,true)) as $key => $value)

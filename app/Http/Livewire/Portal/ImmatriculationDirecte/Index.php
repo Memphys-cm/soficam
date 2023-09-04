@@ -32,7 +32,7 @@ class Index extends Component
     public $imma_directe , $imma_file;
 
     public $state = 0, $price_m2, $users, $user_id, $user_ids, $comissions = [], $localisation;
-    public $attachements, $services, $service_id, $observation, $montant_ordre_versement;
+    public $attachements, $services, $service_id, $observation, $montant_ordre_versement , $montant_ordre_redevance;
     public $region_id;
     public $division_id;
     public $sub_division_id;
@@ -412,6 +412,53 @@ class Index extends Component
         $this->refresh(__('La recette est appliquée Avec SUCCES!'), 'DossierViseImmaDirecteModal');
         $this->clearFields();
     }
+    
+    public function cotation_second_step()
+    {
+        $this->validate([
+            'service_id' => 'required',
+            'user_id' => 'required',
+        ]);
+
+ 
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'service_dossier_complet_id' => $this->service_id,
+                'observation_dossier_complet' => $this->observation,
+                'user_dossier_complet_id' => $this->user_id,
+                'statut' => 'Dossier Cote à la Délégation Départementale',
+                'next_step' => 'Réception + calcul et délivrance de l’ordre de versement de la redevance foncière à l’usager',
+                'date_dossier_complet_vise_coter' => Carbon::now(),
+            ]);
+        });
+
+        $this->refresh(__('Dossier Cote à la Délégation Départementale!'), 'CotationIStep2mmaDirecteModal');
+
+        $this->clearFields();
+    }
+
+    public function cotation_cadre()
+    {
+        $this->validate([
+            'user_id' => 'required',
+        ]);
+
+ 
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'observation_cotation_cadre' => $this->observation,
+                'cadre_id' => $this->user_id,
+                'statut' => 'Demande coter à un Cadre',
+                'next_step' => 'Traitement de la demande d’immatriculation directe et transmission',
+                'date_cotation_cadre' => Carbon::now(),
+            ]);
+        });
+
+        $this->refresh(__('Dossier Cote à un Cadre!'), 'CotationCadreModal');
+
+        $this->clearFields();
+    }
+    
 
     public function cotation_first_step()
     {
@@ -499,6 +546,50 @@ class Index extends Component
 
 
         $this->refresh(__('Ordre de Versement Enregistrer Avec SUCCES!'), 'OrdreVersementImmaDirecteModal');
+
+        $this->clearFields();
+    }
+
+    public function ordre_redevance_fonciere()
+    {
+        $this->validate([
+            'montant_ordre_redevance' => 'required',
+        ]);
+
+
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'numero_redevance_fonciere' => $this->genererNumeroVersement(),
+                // 'superficie_ordre_versement' => $this->superficie_ordre_versement,
+                'montant_ordre_redevance_fonciere' => $this->montant_ordre_redevance,
+                'statut' => 'Ordre de Versement de Redevance Fonciere en Attente de Paiement',
+                'next_step' => 'Paiement de L\'Ordre versement de Redevance Fonciere Chez le Receveur',
+                'ordre_redevance_fonciere' => Carbon::now(),
+            ]);
+        });
+
+        $sale = Sale::create([
+            // 'user_id' => $this->requestor_id,
+            'sales_code' => $this->imma_directe->numero_redevance_fonciere,
+            'sales_amount' => $this->montant_ordre_redevance,
+            'sales_type' => 'ordre_versement_redevance_fonciere_imma_directe',
+            'created_by' => auth()->user()->name,
+        ]);
+
+        // Create the Saleable item using only the specified information
+        $saleableData = [
+            'sale_id' => $sale->id,
+            'price' => $this->montant_ordre_redevance,
+            'quantity' => 1,
+            'saleable_id' => $this->imma_directe->id,
+            'saleable_type' => 'App\Models\ImmatriculationDirecte', // Adjust the namespace if different
+            'created_by' => auth()->user()->name,
+        ];
+
+        DB::table('saleables')->insert($saleableData);
+
+
+        $this->refresh(__('Ordre de Versement De Redevance Fonciere Enregistrer Avec SUCCES!'), 'OrdreRedevanceModal');
 
         $this->clearFields();
     }
