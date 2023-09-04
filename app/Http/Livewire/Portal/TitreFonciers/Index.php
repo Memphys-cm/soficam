@@ -198,7 +198,7 @@ class Index extends Component
         }
 
         $this->validate([
-            'numero_titre_foncier' => 'required|unique:titrefonciers',
+            'numero_titre_foncier' => 'required|unique:titre_fonciers',
             // 'numero_conservation' => 'required|unique:titrefonciers',
             'region_id' => 'required',
             'division_id' => 'required',
