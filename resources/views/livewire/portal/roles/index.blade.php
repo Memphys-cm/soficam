@@ -25,7 +25,7 @@
                     </svg>
                     {{__('Gestion des roles')}}
                 </h1>
-                <p class="mt-n2">{{__('Gérer les rôles et les autorisations')}} </p>
+                <p class="mt-n2">{{__('Gérer les rôles et les autorisations')}}</p>
             </div>
             <div class="d-flex justify-content-between mb-2">
                 @can('role.create')
@@ -147,7 +147,7 @@
 
                 <div class="text-center text-gray-800 mt-4">
                     <img src="{{ asset('/img/illustrations/not_found.svg') }}" class="w-25 ">
-                    <h4 class="fs-4 fw-bold my-1">{{__('Liste Vide')}} </h4>
+                    <h4 class="fs-4 fw-bold my-1">{{__('Liste vide')}}</h4>
                     <p class="pt-0 mt-n1">{{__('Aucun enregistrement n\'a été trouvé ici!')}}</p>
                 </div>
                 @can('core.role.create')

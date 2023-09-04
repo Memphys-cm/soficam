@@ -186,7 +186,7 @@
         <div class='border-prim rounded p-4 d-flex justify-content-center align-items-center flex-column'>
             <img src="{{asset('/img/empty.svg')}}" alt='{{__("Empty")}}' class="text-center  w-25 h-25">
             <div class="text-center text-gray-800 mt-2">
-                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
+                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}};</h4>
                 <p>{{__('L\'enregistrement du salaire anticipé a fonctionné pour les voir ici!')}}</p>
             </div>
         </div>

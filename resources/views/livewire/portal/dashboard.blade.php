@@ -9,7 +9,7 @@
                             class="h5 ">{{ auth()->user()->name }}</span>
                     </div>
                 </h1>
-                <p class="mt-n2">{{ __('Gérer les entreprises et leurs détails relatifs') }} &#128524;</p>
+                <p class="mt-n2">{{ __('Gérer les entreprises et leurs détails relatifs') }} ;</p>
             </div>
             <div class="d-flex justify-content-between">
                 {{ \Str::upper(\Str::random(5)) . '' . now()->format('msu') }} <br>
@@ -164,9 +164,7 @@
                                         <path fill-rule="evenodd"
                                             d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
                                             clip-rule="evenodd"></path>
-                                    </svg>
-                                    <span class="text-success fw-bolder">18,2%</span> Depuis le mois dernier
-                                </div>
+                                    </svg><span class="text-success fw-bolder">18,2%</span>{{__('Depuis le mois dernier')}}</div>
                             </div>
                         </div>
                     </div>

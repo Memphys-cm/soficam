@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">{{$state ? 'Mettre à jour' : 'Créer'}} {{__(' Activité')}}</h1>
-                        <p class="px-1"> {{$state ? 'Mettre à jour' : 'Créer'}} {{__(' Activité')}}</p>
+                        <h1 class="mb-0 h4">{{$state ? 'Mettre à jour' : 'Créer'}} {{__('Activité')}}</h1>
+                        <p class="px-1"> {{$state ? 'Mettre à jour' : 'Créer'}} {{__('Activité')}}</p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <div class="form-group row mb-3">
@@ -34,7 +34,7 @@
 
                         </div>
                         <div class="form-group mb-3">
-                            <label class="px-2" for="nom_activite">{{__('Nom Activité')}}</label>
+                            <label class="px-2" for="nom_activite">{{__('Nom de l\'activité')}}</label>
                             <input wire:model="activite.nom_activite" type="text" class="form-control  @error('activite.nom_activite') is-invalid @enderror" placeholder="{{__('par vente - 4 % du prix d’achat')}}" required="" value="" name="activite.nom_activite">
                             @error('activite.nom_activite')
                             <div class="invalid-feedback">{{$message}}</div>

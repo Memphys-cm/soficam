@@ -28,7 +28,7 @@
                     </svg>
                     {{ __('Gestion des ventes totales') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir toutes les ventes totales dans l\'application') }}  </p>
+                <p class="mt-n1 mx-2">{{ __('Voir toutes les ventes totales dans l\'application') }}</p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 

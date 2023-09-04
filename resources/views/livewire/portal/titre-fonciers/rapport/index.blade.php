@@ -1,6 +1,5 @@
 <div>
     <x-alert />
-    @include('livewire.portal.titre-fonciers.create')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -14,7 +13,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">{{__('Tableau de Bord')}}</a></li>
+                        <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{__('Titres Fonciers')}}</li>
                     </ol>
                 </nav>
@@ -22,44 +21,62 @@
                     <svg class="icon me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    {{__('Titres fonciers')}}
+                    {{__('Rapport sur les titres fonciers')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('Voir tous les Titres Fonciers')}} </p>
-            </div>
-            <div class="d-flex justify-content-between mb-2">
-
-                @can('titre_foncier.create')
-                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateTitreFoncierModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
-                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{__('Nouveau')}}
-                </a>
-                @endcan
-                @can('titre_foncier.import')
-                <div class="btn-group me-2">
-                    <button type="button" class="btn btn-outline-tertiary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                        </svg>
-                        <span class="sr-only">{{__('Opérations sur titres fonciers')}}</span>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{route('portal.lotissements.index')}}">{{__('Lotissement')}}</a>
-                        <a class="dropdown-item" href="{{route('portal.lotissements.index')}}">{{__('Ventes')}}</a>
-                        <a class="dropdown-item" href="{{route('portal.mutation-totale.index')}}">{{__('Mutation totale')}}</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{route('portal.immobilier.index')}}">{{__('Releve Immo')}}</a>
-                        <a class="dropdown-item" href="{{route('portal.certificate-propriete.index')}}">{{__('Certificat Proprieté')}}</a>
-                        <a class="dropdown-item" href="{{route('portal.titre-fonciers-charges.index')}}">{{__('Charges')}}</a>
-                        <a class="dropdown-item" href="{{route('portal.etat-cession.index')}}">{{__('Etat Cession')}}</a>
-                    </div>
-                </div>
-                @endcan
-
+                <p class="mt-n1 mx-2">{{__('Voir tous les titres fonciers')}}</p>
             </div>
         </div>
     </div>
     <div class="row py-3">
+        <div class="col">
+            <label for="selectedRegion">{{__('par Regions')}}: </label>
+            <select wire:model="selectedRegion" id="selectedRegion" class="form-select">
+                <option value="">Toutes les Regions</option>
+                @foreach ($regions as $region)
+                    <option value="{{$region->id}}">{{$region->region_name_en}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col">
+            <label for="selectedDivision">{{__('par Departements')}}: </label>
+            <select wire:model="selectedDivision" id="selectedDivision" class="form-select">
+                <option value="">Toutes les Divisions</option>
+                @foreach ($divisions as $division)
+                    <option value="{{$division->id}}">{{$division->division_name_en}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col">
+            <label for="selectedSubDivision">{{__('by Arrondissements')}}: </label>
+            <select wire:model="selectedSubDivision" id="selectedSubDivision" class="form-select">
+                <option value="">Toutes les Sub-Divisions</option>
+                @foreach ($sub_divisions as $sub_division)
+                    <option value="{{$sub_division->id}}">{{$sub_division->sub_division_name_en}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div class="row p-3">
+        <div class="col">
+            <label for="startDate">Date Debut:</label>
+            <input type="date" wire:model="startDate" class="form-control" id="startDate">
+        </div>
+        <div class="col">
+            <label for="endDate">Date Fin:</label>
+            <input type="date" wire:model="endDate" class="form-control" id="endDate">
+        </div>
+        <div class="col">
+            <label for="selectedStatus">{{__('Par Statut')}}: </label>
+            <select wire:model="selectedStatus" id="selectedStatus" class="form-select">
+                <option value="">Par Statut</option>
+                <option value="HYPOTHEQUE">HYPOTHEQUE</option>
+                <option value="PRENOTE">PRENOTE</option>
+                <option value="SUSPENDU">SUSPENDU</option>
+                <option value="DISPONIBLE">DISPONIBLE</option>
+            </select>
+        </div>
+    </div>
+    <div class="row p-3">
         <div class="col-md-3">
             <label for="search">{{__('Recherche')}}: </label>
             <input wire:model="query" id="search" type="text" placeholder="{{__('Recherche...')}}" class="form-control">
@@ -68,22 +85,22 @@
         <div class="col-md-3">
             <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="region_id">{{__('Région')}}</option>
-                <option value="date_de_delivrance_du_TF">{{__('Date Délivrance')}}</option>
-                <option value="created_at">{{__('Date Création')}}</option>
+                <option value="region_id">{{__('Region')}}</option>
+                <option value="date_de_delivrance_du_TF">{{__('Date Delivrance')}}</option>
+                <option value="created_at">{{__('Date creation')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Sens du tri')}}: </label>
+            <label for="direction">{{__('Sens du Trie')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{__('Ascendant')}}</option>
-                <option value="desc">{{__('Descendant')}}</option>
+                <option value="asc">{{__('Ascendante')}}</option>
+                <option value="desc">{{__('Descendante')}}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Éléments par page')}}: </label>
+            <label for="perPage">{{__('Elements par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -98,15 +115,14 @@
             <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('Numéro Titre Foncier')}}</th>
-                        <th class="border-bottom">{{__('Date Délivrance')}}</th>
-                        <th class="border-bottom">{{__('Propriétaires')}}</th>
+                        <th class="border-bottom">{{__('Numero du titre foncier')}}</th>
+                        <th class="border-bottom">{{__('Date de delivrance')}}</th>
+                        <th class="border-bottom">{{__('Proprietaires')}}</th>
                         <th class="border-bottom">{{__('Localisation')}}</th>
                         <th class="border-bottom">{{__('Limites')}}</th>
-                        <th class="border-bottom">{{__('Coordonnées utm')}}</th>
-                        <th class="border-bottom">{{__('Coordonnées long , lat')}}</th>
+                        <th class="border-bottom">{{__('Coordonnees')}}</th>
                         <th class="border-bottom">{{__('Statut')}}</th>
-                        <th class="border-bottom">{{__('Date Création')}}</th>
+                        <th class="border-bottom">{{__('Date creation')}}</th>
                         @canany('titre_foncier.update','titre_foncier.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
                         @endcanany
@@ -123,7 +139,7 @@
                         </td>
 
                         <td>
-                            <x-elements.user :options="$titrefoncier->users->take(5)" />
+                            <x-elements.user :options="$titrefoncier->users->take(5)" /> 
                         </td>
                         <td>
                             <div class="d-flex align-items-centerpy-1">
@@ -154,14 +170,6 @@
                             </div>
                         </td>
                         <td>
-                            @foreach(collect(json_decode($titrefoncier->coordonnees_utm,true)) as $key => $value)
-                            <div class="d-flex align-items-centerpy-1">
-                                <span class="fw-bolder mx-2"> {{ $key }} :</span> {{ $value}}
-                            </div>
-                            @endforeach
-                        </td>
-                        <td>
-                        <td>
                             @foreach(collect(json_decode($titrefoncier->coordonnees,true)) as $key => $value)
                             <div class="d-flex align-items-centerpy-1">
                                 <span class="fw-bolder mx-2"> {{ $key }} :</span> {{ $value}}
@@ -183,12 +191,6 @@
                                 </svg>
                             </a>
                             @endcan
-                            <a href="#" wire:click.prevent='printPdf({{$titrefoncier->id}})'>
-                                <svg class="icon icon-sm text-gray-500"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
-                                </svg>
-                            </a>
-
                             @can('titre_foncier.update')
                             <a href="#" wire:click.prevent="initData({{$titrefoncier->id}})" data-bs-toggle="modal" data-bs-target="#CreateTitreFoncierModal" draggable="false">
                                 <svg class="icon icon-sm text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -210,7 +212,7 @@
                     <tr>
                         <td colspan="9" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Liste vide')}}</h4>
+                                <h4 class="fs-4 fw-bold">{{__('Liste vide')}} </h4>
                                 <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
@@ -220,7 +222,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Montrer')}} {{$perPage > $titrefonciers_count ? $titrefonciers_count : $perPage  }} {{__('éléments sur')}} {{$titrefonciers_count}}
+                    {{__('Montrer')}} {{$perPage > $titrefonciers_count ? $titrefonciers_count : $perPage  }} {{__('éléments de')}} {{$titrefonciers_count}}
                 </div>
                 {{ $titrefonciers->links() }}
             </div>

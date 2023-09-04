@@ -153,7 +153,7 @@
             <div class='border-prim rounded p-4 d-flex justify-content-center align-items-center flex-column mx-2'>
                 <div class="text-center text-gray-800 mt-4">
                     <img src="{{ asset('/img/illustrations/not_found.svg') }}" class="w-25 ">
-                    <h4 class="fs-4 fw-bold my-1">{{__('Liste Vide')}} </h4>
+                    <h4 class="fs-4 fw-bold my-1">{{__('Liste vide')}} </h4>
                     <p class="pt-0 mt-n1">{{__('Aucun enregistrement trouvé!')}}</p>
                 </div>
                 @can('core.region.create')
