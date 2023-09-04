@@ -32,11 +32,15 @@ class Operation extends Model implements  HasMedia
             ->nonQueued();
     }
 
-    function scopeMutationTotale($query)
+    public function scopeRetraitIndivision($query)
+    {
+        return $query->where('type_operation', 'retrait_indivision_normale')->orWhere('type_operation', 'retrait_indivision_forcee');
+    }
+    public function scopeMutationTotale($query)
     {
         return $query->where('type_operation', 'mutation_totale_normale')->orWhere('type_operation', 'mutation_totale_par_deces');
     }
-    function scopeMorcellements($query)
+    public function scopeMorcellements($query)
     {
         return $query->where('type_operation', 'morcellement_normale')->orWhere('type_operation', 'morcellement_forcee');
     }
