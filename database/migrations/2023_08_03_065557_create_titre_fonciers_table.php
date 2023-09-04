@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('titre_fonciers', function (Blueprint $table) {
             $table->id();
            $table->uuid('uuid')->unique()->index();
-            $table->string('numero_titre_foncier')->index();
-            $table->string('numero_conservation')->index();
+            $table->string('numero_titre_foncier')->index()->unique();
+            $table->string('numero_conservation')->index()->nullable();
             $table->date('date_de_delivrance_du_TF');
             $table->string('numero_du_duplicata')->nullable();
             $table->foreignId('region_id')->index();
