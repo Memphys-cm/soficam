@@ -191,7 +191,7 @@
                             <td><span class="fw-normal">{{ $allsale->sales_code }}</span></td>
                             <td><span class="fw-normal">{{ $allsale->user->name }}</span></td>
                             <td><span class="fw-normal">{{ $allsale->sales_type }}</span></td>
-                            <td><span class="fw-normal">{{ $allsale->sales_amount }} {{ __('XAF') }} </span></td>
+                            <td><span class="fw-normal">{{ $allsale->sales_amount }} {{ __('FCFA') }} </span></td>
                             <td><span class="fw-normal">{{ $allsale->payment_method }}</span></td>
                             <td>
                                 <span
@@ -204,7 +204,7 @@
                         <tr>
                             <td colspan="9" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
-                                    <h4 class="fs-4 fw-bold">{{ __('Liste') }} </h4>
+                                    <h4 class="fs-4 fw-bold">{{ __('Liste Vide') }} </h4>
                                     <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                                 </div>
                             </td>

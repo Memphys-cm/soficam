@@ -17,7 +17,7 @@ class Index extends Component
 
     public function roleCreated()
     {
-        $this->refresh(__('Role and associated Permissions created succeffuly!'), 'CreateRoleModal');
+        $this->refresh(__('Rôle et permissions associées créés avec succès!'), 'CreateRoleModal');
     }
 
     //Get & assign selected advance_salary props
