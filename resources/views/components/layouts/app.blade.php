@@ -52,7 +52,6 @@
             overflow: hidden;
         }
         @endif 
-        
         * {
             font-family: 'Poppins', sans-serif;
 
