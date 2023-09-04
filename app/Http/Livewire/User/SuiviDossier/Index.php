@@ -19,14 +19,9 @@ class Index extends Component
         // $titrefonciers = auth()->user()->titrefonciers;
         // $mutations = auth()->user()->mutations;
         $immatriculations = auth()->user()->imma_directes;
-        $morcellement = auth()->user()->morcellement;
-        $mutation_totale = auth()->user()->mutation_totale;
-        $retrait_indivision = auth()->user()->retrait_indivision;
-
-        $combinedData = $immatriculations;
 
         return view('livewire.user.suivi-dossier.index', [
-            'combinedData' => $combinedData
+            'immatriculations' => $immatriculations
         ]);
     }
 }
