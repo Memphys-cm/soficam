@@ -5,14 +5,14 @@
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4"> {{ __('Bien Immobilier') }}</h1>
-                        <p class="px-1"> {{ __('Créer un bien immobilier') }} </p>
+                        <p class="px-1"> {{ __('Créer un Bien Immobilier') }} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
 
                         <div class='form-group row mb-3'>
                             <div class=" col">
-                                <label for="releve_number">{{ __('Numéro relévé bien immo') }}</label>
-                                <input type="text" wire:model="releve_number" class="form-control  @error('releve_number') is-invalid @enderror " placeholder="RENXXXXXX" id="releve_number" autofocus="" required="">
+                                <label for="releve_number">{{ __('Numéro relévé Bien Immo') }}</label>
+                                <input type="text" wire:model="releve_number" class="form-control  @error('releve_number') is-invalid @enderror " placeholder="" id="releve_number" autofocus="" required="">
                                 @error('releve_number')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -20,7 +20,7 @@
                                 @enderror
                             </div>
 
-                            <div class=" col"><label for="requestor_id">{{ __('Requerant') }}</label>
+                            <div class=" col"><label for="requestor_id">{{ __('Requérant') }}</label>
                                 <x-input.select wire:model="requestor_id" prettyname="requestor" :options="$requestors->pluck( 'first_name','id')->toArray()" />
                                 @error('requestor_id')
                                 <div class="invalid-feedback">
@@ -41,7 +41,7 @@
                             </div>
 
                             <div class=" col">
-                                <label for="releves_type">{{ __('Type') }}</label>
+                                <label for="releves_type">{{ __('Type Personne') }}</label>
                                 <select wire:model="releves_type" class="form-control" name="releves_type" id="releves_type">
                                     <option value="">{{__('--Selectionner le type--')}}</option>
                                     <option value="personne_physique">{{__('Personne Physique')}}</option>
@@ -55,8 +55,8 @@
                             </div>
                         </div>
                         <div class="form-group row mb-1 px-2">
-                            <label for="releve_reason">{{__('Pourquoi avez-vous voulu créer ce bien immobilier ? ?')}}</label>
-                            <textarea class="form-control" wire:model="releve_reason" name="releve_reason" id="releve_reason" placeholder="Enter the reason here"></textarea>
+                            <label for="releve_reason">Pourquoi voulez vous créer ce bien immobilier ? </label>
+                            <textarea class="form-control" wire:model="releve_reason" name="releve_reason" id="releve_reason" placeholder="commentaires"></textarea>
                         </div>
                         </fieldset>
 

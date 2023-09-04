@@ -161,6 +161,51 @@ class Index extends Component
         }
     }
 
+    public function sms($id) {
+        $immobilier = ReleveImmobilier::findOrFail($id);
+        $receiver = $immobilier->requestor->first_name;
+        $sms = "Mr/Mme. $receiver votre relevé immobilier est disponible";
+        $senderid ='SOFICAM';
+        $mobiles = $immobilier->requestor->primary_phone_number;
+        $api_key = '36v7fN66hzUD6SaBYkILlirHZo7P';
+        $url = 'https://api.queensms.net/v1/sms.php';
+
+        $sms_body = array(
+            'api_key' => $api_key,
+            'senderid' => $senderid,
+            'sms' => $sms,
+            'mobiles' => $mobiles
+        );
+    
+        $send_data = http_build_query($sms_body);
+        $gateway_url = $url . "?" . $send_data;
+    
+        try {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $gateway_url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HTTPGET, 1);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $output = curl_exec($ch);
+    
+            if (curl_errno($ch)) {
+                $output = curl_error($ch);
+                $arr = ['echec'];
+                return($arr);
+            }
+            else{
+                return($output);
+            }
+            curl_close($ch);
+        }
+    
+        catch (Exception $exception){
+            //echo $exception->getMessage();
+            $arr = ['echec'];
+            return($arr);
+        }
+    }
+
     public function  printPdf($id)
     {
         $this->immobilier = ReleveImmobilier::findOrFail($id);
