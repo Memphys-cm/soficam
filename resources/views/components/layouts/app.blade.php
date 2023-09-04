@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@inject('request', 'Illuminate\Http\Request')
 
 <head>
     <meta charset="utf-8">
@@ -10,9 +11,7 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>{{ $header ?? 'Soficam' }}</title>
@@ -35,8 +34,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/opensans-font.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/montserrat-font.css') }}">
-    <link rel="stylesheet" type="text/css"
-        href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
     <!-- Main Style Css -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 
@@ -45,8 +43,19 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css" rel="stylesheet" />
     @livewireStyles
     <style>
+        @if($request->routeIs('login') || $request->routeIs('register')) body {
+            background-image: url('../img/login.svg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin-bottom: 200px;
+            overflow: hidden;
+        }
+        @endif 
+        
         * {
             font-family: 'Poppins', sans-serif;
+
         }
 
         .stepwizard-step p {
@@ -157,28 +166,33 @@
 
     <script type="text/javascript">
         // after success to play camera Webcam Ajax paly to send data to Controller
-    function onScanSuccess(data) {
-    $.ajax({
-        type: "POST",
-        cache: false,
-        url : "",
-        data: {"_token": "{{ csrf_token() }}",data:data},
-        success: function(data) {
-            // after success to get Answer from controller if User Registered login user by scanner
-            // and page change to Home blade
-        if (data==1) {
-        document.getElementById('result').innerHTML = '<span class="result">'+'Logged'+'</span>';
-            $(location).attr('href', '{{url('/home')}}');
-            }
-        else{
-        return confirm('There is no user with this qr code'); 
+        function onScanSuccess(data) {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    data: data
+                },
+                success: function(data) {
+                    // after success to get Answer from controller if User Registered login user by scanner
+                    // and page change to Home blade
+                    if (data == 1) {
+                        document.getElementById('result').innerHTML = '<span class="result">' + 'Logged' + '</span>';
+                        $(location).attr('href', '{{url(' / home ')}}');
+                    } else {
+                        return confirm('There is no user with this qr code');
+                    }
+                }
+            })
         }
-        }
-    })
-    }
-    var html5QrcodeScanner = new Html5QrcodeScanner(
-    "reader", { fps: 10, qrbox: 250 });
-    html5QrcodeScanner.render(onScanSuccess);
+        var html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader", {
+                fps: 10,
+                qrbox: 250
+            });
+        html5QrcodeScanner.render(onScanSuccess);
     </script>
 
 </body>
