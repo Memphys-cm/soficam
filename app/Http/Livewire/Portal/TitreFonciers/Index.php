@@ -93,25 +93,25 @@ class Index extends Component
       
     }
 
-    // public function updatedRegionID($region_id)
-    // {
-    //     if (!empty($region_id)) {
-    //         $this->divisions = Division::whereRegionId($region_id)->get();
-    //         $this->region_code = Region::whereId($region_id)->first()->code;
+    public function updatedRegionID($region_id)
+    {
+        if (!empty($region_id)) {
+            $this->divisions = Division::whereRegionId($region_id)->get();
+            $this->region_code = Region::whereId($region_id)->first()->code;
 
-    //         $this->numero_titre_foncier = $this->generateCodeTF();
-    //     }
+            // $this->numero_titre_foncier = $this->generateCodeTF();
+        }
 
-    // }
-    // public function updatedDivisionID($division_id)
-    // {
-    //     if (!empty($division_id)) {
-    //         $this->sub_divisions = SubDivision::whereDivisionId($division_id)->get();
-    //         $this->division_code = Division::whereId($division_id)->first()->code;
-    //         $this->numero_titre_foncier = $this->generateCodeTF();
-    //     }
+    }
+    public function updatedDivisionID($division_id)
+    {
+        if (!empty($division_id)) {
+            $this->sub_divisions = SubDivision::whereDivisionId($division_id)->get();
+            $this->division_code = Division::whereId($division_id)->first()->code;
+            // $this->numero_titre_foncier = $this->generateCodeTF();
+        }
         
-    // }
+    }
 
     // public function updatedNumeroFolio()
     // {
@@ -167,7 +167,6 @@ class Index extends Component
     public function generateCodeTF()
     {
         $numero = $this->region_code . "/" . $this->division_code . "/" . 'A' . "/" . $this->numero_du_duplicata . "/" . $this->superficie_du_TF_mere . "/" . $this->numero_folio;
-
         return ($numero);
     }
 
@@ -200,6 +199,7 @@ class Index extends Component
 
         $this->validate([
             'numero_titre_foncier' => 'required|unique:titrefonciers',
+            'numero_conservation' => 'required|unique:titrefonciers',
             'region_id' => 'required',
             'division_id' => 'required',
             'sub_division_id' => 'required',
