@@ -87,7 +87,7 @@ class Operation extends Model implements  HasMedia
             'mutation_totale_par_deces' => 'primary',
             'morcellement_normale' =>'secondary',
             'morcellement_forcee' => 'tertiary',
-            'retrait_indivision_normale' => 'dark',
+            'retrait_indivision_normale' => 'gray-500',
             'retrait_indivision_forcee' => 'success', 
             NULL => ''
         };
