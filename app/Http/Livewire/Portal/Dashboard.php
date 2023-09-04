@@ -34,12 +34,14 @@ class Dashboard extends Component
     public function mount()
     {
         $this->loadRecentActivities();
+        $this->end_date_tf = Carbon::now()->format('Y-m-d');
+        $this->start_date_tf = Carbon::now()->subMonth()->format('Y-m-d');
+        $this->end_date = Carbon::now()->format('Y-m-d');
+        $this->start_date = Carbon::now()->subMonth()->format('Y-m-d');
+        $this->end_date_dos = Carbon::now()->format('Y-m-d');
+        $this->start_date_dos = Carbon::now()->subMonth()->format('Y-m-d');
+        // dd($this->end_date);
     }
-
-
-
-
-
 
     public function loadRecentActivities()
     {
