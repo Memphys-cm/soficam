@@ -161,7 +161,6 @@
                             @endforeach
                         </td>
                         <td>
-                        <td>
                             @foreach(collect(json_decode($titrefoncier->coordonnees,true)) as $key => $value)
                             <div class="d-flex align-items-centerpy-1">
                                 <span class="fw-bolder mx-2"> {{ $key }} :</span> {{ $value}}

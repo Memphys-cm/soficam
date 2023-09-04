@@ -17,7 +17,7 @@
                                 <label for="numero_titre_foncier">{{ __('Numéro du Titre Foncier') }}</label>
                                 <input wire:model="numero_titre_foncier" type="text"
                                     class="form-control  @error('numero_titre_foncier') is-invalid @enderror"
-                                    placeholder="10056/234/NW09" required="" value=""
+                                    placeholder="10056" required="" value=""
                                     name="numero_titre_foncier">
                                 @error('numero_titre_foncier')
                                     <div class="invalid-feedback">{{ $message }}</div>

@@ -167,7 +167,7 @@ class Index extends Component
     public function generateCodeTF()
     {
         $numero = $this->region_code . "/" . $this->division_code . "/" . 'A' . "/" . $this->numero_du_duplicata . "/" . $this->superficie_du_TF_mere . "/" . $this->numero_folio;
-        return ($numero);
+        // return ($numero);
     }
 
     function genererNationalCodeUnique()
@@ -442,6 +442,7 @@ class Index extends Component
                 'numero_ccp' => $this->numero_ccp,
                 'taxFoncier_amount' => $this->taxFoncier_amount,
                 'coordonnees' => json_encode(getCoords($this->coordonnees)),
+                'coordonnees_utm' => json_encode($this->coordonnees),
             ]);
         }
 
