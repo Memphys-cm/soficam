@@ -20,6 +20,13 @@ return new class extends Migration
             $table->foreignId('region_id')->index();
             $table->foreignId('division_id')->index();
             $table->foreignId('sub_division_id')->index();
+            $table->foreignId('sub_division_id')->index();
+            $table->string('zone')->nullable();
+            $table->string('etat_terrain')->nullable();
+            $table->float('superficie')->nullable();
+            $table->string('volume')->nullable();
+            $table->string('folio')->nullable();
+            $table->string('numero_cp')->nullable();
             $table->foreignId('titre_foncier_id')->index()->nullable();
             $table->string('numero_bordereau_transmission')->nullable();
             $table->string('next_step')->nullable();
@@ -65,6 +72,10 @@ return new class extends Migration
             $table->date('date_publication_dossier_vise')->nullable();
             $table->date('date_signature_bulletin')->nullable();
             $table->json('coordonnees')->nullable();
+            $table->string('limit_nord')->nullable();
+            $table->string('limit_sud')->nullable();
+            $table->string('limit_est')->nullable();
+            $table->string('limit_ouest')->nullable();
             $table->date('dossier_technique_created')->nullable();
             $table->date('descente_terrain')->nullable();
             $table->date('transmission_dos_tech_csdaf')->nullable();
@@ -90,10 +101,13 @@ return new class extends Migration
             $table->foreignId('cadre_id')->on('users')->index()->nullable();
             $table->longText('observation_cotation_cadre')->nullable();
             $table->date('date_cotation_cadre')->nullable();
-
+            $table->date('coter_csrcadastre')->nullable();
+            $table->date('dos_tech_transmis_drm')->nullable();
+            $table->date('dos_compl_csrdaf')->nullable();
+            $table->date('cotation_compl_csrdaf')->nullable(); 
             $table->string('numero_serie')->nullable();
 
-
+            
             $table->timestamps();
         });
     }

@@ -173,7 +173,6 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'imma_directe.view_detail'],
             ['name' => 'imma_directe.convocation'],
             ['name' => 'imma_directe.avis'],
-            ['name' => 'imma_directe.certificat_affichage'],
             ['name' => 'imma_directe.etat_cession'],
             ['name' => 'imma_directe.geometre'],
             ['name' => 'imma_directe.pv_bornage'],
@@ -187,6 +186,7 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'imma_directe.creation_dos_tech'],
             ['name' => 'imma_directe.certificat_affichage'],
             ['name' => 'imma_directe.bulletion_avis'],
+            ['name' => 'imma_directe.dossier_tech_create'],
             ['name' => 'imma_directe.cadre'],
             ['name' => 'imma_directe.export_n_print'],
             

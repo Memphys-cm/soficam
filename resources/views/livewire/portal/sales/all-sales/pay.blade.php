@@ -5,7 +5,7 @@
                 <div class="p-4 p-lg-4">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4"> {{ __('Details de la vente') }}</h1>
-                        <p class="px-1"> {{ __('Mise à jour des ventes') }} &#128522;</p>
+                        <p class="px-1"> {{ __('Mise à jour des ventes') }} </p>
                     </div>
                     <x-form-items.form wire:submit="payment">
                         @if (!empty($sale))

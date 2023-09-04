@@ -17,10 +17,10 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
                     </svg>
                     <span>
-                        {{__('Profile Setting')}}
+                        {{__('Paramètres du profil')}}
                     </span>
                 </h1>
-                <p class="text-gray-800">{{__('Afficher les journaux de connexion de toutes les activités')}} &#129297; </p>
+                <p class="text-gray-800">{{__('Mettre à jour votre profil')}} </p>
             </div>
             <div class=''>
 
@@ -68,7 +68,7 @@
                             </div>
                             <div class="form-group mb-4 row">
                                 <div class='col-md-6 col-xs-12'>
-                                    <label for="phone_number">{{__('Numero de telephone')}}</label>
+                                    <label for="phone_number">{{__('Numero de téléphone')}}</label>
                                     <input wire:model="phone_number" type="text" class="form-control  @error('phone_number') is-invalid @enderror" value="{{auth()->user()->phone}}" name="phone_number">
                                     @error('phone_number')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -85,7 +85,7 @@
                             <div class='form-group mb-4'>
                                 <label for="preferred_language">{{__('Sélectionner la langue de notification préférée')}}</label>
                                 <select wire:model="preferred_language" name="preferred_language" class="form-select  @error('preferred_language') is-invalid @enderror" required="">
-                                    <option value="">{{__('Select status')}}</option>
+                                    <option value="">{{__('Sélectionner statut')}}</option>
                                     <option value="en">{{__('Anglais')}}</option>
                                     <option value="fr">{{__('Français')}}</option>
                                 </select>
@@ -94,7 +94,7 @@
                                 @enderror
                             </div>
                             <div class="d-flex justify-content-end">
-                                <button type="submit" wire:click.prevent="updateProfile" class="btn btn-primary btn-loading">{{__('Update')}} </button>
+                                <button type="submit" wire:click.prevent="updateProfile" class="btn btn-primary btn-loading">{{__('Mettre à jour')}} </button>
                             </div>
                         </x-form-items.form>
                     </div>
@@ -102,7 +102,7 @@
                 <div class='col-md-6'>
                     <div class='card p-3 text-gray-700'>
                         <h5 class="pb-3">{{__('Téléchargement de la signature')}} <br>
-                            <small class="text-muted fw-light fs-6 fst-italic">{{__('Télécharger la signature sur fond transparent/blanc')}} <a href='https://www.signwell.com/online-signature/draw/' target="_blank">{{__("check here!")}}</a> </small>
+                            <small class="text-muted fw-light fs-6 fst-italic">{{__('Télécharger la signature sur fond transparent/blanc')}} <a href='https://www.signwell.com/online-signature/draw/' target="_blank">{{__("choisir ici!")}}</a> </small>
                         </h5>
 
                         <x-form-items.form wire:submit="saveSignature" nctype="multipart/form-data" class="form-modal">
@@ -119,7 +119,7 @@
                                 </div>
                                 @endif
                                 <div>
-                                    <button type="submit" wire:click.prevent="saveSignature" class="btn btn-gray-300 text-gray-500 btn-loading">{{__('Upload signature')}} </button>
+                                    <button type="submit" wire:click.prevent="saveSignature" class="btn btn-gray-300 text-gray-500 btn-loading">{{__('Téléverser signature')}} </button>
                                 </div>
                             </div>
                         </x-form-items.form>

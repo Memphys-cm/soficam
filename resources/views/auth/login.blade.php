@@ -1,16 +1,16 @@
 <x-layouts.app>
-    <main class="pt-5" wire:ignore style="background-image: url('../img/bg.jpeg'); background-position: center; background-repeat: no-repeat; background-size: cover;">
+    <main class="pt-5" wire:ignore>
         <section class="d-flex align-items-center my-5 py-5 mt-lg-6 mb-lg-5">
             <div class="container">
                 <div class="row justify-content-center form-bg-image" data-background-lg="">
 
                     <div class="col-12 d-flex align-items-center justify-content-center ">
-                        <div class="bg-white shadow border-0 rounded border-light p-4 px-lg-5 pt-lg-4 pb-lg-5 w-100 fmxw-500">
+                        <div class="shadow-lg border-0 rounded border-light py-5 p-4 px-lg-5 pt-lg-4 pb-lg-5 w-100 fmxw-500" style="background-color: rgba(255,255,255,.7)">
                             <!-- <div class=" text-center mb-4 mt-md-0 pt-n4">
                                 <img src='/img/logo.png' class="w-50 h-auto" alt=''>
                             </div> -->
-                            <div class="text-center text-md-center mb-4 mt-md-0">
-                                <h1 class="mb-0 h3">{{ __('Se connecter à notre plateforme')}}</h1>
+                            <div class="text-center text-md-center mb-4 pt-2 mt-md-0">
+                                <h1 class="mb-0 h3">{{ __('SOFICAM Soft revolution v2.0.0')}}</h1>
                             </div>
                             <x-form-items.form method="POST" action="{{ route('login') }}" class="mt-1 form-modal needs-validation" id="">
                                 <div class='text-center'>
@@ -52,10 +52,10 @@
                                     <button type="submit" class="btn btn-primary btn-loading px-6"> {{ __('Connexion') }}</button>
                                 </div>
                                 <div class="d-flex justify-content-center align-items-center mt-4">
-                                    <span class="fw-normal">{{__('Pas membre?')}} <a href="{{route('register')}}" class="fw-bold">{{__('S\'enregistrer')}}</a></span>
+                                    <a href="{{route('register')}}" class="btn btn-success px-4 text-white">{{__('Creer un nouveau compt?')}}</a>
                                 </div>
                             </x-form-items.form>
-                            <div class='d-flex justify-content-center mt-3 fw-light mb-n4'>
+                            <div class='d-flex justify-content-center mt-3 fw-light mb-n2'>
                                 {{__('Changer de langue')}} <br>
                                 <a class="{{ \App::isLocale('fr') ? ' text-secondary' : ''}} mx-2" href="{{route('language-switcher',['locale'=>'fr'])}}">{{__('FR')}}</a> |
                                 <a class="{{ \App::isLocale('en') ? ' text-secondary' : ''}} mx-2" href="{{route('language-switcher',['locale'=>'en'])}}">{{__('EN')}}</a>

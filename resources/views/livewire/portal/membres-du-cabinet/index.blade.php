@@ -17,7 +17,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ __('Membre du Cabinet') }}</li>
                     </ol>
                 </nav>
@@ -191,7 +191,6 @@
                             <td colspan="7" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
                                     <h4 class="fs-4 fw-bold">{{ __('Liste vide') }}</h4>
-                                    <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                                 </div>
                             </td>
                         </tr>

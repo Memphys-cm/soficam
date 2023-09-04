@@ -234,7 +234,7 @@
                             </a>
                         </td>
                         <td>
-                            <span class="fs-normal">{{is_null($user->service) ? __('NA'): ucfirst($user->service->name) }}</span>
+                            <span class="fs-normal">{{is_null($user->service) ? __('NA'): ucfirst($user->service->service_name_fr) }}</span>
                         </td>
                         <td>
                             <span class="fw-normal">{{$user->getRoleNames()->first()}}</span>

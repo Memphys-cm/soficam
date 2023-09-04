@@ -15,8 +15,8 @@
                     <x-form-items.form wire:submit="quitance_geometre">
                         <div class="form-group mb-3 row">
                             <div class='col-12 my-1' >
-                                <label for="code">{{ __('Utilisateur') }}</label>
-                                <x-input.select wire:model="geometre_id" prettyname="user_id" :options="$geometres->pluck('first_name', 'id')->toArray()" selected="('geometre_id')" />
+                                <label for="code">{{ __('Geometre') }}</label>
+                                <x-input.select wire:model="geometre_id" prettyname="user_id" :options="$users->pluck('first_name', 'id')->toArray()" selected="('geometre_id')" />
                                 @error('geometre_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

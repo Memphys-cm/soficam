@@ -12,7 +12,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Acceuil</a></li>
+                        <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{__('Journal de connexion')}}</li>
                     </ol>
                 </nav>
@@ -80,7 +80,7 @@
                                     <h3 class="fw-extrabold mb-1">{{numberFormat($creation_log_count)}}</h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Journal de création'), $creation_log_count) }} {{__('Enregistrés')}}</div>
+                                    <div>{{ \Str::plural(__('Journal de création'), $creation_log_count) }} {{__('Enregistrées')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -98,17 +98,17 @@
                                     </svg>
                                 </div>
                                 <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5">{{ \Str::plural(__('Journal des mises à jour'), $update_log_count) }}</h2>
+                                    <h2 class="fw-extrabold h5">{{ \Str::plural(__('Journal des Modifications'), $update_log_count) }}</h2>
                                     <h3 class="mb-1">{{numberFormat($update_log_count)}}</h3>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-8 px-xl-0">
                                 <a href="" class="d-none d-sm-block">
-                                    <h2 class="h5">{{ \Str::plural(__('Journal des mises à jour'), $update_log_count) }}</h2>
+                                    <h2 class="h5">{{ \Str::plural(__('Journal des Modifications'), $update_log_count) }}</h2>
                                     <h3 class="fw-extrabold mb-1">{{numberFormat($update_log_count)}}</h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Journal des mises à jour'), $update_log_count) }} {{__('Enregistrés')}}</div>
+                                    <div>{{ \Str::plural(__('Journal des Modifications'), $update_log_count) }} {{__('Enregistrées')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                                     <h3 class="fw-extrabold mb-1">{{numberFormat($deletion_log_count)}} </h3>
                                 </a>
                                 <div class="small d-flex mt-1">
-                                    <div>{{ \Str::plural(__('Journal des suppressions'), $deletion_log_count) }} {{__('Enregistrés!')}}</div>
+                                    <div>{{ \Str::plural(__('Journal des suppressions'), $deletion_log_count) }} {{__('Enregistrées!')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -230,7 +230,6 @@
                         <td colspan="7" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
                                 <h4 class="fs-4 fw-bold">{{__('Liste vide')}} </h4>
-                                <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
                     </tr>
