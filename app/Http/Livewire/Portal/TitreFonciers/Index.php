@@ -444,7 +444,7 @@ class Index extends Component
                 'le_conservateur' => $this->le_conservateur,
                 'numero_ccp' => $this->numero_ccp,
                 'taxFoncier_amount' => $this->taxFoncier_amount,
-                'coordonnees' => json_encode(getCoords($this->coordonnees)),
+                'coordonnees' => json_encode($transform),
                 'coordonnees_utm' => json_encode($this->coordonnees),
             ]);
         }
