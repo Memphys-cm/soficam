@@ -17,7 +17,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
+                        <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ __('Demande de Certificat de Propriété') }}</li>
                     </ol>
                 </nav>
@@ -87,7 +87,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{ __('Sens du Tri') }}: </label>
+            <label for="direction">{{ __('Sens du tri') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{ __('Ascendant') }}</option>
                 <option value="desc">{{ __('Descendant') }}</option>
@@ -95,7 +95,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{ __('Eléments par page') }}: </label>
+            <label for="perPage">{{ __('Elements par page') }}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>

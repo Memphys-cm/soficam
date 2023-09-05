@@ -66,7 +66,7 @@
             <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p>
         </div>
         <div class="col-md-3">
-            <label for="orderBy">{{__('Trier Par')}}: </label>
+            <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="titre_foncier_id">{{__('Numéro du Titre Foncier')}}</option>
                 <option value="created_at">{{__('Date Création')}}</option>

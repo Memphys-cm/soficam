@@ -86,7 +86,7 @@
                                 <div class='col'>
                                     <label class="px-2" for="requestor_id">{{__('Requérant')}}</label>
                                     <select wire:model="requestor_id" class='form-control'>
-                                        <option value=''>{{__('-- Select --')}}</option>
+                                        <option value=''>{{__('-- Selectionner --')}}</option>
                                         @foreach($users as $user)
                                         <option value='{{$user->id}}'>{{$user->first_name}} {{$user->last_name}}</option>
                                         @endforeach
@@ -112,7 +112,7 @@
                                 <div class='col'>
                                     <label class="px-2" for="etat_cession_id">{{__('Etat Cession')}}</label>
                                     <select wire:model="etat_cession_id" class='form-control'>
-                                        <option value=''>{{__('-- Select --')}}</option>
+                                        <option value=''>{{__('-- Selectionner --')}}</option>
                                         @foreach($etat_cessions as $etat_cession)
                                         <option value='{{$etat_cession->id}}'>{{$etat_cession->reference_etat_cession}}</option>
                                         @endforeach

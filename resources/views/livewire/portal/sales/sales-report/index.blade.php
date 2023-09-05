@@ -191,7 +191,7 @@
                             <td><span class="fw-normal">{{ $allsale->sales_code }}</span></td>
                             <td><span class="fw-normal">{{ $allsale->user->name }}</span></td>
                             <td><span class="fw-normal">{{ $allsale->sales_type }}</span></td>
-                            <td><span class="fw-normal">{{ $allsale->sales_amount }} {{ __('XAF') }} </span></td>
+                            <td><span class="fw-normal">{{ $allsale->sales_amount }} {{ __('FCFA') }} </span></td>
                             <td><span class="fw-normal">{{ $allsale->payment_method }}</span></td>
                             <td>
                                 <span

@@ -266,7 +266,7 @@
                                             </svg>
                                         </span>
                                     </span>
-                                    <div class="multi-level collapse {{ $request->routeIs('portal.bien_immobilier.index') || $request->routeIs('portal.immobilier.index') ? 'show' : '' }}" role="list" id="submenu-rbi" aria-expanded="{{ $request->routeIs('portal.regions.index') || $request->routeIs('portal.division.index') || $request->routeIs('portal.sub_division.index') ? 'false' : 'true' }}">
+                                    <div class="multi-level collapse {{ $request->routeIs('portal.biens_immobiliers.index') || $request->routeIs('portal.immobilier.index') ? 'show' : '' }}" role="list" id="submenu-rbi" aria-expanded="{{ $request->routeIs('portal.regions.index') || $request->routeIs('portal.division.index') || $request->routeIs('portal.sub_division.index') ? 'false' : 'true' }}">
                                         <ul class="flex-column nav">
                                             @can('immobilier.view')
                                             <li class="nav-item {{ $request->routeIs('portal.immobilier.index') ? 'active' : '' }}">
@@ -276,8 +276,8 @@
                                             </li>
                                             @endcan
                                             @can('immobilier.view')
-                                            <li class="nav-item {{ $request->routeIs('portal.bien_immobilier.index') ? 'active' : '' }}">
-                                                <a href="{{ route('portal.bien_immobilier.index') }}" class="nav-link">
+                                            <li class="nav-item {{ $request->routeIs('portal.biens_immobiliers.index') ? 'active' : '' }}">
+                                                <a href="{{ route('portal.biens_immobiliers.index') }}" class="nav-link">
                                                     <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Biens Immo') }}</span>
                                                 </a>
                                             </li>

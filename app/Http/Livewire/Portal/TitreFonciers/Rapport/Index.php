@@ -170,7 +170,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('TitreFoncier successfully Created'), 'CreateTitreFoncierModal');
+        $this->refresh(__('Titre Foncier avec succès Créé'), 'CreateTitreFoncierModal');
     }
 
     public function initData($id)
@@ -284,7 +284,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('TitreFoncier successfully Updated'), 'CreateTitreFoncierModal');
+        $this->refresh(__('Titre Foncier avec succès Mise à jour'), 'CreateTitreFoncierModal');
 
         $this->state = 0;
     }
@@ -304,7 +304,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('TitreFoncier successfully deleted!'), 'DeleteModal');
+        $this->refresh(__('Titre Foncier supprimé avec succès!'), 'DeleteModal');
     }
 
     public function getCoords()

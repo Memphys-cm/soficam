@@ -100,7 +100,7 @@ class Index extends Component
         });
        
         $this->clearFields();
-        $this->refresh(__('CertificatePropriete successfully Created!'), 'CreatecertificateproprieteModal');
+        $this->refresh(__('Certificat Propriete créé avec succès!'), 'CreatecertificateproprieteModal');
     }
 
     public function initData($id)
@@ -160,7 +160,7 @@ class Index extends Component
         });
 
         $this->clearFields();
-        $this->refresh(__('CertificatePropriete Updated Created!'), 'UpdateCertificateProprieteModal');
+        $this->refresh(__('Certificat Propriete Mis à jour!'), 'UpdateCertificateProprieteModal');
 
     }
 

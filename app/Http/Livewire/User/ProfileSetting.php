@@ -46,7 +46,7 @@ class ProfileSetting extends Component
             'preferred_language' => $this->preferred_language,
         ]);
 
-        $this->refresh(__('Profile updated successfully!'));
+        $this->refresh(__('Profil mis à jour avec succès!'));
     }
     public function saveSignature()
     {
@@ -59,7 +59,7 @@ class ProfileSetting extends Component
             auth()->user()->update(['signature_path' => $this->signature->storePublicly('signatures', 'attachments')]);
         }
 
-        $this->refresh(__('Signature saved successfully!'));
+        $this->refresh(__('Signature enregistrée avec succès!'));
     }
     public function passwordReset()
     {

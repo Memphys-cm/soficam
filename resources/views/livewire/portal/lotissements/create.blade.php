@@ -58,7 +58,7 @@
             </div>
             <div class='col-md-9'>
                 <div class="card p-4 mb-3">
-                    <legend class="w-auto">Informations sur le terrain</legend>
+                    <legend class="w-auto">{{__('Informations sur le terrain')}}</legend>
                     <div class='row form-group mb-3'>
                         <div class="col-md-6 py-2">
                             <label for="code">{{ __('Numéro du Titre Foncier') }}</label>
@@ -162,7 +162,7 @@
                             <div class="form-group ">
                                 <div class=''>
                                     <label for="blockName">{{__('Bloc')}} {{$blockIndex+1 }} {{__('Nom')}}</label>
-                                    <input type="text" class="form-control px-4  @error('blocks.{{ $blockIndex }}.block_name') is-invalid @enderror" wire:model="blocks.{{ $blockIndex }}.block_name"  placeholder="{{'Block No. '.$blockIndex+1}}">
+                                    <input type="text" class="form-control px-4  @error('blocks.{{ $blockIndex }}.block_name') is-invalid @enderror" wire:model="blocks.{{ $blockIndex }}.block_name"  placeholder="{{'Bloc No. '.$blockIndex+1}}">
                                     @error('blocks.$blockIndex.block_name')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

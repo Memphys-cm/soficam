@@ -174,7 +174,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('Etat Cession cree avec success'), 'CreateEtatCessionModal');
+        $this->refresh(__('Etat Cession créé avec succes'), 'CreateEtatCessionModal');
     }
 
     public function update()
@@ -221,7 +221,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('Etat Cession cree avec success'), 'CreateEtatCessionModal');
+        $this->refresh(__('Etat Cession mis à jour avec succes'), 'CreateEtatCessionModal');
     }
 
     public function delete()
@@ -242,7 +242,7 @@ class Index extends Component
         }
 
 
-        $this->refresh(__('Etat Cession suprimee avec success!'), 'DeleteModal');
+        $this->refresh(__('Etat Cession supprimé avec succes!'), 'DeleteModal');
     }
 
     public function clearFields()
