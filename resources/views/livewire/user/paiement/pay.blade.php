@@ -1,11 +1,11 @@
 <div wire:ignore.self class="modal fade" id="PayModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:30%;">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{__('Effectuer')}}{{__(' un Paiement')}}</h1>
-                        <p class="px-1"> {{__('Paiement')}} </p>
+                        <h1 class="mb-0 h4">{{__('Effectuer')}}{{__(' un Paiement')}}</h1>
+                        <p class="px-1">{{__('Paiement')}}</p>
                     </div>
                     <x-form-items.form wire:submit="confirmPayment">
                         <div class="form-group mt-3 px-2">
