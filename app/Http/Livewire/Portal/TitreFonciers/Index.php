@@ -88,7 +88,9 @@ class Index extends Component
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
-        $this->conservateurs = User::role('user')->get(); // to be updated
+        $this->conservateurs = User::with(['roles' => function ($role) {
+            return $role->where('name', ['Conservateur'])->get();
+        }])->get();
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
       
     }
@@ -374,7 +376,7 @@ class Index extends Component
         }
         $this->validate(
             [
-                'numero_titre_foncier' => 'required',
+                // 'numero_titre_foncier' => 'required',
                 'region_id' => 'required',
                 'division_id' => 'required',
                 'sub_division_id' => 'required',
@@ -417,7 +419,7 @@ class Index extends Component
             // Calculate the tax_foncier based on the formula
             $taxFoncier_amount = 0.001 * $price;
             $this->titrefoncier->update([
-                'numero_titre_foncier' => $this->numero_titre_foncier,
+                'numero_conservation' => $this->numero_titre_foncier,
                 'region_id' => $this->region_id,
                 'division_id' => $this->division_id,
                 'sub_division_id' => $this->sub_division_id,
