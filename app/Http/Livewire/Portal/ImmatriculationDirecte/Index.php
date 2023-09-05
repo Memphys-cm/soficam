@@ -45,6 +45,7 @@ class Index extends Component
     public $date_convocation , $superficie , $status , $date_status;
     public $geometre_id , $geometres;
     public $attachments , $quitance, $montant_dossier_vise;
+    public $numero_conservation;
     public $limit_nord;
     public $limit_sud;
     public $limit_est;
@@ -209,6 +210,7 @@ class Index extends Component
             $this->imma_directe->update([
                 // 'coordonnees' => json_encode($this->coordonnees),
                 'coordonnees' => json_encode($this->transform),
+                'coordonnees_utm' => $this->coordonnees,
                 'statut' => 'Dossier technique créer',
                 'next_step' => 'Instruction du Dossier – Descente de la CC en vue du constat d’occupation et ou d’exploitation',
                 'dossier_technique_created' => Carbon::now()
@@ -663,31 +665,31 @@ class Index extends Component
         $this->clearFields();
     }
 
-    public function updated()
-    {
-        if($this->detect === 1){
-            $area =  $this->imma_directe->superficie;
-            $zone = $this->zone;
-           ;
-            $this->price_m2 = match ($zone) {
-                "terrain_urbain" => ($area <= 5000) ? 25000 : ($area - 5000) * 20,
-                "terrain_rurale" => match (true) {
-                    ($area <= 50000) => 25000,
-                    ($area >= 50000 && $area <= 200000) => 50000,
-                    default => ($area - 200000) * 1,
-                },
-                default => 0,
-            };
+    // public function updated()
+    // {
+    //     if($this->detect === 1){
+    //         $area =  $this->imma_directe->superficie;
+    //         $zone = $this->zone;
+    //        ;
+    //         $this->price_m2 = match ($zone) {
+    //             "terrain_urbain" => ($area <= 5000) ? 25000 : ($area - 5000) * 20,
+    //             "terrain_rurale" => match (true) {
+    //                 ($area <= 50000) => 25000,
+    //                 ($area >= 50000 && $area <= 200000) => 50000,
+    //                 default => ($area - 200000) * 1,
+    //             },
+    //             default => 0,
+    //         };
             
-            $this->frais_suplementaires = 2500;
+    //         $this->frais_suplementaires = 2500;
     
-            $this->cout = (int)$this->price_m2;
+    //         $this->cout = (int)$this->price_m2;
     
-            $this->cout_etat_cession = (int)$this->cout + (int)$this->frais_suplementaires;
-            // dd($this->cout_etat_cession);
-        }
-    }
-    
+    //         $this->cout_etat_cession = (int)$this->cout + (int)$this->frais_suplementaires;
+    //         // dd($this->cout_etat_cession);
+    //     }
+    // }
+
     public function generateUniqueCode($year, $counter)
     {
         $counterFormatted = str_pad($counter, 5, '0', STR_PAD_LEFT);
@@ -1021,7 +1023,7 @@ class Index extends Component
 
     public function generateCodeTF()
     {
-        $numero = $this->imma_directe->region->region_name_fr . "/" . $this->imma_directe->division->division_name_fr . "/" . 'A' . "/" . $this->duplicata . "/" . $this->imma_dircte->superficie . "/" . $this->folio;
+        $numero = $this->imma_directe->region->code . "/" . $this->imma_directe->division->code . "/" . 'A' . "/" . $this->numero_conservation;
         return ($numero);
     }
 
@@ -1045,9 +1047,10 @@ class Index extends Component
         return $codeUnique;
     }
 
-
+ 
     public function create_tf()
     {
+        // dd($this->imma_directe->users->id);
         $this->validate([
             'volume' => 'required',
             'folio' => 'required',
@@ -1059,14 +1062,15 @@ class Index extends Component
                 'volume' => $this->volume,
                 'folio' => $this->folio,
                 'numero_cp' => $this->numero_cp,
-                'status' => 'Titre foncier créer',
-                'next_step' => 'Délivrance de l’état de cession et paiement',
+                'statut' => 'Titre foncier créer',
+                'next_step' => 'Derniere mise en forme + retrait du titre foncier',
             ]);
         });
 
         $titrefoncier = TitreFoncier::create([
             'numero_titre_foncier' => $this->generateCodeTF(),
             'national_code' => $this->genererNationalCodeUnique(),
+            'numero_conservation' => $this->numero_conservation,
             'region_id' => $this->imma_directe->region_id,
             'division_id' => $this->imma_directe->division_id,
             'sub_division_id' => $this->imma_directe->sub_division_id,
@@ -1078,13 +1082,14 @@ class Index extends Component
             'numero_folio' => $this->imma_directe->folio,
             'volume' => $this->imma_directe->volume,
             'superficie_du_TF_mere' => $this->imma_directe->superficie,
-            // 'etat_TF' => $this->imma_direct->etat_terrain,
+            'etat_TF' => 'DISPONIBLE',
             'etat_terrain' => $this->imma_directe->etat_terrain,
-            // 'provenance_TF' => $this->provenance_TF,
+            'provenance_TF' => $this->imma_directe->source_terrain,
             'numero_bordereau_analytique' => $this->imma_directe->numero_bordereau_transmission,
             // 'volume_du_bordereau_analytique' => $this->volume_du_bordereau_analytique,
             // 'date_detablissement_du_bordereau_analytique' => $this->date_detablissement_du_bordereau_analytique,
-            // 'coordonnees' => json_encode($transform),
+            'coordonnees' => $this->imma_directe->coordonnees,
+            'coordonnees_utm' => $this->imma_directe->coordonnees_utm,
             // 'coordonnees_utm' => json_encode($this->coordonnees),
             'limit_nord' => $this->imma_directe->limit_nord,
             'limit_sud' => $this->imma_directe->limit_sud,
@@ -1097,7 +1102,10 @@ class Index extends Component
             // 'taxFoncier_amount' => $taxFoncier_amount,
         ]);
 
-        $titrefoncier->users()->sync($this->imma_directes->users->id);
+        $userIdsToSync = $this->imma_directe->users->pluck('id')->toArray(); // Récupérer les IDs des utilisateurs
+        $titrefoncier->users()->sync($userIdsToSync); // Synchroniser les IDs des utilisateurs
+
+        // $titrefoncier->users()->sync([$this->imma_directe->users->id]);
 
         //Notfication Par SMS
 
