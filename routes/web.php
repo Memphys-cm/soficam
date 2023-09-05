@@ -39,8 +39,8 @@ Route::get('/validate-document/{category}/{model}', function($category, $model)
 {
     $element = match ('certificate_propriete') {
         'certificate_propriete' => CertificatePropriete::whereUuid('737b2744-15d8-4d45-89f6-4d0f365f94a0')->first(),
-        'etat_cession' => EtatCession::whereUuid($model)->first(),
-        'immobilier' => ReleveImmobilier::whereUuid($model)->first(),
+        'etat_cession' => EtatCession::whereUuid(request('model'))->first(),
+        'immobilier' => ReleveImmobilier::whereUuid(request('model'))->first(),
          default => null,
     };
 
