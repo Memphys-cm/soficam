@@ -49,12 +49,9 @@ $qrCode = QrCode::size(100)->generate("https://landsoficam.com/validate-document
         </tr>
     </table>
 
-    <div style="padding: 12px; text-align:center; margin-top:10px">
-        <img src="{{'data:image/png;base64,'. base64_encode($qrCode) }} " alt="QR Code">
-
-        <!-- <img src="$qrCode" alt="QR Code"> -->
-        <!-- <img src="data:image/png;base64, {!! base64_encode($qrCode) !!} "> -->
-    </div>
+    <!-- <div style="padding: 12px; text-align:center; margin-top:10px">
+        <img src="{{'data:image/png;base64,'. base64_encode($qrCode) }} " alt="QR Code"> 
+    </div> -->
 
     <div style="margin-top: 8vh">
         <p></p>
