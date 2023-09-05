@@ -37,8 +37,8 @@ Route::any('/logout', [LoginController::class, 'logout']);
 
 Route::get('/validate-document/{category}/{model}', function($category, $model)
 {
-    $element = match ('certificate_propriete') {
-        'certificate_propriete' => CertificatePropriete::whereUuid('737b2744-15d8-4d45-89f6-4d0f365f94a0')->first(),
+    $element = match ($category) {
+        'certificate_propriete' => CertificatePropriete::whereUuid($model)->first(),
         'etat_cession' => EtatCession::whereUuid($model)->first(),
         'immobilier' => ReleveImmobilier::whereUuid($model)->first(),
          default => null,
@@ -53,7 +53,7 @@ Route::get('/validate-document/{category}/{model}', function($category, $model)
         'titrefoncier' => $element->titre_foncier,
     ];
 
-    $pdf = match ('certificate_propriete') {
+    $pdf = match ($category) {
         'certificate_propriete' =>  Pdf::loadView('livewire.portal.certificate-propriete.print', $data)->setPaper('a4', 'portrait'),
         'etat_cession' =>  Pdf::loadView('livewire.portal.etat-cession.print', $data)->setPaper('a4', 'portrait'),
         'immobilier' =>  Pdf::loadView('livewire.portal.releve-immobilier.immobilier.print', $data)->setPaper('a4', 'portrait'),
