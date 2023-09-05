@@ -15,9 +15,9 @@
                         <div class='form-group mb-3 row'>
                             <div class='col'>
                                 <label for="numero_titre_foncier">{{ __('Numéro du Titre Foncier') }}</label>
-                                <input wire:model="numero_titre_foncier" type="text"
+                                <input wire:model.defer="numero_titre_foncier" type="text"
                                     class="form-control  @error('numero_titre_foncier') is-invalid @enderror"
-                                    placeholder="10056" required="" value=""
+                                    placeholder="" required="" value=""
                                     name="numero_titre_foncier">
                                 @error('numero_titre_foncier')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -36,7 +36,7 @@
                                 <label for="numero_du_duplicata">{{ __('Numéro de Duplicata') }}</label>
                                 <input wire:model="numero_du_duplicata" type="number"
                                     class="form-control  @error('numero_du_duplicata') is-invalid @enderror"
-                                    placeholder="{{ __('05') }}" required="" name="name">
+                                    placeholder="{{ __('') }}" required="" name="name">
                                 @error('numero_du_duplicata')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -98,7 +98,7 @@
                                 <label for="lieu_dit">{{ __('Village') }}</label>
                                 <input wire:model="lieu_dit" type="text"
                                     class="form-control  @error('lieu_dit') is-invalid @enderror"
-                                    placeholder="{{ __('Bwadibo') }}" required="" name="name">
+                                    placeholder="{{ __('') }}" required="" name="name">
                                 @error('lieu_dit')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -107,7 +107,7 @@
                                 <label for="groupement">{{ __('Groupement') }}</label>
                                 <input wire:model="groupement" type="text"
                                     class="form-control  @error('groupement') is-invalid @enderror"
-                                    placeholder="{{ __('Cantoon') }}" required="" value="" name="groupement">
+                                    placeholder="{{ __('') }}" required="" value="" name="groupement">
                                 @error('groupement')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -126,7 +126,7 @@
                         <div class='form-group mb-3 row'>
                             <div class="col">
                                 <label for="numero_folio">{{__('Numéro Folio')}}</label>
-                                <input wire:model="numero_folio" type="number" class="form-control  @error('numero_folio') is-invalid @enderror" placeholder="{{__('34')}}" required="" name="name">
+                                <input wire:model="numero_folio" type="number" class="form-control  @error('numero_folio') is-invalid @enderror" placeholder="{{__('')}}" required="" name="name">
                                 @error('numero_folio')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -135,16 +135,16 @@
                                 <label for="volume">{{ __('Volume') }}</label>
                                 <input wire:model="volume" type="number"
                                     class="form-control  @error('volume') is-invalid @enderror"
-                                    placeholder="{{ __('124') }}" required="" name="name">
+                                    placeholder="{{ __('') }}" required="" name="name">
                                 @error('volume')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label for="superficie_du_TF_mere">{{ __('Superficie Titre Foncier parent') }}</label>
+                                <label for="superficie_du_TF_mere">{{ __('Superficie (m2)') }}</label>
                                 <input wire:model="superficie_du_TF_mere" type="number"
                                     class="form-control  @error('superficie_du_TF_mere') is-invalid @enderror"
-                                    placeholder="{{ __('1200m2') }}" required="" value=""
+                                    placeholder="{{ __('') }}" required="" value=""
                                     name="superficie_du_TF_mere">
                                 @error('superficie_du_TF_mere')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -156,7 +156,8 @@
                                 <label for="etat_TF">{{ __('Charge du Titre Foncier') }}</label>
                                 <select wire:model="etat_TF" name="etat_TF"
                                     class="form-select  @error('etat_TF') is-invalid @enderror" required="">
-                                    <option value="">{{ __('Sélectionner état du titre foncier') }}</option>
+                                    <option value="">{{ __('Sélectionner Charge') }}</option>
+                                    <option value="DISPONIBLE">{{ __('AUCUNE') }}</option>
                                     <option value="HYPOTHEQUE">{{ __('HYPOTHÈQUE') }}</option>
                                     <option value="RETRAIT">{{ __('RETRAIT') }}</option>
                                     <option value="PRENOTE">{{ __('PRENOTATION') }}</option>
@@ -170,6 +171,7 @@
                                 <label for="etat_terrain">{{ __('État du terrain') }}</label>
                                 <select wire:model="etat_terrain" name="etat_terrain"
                                     class="form-select  @error('etat_terrain') is-invalid @enderror" required="">
+                                    <option value="">{{ __('Selectionner L\'etat') }}</option>
                                     <option value="batit">{{ __('Construit') }}</option>
                                     <option value="non_batit">{{ __('Non Construit') }}</option>
                                 </select>
@@ -179,9 +181,16 @@
                             </div>
                             <div class="col">
                                 <label for="provenance_TF">{{ __('Source du Titre Foncier') }}</label>
-                                <input wire:model="provenance_TF" type="text"
+                                <select wire:model="provenance_TF" name="etat_TF"
+                                class="form-select  @error('etat_TF') is-invalid @enderror" required="">
+                                <option value="">{{ __('--Sélectionner Source--') }}</option>
+                                <option value="IMMATRICULTATION DIRECTE">{{ __('IMMATRICULTATION DIRECTE') }}</option>
+                                <option value="MUTATION TOTALE">{{ __('MUTATION TOTALE') }}</option>
+                                <option value="MORCELLEMENT">{{ __('MORCELLEMENT') }}</option>
+                            </select>
+                                {{-- <input wire:model="provenance_TF" type="text"
                                     class="form-control  @error('provenance_TF') is-invalid @enderror"
-                                    placeholder="{{ __('Lotissement') }}" required="" name="name">
+                                    placeholder="{{ __('') }}" required="" name="name"> --}}
                                 @error('provenance_TF')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -192,7 +201,7 @@
                                 <label for="limit_nord">{{ __('Limite Nord') }}</label>
                                 <input wire:model="limit_nord" type="text"
                                     class="form-control  @error('limit_nord') is-invalid @enderror"
-                                    placeholder="{{ __('Route') }}" required="" value=""
+                                    placeholder="{{ __('') }}" required="" value=""
                                     name="limit_nord">
                                 @error('limit_nord')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -202,7 +211,7 @@
                                 <label for="limit_sud">{{ __('Limite Sud') }}</label>
                                 <input wire:model="limit_sud" type="text"
                                     class="form-control  @error('limit_sud') is-invalid @enderror"
-                                    placeholder="{{ __('Route') }}" required="" value=""
+                                    placeholder="{{ __('') }}" required="" value=""
                                     name="limit_sud">
                                 @error('limit_sud')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -212,7 +221,7 @@
                                 <label for="limit_est">{{ __('Limite Est') }}</label>
                                 <input wire:model="limit_est" type="text"
                                     class="form-control  @error('limit_est') is-invalid @enderror"
-                                    placeholder="{{ __('Route') }}" required="" value=""
+                                    placeholder="{{ __('') }}" required="" value=""
                                     name="limit_est">
                                 @error('limit_est')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -224,7 +233,7 @@
                                 <label for="limit_ouest">{{ __('Limite Ouest') }}</label>
                                 <input wire:model="limit_ouest" type="text"
                                     class="form-control  @error('limit_ouest') is-invalid @enderror"
-                                    placeholder="{{ __('Route') }}" required="" value=""
+                                    placeholder="{{ __('') }}" required="" value=""
                                     name="limit_ouest">
                                 @error('limit_ouest')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -234,7 +243,7 @@
                                 <label for="nom_et_prenoms_de_largent_traitant">{{ __('Agent Traitant') }}</label>
                                 <input wire:model="nom_et_prenoms_de_largent_traitant" type="text"
                                     class="form-control  @error('nom_et_prenoms_de_largent_traitant') is-invalid @enderror"
-                                    placeholder="{{ __('Route') }}" required="" value=""
+                                    placeholder="{{ __('') }}" required="" value=""
                                     name="nom_et_prenoms_de_largent_traitant">
                                 @error('nom_et_prenoms_de_largent_traitant')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -259,7 +268,7 @@
                                 <label for="numero_ccp">{{ __('Numero CCP') }}</label>
                                 <input wire:model="numero_ccp" type="number"
                                     class="form-control  @error('numero_ccp') is-invalid @enderror"
-                                    placeholder="{{ __('Jane Doe') }}" required="" value=""
+                                    placeholder="{{ __('') }}" required="" value=""
                                     name="numero_ccp">
                                 @error('numero_ccp')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -268,7 +277,7 @@
                          
                         </div>
 
-                        <div class="p-3 shadow my-4">
+                        {{-- <div class="p-3 shadow my-4">
                             <h2 class="h5 mb-4">{{ __('Ajouter fichier') }}</h2>
                             <div class="d-xl-flex align-items-center">
                                 <div class="file-field">
@@ -283,14 +292,22 @@
                                                 wire:model="attachements" multiple="multiple">
                                             <div class="d-md-block text-left">
                                                 <div class="fw-normal text-dark mb-1">{{ __('Choisir Fichier') }}</div>
-                                                <div class="text-gray small">JPG,PNG, PDF, Word,Excel. Max size of 50MB
+                                                <div class="text-gray small">JPG,PNG, PDF, Word,Excel. Taille Max 50MB
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
+                         <div class='form-group row mb-2'>
+                                 <div class='col'>
+                                     <label class="px-2" for="plan">{{__('Ajouter les fichiers')}}</label>
+                                     <div class="input-group">
+                                         <input type="file" class="form-control" wire:model="attachements" multiple>
+                                     </div>
+                                 </div>
+                             </div>
                         @foreach ($coordinates as $coordinateIndex => $coordinate)
                             <div class='form-group mb-2 d-flex align-items-end justify-content-between'>
                                 <div class=''>

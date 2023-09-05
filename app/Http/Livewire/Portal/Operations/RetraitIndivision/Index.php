@@ -103,11 +103,11 @@ class Index extends Component
             return abort(401);
         }
 
-        if (!empty($this->mutation_totale)) {
+        if (!empty($this->retrait_indivision)) {
 
-            // $this->mutation_totale->users()->delete();
+            // $this->retrait_indivision->users()->delete();
 
-            $this->mutation_totale->delete();
+            $this->retrait_indivision->delete();
         }
 
 
@@ -131,8 +131,8 @@ class Index extends Component
             return abort(401);
         }
 
-        $retraits = Operation::search($this->query)->mutationTotale()->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
-        $retraits_count = Operation::mutationTotale()->count();
+        $retraits = Operation::search($this->query)->retraitIndivision()->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $retraits_count = Operation::retraitIndivision()->count();
 
         return view('livewire.portal.operations.retrait-indivision.index', [
             'retraits' => $retraits,

@@ -53,7 +53,7 @@
                                                         <h6 style="color: grey">Date de début: </h6>
                                                         <div></div>
                                                         <div style="position: absolute; left:85%">
-                                                            <p class="card-title">01/07/2023</p>
+                                                            <p style="color: grey" class="card-title">01/07/2023</p>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex align-items-center pt-1"
@@ -61,27 +61,27 @@
                                                         <h6 style="color: grey" class="card-title">Estimation de la date
                                                             de fin: </h6>
                                                         <div style="position: absolute; left:85%">
-                                                            <p class="card-title">06/07/2023</p>
+                                                            <p style="color: grey" class="card-title">06/07/2023</p>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex align-items-center pt-1"
                                                         style="align-items: center">
                                                         <h6 style="color: grey" class="card-title">Statut: </h6>
                                                         <div style="position: absolute; left:85%">
-                                                            <p class="card-title">{{ $item->statut }}</p>
+                                                            <p style="color: grey" class="card-title">{{ $item->statut }}</p>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex align-items-center pt-1"
                                                         style="align-items: center">
                                                         <h6 style="color: grey" class="card-title">Temps écoulé: </h6>
                                                         <div style="position: absolute; left:85%">
-                                                            <p class="card-title">2 jours</p>
+                                                            <p style="color: grey" class="card-title">2 jours</p>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex align-items-center" style="align-items: center">
                                                         <h6 style="color: grey" class="card-title">Temps restant: </h6>
                                                         <div style="position: absolute; left:85%">
-                                                            <p class="card-title">4 jours</p>
+                                                            <p style="color: grey" class="card-title">4 jours</p>
                                                         </div>
                                                     </div>
                                                 </div>

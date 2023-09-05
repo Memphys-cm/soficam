@@ -41,7 +41,7 @@
                         <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                         </svg>
-                        <span class="sr-only">{{__('Opérations sur titres fonciers')}}</span>
+                        <span class="sr-only">{{__('Opérations sur Titres Fonciers')}}</span>
                     </button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{{route('portal.lotissements.index')}}">{{__('Lotissement')}}</a>
@@ -99,8 +99,9 @@
                 <thead>
                     <tr>
                         <th class="border-bottom">{{__('Numéro Titre Foncier')}}</th>
+                        <th class="border-bottom">{{__('Numéro Conservation')}}</th>
                         <th class="border-bottom">{{__('Date Délivrance')}}</th>
-                        <th class="border-bottom">{{__('Propriétaires')}}</th>
+                        <th class="border-bottom">{{__('Propriétaire(s)')}}</th>
                         <th class="border-bottom">{{__('Localisation')}}</th>
                         <th class="border-bottom">{{__('Limites')}}</th>
                         <th class="border-bottom">{{__('Coordonnées utm')}}</th>
@@ -119,9 +120,11 @@
                             <span class="fw-normal">{{$titrefoncier->numero_titre_foncier}}</span>
                         </td>
                         <td>
+                            <span class="fw-normal">{{$titrefoncier->numero_conservation}}</span>
+                        </td>
+                        <td>
                             <span class="fw-normal">{{$titrefoncier->date_de_delivrance_du_TF}}</span>
                         </td>
-
                         <td>
                             <x-elements.user :options="$titrefoncier->users->take(5)" />
                         </td>
@@ -210,7 +213,6 @@
                         <td colspan="9" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
                                 <h4 class="fs-4 fw-bold">{{__('Liste vide')}}</h4>
-                                <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
                     </tr>

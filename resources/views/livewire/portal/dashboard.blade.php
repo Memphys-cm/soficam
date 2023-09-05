@@ -26,15 +26,15 @@
                 </div>
                 <div class="p-3 row d-flex row justify-content-between align-iterms-center">
                     <div class="col-md-4 d-flex align-items-center">
-                        <p class="font-sans-serif lh-1 fs-4">{{ $all_titres_fonciers }} </p>
+                      <h4>  <span class="font-sans-serif lh-1 fs-4 fw-extrabold mx-3">{{ $all_titres_fonciers }} </span> </h4>
                     </div>
                     <div class="col-md-7">
-                        <p class="font-sans-serif lh-1 fs-4">
+                        <p class="font-sans-serif lh-1 fs-6">
                             <span> {{__('Hommes')}} : </span>
                             <span> {{ $tf_homme }} , </span>
                             <span> {{number_format($percent_homme,2)}} %</span> 
                         </p>
-                        <p class="font-sans-serif lh-1 fs-4">
+                        <p class="font-sans-serif lh-1 fs-6">
                             <span> {{__('Femmes')}} : </span>
                             <span> {{ $tf_femme }} , </span> 
                             <span> {{number_format($percent_femme,2)}} %</span>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
-                        <p class="font-sans-serif lh-1 fs-4">{{ $dossier_traites }} 
+                        <h4>  <span class="font-sans-serif lh-1 fs-4 fw-extrabold mx-3">{{ $dossier_traites }} </span> </h4>
                             {{-- {{ __('Cabinets de Notaires') }}    --}}
                         </p>
                         {{-- <p class="font-sans-serif lh-1 fs-4">{{ $all_cabinet_geometre }} {{ __('Burreaux D\'Etudes') }}</p>
@@ -82,14 +82,15 @@
             </div>
         </div>
 
-        <div class="col-md-6 col-xxl-4">
+        <div class="col-md-6 col-xxl-4"> 
             <div class="card h-md-100 ecommerce-card-min-width" style="height: 180px;">
                 <div class="card-header pb-0">
                     <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Revenues') }}</h6>
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
-                        <p class="font-sans-serif lh-1 fs-4">{{number_format($totalSalesAmount, 0, '', ' ')}}  {{__('FCFA')}}
+                        <h4>  <span class="font-sans-serif lh-1 fs-4 fw-extrabold mx-3">{{number_format($totalSalesAmount, 0, '', ' ')}}  {{__('FCFA')}} </span> </h4>
+                        <p class="font-sans-serif lh-1 fs-4">
                             {{-- {{ __('Cabinets de Notaires') }}    --}}
                         </p>
                         {{-- <p class="font-sans-serif lh-1 fs-4">{{ $all_cabinet_geometre }} {{ __('Burreaux D\'Etudes') }}</p>
@@ -139,10 +140,10 @@
 
     <div class="row">
         <div class="col-12 col-sm-6 col-xl-4 mb-4">
-            <div class="card border-0 shadow h-100">
+            <div class="card border-0 shadow h-100" style="height: 180px;">
                 <div class="card-body">
                     <div class="row d-block d-xxl-flex align-items-center">
-                        <span class="mb-2">  {{__('Filtrer Les Titres Fonciers Sur Une periode')}} </span> <br>
+                        <span class="mb-2">  {{__('Les titres fonciers')}} </span> <br>
                         <div class="d-flex justify-content-around">
                             <span class="mt-2 me-2"> {{__('Du')}} </span> <input  type="date" wire:model="start_date_tf" class="form-control me-2">
                             
@@ -150,13 +151,7 @@
                         </div>
                         <div class="col-12 col-xxl-8 ps-xxl-4 pe-xxl-0 my-1">
                             {{-- <h2 class="fs-6 fw-normal mb-1 text-gray-400 my-1"> {{__('nombres Titres Fonciers sur une periode')}} </h2> --}}
-                             <h4 class=" mb-1">  <span> {{__('')}} </span>  <span class="fw-extrabold"> {{number_format($filter_tf > 0 ? $filter_tf : 0)}} </span>  </h4><small class="d-flex align-items-center"><svg
-                                    class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewbox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                        clip-rule="evenodd"></path>
-                                </svg> <span> {{__('Periode')}} : </span>  {{$start_date_tf}} {{__("Au")}} {{$end_date_tf}} </small>
+                             <h4 class=" mb-1">  <span> {{__('')}} </span>  <span class="fw-extrabold"> {{number_format($filter_tf > 0 ? $filter_tf : 0)}} </span>  </h4>
                             <div class="small d-flex mt-1">
                                 <div>
                                     <svg class="icon icon-xs text-success" fill="currentColor" viewbox="0 0 20 20"
@@ -175,20 +170,14 @@
             <div class="card border-0 shadow h-100">
                 <div class="card-body">
                     <div class="row d-block d-xxl-flex align-items-center">
-                        <span class="mb-2">  {{__('Nombres de Dossiers traités sur une periode')}} </span> <br>
+                        <span class="mb-2">  {{__('Les dossiers traites')}} </span> <br>
                         <div class="d-flex justify-content-around">
                           <span class="mt-2 me-2"> {{__('Du')}} </span>  <input  type="date" wire:model="start_date_dos" class="form-control me-2">
                            <span class="mt-2 me-2"> {{__('Au')}} </span>  <input  type="date" wire:model="end_date_dos" class="form-control me-2">
                         </div>
                         <div class="col-12 col-xxl-8 ps-xxl-4 pe-xxl-0 my-1">
                             {{-- <h2 class="fs-6 fw-normal mb-1 text-gray-400 my-1"> {{__('nombres Titres Fonciers sur une periode')}} </h2> --}}
-                             <h4 class=" mb-1">  <span> {{__('')}} </span>  <span class="fw-extrabold"> {{number_format($filter_tf > 0 ? $filter_tf : 0)}} </span>  </h4><small class="d-flex align-items-center"><svg
-                                    class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewbox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                        clip-rule="evenodd"></path>
-                                </svg> <span> {{__('Periode')}} : </span>  {{$start_date_tf}} {{__("Au")}} {{$end_date_tf}} </small>
+                             <h4 class=" mb-1">  <span> {{__('')}} </span>  <span class="fw-extrabold"> {{number_format($filter_tf > 0 ? $filter_tf : 0)}} </span>  </h4>
                             <div class="small d-flex mt-1">
                                 <div>
                                     <svg class="icon icon-xs text-success" fill="currentColor" viewbox="0 0 20 20"
@@ -209,20 +198,15 @@
             <div class="card border-0 shadow ">
                 <div class="card-body">
                     <div class="row d-block d-xxl-flex align-items-center">
-                        <span class="mb-2">  {{__('Recettes Enregistrees sur une periode')}} </span> <br>
+                        <span class="mb-2">  {{__('Recettes')}} </span> <br>
                         <div class="d-flex justify-content-around">
                             <input  type="date" wire:model="start_date" class="form-control me-2">
                             <input  type="date" wire:model="end_date" class="form-control me-2">
                         </div>
                         <div class="col-12 col-xxl-8 ps-xxl-4 pe-xxl-0 my-1">
                             {{-- <h2 class="fs-6 fw-normal mb-1 text-gray-400 my-1"> {{__('nombres Titres Fonciers sur une periode')}} </h2> --}}
-                             <h4 class=" mb-1">  <span> {{__('')}} </span>  <span class="fw-extrabold">   {{number_format($filter_amount > 0 ? $filter_amount : 0)}} {{__('FCFA')}} </span>  </h4><small class="d-flex align-items-center"><svg
-                                    class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewbox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                        clip-rule="evenodd"></path>
-                                </svg> <span> {{__('Periode')}} : </span>  {{$start_date}} {{__("Au")}} {{$end_date}} </small>
+                             <h4 class=" mb-1">  <span> {{__('')}} </span>  <span class="fw-extrabold">   {{number_format($filter_amount > 0 ? $filter_amount : 0)}} {{__('FCFA')}} </span>  </h4>
+                             
                             <div class="small d-flex mt-1">
                                 <div>
                                     <svg class="icon icon-xs text-success" fill="currentColor" viewbox="0 0 20 20"
@@ -246,8 +230,8 @@
 
     <div class="row">
         <div class="col-12 col-sm-6 col-xl-4 mb-4">
-            <div class="card border-0 shadow h-100">
-                <div class="card-body">
+            <div class="card card-body border-0 shadow h-100">
+                <div class="">
                     <div class="row d-block d-xxl-flex align-items-center">
                         <div class="col-12 col-xxl-6 px-xxl-0 mb-3 mb-xxl-0" style="position: relative;">
                             <div id="chart-customers" style="min-height: 140px;">

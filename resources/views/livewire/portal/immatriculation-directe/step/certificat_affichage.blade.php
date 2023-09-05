@@ -1,15 +1,15 @@
 <div wire:ignore.self class="modal side-layout-modal fade" id="CertfifcatAffichageImmaDirecteModal" tabindex="-1"
     aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:40%;">
+    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:30%;">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4">
-                            {{ __('Etablissement') }}{{ __('Certficat D\'un Dossier') }}
+                            {{ __('Etablissement') }}{{ __(' Certficat D\'un Dossier') }}
                         </h1>
                         <p class="px-1">
-                            {{ __('Imprimer') }}{{ __('Un Certificat D\'affichage') }}
+                            {{ __('Imprimer') }}{{ __(' Un Certificat D\'affichage') }}
                         </p>
                     </div>
                     <x-form-items.form wire:submit="certificat_affichage">

@@ -77,6 +77,44 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-group mb-3 row">
+                            <div class='col'>
+                                <label class="px-2" for="region_id">{{__('Zone')}}</label>
+                                <select wire:model="zone" name="zone" class="form-select  @error('zone') is-invalid @enderror" required="">
+                                    {{-- @foreach($regions as $region) --}}
+                                    <option value="">{{__('Selectionner La Zone')}}</option>
+                                    <option value="urbain">{{__('Urbain')}}</option>
+                                    <option value="rurale">{{__('Rurale')}}</option>
+                                    {{-- @endforeach --}}
+                                </select>
+                                @error('zone')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class='col'>
+                                <label class="px-2" for="region_id">{{__('Etat du Terrain')}}</label>
+                                <select wire:model="etat_terrain" name="etat_terrain" class="form-select  @error('etat_terrain') is-invalid @enderror" required="">
+                                    {{-- @foreach($regions as $region) --}}
+                                    <option value="">{{__('Selectionner L\'Etat du Terrain')}}</option>
+                                    <option value="batit">{{__('Construit')}}</option>
+                                    <option value="non_batit">{{__('Non Construit')}}</option>
+                                    {{-- @endforeach --}}
+                                </select>
+                                @error('etat_terrain')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col">
+                                <label for="superficie">{{ __('Source du Terrain') }}</label>
+                                <input wire:model="source" type="text"
+                                    class="form-control  @error('source') is-invalid @enderror"
+                                    placeholder="{{ __('Lotissement ...') }}" required=""
+                                    name="source">
+                                @error('source')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="p-3 shadow my-4">
                             <h2 class="h5 mb-4">{{__('Ajouter les fichiers')}}</h2>
                             <div class="d-xl-flex align-items-center">

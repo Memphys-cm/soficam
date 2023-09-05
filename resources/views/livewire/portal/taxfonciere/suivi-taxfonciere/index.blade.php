@@ -85,7 +85,7 @@
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
-                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmountpaid }} {{ __('XAF') }}</p>
+                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmountpaid }} {{ __('FCFA') }}</p>
 
                     </div>
                     <div class="">
@@ -155,7 +155,7 @@
     <div class="row py-3">
         <div class="col-md-3">
             <label for="search">{{ __('Recherche') }}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{ __('Jean...') }}"
+            <input wire:model="query" id="search" type="text" placeholder="{{ __('Recherche...') }}"
                 class="form-control">
             <p class="badge badge-info" wire:model="resultCount">{{ $resultCount }}</p>
         </div>
@@ -230,11 +230,11 @@
 
                             <td>
                                 <div class="d-flex align-items-centerpy-1">
-                                    {{ __('Region') }} : <span class="fw-bolder mx-2">
+                                    {{ __('Région') }} : <span class="fw-bolder mx-2">
                                         {{ $titrefoncier->region->region_name }} </span>
                                 </div>
                                 <div class="d-flex align-items-centerpy-1">
-                                    {{ __('Departement') }} : <span class="fw-bolder mx-2">
+                                    {{ __('Département') }} : <span class="fw-bolder mx-2">
                                         {{ $titrefoncier->division->division_name }} </span>
                                 </div>
                                 <div class="d-flex align-items-centerpy-1">
@@ -295,7 +295,6 @@
                             <td colspan="9" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
                                     <h4 class="fs-4 fw-bold">{{ __('Liste Vide') }}</h4>
-                                    <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                                 </div>
                             </td>
                         </tr>

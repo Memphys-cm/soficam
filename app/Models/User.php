@@ -117,7 +117,7 @@ class User extends Authenticatable
         };
     }
 
-    public function serivce() : BelongsTo
+    public function service() : BelongsTo
     {
         return $this->belongsTo(Service::class, 'service_id');
     }

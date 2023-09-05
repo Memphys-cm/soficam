@@ -49,7 +49,7 @@
                   </select>
               </div>
               <div class="col-md-3 mb-2">
-                  <label for="perPage">{{__('ÉlémentS par page')}}: </label>
+                  <label for="perPage">{{__('Éléments par page')}}: </label>
                   <select wire:model="perPage" id="perPage" class="form-select">
                       <option value="5">5</option>
                       <option value="10">10</option>
@@ -93,15 +93,15 @@
 
                               <td>
                                   <div class="d-flex align-items-centerpy-1">
-                                      {{ __('Region') }} : <span class="fw-bolder mx-2">
+                                      {{ __('Région') }} : <span class="fw-bolder mx-2">
                                           {{ $titrefoncier->region->region_name }} </span>
                                   </div>
                                   <div class="d-flex align-items-centerpy-1">
-                                      {{ __('Division') }} : <span class="fw-bolder mx-2">
+                                      {{ __('Département') }} : <span class="fw-bolder mx-2">
                                           {{ $titrefoncier->division->division_name }} </span>
                                   </div>
                                   <div class="d-flex align-items-centerpy-1">
-                                      {{ __('Sub Divi') }} : <span class="fw-bolder mx-2">
+                                      {{ __('Arrondissement') }} : <span class="fw-bolder mx-2">
                                           {{ $titrefoncier->subDivision->sub_division_name }} </span>
                                   </div>
                                   <div class="d-flex align-items-centerpy-1">
@@ -111,7 +111,7 @@
                               </td>
 
                               <td>
-                                  <span class="fw-normal">{{ $titrefoncier->taxFoncier_amount }} {{ __('XAF') }}</span>
+                                  <span class="fw-normal">{{ $titrefoncier->taxFoncier_amount }} {{ __('FCFA') }}</span>
                               </td>
                               <td>
                                   <span class="fw-normal badge super-badge p-2 bg-{{ $titrefoncier->StatusTaxStyle }} round">{{ $titrefoncier->status_tax }}</span>
@@ -140,7 +140,6 @@
                               <td colspan="7" class="text-center">
                                   <div class="text-center text-gray-800 mt-2">
                                       <h4 class="fs-4 fw-bold">{{__('Liste vide')}}</h4>
-                                      <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                                   </div>
                               </td>
                           </tr>

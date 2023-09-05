@@ -1,13 +1,13 @@
 <div wire:ignore.self class="modal side-layout-modal fade" id="CreateChargeModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:30%;">
+    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:35%;">
         <div class="modal-content">
             <div class="modal-body p-0">
-                <div class="p-3 p-lg-4">
+                <div class="p-4 p-lg-4">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4"> {{__('Ajouter')}}{{__(' Nouvelle Charge sur Titre foncier')}}</h1>
                         <p class="px-1"> {{__('Charge sur Titre foncier')}} </p>
                     </div>
-                    <x-form-items.form wire:submit="">
+                    <x-form-items.form wire:submit="store">
                         <div class='form-group  mb-2'>
                             <label for="titre_foncier_id">{{ __('Numéro Titre Foncier') }}</label>
                             <x-input.land_title-select wire:model="titre_foncier_id" prettyname="titre_foncier" :options="$titre_fonciers" />
@@ -38,6 +38,7 @@
                             @endforeach
                         </div>
                         @endif
+                        
                         <div class="form-group mb-2 row">
                             <div class="col">
                                 <label for="etat_TF">{{__('Type de Charge')}}</label>
@@ -53,6 +54,7 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="form-group mb-3">
                             <div class="p-3 shadow border rounded my-2">
                                 <h2 class="h5 mb-4">{{__('Ajouter fichier')}}</h2>
@@ -65,7 +67,7 @@
                                                 <input type="file" class="form-control-file" wire:model="attachements">
                                                 <div class="d-md-block text-left">
                                                     <div class="fw-normal text-dark mb-1">{{__('Choisir les fichiers')}}</div>
-                                                    <div class="text-gray small">JPG,PNG, PDF, Word,Excel. Max size of 50MB</div>
+                                                    <div class="text-gray small">JPG,PNG, PDF, Word,Excel. Taille max 50MB</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -77,10 +79,9 @@
                                 <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Créer')}}</button>
                             </div>
                         </div>
+                    </x-form-items.form>
                 </div>
-                </x-form-items.form>
             </div>
         </div>
     </div>
-</div>
 </div>

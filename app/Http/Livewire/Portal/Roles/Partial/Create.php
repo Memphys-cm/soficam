@@ -12,7 +12,7 @@ class Create extends Component
 {
 
     use WithUserAndServicePermissions, WithLocationPermissions, WithRolePermissions, WithAuditLogPermissions, WithOperationPermissions,
-    WithTitreFoncierPermissions, WithImmaDirectPermissions, withSalesPermissions;
+    WithTitreFoncierPermissions, WithImmaDirectPermissions, WithSalesPermissions;
 
     public $name;
     public $role;

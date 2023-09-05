@@ -99,7 +99,7 @@ class Index extends Component
             $this->divisions = Division::whereRegionId($region_id)->get();
             $this->region_code = Region::whereId($region_id)->first()->code;
 
-            $this->numero_titre_foncier = $this->generateCodeTF();
+            // $this->numero_titre_foncier = $this->generateCodeTF();
         }
 
     }
@@ -108,26 +108,26 @@ class Index extends Component
         if (!empty($division_id)) {
             $this->sub_divisions = SubDivision::whereDivisionId($division_id)->get();
             $this->division_code = Division::whereId($division_id)->first()->code;
-            $this->numero_titre_foncier = $this->generateCodeTF();
+            // $this->numero_titre_foncier = $this->generateCodeTF();
         }
         
     }
 
-    public function updatedNumeroFolio()
-    {
-        $this->numero_titre_foncier = $this->generateCodeTF();
-    }
+    // public function updatedNumeroFolio()
+    // {
+    //     $this->numero_titre_foncier = $this->generateCodeTF();
+    // }
 
-    public function updatedNumeroDuDuplicata()
-    {
-        $this->numero_titre_foncier = $this->generateCodeTF();
-    }
+    // public function updatedNumeroDuDuplicata()
+    // {
+    //     $this->numero_titre_foncier = $this->generateCodeTF();
+    // }
 
     public function updatedSuperficieDuTFMere($value)
     {
         if($value){
             $this->superficie_du_TF_mere = $value;
-            $this->numero_titre_foncier = $this->generateCodeTF();
+            // $this->numero_titre_foncier = $this->generateCodeTF();
         }
     }
 
@@ -166,8 +166,8 @@ class Index extends Component
 
     public function generateCodeTF()
     {
-        $numero = $this->region_code . "/" . $this->division_code . "/" . 'A' . "/" . $this->numero_du_duplicata . "/" . $this->superficie_du_TF_mere . "/" . $this->numero_folio;
-        // return ($numero);
+        $numero = $this->region_code . "/" . $this->division_code . "/" . 'A' . "/" . $this->numero_du_duplicata;
+        return ($numero);
     }
 
     function genererNationalCodeUnique()
@@ -198,7 +198,8 @@ class Index extends Component
         }
 
         $this->validate([
-            'numero_titre_foncier' => 'nullable',
+            'numero_titre_foncier' => 'required|unique:titre_fonciers',
+            // 'numero_conservation' => 'required|unique:titrefonciers',
             'region_id' => 'required',
             'division_id' => 'required',
             'sub_division_id' => 'required',
@@ -241,7 +242,8 @@ class Index extends Component
 
 
         $titrefoncier = TitreFoncier::create([
-            'numero_titre_foncier' => $this->numero_titre_foncier,
+            'numero_titre_foncier' => $this->generateCodeTF(),
+            'numero_conservation' => $this->numero_titre_foncier,
             'national_code' => $this->genererNationalCodeUnique(),
             'region_id' => $this->region_id,
             'division_id' => $this->division_id,
@@ -328,7 +330,7 @@ class Index extends Component
 
         $this->titrefoncier = $titrefoncier;
 
-        $this->numero_titre_foncier =  $titrefoncier->numero_titre_foncier;
+        $this->numero_titre_foncier =  $titrefoncier->numero_conservation;
         $this->region_id =  $titrefoncier->region_id;
         $this->division_id =  $titrefoncier->division_id;
         $this->sub_division_id =  $titrefoncier->sub_division_id;
@@ -399,7 +401,8 @@ class Index extends Component
 
             ]
         );
-
+        
+        $transform = $this->convert($this->coordonnees);
 
         if (!empty($this->titrefoncier)) {
 
