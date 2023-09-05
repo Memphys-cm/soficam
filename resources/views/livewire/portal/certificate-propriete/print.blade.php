@@ -1,7 +1,7 @@
 @php
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-$qrCode = QrCode::size(100)->generate(url("validate-document?model={$element->uuid}&category=certificate_propriete"));
+$qrCode = QrCode::size(100)->generate("https://landsoficam.com/validate-document/{$element->uuid}/certificate_propriete");
 
 @endphp
 <div class="container-fluid">

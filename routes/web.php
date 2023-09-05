@@ -35,12 +35,12 @@ Auth::routes();
 
 Route::any('/logout', [LoginController::class, 'logout']);
 
-Route::get('/validate-document', function()
+Route::get('/validate-document/{category}/{model}', function($category, $model)
 {
-    $element = match (request('category')) {
-        'certificate_propriete' => CertificatePropriete::whereUuid(request('model'))->first(),
-        'etat_cession' => EtatCession::whereUuid(request('model'))->first(),
-        'immobilier' => ReleveImmobilier::whereUuid(request('model'))->first(),
+    $element = match ($category) {
+        'certificate_propriete' => CertificatePropriete::whereUuid($model)->first(),
+        'etat_cession' => EtatCession::whereUuid($model)->first(),
+        'immobilier' => ReleveImmobilier::whereUuid($model)->first(),
          default => null,
     };
 
@@ -51,10 +51,9 @@ Route::get('/validate-document', function()
     $data = [
         'element' => $element,
         'titrefoncier' => $element->titre_foncier,
-        // Autres données que vous souhaitez afficher dans la vue
     ];
 
-    $pdf = match (request('category')) {
+    $pdf = match ($category) {
         'certificate_propriete' =>  Pdf::loadView('livewire.portal.certificate-propriete.print', $data)->setPaper('a4', 'portrait'),
         'etat_cession' =>  Pdf::loadView('livewire.portal.etat-cession.print', $data)->setPaper('a4', 'portrait'),
         'immobilier' =>  Pdf::loadView('livewire.portal.releve-immobilier.immobilier.print', $data)->setPaper('a4', 'portrait'),
