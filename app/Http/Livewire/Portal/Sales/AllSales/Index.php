@@ -77,8 +77,10 @@ class Index extends Component
                     if (!$payment->success) {
                         return;
                     }
-                } catch (\Throwable $th) {
-                    throw $th;
+                } catch (\Throwable $e) {
+                    report($e);
+                    session()->flash('error', __('Something went wrong please try again later'));
+                    abort(500,__('Something went wrong with payment'));
                 }
             }
 
