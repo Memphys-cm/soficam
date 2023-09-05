@@ -69,7 +69,7 @@ class CreateParDecesForm extends Component
 
         if ($cp->validity->lt(now())) {
             return;
-            session()->flash('message', __('Certificate propriete provided is in valid'));
+            session()->flash('message', __('Le certificat propriété fourni est en cours de validité'));
         }
 
         $operation =  Operation::create([
@@ -91,7 +91,7 @@ class CreateParDecesForm extends Component
         }
         
         $this->clearFields();
-        $this->refresh(__('Mutation Totale par Deces successfully Created'), 'CreateMutationTotaleParDecesModal');
+        $this->refresh(__('Mutation Totale par Deces créée avec succès'), 'CreateMutationTotaleParDecesModal');
     }
 
     public function clearFields()

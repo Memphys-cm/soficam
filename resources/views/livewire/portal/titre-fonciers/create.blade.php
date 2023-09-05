@@ -6,9 +6,9 @@
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4">
-                            {{ $state ? __('Mettre à jour') : __('Enregistrer') }}{{ __(' un Titre Toncier') }}</h1>
+                            {{ $state ? __('Mettre à jour') : __('Enregistrer') }}{{ __('un titre foncier') }}</h1>
                         <p class="px-1">
-                            {{ $state ? __('Mettre à jour') : __('Enregistrer') }}{{ __(' un certificat foncier') }}
+                            {{ $state ? __('Mettre à jour') : __('Enregistrer') }}{{ __('un certificat foncier') }}
                         </p>
                     </div>
                     <x-form-items.form wire:submit="{{ $state ? 'update' : 'store' }}">
@@ -115,7 +115,7 @@
                             <div class="col">
                                 <label for="zone">{{__('Zone')}}</label>
                                 <select wire:model="zone" name="zone" class="form-select  @error('zone') is-invalid @enderror" required="">
-                                    <option value="urbain">{{__('Urbain')}}</option>
+                                    <option value="urbain">{{__('Urbaine')}}</option>
                                     <option value="rurale">{{__('Rurale')}}</option>
                                 </select>
                                 @error('zone')
@@ -132,7 +132,7 @@
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="volume">{{ __('volume') }}</label>
+                                <label for="volume">{{ __('Volume') }}</label>
                                 <input wire:model="volume" type="number"
                                     class="form-control  @error('volume') is-invalid @enderror"
                                     placeholder="{{ __('') }}" required="" name="name">

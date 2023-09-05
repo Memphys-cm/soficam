@@ -284,7 +284,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('TitreFoncier successfully Created'), 'CreateTitreFoncierModal');
+        $this->refresh(__('Titre Foncier créé avec succes'), 'CreateTitreFoncierModal');
     }
 
     public function convertToUTM($decimalCoordinates)
@@ -441,8 +441,8 @@ class Index extends Component
                 'nom_et_prenoms_de_largent_traitant' => $this->nom_et_prenoms_de_largent_traitant,
                 'le_conservateur' => $this->le_conservateur,
                 'numero_ccp' => $this->numero_ccp,
-                'taxFoncier_amount' => $taxFoncier_amount,
-                'coordonnees' => json_encode(getCoords($this->coordonnees)),
+                'taxFoncier_amount' => $this->taxFoncier_amount,
+                'coordonnees' => json_encode($transform),
                 'coordonnees_utm' => json_encode($this->coordonnees),
             ]);
         }
@@ -451,7 +451,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('TitreFoncier successfully Updated'), 'CreateTitreFoncierModal');
+        $this->refresh(__('Titre Foncier mis a jour avec succès'), 'CreateTitreFoncierModal');
 
         $this->state = 0;
     }
@@ -471,7 +471,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('TitreFoncier successfully deleted!'), 'DeleteModal');
+        $this->refresh(__('Titre Foncier supprimé avec succès!'), 'DeleteModal');
     }
 
     public function clearFields()

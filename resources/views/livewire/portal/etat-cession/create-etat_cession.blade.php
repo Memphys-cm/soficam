@@ -92,7 +92,7 @@
                 <div class="col-md-6 py-2">
                     <label for="code">{{ __('Zone') }}</label>
                     <select wire:model="zone" name="zone" class="form-select  @error('zone') is-invalid @enderror">
-                        <option value="">{{ __('--Select Zone --') }}</option>
+                        <option value="">{{ __('--Selectionner Zone --') }}</option>
                         <option value="urbain">{{ __('Terrain urbain') }} </option>
                         <option value="rurale">{{ __('Terrain rural') }} </option>
                     </select>

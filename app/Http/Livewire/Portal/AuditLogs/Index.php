@@ -32,7 +32,7 @@ class Index extends Component
         }
 
 
-        $this->refresh(__('Log record successfully deleted!'), 'DeleteModal');
+        $this->refresh(__('L\'enregistrement a été supprimé avec succès!'), 'DeleteModal');
     }
 
     public function render()

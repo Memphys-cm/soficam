@@ -105,7 +105,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('Tax Foncier successfully Updated'), 'paiement');
+        $this->refresh(__('Le foncier fiscal mis à jour avec succès'), 'paiement');
     }
     public function clearFields()
     {

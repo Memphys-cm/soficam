@@ -79,7 +79,7 @@
                             <div class='col'>
                                 <label class="px-2" for="requestor_id">{{__('Requérant')}}</label>
                                 <select wire:model="requestor_id" class='form-control'>
-                                    <option value=''>{{__('-- Select --')}}</option>
+                                    <option value=''>{{__('-- Selectionner --')}}</option>
                                     @foreach($users as $user)
                                     <option value='{{$user->id}}'>{{$user->first_name}} {{$user->last_name}}</option>
                                     @endforeach

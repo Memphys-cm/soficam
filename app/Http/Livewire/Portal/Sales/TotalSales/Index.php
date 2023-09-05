@@ -178,7 +178,7 @@ class Index extends Component
         $lot->users()->sync($this->user_ids);
 
         $this->clearFields();
-        $this->refresh(__('Sale successfully Created!'), 'CreateMutationTotalModal');
+        $this->refresh(__('Vente créée avec succès!'), 'CreateMutationTotalModal');
     }
 
     public function delete()
@@ -187,7 +187,7 @@ class Index extends Component
 
             $this->sale->delete();
         }
-        $this->refresh(__('Sale deleted successfully'), 'DeleteModal');
+        $this->refresh(__('Vente supprimée avec succès'), 'DeleteModal');
     }
 
     public function clearFields()

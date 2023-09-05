@@ -118,7 +118,7 @@ class Index extends Component
             ]);
         });
 
-        $this->refresh(__('Sales Updated Created!'), 'updatePaySaleModal');
+        $this->refresh(__('Ventes mises à jour créées !'), 'updatePaySaleModal');
 
         $this->clearFields();
     }
@@ -138,7 +138,7 @@ class Index extends Component
         if ($this->allsale) {
             $this->allsale->delete();
         }
-        $this->refresh(__('Sale deleted successfully'), 'DeleteModal');
+        $this->refresh(__('Vente supprimée avec succès'), 'DeleteModal');
     }
 
     public function render()
