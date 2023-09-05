@@ -38,7 +38,7 @@ Route::any('/logout', [LoginController::class, 'logout']);
 Route::get('/validate-document/{category}/{model}', function($category, $model)
 {
     $element = match ($category) {
-        'certificate_propriete' => CertificatePropriete::whereUuid($model)->first(),
+        'certificate_propriete' => CertificatePropriete::whereUuid('737b2744-15d8-4d45-89f6-4d0f365f94a0')->first(),
         'etat_cession' => EtatCession::whereUuid($model)->first(),
         'immobilier' => ReleveImmobilier::whereUuid($model)->first(),
          default => null,
