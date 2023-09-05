@@ -110,22 +110,27 @@
                 // console.log([transformedCoordinates]);
                 var proprietaires = [];
 
-    // Parcourez les propriétaires associés à ce titre foncier
-    item.users.forEach(function(proprietaire) {
-        proprietaires.push(proprietaire.last_name); // Vous pouvez ajuster cela en fonction de la structure réelle de votre modèle User
-    });
-    var proprietairesText = proprietaires.join('<br>');
+                // Parcourez les propriétaires associés à ce titre foncier
+                // item.users.forEach(function(proprietaire) {
+                //     proprietaires.push(proprietaire
+                //     .last_name); // Vous pouvez ajuster cela en fonction de la structure réelle de votre modèle User
+                // });
+                item.users.forEach(function(proprietaire) {
+                    proprietaires.push(proprietaire.last_name + ' ' + proprietaire.first_name);
+                });
+
+                var proprietairesText = proprietaires.join('<br>');
                 polygons.push({
                     "name": numero,
                     "area": superficie,
                     "proprietaires": proprietairesText,
-                    "rings":  transformedCoordinates
+                    "rings": transformedCoordinates
                 });
                 // console.log([polygons]);
             });
-                // console.log([polygons]);
+            // console.log([polygons]);
 
-                const simpleFillSymbol = {
+            const simpleFillSymbol = {
                 type: "simple-fill",
                 color: [227, 139, 79, 0.8], // Orange, opacity 80%
                 outline: {
@@ -208,24 +213,24 @@
             });
 
             view.ui.add(search, "top-right"); //Add to the map
-            
-//             const search = new Search({
-//     view: view,
-//     sources: [
-//         {
-//             featureLayer: graphicsLayer, // Utilisez votre couche de graphiques (graphicsLayer) comme source de recherche
-//             searchFields: ["name", "proprietaires"], // Champs de recherche, incluez les champs "name" et "proprietaires"
-//             displayField: "name", // Champ à afficher dans les résultats de la recherche (vous pouvez choisir "proprietaires" si vous préférez)
-//             exactMatch: false, // Correspondance exacte non requise
-//             outFields: ["*"], // Renvoyer tous les attributs
-//             name: "Titres Fonciers", // Nom de la source de recherche
-//         }
-//     ], 
-//     resultGraphicEnabled: true, // Afficher le résultat en tant que graphique sur la carte
-// });
 
-// // Ajoutez le widget de recherche à l'interface utilisateur de la carte
-// view.ui.add(search, "top-right");
+            //             const search = new Search({
+            //     view: view,
+            //     sources: [
+            //         {
+            //             featureLayer: graphicsLayer, // Utilisez votre couche de graphiques (graphicsLayer) comme source de recherche
+            //             searchFields: ["name", "proprietaires"], // Champs de recherche, incluez les champs "name" et "proprietaires"
+            //             displayField: "name", // Champ à afficher dans les résultats de la recherche (vous pouvez choisir "proprietaires" si vous préférez)
+            //             exactMatch: false, // Correspondance exacte non requise
+            //             outFields: ["*"], // Renvoyer tous les attributs
+            //             name: "Titres Fonciers", // Nom de la source de recherche
+            //         }
+            //     ], 
+            //     resultGraphicEnabled: true, // Afficher le résultat en tant que graphique sur la carte
+            // });
+
+            // // Ajoutez le widget de recherche à l'interface utilisateur de la carte
+            // view.ui.add(search, "top-right");
 
         });
     </script>
