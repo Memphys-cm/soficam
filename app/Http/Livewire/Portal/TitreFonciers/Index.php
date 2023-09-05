@@ -327,8 +327,8 @@ class Index extends Component
     {
         $titrefoncier = TitreFoncier::findOrFail($id);
 
-        $this->updatedRegionID($id);
-        $this->updatedDivisionID($id);
+        // $this->updatedRegionID($id);
+        // $this->updatedDivisionID($id);
 
         $this->titrefoncier = $titrefoncier;
 
@@ -420,7 +420,7 @@ class Index extends Component
             $taxFoncier_amount = self::PERCENTAGE_TAX_FONCIER * $taxFoncier_amount_perm2;
 
             $this->titrefoncier->update([
-                'numero_titre_foncier' => $this->generateCodeTF(),
+                // 'numero_titre_foncier' => $this->generateCodeTF(),
                 'numero_conservation' => $this->numero_titre_foncier,
                 'region_id' => $this->region_id,
                 'division_id' => $this->division_id,
