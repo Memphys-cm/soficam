@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>ArcGIS Maps SDK for JavaScript Tutorials: Add a point, line, and polygon</title>
+    <title>Soficam - Maps</title>
     <style>
         html,
         body,
