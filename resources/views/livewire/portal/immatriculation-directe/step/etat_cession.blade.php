@@ -17,8 +17,8 @@
                                 <select wire:model="zone" name="zone"
                                     class="form-select  @error('zone') is-invalid @enderror">
                                     <option value="">{{ __('--Sélectionner la Zone --') }}</option>
-                                    <option value="terrain_urbain">{{ __('terrain_urbain') }} </option>
-                                    <option value="terrain_rurale">{{ __('terrain_rurale') }} </option>
+                                    <option value="urbain">{{ __('terrain_urbain') }} </option>
+                                    <option value="rurale">{{ __('terrain_rurale') }} </option>
                                 </select>
                                 @error('zone')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -29,7 +29,7 @@
                                 <label for="code">{{ __('superficie en m²') }}</label>
                                 <input wire:model="superficie_en_m2" type="number"
                                     class="form-control  @error('superficie_en_m2') is-invalid @enderror"
-                                    placeholder="25000" required="" value=""
+                                    placeholder="" required="" value=""
                                     name="superficie_en_m2">
                                 @error('superficie_en_m2')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -39,7 +39,7 @@
                                 <label for="code">{{ __('Coût') }}</label>
                                 <input wire:model="cout" type="number"
                                     class="form-control  @error('cout') is-invalid @enderror"
-                                    placeholder="70000" required="" value="" name="cout">
+                                    placeholder="" required="" value="" name="cout">
                                 @error('cout')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -48,7 +48,7 @@
                                 <label for="code">{{ __('Frais Supplémentaires') }}</label>
                                 <input wire:model="frais_suplementaires" type="number"
                                     class="form-control  @error('frais_suplementaires') is-invalid @enderror"
-                                    placeholder="15000" required="" value=""
+                                    placeholder="" required="" value=""
                                     name="frais_suplementaires">
                                 @error('frais_suplementaires')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -58,7 +58,7 @@
                                 <label for="code">{{ __('Coût état cession') }}</label>
                                 <input wire:model="cout_etat_cession" type="number"
                                     class="form-control  @error('cout_etat_cession') is-invalid @enderror"
-                                    placeholder="100000" required="" value=""
+                                    placeholder="" required="" value=""
                                     name="cout_etat_cession">
                                 @error('cout_etat_cession')
                                     <div class="invalid-feedback">{{ $message }}</div>
