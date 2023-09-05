@@ -165,7 +165,7 @@ class Index extends Component
 
     public function generateCodeTF()
     {
-        $numero = $this->region_code . "/" . $this->division_code . "/" . 'A' . "/" . $this->numero_du_duplicata;
+        $numero = $this->region_code . "/" . $this->division_code . "/" . 'A' . "/" . $this->numero_titre_foncier;
         return ($numero);
     }
 
@@ -327,6 +327,9 @@ class Index extends Component
     {
         $titrefoncier = TitreFoncier::findOrFail($id);
 
+        $this->updatedRegionID($id);
+        $this->updatedDivisionID($id);
+
         $this->titrefoncier = $titrefoncier;
 
         $this->numero_titre_foncier =  $titrefoncier->numero_conservation;
@@ -417,6 +420,7 @@ class Index extends Component
             $taxFoncier_amount = self::PERCENTAGE_TAX_FONCIER * $taxFoncier_amount_perm2;
 
             $this->titrefoncier->update([
+                'numero_titre_foncier' => $this->generateCodeTF(),
                 'numero_conservation' => $this->numero_titre_foncier,
                 'region_id' => $this->region_id,
                 'division_id' => $this->division_id,
