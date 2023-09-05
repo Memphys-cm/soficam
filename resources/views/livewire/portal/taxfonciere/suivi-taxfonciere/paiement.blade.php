@@ -6,7 +6,7 @@
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4"> {{ __('Paiement de la Taxe Foncière') }}</h1>
-                        <p class="px-1"> {{ __('Payer une Taxe Foncière') }} &#128522;</p>
+                        <p class="px-1"> {{ __('Payer une Taxe Foncière') }}</p>
                     </div>
                     <x-form-items.form wire:submit="confirmOrder">
                         <div class='col'>

@@ -25,18 +25,18 @@ class DatabaseSeeder extends Seeder
         $this->call(DivisionSeeder::class);
         $this->call(SubDivisionSeeder::class);
         $this->call(RolesAndPermissionsSeeder::class);
-        $this->call(CategoryActivitesSeeder::class);
-        $this->call(CabinetAndMembreCabinetSeeder::class);
+        // $this->call(CategoryActivitesSeeder::class);
+        // $this->call(CabinetAndMembreCabinetSeeder::class);
       
-        \App\Models\User::factory(1000)->create();
+        // \App\Models\User::factory(1000)->create();
 
-        $user_role = Role::where('name', 'user')->first();
+        // $user_role = Role::where('name', 'user')->first();
 
-        User::all()->each(function ($user) use ($user_role) {
-            if (explode("@", $user->email)[1] !== "app.com") {
-                return $user->assignRole($user_role);
-            }
-        });
+        // User::all()->each(function ($user) use ($user_role) {
+        //     if (explode("@", $user->email)[1] !== "app.com") {
+        //         return $user->assignRole($user_role);
+        //     }
+        // });
         \App\Models\User::create([
             'first_name' => fake()->name(),
             'last_name' => fake()->name(),
@@ -57,9 +57,10 @@ class DatabaseSeeder extends Seeder
 
         $user->assignRole('super_admin');
 
-        $this->call(TitreFoncierSeeder::class);
-        $this->call(CertificateProprieteSeeder::class);
-        $this->call(EtatCessionSeeder::class);
+        // $this->call(TitreFoncierSeeder::class);
+        $this->call(UserSeeder::class);
+        // $this->call(CertificateProprieteSeeder::class);
+        // $this->call(EtatCessionSeeder::class);
         
     }
 }

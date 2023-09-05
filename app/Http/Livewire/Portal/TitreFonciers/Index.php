@@ -88,9 +88,10 @@ class Index extends Component
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
-        $this->conservateurs = User::role('user')->get(); // to be updated
+        $this->conservateurs = User::with(['roles' => function ($role) {
+            return $role->where('name', ['Conservateur'])->get();
+        }])->get();
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
-      
     }
 
     public function updatedRegionID($region_id)
@@ -101,7 +102,6 @@ class Index extends Component
 
             // $this->numero_titre_foncier = $this->generateCodeTF();
         }
-
     }
     public function updatedDivisionID($division_id)
     {
@@ -110,7 +110,6 @@ class Index extends Component
             $this->division_code = Division::whereId($division_id)->first()->code;
             // $this->numero_titre_foncier = $this->generateCodeTF();
         }
-        
     }
 
     // public function updatedNumeroFolio()
@@ -125,7 +124,7 @@ class Index extends Component
 
     public function updatedSuperficieDuTFMere($value)
     {
-        if($value){
+        if ($value) {
             $this->superficie_du_TF_mere = $value;
             // $this->numero_titre_foncier = $this->generateCodeTF();
         }
@@ -374,7 +373,7 @@ class Index extends Component
         }
         $this->validate(
             [
-                'numero_titre_foncier' => 'required',
+                // 'numero_titre_foncier' => 'required',
                 'region_id' => 'required',
                 'division_id' => 'required',
                 'sub_division_id' => 'required',
@@ -401,7 +400,7 @@ class Index extends Component
 
             ]
         );
-        
+
         $transform = $this->convert($this->coordonnees);
 
         if (!empty($this->titrefoncier)) {
@@ -410,14 +409,15 @@ class Index extends Component
 
             // Extract the prix_minima_m2 from the selected sub_division
             $prixMinimaM2 = $selectedSubDivision->prix_minima_m2;
+            $taxFoncier_amount_perm2 = $this->superficie_du_TF_mere * $prixMinimaM2;
 
-            // Calculate the price based on the formula
-            $price = $this->superficie_du_TF_mere * $prixMinimaM2;
 
             // Calculate the tax_foncier based on the formula
-            $taxFoncier_amount = 0.001 * $price;
+            // $taxFoncier_amount = 0.001 * $price;
+            $taxFoncier_amount = self::PERCENTAGE_TAX_FONCIER * $taxFoncier_amount_perm2;
+
             $this->titrefoncier->update([
-                'numero_titre_foncier' => $this->numero_titre_foncier,
+                'numero_conservation' => $this->numero_titre_foncier,
                 'region_id' => $this->region_id,
                 'division_id' => $this->division_id,
                 'sub_division_id' => $this->sub_division_id,
@@ -444,7 +444,7 @@ class Index extends Component
                 'le_conservateur' => $this->le_conservateur,
                 'numero_ccp' => $this->numero_ccp,
                 'taxFoncier_amount' => $this->taxFoncier_amount,
-                'coordonnees' => json_encode(getCoords($this->coordonnees)),
+                'coordonnees' => json_encode($transform),
                 'coordonnees_utm' => json_encode($this->coordonnees),
             ]);
         }
