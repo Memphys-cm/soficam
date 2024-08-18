@@ -13,7 +13,7 @@ class CertificatePropriete extends Model
 {
     use HasFactory, HasUUID;
 
-    protected $guarded = []; 
+    protected $guarded = [];
 
     protected $casts = [
         'validity' => 'date'
@@ -48,6 +48,7 @@ class CertificatePropriete extends Model
         };
     }
 
+    
     public function titreFoncier()
     {
         return $this->belongsTo(TitreFoncier::class, 'titre_foncier_id');
@@ -60,11 +61,11 @@ class CertificatePropriete extends Model
             static::query()
             ->where(function ($q) use ($query) {
                 $q->where('titre_foncier_id', 'like', '%' . $query . '%');
-                $q->orWhere('certificate_proprietes_number', 'like', '%' . $query . '%');                
-                $q->orWhere('price', 'like', '%' . $query . '%');                
-                $q->orWhere('validity', 'like', '%' . $query . '%');                
-                $q->orWhere('certificate_proprietes_type', 'like', '%' . $query . '%');                
-                $q->orWhere('status', 'like', '%' . $query . '%');                
+                $q->orWhere('certificate_proprietes_number', 'like', '%' . $query . '%');
+                $q->orWhere('price', 'like', '%' . $query . '%');
+                $q->orWhere('validity', 'like', '%' . $query . '%');
+                $q->orWhere('certificate_proprietes_type', 'like', '%' . $query . '%');
+                $q->orWhere('status', 'like', '%' . $query . '%');
                 $q->orWhere('recorded_by', 'like', '%' . $query . '%');
                 $q->orWhereHas('titreFoncier', function ($q) use ($query) {
                     $q->where('numero_titre_foncier', 'like', '%' . $query . '%');
@@ -72,7 +73,7 @@ class CertificatePropriete extends Model
                 $q->orWhereHas('requestor', function ($q) use ($query) {
                 $q->where('first_name', 'like', '%' . $query . '%');
                 $q->orWhere('last_name', 'like', '%' . $query . '%');
-            }); 
+            });
          });
     }
 }
