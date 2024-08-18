@@ -10,6 +10,7 @@
         "camoo/sms": "^3.2",
         "guzzlehttp/guzzle": "^7.2",
         "hachther/laravel-mesomb": "^1.7",
+        "hachther/mesomb-php": "^2.2",
         "koossaayy/laravel-mapbox": "^0.4.3",
         "laracasts/flash": "^3.2",
         "laravel/framework": "^10.10",
