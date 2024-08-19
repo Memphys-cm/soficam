@@ -82,7 +82,7 @@
                 <option value="price">{{ __('Prix') }}</option>
                 <option value="validity">{{ __('Validité') }}</option>
                 <option value="status">{{ __('Statut') }}</option>
-                <option value="created_at">{{ __('Date Création ') }}</option>
+                <option value="created_at">{{ __('Date Création') }}</option>
             </select>
         </div>
 
@@ -194,7 +194,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Montrer')}} {{$perPage > $certificateproprietes_count ? $certificateproprietes_count : $perPage  }} {{__('éléments sur ')}} {{$certificateproprietes_count}}
+                    {{__('Montrer')}} {{$perPage > $certificateproprietes_count ? $certificateproprietes_count : $perPage  }} {{__('éléments sur')}} {{$certificateproprietes_count}}
                 </div>
                 {{ $certificateproprietes->links()  }}
             </div>
