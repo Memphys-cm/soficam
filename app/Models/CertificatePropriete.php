@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Sales\Sale;
 use App\Models\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -35,6 +36,7 @@ class CertificatePropriete extends Model
              'active' => 'success',
              'expired' => 'danger',
              'pending_payment' => 'secondary',
+             'pending_extract' => 'secondary',
              NULL => ''
         };
     }
@@ -42,6 +44,7 @@ class CertificatePropriete extends Model
     {
         return match ($this->status) {
             'active' => 'Active',
+            'pending_extract' => 'Pending Extract',
             'expired' => 'Expired',
             'pending_payment' => 'Pending Payment',
             NULL => ''
@@ -53,6 +56,11 @@ class CertificatePropriete extends Model
     {
         return $this->belongsTo(TitreFoncier::class, 'titre_foncier_id');
     }
+
+    // public function sale()
+    // {
+    //     return $this->belongsTo(Sale::class);
+    // }
 
     public static function search($query)
     {

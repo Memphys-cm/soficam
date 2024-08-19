@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TitreFoncierSeeder::class);
         $this->call(OperationSeeder::class);
         $this->call(RolesAndPermissionsSeeder::class);
+        // $this->call(TitreFoncierSeeder::class);
         // $this->call(CategoryActivitesSeeder::class);
         // $this->call(CabinetAndMembreCabinetSeeder::class);
 

@@ -18,7 +18,7 @@
                         @if(!empty($titre_foncier_users))
                         <span class="fw-bold py-2">{{__('Propriétaire(s) du terrain')}}</span>
                         <div class='row'>
-                            @foreach($titre_foncier_users->split($titre_foncier_users->count()/2) as $row )
+                            @foreach($titre_foncier_users->split($titre_foncier_users->count()) as $row )
                             <div class="col-md-6" data-aos="fade-right" data-aos-duration="2000">
                                 @foreach($row as $user)
                                 <a href="#" class="d-flex align-items-center  py-1">

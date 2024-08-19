@@ -22,7 +22,7 @@ class ImmatriculationDirecte extends Model implements HasMedia
     use HasFactory, InteractsWithMedia, HasUUID;
 
     public $guarded = [];
-    
+
     public function registerMediaConversions(Media $media = null): void
     {
         $this

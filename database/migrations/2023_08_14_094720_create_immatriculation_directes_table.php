@@ -104,10 +104,11 @@ return new class extends Migration
             $table->date('coter_csrcadastre')->nullable();
             $table->date('dos_tech_transmis_drm')->nullable();
             $table->date('dos_compl_csrdaf')->nullable();
-            $table->date('cotation_compl_csrdaf')->nullable(); 
+            $table->date('cotation_compl_csrdaf')->nullable();
             $table->string('numero_serie')->nullable();
 
-            
+
+            $table->boolean('is_complete')->default(0);
             $table->timestamps();
         });
     }

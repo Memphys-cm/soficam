@@ -1,15 +1,16 @@
 <?php
 
+use App\Models\EtatCession;
 use App\Models\TitreFoncier;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\ReleveImmobilier;
 use App\Models\CertificatePropriete;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Livewire\Portal\QrCode\QRCodeScanner;
-use App\Models\EtatCession;
-use App\Models\ReleveImmobilier;
-use Barryvdh\DomPDF\Facade\Pdf;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +35,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::any('/logout', [LoginController::class, 'logout']);
+
+Route::get('document/verify/cf/{numero_cf}', [DocumentController::class, 'verify'])->name('document.verify.cf');
 
 Route::get('/validate-document/{category}/{model}', function($category, $model)
 {
@@ -80,6 +83,11 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
         Route::get('/', App\Http\Livewire\User\Taxfonciere\Index::class)->name('user.taxfonciere.index');
         // Route::get('/suivi-taxfoncier', App\Http\Livewire\Portal\Taxfonciere\SuiviTaxfonciere\Index::class)->name('portal.taxfonciere.suivi.index');
     });
+
+    Route::prefix('demande')->group(function () {
+        Route::get('/certificat', App\Http\Livewire\User\Request\CertificatPropriate\Index::class)->name('user.request.certificat.index');
+    });
+
     Route::prefix('suivi-dossier')->group(function () {
         Route::get('/', App\Http\Livewire\User\SuiviDossier\Index::class)->name('user.suivi-dossier.index');
         Route::get('/follow', App\Http\Livewire\User\SuiviDossier\Follow::class)->name('user.suivi-dossier.follow');
@@ -173,6 +181,7 @@ Route::group(
 
         Route::prefix('immatriculation_directes')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\ImmatriculationDirecte\Index::class)->name('portal.immatriculation_directes.index');
+            Route::get('/{code}', App\Http\Livewire\Portal\ImmatriculationDirecte\Show::class)->name('portal.immatriculation_directe.index');
             Route::get('/process', App\Http\Livewire\Portal\ImmatriculationDirecte\Process::class)->name('portal.immatriculation_directes.process');
         });
 
@@ -194,10 +203,10 @@ Route::group(
             // Extrayez les coordonnées du modèle
             $longitude = 11.516213163344588;
             $latitude = 3.8722015777978243;
-        
+
             // Récupérez également vos titres fonciers avec les utilisateurs associés
             $titles = TitreFoncier::with('users')->get();
-        
+
             // Passez les coordonnées et les titres fonciers à la vue
             return view('first_test', compact('titles', 'longitude', 'latitude'))->layout('components.layouts.dashboard');
         })->name('portal.maps.index');

@@ -114,7 +114,7 @@ class Index extends Component
         $this->status = $this->imma_directe->next_step;
         $this->superficie_en_m2 = $this->imma_directe->superficie;
         $imma_directe = $this->imma_directe;
-      
+
         $this->state = 1;
         $this->detect = 1;
     }
@@ -168,32 +168,32 @@ class Index extends Component
     {
         // Initialisez Proj4
         $proj4 = new Proj4php();
-    
+
         // Créez les projections
         $projUTM = new Proj('+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs', $proj4);
         $projWGS84 = new Proj('EPSG:4326', $proj4);
-    
+
         $decimalResults = [];
-    
+
         foreach ($utmCoordinates as $utm) {
             $utmParts = explode(',', $utm); // Sépare les coordonnées UTM en X et Y
             $utmX = floatval($utmParts[0]);
             $utmY = floatval($utmParts[1]);
-    
+
             // Créez le point source avec les coordonnées UTM
             $pointSrc = new Point($utmX, $utmY, $projUTM);
-    
+
             // Transformez le point entre les systèmes de coordonnées
             $pointDest = $proj4->transform($projWGS84, $pointSrc);
-    
+
             // Obtenez les coordonnées lat/lon du point de destination
             $lat = $pointDest->y;
             $lon = $pointDest->x;
-    
+
             // Ajoutez le résultat à votre tableau de résultats en coordonnées décimales
             $decimalResults[] = "$lon, $lat";
         }
-    
+
         return $decimalResults;
     }
 
@@ -228,7 +228,7 @@ class Index extends Component
          //Notification Par SMS
 
         $this->emitUp('flow_updated');
-        
+
         $this->clearFields();
         $this->refresh(__('Dossier Technique Enregistré'), 'DossierTechniqueModal');
 
@@ -255,11 +255,11 @@ class Index extends Component
         }
 
         $this->emitUp('flow_updated');
-        
+
         $this->clearFields();
         $this->refresh(__('Dossier Administratif Mise En Forme Avec Suceess'), 'DossierAdministratifModal');
     }
-    
+
     public function descente_terrain()
     {
         $this->validate([
@@ -268,7 +268,7 @@ class Index extends Component
             'limit_sud' => 'required',
             'limit_est' => 'required',
             'limit_ouest' => 'required',
-            
+
         ]);
         DB::transaction(function () {
             $this->imma_directe->update([
@@ -343,7 +343,7 @@ class Index extends Component
                     'next_step' => 'Transmission du dossier complet à la Délégation Départementale',
                     'date_signature_bulletin' => $this->date_status,
                 ]);
-            });    
+            });
         } else if($imma->next_step == "Transmission du dossier technique au CSDAF"){
             DB::transaction(function () {
                 $this->imma_directe->update([
@@ -352,7 +352,7 @@ class Index extends Component
                     'transmission_csdaf' => $this->date_status,
                 ]);
             });
-            
+
         }
         else if($imma->next_step == "Transmission du dossier technique au Délégué Régional MINDCAF"){
             DB::transaction(function () {
@@ -422,18 +422,18 @@ class Index extends Component
             });
         }
 
-       
+
 
         $this->refresh(__('Statut Modifier Avec SUCCES!'), 'EditStatutModal');
         $this->clearFields();
     }
 
-    
+
     public function bordoreauDeTransmitionStatu(){
 
         $this->validate([
             'numero_bordereau_transmission' => 'required',
-           
+
         ]);
 
         DB::transaction(function () {
@@ -449,8 +449,8 @@ class Index extends Component
         });
 
         $this->refresh(__('Bordoreau de Transmition Transmi Avec SUCCES!'), 'bordoreauDeTransmitionModal');
-    }    
-    
+    }
+
     //enregistré le prix du dossier visé dans les paiements
     public function dossier_vise() {
         DB::transaction(function () {
@@ -483,7 +483,7 @@ class Index extends Component
         $this->refresh(__('La recette est appliquée Avec SUCCES!'), 'DossierViseImmaDirecteModal');
         $this->clearFields();
     }
-    
+
     public function cotation_second_step()
     {
         $this->validate([
@@ -491,7 +491,7 @@ class Index extends Component
             'user_id' => 'required',
         ]);
 
- 
+
         DB::transaction(function () {
             $this->imma_directe->update([
                 'service_dossier_complet_id' => $this->service_id,
@@ -514,7 +514,7 @@ class Index extends Component
             'user_id' => 'required',
         ]);
 
- 
+
         DB::transaction(function () {
             $this->imma_directe->update([
                 'observation_cotation_cadre' => $this->observation,
@@ -529,7 +529,7 @@ class Index extends Component
 
         $this->clearFields();
     }
-    
+
 
     public function cotation_first_step()
     {
@@ -680,11 +680,11 @@ class Index extends Component
     //             },
     //             default => 0,
     //         };
-            
+
     //         $this->frais_suplementaires = 2500;
-    
+
     //         $this->cout = (int)$this->price_m2;
-    
+
     //         $this->cout_etat_cession = (int)$this->cout + (int)$this->frais_suplementaires;
     //         // dd($this->cout_etat_cession);
     //     }
@@ -702,12 +702,12 @@ class Index extends Component
 
           // Récupérer le compteur depuis la base de données (par exemple en comptant les enregistrements de lotissement existants)
           $counter = EtatCession::count() + 1;
-  
+
           // Générer le code unique
           $this->code = $this->generateUniqueCode($year, $counter);
         // dd($code);
 
-       
+
         $this->etat_cession = EtatCession::create([
             // 'user_id' => $this->requestor_id,
             'zone' => $this->zone,
@@ -738,8 +738,8 @@ class Index extends Component
                 'sales_type' => 'etat_cession__imma_directe',
                 'created_by' => auth()->user()->name,
             ]);
-    
-    
+
+
             // Create the Saleable item using only the specified information
             $saleableData = [
                 'sale_id' => $sale->id,
@@ -749,10 +749,10 @@ class Index extends Component
                 'saleable_type' => 'App\Models\ImmatriculationDirecte', // Adjust the namespace if different
                 'created_by' => auth()->user()->name,
             ];
-    
-    
+
+
             DB::table('saleables')->insert($saleableData);
-    
+
         });
 
         $data = [
@@ -794,7 +794,7 @@ class Index extends Component
                 'next_step' => 'Avis Au publique En attente de signature',
             ]);
         });
-        
+
         $data = [
             'imma_directe' => $this->imma_directe,
 
@@ -814,8 +814,8 @@ class Index extends Component
         $this->validate([
             'geometre_id' => 'required',
         ]);
-        
-       
+
+
        DB::transaction(function () {
             $this->imma_directe->update([
                 'geometre_id' => $this->geometre_id,
@@ -835,7 +835,7 @@ class Index extends Component
         }
 
         $this->emitUp('flow_updated');
-        
+
         $this->clearFields();
         $this->refresh(__('Geometre Enregistrer Avec Succes et Enregistrement'), 'GeometreModal');
 
@@ -861,7 +861,7 @@ class Index extends Component
         }
 
         $this->emitUp('flow_updated');
-        
+
         $this->clearFields();
         $this->refresh(__('Pv de Bornage Enregistrer Avec Suceess'), 'PvBornageModal');
     }
@@ -886,7 +886,7 @@ class Index extends Component
         }
 
         $this->emitUp('flow_updated');
-        
+
         $this->clearFields();
         $this->refresh(__('Dossier Administratif Mise En Forme Avec Suceess'), 'DossierAdministratifModal');
     }
@@ -928,7 +928,7 @@ class Index extends Component
 
     }
 
-  
+
 
     public function convocation($id)
     {
@@ -953,7 +953,7 @@ class Index extends Component
         ];
 
         // dd($this->imma_directe, $this->comissions);
-        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.message-porte', 
+        $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.message-porte',
         $data)->setPaper('a4', 'portrait');
 
         return response()->streamDownload(
@@ -991,10 +991,10 @@ class Index extends Component
             'sms' => $sms,
             'mobiles' => $mobiles
         );
-    
+
         $send_data = http_build_query($sms_body);
         $gateway_url = $url . "?" . $send_data;
-    
+
         try {
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $gateway_url);
@@ -1002,7 +1002,7 @@ class Index extends Component
             curl_setopt($ch, CURLOPT_HTTPGET, 1);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             $output = curl_exec($ch);
-    
+
             if (curl_errno($ch)) {
                 $output = curl_error($ch);
                 $arr = ['echec'];
@@ -1013,7 +1013,7 @@ class Index extends Component
             }
             curl_close($ch);
         }
-    
+
         catch (Exception $exception){
             //echo $exception->getMessage();
             $arr = ['echec'];
@@ -1047,7 +1047,7 @@ class Index extends Component
         return $codeUnique;
     }
 
- 
+
     public function create_tf()
     {
         // dd($this->imma_directe->users->id);
@@ -1121,7 +1121,7 @@ class Index extends Component
     {
         $this->reset(
             [
-                // 'requestor_id', 
+                // 'requestor_id',
                 'localisation',
                 'comissions',
                 'numero_bordereau_transmission',
