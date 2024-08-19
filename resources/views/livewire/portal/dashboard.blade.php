@@ -31,7 +31,7 @@
                     <div class="d-flex align-items-center card-body">
                         <div>
                             <h6 class="text-muted">Dossiers Totales</h6>
-                            <h3 class="fw-bold">{{ number_format($totalSalesAmount, 0, '', ' ') }} {{ __('FCFA') }}
+                            <h3 class="fw-bold"> 750
                             </h3>
                             <canvas id="dossierTypeChart"></canvas>
                         </div>
