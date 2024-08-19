@@ -15,6 +15,9 @@ use App\Models\CertificatePropriete;
 use App\Models\ImmatriculationDirecte;
 use App\Http\Livewire\Traits\WithDataTables;
 use Hachther\MeSomb\Operation\Payment\Collect;
+use Malico\MeSomb\Payment;
+use MeSomb\Operation\PaymentOperation;
+use MeSomb\Util\RandomGenerator;
 
 class Index extends Component
 {
@@ -26,6 +29,20 @@ class Index extends Component
     public $selectedStatus = 'pending_payment';
     public $user_id;
     public $payment_method = 'cash';
+
+    public function confirmOrder()
+    {
+        $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
+        dd($client);
+        // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
+        $client->makeCollect([
+            'amount' => 100,
+            'service' => 'MTN',
+            'payer' => '651897233',
+            'nonce' => RandomGenerator::nonce(),
+            'trxID' => '1'
+        ]);
+    }
 
     public function initData($id)
     {
@@ -70,11 +87,8 @@ class Index extends Component
             if ($this->payment_method !== 'cash') {
                 try {
 
-                    // dd($this->sale->payment_method);
-
-                    // $request = new Collect($this->payment_number, $this->sale->sales_amount, 'ORANGE');
                     $request = new Collect($this->payment_number, $this->sale->sales_amount, $this->payment_method == 'mtn_mobile_money' ? 'MTN' : 'ORANGE', 'CM');
-
+                    dd($request);
                     $payment = $request->pay();
 
                     if (!$payment->success) {
@@ -161,6 +175,6 @@ class Index extends Component
 
 
         $allsales_count = Sale::count();
-        return view('livewire..portal.sales.all-sales.index', ['allsaless' => $allsaless, 'allsales_count' => $allsales_count]);
+        return view('livewire.portal.sales.all-sales.index', ['allsaless' => $allsaless, 'allsales_count' => $allsales_count]);
     }
 }
