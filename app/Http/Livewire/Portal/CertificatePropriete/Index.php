@@ -54,7 +54,7 @@ class Index extends Component
 
     public function store()
     {
-           
+
         $this->validate([
             'titre_foncier_id' => 'required',
             'certificate_proprietes_type' => 'required',
@@ -98,7 +98,7 @@ class Index extends Component
             ]);
 
         });
-       
+
         $this->clearFields();
         $this->refresh(__('Certificat Propriete créé avec succès!'), 'CreatecertificateproprieteModal');
     }
@@ -145,7 +145,7 @@ class Index extends Component
 
         ]);
 
-       
+
         DB::transaction(function () {
             $this->certificatepropriete->update([
                 //'titre_foncier_id' => $this->titre_foncier_id,
@@ -164,7 +164,7 @@ class Index extends Component
 
     }
 
-    
+
     public function delete()
     {
         if ($this->certificatepropriete) {
@@ -191,10 +191,10 @@ class Index extends Component
             'sms' => $sms,
             'mobiles' => $mobiles
         );
-    
+
         $send_data = http_build_query($sms_body);
         $gateway_url = $url . "?" . $send_data;
-    
+
         try {
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $gateway_url);
@@ -202,7 +202,7 @@ class Index extends Component
             curl_setopt($ch, CURLOPT_HTTPGET, 1);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             $output = curl_exec($ch);
-    
+
             if (curl_errno($ch)) {
                 $output = curl_error($ch);
                 $arr = ['echec'];
@@ -213,7 +213,7 @@ class Index extends Component
             }
             curl_close($ch);
         }
-    
+
         catch (Exception $exception){
             //echo $exception->getMessage();
             $arr = ['echec'];

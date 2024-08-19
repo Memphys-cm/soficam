@@ -70,6 +70,9 @@ class Index extends Component
             if ($this->payment_method !== 'cash') {
                 try {
 
+                    // dd($this->sale->payment_method);
+
+                    // $request = new Collect($this->payment_number, $this->sale->sales_amount, 'ORANGE');
                     $request = new Collect($this->payment_number, $this->sale->sales_amount, $this->payment_method == 'mtn_mobile_money' ? 'MTN' : 'ORANGE', 'CM');
 
                     $payment = $request->pay();
@@ -80,7 +83,7 @@ class Index extends Component
                 } catch (\Throwable $e) {
                     report($e);
                     session()->flash('error', __('Something went wrong please try again later'));
-                    abort(500,__('Something went wrong with payment'));
+                    abort(500, __('Something went wrong with payment'));
                 }
             }
 
@@ -151,11 +154,11 @@ class Index extends Component
             $allsaless = Sale::search($this->query)->where('sales_type', 'dossier_vise_enregistre')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
         } else {
             # code...
-            $allsaless = Sale::search($this->query) ->when($this->selectedStatus, function ($query, $selectedStatus) {
+            $allsaless = Sale::search($this->query)->when($this->selectedStatus, function ($query, $selectedStatus) {
                 return $query->where('payment_status', $selectedStatus);
             })->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
         }
-        
+
 
         $allsales_count = Sale::count();
         return view('livewire..portal.sales.all-sales.index', ['allsaless' => $allsaless, 'allsales_count' => $allsales_count]);
