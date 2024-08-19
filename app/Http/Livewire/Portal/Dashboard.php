@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Portal;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Region;
 use App\Models\Cabinet;
 use Livewire\Component;
 use App\Models\AuditLog;
@@ -12,9 +13,9 @@ use App\Models\TitreFoncier;
 use App\Models\MembreDuCabinet;
 use Illuminate\Support\Facades\DB;
 use App\Models\CertificatePropriete;
+use App\Providers\AppServiceProvider;
 use App\Models\ImmatriculationDirecte;
 use App\Models\Lotissements\Lotissement;
-use App\Providers\AppServiceProvider;
 
 class Dashboard extends Component
 {
@@ -26,11 +27,11 @@ class Dashboard extends Component
     public $recentTransactions = [];
     public $recentSales = [];
     public $recentCertificateUpdates = [];
-    public $start_date , $end_date;
-    public $start_date_tf , $end_date_tf;
-    public $end_date_dos , $start_date_dos;
+    public $start_date, $end_date;
+    public $start_date_tf, $end_date_tf;
+    public $end_date_dos, $start_date_dos;
 
-    
+
     public function mount()
     {
         $this->loadRecentActivities();
@@ -111,10 +112,13 @@ class Dashboard extends Component
         $dossier_traites = ImmatriculationDirecte::count();
         $usersWithTitreFoncier = User::whereHas('titrefonciers')->get();
         $total_users = $usersWithTitreFoncier->count();
+        if ($total_users == 0) {
+            $total_users = 1;
+        }
         $tf_homme = $usersWithTitreFoncier->where('sexe', 'M')->count();
         $tf_femme = $usersWithTitreFoncier->where('sexe', 'F')->count();
-        $percent_homme = ($tf_homme * 100) / $total_users;
-        $percent_femme = ($tf_femme * 100) / $total_users;
+        $percent_homme = ($tf_homme * 100) / $total_users ? $total_users : 1;
+        $percent_femme = ($tf_femme * 100) / $total_users ? $total_users : 1;
         $all_cabinet_notaire = Cabinet::where('type_cabinet', 'notaire')->count();
         $all_cabinet_geometre = Cabinet::where('type_cabinet', 'geometre')->count();
         $all_notaire_membre = MembreDuCabinet::where('type_membre', 'notaire')->count();
@@ -127,7 +131,30 @@ class Dashboard extends Component
         $filter_amount = Sale::whereBetween('created_at', [$this->start_date, $this->end_date])->get()->sum('sales_amount');
         $filter_tf = TitreFoncier::whereBetween('created_at', [$this->start_date_tf, $this->end_date_tf])->get()->count();
 
+        $topRegions = TitreFoncier::select('region_id', DB::raw('count(*) as total'))
+            ->groupBy('region_id')
+            ->orderBy('total', 'desc')
+            ->take(5)
+            ->with('region')
+            ->get();
 
+        // Taux de croissance des titres fonciers par région
+        $growthRates = Region::with(['titreFonciers' => function ($query) {
+            $query->select('region_id', DB::raw('YEAR(date_de_delivrance_du_TF) as year'), DB::raw('COUNT(*) as count'))
+                ->groupBy('region_id', 'year');
+        }])->get();
+
+        // Comparaison des performances régionales
+        $regionComparison = TitreFoncier::select('region_id', DB::raw('COUNT(*) as total'))
+            ->groupBy('region_id')
+            ->with('region')
+            ->get();
+
+        // Évolution des titres fonciers par région
+        $evolutionData = TitreFoncier::select('region_id', DB::raw('YEAR(date_de_delivrance_du_TF) as year'), DB::raw('COUNT(*) as total'))
+            ->groupBy('region_id', 'year')
+            ->with('region')
+            ->get();
 
         return view('livewire.portal.dashboard', [
             'logs' => $logs,
@@ -146,7 +173,11 @@ class Dashboard extends Component
             'dossier_traites' => $dossier_traites,
             'totalSalesAmount' => $totalSalesAmount,
             'filter_amount' => $filter_amount,
-            'filter_tf' => $filter_tf
+            'filter_tf' => $filter_tf,
+            'topRegions' => $topRegions,
+            'growthRates' => $growthRates,
+            'regionComparison' => $regionComparison,
+            'evolutionData' => $evolutionData,
         ])->layout('components.layouts.dashboard');
     }
 }
