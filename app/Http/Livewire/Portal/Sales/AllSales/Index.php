@@ -100,6 +100,7 @@ class Index extends Component
 
             if ($this->payment_method !== 'cash') {
                 try {
+
                     $request = new Collect($this->payment_number, $this->sale->sales_amount, $this->payment_method == 'mtn_mobile_money' ? 'MTN' : 'ORANGE', 'CM');
                     dd($request);
                     $payment = $request->pay();

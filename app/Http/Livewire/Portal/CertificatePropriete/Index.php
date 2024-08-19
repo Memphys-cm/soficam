@@ -209,7 +209,9 @@ class Index extends Component
                 return ($output);
             }
             curl_close($ch);
-        } catch (Exception $exception) {
+
+        }
+        catch (Exception $exception){
             //echo $exception->getMessage();
             $arr = ['echec'];
             return ($arr);

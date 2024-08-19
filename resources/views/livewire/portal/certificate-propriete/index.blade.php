@@ -151,7 +151,6 @@
                             <td>{{ $certificatepropriete->certificate_proprietes_type }}</td>
 
                             <td>
-
                                 <span
                                     class="fw-normal badge super-badge p-2 bg-{{ $certificatepropriete->statusStyle }} round">{{ $certificatepropriete->status }}</span>
 
