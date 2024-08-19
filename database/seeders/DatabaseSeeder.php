@@ -25,17 +25,17 @@ class DatabaseSeeder extends Seeder
         $this->call(RegionSeeder::class);
         $this->call(DivisionSeeder::class);
         $this->call(SubDivisionSeeder::class);
-        $this->call(LotissementSeeder::class);
-        $this->call(CabinetNotaireSeeder::class);
-        $this->call(VentesSeeder::class);
-        $this->call(ReleveDeBienSeeder::class);
-        $this->call(BordereauAnalytiqueSeeder::class);
-        $this->call(CertificateProprieteSeeder::class);
+        // $this->call(LotissementSeeder::class);
+        // $this->call(CabinetNotaireSeeder::class);
+        // $this->call(VentesSeeder::class);
+        // $this->call(ReleveDeBienSeeder::class);
+        // $this->call(BordereauAnalytiqueSeeder::class);
+        // $this->call(CertificateProprieteSeeder::class);
         $this->call(TitreFoncierSeeder::class);
-        $this->call(OperationSeeder::class);
+        // $this->call(OperationSeeder::class);
         $this->call(RolesAndPermissionsSeeder::class);
-        // $this->call(TitreFoncierSeeder::class);
-        // $this->call(CategoryActivitesSeeder::class);
+        $this->call(TitreFoncierSeeder::class);
+        $this->call(CategoryActivitesSeeder::class);
         // $this->call(CabinetAndMembreCabinetSeeder::class);
 
         // \App\Models\User::factory(1000)->create();
@@ -67,9 +67,9 @@ class DatabaseSeeder extends Seeder
 
         $user->assignRole('super_admin');
 
-        
+
         // $this->call(TitreFoncierSeeder::class);
-        $this->call(UserSeeder::class);
+        // $this->call(UserSeeder::class);
         // $this->call(CertificateProprieteSeeder::class);
         // $this->call(EtatCessionSeeder::class);
 
