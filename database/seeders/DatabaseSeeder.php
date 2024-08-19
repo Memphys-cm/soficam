@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
 
 
         // $this->call(TitreFoncierSeeder::class);
-        // $this->call(UserSeeder::class);
+        $this->call(UserSeeder::class);
         // $this->call(CertificateProprieteSeeder::class);
         // $this->call(EtatCessionSeeder::class);
 
