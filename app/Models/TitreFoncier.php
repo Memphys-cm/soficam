@@ -9,6 +9,7 @@ use Spatie\MediaLibrary\HasMedia;
 use App\Models\Lotissements\Parcel;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Registration\HousingEstate;
+use App\Models\Sales\Sale;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;

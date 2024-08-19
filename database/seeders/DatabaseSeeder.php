@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DivisionSeeder::class);
         $this->call(SubDivisionSeeder::class);
         $this->call(RolesAndPermissionsSeeder::class);
+        // $this->call(TitreFoncierSeeder::class);
         // $this->call(CategoryActivitesSeeder::class);
         // $this->call(CabinetAndMembreCabinetSeeder::class);
       

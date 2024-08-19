@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('numero_conservation')->index()->nullable();
             $table->date('date_de_delivrance_du_TF');
             $table->string('numero_du_duplicata')->nullable();
+            $table->foreignId('immatriculation_id')->constrained('immatriculation_directes')->nullable()->onDelete('set null');
             $table->foreignId('region_id')->index();
             $table->foreignId('division_id')->index();
             $table->foreignId('sub_division_id')->index();
