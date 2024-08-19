@@ -73,140 +73,89 @@
         <p></p>
         <p></p>
         <p></p>
-        @if (!empty($certificate_proprietes))
-            <table style="margin-top:5vh; border:3px">
-                <thead>
-                    <tr>
-                        <th class="border-bottom">{{ __('NUMERO') }}</th>
-                        <th class="border-bottom">{{ __('REQUERANT') }}</th>
-                        <th class="border-bottom">{{ __('DELIVRE PAR') }}</th>
-                        <th class="border-bottom">{{ __('DATE') }}</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <table style="margin-top:5vh; border:3px">
+            @if ($certificate_proprietes)
+                <tr>
                     @foreach ($certificate_proprietes as $certificate_propriete)
-                        <tr>
-                            <td>
-                                {{ $certificate_propriete->certificate_proprietes_number }}
-                            </td>
-                            <td>
-                                {{ $certificate_propriete->requestor->first_name }}
-                            </td>
-                            <td>
-                                {{ $certificate_propriete->recorded_by }}
-                            </td>
-                            <td>
-                                {{ $certificate_propriete->created_at }}
-                            </td>
-                        </tr>
+                        <td>
+                            <div>
+                                <b>
+                                    Numero Certificat Propriété:
+                                    {{ $certificate_propriete->certificate_proprietes_number }}
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    Requérant: {{ $certificate_propriete->requestor->first_name }}
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    Délivré Par: {{ $certificate_propriete->recorded_by }}
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    Créé le : {{ $certificate_propriete->created_at }}
+                                </b>
+                            </div>
+                        </td>
                     @endforeach
-                </tbody>
-            </table>
-        @endif
-         {{--@if (!empty($lotissements))
-            <table style="margin-top:5vh">
-                <thead>
-                    <tr>
-                        <th class="border-bottom">{{ __('Nom Block') }}</th>
-                        <th class="border-bottom">{{ __('SUPERFICIE DU LOT') }}</th>
-                        <th class="border-bottom">{{ __('STATUT') }}</th>
-                        <th class="border-bottom">{{ __('DATE DU LOTISSEMENT') }}</th>
-                    </tr>
-                </thead>
-                <tbody>
+                </tr>
+            @endif
+            @if ($lotissements)
+                <tr>
                     @foreach ($lotissements as $lotissement)
-                        <tr>
-                            <td>
-                                {{ $lotissement->block->block_name }}
-                            </td>
-                            <td>
-                                {{ $lotissement->surperficie_du_lot }}
-                            </td>
-                            <td>
-                                {{ $lotissement->statut_du_lot }}
-                            </td>
-                            <td>
-                                {{ $lotissement->date_lotissement }}
-                            </td>
-                        </tr>
+                        <div>
+                            <b>
+                                NOM BLOCK: {{ $lotissement->block->block_name }}
+                            </b>
+                        </div>
+                        <div>
+                            <b>
+                                Superficie: {{ $lotissement->surperficie_du_lot }}
+                            </b>
+                        </div>
+                        <div>
+                            <b>
+                                STATUT: {{ $lotissement->statut_du_lot }}
+                            </b>
+                        </div>
+                        <div>
+                            <b>
+                                DATE: {{ $lotissement->date_lotissement }}
+                            </b>
+                        </div>
                     @endforeach
-                </tbody>
-            </table>
-        @endif
-        @if (!empty($etat_cessions))
-            <table style="margin-top:5vh">
-                <thead>
+                </tr>
+            @endif
+            @if ($etat_cessions)
+                @foreach ($etat_cessions as $etat_cession)
                     <tr>
-                        <th class="border-bottom">{{ __('REFERENCE') }}</th>
-                        <th class="border-bottom">{{ __('TYPE D\'OPERATION') }}</th>
-                        <th class="border-bottom">{{ __('COUT') }}</th>
-                        <th class="border-bottom">{{ __('DATE') }}</th>
+                        <div>
+                            <b>
+                                REFERENCE: {{ $etat_cession->reference_etat_cession }}
+                            </b>
+                        </div>
+                        <div>
+                            <b>
+                                MONTANT: {{ $etat_cession->cout_etat_cession }}
+                            </b>
+                        </div>
+                        <div>
+                            <b>
+                                TYPE D'OPERATION: {{ $etat_cession->type_operation }}
+                            </b>
+                        </div>
+                        <div>
+                            <b>
+                                DATE: {{ $etat_cession->created_at }}
+                            </b>
+                        </div>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach ($etat_cessions as $etat_cession)
-                        <tr>
-                            <td>
-                                {{ $etat_cession->reference_etat_cession }}
-                            </td>
-                            <td>
-                                {{ $etat_cession->type_operation }}
-                            </td>
-                            <td>
-                                {{ $etat_cession->cout_etat_cession }}
-                            </td>
-                            <td>
-                                {{ $etat_cession->created_at }}
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        @endif
-         @if (!empty($ventes))
-            <fieldset>
-                <legend class="fs-4 mb-3">{{ __('Informations sur les charges') }}</legend>
-                <table style="margin-top:5vh">
-                    <thead>
-                        <tr>
-                            <th class="border-bottom">{{ __('REFERENCE') }}</th>
-                            <th class="border-bottom">{{ __('MONTANT') }}</th>
-                            <th class="border-bottom">{{ __('TYPE DE VENTE') }}</th>
-                            <th class="border-bottom">{{ __('EFFECTUE PAR') }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($ventes as $vente)
-                            <tr>
-                                <td>
-                                    {{ $vente->sales_code }}
-                                </td>
-                                <td>
-                                    {{$vente->sales_amount}}
-                                </td>
-                                <td>
-                                    {{ $vente->sales_type }}
-                                </td>
-                                <td>
-                                    {{ $vente->created_by }}
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                    <tr style="font-size:14px">
-                        <td>
-                            <div>Qce N°:<strong>{{ $element->certificate_proprietes_number }}</strong></div>
-                        </td>
-                    </tr>
-                    <tr style="font-size:14px">
-                        <td>
-                            <div><strong>Validité: 03 mois</strong></div>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-        @endif --}}
-
+                @endforeach
+            @endif
+        </table>
 
     </div>
 </div>
