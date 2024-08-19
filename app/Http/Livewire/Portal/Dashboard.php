@@ -112,10 +112,13 @@ class Dashboard extends Component
         $dossier_traites = ImmatriculationDirecte::count();
         $usersWithTitreFoncier = User::whereHas('titrefonciers')->get();
         $total_users = $usersWithTitreFoncier->count();
+        if ($total_users == 0) {
+            $total_users = 1;
+        }
         $tf_homme = $usersWithTitreFoncier->where('sexe', 'M')->count();
         $tf_femme = $usersWithTitreFoncier->where('sexe', 'F')->count();
-        $percent_homme = ($tf_homme * 100) / $total_users;
-        $percent_femme = ($tf_femme * 100) / $total_users;
+        $percent_homme = ($tf_homme * 100) / $total_users ? $total_users : 1;
+        $percent_femme = ($tf_femme * 100) / $total_users ? $total_users : 1;
         $all_cabinet_notaire = Cabinet::where('type_cabinet', 'notaire')->count();
         $all_cabinet_geometre = Cabinet::where('type_cabinet', 'geometre')->count();
         $all_notaire_membre = MembreDuCabinet::where('type_membre', 'notaire')->count();

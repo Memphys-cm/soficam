@@ -51,6 +51,7 @@ class CertificatePropriete extends Model
         };
     }
 
+    
     public function titreFoncier()
     {
         return $this->belongsTo(TitreFoncier::class, 'titre_foncier_id');

@@ -17,6 +17,7 @@ return new class extends Migration
            $table->uuid('uuid')->unique()->index();
             $table->foreignId('titre_foncier_id')->index();
             $table->string('certificate_proprietes_number');
+            $table->string('identity_card');
             $table->foreignId('requestor_id')->index()->constrained('users');
             $table->float('price');
             $table->timestamp('validity')->default(now()->addMonths(3));
