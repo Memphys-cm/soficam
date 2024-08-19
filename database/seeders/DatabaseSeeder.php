@@ -4,7 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\CertificatePropriete;
+use App\Models\BordereauAnalytique;
+use App\Models\Lotissements\Lotissement;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
@@ -19,15 +20,24 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        
+
         $this->call(ServiceSeeder::class);
         $this->call(RegionSeeder::class);
         $this->call(DivisionSeeder::class);
         $this->call(SubDivisionSeeder::class);
+        $this->call(LotissementSeeder::class);
+        $this->call(CabinetNotaireSeeder::class);
+        $this->call(VentesSeeder::class);
+        $this->call(ReleveDeBienSeeder::class);
+        $this->call(BordereauAnalytiqueSeeder::class);
+        $this->call(CertificateProprieteSeeder::class);
+        $this->call(TitreFoncierSeeder::class);
+        $this->call(OperationSeeder::class);
         $this->call(RolesAndPermissionsSeeder::class);
+        // $this->call(TitreFoncierSeeder::class);
         // $this->call(CategoryActivitesSeeder::class);
         // $this->call(CabinetAndMembreCabinetSeeder::class);
-      
+
         // \App\Models\User::factory(1000)->create();
 
         // $user_role = Role::where('name', 'user')->first();
@@ -57,10 +67,11 @@ class DatabaseSeeder extends Seeder
 
         $user->assignRole('super_admin');
 
+        
         // $this->call(TitreFoncierSeeder::class);
         $this->call(UserSeeder::class);
         // $this->call(CertificateProprieteSeeder::class);
         // $this->call(EtatCessionSeeder::class);
-        
+
     }
 }
