@@ -10,12 +10,11 @@ use Livewire\Component;
 use App\Models\AuditLog;
 use App\Models\Sales\Sale;
 use App\Models\TitreFoncier;
-use App\Models\MembreDuCabinet;
-use Illuminate\Support\Facades\DB;
 use App\Models\CertificatePropriete;
-use App\Providers\AppServiceProvider;
+use App\Models\MembreDuCabinet;
 use App\Models\ImmatriculationDirecte;
 use App\Models\Lotissements\Lotissement;
+use Illuminate\Support\Facades\DB;
 
 class Dashboard extends Component
 {
@@ -24,160 +23,105 @@ class Dashboard extends Component
     public $timeFrameCertificateUpdates = 'today';
     public $sortBy = 'asc';
 
-    public $recentTransactions = [];
-    public $recentSales = [];
-    public $recentCertificateUpdates = [];
     public $start_date, $end_date;
     public $start_date_tf, $end_date_tf;
-    public $end_date_dos, $start_date_dos;
-
 
     public function mount()
     {
+        $now = Carbon::now();
+        $this->end_date_tf = $now->format('Y-m-d');
+        $this->start_date_tf = $now->subMonth()->format('Y-m-d');
+        $this->end_date = $now->format('Y-m-d');
+        $this->start_date = $now->subMonth()->format('Y-m-d');
         $this->loadRecentActivities();
-        $this->end_date_tf = Carbon::now()->format('Y-m-d');
-        $this->start_date_tf = Carbon::now()->subMonth()->format('Y-m-d');
-        $this->end_date = Carbon::now()->format('Y-m-d');
-        $this->start_date = Carbon::now()->subMonth()->format('Y-m-d');
-        $this->end_date_dos = Carbon::now()->format('Y-m-d');
-        $this->start_date_dos = Carbon::now()->subMonth()->format('Y-m-d');
-        // dd($this->end_date);
     }
-
-    public function loadRecentActivities()
-    {
-        $startDateTransactions = $this->getStartDate($this->timeFrameTransactions);
-        $endDateTransactions = $this->getEndDate($this->timeFrameTransactions);
-        $this->recentTransactions = TitreFoncier::whereBetween('created_at', [$startDateTransactions, $endDateTransactions])
-            ->orderBy('created_at', $this->sortBy)
-            ->get();
-
-        $startDateSales = $this->getStartDate($this->timeFrameSales);
-        $endDateSales = $this->getEndDate($this->timeFrameSales);
-        $this->recentSales = Sale::whereBetween('created_at', [$startDateSales, $endDateSales])
-            ->orderBy('created_at', $this->sortBy)
-            ->get();
-
-        $startDateCertificateUpdates = $this->getStartDate($this->timeFrameCertificateUpdates);
-        $endDateCertificateUpdates = $this->getEndDate($this->timeFrameCertificateUpdates);
-        $this->recentCertificateUpdates = CertificatePropriete::whereBetween('created_at', [$startDateCertificateUpdates, $endDateCertificateUpdates])
-            ->orderBy('created_at', $this->sortBy)
-            ->get();
-    }
-
 
     private function getStartDate($timeFrame)
     {
-        $startDate = Carbon::now()->startOfDay();
-
-        if ($timeFrame === 'yesterday') {
-            $startDate->subDay();
-        } elseif ($timeFrame === 'this_week') {
-            $startDate->startOfWeek();
-        } elseif ($timeFrame === 'last_week') {
-            $startDate->subWeek();
-        } elseif ($timeFrame === 'last_month') {
-            $startDate->subMonth();
-        } elseif ($timeFrame === 'last_year') {
-            $startDate->subYear();
-        }
-
-        return $startDate;
+        $date = Carbon::now()->startOfDay();
+        return match($timeFrame) {
+            'yesterday' => $date->subDay(),
+            'this_week' => $date->startOfWeek(),
+            'last_week' => $date->subWeek(),
+            'last_month' => $date->subMonth(),
+            'last_year' => $date->subYear(),
+            default => $date,
+        };
     }
 
     private function getEndDate($timeFrame)
     {
-        $endDate = Carbon::now()->endOfDay();
-
-        if ($timeFrame === 'yesterday') {
-            $endDate = Carbon::yesterday()->endOfDay();
-        } elseif ($timeFrame === 'this_week') {
-            $endDate->endOfWeek();
-        } elseif ($timeFrame === 'last_week') {
-            $endDate->subWeek();
-        } elseif ($timeFrame === 'last_month') {
-            $endDate->subMonth();
-        } elseif ($timeFrame === 'last_year') {
-            $endDate->subYear();
-        }
-
-        return $endDate;
+        $date = Carbon::now()->endOfDay();
+        return match($timeFrame) {
+            'yesterday' => Carbon::yesterday()->endOfDay(),
+            'this_week' => $date->endOfWeek(),
+            'last_week' => $date->subWeek(),
+            'last_month' => $date->subMonth(),
+            'last_year' => $date->subYear(),
+            default => $date,
+        };
     }
 
+    public function loadRecentActivities()
+    {
+        $this->recentTransactions = TitreFoncier::whereBetween('created_at', [$this->getStartDate($this->timeFrameTransactions), $this->getEndDate($this->timeFrameTransactions)])
+            ->orderBy('created_at', $this->sortBy)
+            ->get();
 
+        $this->recentSales = Sale::whereBetween('created_at', [$this->getStartDate($this->timeFrameSales), $this->getEndDate($this->timeFrameSales)])
+            ->orderBy('created_at', $this->sortBy)
+            ->get();
+
+        $this->recentCertificateUpdates = CertificatePropriete::whereBetween('created_at', [$this->getStartDate($this->timeFrameCertificateUpdates), $this->getEndDate($this->timeFrameCertificateUpdates)])
+            ->orderBy('created_at', $this->sortBy)
+            ->get();
+    }
 
     public function render()
     {
-        $all_titres_fonciers = TitreFoncier::count();
-        $dossier_traites = ImmatriculationDirecte::count();
-        $usersWithTitreFoncier = User::whereHas('titrefonciers')->get();
-        $total_users = $usersWithTitreFoncier->count();
-        if ($total_users == 0) {
-            $total_users = 1;
-        }
-        $tf_homme = $usersWithTitreFoncier->where('sexe', 'M')->count();
-        $tf_femme = $usersWithTitreFoncier->where('sexe', 'F')->count();
-        $percent_homme = ($tf_homme * 100) / $total_users ? $total_users : 1;
-        $percent_femme = ($tf_femme * 100) / $total_users ? $total_users : 1;
-        $all_cabinet_notaire = Cabinet::where('type_cabinet', 'notaire')->count();
-        $all_cabinet_geometre = Cabinet::where('type_cabinet', 'geometre')->count();
-        $all_notaire_membre = MembreDuCabinet::where('type_membre', 'notaire')->count();
-        $all_geometre_membre = MembreDuCabinet::where('type_membre', 'geometre')->count();
-        $all_lotissement = Lotissement::count();
-        $logs = AuditLog::orderBy('created_at', 'desc')->get()->take(10);
-        $allsales = Sale::where('payment_status', 'totally_paid')->count();
-        $totalPaidAmount = Sale::where('payment_status', 'totally_paid')->sum('sales_amount');
-        $totalSalesAmount = DB::table('sales')->sum('sales_amount');
-        $filter_amount = Sale::whereBetween('created_at', [$this->start_date, $this->end_date])->get()->sum('sales_amount');
-        $filter_tf = TitreFoncier::whereBetween('created_at', [$this->start_date_tf, $this->end_date_tf])->get()->count();
+        $now = Carbon::now();
 
-        $topRegions = TitreFoncier::select('region_id', DB::raw('count(*) as total'))
-            ->groupBy('region_id')
-            ->orderBy('total', 'desc')
-            ->take(5)
-            ->with('region')
-            ->get();
+        $data = [
+            'all_titres_fonciers' => TitreFoncier::count(),
+            'dossier_traites' => ImmatriculationDirecte::count(),
+            'all_users_with_titre' => User::whereHas('titrefonciers')->get(),
+            'total_users' => User::whereHas('titrefonciers')->count() ?: 1,
+            'tf_homme' => User::whereHas('titrefonciers')->where('sexe', 'M')->count(),
+            'tf_femme' => User::whereHas('titrefonciers')->where('sexe', 'F')->count(),
+            'percent_homme' => (User::whereHas('titrefonciers')->where('sexe', 'M')->count() * 100) / (User::whereHas('titrefonciers')->count() ?: 1),
+            'percent_femme' => (User::whereHas('titrefonciers')->where('sexe', 'F')->count() * 100) / (User::whereHas('titrefonciers')->count() ?: 1),
+            'all_cabinet_notaire' => Cabinet::where('type_cabinet', 'notaire')->count(),
+            'all_cabinet_geometre' => Cabinet::where('type_cabinet', 'geometre')->count(),
+            'all_notaire_membre' => MembreDuCabinet::where('type_membre', 'notaire')->count(),
+            'all_geometre_membre' => MembreDuCabinet::where('type_membre', 'geometre')->count(),
+            'all_lotissement' => Lotissement::count(),
+            'logs' => AuditLog::latest()->take(10)->get(),
+            'allsales' => Sale::where('payment_status', 'totally_paid')->count(),
+            'totalPaidAmount' => Sale::where('payment_status', 'totally_paid')->sum('sales_amount'),
+            'totalSalesAmount' => Sale::sum('sales_amount'),
+            'filter_amount' => Sale::whereBetween('created_at', [$this->start_date, $this->end_date])->sum('sales_amount'),
+            'filter_tf' => TitreFoncier::whereBetween('created_at', [$this->start_date_tf, $this->end_date_tf])->count(),
+            'topRegions' => TitreFoncier::select('region_id', DB::raw('count(*) as total'))
+                ->groupBy('region_id')
+                ->orderBy('total', 'desc')
+                ->take(5)
+                ->with('region')
+                ->get(),
+            'growthRates' => Region::with(['titreFonciers' => function ($query) {
+                $query->select('region_id', DB::raw('YEAR(date_de_delivrance_du_TF) as year'), DB::raw('COUNT(*) as count'))
+                    ->groupBy('region_id', 'year');
+            }])->get(),
+            'regionComparison' => TitreFoncier::select('region_id', DB::raw('COUNT(*) as total'))
+                ->groupBy('region_id')
+                ->with('region')
+                ->get(),
+            'evolutionData' => TitreFoncier::select('region_id', DB::raw('YEAR(date_de_delivrance_du_TF) as year'), DB::raw('COUNT(*) as total'))
+                ->groupBy('region_id', 'year')
+                ->with('region')
+                ->get(),
+        ];
 
-        // Taux de croissance des titres fonciers par région
-        $growthRates = Region::with(['titreFonciers' => function ($query) {
-            $query->select('region_id', DB::raw('YEAR(date_de_delivrance_du_TF) as year'), DB::raw('COUNT(*) as count'))
-                ->groupBy('region_id', 'year');
-        }])->get();
-
-        // Comparaison des performances régionales
-        $regionComparison = TitreFoncier::select('region_id', DB::raw('COUNT(*) as total'))
-            ->groupBy('region_id')
-            ->with('region')
-            ->get();
-
-        // Évolution des titres fonciers par région
-        $evolutionData = TitreFoncier::select('region_id', DB::raw('YEAR(date_de_delivrance_du_TF) as year'), DB::raw('COUNT(*) as total'))
-            ->groupBy('region_id', 'year')
-            ->with('region')
-            ->get();
-
-        return view('livewire.portal.dashboard', [
-            'logs' => $logs,
-            'allsales' => $allsales,
-            'totalPaidAmount' => $totalPaidAmount,
-            'all_titres_fonciers' => $all_titres_fonciers,
-            'tf_homme' => $tf_homme,
-            'tf_femme' => $tf_femme,
-            'percent_homme' => $percent_homme,
-            'percent_femme' => $percent_femme,
-            'all_lotissement' => $all_lotissement,
-            'all_cabinet_notaire' => $all_cabinet_notaire,
-            'all_cabinet_geometre' => $all_cabinet_geometre,
-            'all_notaire_membre' => $all_notaire_membre,
-            'all_geometre_membre' => $all_geometre_membre,
-            'dossier_traites' => $dossier_traites,
-            'totalSalesAmount' => $totalSalesAmount,
-            'filter_amount' => $filter_amount,
-            'filter_tf' => $filter_tf,
-            'topRegions' => $topRegions,
-            'growthRates' => $growthRates,
-            'regionComparison' => $regionComparison,
-            'evolutionData' => $evolutionData,
-        ])->layout('components.layouts.dashboard');
+        return view('livewire.portal.dashboard', $data)
+            ->layout('components.layouts.dashboard');
     }
 }
