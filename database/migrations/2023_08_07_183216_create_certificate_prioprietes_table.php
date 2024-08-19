@@ -15,13 +15,13 @@ return new class extends Migration
         Schema::create('certificate_proprietes', function (Blueprint $table) {
             $table->id();
            $table->uuid('uuid')->unique()->index();
-            $table->foreignId('titre_foncier_id')->index()->constrained('titre_fonciers');
+            $table->foreignId('titre_foncier_id')->index();
             $table->string('certificate_proprietes_number');
             $table->foreignId('requestor_id')->index()->constrained('users');
             $table->float('price');
             $table->timestamp('validity')->default(now()->addMonths(3));
             $table->enum('certificate_proprietes_type',['personne_physique','personne_morale']);
-            $table->enum('status',['pending_payment','expired','active'])->default('pending_payment');
+            $table->enum('status',['pending_payment', 'pending_extraction   ','expired','active'])->default('pending_payment');
             $table->longText('certificate_propriete_reason');
             $table->string('recorded_by')->nullable();
             $table->timestamps();

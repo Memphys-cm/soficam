@@ -181,7 +181,7 @@
                                         </svg>
                                     </a>
                                     @if ($imma_directe->next_step != "procedures interne et creation du titre foncier")
-                                        
+
                                     @can('imma_directe.view_detail')
                                         <a href="#" data-bs-placement="top" title="Voir Les Deatils du Dossier">
                                             <svg class="icon icon-sm text-info" xmlns="http://www.w3.org/2000/svg"
@@ -191,7 +191,7 @@
                                             </svg>
                                         </a>
                                     @endcan
-                                    
+
                                     @can('imma_directe.etat_cession', $imma_directe)
                                         @if ($imma_directe->next_step === "Délivrance de l’état de cession et paiement")
                                             <a href="#" data-bs-placement="top" title="Etat de Cession"
@@ -417,7 +417,7 @@
                                             </a>
                                         @endif
                                     @endcan
-                                    
+
                                     {{-- //bulletion_avis --}}
                                     @can('imma_directe.descente_terrain', $imma_directe)
                                         {{-- @if ($imma_directe->dossier_technique_created != null) --}}
