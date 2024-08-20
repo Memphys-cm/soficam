@@ -85,7 +85,7 @@
                                 <td>{{ $item->statut }}</td>
                                 <td>{{ $item->created_at }}</td>
                                 <td class="text-center">
-                                    <a class="btn btn-primary" href="{{ route('user.suivi-dossier.follow') }}">Suivre</a>
+                                    <a class="btn btn-primary" href="{{ route('user.suivi-dossier.follow', ['code' => $item->reference]) }}">Details</a>
                                 </td>
                             </tr>
                             @empty
