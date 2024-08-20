@@ -1,24 +1,6 @@
 <div>
     <x-alert />
-    @include('livewire.portal.immatriculation-directe.create')
-    @include('livewire.portal.immatriculation-directe.step.cotation_step1')
-    @include('livewire.portal.immatriculation-directe.step.ordre_versement')
-    @include('livewire.portal.immatriculation-directe.step.certificat_affichage')
-    @include('livewire.portal.immatriculation-directe.step.convocation_invitation')
-    @include('livewire.portal.immatriculation-directe.step.edit_statut')
-    @include('livewire.portal.immatriculation-directe.step.etat_cession')
-    @include('livewire.portal.immatriculation-directe.step.bordoreau_transmition')
-    @include('livewire.portal.immatriculation-directe.step.dossier_vise')
-    @include('livewire.portal.immatriculation-directe.step.enregistrer_geometre')
-    @include('livewire.portal.immatriculation-directe.step.pv_bornage')
-    @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_technique')
-    @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_administratif')
-    @include('livewire.portal.immatriculation-directe.step.creation_dossier_technique')
-    @include('livewire.portal.immatriculation-directe.step.descente_terrain')
-    @include('livewire.portal.immatriculation-directe.step.cotation_step2')
-    @include('livewire.portal.immatriculation-directe.step.ordre_redevance_fonciere')
-    @include('livewire.portal.immatriculation-directe.step.cotation_cadre')
-    @include('livewire.portal.immatriculation-directe.step.creer_titre_foncier')
+
 
     <x-delete-modal />
     <div class='p-0'>
@@ -147,7 +129,9 @@
                     @forelse($imma_directes as $imma_directe)
                         <tr>
                             <td>
-                                <span class="fw-normal"> {{ $imma_directe->reference }} </span>
+                                <span class="fw-normal"> <a
+                                        href="{{ route('portal.immatriculation_directe.index', ['code' => $imma_directe->reference]) }}">
+                                        {{ $imma_directe->reference }} </a></span>
                             </td>
                             <td>
                                 <x-elements.user :options="$imma_directe->users->take(5)" />

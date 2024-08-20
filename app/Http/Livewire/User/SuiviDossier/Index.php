@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 
-class Index extends Component
+class Index extends Component 
 {
     public function render()
     {
