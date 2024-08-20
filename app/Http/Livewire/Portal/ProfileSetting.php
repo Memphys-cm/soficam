@@ -22,7 +22,7 @@ class ProfileSetting extends Component
     public $password_confirmation;
     public $signature;
     public $preferred_language;
-    
+
     public function mount()
     {
         $this->first_name = auth()->user()->first_name;
@@ -50,20 +50,32 @@ class ProfileSetting extends Component
 
         $this->refresh(__('Profil mis à jour avec succès!'));
     }
+
     public function saveSignature()
     {
+        // Vérifie si l'utilisateur est autorisé à mettre à jour le profil
         if (!Gate::allows('profile-update')) {
             return abort(401);
         }
-        if ($this->signature) {
-            if(!empty(auth()->user()->signature_path)){
 
+        // Vérifie si une signature est présente
+        if ($this->signature) {
+            // Vérifie si l'utilisateur a déjà une signature
+            if (!empty(auth()->user()->signature_path)) {
+                // Vous pouvez ajouter ici du code pour supprimer l'ancienne signature si nécessaire
             }
-            auth()->user()->update(['signature_path' => $this->signature->storePublicly('signatures', 'attachments')]);
+
+            // Enregistre le chemin de la nouvelle signature dans la base de données
+            auth()->user()->update([
+                'signature_path' => $this->signature->store('signatures', 'public')
+            ]);
         }
 
+        // Rafraîchit la page avec un message de succès
         $this->refresh(__('Signature enregistrée avec succès!'));
     }
+
+
     public function passwordReset()
     {
         $this->validate([
@@ -74,7 +86,7 @@ class ProfileSetting extends Component
 
         auth()->user()->update(['password' => Hash::make($this->password)]);
 
-        $this->reset(['current_password','password','password_confirmation']);
+        $this->reset(['current_password', 'password', 'password_confirmation']);
 
         $this->refresh(__('Password reseted successfully!'));
     }
@@ -87,4 +99,3 @@ class ProfileSetting extends Component
         return view('livewire.portal.profile-setting')->layout('components.layouts.dashboard');
     }
 }
-

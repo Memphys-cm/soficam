@@ -19,10 +19,28 @@
             <div class="col-md-4">
                 <div class="card card-custom soft-card">
                     <div class="card-body">
-                        <div class="card-title">Recettes total</div>
+                        <div class="card-title">Recettes totales</div>
                         <div class="card-value">{{ number_format($totalSalesAmount, 0, '', ' ') }} {{ __('FCFA') }}
                         </div>
-                        <div class="card-subtitle">source de revenus top 10</div>
+                        <div class="card-subtitle">Source de revenus top 5</div>
+
+                        <table class="table table-sm table-borderless mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Type</th>
+                                    <th scope="col" class="text-right">Montant (FCFA)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($topSalesTypes as $sale)
+                                    <tr>
+                                        <td>{{ $sale->sales_type }}</td>
+                                        <td class="text-right">
+                                            {{ number_format($sale->total_sales_amount, 0, '', ' ') }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -30,9 +48,8 @@
                 <div class="card soft-card p-2">
                     <div class="d-flex align-items-center card-body">
                         <div>
-                            <h6 class="text-muted">Dossiers Totales</h6>
-                            <h3 class="fw-bold"> 750
-                            </h3>
+                            <h6 class="text-muted">Dossiers Totaux</h6>
+                            <h3 class="fw-bold">{{ number_format($totalOperations, 0, '', ' ') }}</h3>
                             <canvas id="dossierTypeChart"></canvas>
                         </div>
                     </div>
@@ -43,33 +60,33 @@
         <div class="section-title">Activités récentes</div>
         <div class="row text-center my-2">
             <div class="col-md-4">
-                <div class="card card-custom">
-                    <div class="recent-title">Titres fonciers</div>
-                    <div class="recent-activity-chart">
-                        <!-- Example chart placeholder -->
-                        <canvas id="recentChart1"></canvas>
+                <div class="card soft-card p-2">
+                    <div class="d-flex align-items-center card-body">
+                        <div>
+                            <h6 class="text-muted">Évolution des Titres Fonciers du Dernier Mois</h6>
+                            <canvas id="tfEvolutionChart"></canvas>
+                        </div>
                     </div>
-                    <div class="card-subtitle">DU 17/07/2024</div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card card-custom">
                     <div class="recent-title">Les dossiers traités</div>
                     <div class="recent-activity-chart">
-                        <!-- Example chart placeholder -->
-                        <canvas id="recentChart2"></canvas>
+                        <!-- Placeholder pour le graphique -->
+                        <canvas id="dossierTraiter"></canvas>
                     </div>
-                    <div class="card-subtitle">DU 17/04/2024</div>
+                    {{-- <div class="card-subtitle">Évolution des dossiers traités au cours du dernier mois</div> --}}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card card-custom">
                     <div class="recent-title">Recettes</div>
                     <div class="recent-activity-chart">
-                        <!-- Example chart placeholder -->
+                        <!-- Placeholder pour le graphique -->
                         <canvas id="recentChart3"></canvas>
                     </div>
-                    <div class="card-subtitle">DU 17/07/2024</div>
+                    <div class="card-subtitle">Évolution des ventes au cours du dernier mois</div>
                 </div>
             </div>
         </div>
@@ -294,7 +311,7 @@
                     type: 'doughnut',
                     data: {
                         datasets: [{
-                            data: [{{ (($tf_homme *100 ) / $all_titres_fonciers) }}, {{ (($tf_femme *100 ) / $all_titres_fonciers) }}],
+                            data: [{{ $percent_homme }}, {{ $percent_femme }}],
                             backgroundColor: ['#007bff', '#dc3545']
                         }],
                         labels: ['homme', 'femme']
@@ -305,6 +322,7 @@
                         cutoutPercentage: 70
                     }
                 });
+
                 const ctx = document.getElementById('growthRateChart').getContext('2d');
                 const growthRateChart = new Chart(ctx, {
                     type: 'line',
@@ -336,15 +354,21 @@
             // Répartition des Dossiers par Type
 
             var ctx2 = document.getElementById('dossierTypeChart').getContext('2d');
+            var data = {
+                datasets: [{
+                    data: [
+                        {{ $operationsByStatus['en cour'] ?? 0 }},
+                        {{ $operationsByStatus['terminer'] ?? 0 }},
+                        {{ $operationsByStatus['en attente'] ?? 0 }}
+                    ],
+                    backgroundColor: ['#007bff', '#dc3545', '#ffc107']
+                }],
+                labels: ['En cours', 'Terminée', 'En attente']
+            };
+
             var chart2 = new Chart(ctx2, {
                 type: 'doughnut',
-                data: {
-                    datasets: [{
-                        data: [60, 30, 10],
-                        backgroundColor: ['#007bff', '#dc3545', '#ffc107']
-                    }],
-                    labels: ['en cours', 'terminer', 'en attente']
-                },
+                data: data,
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
@@ -389,57 +413,128 @@
             });
 
 
-        // Example line/bar charts
-        var recentCtx1 = document.getElementById('recentChart1').getContext('2d');
-        var recentChart1 = new Chart(recentCtx1, {
-            type: 'line',
-            data: {
-                labels: ['17/07/2024', '18/07/2024', '19/07/2024'],
-                datasets: [{
-                    data: [12, 19, 3],
-                    backgroundColor: 'rgba(0, 123, 255, 0.2)',
-                    borderColor: '#007bff'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
+            // Example line/bar charts
+            var ctxtf = document.getElementById('tfEvolutionChart').getContext('2d');
+            var tfEvolutionChart = new Chart(ctxtf, {
+                type: 'line',
+                data: {
+                    labels: @json($tfDates),
+                    datasets: [{
+                        label: 'Titres Fonciers',
+                        data: @json($tfCounts),
+                        backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                        borderColor: '#007bff',
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            type: 'category', // Utilisation de 'category' si 'time' pose problème
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Nombre de Titres'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    }
+                }
+            });
 
-        var recentCtx2 = document.getElementById('recentChart2').getContext('2d');
-        var recentChart2 = new Chart(recentCtx2, {
-            type: 'bar',
-            data: {
-                labels: ['17/04/2024', '18/04/2024', '19/04/2024'],
-                datasets: [{
-                    data: [7, 11, 5],
-                    backgroundColor: '#007bff'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
+            var ctxRc1 = document.getElementById('dossierTraiter').getContext('2d');
+            var recentChart2 = new Chart(ctxRc1, {
+                type: 'bar',
+                data: {
+                    labels: @json($dossierDates), // Insertion des dates
+                    datasets: [{
+                        label: 'Dossiers traités',
+                        data: @json($dossierCounts), // Insertion du nombre de dossiers
+                        backgroundColor: '#007bff', // Couleur des barres
+                        borderColor: '#007bff', // Couleur des bordures
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Nombre de Dossiers'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    }
+                }
+            });
 
-        var recentCtx3 = document.getElementById('recentChart3').getContext('2d');
-        var recentChart3 = new Chart(recentCtx3, {
-            type: 'line',
-            data: {
-                labels: ['17/07/2024', '18/07/2024', '19/07/2024'],
-                datasets: [{
-                    data: [10, 15, 7],
-                    backgroundColor: 'rgba(40, 167, 69, 0.2)',
-                    borderColor: '#28a745'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
-
+            var ctx3 = document.getElementById('recentChart3').getContext('2d');
+            var recentChart3 = new Chart(ctx3, {
+                type: 'line',
+                data: {
+                    labels: @json($venteDates), // Insertion des dates
+                    datasets: [{
+                        label: 'Recettes',
+                        data: @json($venteTotals), // Insertion des montants
+                        backgroundColor: 'rgba(40, 167, 69, 0.2)', // Couleur de fond
+                        borderColor: '#28a745', // Couleur des lignes
+                        fill: true,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Montant des Ventes'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    }
+                }
+            });
         </script>
 
     </div>

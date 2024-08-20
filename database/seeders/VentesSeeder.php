@@ -47,15 +47,15 @@ class VentesSeeder extends Seeder
             DB::table('titrefoncier_user')->insert($associations);
         }
 
-        // // Assurez-vous que le rôle "user" existe
-        // $role = Role::where('name', 'user')->firstOrFail();
+        // Assurez-vous que le rôle "user" existe
+        $role = Role::where('name', 'user')->firstOrFail();
 
-        // // Identifier l'ID du premier utilisateur
-        // $firstUserId = User::orderBy('id')->value('id');
+        // Identifier l'ID du premier utilisateur
+        $firstUserId = User::orderBy('id')->value('id');
 
-        // // Assigner le rôle "user" à tous les utilisateurs sauf le premier
-        // User::where('id', '!=', $firstUserId)->each(function ($user) use ($role) {
-        //     $user->assignRole($role);
-        // });
+        // Assigner le rôle "user" à tous les utilisateurs sauf le premier
+        User::where('id', '!=', $firstUserId)->each(function ($user) use ($role) {
+            $user->assignRole($role);
+        });
     }
 }

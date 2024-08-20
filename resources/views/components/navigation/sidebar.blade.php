@@ -100,7 +100,7 @@
                                             </li>
                                             @endcan
                                             {{-- @can('report_titre_foncier.view') --}}
-                                            
+
                                             {{-- @endcan --}}
                                         </ul>
                                     </div>
@@ -487,6 +487,18 @@
                                     </a>
                                 </li>
                                 @endcan
+
+                                <li class="nav-item {{ $request->routeIs('portal.profile-setting') ? 'active' : '' }}">
+                                    <a href="{{ route('portal.profile-setting') }}" class="nav-link">
+                                        <span class="sidebar-icon">
+                                            <svg class="icon icon-sm me-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75v4.5m0 4.5v4.5m-5.25-9h3m9-4.5h-3m3 9h-3m-4.5-9h-3m3 9h-3m4.5-9h3m-9-4.5h-3m12 4.5h-3m-6 0h-3" />
+                                            </svg>
+                                        </span>
+                                        <span class="sidebar-text">{{ __('Paramètres') }}</span>
+                                    </a>
+                                </li>
+
                                 @canany('audit_log.view_all', 'audit_log.view_own_only')
                                 <li class="nav-item {{ $request->routeIs('portal.auditlogs.*') ? 'active' : '' }}">
                                     <a href="{{ route('portal.auditlogs.index') }}" class="nav-link">
