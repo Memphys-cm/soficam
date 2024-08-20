@@ -229,6 +229,9 @@ class RolesAndPermissionsSeeder extends Seeder
         $this->command->info('Creating Geometre User\'s Role');
         $admin_user_role = Role::firstOrCreate(['name' => 'geometre']);
 
+        $this->command->info('Creating Geometre User\'s Role');
+        $admin_user_role = Role::firstOrCreate(['name' => 'conservateur']);
+
         $this->command->info('Creating User\'s Role');
         $user_role = Role::firstOrCreate(['name' => 'user']);
 
