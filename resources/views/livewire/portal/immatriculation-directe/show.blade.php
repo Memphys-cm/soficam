@@ -72,7 +72,9 @@
                             1 => __('Création du Dossier'),
                             2 => __('Cotation du Dossier au Csdaf'),
                             3 => __('Délivrance de l\'Ordre de Versement'),
-                            4 => __('Changements de Statut après la Publication d’Avis et décision portant calendrier de descente sur le terrain'),
+                            4 => __(
+                                'Changements de Statut après la Publication d’Avis et décision portant calendrier de descente sur le terrain',
+                            ),
                             5 => __('Génération du Certificat d\'Affichage'),
                             6 => __('Changements de Statut liés au Certificat d\'Affichage'),
                         ],
@@ -118,8 +120,26 @@
                     @include('livewire.portal.immatriculation-directe.stepss.cotation.cotation-csdaf-step')
                 @elseif ($step == 3)
                     @include('livewire.portal.immatriculation-directe.stepss.ordre_versement')
-                    @elseif ($step == 4)
-                        @include('livewire.portal.immatriculation-directe.stepss.signature_avis_calendrier')
+                @elseif ($step == 4)
+                    @include('livewire.portal.immatriculation-directe.stepss.signature_avis_calendrier')
+                @elseif ($step == 5)
+                    @include('livewire.portal.immatriculation-directe.step.certificat_affichage')
+                @elseif ($step == 6)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 7)
+                    @include('livewire.portal.immatriculation-directe.step.descente_terrain')
+                @elseif($step == 8)
+                    @include('livewire.portal.immatriculation-directe.step.etat_cession')
+                @elseif($step == 10)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 11)
+                    @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_technique')
+                @elseif($step == 12)
+                    @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_administratif')
+                @elseif($step == 13)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 15)
+                    @include('livewire.portal.immatriculation-directe.step.bordoreau_transmition')
                 @endif
                 <!-- Ajoutez d'autres conditions pour les étapes restantes -->
             </div>

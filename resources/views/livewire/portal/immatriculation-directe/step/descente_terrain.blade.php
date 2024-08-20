@@ -1,18 +1,27 @@
-<div wire:ignore.self class="modal side-layout-modal fade" id="DescenteTerrainModal" tabindex="-1"
-    aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:45%;">
-        <div class="modal-content">
-            <div class="modal-body p-0">
-                <div class="p-4 p-lg-5">
-                    <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">
-                            {{ __('Descente') }}{{ __(' sur le terrain') }}
-                        </h1>
-                        <p class="px-1">
-                            {{__('Descente de la CC en vue du constat d’occupation et ou d’exploitation') }}
-                        </p>
-                    </div>
-                    <x-form-items.form wire:submit="descente_terrain">
+<div class="container my-4">
+    <div class="shadow-lg rounded p-4 bg-white">
+    <div class="mb-4 mt-md-0">
+        <div class="mb-4 mt-md-0">
+            <h1 class="mb-0 h4">
+                    {{ __('Descente') }}{{ __(' sur le terrain') }}
+            </h1>
+            <p class="px-1">
+                {{__('Descente de la CC en vue du constat d’occupation et ou d’exploitation') }}
+            </p>
+        </div>
+
+        @php
+                $visibility = '';
+        @endphp
+
+        @if ($imma_directe->numero_ordre_versement)
+            @php
+                $visibility = 'disabled';
+            @endphp
+        @endif
+
+        
+        <x-form-items.form wire:submit="descente_terrain">
                         <div class='form-group mb-3 row'>
                             <div class='col'>
                                 <label for="limit_nord">{{ __('Limite Nord') }}</label>
@@ -121,9 +130,7 @@
                                 class="btn btn-primary btn-loading"
                                 wire:loading.attr="disabled">{{__('Enregistrer La Descente sur le Terrain')}}</button>
                         </div>
-                    </x-form-items.form>
-                </div>
-            </div>
-        </div>
+        </x-form-items.form>
     </div>
+
 </div>
