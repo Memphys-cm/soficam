@@ -72,7 +72,9 @@
                             1 => __('Création du Dossier'),
                             2 => __('Cotation du Dossier au Csdaf'),
                             3 => __('Délivrance de l\'Ordre de Versement'),
-                            4 => __('Changements de Statut après la Publication d’Avis et décision portant calendrier de descente sur le terrain'),
+                            4 => __(
+                                'Changements de Statut après la Publication d’Avis et décision portant calendrier de descente sur le terrain',
+                            ),
                             5 => __('Génération du Certificat d\'Affichage'),
                             6 => __('Changements de Statut liés au Certificat d\'Affichage'),
                         ],
@@ -118,8 +120,10 @@
                     @include('livewire.portal.immatriculation-directe.stepss.cotation.cotation-csdaf-step')
                 @elseif ($step == 3)
                     @include('livewire.portal.immatriculation-directe.stepss.ordre_versement')
-                    @elseif ($step == 4)
-                        @include('livewire.portal.immatriculation-directe.stepss.signature_avis_calendrier')
+                @elseif ($step == 4)
+                    @include('livewire.portal.immatriculation-directe.stepss.signature_avis_calendrier')
+                @elseif ($step == 5)
+                    @include('livewire.portal.immatriculation-directe.step.certificat_affichage')
                 @endif
                 <!-- Ajoutez d'autres conditions pour les étapes restantes -->
             </div>

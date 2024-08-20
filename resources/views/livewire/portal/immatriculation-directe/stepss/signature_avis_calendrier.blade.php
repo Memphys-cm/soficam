@@ -2,9 +2,13 @@
     <div class="shadow-lg rounded p-4 bg-white">
         <h4 class="mb-4 fw-bold text-primary">{{ __('Statut après publication d\'avis') }}</h4>
 
+        @php
+            $visibility = '';
+        @endphp
+
         @if ($imma_directe->numero_ordre_versement)
             @php
-                $visibility = '';
+                $visibility = 'disabled';
             @endphp
         @endif
 
