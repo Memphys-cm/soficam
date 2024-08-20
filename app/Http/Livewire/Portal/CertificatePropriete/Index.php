@@ -235,6 +235,23 @@ class Index extends Component
             __('Report-') . Str::random('10') . ".pdf"
         );
     }
+    public function  printCertificate($id)
+    {
+        $this->certificatepropriete = CertificatePropriete::findOrFail($id);
+        $data = [
+            'element' => $this->certificatepropriete,
+            'titrefoncier' => $this->titre_fonciers,
+            // Autres données que vous souhaitez afficher dans la vue
+        ];
+
+        $pdf = Pdf::loadView('livewire.portal.certificate-propriete.print', $data)->setPaper('a4', 'portrait');
+
+
+        return response()->streamDownload(
+            fn() => print($pdf->output()),
+            __('Report-') . Str::random('10') . ".pdf"
+        );
+    }
 
     public function collect($id)
     {
