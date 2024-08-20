@@ -124,6 +124,22 @@
                     @include('livewire.portal.immatriculation-directe.stepss.signature_avis_calendrier')
                 @elseif ($step == 5)
                     @include('livewire.portal.immatriculation-directe.step.certificat_affichage')
+                @elseif ($step == 6)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 7)
+                    @include('livewire.portal.immatriculation-directe.step.descente_terrain')
+                @elseif($step == 8)
+                    @include('livewire.portal.immatriculation-directe.step.etat_cession')
+                @elseif($step == 10)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 11)
+                    @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_technique')
+                @elseif($step == 12)
+                    @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_administratif')
+                @elseif($step == 13)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 15)
+                    @include('livewire.portal.immatriculation-directe.step.bordoreau_transmition')
                 @endif
                 <!-- Ajoutez d'autres conditions pour les étapes restantes -->
             </div>

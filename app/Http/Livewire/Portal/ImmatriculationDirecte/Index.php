@@ -32,7 +32,7 @@ class Index extends Component
     // public ImmatriculationDirecte $imma_directe;
     public $imma_directe , $imma_file;
 
-    public $state = 0, $price_m2, $users, $user_id, $user_ids, $comissions = [], $localisation;
+    public $state = 0, $price_m2, $users, $user_id, $user_ids, $localisation;
     public $attachements, $services, $service_id, $observation, $montant_ordre_versement , $montant_ordre_redevance;
     public $volume ,$folio ,$numero_cp;
     public $region_id;
@@ -56,6 +56,7 @@ class Index extends Component
     public $coordonnees = [];
     public $coordonne = [];
     public $detect = 0;
+    public $comissions = [];
 
     public function addCoordinate()
     {

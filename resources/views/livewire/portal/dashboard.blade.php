@@ -91,58 +91,6 @@
             </div>
         </div>
 
-        <!-- Graphiques et Top 5 Régions -->
-        <div class="row my-2">
-            <div class="col-lg-6 mb-4">
-                <div class="card soft-card p-2">
-                    <div class="card-body">
-                        <h6 class="text-muted mb-3">Top 5 Régions avec Titres Fonciers</h6>
-                        <ul class="list-group soft-list">
-                            @foreach ($topRegions as $region)
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <span class="text-dark fw-bold">{{ $region->region->region_name_fr }}</span>
-                                    <span class="badge bg-primary rounded-pill">{{ $region->total }}</span>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card soft-card p-2">
-                    <div class="card-body">
-                        <h6 class="text-muted mb-3">Répartition des Dossiers par Région</h6>
-                        <canvas id="dossierRegionChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tableau Synthétique -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card soft-card p-2">
-                    <div class="card-body">
-                        <h6 class="text-muted mb-3">Données Synthétiques par Région</h6>
-                        <div class="table-responsive">
-                            <table class="table soft-table table-borderless">
-                                <thead>
-                                    <tr>
-                                        <th>Région</th>
-                                        <th>Titres Fonciers</th>
-                                        <th>Recettes</th>
-                                        <th>Dossiers Complétés</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <style>
             canvas {
                 width: 200px !important;
