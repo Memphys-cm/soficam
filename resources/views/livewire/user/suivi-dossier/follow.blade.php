@@ -1,5 +1,15 @@
 <div class="container-fluid">
     <x-alert />
+    <div class='d-flex flex-wrap pt-2 align-items-center  justify-content-between '>
+        <a href="{{route('user.suivi-dossier.index')}}" sclass="">
+            <svg class="icon me-1 text-gray-700 bg-gray-300 rounded-circle p-2" style="height : 2.5rem;" fill="none" stroke="currentColor" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+        </a>
+        <div>
+            <x-navigation.user-nav />
+        </div>
+    </div>
     <nav aria-label="breadcrumb" class="py-1">
         <ol class="breadcrumb bg-white px-3 py-2 rounded-pill shadow-lg">
             <li class="breadcrumb-item">
