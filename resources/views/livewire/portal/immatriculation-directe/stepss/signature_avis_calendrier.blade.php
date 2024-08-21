@@ -6,7 +6,7 @@
             $visibility = '';
         @endphp
 
-        @if ($imma_directe->numero_ordre_versement)
+        @if (!$imma_directe->numero_ordre_versement)
             @php
                 $visibility = 'disabled';
             @endphp
@@ -16,7 +16,7 @@
 
             <div>
                 <div class="form-check form-switch mb-3">
-                    <input class="form-check-input" type="checkbox" id="statusSwitch" wire:model="status_apres_publication">
+                    <input class="form-check-input" type="checkbox" id="statusSwitch" wire:model="status_apres_publication" {{ $visibility }}>
                     <label class="form-check-label" for="statusSwitch">Statut après publication d'avis</label>
                     @error('status_apres_publication')
                         <span class="text-danger">{{ $message }}</span>
@@ -25,7 +25,7 @@
 
                 <div class="mb-3">
                     <label for="statusDate" class="form-label">Date du Statut après publication d'avis</label>
-                    <input type="date" class="form-control" id="statusDate" wire:model="status_apres_publication_date">
+                    <input type="date" class="form-control" id="statusDate" wire:model="status_apres_publication_date" {{ $visibility }}>
                     @error('status_apres_publication_date')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror

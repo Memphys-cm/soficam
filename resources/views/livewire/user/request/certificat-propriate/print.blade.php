@@ -1,5 +1,8 @@
 @php
     use SimpleSoftwareIO\QrCode\Facades\QrCode;
+    use App\Models\User;
+
+    // $conservateur = User::findOrFail(1);
 
     $url = route('document.verify.cf', ['numero_cf' => $element->uuid]); // Génère l'URL pour la route nommée 'qr_code'
 
@@ -108,6 +111,7 @@
                 </td>
                 <td>
                     <div>{{ $element->titreFoncier->division->division_name }}, le <strong> {{ $element->created_at->format('d/m/Y') }}  </strong>
+                        {{-- <img src='{{ asset("storage/" . $conservateur->signature_path) }}' alt='Signature' class="img-fluid rounded"> --}}
                         {{-- <strong> ______________</strong> --}}
                     </div>
                 </td>
