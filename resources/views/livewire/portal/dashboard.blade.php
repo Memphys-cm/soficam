@@ -64,7 +64,7 @@
                     <div class="d-flex align-items-center card-body">
                         <div>
                             <h6 class="text-muted">Évolution des Titres Fonciers du Dernier Mois</h6>
-                            <canvas id="tfEvolutionChart"></canvas>
+                            <canvas id="titresFoncierRecentChart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                     <div class="recent-title">Les dossiers traités</div>
                     <div class="recent-activity-chart">
                         <!-- Placeholder pour le graphique -->
-                        <canvas id="dossierTraiter"></canvas>
+                        <canvas id="operationsChart"></canvas>
                     </div>
                     {{-- <div class="card-subtitle">Évolution des dossiers traités au cours du dernier mois</div> --}}
                 </div>
@@ -84,9 +84,9 @@
                     <div class="recent-title">Recettes</div>
                     <div class="recent-activity-chart">
                         <!-- Placeholder pour le graphique -->
-                        <canvas id="recentChart3"></canvas>
+                        <canvas id="salesChart"></canvas>
                     </div>
-                    <div class="card-subtitle">Évolution des ventes au cours du dernier mois</div>
+                    {{-- <div class="card-subtitle">Évolution des ventes au cours du dernier mois</div> --}}
                 </div>
             </div>
         </div>
@@ -254,6 +254,34 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
 
+                const titresFoncierRecentCtx = document.getElementById('titresFoncierRecentChart').getContext('2d');
+
+                const labels = @json(array_column($titresFoncierData, 'date'));
+                const counts = @json(array_column($titresFoncierData, 'count'));
+
+                new Chart(titresFoncierRecentCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['01/08/2024', '31/08/2024'],
+                        datasets: [{
+                            label: 'Titres fonciers',
+                            data: [0, counts],
+                            borderColor: '#36a2eb',
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+
                 var ctx1 = document.getElementById('genderChart').getContext('2d');
                 var chart1 = new Chart(ctx1, {
                     type: 'doughnut',
@@ -292,6 +320,78 @@
                         plugins: {
                             legend: {
                                 position: 'top',
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+        <script>
+            document.addEventListener('livewire:load', function () {
+                const operationsCtx = document.getElementById('operationsChart').getContext('2d');
+
+                const labels = @json(array_column($operationsData, 'date'));
+                const counts = @json(array_column($operationsData, 'count'));
+
+                new Chart(operationsCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Nombre d\'opérations',
+                            data: counts,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+        <script>
+            document.addEventListener('livewire:load', function () {
+                const salesCtx = document.getElementById('salesChart').getContext('2d');
+
+                const labels = @json(array_column($salesData, 'date'));
+                const sales = @json(array_column($salesData, 'total_sales'));
+
+                new Chart(salesCtx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Total des ventes',
+                            data: sales,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
                             }
                         }
                     }

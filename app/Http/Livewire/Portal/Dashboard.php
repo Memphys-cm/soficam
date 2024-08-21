@@ -157,6 +157,29 @@ class Dashboard extends Component
 
         $venteTotals = $venteData->pluck('total');
 
+        $titresFoncierData = TitreFoncier::whereMonth('created_at', Carbon::now()->month)
+            ->whereYear('created_at', Carbon::now()->year)
+            ->selectRaw('DATE(created_at) as date, COUNT(*) as count')
+            ->groupBy('date')
+            ->orderBy('date', 'asc')
+            ->get()
+            ->toArray();
+
+        $operationsData = Operation::whereMonth('created_at', Carbon::now()->month)
+            ->whereYear('created_at', Carbon::now()->year)
+            ->selectRaw('DATE(created_at) as date, COUNT(*) as count')
+            ->groupBy('date')
+            ->orderBy('date', 'asc')
+            ->get()
+            ->toArray();
+
+        $salesData = Sale::whereMonth('created_at', Carbon::now()->month)
+            ->whereYear('created_at', Carbon::now()->year)
+            ->selectRaw('DATE(created_at) as date, SUM(sales_amount) as total_sales')
+            ->groupBy('date')
+            ->orderBy('date', 'asc')
+            ->get()
+            ->toArray();
 
 
         // dd($dates, $counts);
@@ -206,7 +229,10 @@ class Dashboard extends Component
             'dossierDates' => $dossierDates,
             'dossierCounts' => $dossierCounts,
             'venteDates' => $venteDates,
-            'venteTotals' => $venteTotals
+            'venteTotals' => $venteTotals,
+            'titresFoncierData' => $titresFoncierData,
+            'operationsData' => $operationsData,
+            'salesData' => $salesData
         ];
 
         return view('livewire.portal.dashboard', $data)
