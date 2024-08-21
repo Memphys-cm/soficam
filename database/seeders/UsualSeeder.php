@@ -9,7 +9,7 @@ use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Collection;
 
-class VentesSeeder extends Seeder
+class UsualSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -32,7 +32,7 @@ class VentesSeeder extends Seeder
             // Vérifier que l'utilisateur existe dans la collection
             if ($usersCollection->contains($userId)) {
                 // Prendre 5 titres fonciers aléatoires pour chaque utilisateur
-                $randomTitles = $titresFoncierCollection->random(min(5, $titresFoncierCollection->count()));
+                $randomTitles = $titresFoncierCollection->random(min(1, $titresFoncierCollection->count()));
                 foreach ($randomTitles as $titleId) {
                     // Vérifier que le titre foncier existe dans la collection
                     if ($titresFoncierCollection->contains($titleId)) {

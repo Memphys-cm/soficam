@@ -34,7 +34,7 @@ class LotissementSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        for($i=0 ; $i<50 ; $i++){
+        for($i=0 ; $i<250 ; $i++){
 
             Lotissement::create([
                 'uuid' => Str::uuid(),
@@ -53,7 +53,7 @@ class LotissementSeeder extends Seeder
                 'updated_at' => now(),
             ]);
         }
-        
+
     }
 
 }

@@ -12,7 +12,7 @@ class Saleable extends Model
     use HasFactory;
     protected $table = 'saleables';
     protected $guarded = [];
-    
+
     public function sale()
     {
         return $this->belongsTo(Sale::class, 'sale_id');
