@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -14,17 +15,27 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // Assurez-vous que le rôle "user" existe
+        $role = Role::where('name', 'user')->firstOrFail();
+
+        // Identifier l'ID du premier utilisateur
+        $firstUserId = User::orderBy('id')->value('id');
+
+        // Assigner le rôle "user" à tous les utilisateurs sauf le premier
+        User::where('id', '!=', $firstUserId)->each(function ($user) use ($role) {
+            $user->assignRole($role);
+        });
 
         User::create([
             'uuid' => Str::uuid(),
-            'first_name' => 'BALGA',
-            'last_name' => 'Mireille',
+            'first_name' => 'MENDOUGA Antole',
+            'last_name' => 'Gervais',
             'id_card_number' => '233454432',
             // 'date_of_birth' => fake()->date(),
             'place_of_birth' => 'Douala',
-            'primary_phone_number' => '674328967',
-            'secondary_phone_number' => '679065432',
-            'address' => 'ADAMAOUA',
+            'primary_phone_number' => '677550820',
+            'secondary_phone_number' => '677550820',
+            'address' => 'CENTRE',
             'service_id' => '1',
             'email' => 'balg1a@gmail.com',
             'is_active' => 1,
@@ -34,30 +45,13 @@ class UserSeeder extends Seeder
 
         User::create([
             'uuid' => Str::uuid(),
-            'first_name' => 'ATANGANA',
-            'last_name' => 'Pierres',
-            'id_card_number' => '133454432',
-            // 'date_of_birth' => fake()->date(),
-            'place_of_birth' => 'Yaounde',
-            'primary_phone_number' => '674328968',
-            'secondary_phone_number' => '679065433',
-            'address' => 'Yaounde',
-            'service_id' => '2',
-            'email' => 'atangana@gmail.com',
-            'is_active' => 1,
-            'sexe' => 'M',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-        ]);
-
-        User::create([
-            'uuid' => Str::uuid(),
-            'first_name' => 'KOUPIT',
-            'last_name' => 'Cherif',
+            'first_name' => 'ONAMBELE',
+            'last_name' => 'Thierry Roland',
             'id_card_number' => '313454473',
             // 'date_of_birth' => fake()->date(),
             'place_of_birth' => 'bafussam',
-            'primary_phone_number' => '674328969',
-            'secondary_phone_number' => '679065434',
+            'primary_phone_number' => '677550820',
+            'secondary_phone_number' => '677550820',
             'address' => 'Badjoun',
             'service_id' => '2',
             'email' => 'koupit@gmail.com',
@@ -68,13 +62,13 @@ class UserSeeder extends Seeder
 
         User::create([
             'uuid' => Str::uuid(),
-            'first_name' => 'CHEDJOU',
-            'last_name' => 'Michel',
+            'first_name' => 'FOTSO',
+            'last_name' => 'Manfred Dieudonne',
             'id_card_number' => '100342267',
             // 'date_of_birth' => fake()->date(),
             'place_of_birth' => 'Bamanedjou',
-            'primary_phone_number' => '674328971',
-            'secondary_phone_number' => '679065436',
+            'primary_phone_number' => '677550820',
+            'secondary_phone_number' => '677550820',
             'address' => 'Bafussam',
             'service_id' => '2',
             'email' => 'chedjou@gmail.com',
@@ -85,14 +79,14 @@ class UserSeeder extends Seeder
 
         User::create([
             'uuid' => Str::uuid(),
-            'first_name' => 'TEMGOUA',
+            'first_name' => 'EPOH Ndame',
             'last_name' => 'Jeanne',
             'id_card_number' => '233454432',
             // 'date_of_birth' => fake()->date(),
             'place_of_birth' => 'Douala',
-            'primary_phone_number' => '674328967',
-            'secondary_phone_number' => '679065432',
-            'address' => 'ADAMAOUA',
+            'primary_phone_number' => '677550820',
+            'secondary_phone_number' => '677550820',
+            'address' => 'Douala',
             'service_id' => '2',
             'email' => 'tengoua@gmail.com',
             'is_active' => 1,
@@ -102,13 +96,13 @@ class UserSeeder extends Seeder
 
         User::create([
             'uuid' => Str::uuid(),
-            'first_name' => 'AMBASSA',
+            'first_name' => 'SONE EHONE',
             'last_name' => 'Dider',
             'id_card_number' => '133454432',
             // 'date_of_birth' => fake()->date(),
             'place_of_birth' => 'Douala',
-            'primary_phone_number' => '674328972',
-            'secondary_phone_number' => '679065437',
+            'primary_phone_number' => '677550820',
+            'secondary_phone_number' => '677550820',
             'address' => 'Edea',
             'service_id' => '2',
             'email' => 'ambassa@gmail.com',
@@ -119,13 +113,13 @@ class UserSeeder extends Seeder
 
         User::create([
             'uuid' => Str::uuid(),
-            'first_name' => 'ONDOA',
-            'last_name' => 'Irene',
+            'first_name' => 'ADOUL Salam',
+            'last_name' => 'Idris',
             'id_card_number' => '233454432',
             // 'date_of_birth' => fake()->date(),
             'place_of_birth' => 'Douala',
-            'primary_phone_number' => '674328973',
-            'secondary_phone_number' => '679065438',
+            'primary_phone_number' => '677550820',
+            'secondary_phone_number' => '677550820',
             'address' => 'yaounde',
             'service_id' => '2',
             'email' => 'ondoa@gmail.com',
