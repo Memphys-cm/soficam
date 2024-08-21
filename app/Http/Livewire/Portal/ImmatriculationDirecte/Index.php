@@ -32,7 +32,7 @@ class Index extends Component
     // public ImmatriculationDirecte $imma_directe;
     public $imma_directe , $imma_file;
 
-    public $state = 0, $price_m2, $users, $user_id, $user_ids, $localisation;
+    public $state = 0, $price_m2, $users, $user_id, $user_ids, $comissions = [], $localisation;
     public $attachements, $services, $service_id, $observation, $montant_ordre_versement , $montant_ordre_redevance;
     public $volume ,$folio ,$numero_cp;
     public $region_id;
@@ -56,7 +56,6 @@ class Index extends Component
     public $coordonnees = [];
     public $coordonne = [];
     public $detect = 0;
-    public $comissions = [];
 
     public function addCoordinate()
     {
@@ -705,6 +704,7 @@ class Index extends Component
         $counterFormatted = str_pad($counter, 5, '0', STR_PAD_LEFT);
         return $year . 'STATE' . $counterFormatted;
     }
+
     public function etatDeCession()
     {
           // Récupérer l'année en cours au format 'yy'
@@ -794,6 +794,7 @@ class Index extends Component
         );
 
     }
+
     public function  printAvisPdf($id)
     {
         $this->imma_directe = ImmatriculationDirecte::findOrFail($id);
@@ -938,8 +939,6 @@ class Index extends Component
 
     }
 
-
-
     public function convocation($id)
     {
         $this->imma_directe = ImmatriculationDirecte::findOrFail($id);
@@ -992,7 +991,7 @@ class Index extends Component
 
         $sms = "Mr/Mme. $userNames, votre dossier d'immatriculation directe et à l'étape $imma_directe->statut";
         $senderid ='SOFICAM';
-        $api_key = 'wplL0f9wq1moi1NrsjpsBgfBzun4';
+        $api_key = '36v7fN66hzUD6SaBYkILlirHZo7P';
         $url = 'https://api.queensms.net/v1/sms.php';
 
         $sms_body = array(
@@ -1126,7 +1125,6 @@ class Index extends Component
 
     }
 
-
     public function clearFields()
     {
         $this->reset(
@@ -1139,6 +1137,23 @@ class Index extends Component
         );
 
         $this->user_ids = [];
+    }
+
+    public function delete()
+    {
+        if (!Gate::allows('user.delete') || !Gate::allows('user.update')) {
+            return abort(401);
+        }
+
+        if (!empty($this->imma_directe)) {
+
+            $this->imma_directe->delete();
+        }
+
+
+        $this->state = 0;
+
+        $this->refresh(__('Dossier supprimé avec succès!'), 'DeleteModal');
     }
 
 

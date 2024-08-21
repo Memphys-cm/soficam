@@ -10,6 +10,7 @@ use Livewire\Component;
 use App\Models\Sales\Sale;
 use App\Models\EtatCession;
 use Illuminate\Support\Str;
+use App\Models\TitreFoncier;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use App\Models\ImmatriculationDirecte;
@@ -434,6 +435,91 @@ class Show extends Component
 
         // $this->clearFields();
         $this->refresh(__('Dossier Administratif Mise En Forme Avec Suceess'), 'DossierAdministratifModal');
+    }
+
+    public function sms($id) {
+        $imma_directe = ImmatriculationDirecte::findOrFail($id);
+        $receivers = $imma_directe->users;
+
+        $userNames='';
+        $mobiles = "";
+
+        foreach($receivers as $user) {
+            if($user){
+                $userNames .= $user->first_name . ',';
+                $mobiles .= "$user->primary_phone_number,";
+            }
+        }
+
+        //retirer la virgule en fin de chaine
+        $userNames = rtrim($userNames, ',');
+        $mobiles = rtrim($mobiles, ',');
+
+        $sms = "Mr/Mme. $userNames, votre dossier d'immatriculation directe et à l'étape $imma_directe->statut";
+        $senderid ='SOFICAM';
+        $api_key = '36v7fN66hzUD6SaBYkILlirHZo7P';
+        $url = 'https://api.queensms.net/v1/sms.php';
+
+        $sms_body = array(
+            'api_key' => $api_key,
+            'senderid' => $senderid,
+            'sms' => $sms,
+            'mobiles' => $mobiles
+        );
+
+        $send_data = http_build_query($sms_body);
+        $gateway_url = $url . "?" . $send_data;
+
+        try {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $gateway_url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HTTPGET, 1);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $output = curl_exec($ch);
+
+            if (curl_errno($ch)) {
+                $output = curl_error($ch);
+                $arr = ['echec'];
+                return($arr);
+            }
+            else{
+                return($output);
+            }
+            curl_close($ch);
+        }
+
+        catch (Exception $exception){
+            //echo $exception->getMessage();
+            $arr = ['echec'];
+            return($arr);
+        }
+    }
+
+    public function generateCodeTF()
+    {
+        $numero = $this->imma_directe->region->code . "/" . $this->imma_directe->division->code . "/" . 'A' . "/" . $this->numero_conservation;
+        return ($numero);
+    }
+
+    function genererNationalCodeUnique()
+    {
+        $dernierEnregistrement = TitreFoncier::orderBy('id', 'desc')->first();
+
+        if ($dernierEnregistrement) {
+            $dernierNumero = intval(substr($dernierEnregistrement->code, 2)); // Extrait le numéro sans "TF" et convertit en nombre
+            $nouveauNumero = $dernierNumero + 1;
+        } else {
+            $nouveauNumero = 1;
+        }
+
+        // Formate le numéro avec des zéros à gauche (total 7 caractères)
+        $numeroFormate = str_pad($nouveauNumero, 7, '0', STR_PAD_LEFT);
+
+        // Concatène "TF" et le numéro formate pour obtenir le code unique
+        $codeUnique = "TF" . $numeroFormate;
+
+        return $codeUnique;
     }
 
     public function render()
