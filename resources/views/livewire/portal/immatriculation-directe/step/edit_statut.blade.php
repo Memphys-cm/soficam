@@ -11,11 +11,11 @@
                 </p>
             </div>
 
-            @if ($imma_directe->numero_ordre_versement)
+            {{-- @if ($imma_directe->numero_ordre_versement)
                 @php
                     $visibility = 'disabled';
                 @endphp
-            @endif
+            @endif --}}
 
 
             <x-form-items.form wire:submit="edit_statut">
@@ -25,7 +25,7 @@
                             <label for="status">{{ __('Statut') }}</label>
                             <input wire:model="status" type="text"
                                 class="form-control  @error('status') is-invalid @enderror"
-                                placeholder="{{ __('') }}" required="" name="status" disabled>
+                                placeholder="{{ __('') }}" required="" value="{{ $status }}" name="status" disabled>
                             @error('status')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

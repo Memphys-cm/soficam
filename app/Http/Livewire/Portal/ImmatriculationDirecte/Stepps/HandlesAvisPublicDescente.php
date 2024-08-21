@@ -16,6 +16,7 @@ trait HandlesAvisPublicDescente
     public $status_apres_publication_date;
     public $calendarDecision_date;
 
+
     public function mounting()
     {
         // Charger les valeurs actuelles depuis la base de données
@@ -30,6 +31,7 @@ trait HandlesAvisPublicDescente
     {
 
         $this->validate([
+            'status_apres_publication' => 'required',
             'calendarDecision' => 'required',
         ]);
 
@@ -37,11 +39,13 @@ trait HandlesAvisPublicDescente
             $this->imma_directe->update([
                 'statut' => 'Avis au Public Signé',
                 'next_step' => 'Instruction du Dossier – préparer la décision portant calendrier de descente sur le terrain',
-                'date_avis_publique_signe' => $this->date_status,
+                'date_avis_publique_signe' => $this->status_apres_publication_date,
+                'calendar_decision' => $this->calendarDecision,
+                'calendar_decision_date' => $this->calendarDecision_date,
             ]);
         });
 
-        Session::flash('message', __('Ordre de Versement Enregistrer Avec SUCCES!'));
+        Session::flash('message', __('publication d\'avis signé!'));
 
         // $this->clearFields();
     }
