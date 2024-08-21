@@ -25,6 +25,10 @@
                         <i class="bi bi-check-circle me-1"></i> Terminée
                     </span>
                 @endif
+                <span class="fw-bold mx-1"> étape en cours </span>
+                <span class="mx-2 badge bg-warning">{{ $imma_directe->statut }}</span>
+                <span class="fw-bold mx-1"> Prochaine étape </span>
+                <span class="mx-2 badge bg-{{ $imma_directe->StatutStyle }}">{{ $imma_directe->next_step }}</span>
             </li>
         </ol>
     </nav>
