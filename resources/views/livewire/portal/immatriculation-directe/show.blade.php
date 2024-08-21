@@ -131,7 +131,7 @@
                         1 => true, // Étape 1 est toujours colorée
                         2 => $imma_directe->date_cotation,
                         3 => $imma_directe->date_ordre_versement,
-                        4 => $imma_directe->calendarDecision_date,
+                        4 => $imma_directe->date_certificat_d_affichage_signer,
                         5 => $imma_directe->date_fin_certificat_d_affichage,
                         6 => $imma_directe->date_certificat_d_affichage_signer,
                         7 => $imma_directe->descente_terrain,
@@ -140,6 +140,7 @@
                         10 => $imma_directe->dossier_technique_complet,
                         11 => $imma_directe->dossier_technique_complet,
                         12 => $imma_directe->dossier_administratif_complet,
+                        13 => $imma_directe->dossier_administratif_complet,
                     ];
                 @endphp
 
