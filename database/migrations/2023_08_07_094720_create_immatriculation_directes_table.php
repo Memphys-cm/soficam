@@ -110,6 +110,8 @@ return new class extends Migration
             $table->date('cotation_compl_csrdaf')->nullable();
             $table->string('numero_serie')->nullable();
 
+            $table->string('is_finalisation')->nullable();
+
 
             $table->boolean('is_complete')->default(0);
             $table->timestamps();

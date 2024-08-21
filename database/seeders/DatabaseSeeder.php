@@ -4,13 +4,14 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\BordereauAnalytique;
-use App\Models\Lotissements\Lotissement;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 use Faker\Factory as FakerFactory;
+use Spatie\Permission\Models\Role;
+use App\Models\BordereauAnalytique;
+use App\Models\Lotissements\Lotissement;
+use Database\Seeders\CabinetAndMembreCabinetSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,18 +26,15 @@ class DatabaseSeeder extends Seeder
         $this->call(RegionSeeder::class);
         $this->call(DivisionSeeder::class);
         $this->call(SubDivisionSeeder::class);
-        // $this->call(LotissementSeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(CabinetAndMembreCabinetSeeder::class);
         // $this->call(CabinetNotaireSeeder::class);
+        $this->call(TitreFoncierSeeder::class);
+        $this->call(LotissementSeeder::class);
         // $this->call(VentesSeeder::class);
         // $this->call(ReleveDeBienSeeder::class);
-        // $this->call(BordereauAnalytiqueSeeder::class);
-        // $this->call(CertificateProprieteSeeder::class);
-        // $this->call(OperationSeeder::class);
+        $this->call(BordereauAnalytiqueSeeder::class);
         $this->call(RolesAndPermissionsSeeder::class);
-        $this->call(TitreFoncierSeeder::class);
-        $this->call(CategoryActivitesSeeder::class);
-        // $this->call(CabinetAndMembreCabinetSeeder::class);
-
         // \App\Models\User::factory(1000)->create();
 
         // $user_role = Role::where('name', 'user')->first();
@@ -68,9 +66,14 @@ class DatabaseSeeder extends Seeder
 
 
         // $this->call(TitreFoncierSeeder::class);
-        $this->call(UserSeeder::class);
+        $this->call(CertificateProprieteSeeder::class);
+        // $this->call(TitreFoncierSeeder::class);
+        $this->call(CategoryActivitesSeeder::class);
+        $this->call(OperationSeeder::class);
+
+        $this->call(UsualSeeder::class);
         // $this->call(CertificateProprieteSeeder::class);
-        // $this->call(EtatCessionSeeder::class);
+        $this->call(EtatCessionSeeder::class);
 
     }
 }
