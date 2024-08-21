@@ -561,7 +561,7 @@ class Index extends Component
             ]);
         });
 
-        $this->refresh(__('DOSSIERt Coter Avec SUCCES!'), 'CotationImmaDirecteModal');
+        $this->refresh(__('DOSSIER Coter Avec SUCCES!'), 'CotationImmaDirecteModal');
 
         $this->clearFields();
     }

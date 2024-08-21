@@ -62,7 +62,7 @@
 
         <div class="d-flex justify-content-end">
             <button class="btn btn-secondary" wire:click.prevent="prevStep"> {{ __('<< Précedent') }} </button>
-            <button class="btn btn-primary mx-2" wire:click.prevent="signatureAvisCalendrier" {{ $visibility }}> {{ __('Enregistrer') }} </button>
+            <button class="btn btn-primary mx-2" wire:click.prevent="signatureAvisCalendrier"> {{ __('Enregistrer') }} </button>
             <button class="btn btn-info" wire:click.prevent="nextStep"> {{ __('Suivant >>') }} </button>
         </div>
     </div>
