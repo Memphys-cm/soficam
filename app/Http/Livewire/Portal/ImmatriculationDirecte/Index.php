@@ -992,7 +992,7 @@ class Index extends Component
 
         $sms = "Mr/Mme. $userNames, votre dossier d'immatriculation directe et à l'étape $imma_directe->statut";
         $senderid ='SOFICAM';
-        $api_key = '36v7fN66hzUD6SaBYkILlirHZo7P';
+        $api_key = 'wplL0f9wq1moi1NrsjpsBgfBzun4';
         $url = 'https://api.queensms.net/v1/sms.php';
 
         $sms_body = array(
