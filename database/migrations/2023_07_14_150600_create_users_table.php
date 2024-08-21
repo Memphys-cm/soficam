@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('signature_path')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('place_of_birth')->nullable();
+            $table->boolean('is_mobility')->nullable();
             $table->string('primary_phone_number')->nullable();
             $table->string('secondary_phone_number')->nullable();
             $table->string('address')->nullable();
