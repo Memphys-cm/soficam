@@ -45,8 +45,10 @@ class Index extends Component
     {
         if ($this->request_type == 'standard') {
             $this->price = 100; // Exemple de prix pour la demande standard
+            $this->status = "pending_payment";
         } elseif ($this->request_type == 'express') {
             $this->price = 100; // Exemple de prix pour la demande express
+            $this->status = "active";
         }
     }
 
@@ -68,65 +70,102 @@ class Index extends Component
 
         $identityCardPath = $this->identity_card->store('identity_cards', 'public');
 
-        try {
-            // $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
-            // $paymentResponse = $client->makeCollect([
-            //     'amount' => $this->price,
-            //     'service' => $this->payment_method,
-            //     'payer' => $this->phone_number,
-            //     'nonce' => RandomGenerator::nonce(),
-            //     'trxID' => '1'
-            // ]);
+        $certificatepropriete = CertificatePropriete::create([
+            'titre_foncier_id' => $this->titre_foncier_id,
+            'certificate_proprietes_number' => $this->CPCode(),
+            'requestor_id' => Auth::id(),
+            'price' => $this->price,
+            'certificate_proprietes_type' => $this->certificate_proprietes_type,
+            'certificate_propriete_reason' => $this->certificate_propriete_reason,
+            'status' => $this->status,
+            'validity' => Carbon::now()->addMonths(3),
+            'identity_card' => $identityCardPath,
+            'recorded_by' => auth()->user()->name,
+        ]);
 
-            // // Vérifiez ici si le paiement a été accepté
-            // if ($paymentResponse->isOperationSuccess()) {
-            //     $status = $this->request_type === 'express' ? 'active' : 'pending_extraction';
+        $sale = Sale::create([
+            'user_id' => Auth::id(),
+            'sales_amount' => $this->price,
+            'sales_type' => 'certificate_propriete',
+            'payment_status' => "totally_paid",
+            'created_by' => auth()->user()->name,
+        ]);
 
-                $certificatepropriete = CertificatePropriete::create([
-                    'titre_foncier_id' => $this->titre_foncier_id,
-                    'certificate_proprietes_number' => $this->CPCode(),
-                    'requestor_id' => Auth::id(),
-                    'price' => $this->price,
-                    'certificate_proprietes_type' => $this->certificate_proprietes_type,
-                    'certificate_propriete_reason' => $this->certificate_propriete_reason,
-                    'status' => $this->status,
-                    'validity' => Carbon::now()->addMonths(3),
-                    'identity_card' => $identityCardPath,
-                    'recorded_by' => auth()->user()->name,
-                ]);
+        Saleable::create([
+            'sale_id' => $sale->id,
+            'price' => $this->price,
+            'quantity' => 1,
+            'saleable_id' => $certificatepropriete->id,
+            'saleable_type' => 'App\Models\CertificatePropriete',
+            'created_by' => auth()->user()->name,
+        ]);
 
-                $sale = Sale::create([
-                    'user_id' => Auth::id(),
-                    'sales_amount' => $this->price,
-                    'sales_type' => 'certificate_propriete',
-                    'payment_status' => "totally_paid",
-                    'created_by' => auth()->user()->name,
-                ]);
-
-                Saleable::create([
-                    'sale_id' => $sale->id,
-                    'price' => $this->price,
-                    'quantity' => 1,
-                    'saleable_id' => $certificatepropriete->id,
-                    'saleable_type' => 'App\Models\CertificatePropriete',
-                    'created_by' => auth()->user()->name,
-                ]);
-
-                if ($this->request_type === "standard") {
-                    $this->refresh(__('Certificat de propriété Supprimé avec succès'), 'CreatecertificateproprieteModal');
-                    $this->clearFields();
-                } else {
-                    return $this->previewPdf($certificatepropriete->id);
-                }
-            // } else {
-            //     session()->flash('error', __('Payment failed, please try again.'));
-            //     return;
-            // }
-        } catch (\Throwable $e) {
-            report($e);
-            session()->flash('error', __('Something went wrong, please try again later.'));
-            abort(500, __('Payment processing error'));
+        if ($this->request_type === "standard") {
+            $this->refresh(__('Certificat de propriété Supprimé avec succès'), 'CreatecertificateproprieteModal');
+            $this->clearFields();
+        } else {
+            return $this->previewPdf($certificatepropriete->id);
         }
+
+        // try {
+        //     // $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
+        //     // $paymentResponse = $client->makeCollect([
+        //     //     'amount' => $this->price,
+        //     //     'service' => $this->payment_method,
+        //     //     'payer' => $this->phone_number,
+        //     //     'nonce' => RandomGenerator::nonce(),
+        //     //     'trxID' => '1'
+        //     // ]);
+
+        //     // // Vérifiez ici si le paiement a été accepté
+        //     // if ($paymentResponse->isOperationSuccess()) {
+        //     //     $status = $this->request_type === 'express' ? 'active' : 'pending_extraction';
+
+        //         $certificatepropriete = CertificatePropriete::create([
+        //             'titre_foncier_id' => $this->titre_foncier_id,
+        //             'certificate_proprietes_number' => $this->CPCode(),
+        //             'requestor_id' => Auth::id(),
+        //             'price' => $this->price,
+        //             'certificate_proprietes_type' => $this->certificate_proprietes_type,
+        //             'certificate_propriete_reason' => $this->certificate_propriete_reason,
+        //             'status' => $this->status,
+        //             'validity' => Carbon::now()->addMonths(3),
+        //             'identity_card' => $identityCardPath,
+        //             'recorded_by' => auth()->user()->name,
+        //         ]);
+
+        //         $sale = Sale::create([
+        //             'user_id' => Auth::id(),
+        //             'sales_amount' => $this->price,
+        //             'sales_type' => 'certificate_propriete',
+        //             'payment_status' => "totally_paid",
+        //             'created_by' => auth()->user()->name,
+        //         ]);
+
+        //         Saleable::create([
+        //             'sale_id' => $sale->id,
+        //             'price' => $this->price,
+        //             'quantity' => 1,
+        //             'saleable_id' => $certificatepropriete->id,
+        //             'saleable_type' => 'App\Models\CertificatePropriete',
+        //             'created_by' => auth()->user()->name,
+        //         ]);
+
+        //         if ($this->request_type === "standard") {
+        //             $this->refresh(__('Certificat de propriété Supprimé avec succès'), 'CreatecertificateproprieteModal');
+        //             $this->clearFields();
+        //         } else {
+        //             return $this->previewPdf($certificatepropriete->id);
+        //         }
+        //     // } else {
+        //     //     session()->flash('error', __('Payment failed, please try again.'));
+        //     //     return;
+        //     // }
+        // } catch (\Throwable $e) {
+        //     report($e);
+        //     session()->flash('error', __('Something went wrong, please try again later.'));
+        //     abort(500, __('Payment processing error'));
+        // }
     }
 
     public function previewPdf($id)
