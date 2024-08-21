@@ -286,13 +286,13 @@ class Index extends Component
 
     public function render()
     {
-        $certificats = CertificatePropriete::search($this->query)->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $certificats = CertificatePropriete::search($this->query)->where('requestor_id', auth()->user()->id)
+            ->orderBy($this->orderBy, $this->orderAsc)
+            ->paginate($this->perPage);
 
         $certificateproprietes_count = CertificatePropriete::count();
 
         $resultCount = 0;
-
-
 
         return view(
             'livewire.user.request.certificat-propriate.index',
