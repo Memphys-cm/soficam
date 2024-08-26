@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
 
 class UserSeeder extends Seeder
 {
@@ -17,13 +18,13 @@ class UserSeeder extends Seeder
 
         User::create([
             'uuid' => Str::uuid(),
-            'first_name' => 'BALGA',
-            'last_name' => 'Mireille',
+            'first_name' => 'MENDOUGA',
+            'last_name' => 'Antole Gervais',
             'id_card_number' => '233454432',
             // 'date_of_birth' => fake()->date(),
             'place_of_birth' => 'Douala',
-            'primary_phone_number' => '674328967',
-            'secondary_phone_number' => '679065432',
+            'primary_phone_number' => '677550820',
+            'secondary_phone_number' => '677550820',
             'address' => 'ADAMAOUA',
             'service_id' => '1',
             'email' => 'balg1a@gmail.com',
@@ -34,13 +35,13 @@ class UserSeeder extends Seeder
 
         User::create([
             'uuid' => Str::uuid(),
-            'first_name' => 'ATANGANA',
-            'last_name' => 'Pierres',
+            'first_name' => 'ONAMBELE',
+            'last_name' => 'Thierry Roland',
             'id_card_number' => '133454432',
             // 'date_of_birth' => fake()->date(),
             'place_of_birth' => 'Yaounde',
-            'primary_phone_number' => '674328968',
-            'secondary_phone_number' => '679065433',
+            'primary_phone_number' => '677550820',
+            'secondary_phone_number' => '677550820',
             'address' => 'Yaounde',
             'service_id' => '2',
             'email' => 'atangana@gmail.com',
@@ -51,13 +52,13 @@ class UserSeeder extends Seeder
 
         User::create([
             'uuid' => Str::uuid(),
-            'first_name' => 'KOUPIT',
-            'last_name' => 'Cherif',
+            'first_name' => 'FOTSO',
+            'last_name' => 'Manfred Dieudonne',
             'id_card_number' => '313454473',
             // 'date_of_birth' => fake()->date(),
             'place_of_birth' => 'bafussam',
-            'primary_phone_number' => '674328969',
-            'secondary_phone_number' => '679065434',
+            'primary_phone_number' => '677550820',
+            'secondary_phone_number' => '677550820',
             'address' => 'Badjoun',
             'service_id' => '2',
             'email' => 'koupit@gmail.com',
@@ -68,13 +69,13 @@ class UserSeeder extends Seeder
 
         User::create([
             'uuid' => Str::uuid(),
-            'first_name' => 'CHEDJOU',
-            'last_name' => 'Michel',
+            'first_name' => 'EPOH Ndame',
+            'last_name' => 'yves',
             'id_card_number' => '100342267',
             // 'date_of_birth' => fake()->date(),
             'place_of_birth' => 'Bamanedjou',
-            'primary_phone_number' => '674328971',
-            'secondary_phone_number' => '679065436',
+            'primary_phone_number' => '677550820',
+            'secondary_phone_number' => '677550820',
             'address' => 'Bafussam',
             'service_id' => '2',
             'email' => 'chedjou@gmail.com',
@@ -85,13 +86,13 @@ class UserSeeder extends Seeder
 
         User::create([
             'uuid' => Str::uuid(),
-            'first_name' => 'TEMGOUA',
-            'last_name' => 'Jeanne',
+            'first_name' => 'EBANE',
+            'last_name' => 'Marthe Sophie',
             'id_card_number' => '233454432',
             // 'date_of_birth' => fake()->date(),
             'place_of_birth' => 'Douala',
-            'primary_phone_number' => '674328967',
-            'secondary_phone_number' => '679065432',
+            'primary_phone_number' => '677550820',
+            'secondary_phone_number' => '677550820',
             'address' => 'ADAMAOUA',
             'service_id' => '2',
             'email' => 'tengoua@gmail.com',
@@ -102,13 +103,13 @@ class UserSeeder extends Seeder
 
         User::create([
             'uuid' => Str::uuid(),
-            'first_name' => 'AMBASSA',
-            'last_name' => 'Dider',
+            'first_name' => 'BISSECK',
+            'last_name' => 'Raphael Arnaud',
             'id_card_number' => '133454432',
             // 'date_of_birth' => fake()->date(),
             'place_of_birth' => 'Douala',
-            'primary_phone_number' => '674328972',
-            'secondary_phone_number' => '679065437',
+            'primary_phone_number' => '677550820',
+            'secondary_phone_number' => '677550820',
             'address' => 'Edea',
             'service_id' => '2',
             'email' => 'ambassa@gmail.com',
@@ -119,13 +120,13 @@ class UserSeeder extends Seeder
 
         User::create([
             'uuid' => Str::uuid(),
-            'first_name' => 'ONDOA',
-            'last_name' => 'Irene',
+            'first_name' => 'SONE',
+            'last_name' => 'EHONE Christian ',
             'id_card_number' => '233454432',
             // 'date_of_birth' => fake()->date(),
             'place_of_birth' => 'Douala',
-            'primary_phone_number' => '674328973',
-            'secondary_phone_number' => '679065438',
+            'primary_phone_number' => '677550820',
+            'secondary_phone_number' => '677550820',
             'address' => 'yaounde',
             'service_id' => '2',
             'email' => 'ondoa@gmail.com',
@@ -136,13 +137,13 @@ class UserSeeder extends Seeder
 
         User::create([
             'uuid' => Str::uuid(),
-            'first_name' => 'BIDIAS',
-            'last_name' => 'Samuel',
+            'first_name' => 'AGBOR Titus',
+            'last_name' => 'Quddus',
             'id_card_number' => '233454432',
             // 'date_of_birth' => fake()->date(),
             'place_of_birth' => 'Douala',
-            'primary_phone_number' => '674328974',
-            'secondary_phone_number' => '679065439',
+            'primary_phone_number' => '677550820',
+            'secondary_phone_number' => '677550820',
             'address' => 'ADAMAOUA',
             'service_id' => '2',
             'email' => 'bidias@gmail.com',
@@ -431,83 +432,33 @@ class UserSeeder extends Seeder
 
 
 
-        for ($i = 0; $i < 50; $i++) {
+        // for ($i = 0; $i < 50; $i++) {
 
-            $user = User::create([
-                'uuid' => Str::uuid(),
-                'first_name' => 'MINLANG',
-                'last_name' => 'Pauline',
-                'id_card_number' => '633454432',
-                // 'date_of_birth' => fake()->date(),
-                'place_of_birth' => 'Douala',
-                'primary_phone_number' => '655430986',
-                'secondary_phone_number' => '690690440',
-                'address' => 'ADAMAOUA',
-                'service_id' => '2',
-                'email' => 'minlang@gmail.com',
-                'is_active' => 1,
-                'sexe' => 'M',
-                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-            ]);
-        }
+        //     $user = User::create([
+        //         'uuid' => Str::uuid(),
+        //         'first_name' => 'MINLANG',
+        //         'last_name' => 'Pauline',
+        //         'id_card_number' => '633454432',
+        //         // 'date_of_birth' => fake()->date(),
+        //         'place_of_birth' => 'Douala',
+        //         'primary_phone_number' => '655430986',
+        //         'secondary_phone_number' => '690690440',
+        //         'address' => 'ADAMAOUA',
+        //         'service_id' => '2',
+        //         'email' => 'minlang@gmail.com',
+        //         'is_active' => 1,
+        //         'sexe' => 'M',
+        //         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+        //     ]);
+        // }
 
+        // Générer 50000 utilisateurs
 
-        for ($i = 0; $i < 50; $i++) {
+        DB::transaction(function () {
+            User::factory()->count(400)->create();
+        });
 
-            $user = User::create([
-                'uuid' => Str::uuid(),
-                'first_name' => 'MORISE',
-                'last_name' => 'Paule',
-                'id_card_number' => '3254387',
-                // 'date_of_birth' => fake()->date(),
-                'place_of_birth' => 'Yaounde',
-                'primary_phone_number' => '652356474',
-                'secondary_phone_number' => '694325676',
-                'address' => 'GAROUA',
-                'service_id' => '3',
-                'email' => 'morise@gmail.com',
-                'is_active' => 1,
-                'sexe' => 'F',
-                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-            ]);
-        }
-        for ($i = 0; $i < 50; $i++) {
-
-            $user = User::create([
-                'uuid' => Str::uuid(),
-                'first_name' => 'MIRTILLE',
-                'last_name' => 'martin',
-                'id_card_number' => '633454432',
-                // 'date_of_birth' => fake()->date(),
-                'place_of_birth' => 'Douala',
-                'primary_phone_number' => '653452156',
-                'secondary_phone_number' => '699213454',
-                'address' => 'BERTOUA',
-                'service_id' => '2',
-                'email' => 'mirtille@gmail.com',
-                'is_active' => 1,
-                'sexe' => 'M',
-                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-            ]);
-        }
-
-        User::create([
-            'uuid' => Str::uuid(),
-            'first_name' => 'MINLANG',
-            'last_name' => 'Pauline',
-            'id_card_number' => '633454432',
-            // 'date_of_birth' => fake()->date(),
-            'place_of_birth' => 'Douala',
-            'primary_phone_number' => '655430986',
-            'secondary_phone_number' => '690690440',
-            'address' => 'ADAMAOUA',
-            'service_id' => '2',
-            'email' => 'minlang@gmail.com',
-            'is_active' => 1,
-            'sexe' => 'M',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-        ]);
-
-
+        // Mettre à jour 1500 utilisateurs pour avoir is_mobility = 1
+        User::inRandomOrder()->limit(1500)->update(['is_mobility' => 1]);
     }
 }

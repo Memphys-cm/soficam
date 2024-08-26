@@ -15,9 +15,12 @@ return new class extends Migration
             $table->id();
            $table->uuid('uuid')->unique()->index();
             $table->string('numero_operation');
-            $table->enum('type_operation', ['mutation_totale_normale','mutation_totale_par_deces','morcellement_normale', 'morcellement_forcee', 'retrait_indivision_normale', 'retrait_indivision_forcee'])->default('mutation_totale_normale');
+            $table->enum('type_operation', ['mutation_totale_normale','mutation_totale_par_deces','morcellement_normale', 'morcellement_forcee', 'retrait_indivision_normale', 'retrait_indivision_forcee','immatriculation_directe','lotissement'])->default('mutation_totale_normale');
+            $table->enum('status', ['en cour','terminer','en attente'])->default('en cour');
             $table->foreignId('requestor_id')->on('users')->nullable();
             $table->foreignId('titre_foncier_id')->nullable();
+            $table->foreignId('immatriculation_directe_id')->nullable();
+            // $table->foreignId('lotissement_id')->nullable();
             $table->foreignId('certificate_prioprietes_id')->nullable();
             $table->foreignId('service_id')->on('services')->nullable()->index();
             $table->date('validite_CP')->nullable();
@@ -43,7 +46,7 @@ return new class extends Migration
             $table->foreignId('bordereau_analytique_id')->on('bordereau_analytiques')->nullable()->index();
             $table->enum('statut_conservateur',['pending_payment','ongoing','completed','pending'])->default('pending');
             $table->longText('commantaires_conservateur')->nullable();
-            
+
             $table->timestamps();
             $table->softDeletes();
         });

@@ -124,7 +124,7 @@
                             <div class=" col"><label for="email">{{ __('Adresse Email ') }}</label>
                                 <input type="email" wire:model="email" class="form-control  @error('email') is-invalid @enderror " value="{{ old('email') }}" placeholder="jane.doe@app.com" id="email" autofocus="" required="">
                                 @error('email')
-                                <div clas>>>>>>> mains="invalid-feedback">
+                                <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                                 @enderror

@@ -118,7 +118,7 @@ class Index extends Component
         if(!empty($sms)){
             $senderid ='SOFICAM';
             $mobiles = $mobiles;
-            $api_key = '36v7fN66hzUD6SaBYkILlirHZo7P';
+            $api_key = 'wplL0f9wq1moi1NrsjpsBgfBzun4';
             $url = 'https://api.queensms.net/v1/sms.php';
 
             $sms_body = array(

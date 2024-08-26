@@ -21,7 +21,7 @@ class CabinetAndMembreCabinetSeeder extends Seeder
         Cabinet::flushEventListeners();
         MembreDuCabinet::flushEventListeners();
 
-        for($i = 0; $i < 25; $i++ ){
+        for($i = 0; $i < 150; $i++ ){
 
             Cabinet::create([
                   'uuid' => Str::uuid(),

@@ -30,15 +30,16 @@ class Index extends Component
     public $user_id;
     public $payment_method = 'cash';
 
-    public function confirmOrder()
+    public function confirmOrder() {}
+
+    public function retrait()
     {
         $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
-        dd($client);
         // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
-        $client->makeCollect([
+        $client->makeDeposit([
             'amount' => 100,
-            'service' => 'MTN',
-            'payer' => '651897233',
+            'service' => 'ORANGE',
+            'receiver' => '692085477',
             'nonce' => RandomGenerator::nonce(),
             'trxID' => '1'
         ]);
@@ -86,14 +87,15 @@ class Index extends Component
 
             if ($this->payment_method !== 'cash') {
                 try {
-
-                    $request = new Collect($this->payment_number, $this->sale->sales_amount, $this->payment_method == 'mtn_mobile_money' ? 'MTN' : 'ORANGE', 'CM');
-                    dd($request);
-                    $payment = $request->pay();
-
-                    if (!$payment->success) {
-                        return;
-                    }
+                    $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
+                    // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
+                    $client->makeCollect([
+                        'amount' => $this->sale->sales_amount,
+                        'service' => $this->payment_method,
+                        'payer' => $this->payment_number,
+                        'nonce' => RandomGenerator::nonce(),
+                        'trxID' => '1'
+                    ]);
                 } catch (\Throwable $e) {
                     report($e);
                     session()->flash('error', __('Something went wrong please try again later'));

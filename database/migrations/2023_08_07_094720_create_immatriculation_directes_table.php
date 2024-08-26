@@ -51,8 +51,11 @@ return new class extends Migration
             $table->string('status_avis_publique')->nullable();
             $table->date('date_avis_publique')->nullable();
             $table->date('date_avis_publique_signe')->nullable();
+            $table->string('calendar_decision')->nullable();
+            $table->date('calendar_decision_date')->nullable();
             $table->date('date_debut_certificat_d_affichage')->nullable();
             $table->date('date_fin_certificat_d_affichage')->nullable();
+            $table->date('date_certificat_d_affichage_signer')->nullable();
 
             $table->date('date_convocation')->nullable();
             $table->string('status_convocation')->nullable();
@@ -106,6 +109,8 @@ return new class extends Migration
             $table->date('dos_compl_csrdaf')->nullable();
             $table->date('cotation_compl_csrdaf')->nullable();
             $table->string('numero_serie')->nullable();
+
+            $table->string('is_finalisation')->nullable();
 
 
             $table->boolean('is_complete')->default(0);

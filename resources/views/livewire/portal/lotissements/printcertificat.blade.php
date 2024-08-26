@@ -1,20 +1,3 @@
-@php
-    use SimpleSoftwareIO\QrCode\Facades\QrCode;
-    use App\Models\User;
-
-    // $conservateur = User::findOrFail(1);
-
-    $url = route('document.verify.cf', ['numero_cf' => $element->uuid]); // Génère l'URL pour la route nommée 'qr_code'
-
-    // Génère le QR code en tant qu'image base64 avec des couleurs douces
-    $qrcode = QrCode::encoding('UTF-8')
-        ->color(74, 144, 226) // Bleu pastel
-        ->backgroundColor(245, 245, 245) // Gris clair
-        ->size(100)
-        ->generate($url);
-    $qrcodeBase64 = base64_encode($qrcode);
-@endphp
-
 <div class="container-fluid">
     <table style="padding: 2px">
         <tr style="font-size: 12px">
@@ -95,37 +78,10 @@
                 du Livre Foncier de la Conservation Foncière, etabli à la demande de
                 <strong>{{ $element->requestor->first_name }}</strong> pour <strong>Informations</strong>
             </p>
-            <p>En foi de quoi le présent certificat est établi pour servir et valoir ce que de droit</p>
         </div>
         <p></p>
         <p></p>
         <p></p>
         <p></p>
-        <table style="margin-top:5vh">
-            <tr style="font-size:14px">
-                <td>
-                    <div>Coût:<strong>{{ $element->price }}</strong></div>
-                </td>
-                <td style="width: 8cm;">
-                    <div></div>
-                </td>
-                <td>
-                    <div>{{ $element->titreFoncier->division->division_name }}, le <strong> {{ $element->created_at->format('d/m/Y') }}  </strong>
-                        {{-- <img src='{{ asset("storage/" . $conservateur->signature_path) }}' alt='Signature' class="img-fluid rounded"> --}}
-                        {{-- <strong> ______________</strong> --}}
-                    </div>
-                </td>
-            </tr>
-            <tr style="font-size:14px">
-                <td>
-                    <div>Qce N°:<strong>{{ $element->certificate_proprietes_number }}</strong></div>
-                </td>
-            </tr>
-            <tr style="font-size:14px">
-                <td>
-                    <div><strong>Validité: 03 mois</strong></div>
-                </td>
-            </tr>
-        </table>
     </div>
 </div>

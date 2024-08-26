@@ -19,7 +19,7 @@
     "Veuillez confirmer votre mot de passe avant de continuer.":"Please confirm your password before continuing.",
     "Mot de passe oublié":"Forgot Your Password",
     "Tableau de bord":"Dashboard",
-    
+
     "Titres Fonciers":"Land Titles",
     "Les Titres Fonciers":"Land Titles",
     "Certificat Pro.":"Certificate Prop.",
@@ -296,6 +296,7 @@
     "Afficher toutes les ventes simples dans l'application": "Display all simple sales in the application",
     "Ascendante": "Ascending",
     "Descendante": "Descending",
+
     "Numéro du titre foncier": "Land Title Number", 
     "Vous devez créer un lotissement avant de pouvoir effectuer des ventes simples.!": "You must create a land subdivision before you can process simple sales.",
     "Ajouter un Lotissement": "Add a land subdivision",
@@ -325,5 +326,5 @@
     "Ajouter les fichiers": "Add file",
     "Type de Charge": "Charge Type"
 
-
 }
+
