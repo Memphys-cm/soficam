@@ -87,9 +87,12 @@
     "Users, Services, Roles and Speciality Permissions":"Permissions utilisateur,Services,Roles et Specialités",
     "Users":"Utilisateurs",
     "Regions":"Régions",
+    "Region":"Région",
     "Towns":"Villes",
     "Quarters":"Quartiers",
     "Display":"Afficher",
-    "Done": "Traité"
+    "Done": "Traité",
+    "Map" : "Carte"
+    
     
 }
