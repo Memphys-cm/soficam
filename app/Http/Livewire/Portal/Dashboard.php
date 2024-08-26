@@ -96,9 +96,9 @@ class Dashboard extends Component
             ->get();
 
         $totalOperations = Operation::count();
-        $operationsByStatus = Operation::select('status', DB::raw('count(*) as count'))
-            ->groupBy('status')
-            ->pluck('count', 'status')
+        $operationsByStatus = Operation::select('statut_geometre', DB::raw('count(*) as count'))
+            ->groupBy('statut_geometre')
+            ->pluck('count', 'statut_geometre')
             ->toArray();
 
         $startDate = Carbon::now()->subMonth()->startOfDay();

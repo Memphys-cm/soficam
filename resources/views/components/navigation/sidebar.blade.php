@@ -59,8 +59,8 @@
                                         </span>
                                     </a>
                                 </li>
-                                <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
                                 @canany('titre_foncier.view', 'certificate_propriete.view')
+                                <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
                                 <li class="nav-item">
                                     <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.certificate-propriete.index') || $request->routeIs('portal.titre-fonciers-charges.index')? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-land-title"><span>
                                             <span class="sidebar-icon">
@@ -287,9 +287,9 @@
                                 </li>
                                 @endcan
 
-                                <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
-
+                                
                                 @can('user.view')
+                                <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
                                 <li class="nav-item {{ $request->routeIs('portal.allsales.*') ? 'active' : '' }}">
                                     <a href="{{ route('portal.allsales.index') }}" class="nav-link">
                                         <span class="sidebar-icon">
@@ -346,9 +346,9 @@
                                 </li>
                                 @endcan
 
-                                <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
-
+                                
                                 @can('user.view')
+                                <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
                                 <li class="nav-item {{ $request->routeIs('portal.users.*') ? 'active' : '' }}">
                                     <a href="{{ route('portal.users.index') }}" class="nav-link">
                                         <span class="sidebar-icon">
@@ -457,9 +457,9 @@
                                     </div>
                                 </li>
                                 @endcanany
-                                <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
-
+                                
                                 @can('category_activites_and_activite.view')
+                                <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
                                 <li class="nav-item {{ $request->routeIs('portal.category-activities.*') ? 'active' : '' }}">
                                     <a href="{{ route('portal.category-activities.activites') }}" class="nav-link">
                                         <span class="sidebar-icon">
