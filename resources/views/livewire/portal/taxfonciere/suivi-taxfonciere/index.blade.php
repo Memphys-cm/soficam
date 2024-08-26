@@ -19,7 +19,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{ __('Tableau de bord') }}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Taxe foncieres') }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ __('Taxes Foncières') }}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -29,17 +29,17 @@
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                         </path>
                     </svg>
-                    {{ __('Rapport sur les Taxe Foncieres') }}
+                    {{ __('Rapport sur les Taxe Foncières') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir tous les Taxe Foncieres') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('Voir tous les Taxe Foncieres') }} </p>
             </div>
         </div>
     </div>
-    <div class="row g-3 mb-3">
-        <div class="col-md-6 col-xxl-2">
+    <div class="row  mb-3">
+        <div class="col">
             <div class="card h-md-100 ecommerce-card-min-width">
                 <div class="card-header pb-0">
-                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Nombre total de Titre Foncier') }}</h6>
+                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Nombre total de Titres Fonciers') }}</h6>
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
@@ -57,10 +57,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xxl-2">
+        <div class="col">
             <div class="card h-md-100 ecommerce-card-min-width">
                 <div class="card-header pb-0">
-                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Nombre total de TF avec Tax') }}</h6>
+                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Nombre total de TF avec Taxe') }}</h6>
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
@@ -78,14 +78,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xxl-2">
+        <div class="col">
             <div class="card h-md-100 ecommerce-card-min-width">
                 <div class="card-header pb-0">
                     <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Taux de Recouvrement') }}</h6>
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
-                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmountpaid }} {{ __('XAF') }}</p>
+                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmountpaid }} {{ __('FCFA') }}</p>
 
                     </div>
                     <div class="">
@@ -103,14 +103,14 @@
             </div>
         </div>
 
-        <div class="col-md-6 col-xxl-2">
+        <div class="col">
             <div class="card h-md-100 ecommerce-card-min-width">
                 <div class="card-header pb-0">
-                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Predicted Tax Amount') }}</h6>
+                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Montant prédit de la Taxe') }}</h6>
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
-                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmountPrediction }} {{ __('XAF') }}</p>
+                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmountPrediction }} {{ __('FCFA') }}</p>
 
                     </div>
                     <div class="">
@@ -121,16 +121,14 @@
                             </path>
                         </svg>
 
-
-
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xxl-2">
+        <div class="col">
             <div class="card h-md-100 ecommerce-card-min-width">
                 <div class="card-header pb-0">
-                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Pourcentage total des Tax') }}</h6>
+                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Pourcentage total des Taxes') }}</h6>
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
@@ -157,7 +155,7 @@
     <div class="row py-3">
         <div class="col-md-3">
             <label for="search">{{ __('Recherche') }}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{ __('Jean...') }}"
+            <input wire:model="query" id="search" type="text" placeholder="{{ __('Recherche...') }}"
                 class="form-control">
             <p class="badge badge-info" wire:model="resultCount">{{ $resultCount }}</p>
         </div>
@@ -172,7 +170,7 @@
         </div>
 
         <div class="col-md-2">
-            <label for="direction">{{ __('Trier par ') }}: </label>
+            <label for="direction">{{ __('Sens du tri') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{ __('Ascendant') }}</option>
                 <option value="desc">{{ __('Descendant') }}</option>
@@ -191,7 +189,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="createdDate">{{ __('date') }}: </label>
+            <label for="createdDate">{{ __('Date') }}: </label>
             <input wire:model="query" id="createdDate" type="date" placeholder="{{ __('10/12/2022...') }}"
                 class="form-control">
             <p class="badge badge-info" wire:model="resultCount">{{ $resultCount }}</p>
@@ -206,11 +204,11 @@
                     <tr>
 
                         <th class="border-bottom">{{ __('Numéro du titre foncier') }}</th>
-                        <th class="border-bottom">{{ __('Proprietaire') }}</th>
+                        <th class="border-bottom">{{ __('Propriétaire(s)') }}</th>
                         <th class="border-bottom">{{ __('Localisation') }}</th>
-                        <th class="border-bottom">{{ __('Tax Amount') }}</th>
-                        <th class="border-bottom">{{ __('Statut de la Tax') }}</th>
-                        <th class="border-bottom">{{ __('Date Payer') }}</th>
+                        <th class="border-bottom">{{ __('prix de la taxe') }}</th>
+                        <th class="border-bottom">{{ __('Statut de la Taxe') }}</th>
+                        <th class="border-bottom">{{ __('Date de paiement') }}</th>
                         @canany('titre_foncier.update', 'titre_foncier.delete')
                             <th class="border-bottom">{{ __('Action') }}</th>
                         @endcanany
@@ -232,15 +230,15 @@
 
                             <td>
                                 <div class="d-flex align-items-centerpy-1">
-                                    {{ __('Region') }} : <span class="fw-bolder mx-2">
+                                    {{ __('Région') }} : <span class="fw-bolder mx-2">
                                         {{ $titrefoncier->region->region_name }} </span>
                                 </div>
                                 <div class="d-flex align-items-centerpy-1">
-                                    {{ __('Division') }} : <span class="fw-bolder mx-2">
+                                    {{ __('Département') }} : <span class="fw-bolder mx-2">
                                         {{ $titrefoncier->division->division_name }} </span>
                                 </div>
                                 <div class="d-flex align-items-centerpy-1">
-                                    {{ __('Sub Divi') }} : <span class="fw-bolder mx-2">
+                                    {{ __('Arrondissement') }} : <span class="fw-bolder mx-2">
                                         {{ $titrefoncier->subDivision->sub_division_name }} </span>
                                 </div>
                                 <div class="d-flex align-items-centerpy-1">
@@ -252,7 +250,7 @@
                             <td>
                                 <span class="fw-normal">
                                     @if ($titrefoncier->taxFoncier_amount !== null)
-                                        {{ $titrefoncier->taxFoncier_amount }} {{ __('XAF') }}
+                                        {{ $titrefoncier->taxFoncier_amount }} {{ __('FCFA') }}
                                     @endif
                                 </span>
                             </td>
@@ -297,7 +295,6 @@
                             <td colspan="9" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
                                     <h4 class="fs-4 fw-bold">{{ __('Liste Vide') }}</h4>
-                                    <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                                 </div>
                             </td>
                         </tr>
@@ -307,7 +304,7 @@
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
                     {{ __('Montrer') }} {{ $perPage > $titrefonciers_count ? $titrefonciers_count : $perPage }}
-                    {{ __('éléments de') }} {{ $titrefonciers_count }}
+                    {{ __(' éléments sur ') }} {{ $titrefonciers_count }}
                 </div>
                 {{ $titrefonciers->links() }}
             </div>

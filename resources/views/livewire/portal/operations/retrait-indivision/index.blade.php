@@ -15,7 +15,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
-                        <li class="breadcrumb-item">{{__('Operations')}}</li>
+                        <li class="breadcrumb-item">{{__('Opérations')}}</li>
                         <li class="breadcrumb-item active" aria-current="page">{{__('Retrait Indivision')}}</li>
                     </ol>
                 </nav>
@@ -25,12 +25,12 @@
                     </svg>
                     {{__('Retrait Indivision')}}
                 </h1>
-                <p class="mt-n1 mx-2">{{__('Voir toutes les Retrait Indivision')}} </p>
+                <p class="mt-n1 mx-2">{{__('Voir tous les Retraits d\'Indivision')}} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
                 @can('operation.retrait_indivision.create')
-                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateMutationTotaleNormaleModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateRetraitIndivisionNormaleModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> {{__('Nouveau')}}
@@ -60,7 +60,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Trier par direction')}}: </label>
+            <label for="direction">{{__('Sens du tri')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{__('Ascendant')}}</option>
                 <option value="desc">{{__('Descendant')}}</option>
@@ -68,7 +68,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{__('Elements par page')}}: </label>
+            <label for="perPage">{{__('Éléments par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -83,12 +83,12 @@
             <table class="table employee-table table-bordered table-hover align-items-center ">
                 <thead>
                     <tr>
-                        <th class="border-bottom">{{__('Numero de Retrait')}}</th>
-                        <th class="border-bottom">{{__('Titre foncier')}}</th>
+                        <th class="border-bottom">{{__('Numéro de Retrait')}}</th>
+                        <th class="border-bottom">{{__('Titre Foncier')}}</th>
                         <th class="border-bottom">{{__('Localisationtion')}}</th>
                         <th class="border-bottom">{{__('Statut')}}</th>
-                        <th class="border-bottom">{{__('Type Operation')}}</th>
-                        <th class="border-bottom">{{__('Date creation')}}</th>
+                        <th class="border-bottom">{{__('Type Opération')}}</th>
+                        <th class="border-bottom">{{__('Date création')}}</th>
                         @canany('mutation_totale.update','mutation_totale.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
                         @endcanany
@@ -171,7 +171,7 @@
                                 @endcan
 
                                 @can('operation.retrait_indivision.delete')
-                                <a href="#" wire:click.prevent="initData({{$mutation_totale->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
+                                <a href="#" wire:click.prevent="initData({{$retrait->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
                                     <svg class="icon icon-sm text-danger me-2 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                                     </svg>
@@ -185,8 +185,7 @@
                     <tr>
                         <td colspan="9" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Opps rien ici')}} &#128540;</h4>
-                                <p>{{__('Aucun enregistrement trouvé..!')}}</p>
+                                <h4 class="fs-4 fw-bold">{{__('Liste vide')}}</h4>
                             </div>
                         </td>
                     </tr>
@@ -195,7 +194,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Affichage')}} {{$perPage > $retraits_count ? $retraits_count : $perPage  }} {{__('element de')}} {{$retraits_count}}
+                    {{__('Montrer')}} {{$perPage > $retraits_count ? $retraits_count : $perPage  }} {{__(' éléments sur')}} {{$retraits_count}}
                 </div>
                 {{ $retraits->links() }}
             </div>

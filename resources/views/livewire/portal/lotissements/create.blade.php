@@ -58,7 +58,7 @@
             </div>
             <div class='col-md-9'>
                 <div class="card p-4 mb-3">
-                    <legend class="w-auto">Informations sur le terrain</legend>
+                    <legend class="w-auto">{{__('Informations sur le terrain')}}</legend>
                     <div class='row form-group mb-3'>
                         <div class="col-md-6 py-2">
                             <label for="code">{{ __('Numéro du Titre Foncier') }}</label>
@@ -107,7 +107,7 @@
                         </div>
                         <div class="col-md-3 py-2">
                             <label for="code">{{ __('Lotisseur') }}</label>
-                            <input wire:model="lotisseur" type="text" class="form-control  @error('lotisseur') is-invalid @enderror" placeholder="lotisseur" required="" value="" name="lotisseur">
+                            <input wire:model="lotisseur" type="text" class="form-control  @error('lotisseur') is-invalid @enderror" placeholder="{{ __('lotisseur') }}" required="" value="" name="lotisseur">
                             @error('lotisseur')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -138,14 +138,14 @@
                         </div>
                         <div class="col-md-3 py-2">
                             <label for="code">{{ __('Urbaniste') }}</label>
-                            <input wire:model="urbaniste" type="text" class="form-control  @error('urbaniste') is-invalid @enderror" placeholder="urbaniste" required="" value="" name="urbaniste">
+                            <input wire:model="urbaniste" type="text" class="form-control  @error('urbaniste') is-invalid @enderror" placeholder="{{ __('urbaniste') }}" required="" value="" name="urbaniste">
                             @error('urbaniste')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-3 py-2">
                             <label for="code">{{ __('Contrôleur') }}</label>
-                            <input wire:model="controlleur" type="text" class="form-control  @error('controlleur') is-invalid @enderror" placeholder="controlleur" required="" value="" name="controlleur">
+                            <input wire:model="controlleur" type="text" class="form-control  @error('controlleur') is-invalid @enderror" placeholder="{{ __('controleur') }}" required="" value="" name="controlleur">
                             @error('controlleur')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -162,7 +162,7 @@
                             <div class="form-group ">
                                 <div class=''>
                                     <label for="blockName">{{__('Bloc')}} {{$blockIndex+1 }} {{__('Nom')}}</label>
-                                    <input type="text" class="form-control px-4  @error('blocks.{{ $blockIndex }}.block_name') is-invalid @enderror" wire:model="blocks.{{ $blockIndex }}.block_name"  placeholder="{{'Block No. '.$blockIndex+1}}">
+                                    <input type="text" class="form-control px-4  @error('blocks.{{ $blockIndex }}.block_name') is-invalid @enderror" wire:model="blocks.{{ $blockIndex }}.block_name"  placeholder="{{'Bloc No. '.$blockIndex+1}}">
                                     @error('blocks.$blockIndex.block_name')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -178,7 +178,7 @@
                                 <button type="button" wire:click="addLotPublic({{ $blockIndex }})" class="btn btn-sm btn-primary">
                                     <svg class="icon icon-xs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                    </svg>{{__('Lot Publique')}}
+                                    </svg>{{__('Lot Public')}}
                                 </button>
                                 <button type="button" wire:click="removeBlock({{ $blockIndex }})" class="btn btn-sm btn-danger">
                                     <svg class="icon icon-xs me-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

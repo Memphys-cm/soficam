@@ -17,7 +17,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ __('Membre du Cabinet') }}</li>
                     </ol>
                 </nav>
@@ -30,7 +30,7 @@
                     </svg>
                     {{ __('Gestion Membre du Cabinet') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir tous les cabinets avec l\'application') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('Voir tous les cabinets dans l\'application') }}  </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -41,7 +41,7 @@
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                        </svg> {{ __('New') }}
+                        </svg> {{ __('Nouveau') }}
                     </a>
                 @endcan
 
@@ -86,12 +86,12 @@
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="first_name">{{ __('Nom') }}</option>
                 <option value="post">{{ __('Poste') }}</option>
-                <option value="created_at">{{ __('Date Creation') }}</option>
+                <option value="created_at">{{ __('Date Création') }}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{ __('Trier par direction') }}: </label>
+            <label for="direction">{{ __('Sens du tri') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{ __('Ascendant') }}</option>
                 <option value="desc">{{ __('Descendant') }}</option>
@@ -99,7 +99,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{ __('Element par page') }}: </label>
+            <label for="perPage">{{ __('Éléments par page') }}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -116,7 +116,7 @@
                     <tr>
                         <th class="border-bottom">{{ __('NOM') }}</th>
                         <th class="border-bottom">{{ __('TYPE MEMBRE') }}</th>
-                        <th class="border-bottom">{{ __('Date creation') }}</th>
+                        <th class="border-bottom">{{ __('Date création') }}</th>
                         <th class="border-bottom">{{ __('Action') }}</th>
                     </tr>
                 </thead>
@@ -190,8 +190,7 @@
                         <tr>
                             <td colspan="7" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
-                                    <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
-                                    <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
+                                    <h4 class="fs-4 fw-bold">{{ __('Liste vide') }}</h4>
                                 </div>
                             </td>
                         </tr>
@@ -201,9 +200,9 @@
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
 
                 <div>
-                    {{ __('Afficher') }}
+                    {{ __('Montrer') }}
                     {{ $perPage > $membre_du_cabinets_count ? $membre_du_cabinets_count : $perPage }}
-                    {{ __('element de') }} {{ $membre_du_cabinets_count }}
+                    {{ __('éléments sur ') }} {{ $membre_du_cabinets_count }}
                 </div>
                 {{ $membre_du_cabinets->links() }}
             </div>

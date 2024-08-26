@@ -4,11 +4,14 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\CertificatePropriete;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Faker\Factory as FakerFactory;
 use Spatie\Permission\Models\Role;
+use App\Models\BordereauAnalytique;
+use App\Models\Lotissements\Lotissement;
+use Database\Seeders\CabinetAndMembreCabinetSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,28 +21,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        
-        $this->call(ServiceSeeder::class);
-        $this->call(RegionSeeder::class);
-        $this->call(DivisionSeeder::class);
-        $this->call(SubDivisionSeeder::class);
         $this->call(RolesAndPermissionsSeeder::class);
-        $this->call(CategoryActivitesSeeder::class);
-        $this->call(CabinetAndMembreCabinetSeeder::class);
-      
-        \App\Models\User::factory(1000)->create();
-
-        $user_role = Role::where('name', 'user')->first();
-
-        User::all()->each(function ($user) use ($user_role) {
-            if (explode("@", $user->email)[1] !== "app.com") {
-                return $user->assignRole($user_role);
-            }
-        });
 
         \App\Models\User::create([
             'first_name' => fake()->name(),
             'last_name' => fake()->name(),
+            'sexe' => 'M', // Ajouter le sexe généré aléatoirement
             'id_card_number' => Str::random(11),
             'date_of_birth' => fake()->date(),
             'place_of_birth' => fake()->country(),
@@ -56,9 +43,58 @@ class DatabaseSeeder extends Seeder
 
         $user->assignRole('super_admin');
 
+        $this->call(ServiceSeeder::class);
+        $this->call(RegionSeeder::class);
+        $this->call(DivisionSeeder::class);
+        $this->call(SubDivisionSeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(CabinetAndMembreCabinetSeeder::class);
+        // $this->call(CabinetNotaireSeeder::class);
         $this->call(TitreFoncierSeeder::class);
+        $this->call(LotissementSeeder::class);
+        // $this->call(VentesSeeder::class);
+        // $this->call(ReleveDeBienSeeder::class);
+        $this->call(BordereauAnalytiqueSeeder::class);
+        // \App\Models\User::factory(1000)->create();
+
+        // $user_role = Role::where('name', 'user')->first();
+
+        // User::all()->each(function ($user) use ($user_role) {
+        //     if (explode("@", $user->email)[1] !== "app.com") {
+        //         return $user->assignRole($user_role);
+        //     }
+        // });
+
+        // \App\Models\User::create([
+        //     'first_name' => fake()->name(),
+        //     'last_name' => fake()->name(),
+        //     'sexe' => 'M', // Ajouter le sexe généré aléatoirement
+        //     'id_card_number' => Str::random(11),
+        //     'date_of_birth' => fake()->date(),
+        //     'place_of_birth' => fake()->country(),
+        //     'primary_phone_number' => fake()->phoneNumber(),
+        //     'secondary_phone_number' => fake()->phoneNumber(),
+        //     'address' => fake()->address(),
+        //     'email' => 'super_admin@app.com',
+        //     'email_verified_at' => now(),
+        //     'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        //     'remember_token' => Str::random(10),
+        // ]);
+
+        // $user = User::where('email', 'super_admin@app.com')->first();
+
+        // $user->assignRole('super_admin');
+
+
+        // $this->call(TitreFoncierSeeder::class);
         $this->call(CertificateProprieteSeeder::class);
+        // $this->call(TitreFoncierSeeder::class);
+        $this->call(CategoryActivitesSeeder::class);
+        $this->call(OperationSeeder::class);
+
+        $this->call(UsualSeeder::class);
+        // $this->call(CertificateProprieteSeeder::class);
         $this->call(EtatCessionSeeder::class);
-        
+
     }
 }

@@ -22,7 +22,7 @@
                                 @enderror
                             </div>
                             <div class='col-12 my-1' >
-                                <label for="code">{{ __('Utilisateur') }}</label>
+                                <label for="code">{{ __('CSDAF') }}</label>
                                 <x-input.select wire:model="user_id" prettyname="user_id" :options="$users->pluck('first_name', 'id')->toArray()" selected="('user_id')" />
                                 @error('user_id')
                                 <div class="invalid-feedback">{{ $message }}</div>

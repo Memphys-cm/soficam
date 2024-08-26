@@ -59,8 +59,8 @@
                                         </span>
                                     </a>
                                 </li>
-                                <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
                                 @canany('titre_foncier.view', 'certificate_propriete.view')
+                                <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
                                 <li class="nav-item">
                                     <span class="nav-link d-flex justify-content-between align-items-center {{ $request->routeIs('portal.titre-fonciers.index') || $request->routeIs('portal.certificate-propriete.index') || $request->routeIs('portal.titre-fonciers-charges.index')? 'collapse' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#submenu-land-title"><span>
                                             <span class="sidebar-icon">
@@ -100,7 +100,7 @@
                                             </li>
                                             @endcan
                                             {{-- @can('report_titre_foncier.view') --}}
-                                            
+
                                             {{-- @endcan --}}
                                         </ul>
                                     </div>
@@ -266,7 +266,7 @@
                                             </svg>
                                         </span>
                                     </span>
-                                    <div class="multi-level collapse {{ $request->routeIs('portal.bien_immobilier.index') || $request->routeIs('portal.immobilier.index') ? 'show' : '' }}" role="list" id="submenu-rbi" aria-expanded="{{ $request->routeIs('portal.regions.index') || $request->routeIs('portal.division.index') || $request->routeIs('portal.sub_division.index') ? 'false' : 'true' }}">
+                                    <div class="multi-level collapse {{ $request->routeIs('portal.biens_immobiliers.index') || $request->routeIs('portal.immobilier.index') ? 'show' : '' }}" role="list" id="submenu-rbi" aria-expanded="{{ $request->routeIs('portal.regions.index') || $request->routeIs('portal.division.index') || $request->routeIs('portal.sub_division.index') ? 'false' : 'true' }}">
                                         <ul class="flex-column nav">
                                             @can('immobilier.view')
                                             <li class="nav-item {{ $request->routeIs('portal.immobilier.index') ? 'active' : '' }}">
@@ -276,8 +276,8 @@
                                             </li>
                                             @endcan
                                             @can('immobilier.view')
-                                            <li class="nav-item {{ $request->routeIs('portal.bien_immobilier.index') ? 'active' : '' }}">
-                                                <a href="{{ route('portal.bien_immobilier.index') }}" class="nav-link">
+                                            <li class="nav-item {{ $request->routeIs('portal.biens_immobiliers.index') ? 'active' : '' }}">
+                                                <a href="{{ route('portal.biens_immobiliers.index') }}" class="nav-link">
                                                     <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Biens Immo') }}</span>
                                                 </a>
                                             </li>
@@ -287,9 +287,9 @@
                                 </li>
                                 @endcan
 
-                                <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
-
+                                
                                 @can('user.view')
+                                <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
                                 <li class="nav-item {{ $request->routeIs('portal.allsales.*') ? 'active' : '' }}">
                                     <a href="{{ route('portal.allsales.index') }}" class="nav-link">
                                         <span class="sidebar-icon">
@@ -346,9 +346,9 @@
                                 </li>
                                 @endcan
 
-                                <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
-
+                                
                                 @can('user.view')
+                                <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
                                 <li class="nav-item {{ $request->routeIs('portal.users.*') ? 'active' : '' }}">
                                     <a href="{{ route('portal.users.index') }}" class="nav-link">
                                         <span class="sidebar-icon">
@@ -457,9 +457,9 @@
                                     </div>
                                 </li>
                                 @endcanany
-                                <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
-
+                                
                                 @can('category_activites_and_activite.view')
+                                <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
                                 <li class="nav-item {{ $request->routeIs('portal.category-activities.*') ? 'active' : '' }}">
                                     <a href="{{ route('portal.category-activities.activites') }}" class="nav-link">
                                         <span class="sidebar-icon">
@@ -487,6 +487,18 @@
                                     </a>
                                 </li>
                                 @endcan
+
+                                <li class="nav-item {{ $request->routeIs('portal.profile-setting') ? 'active' : '' }}">
+                                    <a href="{{ route('portal.profile-setting') }}" class="nav-link">
+                                        <span class="sidebar-icon">
+                                            <svg class="icon icon-sm me-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75v4.5m0 4.5v4.5m-5.25-9h3m9-4.5h-3m3 9h-3m-4.5-9h-3m3 9h-3m4.5-9h3m-9-4.5h-3m12 4.5h-3m-6 0h-3" />
+                                            </svg>
+                                        </span>
+                                        <span class="sidebar-text">{{ __('Paramètres') }}</span>
+                                    </a>
+                                </li>
+
                                 @canany('audit_log.view_all', 'audit_log.view_own_only')
                                 <li class="nav-item {{ $request->routeIs('portal.auditlogs.*') ? 'active' : '' }}">
                                     <a href="{{ route('portal.auditlogs.index') }}" class="nav-link">

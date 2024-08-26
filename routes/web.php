@@ -1,15 +1,16 @@
 <?php
 
+use App\Models\EtatCession;
 use App\Models\TitreFoncier;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\ReleveImmobilier;
 use App\Models\CertificatePropriete;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Livewire\Portal\QrCode\QRCodeScanner;
-use App\Models\EtatCession;
-use App\Models\ReleveImmobilier;
-use Barryvdh\DomPDF\Facade\Pdf;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,10 +36,12 @@ Auth::routes();
 
 Route::any('/logout', [LoginController::class, 'logout']);
 
-Route::get('/validate-document', function()
+Route::get('document/verify/cf/{numero_cf}', [DocumentController::class, 'verify'])->name('document.verify.cf');
+
+Route::get('/validate-document/{category}/{model}', function($category, $model)
 {
-    $element = match (request('category')) {
-        'certificate_propriete' => CertificatePropriete::whereUuid(request('model'))->first(),
+    $element = match ('certificate_propriete') {
+        'certificate_propriete' => CertificatePropriete::whereUuid('737b2744-15d8-4d45-89f6-4d0f365f94a0')->first(),
         'etat_cession' => EtatCession::whereUuid(request('model'))->first(),
         'immobilier' => ReleveImmobilier::whereUuid(request('model'))->first(),
          default => null,
@@ -51,10 +54,9 @@ Route::get('/validate-document', function()
     $data = [
         'element' => $element,
         'titrefoncier' => $element->titre_foncier,
-        // Autres données que vous souhaitez afficher dans la vue
     ];
 
-    $pdf = match (request('category')) {
+    $pdf = match ('certificate_propriete') {
         'certificate_propriete' =>  Pdf::loadView('livewire.portal.certificate-propriete.print', $data)->setPaper('a4', 'portrait'),
         'etat_cession' =>  Pdf::loadView('livewire.portal.etat-cession.print', $data)->setPaper('a4', 'portrait'),
         'immobilier' =>  Pdf::loadView('livewire.portal.releve-immobilier.immobilier.print', $data)->setPaper('a4', 'portrait'),
@@ -67,6 +69,7 @@ Route::get('/validate-document', function()
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function () {
     Route::get('/dashboard', App\Http\Livewire\User\Dashboard::class)->name('user.dashboard');
 
+    Route::get('/profile-setting', App\Http\Livewire\User\ProfileSetting::class)->name('user.profile-setting');
     //AuditLogs
     Route::prefix('auditlogs')->group(function () {
         Route::get('/', App\Http\Livewire\User\AuditLogs\Index::class)->name('user.auditlogs');
@@ -80,9 +83,14 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
         Route::get('/', App\Http\Livewire\User\Taxfonciere\Index::class)->name('user.taxfonciere.index');
         // Route::get('/suivi-taxfoncier', App\Http\Livewire\Portal\Taxfonciere\SuiviTaxfonciere\Index::class)->name('portal.taxfonciere.suivi.index');
     });
+
+    Route::prefix('demande')->group(function () {
+        Route::get('/certificat', App\Http\Livewire\User\Request\CertificatPropriate\Index::class)->name('user.request.certificat.index');
+    });
+
     Route::prefix('suivi-dossier')->group(function () {
         Route::get('/', App\Http\Livewire\User\SuiviDossier\Index::class)->name('user.suivi-dossier.index');
-        Route::get('/follow', App\Http\Livewire\User\SuiviDossier\Follow::class)->name('user.suivi-dossier.follow');
+        Route::get('/follow/{code}', App\Http\Livewire\User\SuiviDossier\Follow::class)->name('user.suivi-dossier.follow');
     });
 });
 
@@ -173,6 +181,7 @@ Route::group(
 
         Route::prefix('immatriculation_directes')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\ImmatriculationDirecte\Index::class)->name('portal.immatriculation_directes.index');
+            Route::get('/{code}', App\Http\Livewire\Portal\ImmatriculationDirecte\Show::class)->name('portal.immatriculation_directe.index');
             Route::get('/process', App\Http\Livewire\Portal\ImmatriculationDirecte\Process::class)->name('portal.immatriculation_directes.process');
         });
 
@@ -185,11 +194,26 @@ Route::group(
 
 
 
-        Route::get('/maps', [TestController::class, 'index'])->name('portal.maps.index');
+        // Route::get('/maps', [TestController::class, 'index'])->name('portal.maps.index');
+
+        Route::get('/maps', function () {
+            // Supposons que vous avez un pointId, remplacez-le par l'ID approprié
+            $pointId = 1; // Remplacez 1 par l'ID du point que vous souhaitez récupérer
+            // $point = PointModel::find($pointId);11.516213163344588,3.8722015777978243
+            // Extrayez les coordonnées du modèle
+            $longitude = 11.516213163344588;
+            $latitude = 3.8722015777978243;
+
+            // Récupérez également vos titres fonciers avec les utilisateurs associés
+            $titles = TitreFoncier::with('users')->get();
+
+            // Passez les coordonnées et les titres fonciers à la vue
+            return view('first_test', compact('titles', 'longitude', 'latitude'))->layout('components.layouts.dashboard');
+        })->name('portal.maps.index');
 
         Route::prefix('releve_immobilier')->group(function () {
             Route::get('/immobilier', App\Http\Livewire\Portal\ReleveImmobilier\Immobilier\Index::class)->name('portal.immobilier.index');
-            Route::get('/bien_immobilier', App\Http\Livewire\Portal\BienImmobilier\Index::class)->name('portal.bien_immobilier.index');
+            Route::get('/bien_immobilier', App\Http\Livewire\Portal\BienImmobilier\Index::class)->name('portal.biens_immobiliers.index');
         });
 
 

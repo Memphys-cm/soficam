@@ -42,7 +42,7 @@
                                 <label for="releves_type">{{ __(' Type Personne') }}</label>
                                 <select wire:model="releves_type" name="releves_type"
                                     class="form-select  @error('releves_type') is-invalid @enderror" required="">
-                                    <option value="">{{ __('-- Selectionner --') }}</option>
+                                    <option value="">{{ __('--Selectionner le type--') }}</option>
                                     <option value="personne_physique">{{ __('Personne Physique') }}</option>
                                     <option value="personne_morale">{{ __('Personne Morale') }}</option>
                                 </select>
@@ -53,7 +53,7 @@
                         </div>
                         <div class='form-group mb-2 row'>
                             <div class="col">
-                                <label for="price">{{ __('Prix') }}</label>
+                                <label for="price">{{ __('Prix (FCFA)') }}</label>
                                 <input wire:model="price" type="number"
                                     class="form-control  @error('price') is-invalid @enderror"
                                     placeholder="{{ __('0') }}" required="">
@@ -66,7 +66,7 @@
                         </div>
                         <div class='form-group mb-2 row'>
                             <div class="col">
-                                <label for="releve_reason">{{ __('Raison Releve') }}</label>
+                                <label for="releve_reason">{{ __('Pourquoi voulez vous créer ce bien immobilier ? ') }}</label>
                                 <textarea rows="6" wire:model="releve_reason"
                                     class="form-control @error('releve_reason') is-invalid @enderror" id="releve_reason" autofocus=""
                                     required=""></textarea>

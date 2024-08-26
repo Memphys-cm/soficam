@@ -17,7 +17,7 @@
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
                         <li class="breadcrumb-item " aria-current="page"><a href="{{route('portal.divisions.index')}}">{{__('Régions')}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Département')}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Départements')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -74,7 +74,7 @@
         <div class="col-md-3">
             <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="division_name_en">{{__('Nom de la division')}}</option>
+                <option value="division_name_en">{{__('Nom du Département')}}</option>
                 <option value="created_at">{{__('Date de création')}}</option>
             </select>
         </div>
@@ -161,7 +161,6 @@
                         <td colspan="7" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
                                 <h4 class="fs-4 fw-bold">{{__('Liste Vide')}} </h4>
-                                <p>{{__('Aucun enregistrement trouvé..!')}}</p>
                             </div>
                         </td>
                     </tr>
@@ -170,7 +169,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Montrer')}} {{$perPage > $divisions_count ? $divisions_count : $perPage  }} {{__('éléments sur ')}} {{$divisions_count}}
+                    {{__('Montrer')}} {{$perPage > $divisions_count ? $divisions_count : $perPage  }} {{__(' éléments sur ')}} {{$divisions_count}}
                 </div>
                 {{ $divisions->links() }}
             </div>

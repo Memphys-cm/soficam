@@ -16,7 +16,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="">{{ __('Tableau de bord') }}</a></li>
-                        <li class="breadcrumb-item active"><a href="">{{ __('Gestion des roles') }}</a></li>
+                        <li class="breadcrumb-item active"><a href="">{{ __('Gestion des rôles') }}</a></li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -25,7 +25,7 @@
                     </svg>
                     {{__('Gestion des roles')}}
                 </h1>
-                <p class="mt-n2">{{__('Gérer les rôles et les autorisations')}} &#128524;</p>
+                <p class="mt-n2">{{__('Gérer les rôles et les autorisations')}}</p>
             </div>
             <div class="d-flex justify-content-between mb-2">
                 @can('role.create')
@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <label for="direction">{{__('Direction du trie')}}: </label>
+                    <label for="direction">{{__('Sens du tri')}}: </label>
                     <select wire:model="orderAsc" id="direction" class="form-select">
                         <option value="asc">{{__('Ascendante')}}</option>
                         <option value="desc">{{__('Descendante')}}</option>
@@ -76,7 +76,7 @@
                 </div>
 
                 <div class="col-md-2">
-                    <label for="perPage">{{__('Par Page')}}: </label>
+                    <label for="perPage">{{__('Éléments par Page')}}: </label>
                     <select wire:model="perPage" id="perPage" class="form-select">
                         <option value="5">5</option>
                         <option value="10">10</option>
@@ -147,8 +147,7 @@
 
                 <div class="text-center text-gray-800 mt-4">
                     <img src="{{ asset('/img/illustrations/not_found.svg') }}" class="w-25 ">
-                    <h4 class="fs-4 fw-bold my-1">{{__('Opps rien ici')}} &#128540;</h4>
-                    <p class="pt-0 mt-n1">{{__('Aucun enregistrement n\'a été trouvé ici!')}}</p>
+                    <h4 class="fs-4 fw-bold my-1">{{__('Liste vide')}}</h4>
                 </div>
                 @can('core.role.create')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#CreateCompanyModal" class="btn btn-sm btn-secondary py-2 mt-1 d-inline-flex align-items-center ">
@@ -164,7 +163,7 @@
     </div>
     <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
         <div>
-            {{__('Montrer')}} {{$perPage > $roles_count ? $roles_count : $perPage  }} {{__('element de')}} {{$roles_count}}
+            {{__('Montrer')}} {{$perPage > $roles_count ? $roles_count : $perPage  }} {{__(' éléments sur')}} {{$roles_count}}
         </div>
         {{ $roles->links() }}
     </div>

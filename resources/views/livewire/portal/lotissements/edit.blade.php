@@ -127,7 +127,7 @@
                         <div class="col-md-3 py-2">
                             <label for="code">{{ __('Géomètre') }}</label>
                             <select wire:model="geometre_id" class="form-control @error('geometre_id') is-invalid @enderror">
-                                <option value=''>{{__('-- Select --')}}</option>
+                                <option value=''>{{__('-- Sélectionner --')}}</option>
                                 @foreach($geometres as $geo)
                                 <option wire:key="{{ $geo->id }}" value='{{$geo->id}}'>{{ucfirst($geo->first_name)}} {{ucfirst($geo->last_name)}} </option>
                                 @endforeach
@@ -261,7 +261,7 @@
                             <div class="col-md-6 ">
                                 <label for="lot_geometre_id">{{ __('Géomètre') }}</label>
                                 <select wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.lot_geometre_id" class="form-control @error('lot_geometre_id') is-invalid @enderror">
-                                    <option value=''>{{__('-- Select --')}}</option>
+                                    <option value=''>{{__('-- Sélectionner --')}}</option>
                                     @foreach($lot_geometres as $lot_geo)
                                     <option wire:key="{{ $lot_geo->id }}" value='{{$lot_geo->id}}'> {{!empty($lot_geo->cabinet) ? $lot_geo->cabinet->nom_cabinet : '' }} - {{ucfirst($lot_geo->first_name)}} {{ucfirst($lot_geo->last_name)}} </option>
                                     @endforeach

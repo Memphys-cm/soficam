@@ -101,7 +101,7 @@ class AddCoordinates extends Component
             
             $this->emitUp('flow_updated');
 
-            $this->refresh(__('Operation successfully Created'), 'CreateAddCoordinatesModal');
+            $this->refresh(__('Opération réussie Créée'), 'CreateAddCoordinatesModal');
         }
     }
 

@@ -5,7 +5,7 @@
                 <div class="p-4 p-lg-4">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4"> {{ __('Details de la vente') }}</h1>
-                        <p class="px-1"> {{ __('Mise à jour des ventes') }} &#128522;</p>
+                        <p class="px-1"> {{ __('Mise à jour des ventes') }} </p>
                     </div>
                     <x-form-items.form wire:submit="payment">
                         @if (!empty($sale))
@@ -60,12 +60,12 @@
                         @endif
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="payment_method">{{ __('MODE DE PAIEMENT') }}</label>
+                                <label for="payment_method">{{ __('Mode de paiement') }}</label>
                                 <select wire:model="payment_method" class="form-select @error('payment_method') is-invalid @enderror" id="payment_method" required="">
                                     <option value="">{{ __('--Selectionner--') }}</option>
                                     <option value="cash">{{ __('Cash') }}</option>
-                                    <option value="orange_money">{{ __('Orange Money') }}</option>
-                                    <option value="mtn_mobile_money">{{ __('MTN Mobile Money') }}</option>
+                                    <option value="ORANGE">{{ __('Orange Money') }}</option>
+                                    <option value="MTN">{{ __('MTN Mobile Money') }}</option>
                                 </select>
                                 @error('payment_method')
                                 <div class="invalid-feedback">
@@ -84,7 +84,7 @@
                                 @enderror
                             </div>
                         </div>
-                        @if(in_array($payment_method, ['mtn_mobile_money', 'orange_money']))
+                        @if(in_array($payment_method, ['ORANGE', 'MTN']))
                         <div class="form-group mb-3">
                             <label for="payment_number">{{ __('Numero Paiement') }}</label>
                             <input type="text" wire:model="payment_number" class="form-control @error('payment_number') is-invalid @enderror" value="{{ old('payment_number') }}" placeholder="0" id="payment_number" autofocus required>

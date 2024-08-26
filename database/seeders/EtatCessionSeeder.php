@@ -21,7 +21,7 @@ class EtatCessionSeeder extends Seeder
     {
         EtatCession::flushEventListeners();
 
-        for ($i = 0; $i < 25; $i++) {
+        for ($i = 0; $i < 5000; $i++) {
 
             $etat_cession = EtatCession::create([
                 'uuid' => Str::uuid(),
@@ -34,7 +34,7 @@ class EtatCessionSeeder extends Seeder
                 'sub_division_id' => SubDivision::pluck('id')->shuffle()->first(),
                 'user_id' => User::role('user')->pluck('id')->shuffle()->first(),
                 'superficie_en_m2' => fake()->randomDigitNot(5),
-                'cout' => collect([25000, 50000])->random(),
+                'cout' => collect([75000, 1000000])->random(),
                 'frais_suplementaires' => 2500,
                 'cout_etat_cession' => collect([25000, 50000, 75000, 20000])->random(),
             ]);

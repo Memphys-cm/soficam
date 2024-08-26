@@ -24,7 +24,7 @@
                                 @enderror
                             </div>
                             <div class="form-group mb-2">
-                                <label for="operation_type_id">{{ __('Type Operation') }}</label>
+                                <label for="operation_type_id">{{ __('Type Opération') }}</label>
                                 <x-input.select wire:model="operation_type_id" prettyname="operation_type_id" :options="['mutation_totale_normale'=>'Mutation totale','mutation_totale_par_deces' => 'Mutation totale par deces','morcellement_normale' => 'Morcellement','morcellement_forcee'=>'Morcellement Forcee','retrait_indivision'=>'Retrait D\'indivision']" selected="({{$operation_type}})" />
                                 @error('operation_type_id')
                                 <div class="invalid-feedback">
@@ -43,8 +43,8 @@
                             </div>
 
                             <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Close')}}</button>
-                                <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Create')}}</button>
+                                <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
+                                <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Créer')}}</button>
                             </div>
                         </x-form-items.form>
                     </div>

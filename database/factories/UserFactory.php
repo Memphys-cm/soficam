@@ -1,9 +1,9 @@
 <?php
-
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\Service;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -18,18 +18,20 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name' => fake()->name(),
-            'last_name' => fake()->name(),
-            'id_card_number' => Str::random(11),
-            'date_of_birth' => fake()->date(),
-            'place_of_birth' => fake()->country(),
-            'primary_phone_number' => fake()->phoneNumber(),
-            'secondary_phone_number' => fake()->phoneNumber(),
-            'address' => fake()->address(),
-            'email' => fake()->email(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'uuid' => $this->faker->uuid,
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'id_card_number' => $this->faker->numerify('#########'),
+            'place_of_birth' => $this->faker->city,
+            'primary_phone_number' => $this->faker->phoneNumber,
+            'secondary_phone_number' => $this->faker->phoneNumber,
+            'address' => $this->faker->address,
+            'service_id' => Service::inRandomOrder()->first()->id, // Utilisation d'un ID valide
+            'email' => $this->faker->unique()->safeEmail,
+            'is_active' => 1,
+            'sexe' => $this->faker->randomElement(['M', 'F']),
+            'password' => bcrypt('password'), // mot de passe par défaut
+            'is_mobility' => 0, // Défaut à 0
         ];
     }
 

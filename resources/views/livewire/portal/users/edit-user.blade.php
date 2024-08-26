@@ -10,7 +10,6 @@
                     <x-form-items.form wire:submit="update">
                         <div class='form-group row mb-3'>
                             <div class='col'>
-
                                 <label class="px-2" for="service_id">{{__('Services')}}</label>
                                 <select wire:model="service_id" name="service_id" class="form-select  @error('service_id') is-invalid @enderror" required="">
                                     @foreach($services as $service)
@@ -35,7 +34,8 @@
                         </div>
 
                         <div class='form-group row mb-3'>
-                            <div class=" col"><label for="first_name">{{ __('Prénom') }}</label>
+                            <div class=" col">
+                                <label for="first_name">{{ __('Prénom') }}</label>
                                 <input type="text" wire:model="first_name" class="form-control  @error('first_name') is-invalid @enderror " value="{{ old('first_name') }}" placeholder="Jane" id="first_name" autofocus="" required="">
                                 @error('first_name')
                                 <div class="invalid-feedback">
@@ -43,7 +43,8 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class=" col"><label for="last_name">{{ __('Nom') }}</label>
+                            <div class=" col">
+                                <label for="last_name">{{ __('Nom') }}</label>
                                 <input type="text" wire:model="last_name" class="form-control  @error('last_name') is-invalid @enderror " value="{{ old('last_name') }}" placeholder="Doe" id="last_name" autofocus="" required="">
                                 @error('last_name')
                                 <div class="invalid-feedback">
@@ -53,15 +54,19 @@
                             </div>
                         </div>
                         <div class='form-group row mb-3'>
-                            <div class=" col"><label for="id_card_number">{{ __('Numéro CNI') }}</label>
-                                <input type="text" wire:model="id_card_number" class="form-control  @error('id_card_number') is-invalid @enderror " value="{{ old('id_card_number') }}" placeholder="112233445566" id="id_card_number" autofocus="" required="">
-                                @error('id_card_number')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                            <div class='col'>
+                                <label class="px-2" for="role_name">{{__('Sexe')}}</label>
+                                <select wire:model="sexe" name="sexe" class="form-select  @error('sexe') is-invalid @enderror" required="">
+                                    <option value="">{{__('Selectionner Le sexe')}}</option>
+                                    <option value="M">{{__('Masculin')}}</option>
+                                    <option value="F">{{__('Feminin')}}</option>
+                                </select>
+                                @error('sexe')
+                                <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class=" col"><label for="date_of_birth">{{ __('Date de naissance') }}</label>
+                          
+                            <div class="col"><label for="date_of_birth">{{ __('Date de naissance') }}</label>
                                 <input type="date" wire:model="date_of_birth" class="form-control  @error('date_of_birth') is-invalid @enderror " value="{{ old('date_of_birth') }}" placeholder="Edea" id="date_of_birth" autofocus="" required="">
                                 @error('date_of_birth')
                                 <div class="invalid-feedback">
@@ -70,13 +75,24 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group mb-3"><label for="place_of_birth">{{ __('Lieu de naissance') }}</label>
-                            <input type="text" wire:model="place_of_birth" class="form-control  @error('place_of_birth') is-invalid @enderror " value="{{ old('place_of_birth') }}" placeholder="Edea" id="place_of_birth" autofocus="" required="">
-                            @error('place_of_birth')
-                            <div class="invalid-feedback">
-                                {{ $message }}
+                        <div class="form-group row mb-3">
+                            <div class=" col"><label for="id_card_number">{{ __('Numero CNI') }}</label>
+                                <input type="text" wire:model="id_card_number" class="form-control  @error('id_card_number') is-invalid @enderror " value="{{ old('id_card_number') }}" placeholder="112233445566" id="id_card_number" autofocus="" required="">
+                                @error('id_card_number')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
-                            @enderror
+                            <div class="col">
+                                <lable> {{ __('Lieu de naissance') }}</label>
+                                    <input type="text" wire:model="place_of_birth" class="form-control  @error('place_of_birth') is-invalid @enderror " value="{{ old('place_of_birth') }}" placeholder="Edea" id="place_of_birth" autofocus="" required="">
+                                    @error('place_of_birth')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                            </div>
                         </div>
                         <div class='form-group row mb-3'>
                             <div class=" col"><label for="primary_phone_number">{{ __('Numéro de téléphone principal') }}</label>

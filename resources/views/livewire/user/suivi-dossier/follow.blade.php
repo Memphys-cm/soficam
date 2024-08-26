@@ -1,357 +1,138 @@
-<div>
-    <div class="container-fluid"
-        style="min-height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
-        @include('livewire.user.suivi-dossier.details')
-
-        <div class="row d-flex align-items-center justify-content-center pt-5" style="min-height: 60vh;">
-            @foreach ($combinedData as $item)
-                <div class="col-md-12">
-                    <div>
-                        <h4 class="card-title">{{ __('Information') }}</h4>
-                    </div>
-                    <div class="card" style="width: 100%;">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4 col-sm-12 d-flex align-items-start">
-                                    <div class="d-flex flex-column" style="height: 30vh">
-                                        <div class="d-flex align-items-center card-title" style="align-items: center">
-                                            <h6>Start date: </h6>
-                                            <div style="position: absolute; left:85%">
-                                                <p class="card-title">01/07/2023</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center pt-1" style="align-items: center">
-                                            <h6 class="card-title">Estimated end-date: </h6>
-                                            <div style="position: absolute; left:85%">
-                                                <p class="card-title">06/07/2023</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center pt-1" style="align-items: center">
-                                            <h6 class="card-title">Statut: </h6>
-                                            <div style="position: absolute; left:85%">
-                                                <p class="card-title">{{ $item->statut }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center pt-1" style="align-items: center">
-                                            <h6 class="card-title">Elapsed time: </h6>
-                                            <div style="position: absolute; left:85%">
-                                                <p class="card-title">2 jours</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center" style="align-items: center">
-                                            <h6 class="card-title">Time remaining: </h6>
-                                            <div style="position: absolute; left:85%">
-                                                <p class="card-title">4 jours</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="container-fluid">
+    <x-alert />
+    <div class='d-flex flex-wrap pt-2 align-items-center  justify-content-between '>
+        <a href="{{route('user.suivi-dossier.index')}}" sclass="">
+            <svg class="icon me-1 text-gray-700 bg-gray-300 rounded-circle p-2" style="height : 2.5rem;" fill="none" stroke="currentColor" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+        </a>
+        <div>
+            <x-navigation.user-nav />
         </div>
     </div>
-    <div>
-        <div class="row d-flex align-items-center justify-content-center pt-3" style="min-height: 60vh;">
+    <nav aria-label="breadcrumb" class="py-1">
+        <ol class="breadcrumb bg-white px-3 py-2 rounded-pill shadow-lg">
+            <li class="breadcrumb-item">
+                <a href="#" class="text-decoration-none text-secondary d-flex align-items-center">
+                    <i class="bi bi-house-door-fill me-2"></i>
+                    <span class="fw-semibold">Accueil</span>
+                </a>
+            </li>
+            <li class="breadcrumb-item active text-primary d-flex align-items-center" aria-current="page">
+                <i class="bi bi-journal-text me-2"></i>
+                <span class="fw-bold">Immatriculation Directe : {{ $immatriculations->reference }}</span>
 
-            <div class="col-md-6 col-sm-12 mx-auto" style="width: 92%">
-                <div>
-                    <h4 class="card-title">Process</h4>
-                </div>
-                @if ($item instanceof \App\Models\ImmatriculationDirecte)
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 mb-3">
-                            <div class="card" style="width: 100%;">
-                                <div class="card-body">
-                                    <div class="mb-1">
-                                        <div>
-                                            <h5 class="card-title">{{__('Cotation du Dossier')}}</h5>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center pb-2">
-                                        <div class="d-flex  flex-column">
-                                            <div class="d-flex align-items-center">
-                                                <h6>Status: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: grey">{{ $item->status_cotation }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6>Start-Date: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: grey">03/07/2023</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6>End-date: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: grey">04/07/2023</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#CotationModal">Details</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 mb-3">
-                            <div class="card" style="width: 100%;">
-                                <div class="card-body">
-                                    <div class="mb-1">
-                                        <div>
-                                            <h5 class="card-title">{{__('Ordre de Versement')}}</h5>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center pb-2">
-                                        <div class="d-flex  flex-column">
-                                            <div class="d-flex align-items-center">
-                                                <h6>Status: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: green">{{ $item->status_ordre_versement }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6>Start-Date: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    {{-- <p style="color: grey">{{$item->date_cotation->format('d/m/Y')}}</p> --}}
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6>End-date: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: grey">06/07/2023</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#OrdreModal">Details</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 mb-3">
-                            <div class="card" style="width: 100%;">
-                                <div class="card-body">
-                                    <div class="mb-1">
-                                        <div>
-                                            <h5 class="card-title">{{__('Avis au Publique ')}}</h5>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center pb-2">
-                                        <div class="d-flex  flex-column">
-                                            <div class="d-flex align-items-center">
-                                                <h6>Status: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: green">{{ $item->status_avis_publique }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6>Start-Date: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: grey">07/07/2023</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6>End-date: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: grey">08/07/2023</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">Details</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 mb-3">
-                            <div class="card ">
-                                <div class="card-body">
-                                    <div class="mb-1">
-                                        <div>
-                                            <h5 class="card-title">{{__('Certificat Affichage')}}</h5>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center pb-2">
-                                        <div class="d-flex  flex-column">
-                                            <div class="d-flex align-items-center">
-                                                <h6>Status: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: green">{{ $item->status_certificat_d_affichage }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6>Start-Date: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: grey">{{ $item->created_at->format('d/m/Y') }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6>End-date: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: grey">02/07/2023</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">Details</button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                @elseif ($item instanceof \App\Models\TitreFoncier)
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 mb-3">
-                            <div class="card" style="width: 100%;">
-                                <div class="card-body">
-                                    <div class="mb-1">
-                                        <div>
-                                            <h5 class="card-title">{{__('Cotation du Dossier')}}</h5>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center pb-2">
-                                        <div class="d-flex  flex-column">
-                                            <div class="d-flex align-items-center">
-                                                <h6>Status: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: grey">{{ $item->status_cotation }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6>Start-Date: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: grey">03/07/2023</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6>End-date: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: grey">04/07/2023</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#CotationModal">Details</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 mb-3">
-                            <div class="card" style="width: 100%;">
-                                <div class="card-body">
-                                    <div class="mb-1">
-                                        <div>
-                                            <h5 class="card-title">{{__('Ordre de Versement')}}</h5>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center pb-2">
-                                        <div class="d-flex  flex-column">
-                                            <div class="d-flex align-items-center">
-                                                <h6>{{__('Status')}}: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: green">{{ $item->status_ordre_versement }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6>Start-Date: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    {{-- <p style="color: grey">{{$item->date_cotation->format('d/m/Y')}}</p> --}}
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6>End-date: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: grey">06/07/2023</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#OrdreModal">Details</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 mb-3">
-                            <div class="card" style="width: 100%;">
-                                <div class="card-body">
-                                    <div class="mb-1">
-                                        <div>
-                                            <h5 class="card-title">Avis au Publique </h5>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center pb-2">
-                                        <div class="d-flex  flex-column">
-                                            <div class="d-flex align-items-center">
-                                                <h6>Status: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: green">{{ $item->status_avis_publique }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6>Start-Date: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: grey">07/07/2023</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6>End-date: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: grey">08/07/2023</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">Details</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 mb-3">
-                            <div class="card ">
-                                <div class="card-body">
-                                    <div class="mb-1">
-                                        <div>
-                                            <h5 class="card-title">Certificat Affichage</h5>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center pb-2">
-                                        <div class="d-flex  flex-column">
-                                            <div class="d-flex align-items-center">
-                                                <h6>Status: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: green">{{ $item->status_certificat_d_affichage }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6>Start-Date: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: grey">{{ $item->created_at->format('d/m/Y') }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6>End-date: </h6>
-                                                <div class="pt-1" style="position: absolute; left:70%">
-                                                    <p style="color: grey">02/07/2023</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">Details</button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                @if (!$immatriculations)
+                    <span class="badge bg-secondary ms-3 d-flex align-items-center">
+                        <i class="bi bi-hourglass-split me-1"></i> Non commencé
+                    </span>
+                @elseif($immatriculations->is_complete === 0)
+                    <span class="badge bg-warning text-dark ms-3 d-flex align-items-center">
+                        <i class="bi bi-hourglass-split me-1"></i> Procédure En Cours ...
+                    </span>
+                @elseif($immatriculations->is_complete === 1)
+                    <span class="badge bg-success ms-3 d-flex align-items-center">
+                        <i class="bi bi-check-circle me-1"></i> Terminée
+                    </span>
                 @endif
+            </li>
+        </ol>
+    </nav>
+    <div class="row">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="horizontal-nav py-3" aria-label="Navigation des étapes">
+                        @php
+                            // Définir les onglets de navigation
+                            $tabs = [
+                                1 => __('Vérification des Droits Coutumiers'),
+                                2 => __('Montage et Jumelage des Dossiers'),
+                                3 => __('Vérification et Publication'),
+                                4 => __('Finalisation du Dossier'),
+                            ];
+                        @endphp
+                        <div class="d-flex justify-content-between align-items-center">
+                            @foreach ($tabs as $tabIndex => $tabLabel)
+                                <div class="nav-link text-center py-2 px-4 rounded {{ $high_step == $tabIndex ? 'bg-secondary text-white shadow-lg' : 'bg-white text-muted' }} fw-bold text-sm mx-1"
+                                    style="transition: all 0.3s ease-in-out; cursor: pointer; font-size:14px;"
+                                    wire:click="setHighStep({{ $tabIndex }})"
+                                    onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                                    onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+                                    {{ $tabLabel }}
+                                    @if (!$loop->last)
+                                        <i class="bi bi-chevron-right mx-2"></i>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation des étapes spécifiques -->
+        <div class="col-12 col-md-4">
+            <nav class="vertical-nav py-3" aria-label="Navigation des étapes">
+                @php
+                    // Définir les étapes spécifiques pour chaque high_step
+                    $steps = [
+                        1 => [
+                            1 => __('Création du Dossier'),
+                            2 => __('Cotation du Dossier au Csdaf'),
+                            3 => __('Délivrance de l\'Ordre de Versement'),
+                            4 => __('Changements de Statut après la Publication d’Avis et décision portant calendrier de descente sur le terrain'),
+                            5 => __('Génération du Certificat d\'Affichage'),
+                            6 => __('Changements de Statut liés au Certificat d\'Affichage'),
+                        ],
+                        2 => [
+                            7 => __('Enregistrement de la Descente sur le Terrain'),
+                            8 => __('Établissement de l\'État de Cession et Paiement'),
+                            9 => __('Instruction de la Descente sur le Terrain'),
+                            10 => __('Changement de Statut après la Descente sur le Terrain'),
+                            11 => __('Mise à Jour du Dossier Technique'),
+                            12 => __('Mise en Forme du Dossier Administratif'),
+                        ],
+                        3 => [
+                            13 => __('Changements de Statut après Transmission'),
+                            14 => __('Établissement du Bordereau de Transmission'),
+                            15 => __('Changements de Statut après le Bordereau'),
+                            16 => __('Production du Certificat Final'),
+                        ],
+                        // Ajouter des steps pour les autres high_steps si nécessaire
+                    ];
+                @endphp
+
+                @foreach ($steps[$high_step] as $stepIndex => $stepLabel)
+                    <div class="my-2 nav-link d-flex align-items-center justify-content-between position-relative py-2 px-3 rounded {{ $step == $stepIndex ? 'bg-secondary text-white shadow-lg' : 'bg-white text-muted' }} fw-bold text-sm mx-1"
+                        style="transition: all 0.3s ease-in-out; cursor: pointer; font-size:14px;"
+                        wire:click="setStep({{ $stepIndex }})"
+                        onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+                        {{ $stepLabel }}
+                        @if (!$loop->last)
+                            <i class="bi bi-chevron-right mx-2"></i>
+                        @endif
+                    </div>
+                @endforeach
+            </nav>
+        </div>
+
+        <!-- Content Section (9 columns) -->
+        <div class="col-12 col-md-8">
+            <div class="">
+                @if ($step == 1)
+                    @include('livewire.user.suivi-dossier.stepss.information-step')
+                @elseif ($step == 2)
+                    @include('livewire.user.suivi-dossier.stepss.cotation.cotation-csdaf-step')
+                @elseif ($step == 3)
+                    @include('livewire.user.suivi-dossier.stepss.ordre_versement')
+                    @elseif ($step == 4)
+                        @include('livewire.user.suivi-dossier.stepss.signature_avis_calendrier')
+                @endif
+                <!-- Ajoutez d'autres conditions pour les étapes restantes -->
             </div>
         </div>
     </div>
-    @endforeach
+</div>

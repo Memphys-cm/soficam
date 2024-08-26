@@ -2,7 +2,6 @@
     <x-alert />
     @include('livewire.portal.users.create-user')
     @include('livewire.portal.users.edit-user')
-    @include('livewire.portal.users.import-users')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -144,23 +143,41 @@
             </div>
         </div>
     </div>
-    <x-alert />
+
 
     <div class="row p-3">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label for="search">{{__('Recherche')}}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{__('Recherche...')}}" class="form-control">
+            <input wire:model="query" id="search" type="text" placeholder="{{__('Atangana...')}}" class="form-control">
             <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label for="orderBy">{{__('Trier par')}}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="first_name">{{__('Utilisateurs')}}</option>
                 <option value="created_at">{{__('Date création')}}</option>
             </select>
         </div>
+        <div class="col-md-2">
+            <label for="selectedStatus">{{ __('Trier par statut') }}: </label>
+            <select wire:model="selectedStatus" id="selectedStatus" class="form-select">
+                <option value="">par statut</option>
+                <option value="false">Inactive</option>
+                <option value="1">Active</option>
 
-        <div class="col-md-3">
+
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label for="selectedSexe">{{ __('Trier par Sexe') }}: </label>
+            <select wire:model="selectedSexe" id="selectedSexe" class="form-select">
+
+                <option value="">par Sexe</option>
+                <option value="M">Homme</option>
+                <option value="F">Femme</option>
+            </select>
+        </div>
+        <div class="col-md-2">
             <label for="direction">{{__('Sens du tri')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{__('Ascendant')}}</option>
@@ -168,7 +185,7 @@
             </select>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label for="perPage">{{__('Eléments par page')}}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
@@ -188,6 +205,7 @@
                         <th class="border-bottom">{{__('Service')}}</th>
                         <th class="border-bottom">{{__('Rôle')}}</th>
                         <th class="border-bottom">{{__('Statut')}}</th>
+                        <th class="border-bottom">{{__('Sexe')}}</th>
                         <th class="border-bottom">{{__('Date création')}}</th>
                         @canany('user.update','user.delete')
                         <th class="border-bottom">{{__('Action')}}</th>
@@ -216,13 +234,16 @@
                             </a>
                         </td>
                         <td>
-                            <span class="fs-normal">{{is_null($user->service) ? __('NA'): ucfirst($user->service->name) }}</span>
+                            <span class="fs-normal">{{is_null($user->service) ? __('NA'): ucfirst($user->service->service_name_fr) }}</span>
                         </td>
                         <td>
                             <span class="fw-normal">{{$user->getRoleNames()->first()}}</span>
                         </td>
                         <td>
                             <span class="fw-normal  badge super-badge p-2  bg-{{$user->status_style}} rounded">{{$user->status_text}}</span>
+                        </td>
+                        <td>
+                            <span class="fw-normal">{{$user->sexe}}</span>
                         </td>
                         <td>
                             <span class="fw-normal">{{$user->created_at->format('Y-m-d')}}</span>
@@ -251,8 +272,7 @@
                     <tr>
                         <td colspan="7" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Liste Vide')}} </h4>
-                                <p>{{__('Aucun enregistrement trouvé..!')}}</p>
+                                <h4 class="fs-4 fw-bold">{{__('Liste vide')}}</h4>
                             </div>
                         </td>
                     </tr>

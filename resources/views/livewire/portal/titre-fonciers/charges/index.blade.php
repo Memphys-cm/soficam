@@ -1,8 +1,10 @@
 <div>
     <x-alert />
-    <x-delete-modal />
     @include('livewire.portal.titre-fonciers.charges.create')
     @include('livewire.portal.titre-fonciers.charges.edit')
+    
+
+    <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
             <div class="mb-lg-0">
@@ -16,7 +18,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+                        <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ __('Charges sur les Titres Fonciers') }}</li>
                     </ol>
                 </nav>
@@ -27,22 +29,20 @@
                     </svg>
                     {{ __('Historique des charges sur les Titres Fonciers') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir toutes les charges sur les Titres Fonciers') }} </p>
+                <p class="mt-n1 mx-2">{{ __('Voir toutes les charges sur les Titres Fonciers') }}</p>
             </div>
             <div class="d-flex justify-content-between mb-2">
+
+                <a href="#" data-bs-toggle="modal" data-bs-target="#CreateChargeModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
+                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg> {{ __('Nouveau') }}
+                </a>
                 <a href="#" data-bs-toggle="modal" data-bs-target="#EditChargeModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg> {{__('Retirer')}}
                 </a>
-
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#CreateChargeModal" class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
-                        <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                        </svg> {{__('Nouveau')}}
-                    </a>
-
-                {{--@can('certificate_propriete.export_n_print')--}}
                 <div class="mx-2" wire:loading.remove>
                     <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center ">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -63,7 +63,6 @@
                         </div>
                     </div>
                 </div>
-                {{--@endcan--}}
             </div>
         </div>
     </div>
@@ -78,12 +77,14 @@
         <div class="col-md-3">
             <label for="orderBy">{{ __('Trier par') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
-                <option value="created_at">{{ __('Date de création') }}</option>
+                <option value="titre_foncier_id">{{ __('Titre Foncier') }}</option>
+                <option value="type_charge">{{ __('Charge ') }}</option>
+                <option value="created_at">{{ __('Date Création ') }}</option>
             </select>
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{ __('Sens du Tri') }}: </label>
+            <label for="direction">{{ __('Sens du tri') }}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{ __('Ascendant') }}</option>
                 <option value="desc">{{ __('Descendant') }}</option>
@@ -110,41 +111,38 @@
                         <th class="border-bottom">{{ __('PROPRIÉTAIRE(S)') }}</th>
                         <th class="border-bottom">{{ __('CHARGE') }}</th>
                         <th class="border-bottom">{{ __('DATE CRÉATION') }}</th>
-                        {{--@canany(['certificate_propriete.edit','certificate_propriete.delete'])--}}
                         <th class="border-bottom">{{ __('Action') }}</th>
-                        {{--@endcanany--}}
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($charges as $charge)
-                    <td>
-                        <span class="fw-normal">{{$charge->titreFoncier->numero_titre_foncier}}</span>
-                    </td>
-                    <td>
-                        <x-elements.user :options="$charge->titreFoncier->users" />
-                    </td>
-                    <td class="text-center">
-                        <span class="fw-normal badge super-badge p-2 bg-{{$charge->EtatTFStyle}} round">{{$charge->type_charge}}</span>
-                    </td>
-                    <td>
-                        <span class="fw-normal">{{$charge->created_at->format('Y-m-d')}}</span>
-                    </td>
-                    <td>
-
-                        <a href='#' wire:click.prevent="initData({{$charge->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal">
-                            <svg class="icon icon-xs text-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                                </path>
-                            </svg>
-                        </a>
-                    </td>
+                    @forelse($charges as $charge)
+                    <tr>
+                        <td>
+                            <span class="fw-normal">{{$charge->titreFoncier->numero_titre_foncier}}</span>
+                        </td>
+                        <td>
+                            <x-elements.user :options="$charge->titreFoncier->users" />
+                        </td>
+                        <td>
+                            <span class="fw-normal badge super-badge p-2 bg-{{$charge->EtatTFStyle}} round">{{$charge->type_charge}}</span>
+                        </td>
+                        <td>
+                            <span class="fw-normal">{{$charge->created_at->format('Y-m-d')}}</span>
+                        </td>
+                        <td>
+                            <a href='#' wire:click.prevent="initData({{$charge->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal">
+                                <svg class="icon icon-xs text-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                    </path>
+                                </svg>
+                            </a>
+                        </td>
                     </tr>
                     @empty
                     <tr>
                         <td colspan="10" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{ __('Liste Vide') }}</h4>
-                                <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
+                                <h4 class="fs-4 fw-bold">{{ __('Liste Vide') }} </h4>
                             </div>
                         </td>
                     </tr>
@@ -153,7 +151,7 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{__('Montrer')}} {{$perPage > $charges_count ? $charges_count : $perPage  }} {{__('éléments sur')}} {{$charges_count}}
+                    {{__('Montrer')}} {{$perPage > $charges_count ? $charges_count : $perPage  }} {{__('éléments sur ')}} {{$charges_count}}
                 </div>
                 {{ $charges->links()  }}
             </div>

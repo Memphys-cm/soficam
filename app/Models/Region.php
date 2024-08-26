@@ -24,6 +24,12 @@ class Region extends Model
     {
         return config('app.locale') == 'en' ? $this->region_name_en : $this->region_name_fr;
     }
+
+    public function titreFonciers()
+    {
+        return $this->hasMany(TitreFoncier::class);
+    }
+
     public static function search($query)
     {
         return empty($query) ?

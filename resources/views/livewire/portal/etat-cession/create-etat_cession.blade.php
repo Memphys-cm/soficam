@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">{{ __('Creer') }} {{ __(' Etat Cession') }}</h1>
-                        <p class="px-1"> {{ __('Creer') }} {{ __(' Etat Cession') }} &#128522;</p>
+                        <h1 class="mb-0 h4">{{ __('Créer') }} {{ __(' Etat Cession') }}</h1>
+                        <p class="px-1"> {{ __('Créer') }} {{ __(' Etat Cession') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="store">
 
@@ -75,14 +75,14 @@
                     @enderror
                 </div>
                 <div class="col-md-6 py-2">
-                    <label for="code">{{ __('Type D\'Operation') }}</label>
+                    <label for="code">{{ __('Type D\'Opération') }}</label>
                     <select wire:model="type_operation" name="type_operation" class="form-select  @error('type_operation') is-invalid @enderror">
                         <option value="">{{ __('--Sélectionner le type d\'opération --') }}</option>
                         <option value="bornage">{{ __('bornage') }} </option>
                         <option value="morcellement">{{ __('morcellement') }} </option>
-                        <option value="mutation_totale">{{ __('mutation_totale') }} </option>
-                        <option value="retrait_indivision">{{ __('retrait_indivision') }} </option>
-                        <option value="immatriculation_direct">{{ __('immatriculation_direct') }} </option>
+                        <option value="mutation_totale">{{ __('mutation totale') }} </option>
+                        <option value="retrait_indivision">{{ __('retrait indivision') }} </option>
+                        <option value="immatriculation_direct">{{ __('immatriculation directe') }} </option>
                         <option value="concession">{{ __('concession') }} </option>
                     </select>
                     @error('type_operation')
@@ -92,44 +92,44 @@
                 <div class="col-md-6 py-2">
                     <label for="code">{{ __('Zone') }}</label>
                     <select wire:model="zone" name="zone" class="form-select  @error('zone') is-invalid @enderror">
-                        <option value="">{{ __('--Select Zone --') }}</option>
+                        <option value="">{{ __('--Selectionner Zone --') }}</option>
                         <option value="urbain">{{ __('Terrain urbain') }} </option>
-                        <option value="rurale">{{ __('Terrain rurale') }} </option>
+                        <option value="rurale">{{ __('Terrain rural') }} </option>
                     </select>
                     @error('zone')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-md-6 py-2">
-                    <label for="code">{{ __('Lieu_dit') }}</label>
+                    <label for="code">{{ __('Lieu-dit') }}</label>
                     <input wire:model="lieu_dit" type="text" class="form-control  @error('lieu_dit') is-invalid @enderror" placeholder="Logpom" required="" value="" name="lieu_dit">
                     @error('lieu_dit')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-md-6 py-2">
-                    <label for="code">{{ __('superficie_en_m2') }}</label>
+                    <label for="code">{{ __('superficie en m²') }}</label>
                     <input wire:model="superficie_en_m2" type="number" class="form-control  @error('superficie_en_m2') is-invalid @enderror" placeholder="25000" required="" value="" name="superficie_en_m2">
                     @error('superficie_en_m2')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-md-6 py-2">
-                    <label for="code">{{ __('Cout') }}</label>
+                    <label for="code">{{ __('Coût') }}</label>
                     <input wire:model="cout" type="number" class="form-control  @error('cout') is-invalid @enderror" placeholder="70000" required="" value="" name="cout">
                     @error('cout')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-md-6 py-2">
-                    <label for="code">{{ __('Frais Supplemetaires') }}</label>
+                    <label for="code">{{ __('Frais Supplémentaires') }}</label>
                     <input wire:model="frais_suplementaires" type="number" class="form-control  @error('frais_suplementaires') is-invalid @enderror" placeholder="15000" required="" value="" name="frais_suplementaires">
                     @error('frais_suplementaires')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-md-6 py-2">
-                    <label for="code">{{ __('Cout_etat_cession') }}</label>
+                    <label for="code">{{ __('Coût Etat Cession') }}</label>
                     <input wire:model="cout_etat_cession" type="number" class="form-control  @error('cout_etat_cession') is-invalid @enderror" placeholder="100000" required="" value="" name="cout_etat_cession">
                     @error('cout_etat_cession')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -146,8 +146,8 @@
             </div>
 
             <div class="d-flex justify-content-end py-2">
-                <button type="button" wire:click.prevent="clearFields" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{ __('Close') }}</button>
-                <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Creer') }} </button>
+                <button type="button" wire:click.prevent="clearFields" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{ __('Fermer') }}</button>
+                <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{ __('Créer') }} </button>
             </div>
             </x-form-items.form>
         </div>

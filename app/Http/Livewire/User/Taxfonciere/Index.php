@@ -18,7 +18,7 @@ class Index extends Component
     public $numero_titre_foncier, $users;
     public $titrefoncier, $transaction_number;
     public $paymentType = ''; 
-    public $phoneNumber = ''; 
+    public $phone_number = ''; 
     public $status_tax, $taxFoncier_amount, $price, $payment_method;
 
     public function confirmOrder()
@@ -28,12 +28,12 @@ class Index extends Component
         ];
 
         if ($this->paymentType === 'MTN') {
-            $rules['phoneNumber'] = [
+            $rules['phone_number'] = [
                 'required',
                 'regex:/(:?^6(:?(:?7)(:?\d){7}$))|(:?^6(:?(:?5[0-4])(:?\d){6}$))|(:?^6(:?(:?8)(:?\d){7}$))/',
             ];
         } elseif ($this->paymentType === 'ORANGE') {
-            $rules['phoneNumber'] = [
+            $rules['phone_number'] = [
                 'required',
                 'regex:/(:?^6(:?(:?9)(:?\d){7}$))|(:?^6(:?(:?5[5-9])(:?\d){6}$))/',
             ];
@@ -41,7 +41,7 @@ class Index extends Component
 
         $this->validate($rules);
 
-        $request = new Collect($this->phoneNumber, $this->taxFoncier_amount, $this->paymentType, 'CM');
+        $request = new Collect($this->phone_number, $this->taxFoncier_amount, $this->paymentType, 'CM');
         $payment = $request->pay();
 
         if ($payment->success) {
@@ -72,7 +72,6 @@ class Index extends Component
         $this->validate(
             [
                 'taxFoncier_amount' => 'required|integer',
-
             ]
         );
         if (!empty($this->titrefoncier)) {
@@ -106,7 +105,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('Tax Foncier successfully Updated'), 'paiement');
+        $this->refresh(__('Le foncier fiscal mis à jour avec succès'), 'paiement');
     }
     public function clearFields()
     {
@@ -120,7 +119,8 @@ class Index extends Component
        
         return view('livewire.user.taxfonciere.index', [
             'titrefonciers' => $titrefonciers,
-        ]);
+            'titrefonciers_count' => count(auth()->user()->titrefonciers)
+        ])->layout('components.layouts.user.master');
     }
 
 }

@@ -16,6 +16,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -40,8 +41,10 @@ class User extends Authenticatable
         'secondary_phone_number',
         'address',
         'email',
+        'is_active',
         'password',
         'service_id',
+        'signature_path',
     ];
 
     /**
@@ -80,13 +83,13 @@ class User extends Authenticatable
     {
         return $query->where('is_active', 1);
     }
-    
+
     public function scopeInActive($query): Builder
     {
         return $query->where('is_active', 0);
     }
 
-    
+
     public function getNameAttribute()
     {
         return $this->first_name . " " . $this->last_name;
@@ -105,17 +108,17 @@ class User extends Authenticatable
             NULL => 'info'
         };
     }
-   
+
     public function getStatusTextAttribute()
     {
         return match ($this->is_active) {
-            true => __('Active'),
-            false => __('Banned'),
-            NULL => __('Active'),
+            true => __('Actif'),
+            false => __('Banit'),
+            NULL => __('Actif'),
         };
     }
 
-    public function serivce() : BelongsTo
+    public function service() : BelongsTo
     {
         return $this->belongsTo(Service::class, 'service_id');
     }
@@ -134,7 +137,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(CertificatePropriete::class,'titrefoncier_user','user_id','titre_foncier_id')->withTimestamps();
     }
-    
+
     public static function search($query)
     {
         return empty($query) ?
@@ -142,7 +145,9 @@ class User extends Authenticatable
             static::query()
             ->where(function ($q) use ($query) {
                 $q->where('first_name', 'like', '%' . $query . '%');
-                $q->orWhere('last_name', 'like', '%' . $query . '%'); 
+                $q->orWhere('last_name', 'like', '%' . $query . '%');
+                $q->orWhere('is_active', 'like', '%' . $query . '%');
+                $q->orWhere('sexe', 'like', '%' . $query . '%');
             });
     }
 

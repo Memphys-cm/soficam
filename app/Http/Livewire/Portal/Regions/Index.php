@@ -40,7 +40,7 @@ class Index extends Component
 
         $this->state = 0;
 
-        $this->refresh(__('Region successfully :state!',['state'=> $this->state ? 'Updated' : 'Created']), 'CreateUpdateRegionModal');
+        $this->refresh(__('Région réussie :state!',['state'=> $this->state ? 'Mettre à jour' : 'Créer']), 'CreateUpdateRegionModal');
 
     }
 
@@ -66,7 +66,7 @@ class Index extends Component
 
         $this->state = 0;
 
-        $this->refresh(__('Region successfully deleted!'), 'DeleteModal');
+        $this->refresh(__('Région supprimée avec succès!'), 'DeleteModal');
     }
 
     public function render()

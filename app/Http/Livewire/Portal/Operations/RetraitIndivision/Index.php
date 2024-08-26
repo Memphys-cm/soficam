@@ -80,7 +80,7 @@ class Index extends Component
 
         if ($cp->validity->lt(now())) {
             return;
-            session()->flash('message', __('Certificate propriete provided is in valid'));
+            session()->flash('message', __('Le certificat de propriété fourni est en cours de validité'));
         }
 
         Operation::create([
@@ -94,7 +94,7 @@ class Index extends Component
         ]);
 
         $this->clearFields();
-        $this->refresh(__('Mutation Totale successfully Created'), 'CreateMutationTotaleNormaleModal');
+        $this->refresh(__('Mutation Totale créée avec succès'), 'CreateMutationTotaleNormaleModal');
     }
 
     public function delete()
@@ -103,15 +103,15 @@ class Index extends Component
             return abort(401);
         }
 
-        if (!empty($this->mutation_totale)) {
+        if (!empty($this->retrait_indivision)) {
 
-            // $this->mutation_totale->users()->delete();
+            // $this->retrait_indivision->users()->delete();
 
-            $this->mutation_totale->delete();
+            $this->retrait_indivision->delete();
         }
 
 
-        $this->refresh(__('Operation successfully deleted!'), 'DeleteModal');
+        $this->refresh(__('Opération supprimée avec succès!'), 'DeleteModal');
     }
 
 
@@ -131,8 +131,8 @@ class Index extends Component
             return abort(401);
         }
 
-        $retraits = Operation::search($this->query)->mutationTotale()->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
-        $retraits_count = Operation::mutationTotale()->count();
+        $retraits = Operation::search($this->query)->retraitIndivision()->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $retraits_count = Operation::retraitIndivision()->count();
 
         return view('livewire.portal.operations.retrait-indivision.index', [
             'retraits' => $retraits,

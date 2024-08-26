@@ -170,7 +170,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('TitreFoncier successfully Created'), 'CreateTitreFoncierModal');
+        $this->refresh(__('TitreFoncier avec succès Créé'), 'CreateTitreFoncierModal');
     }
 
     public function initData($id)
@@ -284,7 +284,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('TitreFoncier successfully Updated'), 'CreateTitreFoncierModal');
+        $this->refresh(__('TitreFoncier avec succès Mise à jour'), 'CreateTitreFoncierModal');
 
         $this->state = 0;
     }
@@ -304,7 +304,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('TitreFoncier successfully deleted!'), 'DeleteModal');
+        $this->refresh(__('TitreFoncier supprimé avec succès!'), 'DeleteModal');
     }
 
     public function getCoords()
@@ -362,13 +362,13 @@ class Index extends Component
         }
 
         $titrefonciers = TitreFoncier::search($this->query)->with('users')
-        ->when($this->selectedRegion, function ($query, $regionId) {
+        ->when($this->region_id, function ($query, $regionId) {
             return $query->where('region_id', $regionId);
         })
-        ->when($this->selectedDivision, function ($query, $divisionId) {
+        ->when($this->division_id, function ($query, $divisionId) {
             return $query->where('division_id', $divisionId);
         })
-        ->when($this->selectedSubDivision, function ($query, $subDivisionId) {
+        ->when($this->sub_division_id, function ($query, $subDivisionId) {
             return $query->where('sub_division_id', $subDivisionId);
         })
         ->when($this->startDate, function ($query) {

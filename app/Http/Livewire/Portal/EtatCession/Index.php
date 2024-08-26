@@ -36,6 +36,7 @@ class Index extends Component
     public $status;
     public $commentaires;
     public $zone;
+    public $etat_cessions;
 
     public function mount()
     {
@@ -43,6 +44,7 @@ class Index extends Component
         $this->users = User::role('user')->get();
         $this->geometres = MembreDuCabinet::geometre()->get();
         $this->subdivisions = SubDivision::all();
+        $this->etat_cessions = EtatCession::where('type_operation', 'morcellement')->get();
     }
 
     public function initData($id)
@@ -103,7 +105,7 @@ class Index extends Component
     protected array $rules = [
         'reference_etat_cession' => 'sometimes',
         'type_personne' => 'sometimes',
-        'titre_foncier_id' => 'sometimes',
+        'titre_foncier_id' => 'required',
         'geometre_id' => 'sometimes',
         'user_id' => 'required',
         'sub_division_id' => 'required',
@@ -145,6 +147,7 @@ class Index extends Component
             $etat_cession = EtatCession::create([
                 'sub_division_id' => $this->sub_division_id,
                 'reference_etat_cession' => $code,
+                'titre_foncier_id' => $this->titre_foncier_id,
                 'user_id' => $this->user_id,
                 'geometre_id' => $this->geometre_id,
                 'frais_suplementaires' => $this->frais_suplementaires,
@@ -152,6 +155,8 @@ class Index extends Component
                 'cout_etat_cession' => $this->cout_etat_cession,
                 'status' => 'pending_payment',
                 'superficie_en_m2' => $this->superficie_en_m2,
+                'type_operation'=>$this->type_operation,
+                'zone'=>$this->zone
             ]);
 
             $sale = Sale::create([
@@ -174,7 +179,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('Etat Cession cree avec success'), 'CreateEtatCessionModal');
+        $this->refresh(__('Etat Cession créé avec succes'), 'CreateEtatCessionModal');
     }
 
     public function update()
@@ -221,7 +226,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('Etat Cession cree avec success'), 'CreateEtatCessionModal');
+        $this->refresh(__('Etat Cession mis à jour avec succes'), 'CreateEtatCessionModal');
     }
 
     public function delete()
@@ -242,7 +247,7 @@ class Index extends Component
         }
 
 
-        $this->refresh(__('Etat Cession suprimee avec success!'), 'DeleteModal');
+        $this->refresh(__('Etat Cession supprimé avec succes!'), 'DeleteModal');
     }
 
     public function clearFields()

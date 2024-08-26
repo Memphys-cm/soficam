@@ -20,6 +20,7 @@ class Index extends Component
 
     public $first_name;
     public $last_name;
+    public $sexe;
     public $email;
     public $is_active;
     public $id_card_number;
@@ -34,6 +35,7 @@ class Index extends Component
 
     public $roles;
     public $role_id;
+    public $selectedStatus, $selectedSexe;
 
     public ?string $query=null;
 
@@ -45,6 +47,7 @@ class Index extends Component
         'first_name' => 'required',
         'last_name' => 'required',
         'email' => 'required|email',
+        'sexe' => 'required',
         'is_active' => 'sometimes',
         'service_id' => 'sometimes',
         'id_card_number' => 'required',
@@ -53,7 +56,7 @@ class Index extends Component
         'primary_phone_number' => 'required',
         'secondary_phone_number' => 'sometimes',
         'address' => 'sometimes',
-        'password' => 'required|confirm',
+        'password' => 'required|confirmed',
     ];
 
     public function mount()
@@ -74,6 +77,7 @@ class Index extends Component
         $user = User::create([
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
+            'sexe' => $this->sexe,
             'email' => $this->email,
             'service_id' => $this->service_id,
             'id_card_number' => $this->id_card_number,
@@ -82,13 +86,13 @@ class Index extends Component
             'primary_phone_number' => $this->primary_phone_number,
             'secondary_phone_number' => $this->secondary_phone_number,
             'address' => $this->address,
-            'is_active' => $this->is_active === "true" ?  1 : 0,
+            'is_active' => $this->is_active === true ?  1 : 0,
             'password' => bcrypt($this->password),
         ]);
 
         $user->assignRole($this->role_name);
 
-        $this->refresh(__('User successfully Created!'), 'CreateUserModal');
+        $this->refresh(__('Utilisateur créé avec succès!'), 'CreateUserModal');
     }
 
     public function update()
@@ -113,6 +117,7 @@ class Index extends Component
         $this->user->update([
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
+            'sexe' => $this->sexe,
             'email' => $this->email,
             'service_id' => $this->service_id,
             'id_card_number' => $this->id_card_number,
@@ -121,15 +126,17 @@ class Index extends Component
             'primary_phone_number' => $this->primary_phone_number,
             'secondary_phone_number' => $this->secondary_phone_number,
             'address' => $this->address,
-            'is_active' => $this->is_active === "true" ?  1 : 0,
+            'is_active' => $this->is_active === true ?  1 : 0,
             'password' => empty($this->password) ? $this->user->password : bcrypt($this->password),
         ]);
+
+        // dd($this->is_active);
 
         if ($this->user->getRoleNames()->first() != $this->role_name) {
             $this->user->syncRoles($this->role_name);
         }
 
-        $this->refresh(__('User successfully updated!'), 'EditUserModal');
+        $this->refresh(__('Mise à jour de l\'utilisateur réussie!'), 'EditUserModal');
     }
 
     public function initData($id)
@@ -137,12 +144,12 @@ class Index extends Component
         $user = User::findOrFail($id);
 
         // $service = Service::findOrFail($user->service_id);
-
         $this->first_name = $user->first_name;
         $this->last_name = $user->last_name;
+        $this->sexe = $user->sexe;
         $this->email = $user->email;
         $this->service_id = $user->service_id;
-        $this->is_active = $user->is_active;
+        $this->is_active = $user->is_active === false ? 0 : 1;
         $this->id_card_number = $user->id_card_number;
         $this->date_of_birth = $user->date_of_birth;
         $this->place_of_birth = $user->place_of_birth;
@@ -169,7 +176,7 @@ class Index extends Component
 
         $this->state = 0;
 
-        $this->refresh(__('User successfully deleted!'), 'DeleteModal');
+        $this->refresh(__('Utilisateur supprimé avec succès!'), 'DeleteModal');
     }
 
     public function render()
@@ -178,7 +185,14 @@ class Index extends Component
             return abort(401);
         }
 
-        $users = User::search($this->query)->with('roles')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        $users = User::search($this->query)->with('roles')
+        ->when($this->selectedStatus, function ($query, $selectedStatus) {
+            return $query->where('is_active', $selectedStatus);
+        })
+        ->when($this->selectedSexe, function ($query, $selectedSexe) {
+            return $query->where('sexe', $selectedSexe);
+        })
+        ->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
 
         $total_users = User::with(['roles' => function ($role) {
             return $role->whereNotIn('name', ['super_admin'])->get();

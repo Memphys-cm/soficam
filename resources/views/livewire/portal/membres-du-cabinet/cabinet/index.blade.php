@@ -17,7 +17,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ __('Cabinet') }}</li>
                     </ol>
                 </nav>
@@ -30,7 +30,7 @@
                     </svg>
                     {{ __(' Gestion Cabinet ') }}
                 </h1>
-                <p class="mt-n1 mx-2">{{ __('Voir tous les cabinets avec dans l\'application') }} &#x23F0; </p>
+                <p class="mt-n1 mx-2">{{ __('Voir tous les cabinets avec dans l\'application') }} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
 
@@ -41,7 +41,7 @@
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{ __('New') }}
+                    </svg> {{ __('Nouveau') }}
                 </a>
                 @endcan
               
@@ -53,7 +53,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
                         </svg>
-                        {{ __('Export') }}
+                        {{ __('Exporter') }}
                     </a>
                 </div>
                 <div class="text-center mx-2" wire:loading wire:target="export">
@@ -99,7 +99,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="perPage">{{ __('Element par page') }}: </label>
+            <label for="perPage">{{ __('Elément par page') }}: </label>
             <select wire:model="perPage" id="perPage" class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -186,7 +186,7 @@
                         <tr>
                             <td colspan="7" class="text-center">
                                 <div class="text-center text-gray-800 mt-2">
-                                    <h4 class="fs-4 fw-bold">{{ __('Opps rien ici') }} &#128540;</h4>
+                                    <h4 class="fs-4 fw-bold">{{ __('Liste vide') }}</h4>
                                     <p>{{ __('Aucun enregistrement trouvé..!') }}</p>
                                 </div>
                             </td>
@@ -196,8 +196,8 @@
             </table>
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
-                    {{ __('Afficher') }} {{ $perPage > $cabinets_count ? $cabinets_count : $perPage }}
-                    {{ __('element de') }} {{ $cabinets_count }}
+                    {{ __('Montrer') }} {{ $perPage > $cabinets_count ? $cabinets_count : $perPage }}
+                    {{ __('element sur ') }} {{ $cabinets_count }}
                 </div>
                 {{ $cabinets->links() }}
             </div>

@@ -11,7 +11,7 @@
                     <x-form-items.form wire:submit="update">
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="payment_method">{{ __('MODE DE PAIEMENT') }}</label>
+                                <label for="payment_method">{{ __('Mode de paiement') }}</label>
                                 <select wire:model="payment_method"
                                     class="form-select @error('payment_method') is-invalid @enderror"
                                     id="payment_method" required="">
@@ -19,8 +19,8 @@
                                     <option value="cash">{{ __('Cash') }}</option>
                                     <option value="orange_money">{{ __('Orange Money') }}</option>
                                     <option value="mtn_mobile_money">{{ __('MTN Mobile Money') }}</option>
-                                    <option value="cheque">{{ __('Cheque') }}</option>
-                                    <option value="bank_transfer">{{ __('Bank Transfer') }}</option>
+                                    <option value="cheque">{{ __('Chèque') }}</option>
+                                    <option value="bank_transfer">{{ __('Transfert Bancaire') }}</option>
 
 
                                 </select>
@@ -31,12 +31,12 @@
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="payment_status">{{ __('Statut_paiement Immobilier ') }}</label>
+                                <label for="payment_status">{{ __('Statut Paiement Immobilier ') }}</label>
                                 <select wire:model="payment_status" name="payment_status"
                                     class="form-select  @error('payment_status') is-invalid @enderror" required="">
                                     <option value="">{{ __('-- Selectionner --') }}</option>
-                                    <option value="pending_payment">{{ __('paiement_en_attente') }}</option>
-                                    <option value="totally_paid">{{ __('totalement_payé') }}</option>
+                                    <option value="pending_payment">{{ __('paiement en_attente') }}</option>
+                                    <option value="totally_paid">{{ __('totalement payé') }}</option>
                                 </select>
                                 @error('payment_status')
                                     <div class="invalid-feedback">{{ $message }}</div>

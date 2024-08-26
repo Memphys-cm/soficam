@@ -15,7 +15,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item"><a href="/">{{__('Tableau de Bord')}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Titres Fonciers')}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Titres fonciers')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -41,7 +41,7 @@
                         <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                         </svg>
-                        <span class="sr-only">{{__('Opérations sur titres fonciers')}}</span>
+                        <span class="sr-only">{{__('Opérations sur Titres Fonciers')}}</span>
                     </button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{{route('portal.lotissements.index')}}">{{__('Lotissement')}}</a>
@@ -99,11 +99,13 @@
                 <thead>
                     <tr>
                         <th class="border-bottom">{{__('Numéro Titre Foncier')}}</th>
+                        <th class="border-bottom">{{__('Numéro Conservation')}}</th>
                         <th class="border-bottom">{{__('Date Délivrance')}}</th>
-                        <th class="border-bottom">{{__('Propriétaires')}}</th>
+                        <th class="border-bottom">{{__('Propriétaire(s)')}}</th>
                         <th class="border-bottom">{{__('Localisation')}}</th>
                         <th class="border-bottom">{{__('Limites')}}</th>
-                        <th class="border-bottom">{{__('Coordonnées')}}</th>
+                        <th class="border-bottom">{{__('Coordonnées utm')}}</th>
+                        <th class="border-bottom">{{__('Coordonnées long , lat')}}</th>
                         <th class="border-bottom">{{__('Statut')}}</th>
                         <th class="border-bottom">{{__('Date Création')}}</th>
                         @canany('titre_foncier.update','titre_foncier.delete')
@@ -118,9 +120,11 @@
                             <span class="fw-normal">{{$titrefoncier->numero_titre_foncier}}</span>
                         </td>
                         <td>
+                            <span class="fw-normal">{{$titrefoncier->numero_conservation}}</span>
+                        </td>
+                        <td>
                             <span class="fw-normal">{{$titrefoncier->date_de_delivrance_du_TF}}</span>
                         </td>
-
                         <td>
                             <x-elements.user :options="$titrefoncier->users->take(5)" />
                         </td>
@@ -153,6 +157,13 @@
                             </div>
                         </td>
                         <td>
+                            @foreach(collect(json_decode($titrefoncier->coordonnees_utm,true)) as $key => $value)
+                            <div class="d-flex align-items-centerpy-1">
+                                <span class="fw-bolder mx-2"> {{ $key }} :</span> {{ $value}}
+                            </div>
+                            @endforeach
+                        </td>
+                        <td>
                             @foreach(collect(json_decode($titrefoncier->coordonnees,true)) as $key => $value)
                             <div class="d-flex align-items-centerpy-1">
                                 <span class="fw-bolder mx-2"> {{ $key }} :</span> {{ $value}}
@@ -172,6 +183,14 @@
                                 <svg class="icon icon-sm text-info" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
+                            </a>
+                            @endcan
+                            @can('titre_foncier.view_detail')
+                            <a href="{{route('portal.maps.index' , $titrefoncier->id)}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon icon-sm text-info">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                  </svg>                                  
                             </a>
                             @endcan
                             <a href="#" wire:click.prevent='printPdf({{$titrefoncier->id}})'>
@@ -201,8 +220,7 @@
                     <tr>
                         <td colspan="9" class="text-center">
                             <div class="text-center text-gray-800 mt-2">
-                                <h4 class="fs-4 fw-bold">{{__('Liste Vide')}}</h4>
-                                <p>{{__('Aucun enregistrement trouvé..!')}}</p>
+                                <h4 class="fs-4 fw-bold">{{__('Liste vide')}}</h4>
                             </div>
                         </td>
                     </tr>

@@ -16,10 +16,17 @@ return new class extends Migration
             $table->uuid('uuid')->unique()->index()->nullable();
             $table->string('reference')->nullable();
             $table->string('localisation')->nullable();
-            $table->string('superficie')->nullable();
             $table->foreignId('region_id')->index();
             $table->foreignId('division_id')->index();
             $table->foreignId('sub_division_id')->index();
+            $table->string('zone')->nullable();
+            $table->string('etat_terrain')->nullable();
+            $table->string('duplicata')->nullable();
+            $table->string('source_terrain')->nullable();
+            $table->float('superficie')->nullable();
+            $table->string('volume')->nullable();
+            $table->string('folio')->nullable();
+            $table->string('numero_cp')->nullable();
             $table->foreignId('titre_foncier_id')->index()->nullable();
             $table->string('numero_bordereau_transmission')->nullable();
             $table->string('next_step')->nullable();
@@ -44,8 +51,11 @@ return new class extends Migration
             $table->string('status_avis_publique')->nullable();
             $table->date('date_avis_publique')->nullable();
             $table->date('date_avis_publique_signe')->nullable();
+            $table->string('calendar_decision')->nullable();
+            $table->date('calendar_decision_date')->nullable();
             $table->date('date_debut_certificat_d_affichage')->nullable();
             $table->date('date_fin_certificat_d_affichage')->nullable();
+            $table->date('date_certificat_d_affichage_signer')->nullable();
 
             $table->date('date_convocation')->nullable();
             $table->string('status_convocation')->nullable();
@@ -65,6 +75,10 @@ return new class extends Migration
             $table->date('date_publication_dossier_vise')->nullable();
             $table->date('date_signature_bulletin')->nullable();
             $table->json('coordonnees')->nullable();
+            $table->string('limit_nord')->nullable();
+            $table->string('limit_sud')->nullable();
+            $table->string('limit_est')->nullable();
+            $table->string('limit_ouest')->nullable();
             $table->date('dossier_technique_created')->nullable();
             $table->date('descente_terrain')->nullable();
             $table->date('transmission_dos_tech_csdaf')->nullable();
@@ -78,8 +92,28 @@ return new class extends Migration
             $table->date('date_dossier_complet_transmi_CSRegional_mindcaf')->nullable();
             $table->date('date_dossier_vise_en_attente_publication')->nullable();
 
+            $table->foreignId('service_dossier_complet_id')->on('services')->index()->nullable();
+            $table->foreignId('user_dossier_complet_id')->on('users')->index()->nullable();
+            $table->longText('observation_dossier_complet')->nullable();
+            $table->date('date_dossier_complet_vise_coter')->nullable();
+
+            $table->string('numero_redevance_fonciere')->nullable();
+            $table->date('ordre_redevance_fonciere')->nullable();
+            $table->float('montant_ordre_redevance_fonciere')->nullable();
+
+            $table->foreignId('cadre_id')->on('users')->index()->nullable();
+            $table->longText('observation_cotation_cadre')->nullable();
+            $table->date('date_cotation_cadre')->nullable();
+            $table->date('coter_csrcadastre')->nullable();
+            $table->date('dos_tech_transmis_drm')->nullable();
+            $table->date('dos_compl_csrdaf')->nullable();
+            $table->date('cotation_compl_csrdaf')->nullable();
+            $table->string('numero_serie')->nullable();
+
+            $table->string('is_finalisation')->nullable();
 
 
+            $table->boolean('is_complete')->default(0);
             $table->timestamps();
         });
     }

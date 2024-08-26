@@ -21,9 +21,9 @@ class Index extends Component
     use WithDataTables;
 
     public $status = 'pending_payment';
-    public $validity, $certificate_proprietes_type, $certificate_propriete_reason, $certificatepropriete, $titre_fonciers;
+    public $validity, $certificate_proprietes_type, $certificate_propriete_reason, $certificatepropriete;
     public $titre_foncier_id, $requestor_id, $price, $requestors;
-    public $certificate_propriete_id, $certificate_proprietes_number;
+    public $certificate_propriete_id, $certificate_proprietes_number, $titre_fonciers;
 
     function CPCode()
     {
@@ -54,7 +54,7 @@ class Index extends Component
 
     public function store()
     {
-           
+
         $this->validate([
             'titre_foncier_id' => 'required',
             'certificate_proprietes_type' => 'required',
@@ -96,11 +96,10 @@ class Index extends Component
                 'saleable_type' => 'App\Models\CertificatePropriete', // Adjust the namespace if different
                 'created_by' => auth()->user()->name,
             ]);
-
         });
-       
+
         $this->clearFields();
-        $this->refresh(__('CertificatePropriete successfully Created!'), 'CreatecertificateproprieteModal');
+        $this->refresh(__('Certificat Propriete créé avec succès!'), 'CreatecertificateproprieteModal');
     }
 
     public function initData($id)
@@ -117,7 +116,6 @@ class Index extends Component
         $this->validity =  $certificatepropriete->validity;
         $this->certificate_proprietes_number =  $certificatepropriete->certificate_proprietes_number;
         $this->status =  $certificatepropriete->status;
-
     }
     public function clearFields()
     {
@@ -145,7 +143,7 @@ class Index extends Component
 
         ]);
 
-       
+
         DB::transaction(function () {
             $this->certificatepropriete->update([
                 //'titre_foncier_id' => $this->titre_foncier_id,
@@ -160,11 +158,10 @@ class Index extends Component
         });
 
         $this->clearFields();
-        $this->refresh(__('CertificatePropriete Updated Created!'), 'UpdateCertificateProprieteModal');
-
+        $this->refresh(__('Certificat Propriete Mis à jour!'), 'UpdateCertificateProprieteModal');
     }
 
-    
+
     public function delete()
     {
         if ($this->certificatepropriete) {
@@ -175,6 +172,52 @@ class Index extends Component
 
         $this->refresh(__('Certificat de propriété Supprimé avec succès'), 'DeleteModal');
     }
+
+    public function sms($id)
+    {
+        $certificatepropriete = CertificatePropriete::findOrFail($id);
+        $receiver = $certificatepropriete->requestor->first_name;
+        $sms = "Mr/Mme. $receiver votre Certificat de Propriété est disponible et désormais fonctionnel";
+        $senderid = 'SOFICAM';
+        $mobiles = $certificatepropriete->requestor->primary_phone_number;
+        $api_key = '36v7fN66hzUD6SaBYkILlirHZo7P';
+        $url = 'https://api.queensms.net/v1/sms.php';
+
+        $sms_body = array(
+            'api_key' => $api_key,
+            'senderid' => $senderid,
+            'sms' => $sms,
+            'mobiles' => $mobiles
+        );
+
+        $send_data = http_build_query($sms_body);
+        $gateway_url = $url . "?" . $send_data;
+
+        try {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $gateway_url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HTTPGET, 1);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $output = curl_exec($ch);
+
+            if (curl_errno($ch)) {
+                $output = curl_error($ch);
+                $arr = ['echec'];
+                return ($arr);
+            } else {
+                return ($output);
+            }
+            curl_close($ch);
+
+        }
+        catch (Exception $exception){
+            //echo $exception->getMessage();
+            $arr = ['echec'];
+            return ($arr);
+        }
+    }
+
     public function  printPdf($id)
     {
         $this->certificatepropriete = CertificatePropriete::findOrFail($id);
@@ -184,20 +227,92 @@ class Index extends Component
             // Autres données que vous souhaitez afficher dans la vue
         ];
 
-        $pdf = Pdf::loadView('livewire.portal.certificate-propriete.print',$data)->setPaper('a4', 'portrait');
+        $pdf = Pdf::loadView('livewire.portal.certificate-propriete.print', $data)->setPaper('a4', 'portrait');
 
 
         return response()->streamDownload(
-            fn () => print($pdf->output()),
+            fn() => print($pdf->output()),
             __('Report-') . Str::random('10') . ".pdf"
         );
     }
+    public function  printCertificate($id)
+    {
+        $this->certificatepropriete = CertificatePropriete::findOrFail($id);
+        $data = [
+            'element' => $this->certificatepropriete,
+            'titrefoncier' => $this->titre_fonciers,
+            // Autres données que vous souhaitez afficher dans la vue
+        ];
+
+        $pdf = Pdf::loadView('livewire.portal.certificate-propriete.print', $data)->setPaper('a4', 'portrait');
+
+
+        return response()->streamDownload(
+            fn() => print($pdf->output()),
+            __('Report-') . Str::random('10') . ".pdf"
+        );
+    }
+
+    public function collect($id)
+    {
+        $titre_fonciers = TitreFoncier::find($id);
+        $charges = $titre_fonciers->charge; // Vérifiez que la relation est bien définie
+        $lotissements = $titre_fonciers->parcels;
+        $certificate_proprietes = $titre_fonciers->certificatesProprietes;
+        $etat_cessions = $titre_fonciers->etatCessionsPaid;
+
+        return [$titre_fonciers, $charges, $lotissements, $certificate_proprietes, $etat_cessions];
+    }
+    public function print($id)
+    {
+        list($charges) = $this->collect($id);
+
+        $data = [
+            'charges' => $charges,
+            // Autres données que vous souhaitez afficher dans la vue
+        ];
+        #dd($data);
+
+        $pdf = Pdf::loadView('livewire.portal.certificate-propriete.prints', $data)
+            ->setPaper('a4', 'portrait');
+
+        return response()->streamDownload(
+            fn() => print($pdf->output()),
+            __('Report-') . Str::random('10') . ".pdf"
+        );
+    }
+
+    public function printPdfs($id)
+    {
+        list($titre_fonciers, $charges, $lotissements, $certificate_proprietes, $etat_cessions) = $this->collect($id);
+
+        $data = [
+            'titre_fonciers' => $titre_fonciers,
+            'charges' => $charges,
+            'lotissements' => $lotissements,
+            'certificate_proprietes' => $certificate_proprietes,
+            'etat_cessions' => $etat_cessions,
+            // Autres données que vous souhaitez afficher dans la vue
+        ];
+        #dd($data);
+
+        $pdf = Pdf::loadView('livewire.portal.certificate-propriete.prints', $data)
+            ->setPaper('a4', 'portrait');
+
+        return response()->streamDownload(
+            fn() => print($pdf->output()),
+            __('Report-') . Str::random('10') . ".pdf"
+        );
+    }
+
 
     public function render()
     {
         $certificateproprietes = CertificatePropriete::search($this->query)->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
 
         $certificateproprietes_count = CertificatePropriete::count();
+
+
 
         return view('livewire.portal.certificate-propriete.index', [
             'certificateproprietes' => $certificateproprietes,

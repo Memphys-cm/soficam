@@ -8,31 +8,35 @@
                     </div>
                 </div>
                 <div class=''>
-                    <div class='fw-bold display-4 text-gray-600'>{{__('Hi')}}, {{auth()->user()->first_name}}</div>
+                    <div class='fw-bold display-4 text-gray-600'>{{__('Salut')}}, {{auth()->user()->first_name}}</div>
                     <div class='d-flex align-items-center justify-content-start '>
-                        <div class='leading text-gray-400 '>{{ auth()->user()->service ? auth()->user()->service->name : __('No Service')}}</div>
+                        <div class='leading text-gray-400 '>{{ auth()->user()->service ? auth()->user()->service->name : __('')}}</div>
                     </div>
                     <div class='mt-4 d-flex flex-wrap   align-items-center gap-2'>
-                        <a href="{{ route('user.suivi-dossier.index') }}" class="btn btn-secondary mr-lg-2 ">
+                        <a href="{{ route('user.paiement') }}" class='btn btn-primary'>
+                            <svg class="icon icon-sm me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            {{ __('Paiements') }}
+                        </a>
+                        <a href="{{ route('user.suivi-dossier.index') }}" class="btn btn-outline-secondary mr-lg-2 ">
                             <svg class="icon icon-sm me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" strokelinejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
                             </svg>
                             {{ __('Suivi Dossier') }}
                         </a>
-
-                        <a href="{{ route('user.taxfonciere.index') }}" class='btn btn-outline-primary mr-lg-2'>
+                        <a href="{{ route('user.taxfonciere.index') }}" class='btn btn-outline-tertiary mr-lg-2'>
                             <svg class="icon icon-sm me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                             {{ __('Taxe Foncière') }}
                         </a>
-                        <a href="{{ route('user.paiement') }}" class='btn btn-outline-tertiary'>
+                        <a href="{{ route('user.request.certificat.index') }}" class='btn btn-outline-tertiary mr-lg-2'>
                             <svg class="icon icon-sm me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            {{ __('Paiement') }}
+                            {{ __('Démande Certificat Propriéte') }}
                         </a>
-
                     </div>
                 </div>
             </div>
@@ -43,9 +47,9 @@
 
         <div class='mt-5'>
             <div class='d-flex justify-content-between align-items-end mx-2'>
-                <h5 class="h5 text-gray-600">{{__("Lastest Audit logs")}}</h5>
+                <h5 class="h5 text-gray-600">{{__("Derniers audits de connexion")}}</h5>
                 <div>
-                    <a href='{{route("user.auditlogs")}}' class='btn btn-secondary'>{{__("View all")}}</a>
+                    <a href='{{route("user.auditlogs")}}' class='btn btn-secondary'>{{__("Voir tous")}}</a>
                 </div>
             </div>
             <div class="card mt-2">
@@ -54,8 +58,8 @@
                         <thead>
                             <tr>
                                 <!-- <th class="border-bottom">{{__('Employee')}}</th> -->
-                                <th class="border-bottom">{{__('Action Type')}}</th>
-                                <th class="border-bottom">{{__('Action Performed')}}</th>
+                                <th class="border-bottom">{{__('Type Action')}}</th>
+                                <th class="border-bottom">{{__('Action Effectuée')}}</th>
                                 <th class="border-bottom">{{__('Date')}}</th>
                             </tr>
                         </thead>
@@ -84,8 +88,7 @@
                             <tr>
                                 <td colspan="7" class="text-center">
                                     <div class="text-center text-gray-800 mt-2">
-                                        <h4 class="fs-4 fw-bold">{{__('Opps nothing here')}} &#128540;</h4>
-                                        <p>{{__('No Record Found..!')}}</p>
+                                        <h4 class="fs-4 fw-bold">{{__('Liste vide')}}</h4>
                                     </div>
                                 </td>
                             </tr>

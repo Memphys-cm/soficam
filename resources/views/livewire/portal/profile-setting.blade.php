@@ -12,8 +12,8 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Acceuil</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{__('Profile settings')}}</li>
+                        <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{__('Paramètres du profil')}}</li>
                     </ol>
                 </nav>
                 <h1 class="h4 mt-n2 d-flex justify-content-start align-items-end">
@@ -68,7 +68,7 @@
                         </div>
                         <div class="form-group mb-4 row">
                             <div class='col-md-6 col-xs-12'>
-                                <label for="phone_number">{{__('Numero de telephone')}}</label>
+                                <label for="phone_number">{{__('Numéro de téléphone')}}</label>
                                 <input wire:model="phone_number" type="text" class="form-control  @error('phone_number') is-invalid @enderror" value="{{auth()->user()->phone}}" name="phone_number">
                                 @error('phone_number')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -85,7 +85,7 @@
                         <div class='form-group mb-4'>
                             <label for="preferred_language">{{__('Sélectionner la langue de notification préférée')}}</label>
                             <select wire:model="preferred_language" name="preferred_language" class="form-select  @error('preferred_language') is-invalid @enderror" required="">
-                                <option value="">{{__('Select status')}}</option>
+                                <option value="">{{__('Sélectionner')}}</option>
                                 <option value="en">{{__('Anglais')}}</option>
                                 <option value="fr">{{__('Français')}}</option>
                             </select>
@@ -94,7 +94,7 @@
                             @enderror
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="submit" wire:click.prevent="updateProfile" class="btn btn-secondary btn-loading">{{__('Update')}} </button>
+                            <button type="submit" wire:click.prevent="updateProfile" class="btn btn-primary btn-loading">{{__('Mettre à jour')}} </button>
                         </div>
                     </x-form-items.form>
                 </div>
@@ -105,25 +105,31 @@
                         <small class="text-muted fw-light fs-6 fst-italic">{{__('Télécharger la signature sur fond transparent/blanc')}} <a href='https://www.signwell.com/online-signature/draw/' target="_blank">{{__("check here!")}}</a> </small>
                     </h5>
 
-                    <x-form-items.form wire:submit="saveSignature" nctype="multipart/form-data" class="form-modal">
+                    <x-form-items.form wire:submit="saveSignature" enctype="multipart/form-data" class="form-modal">
                         <div class="form-group mb-4">
-                            <input type="file" wire:model="signature" class="form-control  @error('signature') is-invalid @enderror" />
+                            <input type="file" wire:model="signature" class="form-control @error('signature') is-invalid @enderror" />
                             @error('signature')
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="d-flex justify-content-between">
-                            @if(!is_null(auth()->user()->signature_path))
+
+                        @if(!is_null(auth()->user()->signature_path))
+                        <div class="form-group mb-4">
+                            <label>{{__('Signature actuelle')}}</label>
                             <div class="w-25 h-25">
-                                <img src='{{asset("storage/attachments/".auth()->user()->signature_path)}}' alt=''>
+                                <img src='{{ asset("storage/" . auth()->user()->signature_path) }}' alt='Signature' class="img-fluid rounded">
                             </div>
-                            @endif
+                        </div>
+                        @endif
+
+                        <div class="d-flex justify-content-between">
                             <div>
-                                <button type="submit" wire:click.prevent="saveSignature" class="btn btn-gray-300 text-gray-500 btn-loading">{{__('Upload signature')}} </button>
+                                <button type="submit" wire:click.prevent="saveSignature" class="btn btn-primary btn-loading">{{__('Upload signature')}} </button>
                             </div>
                         </div>
                     </x-form-items.form>
                 </div>
+
                 <div class='card p-3 text-gray-700 mt-3'>
                     <h5 class="pb-3">{{__('Réinitialisation du mot de passe')}}</h5>
                     <x-form-items.form wire:submit="passwordReset" nctype="multipart/form-data" class="form-modal">
@@ -152,7 +158,7 @@
                         </div>
 
                         <div class="d-flex justify-content-end">
-                            <button type="submit" wire:click.prevent="passwordReset" class="btn btn-gray-300 text-gray-500 btn-loading">{{__('Réinitialiser le mot de passe')}} </button>
+                            <button type="submit" wire:click.prevent="passwordReset" class="btn btn-primary btn-loading">{{__('Réinitialiser le mot de passe')}} </button>
                         </div>
                     </x-form-items.form>
                 </div>
