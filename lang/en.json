@@ -296,7 +296,8 @@
     "Afficher toutes les ventes simples dans l'application": "Display all simple sales in the application",
     "Ascendante": "Ascending",
     "Descendante": "Descending",
-    "Numéro du titre foncier": "Land Title Number",
+
+    "Numéro du titre foncier": "Land Title Number", 
     "Vous devez créer un lotissement avant de pouvoir effectuer des ventes simples.!": "You must create a land subdivision before you can process simple sales.",
     "Ajouter un Lotissement": "Add a land subdivision",
     "Ventes totales": "Total Sales",
@@ -325,5 +326,5 @@
     "Ajouter les fichiers": "Add file",
     "Type de Charge": "Charge Type"
 
-
 }
+

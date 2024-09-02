@@ -1,5 +1,5 @@
 <x-layouts.app>
-    <section class="bg-soft d-flex align-items-center vh-100">
+    <section class="bg-soft d-flex align-items-center ">
         <div class="container">
             <div class="row justify-content-center form-bg-image">
                 <p class="text-center">

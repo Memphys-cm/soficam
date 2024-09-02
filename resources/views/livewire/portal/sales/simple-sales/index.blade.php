@@ -13,7 +13,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
+                        <li class="breadcrumb-item"><a href="/">{{__('Tableau de bord')}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{__('Ventes simples')}}</li>
                     </ol>
                 </nav>
