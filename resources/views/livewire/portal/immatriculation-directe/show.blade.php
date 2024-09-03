@@ -1,5 +1,6 @@
 <div class="container-fluid">
     <x-alert />
+    @include('livewire.portal.immatriculation-directe.step.cotation_step1')
     <nav aria-label="breadcrumb" class="py-1">
         <ol class="breadcrumb bg-white px-3 py-2 rounded-pill shadow-lg">
             <li class="breadcrumb-item">
@@ -51,30 +52,34 @@
                             @foreach ($tabs as $tabIndex => $tabLabel)
                                 @php
                                     // Vérifie si l'onglet doit être marqué comme complété (en vert)
-                                    $isCompleted = false;
+$isCompleted = false;
 
-                                    switch ($tabIndex) {
-                                        case 1:
-                                            $isCompleted = $imma_directe->date_certificat_d_affichage_signer; // Toujours vert si date_certificat_d_affichage_signer existe
-                                            break;
-                                        case 2:
-                                        case 3:
-                                            $isCompleted = $imma_directe->dossier_administratif_complet;
-                                            break;
-                                        case 4:
-                                            $isCompleted = $imma_directe->is_finalisation;
-                                            break;
-                                    }
+switch ($tabIndex) {
+    case 1:
+        $isCompleted = $imma_directe->date_certificat_d_affichage_signer; // Toujours vert si date_certificat_d_affichage_signer existe
+        break;
+    case 2:
+    case 3:
+        $isCompleted = $imma_directe->dossier_administratif_complet;
+        break;
+    case 4:
+        $isCompleted = $imma_directe->is_finalisation;
+        break;
+}
 
-                                    // Applique la classe appropriée
-                                    $bgClass = $isCompleted ? 'bg-success text-white' : ($high_step == $tabIndex ? 'bg-secondary text-white shadow-lg' : 'bg-white text-muted');
+// Applique la classe appropriée
+$bgClass = $isCompleted
+    ? 'bg-success text-white'
+    : ($high_step == $tabIndex
+        ? 'bg-secondary text-white shadow-lg'
+        : 'bg-white text-muted');
                                 @endphp
 
                                 <div class="nav-link text-center py-2 px-4 rounded {{ $bgClass }} fw-bold text-sm mx-1"
-                                     style="transition: all 0.3s ease-in-out; cursor: pointer; font-size:14px;"
-                                     wire:click="setHighStep({{ $tabIndex }})"
-                                     onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
-                                     onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+                                    style="transition: all 0.3s ease-in-out; cursor: pointer; font-size:14px;"
+                                    wire:click="setHighStep({{ $tabIndex }})"
+                                    onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+                                    onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
                                     {{ $tabLabel }}
                                     @if (!$loop->last)
                                         <i class="bi bi-chevron-right mx-2"></i>
@@ -98,7 +103,7 @@
                             2 => __('2- Cotation du Dossier au Csdaf'),
                             3 => __('3- Délivrance de l\'Ordre de Versement'),
                             4 => __(
-                                '4- Changements de Statut après la Publication d’Avis et décision portant calendrier de descente sur le terrain'
+                                '4- Changements de Statut après la Publication d’Avis et décision portant calendrier de descente sur le terrain',
                             ),
                             5 => __('5- Génération du Certificat d\'Affichage'),
                             6 => __('6- Changements de Statut liés au Certificat d\'Affichage'),
@@ -147,7 +152,11 @@
                 @foreach ($steps[$high_step] as $stepIndex => $stepLabel)
                     @php
                         $isCompleted = isset($validations[$stepIndex]) && $validations[$stepIndex];
-                        $bgClass = $isCompleted ? 'bg-success text-white' : ($step == $stepIndex ? 'bg-secondary text-white shadow-lg' : 'bg-white text-muted');
+                        $bgClass = $isCompleted
+                            ? 'bg-success text-white'
+                            : ($step == $stepIndex
+                                ? 'bg-secondary text-white shadow-lg'
+                                : 'bg-white text-muted');
                     @endphp
 
                     <div class="my-2 nav-link d-flex align-items-center justify-content-between position-relative py-2 px-3 rounded {{ $bgClass }} fw-bold text-sm mx-1"
@@ -183,6 +192,8 @@
                     @include('livewire.portal.immatriculation-directe.step.descente_terrain')
                 @elseif($step == 8)
                     @include('livewire.portal.immatriculation-directe.step.etat_cession')
+                @elseif($step == 9)
+                    @include('livewire.portal.immatriculation-directe.step.descente_terrain')
                 @elseif($step == 10)
                     @include('livewire.portal.immatriculation-directe.step.edit_statut')
                 @elseif($step == 11)
@@ -191,8 +202,10 @@
                     @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_administratif')
                 @elseif($step == 13)
                     @include('livewire.portal.immatriculation-directe.step.edit_statut')
-                @elseif($step == 15)
+                @elseif($step == 14)
                     @include('livewire.portal.immatriculation-directe.step.bordoreau_transmition')
+                    @elseif($step == 15)
+                        @include('livewire.portal.immatriculation-directe.step.edit_statut')
                 @endif
                 <!-- Ajoutez d'autres conditions pour les étapes restantes -->
             </div>
