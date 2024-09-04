@@ -52,6 +52,8 @@ class Index extends Component
         }
     }
 
+
+
     public function store()
     {
 

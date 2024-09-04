@@ -128,6 +128,24 @@ class Show extends Component
         );
     }
 
+    public function bordereau(){
+        $this->validate(
+            [
+                "numero_bordereau_transmission"=>"required"
+            ]
+            );
+
+          DB::transaction(function() {
+            $this->imma_directe->update([
+                "numero_bordereau_transmission"=> $this->numero_bordereau_transmission,
+                "statut"=> "Bordereau de Transmission éffectué",
+                "next_step"=>"Transmission du dossier technique au Délégué Régional MINDCAF"
+            ]);
+          });  
+
+          $this->refresh(__('Numéro du Bordereau de transmission enregistré'), 'DescenteTerrainModal');
+    }
+
     public function edit_statut()
     {
         if ($this->step == 6) {
@@ -155,7 +173,7 @@ class Show extends Component
         DB::transaction(function () {
             $this->imma_directe->update([
                 'statut' => 'Descente sur le terrain effectuée',
-                'next_step' => 'Mise en Forme du Dossier Technique',
+                'next_step' => 'Etablissement Etat de Cession',
                 'comissions' => json_encode($this->comissions),
                 'limit_nord' => $this->limit_nord,
                 'limit_sud' => $this->limit_sud,
@@ -182,7 +200,7 @@ class Show extends Component
     {
         $imma = $this->imma_directe;
         $this->validate([
-            'status' => 'required',
+            #'status' => 'required',
             'date_status' => 'required',
         ]);
         if ($imma->next_step == "Avis Au publique En attente de signature") {
@@ -302,7 +320,7 @@ class Show extends Component
 
 
         $this->refresh(__('Statut Modifier Avec SUCCES!'), 'EditStatutModal');
-        $this->clearFields();
+        #$this->clearFields();
     }
 
     public function etatDeCession()
@@ -336,7 +354,7 @@ class Show extends Component
         DB::transaction(function () {
             $this->imma_directe->update([
                 'etat_cession_id' => $this->etat_cession->id,
-                'statut' => 'Etat de Cesssion en Attente de Paiement',
+                'statut' => 'Etat de Cession en Attente de Paiement',
                 'next_step' => 'edit',
                 'etat_cession' => Carbon::now(),
             ]);

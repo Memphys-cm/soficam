@@ -1,4 +1,4 @@
-<div class="container my-4">
+<div class="container my-4 ">
     <div class="shadow-lg rounded p-4 bg-white">
         <div class="mb-4 mt-md-0">
 
@@ -25,7 +25,8 @@
                             <label for="status">{{ __('Statut') }}</label>
                             <input wire:model="status" type="text"
                                 class="form-control  @error('status') is-invalid @enderror"
-                                placeholder="{{ __('') }}" required="" value="{{ $status }}" name="status" disabled>
+                                placeholder="{{ __('') }}" required="" value="{{ $status }}" name="status"
+                                disabled>
                             @error('status')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -45,7 +46,7 @@
                 <div class="d-flex justify-content-end">
                     <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
                         data-bs-dismiss="modal">{{ __('Fermer') }}</button>
-                    <button type="submit" wire:click.prevent="edit_statut" class="btn btn-primary btn-loading"
+                    <button type="submit" wire:click.prevent="edits_statut" class="btn btn-primary btn-loading"
                         wire:loading.attr="disabled">{{ __('Modifier le Statut') }}</button>
                 </div>
             </x-form-items.form>

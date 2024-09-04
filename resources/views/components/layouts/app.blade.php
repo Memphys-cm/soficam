@@ -60,6 +60,10 @@
             font-family: 'Poppins', sans-serif;
 
         }
+        .disabled-page {
+            pointer-events: none; /* Désactive toutes les interactions */
+            opacity: 0.5; /* Grise la page */
+        }
 
         .stepwizard-step p {
             margin-top: 10px;
