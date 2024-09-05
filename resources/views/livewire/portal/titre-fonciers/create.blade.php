@@ -17,8 +17,7 @@
                                 <label for="numero_titre_foncier">{{ __('Numéro du Titre Foncier') }}</label>
                                 <input wire:model.defer="numero_titre_foncier" type="text"
                                     class="form-control  @error('numero_titre_foncier') is-invalid @enderror"
-                                    placeholder="" required="" value=""
-                                    name="numero_titre_foncier">
+                                    placeholder="" required="" value="" name="numero_titre_foncier">
                                 @error('numero_titre_foncier')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -57,7 +56,7 @@
                                 <label class="px-2" for="region_id">{{ __('Région') }}</label>
                                 <select wire:model="region_id" name="region_id"
                                     class="form-select  @error('region_id') is-invalid @enderror" required="">
-                                    <option value="">{{ __('--Sélectionner--') }}</option> 
+                                    <option value="">{{ __('--Sélectionner--') }}</option>
                                     @foreach ($regions as $region)
                                         <option value="{{ $region->id }}">{{ $region->region_name }}</option>
                                     @endforeach
@@ -68,8 +67,9 @@
                             </div>
                             <div class='col'>
                                 <label class="px-2" for="division_id">{{ __('Département') }}</label>
-                                <select wire:model="division_id" name="division_id" class="form-select @error('division_id') is-invalid @enderror" required="">
-                                    <option value="">{{ __('--Sélectionner--') }}</option> 
+                                <select wire:model="division_id" name="division_id"
+                                    class="form-select @error('division_id') is-invalid @enderror" required="">
+                                    <option value="">{{ __('--Sélectionner--') }}</option>
                                     @foreach ($divisions as $division)
                                         <option value="{{ $division->id }}">{{ $division->division_name }}</option>
                                     @endforeach
@@ -82,7 +82,7 @@
                                 <label class="px-2" for="sub_division_id">{{ __('Arrondissement') }}</label>
                                 <select wire:model="sub_division_id" name="sub_division_id"
                                     class="form-select  @error('sub_division_id') is-invalid @enderror" required="">
-                                    <option value="">{{ __('--Sélectionner--') }}</option> 
+                                    <option value="">{{ __('--Sélectionner--') }}</option>
                                     @foreach ($sub_divisions as $sub_division)
                                         <option value="{{ $sub_division->id }}">{{ $sub_division->sub_division_name }}
                                         </option>
@@ -107,16 +107,18 @@
                                 <label for="groupement">{{ __('Groupement') }}</label>
                                 <input wire:model="groupement" type="text"
                                     class="form-control  @error('groupement') is-invalid @enderror"
-                                    placeholder="{{ __('') }}" required="" value="" name="groupement">
+                                    placeholder="{{ __('') }}" required="" value=""
+                                    name="groupement">
                                 @error('groupement')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="zone">{{__('Zone')}}</label>
-                                <select wire:model="zone" name="zone" class="form-select  @error('zone') is-invalid @enderror" required="">
-                                    <option value="urbain">{{__('Urbaine')}}</option>
-                                    <option value="rurale">{{__('Rurale')}}</option>
+                                <label for="zone">{{ __('Zone') }}</label>
+                                <select wire:model="zone" name="zone"
+                                    class="form-select  @error('zone') is-invalid @enderror" required="">
+                                    <option value="urbain">{{ __('Urbaine') }}</option>
+                                    <option value="rurale">{{ __('Rurale') }}</option>
                                 </select>
                                 @error('zone')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -125,8 +127,10 @@
                         </div>
                         <div class='form-group mb-3 row'>
                             <div class="col">
-                                <label for="numero_folio">{{__('Numéro Folio')}}</label>
-                                <input wire:model="numero_folio" type="number" class="form-control  @error('numero_folio') is-invalid @enderror" placeholder="{{__('')}}" required="" name="name">
+                                <label for="numero_folio">{{ __('Numéro Folio') }}</label>
+                                <input wire:model="numero_folio" type="number"
+                                    class="form-control  @error('numero_folio') is-invalid @enderror"
+                                    placeholder="{{ __('') }}" required="" name="name">
                                 @error('numero_folio')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -182,12 +186,13 @@
                             <div class="col">
                                 <label for="provenance_TF">{{ __('Source du Titre Foncier') }}</label>
                                 <select wire:model="provenance_TF" name="etat_TF"
-                                class="form-select  @error('etat_TF') is-invalid @enderror" required="">
-                                <option value="">{{ __('--Sélectionner Source--') }}</option>
-                                <option value="IMMATRICULTATION DIRECTE">{{ __('IMMATRICULTATION DIRECTE') }}</option>
-                                <option value="MUTATION TOTALE">{{ __('MUTATION TOTALE') }}</option>
-                                <option value="MORCELLEMENT">{{ __('MORCELLEMENT') }}</option>
-                            </select>
+                                    class="form-select  @error('etat_TF') is-invalid @enderror" required="">
+                                    <option value="">{{ __('--Sélectionner Source--') }}</option>
+                                    <option value="IMMATRICULTATION DIRECTE">{{ __('IMMATRICULTATION DIRECTE') }}
+                                    </option>
+                                    <option value="MUTATION TOTALE">{{ __('MUTATION TOTALE') }}</option>
+                                    <option value="MORCELLEMENT">{{ __('MORCELLEMENT') }}</option>
+                                </select>
                                 {{-- <input wire:model="provenance_TF" type="text"
                                     class="form-control  @error('provenance_TF') is-invalid @enderror"
                                     placeholder="{{ __('') }}" required="" name="name"> --}}
@@ -274,7 +279,7 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                         
+
                         </div>
 
                         {{-- <div class="p-3 shadow my-4">
@@ -300,14 +305,30 @@
                                 </div>
                             </div>
                         </div> --}}
-                         <div class='form-group row mb-2'>
-                                 <div class='col'>
-                                     <label class="px-2" for="plan">{{__('Ajouter les fichiers')}}</label>
-                                     <div class="input-group">
-                                         <input type="file" class="form-control" wire:model="attachements" multiple>
-                                     </div>
-                                 </div>
-                             </div>
+                        <div class='form-group row mb-2'>
+                            <div class='col'>
+                                <label class="px-2" for="ccp">{{ __('Ajouter le CCP') }}</label>
+                                <div class="input-group">
+                                    <input type="file" class="form-control" wire:model="attachments.ccp" multiple>
+                                </div>
+                            </div>
+                            <div class='col'>
+                                <label class="px-2"
+                                    for="bordereau">{{ __('Ajouter le Bordereau analytique') }}</label>
+                                <div class="input-group">
+                                    <input type="file" class="form-control" wire:model="attachments.bordereau"
+                                        multiple>
+                                </div>
+                            </div>
+                            <div class='col'>
+                                <label class="px-2"
+                                    for="plan">{{ __('Ajouter Le plan de mise à jour') }}</label>
+                                <div class="input-group">
+                                    <input type="file" class="form-control" wire:model="attachments.plan"
+                                        multiple>
+                                </div>
+                            </div>
+                        </div>
                         @foreach ($coordinates as $coordinateIndex => $coordinate)
                             <div class='form-group mb-2 d-flex align-items-end justify-content-between'>
                                 <div class=''>
