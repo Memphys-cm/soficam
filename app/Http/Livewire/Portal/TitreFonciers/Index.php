@@ -57,7 +57,11 @@ class Index extends Component
     public $nom_et_prenoms_de_largent_traitant;
     public $le_conservateur;
     public $numero_ccp;
-    public $attachements;
+    public $attachments = [
+        'ccp' => [],
+        'bordereau' => [],
+        'plan' => []
+    ];
     public $taxFoncier_amount;
     public $conservateurs, $conservateur_id;
 
@@ -277,10 +281,13 @@ class Index extends Component
         $titrefoncier->users()->sync($this->user_ids);
 
         if (!empty($this->attachements)) {
-            foreach ($this->attachements as $attachement) {
-                $titrefoncier->addMedia($attachement->getRealPath())
-                    ->usingName($titrefoncier->uuid)
-                    ->toMediaCollection('titrefonciers');
+            foreach ($this->attachments as $category => $files) {
+                foreach ($files as $file) {
+                    $titrefoncier->addMedia($file->getRealPath())
+                        ->usingName($titrefoncier->uuid) // Ou autre nom personnalisé
+                        ->withCustomProperties(['category' => $category]) // Pour catégoriser si besoin
+                        ->toMediaCollection('titrefonciers');
+                }
             }
         }
 
