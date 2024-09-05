@@ -263,6 +263,24 @@ class Index extends Component
 
         return [$titre_fonciers, $charges, $lotissements, $certificate_proprietes, $etat_cessions];
     }
+    public function print($id)
+    {
+        list($charges) = $this->collect($id);
+
+        $data = [
+            'charges' => $charges,
+            // Autres données que vous souhaitez afficher dans la vue
+        ];
+        #dd($data);
+
+        $pdf = Pdf::loadView('livewire.portal.certificate-propriete.prints', $data)
+            ->setPaper('a4', 'portrait');
+
+        return response()->streamDownload(
+            fn() => print($pdf->output()),
+            __('Report-') . Str::random('10') . ".pdf"
+        );
+    }
 
     public function printPdfs($id)
     {

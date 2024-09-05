@@ -85,7 +85,7 @@
                                     <option value="cash" @if (old('type_de_versement') === 'cash') selected @endif>Cash
                                     </option>
                                     <option value="tranche" @if (old('type_de_versement') === 'tranche') selected @endif>
-                                        Tranche</option>
+                                        {{__('Tranche')}}</option>
 
                                 </select>
                                 @error('type_de_versement')

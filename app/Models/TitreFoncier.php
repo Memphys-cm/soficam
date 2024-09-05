@@ -81,7 +81,7 @@ class TitreFoncier extends Model implements HasMedia
             'DISPONIBLE' => 'success',
             'PRENOTE' => 'secondary',
             'SUSPENDU' => 'danger',
-            NULL => ''
+            default => 'primary'
         };
     }
     public function getStatusTaxStyleAttribute(): String
@@ -89,7 +89,7 @@ class TitreFoncier extends Model implements HasMedia
         return match ($this->status_tax) {
             'payer' => 'success',
             'non_payer' => 'danger',
-            NULL => ''
+            default => 'info'
         };
     }
 

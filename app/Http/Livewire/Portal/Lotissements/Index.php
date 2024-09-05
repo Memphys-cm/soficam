@@ -23,6 +23,25 @@ class Index extends Component
       
     }
 
+    public function print($id)
+    {
+        $lotissements = Lotissement::find($id);
+
+        $data = [
+            '$lotissements' => $lotissements,
+            // Autres données que vous souhaitez afficher dans la vue
+        ];
+        #dd($data);
+
+        $pdf = Pdf::loadView('livewire.portal.lotissements.sale', $data)
+            ->setPaper('a4', 'portrait');
+
+        return response()->streamDownload(
+            fn() => print($pdf->output()),
+            __('Report-') . Str::random('10') . ".pdf"
+        );
+    }
+
     public function initData($id) : void 
     {
         $this->lotissement = Lotissement::findOrFail($id);

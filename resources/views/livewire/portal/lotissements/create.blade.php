@@ -107,7 +107,7 @@
                         </div>
                         <div class="col-md-3 py-2">
                             <label for="code">{{ __('Lotisseur') }}</label>
-                            <input wire:model="lotisseur" type="text" class="form-control  @error('lotisseur') is-invalid @enderror" placeholder="lotisseur" required="" value="" name="lotisseur">
+                            <input wire:model="lotisseur" type="text" class="form-control  @error('lotisseur') is-invalid @enderror" placeholder="{{ __('lotisseur') }}" required="" value="" name="lotisseur">
                             @error('lotisseur')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -138,14 +138,14 @@
                         </div>
                         <div class="col-md-3 py-2">
                             <label for="code">{{ __('Urbaniste') }}</label>
-                            <input wire:model="urbaniste" type="text" class="form-control  @error('urbaniste') is-invalid @enderror" placeholder="urbaniste" required="" value="" name="urbaniste">
+                            <input wire:model="urbaniste" type="text" class="form-control  @error('urbaniste') is-invalid @enderror" placeholder="{{ __('urbaniste') }}" required="" value="" name="urbaniste">
                             @error('urbaniste')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-3 py-2">
                             <label for="code">{{ __('Contrôleur') }}</label>
-                            <input wire:model="controlleur" type="text" class="form-control  @error('controlleur') is-invalid @enderror" placeholder="controlleur" required="" value="" name="controlleur">
+                            <input wire:model="controlleur" type="text" class="form-control  @error('controlleur') is-invalid @enderror" placeholder="{{ __('controleur') }}" required="" value="" name="controlleur">
                             @error('controlleur')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
