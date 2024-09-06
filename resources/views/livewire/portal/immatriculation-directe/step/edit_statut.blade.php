@@ -50,6 +50,14 @@
                         wire:loading.attr="disabled">{{ __('Modifier le Statut') }}</button>
                 </div>
             </x-form-items.form>
+
+            <!-- Notice explicative -->
+            <div class="my-2 p-2 shadow">
+                <p class="text-warning">
+                    {{ __('À cette étape, veuillez modifier le statut du dossier d\'immatriculation et indiquer la date correspondante. Une fois les informations saisies, vous pouvez enregistrer les modifications.') }}
+                </p>
+            </div>
+
         </div>
 
     </div>
