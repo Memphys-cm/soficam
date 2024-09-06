@@ -44,6 +44,10 @@ is-invalid
 
             </x-form-items.form>
 
+            <div class="rounded shadow">
+            
+            </div>
+
             <div class="d-flex justify-content-end">
                 <button class="btn btn-secondary" wire:click.prevent="prevStep"> {{ __('<< Précedent') }} </button>
                 <button class="btn btn-primary mx-2" wire:click.prevent="cotationFirstStep"> {{ __('Enregistrer') }}
