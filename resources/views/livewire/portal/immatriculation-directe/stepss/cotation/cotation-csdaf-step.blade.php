@@ -50,6 +50,14 @@ is-invalid
                 </button>
                 <button class="btn btn-info" wire:click.prevent="cotation_first_step"> {{ __('Suivant >>') }} </button>
             </div>
+
+            <!-- Notice explicative -->
+            <div class="my-2 p-2 shadow ">
+                <p class="text-warning">
+                    {{ __('À cette étape, veuillez sélectionner le service et le CSDAF appropriés. Vous pouvez également ajouter des observations si nécessaire. Une fois les informations saisies, vous pouvez enregistrer et passer à l\'étape suivante.') }}
+                </p>
+            </div>
+
         </div>
 
     </div>

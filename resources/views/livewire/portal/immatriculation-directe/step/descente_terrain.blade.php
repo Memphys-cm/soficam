@@ -126,5 +126,12 @@
                 </x-form-items.form>
             </div>
 
+            <!-- Notice explicative -->
+            <div class="my-2 p-2 shadow">
+                <p class="text-warning">
+                    {{ __('À cette étape, veuillez entrer les limites géographiques (Nord, Sud, Est, Ouest) et les informations des membres de la commission (nom, poste, numéro CNI, téléphone). Vous pouvez également ajouter des membres supplémentaires et télécharger les différents PV. Une fois les informations saisies, vous pouvez enregistrer la descente sur le terrain.') }}
+                </p>
+            </div>
+
         </div>
     @endcan

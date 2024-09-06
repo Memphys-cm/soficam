@@ -35,6 +35,14 @@
                         wire:loading.attr="disabled">{{ __('Enregistrer') }}</button>
                 </div>
             </x-form-items.form>
+
+            <!-- Notice explicative -->
+            <div class="my-2 p-2 shadow">
+                <p class="text-warning">
+                    {{ __('À cette étape, veuillez ajouter les pièces manquantes dans le dossier administratif. Une fois les pièces ajoutées, vous pouvez enregistrer les modifications.') }}
+                </p>
+            </div>
+
         </div>
 
     </div>
