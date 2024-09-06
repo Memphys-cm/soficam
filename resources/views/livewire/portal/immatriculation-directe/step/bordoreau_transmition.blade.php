@@ -16,7 +16,6 @@
             @endphp
         @endif
 
-
         <x-form-items.form wire:submit="bordereau">
             <div class="form-group mb-3 row">
                 <div class="col-md-12">
