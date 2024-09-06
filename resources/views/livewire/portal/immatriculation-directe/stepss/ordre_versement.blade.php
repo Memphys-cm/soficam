@@ -1,5 +1,5 @@
 @can('imma_directe.ordre_versement')
-    <div class="container my-4 {{ $imma_directe->statut !== 'coter' ? 'disabled-page' : '' }}">
+    <div class="container my-4 {{ $imma_directe->statut !== 'coter' && !auth()->user()->hasRole('super_admin') ? 'disabled-page' : '' }} ? 'disabled-page' : '' }}">
         <div class="shadow-lg rounded p-4 bg-white">
             <h4 class="mb-4 fw-bold text-primary">{{ __('Ordre de Versement') }}</h4>
 
