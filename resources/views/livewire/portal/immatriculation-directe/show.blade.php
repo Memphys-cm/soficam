@@ -197,7 +197,7 @@ $bgClass = $isCompleted
                 @elseif($step == 10)
                     @include('livewire.portal.immatriculation-directe.step.edit_statut')
                 @elseif($step == 11)
-                    @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_technique')
+                    @include('livewire.portal.immatriculation-directe.step.quittance_paiement')
                 @elseif($step == 12)
                     @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_administratif')
                 @elseif($step == 13)
