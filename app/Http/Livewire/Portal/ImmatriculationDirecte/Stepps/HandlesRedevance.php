@@ -19,7 +19,7 @@ trait HandlesRedevance
 
         DB::transaction(function () {
             $this->imma_directe->update([
-                'numero_ordre_versement' => $this->genererNumero(),
+                'numero_redevance_fonciere' => $this->genererNumero(),
                 // 'superficie_ordre_versement' => $this->superficie_ordre_versement,
                 'montant_ordre_redevance_fonciere' => $this->montant_ordre_redevance_fonciere,
                 'status_ordre_versement' => 'pending',
@@ -49,7 +49,7 @@ trait HandlesRedevance
 
         DB::table('saleables')->insert($saleableData);
 
-        Session::flash('message', __('Ordre de Versement Enregistrer Avec SUCCES!'));
+        Session::flash('message', __('Ordre de Redevance Foncière Enregistrer Avec SUCCES!'));
 
         // $this->clearFields();
     }
