@@ -372,7 +372,7 @@ class Show extends Component
     public function edits_statut()
     {
 
-        // dd($this->next_step);
+        dd($this->next_step);
         $imma = $this->imma_directe;
         $this->validate([
             #'status' => 'required',
@@ -436,20 +436,20 @@ class Show extends Component
                 ]);
             });
         } else if ($imma->next_step == "Cotation du dossier complet d\’immatriculation directe au CSRDAF ") { // step 18
-            // dd("ok");
             DB::transaction(function () {
                 $this->imma_directe->update([
                     'statut' => 'Dossier complet transmis  au CSRegional Mindcaf',
-                    'next_step' => ' Transmission du dossier complet au Délégué Régional MINDCAF ',
+                    'next_step' => 'Finalisation du Dossier',
                     'date_dossier_complet_transmi_CSRegional_mindcaf' => $this->date_status,
                 ]);
             });
-        } else if ($imma->next_step == "Transmission du dossier complet au Délégué Régional MINDCAF") { //step 19
+        } else if ($imma->next_step == "Finalisation du Dossier") { //step 19
+            dd("ok");
             DB::transaction(function () {
                 $this->imma_directe->update([
-                    'statut' => 'Dossier Vise et en attente de publication',
-                    'next_step' => 'Traitement du dossier visé-enregistré',
-                    'date_dossier_vise_en_attente_publication' => $this->date_status,
+                    'statut' => 'Dossier Finaliser en attente de verification finale',
+                    'next_step' => 'Verification finale',
+                    'dossier_finale' => $this->date_status,
                 ]);
             });
         } else if ($imma->next_step == "Cotation du dossier du dossier technique au Chef service régional du cadastre pour contrôle, mise à jour et signature") {

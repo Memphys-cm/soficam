@@ -122,12 +122,12 @@ $bgClass = $isCompleted
                             15 => __('15- Établissement du Bordereau de Transmission'),
                             16 => __('16- Transmission du dossier technique au Délégué Régional MINDCAF'),
                             17 => __('17- Cotation du dossier complet d’immatriculation directe au CSRDAF'),
-                            18 => __('18- Finalisation et Clôture du Dossier'),
                         ],
                         4 => [
+                            18 => __('18- Finalisation et Clôture du Dossier'),
                             19 => __('19- Vérification Finale'),
-                            20 => __('20- Remise des Documents Officiels'),
-                            21 => __('21- Archivage du Dossier'),
+                            20 => __('20- Enregistrer le Titre foncier'),
+                            // 21 => __('21- Archivage du Dossier'),
                         ],
                         // Ajouter des steps pour les autres high_steps si nécessaire
                     ];
@@ -223,8 +223,8 @@ $bgClass = $isCompleted
                     @include('livewire.portal.immatriculation-directe.step.edit_statut')
                 @elseif($step == 20)
                     @include('livewire.portal.immatriculation-directe.step.edit_statut')
-                @elseif($step == 21)
-                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                {{-- @elseif($step == 21)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut') --}}
                 
                 @endif
                 <!-- Ajoutez d'autres conditions pour les étapes restantes -->

@@ -111,6 +111,8 @@ return new class extends Migration
             $table->date('cotation_compl_csrdaf')->nullable();
             $table->string('numero_serie')->nullable();
 
+            $table->date('dossier_finale')->nullable();
+
             $table->string('is_finalisation')->nullable();
 
 
