@@ -1,5 +1,5 @@
 @can('imma_directe.certificat_affichage')
-    <div class="container my-4 {{ $imma_directe->statut !== 'Avis au Public Signé' ? 'disabled-page' : '' }}">
+    <div class="container my-4 {{ $imma_directe->statut !== 'Avis au Public Signé' && !auth()->user()->hasRole('super_admin') ? 'disabled-page' : '' }}">
         <div class="shadow-lg rounded p-4 bg-white">
 
             <div class="mb-4 mt-md-0">
@@ -47,7 +47,15 @@
                         wire:loading.attr="disabled">{{ __('Imprimer') }}</button>
                 </div>
             </x-form-items.form>
+
+            <!-- Notice explicative -->
+            <div class="my-2 p-2 shadow">
+                <p class="text-warning">
+                    {{ __('À cette étape, veuillez entrer les dates de début et de fin pour l\'établissement du certificat d\'affichage. Une fois les informations saisies, vous pouvez imprimer le certificat et une fois terminer passer a la prochaine etape]') }}
+                </p>
+            </div>
         </div>
+
 
     </div>
 @endcan

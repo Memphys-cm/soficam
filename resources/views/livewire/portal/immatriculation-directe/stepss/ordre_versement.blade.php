@@ -1,5 +1,5 @@
 @can('imma_directe.ordre_versement')
-    <div class="container my-4 {{ $imma_directe->statut !== 'coter' ? 'disabled-page' : '' }}">
+    <div class="container my-4 {{ $imma_directe->statut !== 'coter' && !auth()->user()->hasRole('super_admin') ? 'disabled-page' : '' }} ? 'disabled-page' : '' }}">
         <div class="shadow-lg rounded p-4 bg-white">
             <h4 class="mb-4 fw-bold text-primary">{{ __('Ordre de Versement') }}</h4>
 
@@ -46,6 +46,14 @@
                 </button>
                 <button class="btn btn-info" wire:click.prevent="nextStep"> {{ __('Suivant >>') }} </button>
             </div>
+
+            <!-- Notice explicative -->
+            <div class="my-2 p-2 shadow ">
+                <p class="text-warning">
+                    {{ __('À cette étape, veuillez entrer le montant de l\'ordre de versement. Si le montant est déjà défini, le champ sera désactivé. Vous pouvez enregistrer les informations et passer à l\'étape suivante.') }}
+                </p>
+            </div>
+
         </div>
 
     </div>

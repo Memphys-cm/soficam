@@ -1,5 +1,5 @@
 @can('imma_directe.mise_en_forme_dos_admin')
-    <div class="container my-4 {{ $imma_directe->statut !== "Dossier Technique Mise En Forme" ? 'disabled-page' : '' }}">
+    <div class="container my-4 {{ $imma_directe->statut !== "Dossier Technique Mise En Forme" && !auth()->user()->hasRole('super_admin') ? 'disabled-page' : '' }}">
         <div class="shadow-lg rounded p-4 bg-white">
             <div class="mb-4 mt-md-0">
                 <h1 class="mb-0 h4">
@@ -35,6 +35,14 @@
                         wire:loading.attr="disabled">{{ __('Enregistrer') }}</button>
                 </div>
             </x-form-items.form>
+
+            <!-- Notice explicative -->
+            <div class="my-2 p-2 shadow">
+                <p class="text-warning">
+                    {{ __('À cette étape, veuillez ajouter les pièces manquantes dans le dossier administratif. Une fois les pièces ajoutées, vous pouvez enregistrer les modifications.') }}
+                </p>
+            </div>
+
         </div>
 
     </div>

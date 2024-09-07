@@ -57,7 +57,7 @@ class Index extends Component
     public $nom_et_prenoms_de_largent_traitant;
     public $le_conservateur;
     public $numero_ccp;
-    public $attachements;
+    public $attachments;
     public $taxFoncier_amount;
     public $conservateurs, $conservateur_id;
 

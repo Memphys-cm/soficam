@@ -1,5 +1,5 @@
 @can('imma_directe.descente_terrain')
-    <div class="container my-4 {{ $imma_directe->statut !== "Certificat d'affichage signé" ? 'disabled-page' : '' }}">
+    <div class="container my-4 {{ $imma_directe->statut !== "Certificat d'affichage signé" && !auth()->user()->hasRole('super_admin') ? 'disabled-page' : '' }}">
         <div class="shadow-lg rounded p-4 bg-white">
             <div class="mb-4 mt-md-0">
                 <div class="mb-4 mt-md-0">
@@ -23,44 +23,6 @@
 
 
                 <x-form-items.form wire:submit="descente_terrain">
-                    <div class='form-group mb-3 row'>
-                        <div class='col'>
-                            <label for="limit_nord">{{ __('Limite Nord') }}</label>
-                            <input wire:model="limit_nord" type="text"
-                                class="form-control  @error('limit_nord') is-invalid @enderror"
-                                placeholder="{{ __('Road') }}" required="" value="" name="limit_nord">
-                            @error('limit_nord')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class='col'>
-                            <label for="limit_sud">{{ __('Limite Sud') }}</label>
-                            <input wire:model="limit_sud" type="text"
-                                class="form-control  @error('limit_sud') is-invalid @enderror"
-                                placeholder="{{ __('Road') }}" required="" value="" name="limit_sud">
-                            @error('limit_sud')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class='col'>
-                            <label for="limit_est">{{ __('Limite Est') }}</label>
-                            <input wire:model="limit_est" type="text"
-                                class="form-control  @error('limit_est') is-invalid @enderror"
-                                placeholder="{{ __('Road') }}" required="" value="" name="limit_est">
-                            @error('limit_est')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class='col'>
-                            <label for="limit_ouest">{{ __('Limite Ouest') }}</label>
-                            <input wire:model="limit_ouest" type="text"
-                                class="form-control  @error('limit_ouest') is-invalid @enderror"
-                                placeholder="{{ __('Road') }}" required="" value="" name="limit_ouest">
-                            @error('limit_ouest')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
                     <label for=""> {{ __('Enregistrement des CNI des notables + chefs') }} </label> <br>
                     @foreach ($comissions as $index => $user)
                         <div class="row my-1 py-1">
@@ -69,7 +31,7 @@
                                 <input class="form-control  @error('comissions') is-invalid @enderror" type="text"
                                     wire:model="comissions.{{ $index }}.name" placeholder="Nom">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <label>{{ __('Poste') }} </label>
                                 <input class="form-control @error('comissions') is-invalid @enderror" type="text"
                                     wire:model="comissions.{{ $index }}.position" placeholder="Poste">
@@ -84,7 +46,7 @@
                                 <input class="form-control  @error('comissions') is-invalid @enderror" type="text"
                                     wire:model="comissions.{{ $index }}.telephone" placeholder="Téléphone">
                             </div>
-                            <div class="col-md-2 mb-3">
+                            <div class="col-md-1 mb-3">
                                 <label>{{ __('Action') }} </label>
                                 <a type="button" wire:click="removeRow({{ $index }})" class="btn-icon ">
                                     <svg class="icon icon-sm text-danger me-1" fill="currentColor" viewBox="0 0 20 20"
@@ -104,26 +66,27 @@
                                 d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                         </svg>
                         {{ __('Ajouter un membre') }}</button>
-                    <button class="btn btn-primary" type="submit">{{ __('Enregistrer') }}</button>
+                    {{-- <button class="btn btn-primary" type="submit">{{ __('Enregistrer') }}</button> --}}
                     <hr>
 
-                    <div class='form-group row mb-2'>
-                        <div class='col-md-12'>
-                            <label class="px-2"
-                                for="certificates_propriete_id">{{ __('Ajouter Les Differents PV') }}</label>
-                            <div class="input-group">
-                                <input type="file" class="form-control" wire:model="attachments" multiple>
-                            </div>
-                        </div>
+                    <div class="my-2">
+                        <textarea name="" wire:model="message_porte" class="form-control" id="" cols="30" rows="10"></textarea>
                     </div>
 
                     <div class="d-flex justify-content-end my-2">
-                        <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
-                            data-bs-dismiss="modal">{{ __('Fermer') }}</button>
-                        <button type="submit" wire:click.prevent="descente_terrain" class="btn btn-primary btn-loading"
+                        <button class="btn btn-secondary" wire:click.prevent="prevStep"> {{ __('<< Précedent') }} </button>
+                        <button type="submit" wire:click.prevent="descente_terrain" class="btn btn-primary btn-loading mx-2
                             wire:loading.attr="disabled">{{ __('Enregistrer La Descente sur le Terrain') }}</button>
+                            <button class="btn btn-info" wire:click.prevent="nextStep"> {{ __('Suivant >>') }} </button>
                     </div>
                 </x-form-items.form>
+            </div>
+
+            <!-- Notice explicative -->
+            <div class="my-2 p-2 shadow">
+                <p class="text-warning">
+                    {{ __('À cette étape, veuillez entrer les informations des membres de la commission (nom, poste, numéro CNI, téléphone). Vous pouvez également ajouter des membres supplémentaires Une fois les informations saisies, vous pouvez enregistrer la descente sur le terrain.') }}
+                </p>
             </div>
 
         </div>

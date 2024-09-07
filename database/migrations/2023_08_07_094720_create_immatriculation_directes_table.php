@@ -81,6 +81,7 @@ return new class extends Migration
             $table->string('limit_ouest')->nullable();
             $table->date('dossier_technique_created')->nullable();
             $table->date('descente_terrain')->nullable();
+            $table->date('descente_terrain_maked')->nullable();
             $table->date('transmission_dos_tech_csdaf')->nullable();
             $table->date('transmission_delegue_departemental')->nullable();
             $table->date('transmission_delegue_regional')->nullable();

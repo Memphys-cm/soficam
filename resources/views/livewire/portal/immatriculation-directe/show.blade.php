@@ -136,12 +136,12 @@ $bgClass = $isCompleted
                         1 => true, // Étape 1 est toujours colorée
                         2 => $imma_directe->date_cotation,
                         3 => $imma_directe->date_ordre_versement,
-                        4 => $imma_directe->date_certificat_d_affichage_signer,
+                        4 => $imma_directe->calendar_decision_date,
                         5 => $imma_directe->date_fin_certificat_d_affichage,
                         6 => $imma_directe->date_certificat_d_affichage_signer,
                         7 => $imma_directe->descente_terrain,
                         8 => $imma_directe->etat_cession,
-                        9 => $imma_directe->dossier_technique_complet,
+                        9 => $imma_directe->descente_terrain_maked,
                         10 => $imma_directe->dossier_technique_complet,
                         11 => $imma_directe->dossier_technique_complet,
                         12 => $imma_directe->dossier_administratif_complet,
@@ -193,11 +193,11 @@ $bgClass = $isCompleted
                 @elseif($step == 8)
                     @include('livewire.portal.immatriculation-directe.step.etat_cession')
                 @elseif($step == 9)
-                    @include('livewire.portal.immatriculation-directe.step.descente_terrain')
+                    @include('livewire.portal.immatriculation-directe.step.instruction_descente_terrain')
                 @elseif($step == 10)
                     @include('livewire.portal.immatriculation-directe.step.edit_statut')
                 @elseif($step == 11)
-                    @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_technique')
+                    @include('livewire.portal.immatriculation-directe.step.quittance_paiement')
                 @elseif($step == 12)
                     @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_administratif')
                 @elseif($step == 13)
