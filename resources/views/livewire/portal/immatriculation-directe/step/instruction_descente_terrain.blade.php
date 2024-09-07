@@ -23,8 +23,7 @@
                 @endif
 
                 <x-form-items.form wire:submit="instruction_descente_terrain">
-                    <!-- Enregistrement des PVs admin
-                    
+
                     <div class='form-group mb-3 row'>
                         <div class='col'>
                             <label for="limit_nord">{{ __('Limite Nord') }}</label>
@@ -63,7 +62,6 @@
                             @enderror
                         </div>
                     </div>
-                        istratifs -->
                     <div class="form-group row mb-3">
                         <div class="col-md-12">
                             <label class="form-label"
@@ -78,7 +76,8 @@
                     <!-- Enregistrement des PVs de bornage -->
                     <div class="form-group row mb-3">
                         <div class="col-md-12">
-                            <label class="form-label" for="pv_bornage">{{ __('Enregistrement des PVs de bornage') }}</label>
+                            <label class="form-label"
+                                for="pv_bornage">{{ __('Enregistrement des PVs de bornage') }}</label>
                             <input type="file" id="pv_bornage" class="form-control" wire:model="pv_bornage">
                             @error('pv_bornage')
                                 <span class="text-danger">{{ $message }}</span>
@@ -107,9 +106,10 @@
                     <!-- Boutons d'action -->
                     <div class="d-flex justify-content-end my-2">
                         <button class="btn btn-secondary" wire:click.prevent="prevStep"> {{ __('<< Précedent') }} </button>
-                        <button type="submit" wire:click.prevent="instruction_descente_terrain" class="btn btn-primary btn-loading mx-2"
+                        <button type="submit" wire:click.prevent="instruction_descente_terrain"
+                            class="btn btn-primary btn-loading mx-2"
                             wire:loading.attr="disabled">{{ __('Enregistrer L\'instruction de la descente sur le Terrain') }}</button>
-                            <button class="btn btn-info" wire:click.prevent="nextStep"> {{ __('Suivant >>') }} </button>
+                        <button class="btn btn-info" wire:click.prevent="nextStep"> {{ __('Suivant >>') }} </button>
                     </div>
                 </x-form-items.form>
             </div>

@@ -204,6 +204,10 @@ class Show extends Component
             $this->imma_directe->update([
                 'statut' => 'Instruction de la Descente sur le terrain effectuée',
                 'next_step' => 'Attente de la descente sur le terrain',
+                'limit_nord' => $this->limit_nord,
+                'limit_sud' => $this->limit_sud,
+                'limit_est' => $this->limit_est,
+                'limit_ouest' => $this->limit_ouest,
                 'descente_terrain_maked' => Carbon::now()
             ]);
         });
@@ -271,6 +275,14 @@ class Show extends Component
                     'etat_cession_payer' => $this->date_status,
                 ];
                 break;
+            case "Attente de la descente sur le terrain":
+                $updateData = [
+                    'statut' => 'Descente sur le terrain effectuer',
+                    'next_step' => 'Mise a jour du dossier technique',
+                    'etat_cession_payer' => $this->date_status,
+                ];
+                break;
+
             case "valider le paiement":
                 $updateData = [
                     'statut' => 'Dossier publié au bulletin des avis domaniaux et fonciers',
