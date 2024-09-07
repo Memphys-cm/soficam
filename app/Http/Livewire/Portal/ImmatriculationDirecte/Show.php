@@ -43,12 +43,65 @@ class Show extends Component
     public $attachments;
     public $state = 0, $price_m2, $user_ids, $localisation;
     public $frais_suplementaires, $cout, $commentaires, $code, $numero_bordereau_transmission;
-    public $etat_cession , $zone ,$superficie_en_m2;
-    public $cout_etat_cession;
+    public $etat_cession, $zone, $superficie_en_m2;
+    public $region_id;
+    public $division_id;
+    public $sub_division_id;
+    public $etat_terrain;
+    public $duplicata;
+    public $source_terrain;
+    public $superficie;
+    public $volume;
+    public $folio;
+    public $numero_cp;
+    public $titre_foncier_id;
+    public $next_step;
+    public $statut;
+    public $date_delivrance;
+    public $cotation_user_id;
+    public $observation_cotation;
+    public $date_cotation;
+    public $status_cotation;
+    public $numero_ordre_versement;
+    public $numero_arrete_ordre_versement;
+    public $date_ordre_versement;
+    public $status_ordre_versement;
 
     public function mount($code)
     {
-        $this->imma_directe = ImmatriculationDirecte::where('reference', $code)->first();
+        $imma_directe = ImmatriculationDirecte::where('reference', $code)->first();
+        $this->imma_directe = $imma_directe;
+        $this->service_id = $imma_directe->service_id;
+        $this->user_id = $imma_directe->user_id;
+        $this->observation = $imma_directe->observation;
+
+        // Ajouter ici toutes les autres colonnes récupérées
+        $this->region_id = $imma_directe->region_id;
+        $this->division_id = $imma_directe->division_id;
+        $this->sub_division_id = $imma_directe->sub_division_id;
+        $this->zone = $imma_directe->zone;
+        $this->etat_terrain = $imma_directe->etat_terrain;
+        $this->duplicata = $imma_directe->duplicata;
+        $this->source_terrain = $imma_directe->source_terrain;
+        $this->superficie = $imma_directe->superficie;
+        $this->volume = $imma_directe->volume;
+        $this->folio = $imma_directe->folio;
+        $this->numero_cp = $imma_directe->numero_cp;
+        $this->titre_foncier_id = $imma_directe->titre_foncier_id;
+        $this->numero_bordereau_transmission = $imma_directe->numero_bordereau_transmission;
+        $this->next_step = $imma_directe->next_step;
+        $this->statut = $imma_directe->statut;
+        $this->date_delivrance = $imma_directe->date_delivrance;
+        $this->comissions = $imma_directe->comissions;
+        $this->cotation_user_id = $imma_directe->cotation_user_id;
+        $this->observation_cotation = $imma_directe->observation_cotation;
+        $this->date_cotation = $imma_directe->date_cotation;
+        $this->status_cotation = $imma_directe->status_cotation;
+        $this->montant_ordre_versement = $imma_directe->montant_ordre_versement;
+        $this->numero_ordre_versement = $imma_directe->numero_ordre_versement;
+        $this->numero_arrete_ordre_versement = $imma_directe->numero_arrete_ordre_versement;
+        $this->date_ordre_versement = $imma_directe->date_ordre_versement;
+        $this->status_ordre_versement = $imma_directe->status_ordre_versement;
         $this->services = Service::select('id', 'service_name_fr')->get();
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
         $this->users = User::with(['roles' => function ($role) {
@@ -128,22 +181,23 @@ class Show extends Component
         );
     }
 
-    public function bordereau(){
+    public function bordereau()
+    {
         $this->validate(
             [
-                "numero_bordereau_transmission"=>"required"
+                "numero_bordereau_transmission" => "required"
             ]
-            );
+        );
 
-          DB::transaction(function() {
+        DB::transaction(function () {
             $this->imma_directe->update([
-                "numero_bordereau_transmission"=> $this->numero_bordereau_transmission,
-                "statut"=> "Bordereau de Transmission éffectué",
-                "next_step"=>"Transmission du dossier technique au Délégué Régional MINDCAF"
+                "numero_bordereau_transmission" => $this->numero_bordereau_transmission,
+                "statut" => "Bordereau de Transmission éffectué",
+                "next_step" => "Transmission du dossier technique au Délégué Régional MINDCAF"
             ]);
-          });  
+        });
 
-          $this->refresh(__('Numéro du Bordereau de transmission enregistré'), 'DescenteTerrainModal');
+        $this->refresh(__('Numéro du Bordereau de transmission enregistré'), 'DescenteTerrainModal');
     }
 
     public function edit_statut()
@@ -193,7 +247,6 @@ class Show extends Component
 
         // $this->clearFields();
         $this->refresh(__('Descente sur le terrain effectuée'), 'DescenteTerrainModal');
-
     }
 
     public function edits_statut()
@@ -325,14 +378,14 @@ class Show extends Component
 
     public function etatDeCession()
     {
-          // Récupérer l'année en cours au format 'yy'
-          $year = date('y');
+        // Récupérer l'année en cours au format 'yy'
+        $year = date('y');
 
-          // Récupérer le compteur depuis la base de données (par exemple en comptant les enregistrements de lotissement existants)
-          $counter = EtatCession::count() + 1;
+        // Récupérer le compteur depuis la base de données (par exemple en comptant les enregistrements de lotissement existants)
+        $counter = EtatCession::count() + 1;
 
-          // Générer le code unique
-          $this->code = $this->generateUniqueCode($year, $counter);
+        // Générer le code unique
+        $this->code = $this->generateUniqueCode($year, $counter);
         // dd($code);
 
 
@@ -380,7 +433,6 @@ class Show extends Component
 
 
             DB::table('saleables')->insert($saleableData);
-
         });
 
         $data = [
@@ -389,7 +441,7 @@ class Show extends Component
 
         $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.quitance', $data)->setPaper('a4', 'portrait');
         return response()->streamDownload(
-            fn () => print($pdf->output()),
+            fn() => print($pdf->output()),
             __('OrdreDeVersement') . Str::random('10') . ".pdf"
         );
 
@@ -455,15 +507,16 @@ class Show extends Component
         $this->refresh(__('Dossier Administratif Mise En Forme Avec Suceess'), 'DossierAdministratifModal');
     }
 
-    public function sms($id) {
+    public function sms($id)
+    {
         $imma_directe = ImmatriculationDirecte::findOrFail($id);
         $receivers = $imma_directe->users;
 
-        $userNames='';
+        $userNames = '';
         $mobiles = "";
 
-        foreach($receivers as $user) {
-            if($user){
+        foreach ($receivers as $user) {
+            if ($user) {
                 $userNames .= $user->first_name . ',';
                 $mobiles .= "$user->primary_phone_number,";
             }
@@ -474,7 +527,7 @@ class Show extends Component
         $mobiles = rtrim($mobiles, ',');
 
         $sms = "Mr/Mme. $userNames, votre dossier d'immatriculation directe et à l'étape $imma_directe->statut";
-        $senderid ='SOFICAM';
+        $senderid = 'SOFICAM';
         $api_key = '36v7fN66hzUD6SaBYkILlirHZo7P';
         $url = 'https://api.queensms.net/v1/sms.php';
 
@@ -499,18 +552,15 @@ class Show extends Component
             if (curl_errno($ch)) {
                 $output = curl_error($ch);
                 $arr = ['echec'];
-                return($arr);
-            }
-            else{
-                return($output);
+                return ($arr);
+            } else {
+                return ($output);
             }
             curl_close($ch);
-        }
-
-        catch (Exception $exception){
+        } catch (Exception $exception) {
             //echo $exception->getMessage();
             $arr = ['echec'];
-            return($arr);
+            return ($arr);
         }
     }
 
