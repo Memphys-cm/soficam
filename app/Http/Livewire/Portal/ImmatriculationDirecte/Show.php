@@ -18,6 +18,9 @@ use App\Http\Livewire\Traits\WithDataTables;
 use App\Http\Livewire\Portal\ImmatriculationDirecte\Stepps\HandlesCotationCsdaf;
 use App\Http\Livewire\Portal\ImmatriculationDirecte\Stepps\HandlesOrdreVersement;
 use App\Http\Livewire\Portal\ImmatriculationDirecte\Stepps\HandlesAvisPublicDescente;
+use proj4php\Point;
+use proj4php\Proj;
+use proj4php\Proj4php;
 
 class Show extends Component
 {
@@ -44,6 +47,31 @@ class Show extends Component
     public $state = 0, $price_m2, $user_ids, $localisation;
     public $frais_suplementaires, $cout, $commentaires, $code, $numero_bordereau_transmission;
     public $etat_cession, $zone, $superficie_en_m2;
+    public $region_id;
+    public $division_id;
+    public $sub_division_id;
+    public $etat_terrain;
+    public $duplicata;
+    public $source_terrain;
+    public $superficie;
+    public $volume;
+    public $folio;
+    public $numero_cp;
+    public $titre_foncier_id;
+    public $next_step;
+    public $statut;
+    public $date_delivrance;
+    public $cotation_user_id;
+    public $observation_cotation;
+    public $date_cotation;
+    public $status_cotation;
+    public $numero_ordre_versement;
+    public $numero_arrete_ordre_versement;
+    public $date_ordre_versement;
+    public $status_ordre_versement;
+    public $coordinates = ['', ''];
+    public $coordonnees = [];
+    public $attachements;
     public $cout_etat_cession;
     public $message_porte;
     public $pv_administratif;
@@ -52,18 +80,112 @@ class Show extends Component
 
     public function mount($code)
     {
+        $imma_directe = ImmatriculationDirecte::where('reference', $code)->first();
+        $this->imma_directe = $imma_directe;
+        $this->service_id = $imma_directe->service_id;
+        $this->user_id = $imma_directe->user_id;
+        $this->observation = $imma_directe->observation;
+
+        // Ajouter ici toutes les autres colonnes récupérées
+        $this->region_id = $imma_directe->region_id;
+        $this->division_id = $imma_directe->division_id;
+        $this->sub_division_id = $imma_directe->sub_division_id;
+        $this->zone = $imma_directe->zone;
+        $this->etat_terrain = $imma_directe->etat_terrain;
+        $this->duplicata = $imma_directe->duplicata;
+        $this->source_terrain = $imma_directe->source_terrain;
+        $this->superficie = $imma_directe->superficie;
+        $this->volume = $imma_directe->volume;
+        $this->folio = $imma_directe->folio;
+        $this->numero_cp = $imma_directe->numero_cp;
+        $this->titre_foncier_id = $imma_directe->titre_foncier_id;
+        $this->numero_bordereau_transmission = $imma_directe->numero_bordereau_transmission;
+        $this->next_step = $imma_directe->next_step;
+        $this->statut = $imma_directe->statut;
+        #$this->date_delivrance = Carbon::createFromFormat('Y-m-d', trim($imma_directe->date_delivrance))->format('d/m/Y');
+        $this->comissions = $imma_directe->comissions;
+        $this->cotation_user_id = $imma_directe->cotation_user_id;
+        $this->observation_cotation = $imma_directe->observation_cotation;
+        $this->date_cotation = Carbon::createFromFormat('Y-m-d', trim($imma_directe->date_cotation))->format('d/m/Y');
+        $this->status_cotation = $imma_directe->status_cotation;
+        $this->montant_ordre_versement = $imma_directe->montant_ordre_versement;
+        $this->numero_ordre_versement = $imma_directe->numero_ordre_versement;
+        $this->numero_arrete_ordre_versement = $imma_directe->numero_arrete_ordre_versement;
+        $this->date_ordre_versement = $imma_directe->date_ordre_versement;
+        $this->status_ordre_versement = $imma_directe->status_ordre_versement;
         $this->imma_directe = ImmatriculationDirecte::where('reference', $code)->first();
         $this->services = Service::select('id', 'service_name_fr')->get();
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
+    }
 
-        // Vérifie si l'objet 'imma_directe' est défini et a une propriété 'next_step'
-        if (isset($this->imma_directe) && isset($this->imma_directe->next_step)) {
-            // Assigner le 'next_step' de 'imma_directe' à 'this->status'
-            $this->status = $this->imma_directe->next_step;
+    public function addCoordinate()
+    {
+        $this->coordinates[] = [];
+    }
+
+    public function removeCoordinate($coordinateIndex)
+    {
+        unset($this->coordinates[$coordinateIndex]);
+        $this->coordinates = array_values($this->coordinates);
+    }
+
+    public function convert($utmCoordinates)
+    {
+        // Initialisez Proj4
+        $proj4 = new Proj4php();
+
+        // Créez les projections
+        $projUTM = new Proj('+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs', $proj4);
+        $projWGS84 = new Proj('EPSG:4326', $proj4);
+
+        $decimalResults = [];
+
+        foreach ($utmCoordinates as $utm) {
+            $utmParts = explode(',', $utm); // Sépare les coordonnées UTM en X et Y
+            $utmX = floatval($utmParts[0]);
+            $utmY = floatval($utmParts[1]);
+
+            // Créez le point source avec les coordonnées UTM
+            $pointSrc = new Point($utmX, $utmY, $projUTM);
+
+            // Transformez le point entre les systèmes de coordonnées
+            $pointDest = $proj4->transform($projWGS84, $pointSrc);
+
+            // Obtenez les coordonnées lat/lon du point de destination
+            $lat = $pointDest->y;
+            $lon = $pointDest->x;
+
+            // Ajoutez le résultat à votre tableau de résultats en coordonnées décimales
+            $decimalResults[] = "$lon, $lat";
         }
+
+        return $decimalResults;
+    }
+
+    public function quittance()
+    {
+        $this->validate([
+            'coordonates'=>'required',
+            'coordonnees'=>'required'
+        ]);
+        $transform = $this->convert($this->coordonnees);
+
+        $imma_directe = $this->imma_directe->update([
+            'coordonnees_utm' => json_encode($this->coordonnees),
+            'coordonnees' => json_encode($transform),
+        ]);
+        if (!empty($this->attachements)) {
+            foreach ($this->attachements as $attachement) {
+                $imma_directe->addMedia($attachement->getRealPath())
+                    ->usingName($imma_directe->uuid)
+                    ->toMediaCollection('imma_directe');
+            }
+        }
+
+        $this->refresh(__('Quittance et Coordonnées enregistréd avec succès!'), 'CertfifcatAffichageImmaDirecteModal');
     }
 
     public function nextStep()
@@ -245,109 +367,129 @@ class Show extends Component
     {
         $imma = $this->imma_directe;
         $this->validate([
+            #'status' => 'required',
             'date_status' => 'required',
         ]);
-
-        switch ($imma->next_step) {
-            case "Avis Au publique En attente de signature":
-                $updateData = [
+        if ($imma->next_step == "Avis Au publique En attente de signature") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Avis au Public Signer',
                     'next_step' => 'Instruction du Dossier – Élaboration du certificat d’affichage',
                     'date_avis_publique_signe' => $this->date_status,
-                ];
-                break;
-            case "Signature du certificat d'affichage":
-                $updateData = [
+                ]);
+            });
+        } else if ($imma->next_step == "Signature du certificat d'affichage") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Certificat d\'affichage signé',
                     'date_certificat_d_affichage_signer' => $this->date_status,
                     'next_step' => 'Programmation descente',
                     'date_calendrier_descente' => $this->date_status,
-                ];
-                break;
-            case "Paiement de L\'Etat de Cession":
-                $updateData = [
+                ]);
+            });
+        } else if ($imma->next_step == "Paiement de L\'Etat de Cession") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Etat de Cession Payer',
                     'next_step' => 'Dépôt de la quittance de l’état de cession auprès du géomètre désigné',
                     'etat_cession_payer' => $this->date_status,
-                ];
-                break;
-            case "valider le paiement":
-                $updateData = [
+                ]);
+            });
+        } else if ($imma->next_step == "valider le paiement") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Dossier publié au bulletin des avis domaniaux et fonciers',
                     'next_step' => 'Achat des bulletins',
                     'date_publication_dossier_vise' => $this->date_status,
-                ];
-                break;
-            case "Bulletins en attente de signature par le délégué":
-                $updateData = [
+                ]);
+            });
+        } else if ($imma->next_step == 'Bulletins en attente de signature par le délégué') {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Bulletins signés',
                     'next_step' => 'Transmission du dossier complet à la Délégation Départementale',
                     'date_signature_bulletin' => $this->date_status,
-                ];
-                break;
-            case "Transmission du dossier technique au CSDAF":
-                $updateData = [
+                ]);
+            });
+        } else if ($imma->next_step == "Transmission du dossier technique au CSDAF") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Dossier Transmis au CsDaf',
                     'next_step' => 'Jumelage (fusion) et préparation du Bordereau de transmission',
                     'transmission_csdaf' => $this->date_status,
-                ];
-                break;
-            case "Transmission du dossier technique au Délégué Régional MINDCAF":
-                $updateData = [
-                    'statut' => 'Dossier technique transmis au Délègue Regional Mindcaf',
-                    'next_step' => 'Cotation du dossier complet d’immatriculation directe au CSRDAF',
+                ]);
+            });
+        } else if ($imma->next_step == "Transmission du dossier technique au Délégué Régional MINDCAF") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => ' Dossier technique transmis au Délègue Regional Mindcaf',
+                    'next_step' => 'Cotation du dossier complet d\’immatriculation directe au CSRDAF ',
                     'date_dossier_transmi_au_Mindcaf' => $this->date_status,
-                ];
-                break;
-            case "Cotation du dossier complet d’immatriculation directe au CSRDAF":
-                $updateData = [
+                ]);
+            });
+        } else if ($imma->next_step == "Cotation du dossier complet d\’immatriculation directe au CSRDAF") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Dossier complet transmis  au CSRegional Mindcaf',
-                    'next_step' => 'Transmission du dossier complet au Délégué Régional MINDCAF',
+                    'next_step' => ' Transmission du dossier complet au Délégué Régional MINDCAF ',
                     'date_dossier_complet_transmi_CSRegional_mindcaf' => $this->date_status,
-                ];
-                break;
-            case "Cotation du dossier du dossier technique au Chef service régional du cadastre pour contrôle, mise à jour et signature":
-                $updateData = [
+                ]);
+            });
+        } else if ($imma->next_step == "Transmission du dossier complet au Délégué Régional MINDCAF") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => 'Dossier Vise et en attente de publication',
+                    'next_step' => 'Traitement du dossier visé-enregistré',
+                    'date_dossier_vise_en_attente_publication' => $this->date_status,
+                ]);
+            });
+        } else if ($imma->next_step == "Cotation du dossier du dossier technique au Chef service régional du cadastre pour contrôle, mise à jour et signature") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Dossier technique valide par la Brigader',
                     'next_step' => 'Réception, traitement et signature du dossier technique',
                     'coter_csrcadastre' => $this->date_status,
-                ];
-                break;
-            case "Réception, traitement et signature du dossier technique":
-                $updateData = [
-                    'statut' => 'Dossier technique signe (Par le CSRCadastre)',
+                ]);
+            });
+        } else if ($imma->next_step == "Réception, traitement et signature du dossier technique") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => 'Dossier technique signe  (Par le CSRCadastre)',
                     'next_step' => 'Transmission du dossier technique au Délégué Régional MINDCAF',
                     'dos_tech_transmis_drm' => $this->date_status,
-                ];
-                break;
-            case "Cotation du dossier complet d’immatriculation directe au Chef service Régional des affaires foncières":
-                $updateData = [
+                ]);
+            });
+        } else if ($imma->next_step == "Transmission du dossier technique au Délégué Régional MINDCAF") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => ' Dossier technique transmis au Délègue Regional Mindcaf ',
+                    'next_step' => 'Cotation du dossier complet d’immatriculation directe au Chef service Régional des affaires foncières',
+                    'dos_compl_csrdaf' => $this->date_status,
+                ]);
+            });
+        } else if ($imma->next_step == "Cotation du dossier complet d’immatriculation directe au Chef service Régional des affaires foncières") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Dossier Vise et en attente de publication',
                     'next_step' => 'Traitement du dossier visé-enregistré',
                     'cotation_compl_csrdaf' => $this->date_status,
-                ];
-                break;
-            case "Traitement du dossier visé-enregistré":
-                $updateData = [
+                ]);
+            });
+        } else if ($imma->next_step == "Traitement du dossier visé-enregistré") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Dossier Publier au bulletin des avis domaniaux et fonciers',
                     'next_step' => 'Achat des bulletins',
                     'cotation_compl_csrdaf' => $this->date_status,
-                ];
-                break;
-            default:
-                $updateData = [];
-                break;
-        }
-
-        if (!empty($updateData)) {
-            DB::transaction(function () use ($updateData) {
-                $this->imma_directe->update($updateData);
+                ]);
             });
         }
 
-        $this->refresh(__('Statut Modifier Avec SUCCES!'), 'EditStatutModal');
-    }
 
+
+        $this->refresh(__('Statut Modifier Avec SUCCES!'), 'EditStatutModal');
+        #$this->clearFields();
+    }
 
     public function etatDeCession()
     {
