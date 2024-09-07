@@ -371,6 +371,8 @@ class Show extends Component
 
     public function edits_statut()
     {
+
+        // dd($this->next_step);
         $imma = $this->imma_directe;
         $this->validate([
             #'status' => 'required',
@@ -433,7 +435,8 @@ class Show extends Component
                     'date_dossier_transmi_au_Mindcaf' => $this->date_status,
                 ]);
             });
-        } else if ($imma->next_step == "Cotation du dossier complet d\’immatriculation directe au CSRDAF") { // step 18
+        } else if ($imma->next_step == "Cotation du dossier complet d\’immatriculation directe au CSRDAF ") { // step 18
+            // dd("ok");
             DB::transaction(function () {
                 $this->imma_directe->update([
                     'statut' => 'Dossier complet transmis  au CSRegional Mindcaf',

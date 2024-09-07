@@ -18,7 +18,7 @@
             @endif --}}
 
 
-            <x-form-items.form wire:submit="edit_statut">
+            <x-form-items.form wire:submit="edits_statut">
                 <div class="form-group mb-3 row">
                     @can('imma_directe.avis', $imma_directe)
                         <div class="col-md-12">

@@ -120,11 +120,11 @@ $bgClass = $isCompleted
                         3 => [
                             14 => __('14- Changements de Statut après Transmission dossier technique au CSDAF'),
                             15 => __('15- Établissement du Bordereau de Transmission'),
-                            16 => __('16- Changements de Statut après le Bordereau'),
-                            17 => __('17- Production du Certificat Final'),
+                            16 => __('16- Transmission du dossier technique au Délégué Régional MINDCAF'),
+                            17 => __('17- Cotation du dossier complet d’immatriculation directe au CSRDAF'),
+                            18 => __('18- Finalisation et Clôture du Dossier'),
                         ],
                         4 => [
-                            18 => __('18- Finalisation et Clôture du Dossier'),
                             19 => __('19- Vérification Finale'),
                             20 => __('20- Remise des Documents Officiels'),
                             21 => __('21- Archivage du Dossier'),
@@ -149,8 +149,9 @@ $bgClass = $isCompleted
                         13 => $imma_directe->dossier_administratif_complet,
                         14 => $imma_directe->transmission_csdaf,
                         15 => $imma_directe->numero_bordereau_transmission,
-                        16 => $imma_directe->transmission_csdaf,
-                        17 => $imma_directe->transmission_csdaf,
+                        16 => $imma_directe->date_dossier_transmi_au_Mindcaf,
+                        17 => $imma_directe->date_dossier_complet_transmi_CSRegional_mindcaf,
+                        18 => $imma_directe->date_dossier_complet_transmi_CSRegional_mindcaf,
                     ];
                     
                 @endphp
@@ -193,7 +194,7 @@ $bgClass = $isCompleted
                 @elseif ($step == 5)
                     @include('livewire.portal.immatriculation-directe.step.certificat_affichage')
                 @elseif ($step == 6)
-                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                    @include('livewire.portal.immatriculation-directe.step.edits_statut')
                 @elseif($step == 7)
                     @include('livewire.portal.immatriculation-directe.step.descente_terrain')
                 @elseif($step == 8)
@@ -214,6 +215,17 @@ $bgClass = $isCompleted
                     @include('livewire.portal.immatriculation-directe.step.bordoreau_transmition')
                 @elseif($step == 16)
                     @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 17)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 18)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 19)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 20)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 21)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                
                 @endif
                 <!-- Ajoutez d'autres conditions pour les étapes restantes -->
             </div>
