@@ -1,5 +1,6 @@
 @can('imma_directe.descente_terrain')
-    <div class="container my-4 {{ $imma_directe->statut !== "Certificat d'affichage signé" && !auth()->user()->hasRole('super_admin') ? 'disabled-page' : '' }}">
+    <div
+        class="container my-4 {{ $imma_directe->statut !== "Certificat d'affichage signé" && !auth()->user()->hasRole('super_admin') ? 'disabled-page' : '' }}">
         <div class="shadow-lg rounded p-4 bg-white">
             <div class="mb-4 mt-md-0">
                 <div class="mb-4 mt-md-0">
@@ -24,41 +25,45 @@
 
                 <x-form-items.form wire:submit="descente_terrain">
                     <label for=""> {{ __('Enregistrement des CNI des notables + chefs') }} </label> <br>
-                    @foreach ($comissions as $index => $user)
-                        <div class="row my-1 py-1">
-                            <div class="col-md-3">
-                                <label>{{ __('Nom') }} </label>
-                                <input class="form-control  @error('comissions') is-invalid @enderror" type="text"
-                                    wire:model="comissions.{{ $index }}.name" placeholder="Nom">
+                    @if (is_array($comissions) && count($comissions) > 0)
+                        @foreach ($comissions as $index => $user)
+                            <div class="row my-1 py-1">
+                                <div class="col-md-3">
+                                    <label>{{ __('Nom') }} </label>
+                                    <input class="form-control  @error('comissions') is-invalid @enderror" type="text"
+                                        wire:model="comissions.{{ $index }}.name" placeholder="Nom">
+                                </div>
+                                <div class="col-md-2">
+                                    <label>{{ __('Poste') }} </label>
+                                    <input class="form-control @error('comissions') is-invalid @enderror" type="text"
+                                        wire:model="comissions.{{ $index }}.position" placeholder="Poste">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">{{ __('Numéro CNI') }}</label>
+                                    <input class="form-control  @error('comissions') is-invalid @enderror" type="text"
+                                        wire:model="comissions.{{ $index }}.num_cni" placeholder="Numéro CNI">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">{{ __('Téléphone') }}</label>
+                                    <input class="form-control  @error('comissions') is-invalid @enderror" type="text"
+                                        wire:model="comissions.{{ $index }}.telephone" placeholder="Téléphone">
+                                </div>
+                                <div class="col-md-1 mb-3">
+                                    <label>{{ __('Action') }} </label>
+                                    <a type="button" wire:click="removeRow({{ $index }})" class="btn-icon ">
+                                        <svg class="icon icon-sm text-danger me-1" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="col-md-2">
-                                <label>{{ __('Poste') }} </label>
-                                <input class="form-control @error('comissions') is-invalid @enderror" type="text"
-                                    wire:model="comissions.{{ $index }}.position" placeholder="Poste">
-                            </div>
-                            <div class="col-md-3">
-                                <label for="">{{ __('Numéro CNI') }}</label>
-                                <input class="form-control  @error('comissions') is-invalid @enderror" type="text"
-                                    wire:model="comissions.{{ $index }}.num_cni" placeholder="Numéro CNI">
-                            </div>
-                            <div class="col-md-3">
-                                <label for="">{{ __('Téléphone') }}</label>
-                                <input class="form-control  @error('comissions') is-invalid @enderror" type="text"
-                                    wire:model="comissions.{{ $index }}.telephone" placeholder="Téléphone">
-                            </div>
-                            <div class="col-md-1 mb-3">
-                                <label>{{ __('Action') }} </label>
-                                <a type="button" wire:click="removeRow({{ $index }})" class="btn-icon ">
-                                    <svg class="icon icon-sm text-danger me-1" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @else
+                        <p>{{ __('Aucun membre trouvé dans la commission.') }}</p>
+                    @endif
                     <button class="btn btn-info" type="button" wire:click="addRow">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -75,9 +80,10 @@
 
                     <div class="d-flex justify-content-end my-2">
                         <button class="btn btn-secondary" wire:click.prevent="prevStep"> {{ __('<< Précedent') }} </button>
-                        <button type="submit" wire:click.prevent="descente_terrain" class="btn btn-primary btn-loading mx-2
+                        <button type="submit" wire:click.prevent="descente_terrain"
+                            class="btn btn-primary btn-loading mx-2
                             wire:loading.attr="disabled">{{ __('Enregistrer La Descente sur le Terrain') }}</button>
-                            <button class="btn btn-info" wire:click.prevent="nextStep"> {{ __('Suivant >>') }} </button>
+                        <button class="btn btn-info" wire:click.prevent="nextStep"> {{ __('Suivant >>') }} </button>
                     </div>
                 </x-form-items.form>
             </div>

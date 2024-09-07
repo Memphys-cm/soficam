@@ -103,7 +103,7 @@ class Show extends Component
         $this->next_step = $imma_directe->next_step;
         $this->statut = $imma_directe->statut;
         #$this->date_delivrance = Carbon::createFromFormat('Y-m-d', trim($imma_directe->date_delivrance))->format('d/m/Y');
-        $this->comissions = $imma_directe->comissions;
+        $this->comissions = json_decode($imma_directe->comissions, true);
         $this->cotation_user_id = $imma_directe->cotation_user_id;
         $this->observation_cotation = $imma_directe->observation_cotation;
         $this->date_cotation = Carbon::createFromFormat('Y-m-d', trim($imma_directe->date_cotation))->format('d/m/Y');
