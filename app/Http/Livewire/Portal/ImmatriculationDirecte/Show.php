@@ -43,7 +43,7 @@ class Show extends Component
     public $attachments;
     public $state = 0, $price_m2, $user_ids, $localisation;
     public $frais_suplementaires, $cout, $commentaires, $code, $numero_bordereau_transmission;
-    public $etat_cession , $zone ,$superficie_en_m2;
+    public $etat_cession, $zone, $superficie_en_m2;
     public $cout_etat_cession;
 
     public function mount($code)
@@ -54,6 +54,16 @@ class Show extends Component
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
+        public function mount()
+{
+    // Vérifie si l'objet 'imma_directe' est défini et a une propriété 'next_step'
+    if (isset($this->imma_directe) && isset($this->imma_directe->next_step)) {
+        // Assigner le 'next_step' de 'imma_directe' à 'this->status'
+        $this->status = $this->imma_directe->next_step;
+    }
+    
+}
+
     }
 
     public function nextStep()
@@ -128,22 +138,23 @@ class Show extends Component
         );
     }
 
-    public function bordereau(){
+    public function bordereau()
+    {
         $this->validate(
             [
-                "numero_bordereau_transmission"=>"required"
+                "numero_bordereau_transmission" => "required"
             ]
-            );
+        );
 
-          DB::transaction(function() {
+        DB::transaction(function () {
             $this->imma_directe->update([
-                "numero_bordereau_transmission"=> $this->numero_bordereau_transmission,
-                "statut"=> "Bordereau de Transmission éffectué",
-                "next_step"=>"Transmission du dossier technique au Délégué Régional MINDCAF"
+                "numero_bordereau_transmission" => $this->numero_bordereau_transmission,
+                "statut" => "Bordereau de Transmission éffectué",
+                "next_step" => "Transmission du dossier technique au Délégué Régional MINDCAF"
             ]);
-          });  
+        });
 
-          $this->refresh(__('Numéro du Bordereau de transmission enregistré'), 'DescenteTerrainModal');
+        $this->refresh(__('Numéro du Bordereau de transmission enregistré'), 'DescenteTerrainModal');
     }
 
     public function edit_statut()
@@ -193,146 +204,125 @@ class Show extends Component
 
         // $this->clearFields();
         $this->refresh(__('Descente sur le terrain effectuée'), 'DescenteTerrainModal');
-
     }
 
     public function edits_statut()
     {
         $imma = $this->imma_directe;
         $this->validate([
-            #'status' => 'required',
             'date_status' => 'required',
         ]);
-        if ($imma->next_step == "Avis Au publique En attente de signature") {
-            DB::transaction(function () {
-                $this->imma_directe->update([
+
+        switch ($imma->next_step) {
+            case "Avis Au publique En attente de signature":
+                $updateData = [
                     'statut' => 'Avis au Public Signer',
                     'next_step' => 'Instruction du Dossier – Élaboration du certificat d’affichage',
                     'date_avis_publique_signe' => $this->date_status,
-                ]);
-            });
-        } else if ($imma->next_step == "Signature du certificat d'affichage") {
-            DB::transaction(function () {
-                $this->imma_directe->update([
+                ];
+                break;
+            case "Signature du certificat d'affichage":
+                $updateData = [
                     'statut' => 'Certificat d\'affichage signé',
                     'next_step' => 'Programmation descente sur le terrain',
                     'date_calendrier_descente' => $this->date_status,
-                ]);
-            });
-        } else if ($imma->next_step == "Paiement de L\'Etat de Cession") {
-            DB::transaction(function () {
-                $this->imma_directe->update([
+                ];
+                break;
+            case "Paiement de L\'Etat de Cession":
+                $updateData = [
                     'statut' => 'Etat de Cession Payer',
                     'next_step' => 'Dépôt de la quittance de l’état de cession auprès du géomètre désigné',
                     'etat_cession_payer' => $this->date_status,
-                ]);
-            });
-        } else if ($imma->next_step == "valider le paiement") {
-            DB::transaction(function () {
-                $this->imma_directe->update([
+                ];
+                break;
+            case "valider le paiement":
+                $updateData = [
                     'statut' => 'Dossier publié au bulletin des avis domaniaux et fonciers',
                     'next_step' => 'Achat des bulletins',
                     'date_publication_dossier_vise' => $this->date_status,
-                ]);
-            });
-        } else if ($imma->next_step == 'Bulletins en attente de signature par le délégué') {
-            DB::transaction(function () {
-                $this->imma_directe->update([
+                ];
+                break;
+            case "Bulletins en attente de signature par le délégué":
+                $updateData = [
                     'statut' => 'Bulletins signés',
                     'next_step' => 'Transmission du dossier complet à la Délégation Départementale',
                     'date_signature_bulletin' => $this->date_status,
-                ]);
-            });
-        } else if ($imma->next_step == "Transmission du dossier technique au CSDAF") {
-            DB::transaction(function () {
-                $this->imma_directe->update([
+                ];
+                break;
+            case "Transmission du dossier technique au CSDAF":
+                $updateData = [
                     'statut' => 'Dossier Transmis au CsDaf',
                     'next_step' => 'Jumelage (fusion) et préparation du Bordereau de transmission',
                     'transmission_csdaf' => $this->date_status,
-                ]);
-            });
-        } else if ($imma->next_step == "Transmission du dossier technique au Délégué Régional MINDCAF") {
-            DB::transaction(function () {
-                $this->imma_directe->update([
-                    'statut' => ' Dossier technique transmis au Délègue Regional Mindcaf',
-                    'next_step' => 'Cotation du dossier complet d\’immatriculation directe au CSRDAF ',
+                ];
+                break;
+            case "Transmission du dossier technique au Délégué Régional MINDCAF":
+                $updateData = [
+                    'statut' => 'Dossier technique transmis au Délègue Regional Mindcaf',
+                    'next_step' => 'Cotation du dossier complet d’immatriculation directe au CSRDAF',
                     'date_dossier_transmi_au_Mindcaf' => $this->date_status,
-                ]);
-            });
-        } else if ($imma->next_step == "Cotation du dossier complet d\’immatriculation directe au CSRDAF") {
-            DB::transaction(function () {
-                $this->imma_directe->update([
+                ];
+                break;
+            case "Cotation du dossier complet d’immatriculation directe au CSRDAF":
+                $updateData = [
                     'statut' => 'Dossier complet transmis  au CSRegional Mindcaf',
-                    'next_step' => ' Transmission du dossier complet au Délégué Régional MINDCAF ',
+                    'next_step' => 'Transmission du dossier complet au Délégué Régional MINDCAF',
                     'date_dossier_complet_transmi_CSRegional_mindcaf' => $this->date_status,
-                ]);
-            });
-        } else if ($imma->next_step == "Transmission du dossier complet au Délégué Régional MINDCAF") {
-            DB::transaction(function () {
-                $this->imma_directe->update([
-                    'statut' => 'Dossier Vise et en attente de publication',
-                    'next_step' => 'Traitement du dossier visé-enregistré',
-                    'date_dossier_vise_en_attente_publication' => $this->date_status,
-                ]);
-            });
-        } else if ($imma->next_step == "Cotation du dossier du dossier technique au Chef service régional du cadastre pour contrôle, mise à jour et signature") {
-            DB::transaction(function () {
-                $this->imma_directe->update([
+                ];
+                break;
+            case "Cotation du dossier du dossier technique au Chef service régional du cadastre pour contrôle, mise à jour et signature":
+                $updateData = [
                     'statut' => 'Dossier technique valide par la Brigader',
                     'next_step' => 'Réception, traitement et signature du dossier technique',
                     'coter_csrcadastre' => $this->date_status,
-                ]);
-            });
-        } else if ($imma->next_step == "Réception, traitement et signature du dossier technique") {
-            DB::transaction(function () {
-                $this->imma_directe->update([
-                    'statut' => 'Dossier technique signe  (Par le CSRCadastre)',
+                ];
+                break;
+            case "Réception, traitement et signature du dossier technique":
+                $updateData = [
+                    'statut' => 'Dossier technique signe (Par le CSRCadastre)',
                     'next_step' => 'Transmission du dossier technique au Délégué Régional MINDCAF',
                     'dos_tech_transmis_drm' => $this->date_status,
-                ]);
-            });
-        } else if ($imma->next_step == "Transmission du dossier technique au Délégué Régional MINDCAF") {
-            DB::transaction(function () {
-                $this->imma_directe->update([
-                    'statut' => ' Dossier technique transmis au Délègue Regional Mindcaf ',
-                    'next_step' => 'Cotation du dossier complet d’immatriculation directe au Chef service Régional des affaires foncières',
-                    'dos_compl_csrdaf' => $this->date_status,
-                ]);
-            });
-        } else if ($imma->next_step == "Cotation du dossier complet d’immatriculation directe au Chef service Régional des affaires foncières") {
-            DB::transaction(function () {
-                $this->imma_directe->update([
+                ];
+                break;
+            case "Cotation du dossier complet d’immatriculation directe au Chef service Régional des affaires foncières":
+                $updateData = [
                     'statut' => 'Dossier Vise et en attente de publication',
                     'next_step' => 'Traitement du dossier visé-enregistré',
                     'cotation_compl_csrdaf' => $this->date_status,
-                ]);
-            });
-        } else if ($imma->next_step == "Traitement du dossier visé-enregistré") {
-            DB::transaction(function () {
-                $this->imma_directe->update([
+                ];
+                break;
+            case "Traitement du dossier visé-enregistré":
+                $updateData = [
                     'statut' => 'Dossier Publier au bulletin des avis domaniaux et fonciers',
                     'next_step' => 'Achat des bulletins',
                     'cotation_compl_csrdaf' => $this->date_status,
-                ]);
+                ];
+                break;
+            default:
+                $updateData = [];
+                break;
+        }
+
+        if (!empty($updateData)) {
+            DB::transaction(function () use ($updateData) {
+                $this->imma_directe->update($updateData);
             });
         }
 
-
-
         $this->refresh(__('Statut Modifier Avec SUCCES!'), 'EditStatutModal');
-        #$this->clearFields();
     }
+
 
     public function etatDeCession()
     {
-          // Récupérer l'année en cours au format 'yy'
-          $year = date('y');
+        // Récupérer l'année en cours au format 'yy'
+        $year = date('y');
 
-          // Récupérer le compteur depuis la base de données (par exemple en comptant les enregistrements de lotissement existants)
-          $counter = EtatCession::count() + 1;
+        // Récupérer le compteur depuis la base de données (par exemple en comptant les enregistrements de lotissement existants)
+        $counter = EtatCession::count() + 1;
 
-          // Générer le code unique
-          $this->code = $this->generateUniqueCode($year, $counter);
+        // Générer le code unique
+        $this->code = $this->generateUniqueCode($year, $counter);
         // dd($code);
 
 
@@ -380,7 +370,6 @@ class Show extends Component
 
 
             DB::table('saleables')->insert($saleableData);
-
         });
 
         $data = [
@@ -389,7 +378,7 @@ class Show extends Component
 
         $pdf = Pdf::loadView('livewire.portal.immatriculation-directe.print.quitance', $data)->setPaper('a4', 'portrait');
         return response()->streamDownload(
-            fn () => print($pdf->output()),
+            fn() => print($pdf->output()),
             __('OrdreDeVersement') . Str::random('10') . ".pdf"
         );
 
@@ -455,15 +444,16 @@ class Show extends Component
         $this->refresh(__('Dossier Administratif Mise En Forme Avec Suceess'), 'DossierAdministratifModal');
     }
 
-    public function sms($id) {
+    public function sms($id)
+    {
         $imma_directe = ImmatriculationDirecte::findOrFail($id);
         $receivers = $imma_directe->users;
 
-        $userNames='';
+        $userNames = '';
         $mobiles = "";
 
-        foreach($receivers as $user) {
-            if($user){
+        foreach ($receivers as $user) {
+            if ($user) {
                 $userNames .= $user->first_name . ',';
                 $mobiles .= "$user->primary_phone_number,";
             }
@@ -474,7 +464,7 @@ class Show extends Component
         $mobiles = rtrim($mobiles, ',');
 
         $sms = "Mr/Mme. $userNames, votre dossier d'immatriculation directe et à l'étape $imma_directe->statut";
-        $senderid ='SOFICAM';
+        $senderid = 'SOFICAM';
         $api_key = '36v7fN66hzUD6SaBYkILlirHZo7P';
         $url = 'https://api.queensms.net/v1/sms.php';
 
@@ -499,18 +489,15 @@ class Show extends Component
             if (curl_errno($ch)) {
                 $output = curl_error($ch);
                 $arr = ['echec'];
-                return($arr);
-            }
-            else{
-                return($output);
+                return ($arr);
+            } else {
+                return ($output);
             }
             curl_close($ch);
-        }
-
-        catch (Exception $exception){
+        } catch (Exception $exception) {
             //echo $exception->getMessage();
             $arr = ['echec'];
-            return($arr);
+            return ($arr);
         }
     }
 
