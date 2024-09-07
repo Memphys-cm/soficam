@@ -635,67 +635,65 @@ class Show extends Component
             return ['echec' => 'Aucun membre de la commission trouvé pour cet envoi de SMS.'];
         }
 
-        // Construire la liste des numéros de téléphone
-        $mobiles = array_column($comissions, 'telephone');
-        $mobiles = implode(',', $mobiles);
+        $sms='';
+        $userNames='';
+        $mobiles = "";
 
-        // Construire le message en fonction du cas
-        $userNames = array_column($comissions, 'name');
-        $userNamesString = implode(', ', $userNames);
-
-        switch ($case) {
-            case 'descente_terrain':
-                $sms = "Mr/Mme. $userNamesString, votre dossier d'immatriculation directe est à l'étape 'Descente sur le terrain'.";
-                break;
-
-            case 'certificat_affichage':
-                $sms = "Mr/Mme. $userNamesString, votre dossier d'immatriculation directe est à l'étape 'Certificat d'affichage signé'.";
-                break;
-
-            case 'paiement_etat':
-                $sms = "Mr/Mme. $userNamesString, votre dossier d'immatriculation directe est à l'étape 'Paiement de l'État de Cession'.";
-                break;
-
-                // Ajoute d'autres cas ici selon les besoins
-
-            default:
-                $sms = "Mr/Mme. $userNamesString, votre dossier d'immatriculation directe est à l'étape actuelle : $imma_directe->statut.";
-                break;
-        }
-
-        // Paramètres pour l'API SMS
-        $sms_body = [
-            'api_key' => '36v7fN66hzUD6SaBYkILlirHZo7P',
-            'senderid' => 'SOFICAM',
-            'sms' => $sms,
-            'mobiles' => $mobiles
-        ];
-
-        $url = 'https://api.queensms.net/v1/sms.php?' . http_build_query($sms_body);
-
-        try {
-            // Envoi de la requête HTTP
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPGET, true);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            $output = curl_exec($ch);
-
-            // Gestion des erreurs cURL
-            if (curl_errno($ch)) {
-                return ['echec' => curl_error($ch)];
+        foreach($comissions as $user) {
+            if($user){
+                $userNames .= $user->first_name . ',';
+                $mobiles .= "$user->primary_phone_number,";
             }
-
-            curl_close($ch);
-            return ['success' => $output];
-        } catch (Exception $exception) {
-            // Gestion des exceptions
-            return ['echec' => $exception->getMessage()];
         }
+
+        //retirer la virgule en fin de chaine
+        $userNames = rtrim($userNames, ',');
+        $mobiles = rtrim($mobiles, ',');
+        $sms = $this->message_porte;
+                
+        if(!empty($sms)){
+            $senderid ='SOFICAM';
+            $mobiles = $mobiles;
+            $api_key = 'wplL0f9wq1moi1NrsjpsBgfBzun4';
+            $url = 'https://api.queensms.net/v1/sms.php';
+
+            $sms_body = array(
+                'api_key' => $api_key,
+                'senderid' => $senderid,
+                'sms' => $sms,
+                'mobiles' => $mobiles
+            );
+                
+            $send_data = http_build_query($sms_body);
+            $gateway_url = $url . "?" . $send_data;
+                
+            try {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $gateway_url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_HTTPGET, 1);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                $output = curl_exec($ch);
+            
+                if (curl_errno($ch)) {
+                    $output = curl_error($ch);
+                    $arr = ['echec'];
+                    return($arr);
+                }
+                else{
+                    return($output);
+                }
+                    curl_close($ch);
+            }
+                
+            catch (Exception $exception){
+                //echo $exception->getMessage();
+                $arr = ['echec'];
+                return($arr);
+            }
+        }
+
     }
-
-
     public function generateCodeTF()
     {
         $numero = $this->imma_directe->region->code . "/" . $this->imma_directe->division->code . "/" . 'A' . "/" . $this->numero_conservation;

@@ -24,7 +24,7 @@
 
                 <x-form-items.form wire:submit="descente_terrain">
                     <label for=""> {{ __('Enregistrement des CNI des notables + chefs') }} </label> <br>
-                    @foreach ($comissions as $index => $user)
+                    @forelse($comissions as $index => $user)
                         <div class="row my-1 py-1">
                             <div class="col-md-3">
                                 <label>{{ __('Nom') }} </label>
@@ -58,7 +58,9 @@
                                 </a>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        
+                    @endforelse
                     <button class="btn btn-info" type="button" wire:click="addRow">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -75,7 +77,7 @@
 
                     <div class="d-flex justify-content-end my-2">
                         <button class="btn btn-secondary" wire:click.prevent="prevStep"> {{ __('<< Précedent') }} </button>
-                        <button type="submit" wire:click.prevent="descente_terrain" class="btn btn-primary btn-loading mx-2
+                        <button type="submit" wire:click.prevent="descente_terrain" class="btn btn-primary btn-loading mx-2"
                             wire:loading.attr="disabled">{{ __('Enregistrer La Descente sur le Terrain') }}</button>
                             <button class="btn btn-info" wire:click.prevent="nextStep"> {{ __('Suivant >>') }} </button>
                     </div>
