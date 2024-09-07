@@ -18,6 +18,8 @@ use App\Http\Livewire\Traits\WithDataTables;
 use App\Http\Livewire\Portal\ImmatriculationDirecte\Stepps\HandlesCotationCsdaf;
 use App\Http\Livewire\Portal\ImmatriculationDirecte\Stepps\HandlesOrdreVersement;
 use App\Http\Livewire\Portal\ImmatriculationDirecte\Stepps\HandlesAvisPublicDescente;
+use App\Http\Livewire\Portal\ImmatriculationDirecte\Stepps\HandlesRedevance;
+use App\Models\SubDivision;
 use proj4php\Point;
 use proj4php\Proj;
 use proj4php\Proj4php;
@@ -25,7 +27,7 @@ use proj4php\Proj4php;
 class Show extends Component
 {
     use WithDataTables;
-    use HandlesCotationCsdaf, HandlesOrdreVersement, HandlesAvisPublicDescente;  // Inclure le Trait
+    use HandlesCotationCsdaf, HandlesOrdreVersement, HandlesAvisPublicDescente, HandlesRedevance;  // Inclure le Trait
 
     public $imma_directe;
     public $services, $regions;
@@ -77,6 +79,7 @@ class Show extends Component
     public $pv_administratif;
     public $pv_bornage;
     public $cni_files = [];
+    public $montant_ordre_redevance_fonciere;
 
     public function mount($code)
     {
@@ -121,6 +124,10 @@ class Show extends Component
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
+
+        $selectedSubDivision = SubDivision::findOrFail($this->imma_directe->sub_division_id);
+        $prixMinimaM2 = $selectedSubDivision->prix_minima_m2;
+        $this->montant_ordre_redevance_fonciere = $this->superficie * $prixMinimaM2;
     }
 
     public function addCoordinate()
@@ -631,9 +638,8 @@ class Show extends Component
         $this->refresh(__('Dossier Administratif Mise En Forme Avec Suceess'), 'DossierAdministratifModal');
     }
 
-    public function sms($id, $case = 'default')
+    public function sms($id)
     {
-        // Récupérer l'immatriculation directe
         $imma_directe = ImmatriculationDirecte::findOrFail($id);
 
         // Décoder les informations de la commission à partir du JSON
@@ -644,67 +650,61 @@ class Show extends Component
             return ['echec' => 'Aucun membre de la commission trouvé pour cet envoi de SMS.'];
         }
 
-        // Construire la liste des numéros de téléphone
-        $mobiles = array_column($comissions, 'telephone');
-        $mobiles = implode(',', $mobiles);
+        $sms = '';
+        $userNames = '';
+        $mobiles = "";
 
-        // Construire le message en fonction du cas
-        $userNames = array_column($comissions, 'name');
-        $userNamesString = implode(', ', $userNames);
-
-        switch ($case) {
-            case 'descente_terrain':
-                $sms = "Mr/Mme. $userNamesString, votre dossier d'immatriculation directe est à l'étape 'Descente sur le terrain'.";
-                break;
-
-            case 'certificat_affichage':
-                $sms = "Mr/Mme. $userNamesString, votre dossier d'immatriculation directe est à l'étape 'Certificat d'affichage signé'.";
-                break;
-
-            case 'paiement_etat':
-                $sms = "Mr/Mme. $userNamesString, votre dossier d'immatriculation directe est à l'étape 'Paiement de l'État de Cession'.";
-                break;
-
-                // Ajoute d'autres cas ici selon les besoins
-
-            default:
-                $sms = "Mr/Mme. $userNamesString, votre dossier d'immatriculation directe est à l'étape actuelle : $imma_directe->statut.";
-                break;
+        foreach ($comissions as $user) {
+            if ($user) {
+                $userNames .= $user->first_name . ',';
+                $mobiles .= "$user->primary_phone_number,";
+            }
         }
 
-        // Paramètres pour l'API SMS
-        $sms_body = [
-            'api_key' => '36v7fN66hzUD6SaBYkILlirHZo7P',
-            'senderid' => 'SOFICAM',
-            'sms' => $sms,
-            'mobiles' => $mobiles
-        ];
+        //retirer la virgule en fin de chaine
+        $userNames = rtrim($userNames, ',');
+        $mobiles = rtrim($mobiles, ',');
+        $sms = $this->message_porte;
 
-        $url = 'https://api.queensms.net/v1/sms.php?' . http_build_query($sms_body);
+        if (!empty($sms)) {
+            $senderid = 'SOFICAM';
+            $mobiles = $mobiles;
+            $api_key = 'wplL0f9wq1moi1NrsjpsBgfBzun4';
+            $url = 'https://api.queensms.net/v1/sms.php';
 
-        try {
-            // Envoi de la requête HTTP
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPGET, true);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            $output = curl_exec($ch);
+            $sms_body = array(
+                'api_key' => $api_key,
+                'senderid' => $senderid,
+                'sms' => $sms,
+                'mobiles' => $mobiles
+            );
 
-            // Gestion des erreurs cURL
-            if (curl_errno($ch)) {
-                return ['echec' => curl_error($ch)];
+            $send_data = http_build_query($sms_body);
+            $gateway_url = $url . "?" . $send_data;
+
+            try {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $gateway_url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_HTTPGET, 1);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                $output = curl_exec($ch);
+
+                if (curl_errno($ch)) {
+                    $output = curl_error($ch);
+                    $arr = ['echec'];
+                    return ($arr);
+                } else {
+                    return ($output);
+                }
+                curl_close($ch);
+            } catch (Exception $exception) {
+                //echo $exception->getMessage();
+                $arr = ['echec'];
+                return ($arr);
             }
-
-            curl_close($ch);
-            return ['success' => $output];
-        } catch (Exception $exception) {
-            // Gestion des exceptions
-            return ['echec' => $exception->getMessage()];
         }
     }
-
-
     public function generateCodeTF()
     {
         $numero = $this->imma_directe->region->code . "/" . $this->imma_directe->division->code . "/" . 'A' . "/" . $this->numero_conservation;
