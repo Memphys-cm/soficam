@@ -113,20 +113,21 @@ $bgClass = $isCompleted
                             8 => __('8- Établissement de l\'État de Cession et Paiement'),
                             9 => __('9- Instruction de la Descente sur le Terrain'),
                             10 => __('10- Changement de Statut après la Descente sur le Terrain'),
-                            11 => __('11- Mise à Jour du Dossier Technique'),
-                            12 => __('12- Mise en Forme du Dossier Administratif'),
+                            11 => __('11- Dépôt de la quittance de l’état de cession auprès du géomètre désigné'),
+                            12 => __('12- Mise à Jour du Dossier Technique'),
+                            13 => __('13- Mise en Forme du Dossier Administratif'),
                         ],
                         3 => [
-                            13 => __('13- Changements de Statut après Transmission'),
-                            14 => __('14- Établissement du Bordereau de Transmission'),
-                            15 => __('15- Changements de Statut après le Bordereau'),
-                            16 => __('16- Production du Certificat Final'),
+                            14 => __('14- Changements de Statut après Transmission dossier technique au CSDAF'),
+                            15 => __('15- Établissement du Bordereau de Transmission'),
+                            16 => __('16- Transmission du dossier technique au Délégué Régional MINDCAF'),
+                            17 => __('17- Cotation du dossier complet d’immatriculation directe au CSRDAF'),
+                            18 => __('18- Finalisation et Clôture du Dossier'),
                         ],
                         4 => [
-                            17 => __('17- Finalisation et Clôture du Dossier'),
-                            18 => __('18- Vérification Finale'),
-                            19 => __('19- Remise des Documents Officiels'),
-                            20 => __('20- Archivage du Dossier'),
+                            19 => __('19- Vérification Finale'),
+                            20 => __('20- Remise des Documents Officiels'),
+                            21 => __('21- Archivage du Dossier'),
                         ],
                         // Ajouter des steps pour les autres high_steps si nécessaire
                     ];
@@ -141,12 +142,18 @@ $bgClass = $isCompleted
                         6 => $imma_directe->date_certificat_d_affichage_signer,
                         7 => $imma_directe->descente_terrain,
                         8 => $imma_directe->etat_cession,
-                        9 => $imma_directe->descente_terrain_maked,
-                        10 => $imma_directe->dossier_technique_complet,
-                        11 => $imma_directe->dossier_technique_complet,
-                        12 => $imma_directe->dossier_administratif_complet,
+                        9 => $imma_directe->limit_ouest,
+                        10 => $imma_directe->descente_terrain_maked,
+                        11 => $imma_directe->coordonnees_utm,
+                        12 => $imma_directe->dossier_technique_complet,
                         13 => $imma_directe->dossier_administratif_complet,
+                        14 => $imma_directe->transmission_csdaf,
+                        15 => $imma_directe->numero_bordereau_transmission,
+                        16 => $imma_directe->date_dossier_transmi_au_Mindcaf,
+                        17 => $imma_directe->date_dossier_complet_transmi_CSRegional_mindcaf,
+                        18 => $imma_directe->date_dossier_complet_transmi_CSRegional_mindcaf,
                     ];
+                    
                 @endphp
 
                 @foreach ($steps[$high_step] as $stepIndex => $stepLabel)
@@ -187,7 +194,7 @@ $bgClass = $isCompleted
                 @elseif ($step == 5)
                     @include('livewire.portal.immatriculation-directe.step.certificat_affichage')
                 @elseif ($step == 6)
-                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                    @include('livewire.portal.immatriculation-directe.step.edits_statut')
                 @elseif($step == 7)
                     @include('livewire.portal.immatriculation-directe.step.descente_terrain')
                 @elseif($step == 8)
@@ -199,13 +206,26 @@ $bgClass = $isCompleted
                 @elseif($step == 11)
                     @include('livewire.portal.immatriculation-directe.step.quittance_paiement')
                 @elseif($step == 12)
-                    @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_administratif')
+                    @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_technique')
                 @elseif($step == 13)
-                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                    @include('livewire.portal.immatriculation-directe.step.mise_en_forme_dossier_administratif')
                 @elseif($step == 14)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 15)
                     @include('livewire.portal.immatriculation-directe.step.bordoreau_transmition')
-                    @elseif($step == 15)
-                        @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 16)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 17)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 18)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 19)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 20)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 21)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                
                 @endif
                 <!-- Ajoutez d'autres conditions pour les étapes restantes -->
             </div>
