@@ -1,5 +1,5 @@
 @can('imma_directe.avis')
-    <div class="container my-4 {{ $imma_directe->statut !== 'Ordre de Versement Payé' ? 'disabled-page' : '' }}">
+    <div class="container my-4 {{ $imma_directe->statut !== 'Ordre de Versement Payé' && !auth()->user()->hasRole('super_admin') ? 'disabled-page' : '' }}">
         <div class="shadow-lg rounded p-4 bg-white">
             <h4 class="mb-4 fw-bold text-primary">{{ __('Statut après publication d\'avis') }}</h4>
 

@@ -1,5 +1,5 @@
 @can('imma_directe.cotation')
-    <div class="container my-3 {{ $imma_directe->statut !== 'Dossier Ouvert' ? 'disabled-page' : '' }}">
+    <div class="container my-3 {{ $imma_directe->statut !== 'Dossier Ouvert' && !auth()->user()->hasRole('super_admin') ? 'disabled-page' : '' }}">
         <div class="shadow-lg rounded p-4 bg-white">
             <h4 class="mb-4 fw-bold text-primary">{{ __('Cotation du Dossier au CSDAF') }}</h4>
 
