@@ -622,30 +622,28 @@ class Show extends Component
         $this->refresh(__('Dossier Administratif Mise En Forme Avec Suceess'), 'DossierAdministratifModal');
     }
 
-    public function sms($id, $case = 'default')
-    {
-        // Récupérer l'immatriculation directe
+    public function sms($id){
         $imma_directe = ImmatriculationDirecte::findOrFail($id);
-
+    
         // Décoder les informations de la commission à partir du JSON
         $comissions = json_decode($imma_directe->comissions, true);
-
+    
         // Vérifier qu'il y a au moins une entrée dans la commission
         if (empty($comissions)) {
             return ['echec' => 'Aucun membre de la commission trouvé pour cet envoi de SMS.'];
         }
-
+    
         $sms='';
         $userNames='';
         $mobiles = "";
-
+    
         foreach($comissions as $user) {
             if($user){
                 $userNames .= $user->first_name . ',';
                 $mobiles .= "$user->primary_phone_number,";
             }
         }
-
+    
         //retirer la virgule en fin de chaine
         $userNames = rtrim($userNames, ',');
         $mobiles = rtrim($mobiles, ',');
@@ -656,7 +654,7 @@ class Show extends Component
             $mobiles = $mobiles;
             $api_key = 'wplL0f9wq1moi1NrsjpsBgfBzun4';
             $url = 'https://api.queensms.net/v1/sms.php';
-
+    
             $sms_body = array(
                 'api_key' => $api_key,
                 'senderid' => $senderid,
@@ -692,7 +690,7 @@ class Show extends Component
                 return($arr);
             }
         }
-
+    
     }
     public function generateCodeTF()
     {
