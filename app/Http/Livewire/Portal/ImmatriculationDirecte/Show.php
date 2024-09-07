@@ -18,6 +18,9 @@ use App\Http\Livewire\Traits\WithDataTables;
 use App\Http\Livewire\Portal\ImmatriculationDirecte\Stepps\HandlesCotationCsdaf;
 use App\Http\Livewire\Portal\ImmatriculationDirecte\Stepps\HandlesOrdreVersement;
 use App\Http\Livewire\Portal\ImmatriculationDirecte\Stepps\HandlesAvisPublicDescente;
+use proj4php\Point;
+use proj4php\Proj;
+use proj4php\Proj4php;
 
 class Show extends Component
 {
@@ -66,6 +69,9 @@ class Show extends Component
     public $numero_arrete_ordre_versement;
     public $date_ordre_versement;
     public $status_ordre_versement;
+    public $coordinates = ['', ''];
+    public $coordonnees = [];
+    public $attachements;
 
     public function mount($code)
     {
@@ -91,11 +97,11 @@ class Show extends Component
         $this->numero_bordereau_transmission = $imma_directe->numero_bordereau_transmission;
         $this->next_step = $imma_directe->next_step;
         $this->statut = $imma_directe->statut;
-        $this->date_delivrance = $imma_directe->date_delivrance;
+        #$this->date_delivrance = Carbon::createFromFormat('Y-m-d', trim($imma_directe->date_delivrance))->format('d/m/Y');
         $this->comissions = $imma_directe->comissions;
         $this->cotation_user_id = $imma_directe->cotation_user_id;
         $this->observation_cotation = $imma_directe->observation_cotation;
-        $this->date_cotation = $imma_directe->date_cotation;
+        $this->date_cotation = Carbon::createFromFormat('Y-m-d', trim($imma_directe->date_cotation))->format('d/m/Y');
         $this->status_cotation = $imma_directe->status_cotation;
         $this->montant_ordre_versement = $imma_directe->montant_ordre_versement;
         $this->numero_ordre_versement = $imma_directe->numero_ordre_versement;
@@ -107,6 +113,73 @@ class Show extends Component
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
+    }
+
+    public function addCoordinate()
+    {
+        $this->coordinates[] = [];
+    }
+
+    public function removeCoordinate($coordinateIndex)
+    {
+        unset($this->coordinates[$coordinateIndex]);
+        $this->coordinates = array_values($this->coordinates);
+    }
+
+    public function convert($utmCoordinates)
+    {
+        // Initialisez Proj4
+        $proj4 = new Proj4php();
+
+        // Créez les projections
+        $projUTM = new Proj('+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs', $proj4);
+        $projWGS84 = new Proj('EPSG:4326', $proj4);
+
+        $decimalResults = [];
+
+        foreach ($utmCoordinates as $utm) {
+            $utmParts = explode(',', $utm); // Sépare les coordonnées UTM en X et Y
+            $utmX = floatval($utmParts[0]);
+            $utmY = floatval($utmParts[1]);
+
+            // Créez le point source avec les coordonnées UTM
+            $pointSrc = new Point($utmX, $utmY, $projUTM);
+
+            // Transformez le point entre les systèmes de coordonnées
+            $pointDest = $proj4->transform($projWGS84, $pointSrc);
+
+            // Obtenez les coordonnées lat/lon du point de destination
+            $lat = $pointDest->y;
+            $lon = $pointDest->x;
+
+            // Ajoutez le résultat à votre tableau de résultats en coordonnées décimales
+            $decimalResults[] = "$lon, $lat";
+        }
+
+        return $decimalResults;
+    }
+
+    public function quittance()
+    {
+        $this->validate([
+            'coordonates'=>'required',
+            'coordonnees'=>'required'
+        ]);
+        $transform = $this->convert($this->coordonnees);
+
+        $imma_directe = $this->imma_directe->update([
+            'coordonnees_utm' => json_encode($this->coordonnees),
+            'coordonnees' => json_encode($transform),
+        ]);
+        if (!empty($this->attachements)) {
+            foreach ($this->attachements as $attachement) {
+                $imma_directe->addMedia($attachement->getRealPath())
+                    ->usingName($imma_directe->uuid)
+                    ->toMediaCollection('imma_directe');
+            }
+        }
+
+        $this->refresh(__('Quittance et Coordonnées enregistrés avec succès!'), 'CertfifcatAffichageImmaDirecteModal');
     }
 
     public function nextStep()
