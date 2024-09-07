@@ -216,7 +216,7 @@ $bgClass = $isCompleted
                 @elseif($step == 16)
                     @include('livewire.portal.immatriculation-directe.step.edit_statut')
                 @elseif($step == 17)
-                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                    @include('livewire.portal.immatriculation-directe.step.ordre_redevance_fonciere')
                 @elseif($step == 18)
                     @include('livewire.portal.immatriculation-directe.step.edit_statut')
                 @elseif($step == 19)

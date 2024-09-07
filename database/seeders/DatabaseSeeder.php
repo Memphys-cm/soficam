@@ -50,11 +50,11 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(CabinetAndMembreCabinetSeeder::class);
         // $this->call(CabinetNotaireSeeder::class);
-        $this->call(TitreFoncierSeeder::class);
-        $this->call(LotissementSeeder::class);
+        #$this->call(TitreFoncierSeeder::class);
+        #$this->call(LotissementSeeder::class);
         // $this->call(VentesSeeder::class);
         // $this->call(ReleveDeBienSeeder::class);
-        $this->call(BordereauAnalytiqueSeeder::class);
+        #$this->call(BordereauAnalytiqueSeeder::class);
         // \App\Models\User::factory(1000)->create();
 
         // $user_role = Role::where('name', 'user')->first();
@@ -87,14 +87,14 @@ class DatabaseSeeder extends Seeder
 
 
         // $this->call(TitreFoncierSeeder::class);
-        $this->call(CertificateProprieteSeeder::class);
+        #$this->call(CertificateProprieteSeeder::class);
         // $this->call(TitreFoncierSeeder::class);
-        $this->call(CategoryActivitesSeeder::class);
-        $this->call(OperationSeeder::class);
+        #$this->call(CategoryActivitesSeeder::class);
+        #$this->call(OperationSeeder::class);
 
-        $this->call(UsualSeeder::class);
+        #$this->call(UsualSeeder::class);
         // $this->call(CertificateProprieteSeeder::class);
-        $this->call(EtatCessionSeeder::class);
+        #$this->call(EtatCessionSeeder::class);
 
     }
 }
