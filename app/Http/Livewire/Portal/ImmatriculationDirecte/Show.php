@@ -319,14 +319,18 @@ class Show extends Component
         $this->validate([
             'pv_administratif' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             'pv_bornage' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'cni_files.*' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'cni_files.*' => 'nullable|file|mimes:pdf,jpg,jpeg,png,pdf,doc,docx|max:2048',
         ]);
 
         DB::transaction(function () {
             $this->imma_directe->update([
-                'statut' => 'Descente sur le terrain effectuée',
-                'next_step' => 'Etablissement Etat de Cession',
-                'descente_terrain' => Carbon::now()
+                'statut' => 'Instruction de la Descente sur le terrain effectuée',
+                'next_step' => 'Attente de la descente sur le terrain',
+                'limit_nord' => $this->limit_nord,
+                'limit_sud' => $this->limit_sud,
+                'limit_est' => $this->limit_est,
+                'limit_ouest' => $this->limit_ouest,
+                'descente_terrain_maked' => Carbon::now()
             ]);
         });
 
@@ -393,6 +397,18 @@ class Show extends Component
                     'statut' => 'Etat de Cession Payer',
                     'next_step' => 'Dépôt de la quittance de l’état de cession auprès du géomètre désigné',
                     'etat_cession_payer' => $this->date_status,
+                ];
+                break;
+            case "Attente de la descente sur le terrain":
+                $updateData = [
+                    'statut' => 'Descente sur le terrain effectuer',
+                    'next_step' => 'Mise a jour du dossier technique',
+                    'etat_cession_payer' => $this->date_status,
+                ];
+                break;
+
+            case "valider le paiement":
+                $updateData = [
                 ]);
             });
         } else if ($imma->next_step == "valider le paiement") {
