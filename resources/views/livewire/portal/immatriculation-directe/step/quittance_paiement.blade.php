@@ -66,7 +66,7 @@
             <div class="d-flex justify-content-end">
                 <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
                     data-bs-dismiss="modal">{{ __('Fermer') }}</button>
-                <button type="submit" wire:click.prevent="update_dossier_technique" class="btn btn-primary btn-loading"
+                <button type="submit" wire:click.prevent="quittance" class="btn btn-primary btn-loading"
                     wire:loading.attr="disabled">{{ __('Enregistrer') }}</button>
             </div>
         </x-form-items.form>

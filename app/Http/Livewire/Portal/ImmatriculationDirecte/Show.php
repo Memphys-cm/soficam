@@ -168,7 +168,7 @@ class Show extends Component
     public function quittance()
     {
         $this->validate([
-            'coordonates'=>'required',
+            'coordinates'=>'required',
             'coordonnees'=>'required'
         ]);
         $transform = $this->convert($this->coordonnees);
