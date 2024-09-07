@@ -1,5 +1,5 @@
 @can('imma_directe.etat_cession')
-    <div class="container my-4 {{ $imma_directe->statut !== 'Descente sur le terrain effectuée' && !auth()->user()->hasRole('super_admin') ? 'disabled-page' ? 'disabled-page' : '' }}">
+    <div class="container my-4 {{ $imma_directe->statut !== 'Descente sur le terrain effectuée' && !auth()->user()->hasRole('super_admin')? 'disabled-page' : '' }}">
         <div class="shadow-lg rounded p-4 bg-white">
             <div class="mb-4 mt-md-0">
                 <h1 class="mb-0 h4">{{ __('Etat Cession') }}</h1>
