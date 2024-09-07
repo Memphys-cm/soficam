@@ -397,18 +397,6 @@ class Show extends Component
                     'statut' => 'Etat de Cession Payer',
                     'next_step' => 'Dépôt de la quittance de l’état de cession auprès du géomètre désigné',
                     'etat_cession_payer' => $this->date_status,
-                ];
-                break;
-            case "Attente de la descente sur le terrain":
-                $updateData = [
-                    'statut' => 'Descente sur le terrain effectuer',
-                    'next_step' => 'Mise a jour du dossier technique',
-                    'etat_cession_payer' => $this->date_status,
-                ];
-                break;
-
-            case "valider le paiement":
-                $updateData = [
                 ]);
             });
         } else if ($imma->next_step == "valider le paiement") {
