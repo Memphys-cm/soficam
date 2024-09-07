@@ -193,7 +193,7 @@ $bgClass = $isCompleted
                 @elseif($step == 8)
                     @include('livewire.portal.immatriculation-directe.step.etat_cession')
                 @elseif($step == 9)
-                    @include('livewire.portal.immatriculation-directe.step.descente_terrain')
+                    @include('livewire.portal.immatriculation-directe.step.instruction_descente_terrain')
                 @elseif($step == 10)
                     @include('livewire.portal.immatriculation-directe.step.edit_statut')
                 @elseif($step == 11)

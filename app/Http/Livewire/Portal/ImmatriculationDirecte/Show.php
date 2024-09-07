@@ -72,6 +72,11 @@ class Show extends Component
     public $coordinates = ['', ''];
     public $coordonnees = [];
     public $attachements;
+    public $cout_etat_cession;
+    public $message_porte;
+    public $pv_administratif;
+    public $pv_bornage;
+    public $cni_files = [];
 
     public function mount($code)
     {
@@ -108,21 +113,12 @@ class Show extends Component
         $this->numero_arrete_ordre_versement = $imma_directe->numero_arrete_ordre_versement;
         $this->date_ordre_versement = $imma_directe->date_ordre_versement;
         $this->status_ordre_versement = $imma_directe->status_ordre_versement;
+        $this->imma_directe = ImmatriculationDirecte::where('reference', $code)->first();
         $this->services = Service::select('id', 'service_name_fr')->get();
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
-        public function mount()
-{
-    // Vérifie si l'objet 'imma_directe' est défini et a une propriété 'next_step'
-    if (isset($this->imma_directe) && isset($this->imma_directe->next_step)) {
-        // Assigner le 'next_step' de 'imma_directe' à 'this->status'
-        $this->status = $this->imma_directe->next_step;
-    }
-    
-}
-
     }
 
     public function addCoordinate()
@@ -189,7 +185,7 @@ class Show extends Component
             }
         }
 
-        $this->refresh(__('Quittance et Coordonnées enregistrés avec succès!'), 'CertfifcatAffichageImmaDirecteModal');
+        $this->refresh(__('Quittance et Coordonnées enregistréd avec succès!'), 'CertfifcatAffichageImmaDirecteModal');
     }
 
     public function nextStep()
@@ -300,144 +296,200 @@ class Show extends Component
     public function descente_terrain()
     {
         $this->validate([
-
-            'limit_nord' => 'required',
-            'limit_sud' => 'required',
-            'limit_est' => 'required',
-            'limit_ouest' => 'required',
-
+            'comissions' => 'required|array|min:1',
         ]);
+
         DB::transaction(function () {
             $this->imma_directe->update([
                 'statut' => 'Descente sur le terrain effectuée',
                 'next_step' => 'Etablissement Etat de Cession',
                 'comissions' => json_encode($this->comissions),
-                'limit_nord' => $this->limit_nord,
-                'limit_sud' => $this->limit_sud,
-                'limit_est' => $this->limit_est,
-                'limit_ouest' => $this->limit_ouest,
                 'descente_terrain' => Carbon::now()
             ]);
         });
 
-        if (!empty($this->attachments)) {
-            foreach ($this->attachments as $attachment) {
-                $this->imma_directe->addMedia($attachment->getRealPath())
-                    ->usingName('Acte_Pv_Descente_Terrain')
-                    ->toMediaCollection('imma_directe_dossier_administratif');
-            }
-        }
+        $this->sms($this->imma_directe->id, 'descente_terrain');
 
         // $this->clearFields();
         $this->refresh(__('Descente sur le terrain effectuée'), 'DescenteTerrainModal');
     }
 
+    public function instruction_descente_terrain()
+    {
+        $this->validate([
+            'pv_administratif' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'pv_bornage' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'cni_files.*' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+        ]);
+
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'statut' => 'Descente sur le terrain effectuée',
+                'next_step' => 'Etablissement Etat de Cession',
+                'descente_terrain' => Carbon::now()
+            ]);
+        });
+
+        // Enregistrer les fichiers PV administratifs
+        if ($this->pv_administratif) {
+            $this->imma_directe->pv_administratif = $this->pv_administratif->store('pvs_administratif', 'public');
+        }
+        if ($this->pv_bornage) {
+            $this->imma_directe->pv_bornage = $this->pv_bornage->store('pvs_bornage', 'public');
+        }
+
+        // Enregistrer les fichiers CNI
+        $cni_paths = [];
+        foreach ($this->cni_files as $index => $file) {
+            if ($file) {
+                $cni_paths[$index] = $file->store('cni_comissions', 'public');
+            }
+        }
+        $this->imma_directe->cni_files = json_encode($cni_paths);
+
+        // Enregistrer les fichiers attachés supplémentaires
+        // if (!empty($this->attachments)) {
+        //     foreach ($this->attachments as $attachment) {
+        //         $this->imma_directe->addMedia($attachment->getRealPath())
+        //             ->usingName('Acte_Pv_Descente_Terrain')
+        //             ->toMediaCollection('imma_directe_dossier_administratif');
+        //     }
+        // }
+
+        // Sauvegarder les modifications
+        $this->imma_directe->save();
+
+        $this->refresh(__('Descente sur le terrain effectuée'), 'DescenteTerrainModal');
+    }
+
+
     public function edits_statut()
     {
         $imma = $this->imma_directe;
         $this->validate([
+            #'status' => 'required',
             'date_status' => 'required',
         ]);
-
-        switch ($imma->next_step) {
-            case "Avis Au publique En attente de signature":
-                $updateData = [
+        if ($imma->next_step == "Avis Au publique En attente de signature") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Avis au Public Signer',
                     'next_step' => 'Instruction du Dossier – Élaboration du certificat d’affichage',
                     'date_avis_publique_signe' => $this->date_status,
-                ];
-                break;
-            case "Signature du certificat d'affichage":
-                $updateData = [
+                ]);
+            });
+        } else if ($imma->next_step == "Signature du certificat d'affichage") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Certificat d\'affichage signé',
-                    'next_step' => 'Programmation descente sur le terrain',
+                    'date_certificat_d_affichage_signer' => $this->date_status,
+                    'next_step' => 'Programmation descente',
                     'date_calendrier_descente' => $this->date_status,
-                ];
-                break;
-            case "Paiement de L\'Etat de Cession":
-                $updateData = [
+                ]);
+            });
+        } else if ($imma->next_step == "Paiement de L\'Etat de Cession") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Etat de Cession Payer',
                     'next_step' => 'Dépôt de la quittance de l’état de cession auprès du géomètre désigné',
                     'etat_cession_payer' => $this->date_status,
-                ];
-                break;
-            case "valider le paiement":
-                $updateData = [
+                ]);
+            });
+        } else if ($imma->next_step == "valider le paiement") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Dossier publié au bulletin des avis domaniaux et fonciers',
                     'next_step' => 'Achat des bulletins',
                     'date_publication_dossier_vise' => $this->date_status,
-                ];
-                break;
-            case "Bulletins en attente de signature par le délégué":
-                $updateData = [
+                ]);
+            });
+        } else if ($imma->next_step == 'Bulletins en attente de signature par le délégué') {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Bulletins signés',
                     'next_step' => 'Transmission du dossier complet à la Délégation Départementale',
                     'date_signature_bulletin' => $this->date_status,
-                ];
-                break;
-            case "Transmission du dossier technique au CSDAF":
-                $updateData = [
+                ]);
+            });
+        } else if ($imma->next_step == "Transmission du dossier technique au CSDAF") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Dossier Transmis au CsDaf',
                     'next_step' => 'Jumelage (fusion) et préparation du Bordereau de transmission',
                     'transmission_csdaf' => $this->date_status,
-                ];
-                break;
-            case "Transmission du dossier technique au Délégué Régional MINDCAF":
-                $updateData = [
-                    'statut' => 'Dossier technique transmis au Délègue Regional Mindcaf',
-                    'next_step' => 'Cotation du dossier complet d’immatriculation directe au CSRDAF',
+                ]);
+            });
+        } else if ($imma->next_step == "Transmission du dossier technique au Délégué Régional MINDCAF") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => ' Dossier technique transmis au Délègue Regional Mindcaf',
+                    'next_step' => 'Cotation du dossier complet d\’immatriculation directe au CSRDAF ',
                     'date_dossier_transmi_au_Mindcaf' => $this->date_status,
-                ];
-                break;
-            case "Cotation du dossier complet d’immatriculation directe au CSRDAF":
-                $updateData = [
+                ]);
+            });
+        } else if ($imma->next_step == "Cotation du dossier complet d\’immatriculation directe au CSRDAF") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Dossier complet transmis  au CSRegional Mindcaf',
-                    'next_step' => 'Transmission du dossier complet au Délégué Régional MINDCAF',
+                    'next_step' => ' Transmission du dossier complet au Délégué Régional MINDCAF ',
                     'date_dossier_complet_transmi_CSRegional_mindcaf' => $this->date_status,
-                ];
-                break;
-            case "Cotation du dossier du dossier technique au Chef service régional du cadastre pour contrôle, mise à jour et signature":
-                $updateData = [
+                ]);
+            });
+        } else if ($imma->next_step == "Transmission du dossier complet au Délégué Régional MINDCAF") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => 'Dossier Vise et en attente de publication',
+                    'next_step' => 'Traitement du dossier visé-enregistré',
+                    'date_dossier_vise_en_attente_publication' => $this->date_status,
+                ]);
+            });
+        } else if ($imma->next_step == "Cotation du dossier du dossier technique au Chef service régional du cadastre pour contrôle, mise à jour et signature") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Dossier technique valide par la Brigader',
                     'next_step' => 'Réception, traitement et signature du dossier technique',
                     'coter_csrcadastre' => $this->date_status,
-                ];
-                break;
-            case "Réception, traitement et signature du dossier technique":
-                $updateData = [
-                    'statut' => 'Dossier technique signe (Par le CSRCadastre)',
+                ]);
+            });
+        } else if ($imma->next_step == "Réception, traitement et signature du dossier technique") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => 'Dossier technique signe  (Par le CSRCadastre)',
                     'next_step' => 'Transmission du dossier technique au Délégué Régional MINDCAF',
                     'dos_tech_transmis_drm' => $this->date_status,
-                ];
-                break;
-            case "Cotation du dossier complet d’immatriculation directe au Chef service Régional des affaires foncières":
-                $updateData = [
+                ]);
+            });
+        } else if ($imma->next_step == "Transmission du dossier technique au Délégué Régional MINDCAF") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
+                    'statut' => ' Dossier technique transmis au Délègue Regional Mindcaf ',
+                    'next_step' => 'Cotation du dossier complet d’immatriculation directe au Chef service Régional des affaires foncières',
+                    'dos_compl_csrdaf' => $this->date_status,
+                ]);
+            });
+        } else if ($imma->next_step == "Cotation du dossier complet d’immatriculation directe au Chef service Régional des affaires foncières") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Dossier Vise et en attente de publication',
                     'next_step' => 'Traitement du dossier visé-enregistré',
                     'cotation_compl_csrdaf' => $this->date_status,
-                ];
-                break;
-            case "Traitement du dossier visé-enregistré":
-                $updateData = [
+                ]);
+            });
+        } else if ($imma->next_step == "Traitement du dossier visé-enregistré") {
+            DB::transaction(function () {
+                $this->imma_directe->update([
                     'statut' => 'Dossier Publier au bulletin des avis domaniaux et fonciers',
                     'next_step' => 'Achat des bulletins',
                     'cotation_compl_csrdaf' => $this->date_status,
-                ];
-                break;
-            default:
-                $updateData = [];
-                break;
-        }
-
-        if (!empty($updateData)) {
-            DB::transaction(function () use ($updateData) {
-                $this->imma_directe->update($updateData);
+                ]);
             });
         }
 
-        $this->refresh(__('Statut Modifier Avec SUCCES!'), 'EditStatutModal');
-    }
 
+
+        $this->refresh(__('Statut Modifier Avec SUCCES!'), 'EditStatutModal');
+        #$this->clearFields();
+    }
 
     public function etatDeCession()
     {
@@ -570,62 +622,79 @@ class Show extends Component
         $this->refresh(__('Dossier Administratif Mise En Forme Avec Suceess'), 'DossierAdministratifModal');
     }
 
-    public function sms($id)
+    public function sms($id, $case = 'default')
     {
+        // Récupérer l'immatriculation directe
         $imma_directe = ImmatriculationDirecte::findOrFail($id);
-        $receivers = $imma_directe->users;
 
-        $userNames = '';
-        $mobiles = "";
+        // Décoder les informations de la commission à partir du JSON
+        $comissions = json_decode($imma_directe->comissions, true);
 
-        foreach ($receivers as $user) {
-            if ($user) {
-                $userNames .= $user->first_name . ',';
-                $mobiles .= "$user->primary_phone_number,";
-            }
+        // Vérifier qu'il y a au moins une entrée dans la commission
+        if (empty($comissions)) {
+            return ['echec' => 'Aucun membre de la commission trouvé pour cet envoi de SMS.'];
         }
 
-        //retirer la virgule en fin de chaine
-        $userNames = rtrim($userNames, ',');
-        $mobiles = rtrim($mobiles, ',');
+        // Construire la liste des numéros de téléphone
+        $mobiles = array_column($comissions, 'telephone');
+        $mobiles = implode(',', $mobiles);
 
-        $sms = "Mr/Mme. $userNames, votre dossier d'immatriculation directe et à l'étape $imma_directe->statut";
-        $senderid = 'SOFICAM';
-        $api_key = '36v7fN66hzUD6SaBYkILlirHZo7P';
-        $url = 'https://api.queensms.net/v1/sms.php';
+        // Construire le message en fonction du cas
+        $userNames = array_column($comissions, 'name');
+        $userNamesString = implode(', ', $userNames);
 
-        $sms_body = array(
-            'api_key' => $api_key,
-            'senderid' => $senderid,
+        switch ($case) {
+            case 'descente_terrain':
+                $sms = "Mr/Mme. $userNamesString, votre dossier d'immatriculation directe est à l'étape 'Descente sur le terrain'.";
+                break;
+
+            case 'certificat_affichage':
+                $sms = "Mr/Mme. $userNamesString, votre dossier d'immatriculation directe est à l'étape 'Certificat d'affichage signé'.";
+                break;
+
+            case 'paiement_etat':
+                $sms = "Mr/Mme. $userNamesString, votre dossier d'immatriculation directe est à l'étape 'Paiement de l'État de Cession'.";
+                break;
+
+                // Ajoute d'autres cas ici selon les besoins
+
+            default:
+                $sms = "Mr/Mme. $userNamesString, votre dossier d'immatriculation directe est à l'étape actuelle : $imma_directe->statut.";
+                break;
+        }
+
+        // Paramètres pour l'API SMS
+        $sms_body = [
+            'api_key' => '36v7fN66hzUD6SaBYkILlirHZo7P',
+            'senderid' => 'SOFICAM',
             'sms' => $sms,
             'mobiles' => $mobiles
-        );
+        ];
 
-        $send_data = http_build_query($sms_body);
-        $gateway_url = $url . "?" . $send_data;
+        $url = 'https://api.queensms.net/v1/sms.php?' . http_build_query($sms_body);
 
         try {
+            // Envoi de la requête HTTP
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $gateway_url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_HTTPGET, 1);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPGET, true);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             $output = curl_exec($ch);
 
+            // Gestion des erreurs cURL
             if (curl_errno($ch)) {
-                $output = curl_error($ch);
-                $arr = ['echec'];
-                return ($arr);
-            } else {
-                return ($output);
+                return ['echec' => curl_error($ch)];
             }
+
             curl_close($ch);
+            return ['success' => $output];
         } catch (Exception $exception) {
-            //echo $exception->getMessage();
-            $arr = ['echec'];
-            return ($arr);
+            // Gestion des exceptions
+            return ['echec' => $exception->getMessage()];
         }
     }
+
 
     public function generateCodeTF()
     {
