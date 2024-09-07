@@ -105,11 +105,13 @@ class Show extends Component
         $this->numero_bordereau_transmission = $imma_directe->numero_bordereau_transmission;
         $this->next_step = $imma_directe->next_step;
         $this->statut = $imma_directe->statut;
-        #$this->date_delivrance = Carbon::createFromFormat('Y-m-d', trim($imma_directe->date_delivrance))->format('d/m/Y');
-        $this->comissions = $imma_directe->comissions;
+        // #$this->date_delivrance = Carbon::createFromFormat('Y-m-d', trim($imma_directe->date_delivrance))->format('d/m/Y');
+        $this->comissions = json_decode($imma_directe->comissions, true);
         $this->cotation_user_id = $imma_directe->cotation_user_id;
         $this->observation_cotation = $imma_directe->observation_cotation;
-        #$this->date_cotation = Carbon::createFromFormat('Y-m-d', trim($imma_directe->date_cotation))->format('d/m/Y');
+        $this->date_cotation = !empty($imma_directe->date_cotation) && Carbon::hasFormat(trim($imma_directe->date_cotation), 'Y-m-d')
+            ? Carbon::createFromFormat('Y-m-d', trim($imma_directe->date_cotation))->format('d/m/Y')
+            : null;
         $this->status_cotation = $imma_directe->status_cotation;
         $this->montant_ordre_versement = $imma_directe->montant_ordre_versement;
         $this->numero_ordre_versement = $imma_directe->numero_ordre_versement;
@@ -376,6 +378,8 @@ class Show extends Component
 
     public function edits_statut()
     {
+
+        // dd($this->next_step);
         $imma = $this->imma_directe;
         $this->validate([
             #'status' => 'required',
@@ -430,7 +434,7 @@ class Show extends Component
                     'transmission_csdaf' => $this->date_status,
                 ]);
             });
-        } else if ($imma->next_step == "Transmission du dossier technique au Délégué Régional MINDCAF") {
+        } else if ($imma->next_step == "Transmission du dossier technique au Délégué Régional MINDCAF") { //step 17
             DB::transaction(function () {
                 $this->imma_directe->update([
                     'statut' => ' Dossier technique transmis au Délègue Regional Mindcaf',
@@ -438,7 +442,8 @@ class Show extends Component
                     'date_dossier_transmi_au_Mindcaf' => $this->date_status,
                 ]);
             });
-        } else if ($imma->next_step == "Cotation du dossier complet d\’immatriculation directe au CSRDAF") {
+        } else if ($imma->next_step == "Cotation du dossier complet d\’immatriculation directe au CSRDAF ") { // step 18
+            // dd("ok");
             DB::transaction(function () {
                 $this->imma_directe->update([
                     'statut' => 'Dossier complet transmis  au CSRegional Mindcaf',
@@ -446,7 +451,7 @@ class Show extends Component
                     'date_dossier_complet_transmi_CSRegional_mindcaf' => $this->date_status,
                 ]);
             });
-        } else if ($imma->next_step == "Transmission du dossier complet au Délégué Régional MINDCAF") {
+        } else if ($imma->next_step == "Transmission du dossier complet au Délégué Régional MINDCAF") { //step 19
             DB::transaction(function () {
                 $this->imma_directe->update([
                     'statut' => 'Dossier Vise et en attente de publication',
