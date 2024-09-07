@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('pv_administratif')->nullable();
             $table->string('pv_bornage')->nullable();
             $table->json('cni_files')->nullable();
+            $table->date('instruction_descente_terrain')->nullable();
         });
     }
 

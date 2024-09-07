@@ -22,8 +22,46 @@
                     @endphp
                 @endif
 
-                <x-form-items.form wire:submit="descente_terrain">
-                    <!-- Enregistrement des PVs administratifs -->
+                <x-form-items.form wire:submit="instruction_descente_terrain">
+
+                    <div class='form-group mb-3 row'>
+                        <div class='col'>
+                            <label for="limit_nord">{{ __('Limite Nord') }}</label>
+                            <input wire:model="limit_nord" type="text"
+                                class="form-control  @error('limit_nord') is-invalid @enderror"
+                                placeholder="{{ __('Road') }}" required="" value="" name="limit_nord">
+                            @error('limit_nord')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class='col'>
+                            <label for="limit_sud">{{ __('Limite Sud') }}</label>
+                            <input wire:model="limit_sud" type="text"
+                                class="form-control  @error('limit_sud') is-invalid @enderror"
+                                placeholder="{{ __('Road') }}" required="" value="" name="limit_sud">
+                            @error('limit_sud')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class='col'>
+                            <label for="limit_est">{{ __('Limite Est') }}</label>
+                            <input wire:model="limit_est" type="text"
+                                class="form-control  @error('limit_est') is-invalid @enderror"
+                                placeholder="{{ __('Road') }}" required="" value="" name="limit_est">
+                            @error('limit_est')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class='col'>
+                            <label for="limit_ouest">{{ __('Limite Ouest') }}</label>
+                            <input wire:model="limit_ouest" type="text"
+                                class="form-control  @error('limit_ouest') is-invalid @enderror"
+                                placeholder="{{ __('Road') }}" required="" value="" name="limit_ouest">
+                            @error('limit_ouest')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="form-group row mb-3">
                         <div class="col-md-12">
                             <label class="form-label"
@@ -38,7 +76,8 @@
                     <!-- Enregistrement des PVs de bornage -->
                     <div class="form-group row mb-3">
                         <div class="col-md-12">
-                            <label class="form-label" for="pv_bornage">{{ __('Enregistrement des PVs de bornage') }}</label>
+                            <label class="form-label"
+                                for="pv_bornage">{{ __('Enregistrement des PVs de bornage') }}</label>
                             <input type="file" id="pv_bornage" class="form-control" wire:model="pv_bornage">
                             @error('pv_bornage')
                                 <span class="text-danger">{{ $message }}</span>
@@ -66,10 +105,11 @@
 
                     <!-- Boutons d'action -->
                     <div class="d-flex justify-content-end my-2">
-                        <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
-                            data-bs-dismiss="modal">{{ __('Fermer') }}</button>
-                        <button type="submit" wire:click.prevent="descente_terrain" class="btn btn-primary btn-loading"
+                        <button class="btn btn-secondary" wire:click.prevent="prevStep"> {{ __('<< Précedent') }} </button>
+                        <button type="submit" wire:click.prevent="instruction_descente_terrain"
+                            class="btn btn-primary btn-loading mx-2"
                             wire:loading.attr="disabled">{{ __('Enregistrer L\'instruction de la descente sur le Terrain') }}</button>
+                        <button class="btn btn-info" wire:click.prevent="nextStep"> {{ __('Suivant >>') }} </button>
                     </div>
                 </x-form-items.form>
             </div>
@@ -77,7 +117,7 @@
             <!-- Notice explicative -->
             <div class="my-2 p-2 shadow">
                 <p class="text-warning">
-                    {{ __('À cette étape, veuillez entrer les limites géographiques (Nord, Sud, Est, Ouest) et les informations des membres de la commission (nom, poste, numéro CNI, téléphone). Vous pouvez également ajouter des membres supplémentaires et télécharger les PVs administratifs et de bornage. Une fois les informations saisies, vous pouvez enregistrer la descente sur le terrain.') }}
+                    {{ __('À cette étape, veuillez entrer les differents pvs et cni des membres de la comission.') }}
                 </p>
             </div>
 
