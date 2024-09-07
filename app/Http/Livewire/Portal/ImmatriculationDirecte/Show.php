@@ -197,14 +197,14 @@ class Show extends Component
         $this->validate([
             'pv_administratif' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             'pv_bornage' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'cni_files.*' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'cni_files.*' => 'nullable|file|mimes:pdf,jpg,jpeg,png,pdf,doc,docx|max:2048',
         ]);
 
         DB::transaction(function () {
             $this->imma_directe->update([
-                'statut' => 'Descente sur le terrain effectuée',
-                'next_step' => 'Etablissement Etat de Cession',
-                'descente_terrain' => Carbon::now()
+                'statut' => 'Instruction de la Descente sur le terrain effectuée',
+                'next_step' => 'Attente de la descente sur le terrain',
+                'descente_terrain_maked' => Carbon::now()
             ]);
         });
 
