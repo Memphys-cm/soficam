@@ -1,5 +1,5 @@
 @can('imma_directe.mise_en_forme_dos_tech')
-    <div class="container my-4 {{ $imma_directe->statut !== 'Etat de cession payé' ? 'disabled-page' : '' }}">
+    <div class="container my-4 {{ $imma_directe->statut !== 'Etat de cession payé' && !auth()->user()->hasRole('super_admin') ? 'disabled-page' ? 'disabled-page' : '' }}">
         <div class="shadow-lg rounded p-4 bg-white">
 
             <div class="mb-4 mt-md-0">

@@ -1,5 +1,5 @@
 @can('imma_directe.certificat_affichage')
-    <div class="container my-4 {{ $imma_directe->statut !== 'Avis au Public Signé' ? 'disabled-page' : '' }}">
+    <div class="container my-4 {{ $imma_directe->statut !== 'Avis au Public Signé' && !auth()->user()->hasRole('super_admin') ? 'disabled-page' : '' }}">
         <div class="shadow-lg rounded p-4 bg-white">
 
             <div class="mb-4 mt-md-0">
