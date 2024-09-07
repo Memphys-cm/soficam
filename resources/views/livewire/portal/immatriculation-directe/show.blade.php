@@ -147,7 +147,10 @@ $bgClass = $isCompleted
                         11 => $imma_directe->coordonnees_utm,
                         12 => $imma_directe->dossier_technique_complet,
                         13 => $imma_directe->dossier_administratif_complet,
-                        13 => $imma_directe->transmission_csdaf,
+                        14 => $imma_directe->transmission_csdaf,
+                        15 => $imma_directe->numero_bordereau_transmission,
+                        16 => $imma_directe->transmission_csdaf,
+                        17 => $imma_directe->transmission_csdaf,
                     ];
                     
                 @endphp
