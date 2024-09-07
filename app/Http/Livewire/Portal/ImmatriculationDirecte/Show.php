@@ -18,6 +18,8 @@ use App\Http\Livewire\Traits\WithDataTables;
 use App\Http\Livewire\Portal\ImmatriculationDirecte\Stepps\HandlesCotationCsdaf;
 use App\Http\Livewire\Portal\ImmatriculationDirecte\Stepps\HandlesOrdreVersement;
 use App\Http\Livewire\Portal\ImmatriculationDirecte\Stepps\HandlesAvisPublicDescente;
+use App\Http\Livewire\Portal\ImmatriculationDirecte\Stepps\HandlesRedevance;
+use App\Models\SubDivision;
 use proj4php\Point;
 use proj4php\Proj;
 use proj4php\Proj4php;
@@ -25,7 +27,7 @@ use proj4php\Proj4php;
 class Show extends Component
 {
     use WithDataTables;
-    use HandlesCotationCsdaf, HandlesOrdreVersement, HandlesAvisPublicDescente;  // Inclure le Trait
+    use HandlesCotationCsdaf, HandlesOrdreVersement, HandlesAvisPublicDescente, HandlesRedevance;  // Inclure le Trait
 
     public $imma_directe;
     public $services, $regions;
@@ -77,6 +79,7 @@ class Show extends Component
     public $pv_administratif;
     public $pv_bornage;
     public $cni_files = [];
+    public $montant_ordre_redevance_fonciere;
 
     public function mount($code)
     {
@@ -106,7 +109,7 @@ class Show extends Component
         $this->comissions = $imma_directe->comissions;
         $this->cotation_user_id = $imma_directe->cotation_user_id;
         $this->observation_cotation = $imma_directe->observation_cotation;
-        $this->date_cotation = Carbon::createFromFormat('Y-m-d', trim($imma_directe->date_cotation))->format('d/m/Y');
+        #$this->date_cotation = Carbon::createFromFormat('Y-m-d', trim($imma_directe->date_cotation))->format('d/m/Y');
         $this->status_cotation = $imma_directe->status_cotation;
         $this->montant_ordre_versement = $imma_directe->montant_ordre_versement;
         $this->numero_ordre_versement = $imma_directe->numero_ordre_versement;
@@ -119,6 +122,10 @@ class Show extends Component
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
+
+        $selectedSubDivision = SubDivision::findOrFail($this->imma_directe->sub_division_id);
+        $prixMinimaM2 = $selectedSubDivision->prix_minima_m2;
+        $this->montant_ordre_redevance_fonciere = $this->superficie * $prixMinimaM2;
     }
 
     public function addCoordinate()
@@ -168,8 +175,8 @@ class Show extends Component
     public function quittance()
     {
         $this->validate([
-            'coordinates'=>'required',
-            'coordonnees'=>'required'
+            'coordinates' => 'required',
+            'coordonnees' => 'required'
         ]);
         $transform = $this->convert($this->coordonnees);
 
@@ -626,49 +633,50 @@ class Show extends Component
         $this->refresh(__('Dossier Administratif Mise En Forme Avec Suceess'), 'DossierAdministratifModal');
     }
 
-    public function sms($id){
+    public function sms($id)
+    {
         $imma_directe = ImmatriculationDirecte::findOrFail($id);
-    
+
         // Décoder les informations de la commission à partir du JSON
         $comissions = json_decode($imma_directe->comissions, true);
-    
+
         // Vérifier qu'il y a au moins une entrée dans la commission
         if (empty($comissions)) {
             return ['echec' => 'Aucun membre de la commission trouvé pour cet envoi de SMS.'];
         }
-    
-        $sms='';
-        $userNames='';
+
+        $sms = '';
+        $userNames = '';
         $mobiles = "";
-    
-        foreach($comissions as $user) {
-            if($user){
+
+        foreach ($comissions as $user) {
+            if ($user) {
                 $userNames .= $user->first_name . ',';
                 $mobiles .= "$user->primary_phone_number,";
             }
         }
-    
+
         //retirer la virgule en fin de chaine
         $userNames = rtrim($userNames, ',');
         $mobiles = rtrim($mobiles, ',');
         $sms = $this->message_porte;
-                
-        if(!empty($sms)){
-            $senderid ='SOFICAM';
+
+        if (!empty($sms)) {
+            $senderid = 'SOFICAM';
             $mobiles = $mobiles;
             $api_key = 'wplL0f9wq1moi1NrsjpsBgfBzun4';
             $url = 'https://api.queensms.net/v1/sms.php';
-    
+
             $sms_body = array(
                 'api_key' => $api_key,
                 'senderid' => $senderid,
                 'sms' => $sms,
                 'mobiles' => $mobiles
             );
-                
+
             $send_data = http_build_query($sms_body);
             $gateway_url = $url . "?" . $send_data;
-                
+
             try {
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $gateway_url);
@@ -676,25 +684,21 @@ class Show extends Component
                 curl_setopt($ch, CURLOPT_HTTPGET, 1);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
                 $output = curl_exec($ch);
-            
+
                 if (curl_errno($ch)) {
                     $output = curl_error($ch);
                     $arr = ['echec'];
-                    return($arr);
+                    return ($arr);
+                } else {
+                    return ($output);
                 }
-                else{
-                    return($output);
-                }
-                    curl_close($ch);
-            }
-                
-            catch (Exception $exception){
+                curl_close($ch);
+            } catch (Exception $exception) {
                 //echo $exception->getMessage();
                 $arr = ['echec'];
-                return($arr);
+                return ($arr);
             }
         }
-    
     }
     public function generateCodeTF()
     {

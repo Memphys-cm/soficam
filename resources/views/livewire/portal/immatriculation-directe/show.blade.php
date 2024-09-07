@@ -120,10 +120,10 @@ $bgClass = $isCompleted
                             13 => __('13- Changements de Statut après Transmission'),
                             14 => __('14- Établissement du Bordereau de Transmission'),
                             15 => __('15- Changements de Statut après le Bordereau'),
-                            16 => __('16- Production du Certificat Final'),
+                            16 => __('16- Cotation du dossier du dossier technique au CSRC'),
                         ],
                         4 => [
-                            17 => __('17- Finalisation et Clôture du Dossier'),
+                            17 => __('17- Etablissement Délivrance de l’ordre de la redevance foncière'),
                             18 => __('18- Vérification Finale'),
                             19 => __('19- Remise des Documents Officiels'),
                             20 => __('20- Archivage du Dossier'),
@@ -204,8 +204,10 @@ $bgClass = $isCompleted
                     @include('livewire.portal.immatriculation-directe.step.edit_statut')
                 @elseif($step == 14)
                     @include('livewire.portal.immatriculation-directe.step.bordoreau_transmition')
-                    @elseif($step == 15)
-                        @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 15)
+                    @include('livewire.portal.immatriculation-directe.step.edit_statut')
+                @elseif($step == 17)
+                    @include('livewire.portal.immatriculation-directe.step.ordre_redevance_fonciere')
                 @endif
                 <!-- Ajoutez d'autres conditions pour les étapes restantes -->
             </div>
