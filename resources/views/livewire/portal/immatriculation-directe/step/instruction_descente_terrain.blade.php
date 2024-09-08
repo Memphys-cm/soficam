@@ -86,10 +86,10 @@
                     </div>
 
                     @php
-                        $comissions = json_decode($imma_directe->comissions, true);
+                        $comissionss = json_decode($imma_directe->comissions, true);
                     @endphp
 
-                    @foreach ($comissions as $index => $member)
+                    @foreach ($comissionss as $index => $member)
                         <div class="form-group row mb-3">
                             <div class="col-md-12">
                                 <label class="form-label"

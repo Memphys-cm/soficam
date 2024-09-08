@@ -8,32 +8,32 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ImmatriculationDirecte;
 use Illuminate\Support\Facades\Session;
 
-trait HandlesOrdreVersement
+trait HandlesRedevance
 {
-    public function ordreVersement()
+    public function ordre_redevance_fonciere()
     {
         $this->validate([
-            'montant_ordre_versement' => 'required',
+            'montant_ordre_redevance_fonciere' => 'required',
         ]);
 
 
         DB::transaction(function () {
             $this->imma_directe->update([
-                'numero_ordre_versement' => $this->genererNumeroVersement(),
+                'numero_redevance_fonciere' => $this->genererNumero(),
                 // 'superficie_ordre_versement' => $this->superficie_ordre_versement,
-                'montant_ordre_versement' => $this->montant_ordre_versement,
+                'montant_ordre_redevance_fonciere' => $this->montant_ordre_redevance_fonciere,
                 'status_ordre_versement' => 'pending',
-                'statut' => 'Ordre de Versement en Attente de Paiement',
-                'next_step' => 'Paiement de L\'Ordre versement',
-                'date_ordre_versement' => Carbon::now(),
+                'statut' => 'Redevance foncière en attente de paiement',
+                'next_step' => 'Paiement de la Redevance Foncière',
+                'ordre_redevance_fonciere' => Carbon::now(),
             ]);
         });
 
         $sale = Sale::create([
             // 'user_id' => $this->requestor_id,
-            'sales_code' => $this->imma_directe->numero_ordre_versement,
-            'sales_amount' => $this->montant_ordre_versement,
-            'sales_type' => 'redevance_foc_imma_directe',
+            'sales_code' => $this->imma_directe->numero_redevance_fonciere,
+            'sales_amount' => $this->montant_ordre_redevance_fonciere,
+            'sales_type' => 'ordre_versement_imma_directe',
             'created_by' => auth()->user()->name,
         ]);
 
@@ -49,12 +49,12 @@ trait HandlesOrdreVersement
 
         DB::table('saleables')->insert($saleableData);
 
-        Session::flash('message', __('Ordre de Versement Enregistrer Avec SUCCES!'));
+        Session::flash('message', __('Ordre de Redevance Foncière Enregistrer Avec SUCCES!'));
 
         // $this->clearFields();
     }
 
-    function genererNumeroVersement()
+    function genererNumero()
     {
         $dernierEnregistrement = ImmatriculationDirecte::orderBy('id', 'desc')->first();
 
@@ -69,8 +69,9 @@ trait HandlesOrdreVersement
         $numeroFormate = str_pad($nouveauNumero, 7, '0', STR_PAD_LEFT);
 
         // Concatène "TF" et le numéro formate pour obtenir le code unique
-        $codeUnique =  $numeroFormate . "Y.30" . "/MINCAF/41/T400";
+        $codeUnique =  $numeroFormate . "Y.30" . "/Redevance/MINCAF/41/T400";
 
         return $codeUnique;
     }
 }
+

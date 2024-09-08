@@ -100,7 +100,7 @@ return new class extends Migration
 
             $table->string('numero_redevance_fonciere')->nullable();
             $table->date('ordre_redevance_fonciere')->nullable();
-            $table->float('montant_ordre_redevance_fonciere')->nullable();
+            $table->bigInteger('montant_ordre_redevance_fonciere')->nullable();
 
             $table->foreignId('cadre_id')->on('users')->index()->nullable();
             $table->longText('observation_cotation_cadre')->nullable();
@@ -110,6 +110,8 @@ return new class extends Migration
             $table->date('dos_compl_csrdaf')->nullable();
             $table->date('cotation_compl_csrdaf')->nullable();
             $table->string('numero_serie')->nullable();
+
+            $table->date('dossier_finale')->nullable();
 
             $table->string('is_finalisation')->nullable();
 
