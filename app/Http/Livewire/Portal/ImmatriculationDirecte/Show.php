@@ -81,53 +81,68 @@ class Show extends Component
     public $cni_files = [];
     public $montant_ordre_redevance_fonciere;
 
+    public $numero_conservation;
+
     public function mount($code)
     {
         $imma_directe = ImmatriculationDirecte::where('reference', $code)->first();
         $this->imma_directe = $imma_directe;
-        $this->service_id = $imma_directe->service_id;
-        $this->user_id = $imma_directe->user_id;
-        $this->observation = $imma_directe->observation;
+        $this->service_id = $imma_directe->service_id ?? null;
+        $this->user_id = $imma_directe->user_id ?? null;
+        $this->observation = $imma_directe->observation ?? '';
 
-        // Ajouter ici toutes les autres colonnes récupérées
-        $this->region_id = $imma_directe->region_id;
-        $this->division_id = $imma_directe->division_id;
-        $this->sub_division_id = $imma_directe->sub_division_id;
-        $this->zone = $imma_directe->zone;
-        $this->etat_terrain = $imma_directe->etat_terrain;
-        $this->duplicata = $imma_directe->duplicata;
-        $this->source_terrain = $imma_directe->source_terrain;
-        $this->superficie = $imma_directe->superficie;
-        $this->volume = $imma_directe->volume;
-        $this->folio = $imma_directe->folio;
-        $this->numero_cp = $imma_directe->numero_cp;
-        $this->titre_foncier_id = $imma_directe->titre_foncier_id;
-        $this->numero_bordereau_transmission = $imma_directe->numero_bordereau_transmission;
-        $this->next_step = $imma_directe->next_step;
-        $this->statut = $imma_directe->statut;
-        // #$this->date_delivrance = Carbon::createFromFormat('Y-m-d', trim($imma_directe->date_delivrance))->format('d/m/Y');
-        $this->comissions = json_decode($imma_directe->comissions, true);
-        $this->cotation_user_id = $imma_directe->cotation_user_id;
-        $this->observation_cotation = $imma_directe->observation_cotation;
+        // Ajouter ici toutes les autres colonnes récupérées avec des ternaires
+        $this->region_id = $imma_directe->region_id ?? null;
+        $this->division_id = $imma_directe->division_id ?? null;
+        $this->sub_division_id = $imma_directe->sub_division_id ?? null;
+        $this->zone = $imma_directe->zone ?? '';
+        $this->etat_terrain = $imma_directe->etat_terrain ?? '';
+        $this->duplicata = $imma_directe->duplicata ?? '';
+        $this->source_terrain = $imma_directe->source_terrain ?? '';
+        $this->superficie = $imma_directe->superficie ?? 0;
+        $this->volume = $imma_directe->volume ?? '';
+        $this->folio = $imma_directe->folio ?? '';
+        $this->numero_cp = $imma_directe->numero_cp ?? '';
+        $this->titre_foncier_id = $imma_directe->titre_foncier_id ?? null;
+        $this->numero_bordereau_transmission = $imma_directe->numero_bordereau_transmission ?? '';
+        $this->next_step = $imma_directe->next_step ?? '';
+        $this->statut = $imma_directe->statut ?? '';
+        $this->comissions = !empty($imma_directe->comissions) ? json_decode($imma_directe->comissions, true) : [];
+        $this->cotation_user_id = $imma_directe->cotation_user_id ?? null;
+        $this->observation_cotation = $imma_directe->observation_cotation ?? '';
         $this->date_cotation = !empty($imma_directe->date_cotation) && Carbon::hasFormat(trim($imma_directe->date_cotation), 'Y-m-d')
             ? Carbon::createFromFormat('Y-m-d', trim($imma_directe->date_cotation))->format('d/m/Y')
             : null;
-        $this->status_cotation = $imma_directe->status_cotation;
-        $this->montant_ordre_versement = $imma_directe->montant_ordre_versement;
-        $this->numero_ordre_versement = $imma_directe->numero_ordre_versement;
-        $this->numero_arrete_ordre_versement = $imma_directe->numero_arrete_ordre_versement;
-        $this->date_ordre_versement = $imma_directe->date_ordre_versement;
-        $this->status_ordre_versement = $imma_directe->status_ordre_versement;
-        $this->imma_directe = ImmatriculationDirecte::where('reference', $code)->first();
+        $this->status_cotation = $imma_directe->status_cotation ?? 'no_done';
+        $this->montant_ordre_versement = $imma_directe->montant_ordre_versement ?? 0;
+        $this->numero_ordre_versement = $imma_directe->numero_ordre_versement ?? '';
+        $this->numero_arrete_ordre_versement = $imma_directe->numero_arrete_ordre_versement ?? '';
+        $this->date_ordre_versement = $imma_directe->date_ordre_versement ?? null;
+        $this->status_ordre_versement = $imma_directe->status_ordre_versement ?? 'no_done';
+
+        // Récupérer les services, régions, utilisateurs
         $this->services = Service::select('id', 'service_name_fr')->get();
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
 
-        $selectedSubDivision = SubDivision::findOrFail($this->imma_directe->sub_division_id);
-        $prixMinimaM2 = $selectedSubDivision->prix_minima_m2;
-        $this->montant_ordre_redevance_fonciere = $this->superficie * $prixMinimaM2;
+        // Calculer montant ordre redevance foncière
+        $selectedSubDivision = SubDivision::findOrFail($this->sub_division_id);
+        $prixMinimaM2 = $selectedSubDivision->prix_minima_m2 ?? 0;
+        $this->montant_ordre_redevance_fonciere = ($this->superficie ?? 0) * $prixMinimaM2;
+    }
+
+
+    public function dossier_approbation_final()
+    {
+
+        $imma_directe = $this->imma_directe->update([
+            'is_finalisation' => 1,
+        ]);
+
+
+        $this->refresh(__('Dossier verifier avec succes !'), 'EditStatutModal');
     }
 
     public function addCoordinate()
@@ -443,20 +458,20 @@ class Show extends Component
                 ]);
             });
         } else if ($imma->next_step == "Cotation du dossier complet d\’immatriculation directe au CSRDAF ") { // step 18
-            // dd("ok");
             DB::transaction(function () {
                 $this->imma_directe->update([
                     'statut' => 'Dossier complet transmis  au CSRegional Mindcaf',
-                    'next_step' => ' Transmission du dossier complet au Délégué Régional MINDCAF ',
+                    'next_step' => 'Finalisation du Dossier',
                     'date_dossier_complet_transmi_CSRegional_mindcaf' => $this->date_status,
                 ]);
             });
-        } else if ($imma->next_step == "Transmission du dossier complet au Délégué Régional MINDCAF") { //step 19
+        } else if ($imma->next_step == "Finalisation du Dossier") { //step 19
+            dd("ok");
             DB::transaction(function () {
                 $this->imma_directe->update([
-                    'statut' => 'Dossier Vise et en attente de publication',
-                    'next_step' => 'Traitement du dossier visé-enregistré',
-                    'date_dossier_vise_en_attente_publication' => $this->date_status,
+                    'statut' => 'Dossier Finaliser en attente de verification finale',
+                    'next_step' => 'Verification finale',
+                    'dossier_finale' => $this->date_status,
                 ]);
             });
         } else if ($imma->next_step == "Cotation du dossier du dossier technique au Chef service régional du cadastre pour contrôle, mise à jour et signature") {
@@ -729,6 +744,75 @@ class Show extends Component
         $codeUnique = "TF" . $numeroFormate;
 
         return $codeUnique;
+    }
+
+    public function create_tf()
+    {
+        // dd($this->imma_directe->users->id);
+        $this->validate([
+            'volume' => 'required',
+            'folio' => 'required',
+            'numero_cp' => 'required'
+        ]);
+
+        // dd("ok");
+
+        DB::transaction(function () {
+            $this->imma_directe->update([
+                'volume' => $this->volume,
+                'folio' => $this->folio,
+                'numero_cp' => $this->numero_cp,
+                'is_complete' => 1,
+                'statut' => 'Titre foncier créer',
+                'next_step' => 'Derniere mise en forme + retrait du titre foncier',
+            ]);
+        });
+
+        $titrefoncier = TitreFoncier::create([
+            'numero_titre_foncier' => $this->generateCodeTF(),
+            'national_code' => $this->genererNationalCodeUnique(),
+            'numero_conservation' => $this->numero_conservation,
+            'region_id' => $this->imma_directe->region_id,
+            'division_id' => $this->imma_directe->division_id,
+            'sub_division_id' => $this->imma_directe->sub_division_id,
+            'date_de_delivrance_du_TF' => now(),
+            'numero_du_duplicata' => $this->imma_directe->numero_du_duplicata,
+            // 'groupement' => $this->groupement,
+            'lieu_dit' => $this->imma_directe->lieu_dit,
+            'zone' => $this->imma_directe->zone,
+            'numero_folio' => $this->imma_directe->folio,
+            'volume' => $this->imma_directe->volume,
+            'superficie_du_TF_mere' => $this->imma_directe->superficie,
+            'etat_TF' => 'DISPONIBLE',
+            'etat_terrain' => $this->imma_directe->etat_terrain,
+            'provenance_TF' => $this->imma_directe->source_terrain,
+            'numero_bordereau_analytique' => $this->imma_directe->numero_bordereau_transmission,
+            // 'volume_du_bordereau_analytique' => $this->volume_du_bordereau_analytique,
+            // 'date_detablissement_du_bordereau_analytique' => $this->date_detablissement_du_bordereau_analytique,
+            'coordonnees' => $this->imma_directe->coordonnees,
+            'coordonnees_utm' => $this->imma_directe->coordonnees_utm,
+            // 'coordonnees_utm' => json_encode($this->coordonnees),
+            'limit_nord' => $this->imma_directe->limit_nord,
+            'limit_sud' => $this->imma_directe->limit_sud,
+            'limit_est' => $this->imma_directe->limit_est,
+            'limit_ouest' => $this->imma_directe->limit_ouest,
+            'recorded_by' => auth()->user()->name,
+            'nom_et_prenoms_de_largent_traitant' => auth()->user()->name,
+            // 'conservateur_id' => $this->conservateur_id,
+            'numero_ccp' => $this->imma_directe->numero_cp,
+            // 'taxFoncier_amount' => $taxFoncier_amount,
+        ]);
+
+        $userIdsToSync = $this->imma_directe->users->pluck('id')->toArray(); // Récupérer les IDs des utilisateurs
+        $titrefoncier->users()->sync($userIdsToSync); // Synchroniser les IDs des utilisateurs
+
+        // $titrefoncier->users()->sync([$this->imma_directe->users->id]);
+
+        //Notfication Par SMS
+
+        // $this->clearFields();
+
+        $this->refresh(__('Titres Fonciers Enregistres'), 'CreerTitreFoncier');
     }
 
     public function render()
