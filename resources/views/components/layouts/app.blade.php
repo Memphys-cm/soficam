@@ -11,7 +11,9 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+        rel="stylesheet">
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>{{ $header ?? 'Soficam' }}</title>
@@ -34,11 +36,14 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/opensans-font.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/montserrat-font.css') }}">
-    <link rel="stylesheet" type="text/css" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
     <!-- Main Style Css -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css"
         rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <script defer src="https://unpkg.com/alpinejs@3.9.0/dist/cdn.min.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js"></script>
@@ -47,22 +52,47 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     @livewireStyles
     <style>
-        @if($request->routeIs('login') || $request->routeIs('register') || $request->routeIs('password.request')) body {
-            background-image: url("../img/login.svg");
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            margin-bottom: 30%;
-            overflow: hidden;
-        }
+        @if ($request->routeIs('login') || $request->routeIs('register') || $request->routeIs('password.request'))
+            body {
+                background-image: url("../img/login.svg");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                margin-bottom: 30%;
+                overflow: hidden;
+            }
 
-        @endif * {
+            /* style */
+
+            .step-icon {
+                font-size: 2rem;
+                color: #007bff;
+            }
+
+            .step-item {
+                margin-bottom: 1.5rem;
+            }
+
+            .step-title {
+                font-weight: bold;
+            }
+
+            .step-description {
+                color: #6c757d;
+            }
+
+
+        @endif
+        * {
             font-family: 'Poppins', sans-serif;
 
         }
+
         .disabled-page {
-            pointer-events: none; /* Désactive toutes les interactions */
-            opacity: 0.5; /* Grise la page */
+            pointer-events: none;
+            /* Désactive toutes les interactions */
+            opacity: 0.5;
+            /* Grise la page */
         }
 
         .stepwizard-step p {
@@ -134,12 +164,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/instascan@1.0.0/dist/instascan.min.js"></script>
     <script src="https://reeteshghimire.com.np/wp-content/uploads/2021/05/html5-qrcode.min_.js"></script>
-    <script src="{{ asset('vendor/vanillajs-datepicker/dist/js/datepicker.min.js')}}"></script>
-    <script src="{{ asset('vendor/leaflet/dist/leaflet.js')}}"></script>
-    <script src="{{ asset('vendor/simplebar/dist/simplebar.min.js')}}"></script>
-    <script src="{{ asset('vendor/choices.js/public/assets/scripts/choices.min.js')}}"></script>
-    <script src="{{ asset('js/theme.js')}}"></script>
-    <script src="{{ asset('js/jquery-3.6.0.min.js')}}"></script>
+    <script src="{{ asset('vendor/vanillajs-datepicker/dist/js/datepicker.min.js') }}"></script>
+    <script src="{{ asset('vendor/leaflet/dist/leaflet.js') }}"></script>
+    <script src="{{ asset('vendor/simplebar/dist/simplebar.min.js') }}"></script>
+    <script src="{{ asset('vendor/choices.js/public/assets/scripts/choices.min.js') }}"></script>
+    <script src="{{ asset('js/theme.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
@@ -186,8 +216,9 @@
                     // after success to get Answer from controller if User Registered login user by scanner
                     // and page change to Home blade
                     if (data == 1) {
-                        document.getElementById('result').innerHTML = '<span class="result">' + 'Logged' + '</span>';
-                        $(location).attr('href', '{{url(' / home ')}}');
+                        document.getElementById('result').innerHTML = '<span class="result">' + 'Logged' +
+                            '</span>';
+                        $(location).attr('href', '{{ url(' / home ') }}');
                     } else {
                         return confirm('There is no user with this qr code');
                     }
