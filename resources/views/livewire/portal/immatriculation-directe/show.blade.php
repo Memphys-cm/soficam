@@ -153,11 +153,12 @@ $bgClass = $isCompleted
                         17 => $imma_directe->date_dossier_complet_transmi_CSRegional_mindcaf,
                         18 => $imma_directe->date_dossier_complet_transmi_CSRegional_mindcaf,
                     ];
-                    
+
                 @endphp
 
                 @foreach ($steps[$high_step] as $stepIndex => $stepLabel)
                     @php
+                        $isSuperAdmin = auth()->user()->hasRole('super_admin');
                         $isCompleted = isset($validations[$stepIndex]) && $validations[$stepIndex];
                         $bgClass = $isCompleted
                             ? 'bg-success text-white'
@@ -225,7 +226,6 @@ $bgClass = $isCompleted
                     @include('livewire.portal.immatriculation-directe.step.edit_statut')
                 @elseif($step == 21)
                     @include('livewire.portal.immatriculation-directe.step.edit_statut')
-                
                 @endif
                 <!-- Ajoutez d'autres conditions pour les étapes restantes -->
             </div>
