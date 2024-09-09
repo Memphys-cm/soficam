@@ -23,12 +23,14 @@ class Index extends Component
 {
     use WithDataTables;
     public ?Sale $sale;
-    public ?Saleable $saleable;
+    public  $saleable;
     public $allsales, $allsale, $allsalesId, $sales_amount, $sales_code, $payment_status, $commentaires;
     public $sales_type, $payment_number, $requestor_id, $requestors;
     public $selectedStatus = 'pending_payment';
     public $user_id;
     public $payment_method = 'cash';
+
+    public $tresorPay_Reference;
 
     public function confirmOrder() {}
 
@@ -96,7 +98,8 @@ class Index extends Component
                 'App\Models\ReleveImmobilier'  => optional(ReleveImmobilier::whereId($saleable_item->saleable_id))->update(['status' => 'active']),
                 default => ''
             };
-            if ($immatriculationDirecte->statut === 'Ordre de Versement en Attente de Paiement') {
+
+            if ($immatriculationDirecte && $immatriculationDirecte->statut === 'Ordre de Versement en Attente de Paiement') {
                 $immatriculationDirecte->update([
                     'status_ordre_versement' => 'done',
                     'statut' => 'Ordre de Versement Payé',
@@ -104,14 +107,14 @@ class Index extends Component
                 ]);
             }
             // Deuxième condition
-            elseif ($immatriculationDirecte->statut === 'Etat de Cession en Attente de Paiement') {
+            elseif ($immatriculationDirecte && $immatriculationDirecte->statut === 'Etat de Cession en Attente de Paiement') {
                 $immatriculationDirecte->update([
                     'statut' => 'Etat de cession payé',
                     'next_step' => 'Mise en forme du dossier technique',
                 ]);
             }
 
-            if ($this->payment_method !== 'cash') {
+            if (in_array($this->payment_method, ['ORANGE', 'MTN'])) {
                 try {
                     $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
                     // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
@@ -129,7 +132,12 @@ class Index extends Component
                 }
             }
 
-            
+            $saleable_item->sale->sales_code = $this->tresorPay_Reference;
+            $saleable_item->sale->payment_status = 'totally_paid';
+            $saleable_item->sale->payment_method = $this->payment_method;
+            $saleable_item->sale->save();
+            // dd($saleable_item->sale);
+
         });
 
         $this->refresh(__('Ventes mises à jour créées !'), 'updatePaySaleModal');

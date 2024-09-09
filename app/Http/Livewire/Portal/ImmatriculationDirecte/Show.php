@@ -659,6 +659,7 @@ class Show extends Component
 
         // Décoder les informations de la commission à partir du JSON
         $comissions = json_decode($imma_directe->comissions, true);
+        // dd($comissions);
 
         // Vérifier qu'il y a au moins une entrée dans la commission
         if (empty($comissions)) {
@@ -671,8 +672,8 @@ class Show extends Component
 
         foreach ($comissions as $user) {
             if ($user) {
-                $userNames .= $user->first_name . ',';
-                $mobiles .= "$user->primary_phone_number,";
+                $userNames .= $user['name'] . ',';
+                $mobiles .= $user['telephone'];
             }
         }
 
@@ -810,7 +811,7 @@ class Show extends Component
 
         //Notfication Par SMS
 
-        // $this->clearFields();
+        // $this->clearFields();u
 
         $this->refresh(__('Titres Fonciers Enregistres'), 'CreerTitreFoncier');
     }
