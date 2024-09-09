@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Sales\Sale;
+use App\Models\Sales\Saleable;
 use App\Models\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -57,10 +58,10 @@ class CertificatePropriete extends Model
         return $this->belongsTo(TitreFoncier::class, 'titre_foncier_id');
     }
 
-    // public function sale()
-    // {
-    //     return $this->belongsTo(Sale::class);
-    // }
+    public function saleable()
+    {
+        return $this->morphOne(Saleable::class, 'saleable');
+    }
 
     public static function search($query)
     {

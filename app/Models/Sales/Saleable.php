@@ -2,6 +2,7 @@
 
 namespace App\Models\Sales;
 
+use App\Models\CertificatePropriete;
 use App\Models\EtatCession;
 // use App\Models\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Model;
@@ -21,6 +22,16 @@ class Saleable extends Model
     public function etat_cession()
     {
         return $this->belongsTo(EtatCession::class, 'saleable_id');
+    }
+
+    public function saleable()
+    {
+        return $this->morphTo();
+    }
+
+    public function certificat()
+    {
+        return $this->belongsTo(CertificatePropriete::class, 'saleable_id');
     }
 
     public function releveImmobilier()
