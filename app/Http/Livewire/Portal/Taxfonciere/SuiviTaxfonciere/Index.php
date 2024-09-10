@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Portal\Taxfonciere\SuiviTaxfonciere;
 
+use App\Exports\TaxeFonciere;
 use App\Models\User;
 use App\Models\Region;
 use Livewire\Component;
@@ -13,6 +14,7 @@ use App\Models\Sales\Saleable;
 use Illuminate\Support\Facades\DB;
 use App\Http\Livewire\Traits\WithDataTables;
 use Hachther\MeSomb\Operation\Payment\Collect;
+use Illuminate\Support\Str;
 
 class Index extends Component
 {
@@ -30,8 +32,8 @@ class Index extends Component
     public $selectedUsers = [];
     public $paymentType = 'Cash';
     public $phoneNumber = '';
-    public $status_tax, $taxFoncier_amount, $price, $payment_method;
-    
+    public $status_tax, $taxFoncier_amount, $price, $payment_method, $regions, $element, $subdivisions, $divisions, $selector;
+
     public $requestor_id, $requestors;
     public function mount()
     {
@@ -40,6 +42,21 @@ class Index extends Component
         // $user = User::findOrFail(22);
         // dd($user->titrefoncier);
         $this->titrefoncier = TitreFoncier::all();
+        $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
+        $this->divisions = Division::select('division_name_en', 'division_name_fr', 'id')->get();
+        $this->subdivisions = SubDivision::select('sub_division_name_en', 'sub_division_name_fr', 'id')->get();
+    }
+    public function export()
+    {
+        auditLog(
+            auth()->user(),
+            'taxe_fonciere_exported',
+            'web',
+            __('Exported excel file for taxe foncière')
+        );
+        return (new TaxeFonciere($this->element, $this->selector))->download('RapportTaxeFonciere-' . Str::random(5) . '.xlsx');
+
+        $this->emit('refresh-page');
     }
 
     public function initData($id)
@@ -51,9 +68,7 @@ class Index extends Component
         $this->status_tax =  $titrefoncier->status_tax;
         $this->taxFoncier_amount =  $titrefoncier->taxFoncier_amount;
     }
-    public function updatedPaymentType()
-    {
-    }
+    public function updatedPaymentType() {}
 
     public function confirmOrder()
     {
@@ -100,7 +115,7 @@ class Index extends Component
 
             ]
         );
-        
+
         if (!empty($this->titrefoncier)) {
 
             $this->titrefoncier->update([
@@ -144,6 +159,69 @@ class Index extends Component
         $this->status_tax = '';
         $this->price = '';
         $this->phoneNumber = '';
+    }
+
+    public function sms($id)
+    {
+
+        $receivers = TitreFoncier::where('id', $id)->get();
+
+        $sms = '';
+        $userNames = '';
+        $mobiles = "";
+
+        foreach ($receivers as $user) {
+            if ($user) {
+                $userNames .= $user->first_name . ',';
+                $mobiles .= "$user->primary_phone_number,";
+            }
+        }
+
+        //retirer la virgule en fin de chaine
+        $userNames = rtrim($userNames, ',');
+        $mobiles = rtrim($mobiles, ',');
+        $sms = "Mr/Mme. $userNames, vous devez payer votre taxe foncière.
+        Cliquez sur le lien ci dessous pour vous connecter à la plateforme: http://127.0.0.1:8001/";
+        
+
+        if (!empty($sms)) {
+            $senderid = 'SOFICAM';
+            $mobiles = $mobiles;
+            $api_key = 'wplL0f9wq1moi1NrsjpsBgfBzun4';
+            $url = 'https://api.queensms.net/v1/sms.php';
+
+            $sms_body = array(
+                'api_key' => $api_key,
+                'senderid' => $senderid,
+                'sms' => $sms,
+                'mobiles' => $mobiles
+            );
+
+            $send_data = http_build_query($sms_body);
+            $gateway_url = $url . "?" . $send_data;
+
+            try {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $gateway_url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_HTTPGET, 1);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                $output = curl_exec($ch);
+
+                if (curl_errno($ch)) {
+                    $output = curl_error($ch);
+                    $arr = ['echec'];
+                    return ($arr);
+                } else {
+                    return ($output);
+                }
+                curl_close($ch);
+            } catch (Exception $exception) {
+                //echo $exception->getMessage();
+                $arr = ['echec'];
+                return ($arr);
+            }
+        }
     }
 
     public function render()

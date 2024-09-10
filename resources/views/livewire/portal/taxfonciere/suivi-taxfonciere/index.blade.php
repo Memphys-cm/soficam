@@ -1,5 +1,6 @@
 <div>
     @include('livewire.portal.taxfonciere.suivi-taxfonciere.paiement')
+    @include('livewire.portal.taxfonciere.suivi-taxfonciere.report')
 
     <x-alert />
     <x-delete-modal />
@@ -32,6 +33,18 @@
                     {{ __('Rapport sur les Taxe Foncières') }}
                 </h1>
                 <p class="mt-n1 mx-2">{{ __('Voir tous les Taxe Foncieres') }} </p>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+
+
+                <a href="#" data-bs-toggle="modal" data-bs-target="#RapportModal"
+                    class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
+                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg> {{ __('Exporter les Rapports') }}
+                </a>
             </div>
         </div>
     </div>
@@ -197,6 +210,17 @@
 
 
     </div>
+    <div class="row py-3">
+        <div class="col-md-2">
+            <label for="perPage">{{ __('Par Région') }}: </label>
+            <select wire:model="perPage" id="perPage" class="form-select">
+                <option value="">{{ __('Toutes les regions') }}</option>
+                @foreach ($regions as $r)
+                    <option value="{{ $r->id }}">{{ $r->region_name_fr }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
     <div class="card pb-3">
         <div class="table-responsive  text-gray-700">
             <table class="table employee-table table-bordered table-hover align-items-center ">
@@ -263,7 +287,13 @@
                             </td>
                             @canany('tax_foncier.update', 'tax_foncier.view')
                                 <td>
-
+                                    <a href='#' wire:click.prevent="sms({{ $titrefoncier->id }})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901" />
+                                        </svg>
+                                    </a>
                                     @can('tax_foncier.update')
                                         @if ($titrefoncier->status_tax === 'non_payer')
                                             <a href='#' wire:click.prevent="initData({{ $titrefoncier->id }})"

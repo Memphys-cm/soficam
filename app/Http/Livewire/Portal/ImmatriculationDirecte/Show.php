@@ -765,7 +765,7 @@ class Show extends Component
                 'numero_cp' => $this->numero_cp,
                 'is_complete' => 1,
                 'statut' => 'Titre foncier créer',
-                'next_step' => 'Derniere mise en forme + retrait du titre foncier',
+                'next_step' => null,
             ]);
         });
 
