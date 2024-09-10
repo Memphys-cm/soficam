@@ -47,6 +47,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RegionSeeder::class);
         $this->call(DivisionSeeder::class);
         $this->call(SubDivisionSeeder::class);
+        $this->call(ConservationSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(CabinetAndMembreCabinetSeeder::class);
         // $this->call(CabinetNotaireSeeder::class);
@@ -86,7 +87,7 @@ class DatabaseSeeder extends Seeder
         // $user->assignRole('super_admin');
 
 
-        // $this->call(TitreFoncierSeeder::class);
+        $this->call(TitreFoncierSeeder::class);
         #$this->call(CertificateProprieteSeeder::class);
         // $this->call(TitreFoncierSeeder::class);
         #$this->call(CategoryActivitesSeeder::class);

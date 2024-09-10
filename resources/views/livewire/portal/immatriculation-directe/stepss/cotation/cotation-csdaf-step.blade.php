@@ -52,7 +52,7 @@ is-invalid
                 <button class="btn btn-secondary" wire:click.prevent="prevStep"> {{ __('<< Précedent') }} </button>
                 <button class="btn btn-primary mx-2" wire:click.prevent="cotationFirstStep"> {{ __('Enregistrer') }}
                 </button>
-                <button class="btn btn-info" wire:click.prevent="cotation_first_step"> {{ __('Suivant >>') }} </button>
+                <button class="btn btn-info" wire:click.prevent="nextStep"> {{ __('Suivant >>') }} </button>
             </div>
 
             <!-- Notice explicative -->
