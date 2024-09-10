@@ -159,6 +159,6 @@ class Pay extends Component
     public function render()
     {
         // dd('ok');
-        return view('livewire.payment.impot.taxe-fonciere.pay')->layout('livewire.payment.master_tresor');
+        return view('livewire.payment.impot.taxe-fonciere.pay')->layout('livewire.payment.impot.app');
     }
 }

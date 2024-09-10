@@ -1,10 +1,10 @@
-<div class="container-fluid mt-5">
+<div class="container-fluid mt-3">
     <div class="content-header">
         <h1>Enregistrez vos informations</h1>
         <p>Bienvenue sur le portail d'enregistrement des informations -- Taxe Foncière</p>
     </div>
 
-    <div class="row mx-5 ">
+    <div class="row mx-2 ">
 
         <!-- Right Side Form -->
         <div class="d-flex align-items-center justify-content-center pt-3">
