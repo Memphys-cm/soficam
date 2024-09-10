@@ -179,6 +179,11 @@
 
     @yield('scripts')
     <script>
+        window.addEventListener('refresh-page', event => {
+            location.reload();
+        });
+    </script>
+    <script>
         document.addEventListener('livewire:load', function() {
 
             var form = document.querySelector('.form-modal')

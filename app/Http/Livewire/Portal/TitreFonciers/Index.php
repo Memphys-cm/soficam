@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Portal\TitreFonciers;
 
+use App\Exports\TitreFonciers;
 use App\Models\User;
 use App\Models\Region;
 use Livewire\Component;
@@ -59,7 +60,7 @@ class Index extends Component
     public $numero_ccp;
     public $attachments;
     public $taxFoncier_amount;
-    public $conservateurs, $conservateur_id;
+    public $conservateurs, $conservateur_id,$selector,$element, $subdivisions;
 
     public  $state = 0;
 
@@ -92,6 +93,21 @@ class Index extends Component
             return $role->where('name', ['Conservateur'])->get();
         }])->get();
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
+        $this->divisions = Division::select('division_name_en', 'division_name_fr', 'id')->get();
+        $this->subdivisions = SubDivision::select('sub_division_name_en', 'sub_division_name_fr', 'id')->get();
+    }
+
+    public function export()
+    {
+        auditLog(
+            auth()->user(),
+            'taxe_fonciere_exported',
+            'web',
+            __('Exported excel file for taxe foncière')
+        );
+        return (new TitreFonciers($this->element, $this->selector))->download('RapportTitreFoncier-' . Str::random(5) . '.xlsx');
+
+        $this->emit('refresh-page');
     }
 
     public function updatedRegionID($region_id)

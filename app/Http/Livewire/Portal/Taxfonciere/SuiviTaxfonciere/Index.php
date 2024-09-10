@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Portal\Taxfonciere\SuiviTaxfonciere;
 
+use App\Exports\TaxeFonciere;
 use App\Models\User;
 use App\Models\Region;
 use Livewire\Component;
@@ -13,6 +14,7 @@ use App\Models\Sales\Saleable;
 use Illuminate\Support\Facades\DB;
 use App\Http\Livewire\Traits\WithDataTables;
 use Hachther\MeSomb\Operation\Payment\Collect;
+use Illuminate\Support\Str;
 
 class Index extends Component
 {
@@ -30,7 +32,7 @@ class Index extends Component
     public $selectedUsers = [];
     public $paymentType = 'Cash';
     public $phoneNumber = '';
-    public $status_tax, $taxFoncier_amount, $price, $payment_method;
+    public $status_tax, $taxFoncier_amount, $price, $payment_method, $regions, $element, $subdivisions, $divisions, $selector;
 
     public $requestor_id, $requestors;
     public function mount()
@@ -40,6 +42,21 @@ class Index extends Component
         // $user = User::findOrFail(22);
         // dd($user->titrefoncier);
         $this->titrefoncier = TitreFoncier::all();
+        $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
+        $this->divisions = Division::select('division_name_en', 'division_name_fr', 'id')->get();
+        $this->subdivisions = SubDivision::select('sub_division_name_en', 'sub_division_name_fr', 'id')->get();
+    }
+    public function export()
+    {
+        auditLog(
+            auth()->user(),
+            'taxe_fonciere_exported',
+            'web',
+            __('Exported excel file for taxe foncière')
+        );
+        return (new TaxeFonciere($this->element, $this->selector))->download('RapportTaxeFonciere-' . Str::random(5) . '.xlsx');
+
+        $this->emit('refresh-page');
     }
 
     public function initData($id)
