@@ -97,6 +97,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 Route::get('tresorpublic.cm/fr/ministries/mindcaf' , App\Http\Livewire\Payment\TresorPay\Index::class)->name('tresor_pay.index');
 
 Route::get('tresorpublic.cm/fr/services/mindcafcp/{uuid?}' , App\Http\Livewire\Payment\TresorPay\CertificatPropriate\Index::class)->name('tresor_pay.certificat_pay');
+Route::get('impot.cm/fr/services/mindcaf' , App\Http\Livewire\Payment\Impot\TaxeFonciere::class)->name('impot.index');
+Route::get('impot.cm/fr/services/mindcaftf/{uuid?}' , App\Http\Livewire\Payment\Impot\TaxeFonciere\Pay::class)->name('impot.certificat_pay');
 
 
 Route::group(

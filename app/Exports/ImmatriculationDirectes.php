@@ -47,7 +47,7 @@ class ImmatriculationDirectes implements FromQuery, WithMapping, WithHeadings
         } elseif ($this->element === 'arrondissement' && $this->selector) {
             $query->where('sub_division_id', $this->selector);
         } elseif ($this->element === 'statut' && $this->selector) {
-            $query->where('etat_TF', $this->selector);
+            $query->where('statut', $this->selector);
         }
 
         return $query;
