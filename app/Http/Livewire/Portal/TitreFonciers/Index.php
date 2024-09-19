@@ -60,7 +60,7 @@ class Index extends Component
     public $numero_ccp;
     public $attachments;
     public $taxFoncier_amount;
-    public $conservateurs, $conservateur_id,$selector,$element, $subdivisions;
+    public $conservateurs, $conservateur_id, $selector, $element, $subdivisions, $is_vip;
 
     public  $state = 0;
 
@@ -256,6 +256,7 @@ class Index extends Component
         $taxFoncier_amount = self::PERCENTAGE_TAX_FONCIER * $taxFoncier_amount_perm2;
 
 
+
         $titrefoncier = TitreFoncier::create([
             'numero_titre_foncier' => $this->generateCodeTF(),
             'numero_conservation' => $this->numero_titre_foncier,
@@ -288,6 +289,7 @@ class Index extends Component
             'conservateur_id' => $this->conservateur_id,
             'numero_ccp' => $this->numero_ccp,
             'taxFoncier_amount' => $taxFoncier_amount,
+            'is_vip' => $this->is_vip === true ?  1 : 0,
         ]);
 
         $titrefoncier->users()->sync($this->user_ids);
@@ -349,6 +351,7 @@ class Index extends Component
         $this->titrefoncier = $titrefoncier;
 
         $this->numero_titre_foncier =  $titrefoncier->numero_conservation;
+        $this->is_vip = $titrefoncier->is_vip === false ? 0 : 1;
         $this->region_id =  $titrefoncier->region_id;
         $this->division_id =  $titrefoncier->division_id;
         $this->sub_division_id =  $titrefoncier->sub_division_id;
@@ -466,6 +469,7 @@ class Index extends Component
                 'taxFoncier_amount' => $this->taxFoncier_amount,
                 'coordonnees' => json_encode($transform),
                 'coordonnees_utm' => json_encode($this->coordonnees),
+                'is_vip' => $this->is_vip === true ?  1 : 0,
             ]);
         }
 
@@ -546,7 +550,7 @@ class Index extends Component
 
 
         return response()->streamDownload(
-            fn () => print($pdf->output()),
+            fn() => print($pdf->output()),
             __('Bordereau-analytique-TF-') . Str::random('10') . ".pdf"
         );
     }
@@ -556,13 +560,17 @@ class Index extends Component
         if (!Gate::allows('titre_foncier.view')) {
             return abort(401);
         }
+        if (auth()->user()->hasRole('super_admin')) {
+            $titrefonciers = TitreFoncier::search($this->query)->with('users')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+        } else {
+            $titrefonciers = TitreFoncier::search($this->query)->with('users')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage)->where('is_vip', false);
+        }
 
-        $titrefonciers = TitreFoncier::search($this->query)->with('users')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
         $titrefonciers_count = TitreFoncier::count();
 
         return view('livewire.portal.titre-fonciers.index', [
             'titrefonciers' => $titrefonciers,
             'titrefonciers_count' => $titrefonciers_count,
-        ])->layout('components.layouts.dashboard');
+        ]);
     }
 }

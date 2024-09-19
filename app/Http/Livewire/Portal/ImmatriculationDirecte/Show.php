@@ -80,7 +80,7 @@ class Show extends Component
     public $pv_bornage;
     public $cni_files = [];
     public $montant_ordre_redevance_fonciere;
-
+    const PERCENTAGE_TAX_FONCIER = 0.001;
     public $numero_conservation;
 
     public function mount($code)
@@ -769,6 +769,15 @@ class Show extends Component
             ]);
         });
 
+        $selectedSubDivision = SubDivision::findOrFail($this->sub_division_id);
+
+        // Extract the prix_minima_m2 from the selected sub_division
+        $prixMinimaM2 = $selectedSubDivision->prix_minima_m2;
+        $taxFoncier_amount_perm2 = $this->superficie_du_TF_mere * $prixMinimaM2;
+
+        // Calculate the tax_foncier based on the formula
+        $taxFoncier_amount = self::PERCENTAGE_TAX_FONCIER * $taxFoncier_amount_perm2;
+
         $titrefoncier = TitreFoncier::create([
             'numero_titre_foncier' => $this->generateCodeTF(),
             'national_code' => $this->genererNationalCodeUnique(),
@@ -802,6 +811,8 @@ class Show extends Component
             // 'conservateur_id' => $this->conservateur_id,
             'numero_ccp' => $this->imma_directe->numero_cp,
             // 'taxFoncier_amount' => $taxFoncier_amount,
+            'provenance_TF' => 'IMMATRICULATION DIRECTE',
+            'taxFoncier_amount' => $taxFoncier_amount,
         ]);
 
         $userIdsToSync = $this->imma_directe->users->pluck('id')->toArray(); // Récupérer les IDs des utilisateurs

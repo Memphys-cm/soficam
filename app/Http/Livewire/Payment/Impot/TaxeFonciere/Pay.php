@@ -41,17 +41,17 @@ class Pay extends Component
 
         if ($uuid != null) {
             $this->certificat = TitreFoncier::where('uuid', $uuid)->first();
-            $this->titre_foncier = $this->certificat->titreFoncier->numero_titre_foncier;
-            $this->region_id = $this->certificat->titreFoncier->region_id;
-            $this->division_id = $this->certificat->titreFoncier->division_id;
+            $this->titre_foncier = $this->certificat->numero_titre_foncier;
+            $this->region_id = $this->certificat->region_id;
+            $this->division_id = $this->certificat->division_id;
             $this->divisions = Division::all();
             // $this->conservations = Conservation::where('id',$this->division_id)->get();
             $this->conservations = Conservation::all();
-            $this->nom = $this->certificat->users->last_name;
-            $this->prenom = $this->certificat->users->first_name;
-            $this->telephone = $this->certificat->requestor->primary_phone_number;
-            $this->email = $this->certificat->users->email;
-            $this->localisation = $this->certificat->users->lieu_dit;
+            $this->nom = $this->certificat->users;
+            $this->prenom = $this->certificat->users;
+            $this->telephone = $this->certificat->users;
+            $this->email = $this->certificat->users;
+            $this->localisation = $this->certificat->users;
             $this->amount = $this->certificat->taxFoncier_amount;
 
             // dd($this->certificat->saleable);

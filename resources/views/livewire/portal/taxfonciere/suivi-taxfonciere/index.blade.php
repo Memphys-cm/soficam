@@ -37,14 +37,12 @@
             <div class="d-flex justify-content-between mb-2">
 
 
-                <a href="#" data-bs-toggle="modal" data-bs-target="#RapportModal"
-                    class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
-                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg> {{ __('Exporter les Rapports') }}
-                </a>
+                <button wire:loading.remove wire:click="export" class="btn btn-outline-secondary btn-sm mx-1" type="button">
+                    <svg class="icon icon-xs " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                    </svg><!-- <span class="fas fa-external-link-alt" data-fa-transform="shrink-3 down-2"></span> Font Awesome fontawesome.com -->
+                    <span class="d-none d-sm-inline-block ms-1">{{__('Export')}}</span>
+                </button>
             </div>
         </div>
     </div>
@@ -91,30 +89,6 @@
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card h-md-100 ecommerce-card-min-width">
-                <div class="card-header pb-0">
-                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Taux de Recouvrement') }}</h6>
-                </div>
-                <div class="p-3 d-flex justify-content-between align-iterms-center">
-                    <div class="col">
-                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmountpaid }} {{ __('FCFA') }}</p>
-
-                    </div>
-                    <div class="">
-                        <svg class="icon text-success" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 1v6m0 10v6m-6-3h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v6a3 3 0 003 3z">
-                            </path>
-                        </svg>
-
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="col">
             <div class="card h-md-100 ecommerce-card-min-width">
@@ -138,29 +112,6 @@
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card h-md-100 ecommerce-card-min-width">
-                <div class="card-header pb-0">
-                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Pourcentage total des Taxes') }}</h6>
-                </div>
-                <div class="p-3 d-flex justify-content-between align-iterms-center">
-                    <div class="col">
-                        <p class="font-sans-serif lh-1 fs-4">{{ $percentagePaid }} {{ __('%') }}</p>
-
-                    </div>
-                    <div class="">
-                        <svg class="icon text-warning" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M7 12a2 2 0 012-2h6a2 2 0 012 2m-2 8h-4a2 2 0 01-2-2V6a2 2 0 012-2h4a2 2 0 012 2v12a2 2 0 01-2 2z">
-                            </path>
-                        </svg>
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </div>
 
@@ -173,8 +124,8 @@
             <p class="badge badge-info" wire:model="resultCount">{{ $resultCount }}</p>
         </div>
         <div class="col-md-2">
-            <label for="selectedStatus">{{ __('par le statut') }}: </label>
-            <select wire:model="selectedStatus" id="selectedStatus" class="form-select">
+            <label for="status">{{ __('par le statut') }}: </label>
+            <select wire:model="status" id="status" class="form-select">
                 <option value="">par le statut</option>
                 <option value="payer">PAYER</option>
                 <option value="non_payer">NON PAYER</option>
@@ -200,25 +151,46 @@
                 <option value="25">25</option>
             </select>
         </div>
-
-        <div class="col-md-3">
-            <label for="createdDate">{{ __('Date') }}: </label>
-            <input wire:model="query" id="createdDate" type="date" placeholder="{{ __('10/12/2022...') }}"
-                class="form-control">
-            <p class="badge badge-info" wire:model="resultCount">{{ $resultCount }}</p>
-        </div>
-
-
-    </div>
-    <div class="row py-3">
         <div class="col-md-2">
-            <label for="perPage">{{ __('Par Région') }}: </label>
-            <select wire:model="perPage" id="perPage" class="form-select">
+            <label for="region_id">{{ __('Par Région') }}: </label>
+            <select wire:model="region_id" id="region_id" class="form-select">
                 <option value="">{{ __('Toutes les regions') }}</option>
                 @foreach ($regions as $r)
                     <option value="{{ $r->id }}">{{ $r->region_name_fr }}</option>
                 @endforeach
             </select>
+        </div>
+    </div>
+    <div class="row py-3">
+        <div class="col-md-2">
+            <label for="division_id">{{ __('Par Division') }}: </label>
+            <select wire:model="division_id" id="division_id" class="form-select">
+                <option value="">{{ __('Toutes les divisions') }}</option>
+                @foreach ($divisions as $r)
+                    <option value="{{ $r->id }}">{{ $r->division_name_fr }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label for="subdivision_id">{{ __('Par Arrondissement') }}: </label>
+            <select wire:model="subdivision_id" id="subdivisionn_id" class="form-select">
+                <option value="">{{ __('Toutes les subdivisions') }}</option>
+                @foreach ($subdivisions as $r)
+                    <option value="{{ $r->id }}">{{ $r->sub_division_name_fr }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="inter_start">{{ __('Date Debut') }}: </label>
+            <input wire:model="inter_start" id="createdDate" type="date" placeholder="{{ __('10/12/2022...') }}"
+                class="form-control">
+            <p class="badge badge-info" wire:model="resultCount">{{ $resultCount }}</p>
+        </div>
+        <div class="col-md-3">
+            <label for="inter_end">{{ __('Date Fin') }}: </label>
+            <input wire:model="inter_end" id="createdDate" type="date" placeholder="{{ __('10/12/2022...') }}"
+                class="form-control">
+            <p class="badge badge-info" wire:model="resultCount">{{ $resultCount }}</p>
         </div>
     </div>
     <div class="card pb-3">
@@ -336,7 +308,7 @@
                     {{ __('Montrer') }} {{ $perPage > $titrefonciers_count ? $titrefonciers_count : $perPage }}
                     {{ __(' éléments sur ') }} {{ $titrefonciers_count }}
                 </div>
-                {{ $titrefonciers->links() }}
+                {{--{{ $titrefonciers->links() }}--}}
             </div>
         </div>
     </div>
