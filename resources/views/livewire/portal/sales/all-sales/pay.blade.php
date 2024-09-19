@@ -111,27 +111,21 @@
                         @endif
 
                         @if ($payment_method == 'TresorPay')
-                            <div class="form-group mb-3">
-                                <label for="payment_number">{{ __('Reference de Paiement Tresor Pay') }} </label>
-                                <input type="text" wire:model="tresorPay_Reference"
-                                    class="form-control @error('tresorPay_Reference') is-invalid @enderror"
-                                    value="{{ old('tresorPay_Reference') }}" placeholder="TresorPay001" id="tresorPay_Reference" autofocus
-                                    required>
-                                @error('tresorPay_Reference')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
+                                    data-bs-dismiss="modal">{{ __('Fermer') }}</button>
+                                <a type="button" class="btn btn-primary btn-loading"
+                                    href="{{ route('tresor_pay.certificat_pay', ['uuid'=>$allsale]) }}">Payer</a>
+                            </div>
+                        @else
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
+                                    data-bs-dismiss="modal">{{ __('Fermer') }}</button>
+                                <button type="submit" wire:click.prevent="confirmOrder"
+                                    class="btn btn-primary btn-loading"
+                                    wire:loading.attr="disabled">{{ __('Mettre à jour') }}</button>
                             </div>
                         @endif
-
-
-                        <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
-                                data-bs-dismiss="modal">{{ __('Fermer') }}</button>
-                            <button type="submit" wire:click.prevent="payment" class="btn btn-primary btn-loading"
-                                wire:loading.attr="disabled">{{ __('Payer') }}</button>
-                        </div>
                     </x-form-items.form>
                 </div>
             </div>

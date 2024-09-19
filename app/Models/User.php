@@ -118,24 +118,24 @@ class User extends Authenticatable
         };
     }
 
-    public function service() : BelongsTo
+    public function service(): BelongsTo
     {
         return $this->belongsTo(Service::class, 'service_id');
     }
 
-    public function titrefonciers() : BelongsToMany
+    public function titrefonciers(): BelongsToMany
     {
-        return $this->belongsToMany(TitreFoncier::class,'titrefoncier_user','titre_foncier_id','user_id')->withTimestamps();
+        return $this->belongsToMany(TitreFoncier::class, 'titrefoncier_user', 'titre_foncier_id', 'user_id')->withTimestamps();
     }
 
-    public function imma_directes() : BelongsToMany
+    public function imma_directes(): BelongsToMany
     {
-        return $this->belongsToMany(ImmatriculationDirecte::class,'immatriculation_directe_user','immatriculation_directe_id','user_id')->withTimestamps();
+        return $this->belongsToMany(ImmatriculationDirecte::class, 'immatriculation_directe_user', 'immatriculation_directe_id', 'user_id')->withTimestamps();
     }
 
-    public function certificatepropriete() : BelongsToMany
+    public function certificatepropriete(): BelongsToMany
     {
-        return $this->belongsToMany(CertificatePropriete::class,'titrefoncier_user','user_id','titre_foncier_id')->withTimestamps();
+        return $this->belongsToMany(CertificatePropriete::class, 'titrefoncier_user', 'user_id', 'titre_foncier_id')->withTimestamps();
     }
 
     public static function search($query)
@@ -151,4 +151,8 @@ class User extends Authenticatable
             });
     }
 
+    public function loginSecurity()
+    {
+        return $this->hasOne(LoginSecurity::class);
+    }
 }

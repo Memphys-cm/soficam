@@ -23,8 +23,7 @@
 
                                     <option value=""><strong>{{ __('--Sélectionner--') }}</strong></option>
                                     <option value="Cash"><strong>{{ __('Cash') }}</strong></option>
-                                    <option value="ORANGE"><strong>{{ __('OrangeMoney') }}</strong></option>
-                                    <option value="MTN"><strong>{{ __('MobileMoney') }}</strong></option>
+                                    <option value="impot"><strong>{{ __('Impot') }}</strong></option>
                                 </select>
                                 @error('paymentType')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -74,13 +73,22 @@
                                 @enderror
                             </div>
                         </div>
-
-                        <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
-                                data-bs-dismiss="modal">{{ __('Fermer') }}</button>
-                            <button type="submit" wire:click.prevent="confirmOrder" class="btn btn-primary btn-loading"
-                                wire:loading.attr="disabled">{{ __('Mettre à jour') }}</button>
-                        </div>
+                        @if ($paymentType == 'impot')
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
+                                    data-bs-dismiss="modal">{{ __('Fermer') }}</button>
+                                <a type="button" class="btn btn-primary btn-loading"
+                                    href="{{ route('impot.certificat_pay', ['uuid'=>$titrefoncier->uuid]) }}">Payer</a>
+                            </div>
+                        @else
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
+                                    data-bs-dismiss="modal">{{ __('Fermer') }}</button>
+                                <button type="submit" wire:click.prevent="confirmOrder"
+                                    class="btn btn-primary btn-loading"
+                                    wire:loading.attr="disabled">{{ __('Mettre à jour') }}</button>
+                            </div>
+                        @endif
                     </x-form-items.form>
                 </div>
             </div>

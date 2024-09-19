@@ -236,7 +236,7 @@
                 <div>
                     {{__('Montrer')}} {{$perPage > $titrefonciers_count ? $titrefonciers_count : $perPage  }} {{__('éléments sur')}} {{$titrefonciers_count}}
                 </div>
-                {{ $titrefonciers->links() }}
+                {{--{{ $titrefonciers->links() }}--}}
             </div>
         </div>
     </div>

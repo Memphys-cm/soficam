@@ -49,20 +49,20 @@ class LoginController extends Controller
                 'web',
                 __('Successfully logged in from ip ') . $request->ip()
             );
-           
 
-            if ($user->hasRole('user')) {
-                return redirect()->route('user.dashboard');
-                flash(__('Welcome back! :user', ['user' => auth()->user()->name]))->success();
-            }else{
-                return redirect()->route('portal.dashboard');
+
+            if($user->hasRole('super_admin')){
+                return redirect()->route('portal.dashboard')->with('success',"2FA is enabled successfully.");
+            }
+            else{
+                return redirect()->route('user.dashboard')->with('success',"2FA is enabled successfully.");
             }
         } else {
             auditLog(
                 auth()->user(),
                 'user_login',
                 'web',
-                __('Tried to log in from ip ') . $request->ip() .__('but account is banned!')
+                __('Tried to log in from ip ') . $request->ip() . __('but account is banned!')
             );
             auth()->logout();
             flash(__('Your account is not active'))->error()->important();

@@ -13,8 +13,10 @@ use App\Models\TitreFoncier;
 use App\Models\Sales\Saleable;
 use Illuminate\Support\Facades\DB;
 use App\Http\Livewire\Traits\WithDataTables;
+use Carbon\Carbon;
 use Hachther\MeSomb\Operation\Payment\Collect;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Index extends Component
 {
@@ -32,9 +34,9 @@ class Index extends Component
     public $selectedUsers = [];
     public $paymentType = 'Cash';
     public $phoneNumber = '';
-    public $status_tax, $taxFoncier_amount, $price, $payment_method, $regions, $element, $subdivisions, $divisions, $selector;
+    public $status_tax, $taxFoncier_amount, $price, $payment_method, $regions, $element, $subdivisions, $divisions, $selector, $status, $region_id, $division_id, $subdivision_id;
 
-    public $requestor_id, $requestors;
+    public $requestor_id, $requestors, $inter_start, $inter_end;
     public function mount()
     {
         $this->requestors = User::role('user')->select('id', 'first_name', 'last_name')->get();
@@ -50,13 +52,45 @@ class Index extends Component
     {
         auditLog(
             auth()->user(),
-            'taxe_fonciere_exported',
+            'sales_report_exported',
             'web',
-            __('Exported excel file for taxe foncière')
+            __('Exported excel file for Sales')
         );
-        return (new TaxeFonciere($this->element, $this->selector))->download('RapportTaxeFonciere-' . Str::random(5) . '.xlsx');
-
-        $this->emit('refresh-page');
+        return (new \App\Exports\TaxeFonciere(
+            $this->status,
+            $this->region_id,
+            $this->division_id,
+            $this->subdivision_id,
+            $this->inter_start,
+            $this->inter_end,
+            $this->orderBy,
+            $this->orderAsc
+        ))->download('taxes_foncieres.xlsx');
+        
+       
+    }
+    public function BuildingQuery()
+    {
+        return TitreFoncier::query() // Utiliser query() pour une meilleure compatibilité
+            ->when($this->status && in_array($this->status, ['payer', 'non_payer']), function ($query) {
+                return $query->where('status_tax', $this->status);
+            })
+            ->when($this->region_id && $this->region_id != "all", function ($query) {
+                return $query->where('region_id',  $this->region_id);
+            })
+            ->when($this->division_id && $this->division_id != "all", function ($query) {
+                return $query->where('division_id',  $this->division_id);
+            })
+            ->when($this->subdivision_id && $this->subdivision_id != "all", function ($query) {
+                return $query->where('sub_division_id',  $this->subdivision_id);
+            })
+            ->when($this->inter_start && $this->inter_end, function ($query) {
+                return $query->whereBetween(DB::raw('DATE(created_at)'), [
+                    Carbon::parse($this->inter_start),
+                    Carbon::parse($this->inter_end)
+                ]);
+            })
+            ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc'); // Gérer le tri dynamique
     }
 
     public function initData($id)
@@ -182,7 +216,7 @@ class Index extends Component
         $mobiles = rtrim($mobiles, ',');
         $sms = "Mr/Mme. $userNames, vous devez payer votre taxe foncière.
         Cliquez sur le lien ci dessous pour vous connecter à la plateforme: http://127.0.0.1:8001/";
-        
+
 
         if (!empty($sms)) {
             $senderid = 'SOFICAM';
@@ -227,21 +261,7 @@ class Index extends Component
     public function render()
     {
 
-        $titrefonciers = TitreFoncier::search($this->query)->with('users')
-
-            ->when($this->selectedSubDivision, function ($query, $subDivisionId) {
-                return $query->where('sub_division_id', $subDivisionId);
-            })
-            ->when($this->createdDate, function ($query) {
-                return $query->whereDate('date_tax', '>=', $this->createdDate);
-            })
-
-            ->when($this->selectedStatus, function ($query, $selectedStatus) {
-                return $query->where('status_tax', $selectedStatus);
-            })
-            ->orderBy($this->orderBy, $this->orderAsc)
-            ->paginate($this->perPage);
-
+        $titrefonciers = $this->BuildingQuery()->paginate($this->perPage);
         $titrefonciers_count = TitreFoncier::count();
         $titrefonciers_with_tax = TitreFoncier::whereNotNull('taxFoncier_amount')->count();
         $totalTaxAmountPrediction = TitreFoncier::sum('taxFoncier_amount');

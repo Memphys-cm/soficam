@@ -13,7 +13,7 @@
                 <p><small class="text-danger">*** Tous les champs marqués avec l'astérisque (*) sont obligatoires
                         ***</small></p>
 
-                        <x-form-items.form wire:submit="store" class="">
+                <x-form-items.form wire:submit="store" class="">
                     <!-- First Row -->
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -76,7 +76,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label for="titre_foncier">Numéro du titre foncier *</label>
-                            <input type="text" class="form-control mb-3" wire:model="titre_foncier" placeholder="Numéro du titre foncier">
+                            <input type="text" class="form-control mb-3" wire:model="titre_foncier"
+                                placeholder="Numéro du titre foncier">
                             @error('titre_foncier')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -86,7 +87,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="nom">Nom/Raison Sociale</label>
-                            <input type="text" class="form-control mb-3" wire:model="nom" placeholder="Nom/Raison Sociale">
+                            <input type="text" class="form-control mb-3" wire:model="nom"
+                                placeholder="Nom/Raison Sociale">
                         </div>
                         <div class="col-md-6">
                             <label for="prenom">Prénom</label>
@@ -98,7 +100,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="profession">Profession</label>
-                            <input type="text" class="form-control mb-3" wire:model="profession" placeholder="Profession">
+                            <input type="text" class="form-control mb-3" wire:model="profession"
+                                placeholder="Profession">
                         </div>
                         <div class="col-md-6">
                             <label for="motifs">Motifs</label>
@@ -110,7 +113,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="telephone">Téléphone</label>
-                            <input type="text" class="form-control mb-3" wire:model="telephone" placeholder="Téléphone">
+                            <input type="text" class="form-control mb-3" wire:model="telephone"
+                                placeholder="Téléphone">
                         </div>
                         <div class="col-md-6">
                             <label for="email">Email</label>
@@ -122,18 +126,21 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="localisation">Localisation de la parcelle</label>
-                            <input type="text" class="form-control mb-3" wire:model="localisation" placeholder="Localisation de la parcelle">
+                            <input type="text" class="form-control mb-3" wire:model="localisation"
+                                placeholder="Localisation de la parcelle">
                         </div>
                         <div class="col-md-6">
                             <label for="identifiant">Numéro d'identifiant unique</label>
-                            <input type="text" class="form-control mb-3" wire:model="identifiant" placeholder="Numéro d'identifiant unique">
+                            <input type="text" class="form-control mb-3" wire:model="identifiant"
+                                placeholder="Numéro d'identifiant unique">
                         </div>
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" wire:click.prevent="store" wire:loading.attr="disabled" class="btn btn-success">Soumettre la Demande</button>
-                
-            </x-form-items.form>
+                    <button type="submit" wire:click.prevent="store" wire:loading.attr="disabled"
+                        class="btn btn-success">Soumettre la Demande</button>
+
+                </x-form-items.form>
             </div>
         </div>
     </div>
