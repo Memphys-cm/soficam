@@ -12,6 +12,13 @@
                         </p>
                     </div>
                     <x-form-items.form wire:submit="{{ $state ? 'update' : 'store' }}">
+
+                        <div class='form-group mb-4 px-1'>
+                            <div class="form-check">
+                                <input class="form-check-input {{ $this->is_vip ? 'checked' : '' }}" type="checkbox" value="" wire:model="is_vip" id="is_vip">
+                                <label class="form-check-label mb-0" for="is_vip">{{ __('Marquer comme VIP') }}</label>
+                            </div>
+                        </div>
                         <div class='form-group mb-3 row'>
                             <div class='col'>
                                 <label for="numero_titre_foncier">{{ __('Numéro du Titre Foncier') }}</label>

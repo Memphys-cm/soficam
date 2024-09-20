@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LoginSecurityController;
 use App\Http\Livewire\Portal\QrCode\QRCodeScanner;
 use App\Models\ImmatriculationDirecte;
 
@@ -35,6 +36,24 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::group(['prefix' => '2fa'], function () {
+
+    Route::get('/', [LoginSecurityController::class, 'show2faForm'])->name('2fa');
+
+    Route::post('/generateSecret', [LoginSecurityController::class, 'generate2faSecret'])->name('generate2faSecret');
+
+    Route::post('/enable2fa', [LoginSecurityController::class, 'enable2fa'])->name('enable2fa');
+
+    Route::post('/disable2fa', [LoginSecurityController::class, 'disable2fa'])->name('disable2fa');
+
+    // 2fa middleware
+    Route::post('/2faVerify', function () {
+        return redirect(URL()->previous());
+    })->name('2faVerify')->middleware('2fa');
+
+});
+
 
 Route::any('/logout', [LoginController::class, 'logout']);
 
@@ -99,6 +118,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], functi
 Route::get('tresorpublic.cm/fr/ministries/mindcaf' , App\Http\Livewire\Payment\TresorPay\Index::class)->name('tresor_pay.index');
 
 Route::get('tresorpublic.cm/fr/services/mindcafcp/{uuid?}' , App\Http\Livewire\Payment\TresorPay\CertificatPropriate\Index::class)->name('tresor_pay.certificat_pay');
+Route::get('impot.cm/fr/services/mindcaf' , App\Http\Livewire\Payment\Impot\TaxeFonciere::class)->name('impot.index');
+Route::get('impot.cm/fr/services/mindcaftf/{uuid?}' , App\Http\Livewire\Payment\Impot\TaxeFonciere\Pay::class)->name('impot.certificat_pay');
 
 
 Route::group(

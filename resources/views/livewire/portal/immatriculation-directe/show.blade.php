@@ -155,11 +155,12 @@ $bgClass = $isCompleted
                         19 => $imma_directe->is_finalisation,
                         20 => $imma_directe->is_complete,
                     ];
-                    
+
                 @endphp
 
                 @foreach ($steps[$high_step] as $stepIndex => $stepLabel)
                     @php
+                        $isSuperAdmin = auth()->user()->hasRole('super_admin');
                         $isCompleted = isset($validations[$stepIndex]) && $validations[$stepIndex];
                         $bgClass = $isCompleted
                             ? 'bg-success text-white'

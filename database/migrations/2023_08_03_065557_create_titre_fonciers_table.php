@@ -47,6 +47,7 @@ return new class extends Migration
             $table->string('limit_sud');
             $table->string('limit_est');
             $table->string('limit_ouest');
+            $table->boolean('is_vip')->default(0);
             $table->string('recorded_by')->nullable();
             $table->string('nom_et_prenoms_de_largent_traitant')->nullable();
             $table->string('le_conservateur')->nullable();
