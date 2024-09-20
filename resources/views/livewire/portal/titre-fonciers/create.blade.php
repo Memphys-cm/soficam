@@ -94,15 +94,42 @@
                             </div>
                         </div>
                         <div class='form-group mb-3 row'>
-                            <div class="col">
-                                <label for="lieu_dit">{{ __('Village') }}</label>
-                                <input wire:model="lieu_dit" type="text"
-                                    class="form-control  @error('lieu_dit') is-invalid @enderror"
-                                    placeholder="{{ __('') }}" required="" name="name">
-                                @error('lieu_dit')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                            <div class='col'>
+                                {{-- <label class="px-2" for="land_id">{{ __('Village') }}</label> --}}
+                                
+                                <!-- Checkbox pour décider d'entrer manuellement le village -->
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="manualVillageEntry" wire:model="manualVillage">
+                                    <label class="form-check-label" for="manualVillageEntry">
+                                        {{ __('Cliquez et Entrer le village') }}
+                                    </label>
+                                </div>
+                            
+                                <!-- Champ Select: Affiché si manualVillage est faux -->
+                                @if(!$manualVillage)
+                                    <select wire:model="land_id" name="land_id"
+                                        class="form-select  @error('land_id') is-invalid @enderror" required>
+                                        <option value="">{{ __('--Sélectionner--') }}</option>
+                                        @foreach ($lands as $land)
+                                            <option value="{{ $land->id }}">{{ $land->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('land_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                @endif
+                            
+                                <!-- Champ Input: Affiché si manualVillage est vrai -->
+                                @if($manualVillage)
+                                    <input type="text" wire:model="manualVillageName" name="manualVillageName" 
+                                        class="form-control @error('manualVillageName') is-invalid @enderror" 
+                                        placeholder="{{ __('Entrez le nom du village') }}">
+                                    @error('manualVillageName')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                @endif
                             </div>
+                            
                             <div class='col'>
                                 <label for="groupement">{{ __('Groupement') }}</label>
                                 <input wire:model="groupement" type="text"
