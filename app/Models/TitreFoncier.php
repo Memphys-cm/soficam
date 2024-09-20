@@ -68,6 +68,10 @@ class TitreFoncier extends Model implements HasMedia
     {
         return $this->belongsTo(SubDivision::class);
     }
+    public function land(): BelongsTo
+    {
+        return $this->belongsTo(Land::class);
+    }
 
     public function charge(): HasMany
     {

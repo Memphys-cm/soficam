@@ -27,53 +27,49 @@
             "esri/widgets/Search"
         ], function(esriConfig, Map, MapView, Graphic, GraphicsLayer, Search) {
 
-            // Configure the API key
             esriConfig.apiKey = "AAPK446b8141b13c40dab9f67038a712d37bBRypjChZVBGs585WQsWhvIokmAMlXjAsbAQ3YJ7pDt3dsRW3cHEinKR_7zyBVx-m";
 
-            // Create the map
             const map = new Map({
                 basemap: "arcgis-topographic"
             });
 
-            // Create the map view
             const view = new MapView({
                 map: map,
-                center: [{{ $longitude }}, {{ $latitude }}], // Longitude, latitude
+                center: [{{ $longitude }}, {{ $latitude }}], 
                 zoom: 13,
                 container: "viewDiv"
             });
 
-            // Create a graphics layer
             const graphicsLayer = new GraphicsLayer();
             map.add(graphicsLayer);
 
-            // Get data from the controller
-            var itemsFromController = @json($titles);
-            var polygons = [];
+            // Fetching both Titres Fonciers and Immatriculations
+            var titlesFromController = @json($titles);
+            var immatriculationsFromController = @json($immatriculations);
 
-            // Process the data to create polygons
-            itemsFromController.forEach(function(item) {
+            var titlePolygons = [];
+            var immatriculationPolygons = [];
+
+            // Processing Titres Fonciers
+            titlesFromController.forEach(function(item) {
                 var jsonString = item.coordonnees;
                 var numero = item.numero_titre_foncier;
                 var superficie = item.superficie_du_TF_mere;
                 var coordinatesArray = JSON.parse(jsonString);
                 var transformedCoordinates = [];
 
-                // Convert coordinates to the appropriate format
                 for (var i = 0; i < coordinatesArray.length; i++) {
                     var coords = coordinatesArray[i].split(',');
                     transformedCoordinates.push([parseFloat(coords[0]), parseFloat(coords[1])]);
                 }
 
-                // Collect owners' names
                 var proprietaires = [];
                 item.users.forEach(function(proprietaire) {
                     proprietaires.push(proprietaire.last_name + ' ' + proprietaire.first_name);
                 });
 
-                // Prepare the data for the polygon
                 var proprietairesText = proprietaires.join('<br>');
-                polygons.push({
+                titlePolygons.push({
                     "name": numero,
                     "area": superficie,
                     "proprietaires": proprietairesText,
@@ -81,24 +77,61 @@
                 });
             });
 
-            // Define a simple fill symbol
-            const simpleFillSymbol = {
+            // Processing Immatriculations (similar to Titles)
+            immatriculationsFromController.forEach(function(item) {
+                var jsonString = item.coordonnees;
+                var numero = item.numero_immatriculation;
+                var surface = item.surface;
+                var coordinatesArray = JSON.parse(jsonString);
+                var transformedCoordinates = [];
+
+                for (var i = 0; i < coordinatesArray.length; i++) {
+                    var coords = coordinatesArray[i].split(',');
+                    transformedCoordinates.push([parseFloat(coords[0]), parseFloat(coords[1])]);
+                }
+
+                var proprietaires = [];
+                item.users.forEach(function(proprietaire) {
+                    proprietaires.push(proprietaire.last_name + ' ' + proprietaire.first_name);
+                });
+
+                var proprietairesText = proprietaires.join('<br>');
+                immatriculationPolygons.push({
+                    "name": numero,
+                    "area": surface,
+                    "proprietaires": proprietairesText,
+                    "rings": transformedCoordinates
+                });
+            });
+
+            // Symbol for Titres Fonciers (orange)
+            const titleFillSymbol = {
                 type: "simple-fill",
-                color: [227, 139, 79, 0.8],
+                color: [227, 139, 79, 0.8], 
                 outline: {
                     color: [255, 255, 255],
                     width: 1
                 }
             };
 
-            // Add each polygon to the graphics layer
-            polygons.forEach(polygonData => {
+            // Symbol for Immatriculations (blue)
+            const immatriculationFillSymbol = {
+                type: "simple-fill",
+                color: [79, 139, 227, 0.8], 
+                outline: {
+                    color: [255, 255, 255],
+                    width: 1
+                }
+            };
+
+            // Add Titres Fonciers to the map
+            titlePolygons.forEach(polygonData => {
                 const polygonGraphic = new Graphic({
                     geometry: {
                         type: "polygon",
                         rings: polygonData.rings
                     },
-                    symbol: simpleFillSymbol,
+                    symbol: titleFillSymbol,
                     attributes: {
                         name: polygonData.name,
                         area: polygonData.area,
@@ -106,29 +139,49 @@
                     },
                     popupTemplate: {
                         title: "Numero TF: {name}",
-                        content: "<b>Superficie</b> Tf: {area} m2 <br> <b>Proprietaires </b>: {proprietaires}"
+                        content: "<b>Superficie</b>: {area} m²<br><b>Proprietaires</b>: {proprietaires}"
                     }
                 });
                 graphicsLayer.add(polygonGraphic);
             });
 
-            // Create the search widget
+            // Add Immatriculations to the map
+            immatriculationPolygons.forEach(polygonData => {
+                const polygonGraphic = new Graphic({
+                    geometry: {
+                        type: "polygon",
+                        rings: polygonData.rings
+                    },
+                    symbol: immatriculationFillSymbol,
+                    attributes: {
+                        name: polygonData.name,
+                        area: polygonData.area,
+                        proprietaires: polygonData.proprietaires
+                    },
+                    popupTemplate: {
+                        title: "Numero Immatriculation: {name}",
+                        content: "<b>Surface</b>: {area} m²<br><b>Proprietaires</b>: {proprietaires}"
+                    }
+                });
+                graphicsLayer.add(polygonGraphic);
+            });
+
+            // Search Widget
             const search = new Search({
                 view: view,
                 sources: [
                     {
-                        layer: graphicsLayer,  // The layer to search within
-                        searchFields: ["name"],  // The field to search
-                        displayField: "name",  // The field to display in the search results
-                        exactMatch: false,  // Allow partial matches
-                        outFields: ["*"],  // Return all fields in the results
-                        name: "Titres Fonciers",  // Name of the source
-                        placeholder: "Chercher par numéro TF"  // Placeholder text in the search box
+                        layer: graphicsLayer, 
+                        searchFields: ["name"], 
+                        displayField: "name", 
+                        exactMatch: false,
+                        outFields: ["*"],
+                        name: "Titres Fonciers & Immatriculations", 
+                        placeholder: "Chercher par numéro"
                     }
                 ]
             });
 
-            // Add the search widget to the view
             view.ui.add(search, "top-right");
         });
     </script>
