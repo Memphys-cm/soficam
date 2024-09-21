@@ -80,8 +80,8 @@
             // Processing Immatriculations (similar to Titles)
             immatriculationsFromController.forEach(function(item) {
                 var jsonString = item.coordonnees;
-                var numero = item.numero_immatriculation;
-                var surface = item.surface;
+                var numero = item.reference;
+                var surface = item.superficie;
                 var coordinatesArray = JSON.parse(jsonString);
                 var transformedCoordinates = [];
 
@@ -154,7 +154,7 @@
                     },
                     symbol: immatriculationFillSymbol,
                     attributes: {
-                        name: polygonData.name,
+                        name: polygonData.reference,
                         area: polygonData.area,
                         proprietaires: polygonData.proprietaires
                     },
