@@ -42,8 +42,7 @@ class Index extends Component
     {
 
         if($uuid != null){
-            $this->certificat = CertificatePropriete::where('uuid', $uuid)->first();
-            $this->qualification = $this->certificat->certificate_proprietes_type;
+            $this->certificat = CertificatePropriete::where('id', $uuid)->first();
             $this->titre_foncier = $this->certificat->titreFoncier->numero_titre_foncier;
             $this->region_id = $this->certificat->titreFoncier->region_id;
             $this->division_id = $this->certificat->titreFoncier->division_id;
@@ -163,6 +162,6 @@ class Index extends Component
     public function render()
     {
         // dd('ok');
-        return view('livewire.payment.tresor-pay.certificat-propriate.index')->layout('livewire.payment.master_tresor');
+        return view('livewire.payment.tresor-pay.certificat-propriate.index')->layout('components.layouts.user.master');
     }
 }

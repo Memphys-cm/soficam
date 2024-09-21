@@ -16,6 +16,8 @@ use Illuminate\Support\Str;
 
 class Pay extends Component
 {
+
+
     public $regions;
     public $divisions = [];
     public $sub_divisions = [];
@@ -47,11 +49,15 @@ class Pay extends Component
             $this->divisions = Division::all();
             // $this->conservations = Conservation::where('id',$this->division_id)->get();
             $this->conservations = Conservation::all();
-            $this->nom = $this->certificat->users;
-            $this->prenom = $this->certificat->users;
-            $this->telephone = $this->certificat->users;
-            $this->email = $this->certificat->users;
-            $this->localisation = $this->certificat->users;
+            if ($this->certificat->users->isNotEmpty()) {
+                $firstUser = $this->certificat->users->first();  // Sélectionne le premier utilisateur
+                $this->nom = $firstUser->first_name;
+                $this->prenom = $firstUser->last_name;
+                $this->telephone = $firstUser->primary_phone_number;
+                $this->email = $firstUser->email;
+            }
+            $this->motifs = $this->certificat->certificate_propriete_reason;
+            $this->localisation = $this->certificat->lieu_dit;
             $this->amount = $this->certificat->taxFoncier_amount;
 
             // dd($this->certificat->saleable);
@@ -98,10 +104,24 @@ class Pay extends Component
 
     public function store()
     {
-        $validatedData = $this->validate();
 
-        // dd($this->qualification);
 
+        $validatedData = $this->validate([
+            'qualification' => 'required',
+            'region_id' => 'required|exists:regions,id',
+            'division_id' => 'required|exists:divisions,id',
+            'conservation_id' => 'required|exists:conservations,id',
+            'titre_foncier' => 'required|string|max:255',
+            'nom' => 'nullable|string|max:255',
+            'prenom' => 'nullable|string|max:255',
+            'profession' => 'nullable|string|max:255',
+            'motifs' => 'nullable|string|max:255',
+            'telephone' => 'nullable',
+            'email' => 'nullable|email|max:255',
+            'localisation' => 'nullable|string|max:255',
+            'identifiant' => 'nullable|string|max:255', 
+        ]);
+        dd($validatedData);
         // Sauvegarde dans la base de données
         $certificat = FakeCertificate::create($validatedData);
 
@@ -151,7 +171,7 @@ class Pay extends Component
         // Afficher le PDF dans une nouvelle fenêtre du navigateur
         return response()->stream(fn() => print($pdf->output()), 200, [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="Quittance_Taxe_Fonciere' . Str::random(10) . '.pdf"',
+            'Content-Disposition' => 'inline; filename="Quitance_Certificate_Propriate' . Str::random(10) . '.pdf"',
         ]);
     }
 
@@ -159,6 +179,6 @@ class Pay extends Component
     public function render()
     {
         // dd('ok');
-        return view('livewire.payment.impot.taxe-fonciere.pay')->layout('livewire.payment.impot.app');
+        return view('livewire.payment.impot.taxe-fonciere.pay')->layout('components.layouts.user.master');
     }
 }

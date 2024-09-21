@@ -31,22 +31,6 @@
                             </div>
                         </div>
 
-
-                        @if ($paymentType !== 'Cash')
-                            <!-- Only show the field if paymentType is not 'Cash' -->
-                            <div class='form-group mb-3 row'>
-                                <div class="col">
-                                    <label for="phoneNumber">{{ __('Numéro de transaction') }}</label>
-                                    <input wire:model="phoneNumber" type="number"
-                                        class="form-control @error('phoneNumber') is-invalid @enderror"
-                                        placeholder="{{ __('67xxxxxxx') }}" required="">
-                                    @error('phoneNumber')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        @endif
-
                         <div class='form-group mb-3 row'>
                             <div class="col">
                                 <label for="taxFoncier_amount">{{ __('Montant de la Taxe') }}</label>
