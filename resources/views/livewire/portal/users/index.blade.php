@@ -143,7 +143,7 @@
             </div>
         </div>
     </div>
-    <x-alert />
+
 
     <div class="row p-3">
         <div class="col-md-2">
@@ -164,14 +164,14 @@
                 <option value="">par statut</option>
                 <option value="false">Inactive</option>
                 <option value="1">Active</option>
-                
+
 
             </select>
         </div>
         <div class="col-md-2">
             <label for="selectedSexe">{{ __('Trier par Sexe') }}: </label>
             <select wire:model="selectedSexe" id="selectedSexe" class="form-select">
-                
+
                 <option value="">par Sexe</option>
                 <option value="M">Homme</option>
                 <option value="F">Femme</option>

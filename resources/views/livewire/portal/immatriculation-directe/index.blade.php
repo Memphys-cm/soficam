@@ -2,6 +2,7 @@
     <x-alert />
 
     @include('livewire.portal.immatriculation-directe.create')
+    @include('livewire.portal.immatriculation-directe.report')
     <x-delete-modal />
     <div class='p-0'>
         <div class="d-flex justify-content-between w-100 flex-wrap align-items-center">
@@ -35,7 +36,14 @@
                 <p class="mt-n1 mx-2">{{ __('Voir Toutes les Immatriculations Directes') }} </p>
             </div>
             <div class="d-flex justify-content-between mb-2">
-
+                <a href="#" data-bs-toggle="modal" data-bs-target="#RapportModal"
+                        class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">
+                        <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg> {{ __('Export') }}
+                    </a>
                 @can('imma_directe.create')
                     <a href="#" data-bs-toggle="modal" data-bs-target="#CreateImmaDirecteModal"
                         class="btn btn-sm btn-primary py-2 d-inline-flex align-items-center mx-2">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Portal\TitreFonciers;
 
+use App\Exports\TitreFonciers;
 use App\Models\User;
 use App\Models\Region;
 use Livewire\Component;
@@ -13,6 +14,7 @@ use App\Models\TitreFoncier;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Livewire\Traits\WithDataTables;
+use App\Models\Land;
 use proj4php\Proj4php;
 use proj4php\Proj;
 use proj4php\Point;
@@ -57,9 +59,9 @@ class Index extends Component
     public $nom_et_prenoms_de_largent_traitant;
     public $le_conservateur;
     public $numero_ccp;
-    public $attachements;
+    public $attachments;
     public $taxFoncier_amount;
-    public $conservateurs, $conservateur_id;
+    public $conservateurs, $conservateur_id, $selector, $element, $subdivisions, $is_vip, $subdivision_id, $inter_start, $inter_end;
 
     public  $state = 0;
 
@@ -70,7 +72,11 @@ class Index extends Component
     public $coordonne = [];
 
 
-    public $region_code, $division_code;
+    public $region_code, $division_code , $sub_division_code;
+    public $lands = [];  // Liste des villages
+    public $land_id;  // Sélection du village
+    public $manualVillage = false;  // Activer l'entrée manuelle
+    public $manualVillageName;  // Nom du village entré manuellement
 
     public function addCoordinate()
     {
@@ -92,6 +98,8 @@ class Index extends Component
             return $role->where('name', ['Conservateur'])->get();
         }])->get();
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
+        $this->divisions = Division::select('division_name_en', 'division_name_fr', 'id')->get();
+        $this->subdivisions = SubDivision::select('sub_division_name_en', 'sub_division_name_fr', 'id')->get();
     }
 
     public function updatedRegionID($region_id)
@@ -103,11 +111,20 @@ class Index extends Component
             // $this->numero_titre_foncier = $this->generateCodeTF();
         }
     }
+
     public function updatedDivisionID($division_id)
     {
         if (!empty($division_id)) {
             $this->sub_divisions = SubDivision::whereDivisionId($division_id)->get();
             $this->division_code = Division::whereId($division_id)->first()->code;
+            // $this->numero_titre_foncier = $this->generateCodeTF();
+        }
+    }
+    public function updatedSubDivisionID($sub_division_id)
+    {
+        if (!empty($sub_division_id)) {
+            $this->lands = Land::whereSubDivisionId($sub_division_id)->get();
+            $this->sub_division_code = SubDivision::whereId($sub_division_id)->first()->code;
             // $this->numero_titre_foncier = $this->generateCodeTF();
         }
     }
@@ -196,16 +213,32 @@ class Index extends Component
             return abort(401);
         }
 
+        if($this->manualVillage == true) {
+
+            $this->validate([
+                'manualVillageName' => 'required|unique:lands,name',  // Vérification de l'unicité
+            ]);
+
+            $land = Land::create([
+                'name' => $this->manualVillageName,
+                'sub_division_id' => $this->sub_division_id
+            ]);
+
+            $this->land_id = $land->id;
+
+        }
+
         $this->validate([
             'numero_titre_foncier' => 'required|unique:titre_fonciers',
             // 'numero_conservation' => 'required|unique:titrefonciers',
             'region_id' => 'required',
             'division_id' => 'required',
             'sub_division_id' => 'required',
+            'land_id' => 'required',
             'date_de_delivrance_du_TF' => 'required|date',
             'numero_du_duplicata' => 'required|integer',
             'groupement' => 'required',
-            'lieu_dit' => 'required',
+            // 'lieu_dit' => 'required',
             'zone' => 'required',
             'numero_folio' => 'required|integer',
             'volume' => 'required|integer',
@@ -227,6 +260,7 @@ class Index extends Component
             'user_ids.*' => 'required',
         ]);
 
+        
 
         $transform = $this->convert($this->coordonnees);
 
@@ -240,6 +274,7 @@ class Index extends Component
         $taxFoncier_amount = self::PERCENTAGE_TAX_FONCIER * $taxFoncier_amount_perm2;
 
 
+
         $titrefoncier = TitreFoncier::create([
             'numero_titre_foncier' => $this->generateCodeTF(),
             'numero_conservation' => $this->numero_titre_foncier,
@@ -250,7 +285,8 @@ class Index extends Component
             'date_de_delivrance_du_TF' => $this->date_de_delivrance_du_TF,
             'numero_du_duplicata' => $this->numero_du_duplicata,
             'groupement' => $this->groupement,
-            'lieu_dit' => $this->lieu_dit,
+            // 'lieu_dit' => $this->lieu_dit,
+            'land_id' => $this->land_id,
             'zone' => $this->zone,
             'numero_folio' => $this->numero_folio,
             'volume' => $this->volume,
@@ -272,6 +308,7 @@ class Index extends Component
             'conservateur_id' => $this->conservateur_id,
             'numero_ccp' => $this->numero_ccp,
             'taxFoncier_amount' => $taxFoncier_amount,
+            'is_vip' => $this->is_vip === true ?  1 : 0,
         ]);
 
         $titrefoncier->users()->sync($this->user_ids);
@@ -333,9 +370,11 @@ class Index extends Component
         $this->titrefoncier = $titrefoncier;
 
         $this->numero_titre_foncier =  $titrefoncier->numero_conservation;
+        $this->is_vip = $titrefoncier->is_vip === false ? 0 : 1;
         $this->region_id =  $titrefoncier->region_id;
         $this->division_id =  $titrefoncier->division_id;
         $this->sub_division_id =  $titrefoncier->sub_division_id;
+        $this->land_id = $titrefoncier->land_id;
         $this->date_de_delivrance_du_TF =  $titrefoncier->date_de_delivrance_du_TF;
         $this->numero_du_duplicata =  $titrefoncier->numero_du_duplicata;
         $this->groupement =  $titrefoncier->groupement;
@@ -374,6 +413,22 @@ class Index extends Component
         if (!Gate::allows('titre_foncier.update')) {
             return abort(401);
         }
+
+        if($this->manualVillage == true) {
+
+            $this->validate([
+                'manualVillageName' => 'required|unique:lands,name',  // Vérification de l'unicité
+            ]);
+
+            $land = Land::create([
+                'name' => $this->manualVillageName,
+                'sub_division_id' => $this->sub_division_id
+            ]);
+
+            $this->land_id = $land->id;
+
+        }
+
         $this->validate(
             [
                 // 'numero_titre_foncier' => 'required',
@@ -450,6 +505,7 @@ class Index extends Component
                 'taxFoncier_amount' => $this->taxFoncier_amount,
                 'coordonnees' => json_encode($transform),
                 'coordonnees_utm' => json_encode($this->coordonnees),
+                'is_vip' => $this->is_vip === true ?  1 : 0,
             ]);
         }
 
@@ -530,23 +586,75 @@ class Index extends Component
 
 
         return response()->streamDownload(
-            fn () => print($pdf->output()),
+            fn() => print($pdf->output()),
             __('Bordereau-analytique-TF-') . Str::random('10') . ".pdf"
         );
     }
+
+    public function BuildingQuery()
+    {
+        return TitreFoncier::query()
+            ->when($this->query && $this->query != "all", function ($query) {
+                return $query->whereHas('users', function ($query) {
+                    $query->where('first_name', 'like', '%' . $this->query . '%');
+                })->orWhere('numero_titre_foncier', 'like', '%'. $this->query. '%');
+            })
+            ->when($this->region_id && $this->region_id != "all", function ($query) {
+                return $query->where('region_id',  $this->region_id);
+            })
+            ->when($this->division_id && $this->division_id != "all", function ($query) {
+                return $query->where('division_id',  $this->division_id);
+            })
+            ->when($this->subdivision_id && $this->subdivision_id != "all", function ($query) {
+                return $query->where('sub_division_id',  $this->subdivision_id);
+            })
+            ->when($this->inter_start && $this->inter_end, function ($query) {
+                return $query->whereBetween(DB::raw('DATE(created_at)'), [
+                    Carbon::parse($this->inter_start),
+                    Carbon::parse($this->inter_end)
+                ]);
+            })
+            ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc'); // Gérer le tri dynamique
+    }
+
+    public function export()
+    {
+        auditLog(
+            auth()->user(),
+            'sales_report_exported',
+            'web',
+            __('Exported excel file for Sales')
+        );
+        return (new \App\Exports\TitreFonciers(
+            $this->region_id,
+            $this->division_id,
+            $this->subdivision_id,
+            $this->inter_start,
+            $this->inter_end,
+            $this->orderBy,
+            $this->orderAsc
+        ))->download('taxes_foncieres.xlsx');
+        
+       
+    }
+
 
     public function render()
     {
         if (!Gate::allows('titre_foncier.view')) {
             return abort(401);
         }
+        if (auth()->user()->hasRole('super_admin')) {
+            $titrefonciers = $this->BuildingQuery()->paginate($this->perPage);
+        } else {
+            $titrefonciers = $this->BuildingQuery()->paginate($this->perPage)->where('is_vip', false);
+        }
 
-        $titrefonciers = TitreFoncier::search($this->query)->with('users')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
         $titrefonciers_count = TitreFoncier::count();
 
         return view('livewire.portal.titre-fonciers.index', [
             'titrefonciers' => $titrefonciers,
             'titrefonciers_count' => $titrefonciers_count,
-        ])->layout('components.layouts.dashboard');
+        ]);
     }
 }

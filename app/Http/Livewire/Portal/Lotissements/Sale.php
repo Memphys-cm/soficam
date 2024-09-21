@@ -11,7 +11,7 @@ use App\Models\Lotissements\Lotissement;
 use App\Http\Livewire\Traits\WithDataTables;
 use App\Models\TitreFoncier;
 
-class Sale extends Component
+class Sale extends Component 
 {
     use WithDataTables;
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('sale_id')->on('sales')->nullable()->index();
             $table->integer('saleable_id');
             $table->string('saleable_type');
+            // $table->string('saleable_type');
             $table->integer('quantity')->default(1);
             $table->float('price', 10, 2);
             $table->foreignId('service_id')->on('services')->nullable()->index();

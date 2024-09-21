@@ -35,17 +35,6 @@
                     });
                 </script>
 
-                {{-- <script type="text/javascript">
-                    window.addEventListener('onScanSuccess', event => {
-                        @this.call('onScanSuccess', event.detail);
-                    });
-
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                </script> --}}
             @endpush
         </div>
     </div>

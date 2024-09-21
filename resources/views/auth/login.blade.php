@@ -52,7 +52,7 @@
                                     <button type="submit" class="btn btn-primary btn-loading px-6"> {{ __('Connexion') }}</button>
                                 </div>
                                 <div class="d-flex justify-content-center align-items-center mt-4">
-                                    <a href="{{route('register')}}" class="btn btn-success px-4 text-white">{{__('Creer un nouveau compt?')}}</a>
+                                    <a href="{{route('register')}}" class="btn btn-success px-4 text-white">{{__('Creer un nouveau compte?')}}</a>
                                 </div>
                             </x-form-items.form>
                             <div class='d-flex justify-content-center mt-3 fw-light mb-n2'>

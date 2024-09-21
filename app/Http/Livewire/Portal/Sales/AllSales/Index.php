@@ -23,13 +23,20 @@ class Index extends Component
 {
     use WithDataTables;
     public ?Sale $sale;
-    public ?Saleable $saleable;
+    public  $saleable;
     public $allsales, $allsale, $allsalesId, $sales_amount, $sales_code, $payment_status, $commentaires;
     public $sales_type, $payment_number, $requestor_id, $requestors;
     public $selectedStatus = 'pending_payment';
     public $user_id;
     public $payment_method = 'cash';
 
+<<<<<<< HEAD
+=======
+    public $tresorPay_Reference;
+
+    public function confirmOrder() {}
+
+>>>>>>> 5255c87496b87c703fa46be92ba5571619eb6ca6
     public function retrait()
     {
         $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
@@ -81,9 +88,36 @@ class Index extends Component
             'payment_number' => 'required_if:payment_method,mtn_mobile_money,orange_money'
         ]);
 
-        DB::transaction(function () {
+        DB::transaction(function () { 
+            
+            
+            $saleable_item =  Saleable::findOrFail($this->saleable->id);
+            $immatriculationDirecte = ImmatriculationDirecte::whereId($saleable_item->saleable_id)->first();
 
-            if ($this->payment_method !== 'cash') {
+            match ($saleable_item->saleable_type) {
+                'App\Models\EtatCession'  => optional(EtatCession::whereId($saleable_item->saleable_id))->update(['status' => 'paid']),
+                'App\Models\CertificatePropriete'  => optional(CertificatePropriete::whereId($saleable_item->saleable_id))->update(['status' => 'active']),
+                'App\Models\Operation'  => optional(Operation::whereId($saleable_item->saleable_id))->update(['statut_conservateur' => 'ongoing']),
+                'App\Models\ReleveImmobilier'  => optional(ReleveImmobilier::whereId($saleable_item->saleable_id))->update(['status' => 'active']),
+                default => ''
+            };
+
+            if ($immatriculationDirecte && $immatriculationDirecte->statut === 'Ordre de Versement en Attente de Paiement') {
+                $immatriculationDirecte->update([
+                    'status_ordre_versement' => 'done',
+                    'statut' => 'Ordre de Versement Payé',
+                    'next_step' => 'Preparation Avis Au publique',
+                ]);
+            }
+            // Deuxième condition
+            elseif ($immatriculationDirecte && $immatriculationDirecte->statut === 'Etat de Cession en Attente de Paiement') {
+                $immatriculationDirecte->update([
+                    'statut' => 'Etat de cession payé',
+                    'next_step' => 'Mise en forme du dossier technique',
+                ]);
+            }
+
+            if (in_array($this->payment_method, ['ORANGE', 'MTN'])) {
                 try {
                     $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
                     // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
@@ -103,40 +137,12 @@ class Index extends Component
                 }
             }
 
-            $this->sale->update([
-                'user_id' => $this->user_id,
-                'payment_status' => 'totally_paid',
-                'payment_number' => $this->payment_number,
-                'payment_method' => $this->payment_method,
+            $saleable_item->sale->sales_code = $this->tresorPay_Reference;
+            $saleable_item->sale->payment_status = 'totally_paid';
+            $saleable_item->sale->payment_method = $this->payment_method;
+            $saleable_item->sale->save();
+            // dd($saleable_item->sale);
 
-            ]);
-
-            // dd($this->user_id);
-
-
-            // when sales is successful
-            // 1. Get the saleable item for that sale.
-            // 2. Query and get the instance of the saleable item class
-            // 3. Update the status of this item.
-
-            $saleable_item =  Saleable::findOrFail($this->saleable->id);
-
-            match ($saleable_item->saleable_type) {
-                'App\Models\EtatCession'  => optional(EtatCession::whereId($saleable_item->saleable_id))->update(['status' => 'paid']),
-                'App\Models\CertificatePropriete'  => optional(CertificatePropriete::whereId($saleable_item->saleable_id))->update(['status' => 'active']),
-                'App\Models\Operation'  => optional(Operation::whereId($saleable_item->saleable_id))->update(['statut_conservateur' => 'ongoing']),
-                'App\Models\ReleveImmobilier'  => optional(ReleveImmobilier::whereId($saleable_item->saleable_id))->update(['status' => 'active']),
-                'App\Models\ImmatriculationDirecte'  => optional(ImmatriculationDirecte::whereId($saleable_item->saleable_id))->update(['status_ordre_versement' => 'done', 'statut' => 'Ordre de Versement Payer', 'next_step' => 'Preparation Avis Au publique']),
-                default => ''
-            };
-
-            // save receipt
-
-            Receipt::create([
-                'receipt_code' => $this->sale->sales_code,
-                'sale_id' => $this->sale->id,
-                'receveur_id' => auth()->user()->id,
-            ]);
         });
 
         $this->refresh(__('Ventes mises à jour créées !'), 'updatePaySaleModal');

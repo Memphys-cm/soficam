@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\ImmatriculationDirecte;
 use App\Http\Livewire\Traits\WithDataTables;
 use Hachther\MeSomb\Operation\Payment\Collect;
+use MeSomb\Operation\PaymentOperation;
+use MeSomb\Util\RandomGenerator;
 
 class Index extends Component
 {
@@ -50,13 +52,15 @@ class Index extends Component
 
             try {
 
-                $request = new Collect($this->phone_number, $this->amount, $this->payment_method == 'mtn_mobile_money' ? 'MTN' : 'ORANGE', 'CM');
-
-                $payment = $request->pay();
-
-                if (!$payment->success) {
-                    return;
-                }
+                $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
+                    // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
+                    $client->makeCollect([
+                        'amount' => $this->sale->sales_amount,
+                        'service' => $this->payment_method,
+                        'payer' => $this->payment_number,
+                        'nonce' => RandomGenerator::nonce(),
+                        'trxID' => '1'
+                    ]);
             } catch (\Throwable $th) {
                 throw $th;
             }

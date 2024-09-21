@@ -111,7 +111,7 @@
                               </td>
 
                               <td>
-                                  <span class="fw-normal">{{ $titrefoncier->taxFoncier_amount }} {{ __('FCFA') }}</span>
+                                  <span class="fw-normal">10000 {{ __('FCFA') }}</span>
                               </td>
                               <td>
                                   <span class="fw-normal badge super-badge p-2 bg-{{ $titrefoncier->StatusTaxStyle }} round">{{ $titrefoncier->status_tax }}</span>
