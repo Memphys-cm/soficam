@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('fake_certificates', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
+            $table->string('code')->nullable();
             $table->string('qualification');
             $table->unsignedBigInteger('region_id');
             $table->unsignedBigInteger('division_id');
