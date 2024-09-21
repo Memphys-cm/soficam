@@ -6,6 +6,7 @@ use App\Models\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -44,6 +45,11 @@ class SubDivision extends Model
     public function division(): BelongsTo
     {
         return $this->belongsTo(Division::class);
+    }
+    public function lands() : HasMany 
+    {
+        return $this->hasMany(Land::class);
+        
     }
 
     public static function search($query)

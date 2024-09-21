@@ -99,6 +99,13 @@
                                                 </a>
                                             </li>
                                             @endcan
+                                            @can('charge_titre_foncier.view')
+                                            <li class="nav-item {{ $request->routeIs('portal.market-value.index') ? 'active' : '' }}">
+                                                <a href="{{ route('portal.market-value.index') }}" class="nav-link">
+                                                    <span class="sidebar-text-contracted">D</span> <span class="sidebar-text">{{ __('Valeurs Venales') }}</span>
+                                                </a>
+                                            </li>
+                                            @endcan
                                             {{-- @can('report_titre_foncier.view') --}}
 
                                             {{-- @endcan --}}

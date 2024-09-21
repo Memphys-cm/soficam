@@ -12,6 +12,8 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LoginSecurityController;
 use App\Http\Livewire\Portal\QrCode\QRCodeScanner;
+use App\Models\ImmatriculationDirecte;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -145,6 +147,10 @@ Route::group(
             Route::get('/', App\Http\Livewire\Portal\SubDivisions\Index::class)->name('portal.sub-divisions.index');
         });
 
+        Route::prefix('lands')->group(function () {
+            Route::get('/', App\Http\Livewire\Portal\MarketValue\Index::class)->name('portal.market-value.index');
+        });
+
         Route::prefix('services')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\Services\Index::class)->name('portal.services.index');
         });
@@ -232,8 +238,10 @@ Route::group(
             // Récupérez également vos titres fonciers avec les utilisateurs associés
             $titles = TitreFoncier::with('users')->get();
 
+            $immatriculations = ImmatriculationDirecte::with('users')->get();
+
             // Passez les coordonnées et les titres fonciers à la vue
-            return view('first_test', compact('titles', 'longitude', 'latitude'))->layout('components.layouts.dashboard');
+            return view('first_test', compact('titles','immatriculations', 'longitude', 'latitude'))->layout('components.layouts.dashboard');
         })->name('portal.maps.index');
 
         Route::prefix('releve_immobilier')->group(function () {

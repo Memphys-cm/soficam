@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignId('region_id')->index();
             $table->foreignId('division_id')->index();
             $table->foreignId('sub_division_id')->index();
+            $table->foreignId('land_id')->nullable()->index();
             $table->string('groupement')->nullable();
             $table->string('lieu_dit')->nullable();
             $table->enum('zone',['urbain','rurale']);
