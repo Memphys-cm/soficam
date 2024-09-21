@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Cabinet;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -13,7 +14,7 @@ class CabinetNotaireSeeder extends Seeder
      */
     public function run(): void
     {
-        CabinetNotaire::create([
+        Cabinet::create([
             'uuid' => Str::uuid(),
             'first_name' => 'John',
             'last_name' => 'Doe',
@@ -26,7 +27,7 @@ class CabinetNotaireSeeder extends Seeder
 
         for($i=0 ; $i<50 ; $i++){
 
-            CabinetNotaire::create([
+            Cabinet::create([
                 'uuid' => Str::uuid(),
                 'first_name' => 'Jane',
                 'last_name' => 'Smith',
@@ -36,8 +37,8 @@ class CabinetNotaireSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
-    
+
         }
-        
+
     }
 }

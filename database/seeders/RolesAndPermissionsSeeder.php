@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
@@ -27,6 +28,8 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'user.create'],
             ['name' => 'user.update'],
             ['name' => 'user.delete'],
+            ['name' => 'user.profile-update'],
+            ['name' => 'profile-update'],
 
             ['name' => 'user.export_n_print'],
             ['name' => 'user.import'],
@@ -81,9 +84,9 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'titre_foncier.update'],
             ['name' => 'titre_foncier.delete'],
             ['name' => 'map.view'],
-            
+
             ['name' => 'titre_foncier.export_n_print'],
-            
+
             ['name' => 'profile.view'],
             ['name' => 'profile.update'],
             ['name' => 'profile.delete'],
@@ -170,31 +173,33 @@ class RolesAndPermissionsSeeder extends Seeder
             ['name' => 'imma_directe.update'],
             ['name' => 'imma_directe.cotation'],
             ['name' => 'imma_directe.ordre_versement'],
+            ['name' => 'imma_directe.edit_statut'],
+            ['name' => 'imma_directe.certificat_affichage'],
+            ['name' => 'imma_directe.descente_terrain'],
+            ['name' => 'imma_directe.etat_cession'],
+            ['name' => 'imma_directe.mise_en_forme_dos_tech'],
+            ['name' => 'imma_directe.mise_en_forme_dos_admin'],
+            ['name' => 'imma_directe.bordereau_transmission'],
+            ['name' => 'imma_directe.dossier_tech_create'],   
             ['name' => 'imma_directe.view_detail'],
             ['name' => 'imma_directe.convocation'],
             ['name' => 'imma_directe.avis'],
-            ['name' => 'imma_directe.etat_cession'],
             ['name' => 'imma_directe.geometre'],
             ['name' => 'imma_directe.pv_bornage'],
-            ['name' => 'imma_directe.descente_terrain'],
-            ['name' => 'imma_directe.bordereau_transmission'],
             ['name' => 'imma_directe.dossier_vise'],
             ['name' => 'imma_directe.enregistrer_geometre'],
             ['name' => 'imma_directe.enregistrement_pv_bornage'],
-            ['name' => 'imma_directe.mise_en_forme_dos_tech'],
-            ['name' => 'imma_directe.mise_en_forme_dos_admin'],
             ['name' => 'imma_directe.creation_dos_tech'],
             ['name' => 'imma_directe.certificat_affichage'],
             ['name' => 'imma_directe.bulletion_avis'],
-            ['name' => 'imma_directe.dossier_tech_create'],
             ['name' => 'imma_directe.cadre'],
             ['name' => 'imma_directe.export_n_print'],
-            
-            
+
+
 
             ['name' => 'tax_foncier.view'],
-            ['name' => 'tax_foncier.update'],     
-            
+            ['name' => 'tax_foncier.update'],
+
             ['name' => 'sales.view'],
             ['name' => 'sales.pay'],
             ['name' => 'sales.delete'],
@@ -210,7 +215,7 @@ class RolesAndPermissionsSeeder extends Seeder
                 'name' => $d['name']
             ],[
                 'guard_name' => 'web',
-                'created_at' => $time_stamp, 
+                'created_at' => $time_stamp,
             ]);
         }
         // $this->command->info('Creating Permissions');
@@ -227,6 +232,9 @@ class RolesAndPermissionsSeeder extends Seeder
         $this->command->info('Creating Geometre User\'s Role');
         $admin_user_role = Role::firstOrCreate(['name' => 'geometre']);
 
+        $this->command->info('Creating Geometre User\'s Role');
+        $admin_user_role = Role::firstOrCreate(['name' => 'conservateur']);
+
         $this->command->info('Creating User\'s Role');
         $user_role = Role::firstOrCreate(['name' => 'user']);
 
@@ -240,7 +248,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'profile.update',
             'profile.delete',
         ]);
-        
+
     }
 
     /**

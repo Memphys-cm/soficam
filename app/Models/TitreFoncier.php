@@ -66,7 +66,15 @@ class TitreFoncier extends Model implements HasMedia
     }
     public function subDivision(): BelongsTo
     {
+        return $this->belongsTo(SubDivision::class,'sub_division_id');
+    }
+    public function sub_division(): BelongsTo
+    {
         return $this->belongsTo(SubDivision::class);
+    }
+    public function land(): BelongsTo
+    {
+        return $this->belongsTo(Land::class,'land_id');
     }
 
     public function charge(): HasMany
@@ -81,7 +89,7 @@ class TitreFoncier extends Model implements HasMedia
             'DISPONIBLE' => 'success',
             'PRENOTE' => 'secondary',
             'SUSPENDU' => 'danger',
-            NULL => ''
+            default => 'primary'
         };
     }
     public function getStatusTaxStyleAttribute(): String
@@ -89,7 +97,7 @@ class TitreFoncier extends Model implements HasMedia
         return match ($this->status_tax) {
             'payer' => 'success',
             'non_payer' => 'danger',
-            NULL => ''
+            default => 'info'
         };
     }
 

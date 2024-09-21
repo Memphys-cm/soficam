@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Portal\Taxfonciere\SuiviTaxfonciere;
 
+use App\Exports\TaxeFonciere;
 use App\Models\User;
 use App\Models\Region;
 use Livewire\Component;
@@ -12,7 +13,10 @@ use App\Models\TitreFoncier;
 use App\Models\Sales\Saleable;
 use Illuminate\Support\Facades\DB;
 use App\Http\Livewire\Traits\WithDataTables;
+use Carbon\Carbon;
 use Hachther\MeSomb\Operation\Payment\Collect;
+use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Index extends Component
 {
@@ -30,9 +34,9 @@ class Index extends Component
     public $selectedUsers = [];
     public $paymentType = 'Cash';
     public $phoneNumber = '';
-    public $status_tax, $taxFoncier_amount, $price, $payment_method;
-    
-    public $requestor_id, $requestors;
+    public $status_tax, $taxFoncier_amount, $price, $payment_method, $regions, $element, $subdivisions, $divisions, $selector, $status, $region_id, $division_id, $subdivision_id;
+
+    public $requestor_id, $requestors, $inter_start, $inter_end;
     public function mount()
     {
         $this->requestors = User::role('user')->select('id', 'first_name', 'last_name')->get();
@@ -40,6 +44,53 @@ class Index extends Component
         // $user = User::findOrFail(22);
         // dd($user->titrefoncier);
         $this->titrefoncier = TitreFoncier::all();
+        $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
+        $this->divisions = Division::select('division_name_en', 'division_name_fr', 'id')->get();
+        $this->subdivisions = SubDivision::select('sub_division_name_en', 'sub_division_name_fr', 'id')->get();
+    }
+    public function export()
+    {
+        auditLog(
+            auth()->user(),
+            'sales_report_exported',
+            'web',
+            __('Exported excel file for Sales')
+        );
+        return (new \App\Exports\TaxeFonciere(
+            $this->status,
+            $this->region_id,
+            $this->division_id,
+            $this->subdivision_id,
+            $this->inter_start,
+            $this->inter_end,
+            $this->orderBy,
+            $this->orderAsc
+        ))->download('taxes_foncieres.xlsx');
+        
+       
+    }
+    public function BuildingQuery()
+    {
+        return TitreFoncier::query() // Utiliser query() pour une meilleure compatibilité
+            ->when($this->status && in_array($this->status, ['payer', 'non_payer']), function ($query) {
+                return $query->where('status_tax', $this->status);
+            })
+            ->when($this->region_id && $this->region_id != "all", function ($query) {
+                return $query->where('region_id',  $this->region_id);
+            })
+            ->when($this->division_id && $this->division_id != "all", function ($query) {
+                return $query->where('division_id',  $this->division_id);
+            })
+            ->when($this->subdivision_id && $this->subdivision_id != "all", function ($query) {
+                return $query->where('sub_division_id',  $this->subdivision_id);
+            })
+            ->when($this->inter_start && $this->inter_end, function ($query) {
+                return $query->whereBetween(DB::raw('DATE(created_at)'), [
+                    Carbon::parse($this->inter_start),
+                    Carbon::parse($this->inter_end)
+                ]);
+            })
+            ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc'); // Gérer le tri dynamique
     }
 
     public function initData($id)
@@ -51,9 +102,7 @@ class Index extends Component
         $this->status_tax =  $titrefoncier->status_tax;
         $this->taxFoncier_amount =  $titrefoncier->taxFoncier_amount;
     }
-    public function updatedPaymentType()
-    {
-    }
+    public function updatedPaymentType() {}
 
     public function confirmOrder()
     {
@@ -100,7 +149,7 @@ class Index extends Component
 
             ]
         );
-        
+
         if (!empty($this->titrefoncier)) {
 
             $this->titrefoncier->update([
@@ -146,33 +195,82 @@ class Index extends Component
         $this->phoneNumber = '';
     }
 
+    public function sms($id)
+    {
+
+        $receivers = TitreFoncier::where('id', $id)->get();
+
+        $sms = '';
+        $userNames = '';
+        $mobiles = "";
+
+        foreach ($receivers as $user) {
+            if ($user) {
+                $userNames .= $user->first_name . ',';
+                $mobiles .= "$user->primary_phone_number,";
+            }
+        }
+
+        //retirer la virgule en fin de chaine
+        $userNames = rtrim($userNames, ',');
+        $mobiles = rtrim($mobiles, ',');
+        $sms = "Mr/Mme. $userNames, vous devez payer votre taxe foncière.
+        Cliquez sur le lien ci dessous pour vous connecter à la plateforme: http://127.0.0.1:8001/";
+
+
+        if (!empty($sms)) {
+            $senderid = 'SOFICAM';
+            $mobiles = $mobiles;
+            $api_key = 'wplL0f9wq1moi1NrsjpsBgfBzun4';
+            $url = 'https://api.queensms.net/v1/sms.php';
+
+            $sms_body = array(
+                'api_key' => $api_key,
+                'senderid' => $senderid,
+                'sms' => $sms,
+                'mobiles' => $mobiles
+            );
+
+            $send_data = http_build_query($sms_body);
+            $gateway_url = $url . "?" . $send_data;
+
+            try {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $gateway_url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_HTTPGET, 1);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                $output = curl_exec($ch);
+
+                if (curl_errno($ch)) {
+                    $output = curl_error($ch);
+                    $arr = ['echec'];
+                    return ($arr);
+                } else {
+                    return ($output);
+                }
+                curl_close($ch);
+            } catch (Exception $exception) {
+                //echo $exception->getMessage();
+                $arr = ['echec'];
+                return ($arr);
+            }
+        }
+    }
+
     public function render()
     {
 
-        $titrefonciers = TitreFoncier::search($this->query)->with('users')
-
-            ->when($this->selectedSubDivision, function ($query, $subDivisionId) {
-                return $query->where('sub_division_id', $subDivisionId);
-            })
-            ->when($this->createdDate, function ($query) {
-                return $query->whereDate('date_tax', '>=', $this->createdDate);
-            })
-
-            ->when($this->selectedStatus, function ($query, $selectedStatus) {
-                return $query->where('status_tax', $selectedStatus);
-            })
-            ->orderBy($this->orderBy, $this->orderAsc)
-            ->paginate($this->perPage);
-
+        $titrefonciers = $this->BuildingQuery()->paginate($this->perPage);
         $titrefonciers_count = TitreFoncier::count();
-        $titrefonciers_with_tax = TitreFoncier::whereNotNull('taxFoncier_amount')->count();
-        $totalTaxAmountPrediction = TitreFoncier::sum('taxFoncier_amount');
-        $totalTaxAmountpaid = TitreFoncier::where('status_tax', 'payer')->sum('taxFoncier_amount');
-        $totalTaxAmountPaid = TitreFoncier::where('status_tax', 'payer')->sum('taxFoncier_amount');
-        $tax_paid_percentage = TitreFoncier::whereNotNull('taxFoncier_amount')->count();
-        //  Check if $totalTaxAmountPrediction is not zero or null before calculating the percentage
-        $percentagePaid = ($totalTaxAmountPrediction != 0) ? ($totalTaxAmountPaid / $totalTaxAmountPrediction) * 100 : 0;
-        // $percentagePaid = ($totalTaxAmountPaid / $totalTaxAmountPrediction) * 100;
+        $titrefonciers_with_tax = $this->BuildingQuery()->where('status_tax', 'non_payer')->count();
+        $totalTaxAmountPrediction = $this->BuildingQuery()->where('status_tax', 'non_payer')->get()->sum(function ($titrefonciers) {
+            return $titrefonciers->taxFoncier_amount;
+        }); 
+        $totalTaxAmountpaid = $this->BuildingQuery()->where('status_tax', 'payer')->get()->sum(function ($titrefonciers) {
+            return $titrefonciers->taxFoncier_amount;
+        });
+        
 
         return view('livewire.portal.taxfonciere.suivi-taxfonciere.index',  [
             'titrefonciers' => $titrefonciers,
@@ -180,8 +278,6 @@ class Index extends Component
             'titrefonciers_with_tax' => $titrefonciers_with_tax,
             'totalTaxAmountPrediction' => $totalTaxAmountPrediction,
             'totalTaxAmountpaid' => $totalTaxAmountpaid,
-            'tax_paid_percentage' => $tax_paid_percentage,
-            'percentagePaid' => $percentagePaid,
         ]);
     }
 }

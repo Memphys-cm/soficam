@@ -1,26 +1,32 @@
-<div class="container my-4">
-    <div class="shadow-lg rounded p-4 bg-white">
-        <h4 class="mb-4 fw-bold text-primary">{{ __('Odre de Versement') }}</h4>
+@can('imma_directe.ordre_versement')
+    <div class="container my-4 {{ $imma_directe->statut !== 'coter' && !auth()->user()->hasRole('super_admin') ? 'disabled-page' : '' }} ? 'disabled-page' : '' }}">
+        <div class="shadow-lg rounded p-4 bg-white">
+            <h4 class="mb-4 fw-bold text-primary">{{ __('Ordre de Versement') }}</h4>
 
-        @if ($imma_directe->numero_ordre_versement)
             @php
-                $visibility = 'disabled';
+                $visibility = '';
             @endphp
-        @endif
 
-        <x-form-items.form wire:submit="ordreVersement">
-            <div class="form-group mb-3 row">
-                <div class='col-12 my-1'>
-                    <label for="code">{{ __('Montant de L\'ordre de Versement') }}  </label>
-                    <input wire:model="montant_ordre_versement" type="number"
-                        class="form-control {{ $visibility }}  @error('montant_ordre_versement') is-invalid @enderror"
-                        placeholder="15000" required="" value="" name="montant_ordre_versement" {{ $visibility }}>
-                    @error('montant_ordre_versement')
-                    <span class="text-danger">{{ $message }}</span>
-                        {{-- <div class="invalid-feedback">{{ $message }}</div> --}}
-                    @enderror
-                </div>
-                {{-- <div class='col-12 my-1'>
+            @if ($imma_directe->numero_ordre_versement)
+                @php
+                    $visibility = 'disabled';
+                @endphp
+            @endif
+
+            <x-form-items.form wire:submit="ordreVersement">
+                <div class="form-group mb-3 row">
+                    <div class='col-12 my-1'>
+                        <label for="code">{{ __('Montant de L\'ordre de Versement') }} </label>
+                        <input wire:model="montant_ordre_versement" type="number"
+                            class="form-control {{ $visibility }}  @error('montant_ordre_versement') is-invalid @enderror"
+                            placeholder="15000" required="" value="" name="montant_ordre_versement"
+                            {{ $visibility }}>
+                        @error('montant_ordre_versement')
+                            <span class="text-danger">{{ $message }}</span>
+                            {{-- <div class="invalid-feedback">{{ $message }}</div> --}}
+                        @enderror
+                    </div>
+                    {{-- <div class='col-12 my-1'>
                     <label for="code">{{ __('Superficie de L\'ordre de Versement') }}</label>
                     <input wire:model="superficie_ordre_versement" type="number"
                         class="form-control  @error('superficie_ordre_versement') is-invalid @enderror"
@@ -29,16 +35,26 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div> --}}
+                </div>
+
+            </x-form-items.form>
+
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-secondary" wire:click.prevent="prevStep"> {{ __('<< Précedent') }} </button>
+                <button class="btn btn-primary mx-2" wire:click.prevent="ordreVersement" {{ $visibility }}>
+                    {{ __('Enregistrer') }}
+                </button>
+                <button class="btn btn-info" wire:click.prevent="nextStep"> {{ __('Suivant >>') }} </button>
             </div>
 
-        </x-form-items.form>
+            <!-- Notice explicative -->
+            <div class="my-2 p-2 shadow ">
+                <p class="text-warning">
+                    {{ __('À cette étape, veuillez entrer le montant de l\'ordre de versement. Si le montant est déjà défini, le champ sera désactivé. Vous pouvez enregistrer les informations et passer à l\'étape suivante.') }}
+                </p>
+            </div>
 
-        <div class="d-flex justify-content-end">
-            <button class="btn btn-secondary" wire:click.prevent="prevStep"> {{ __('<< Précedent') }} </button>
-            <button class="btn btn-primary mx-2" wire:click.prevent="ordreVersement" {{ $visibility }}> {{ __('Enregistrer') }}
-            </button>
-            <button class="btn btn-info" wire:click.prevent="nextStep"> {{ __('Suivant >>') }} </button>
         </div>
-    </div>
 
-</div>
+    </div>
+@endcan

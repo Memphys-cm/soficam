@@ -44,6 +44,7 @@ class User extends Authenticatable
         'is_active',
         'password',
         'service_id',
+        'signature_path',
     ];
 
     /**
@@ -82,13 +83,13 @@ class User extends Authenticatable
     {
         return $query->where('is_active', 1);
     }
-    
+
     public function scopeInActive($query): Builder
     {
         return $query->where('is_active', 0);
     }
 
-    
+
     public function getNameAttribute()
     {
         return $this->first_name . " " . $this->last_name;
@@ -107,7 +108,7 @@ class User extends Authenticatable
             NULL => 'info'
         };
     }
-   
+
     public function getStatusTextAttribute()
     {
         return match ($this->is_active) {
@@ -117,26 +118,26 @@ class User extends Authenticatable
         };
     }
 
-    public function service() : BelongsTo
+    public function service(): BelongsTo
     {
         return $this->belongsTo(Service::class, 'service_id');
     }
 
-    public function titrefonciers() : BelongsToMany
+    public function titrefonciers(): BelongsToMany
     {
-        return $this->belongsToMany(TitreFoncier::class,'titrefoncier_user','titre_foncier_id','user_id')->withTimestamps();
+        return $this->belongsToMany(TitreFoncier::class, 'titrefoncier_user', 'titre_foncier_id', 'user_id')->withTimestamps();
     }
 
-    public function imma_directes() : BelongsToMany
+    public function imma_directes(): BelongsToMany
     {
-        return $this->belongsToMany(ImmatriculationDirecte::class,'immatriculation_directe_user','immatriculation_directe_id','user_id')->withTimestamps();
+        return $this->belongsToMany(ImmatriculationDirecte::class, 'immatriculation_directe_user', 'immatriculation_directe_id', 'user_id')->withTimestamps();
     }
 
-    public function certificatepropriete() : BelongsToMany
+    public function certificatepropriete(): BelongsToMany
     {
-        return $this->belongsToMany(CertificatePropriete::class,'titrefoncier_user','user_id','titre_foncier_id')->withTimestamps();
+        return $this->belongsToMany(CertificatePropriete::class, 'titrefoncier_user', 'user_id', 'titre_foncier_id')->withTimestamps();
     }
-    
+
     public static function search($query)
     {
         return empty($query) ?
@@ -144,10 +145,14 @@ class User extends Authenticatable
             static::query()
             ->where(function ($q) use ($query) {
                 $q->where('first_name', 'like', '%' . $query . '%');
-                $q->orWhere('last_name', 'like', '%' . $query . '%'); 
-                $q->orWhere('is_active', 'like', '%' . $query . '%'); 
-                $q->orWhere('sexe', 'like', '%' . $query . '%'); 
+                $q->orWhere('last_name', 'like', '%' . $query . '%');
+                $q->orWhere('is_active', 'like', '%' . $query . '%');
+                $q->orWhere('sexe', 'like', '%' . $query . '%');
             });
     }
 
+    public function loginSecurity()
+    {
+        return $this->hasOne(LoginSecurity::class);
+    }
 }

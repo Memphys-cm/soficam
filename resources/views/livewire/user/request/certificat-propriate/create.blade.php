@@ -60,8 +60,9 @@
                                 <label for="payment_method">{{ __('Mode de paiement') }}</label>
                                 <select wire:model="payment_method" class="form-select @error('payment_method') is-invalid @enderror" id="payment_method" required="">
                                     <option value="">{{ __('--Selectionner--') }}</option>
-                                    <option value="orange_money">{{ __('Orange Money') }}</option>
-                                    <option value="mtn_mobile_money">{{ __('MTN Mobile Money') }}</option>
+                                    <option value="ORANGE">{{ __('Orange Money') }}</option>
+                                    <option value="MTN">{{ __('MTN Mobile Money') }}</option>
+                                    <option value="Tresor_Pay">{{ __('Tresor Pay') }}</option>
                                 </select>
                                 @error('payment_method')
                                 <div class="invalid-feedback">
@@ -71,7 +72,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row"  {{$show_payment}}>
                             <div class="col my-2">
                                 <label for="price">{{ __('Numéro de Télephone') }}</label>
                                 <input wire:model="phone_number" type="number"

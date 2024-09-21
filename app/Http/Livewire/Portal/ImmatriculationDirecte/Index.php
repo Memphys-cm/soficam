@@ -2,14 +2,20 @@
 
 namespace App\Http\Livewire\Portal\ImmatriculationDirecte;
 
+use App\Exports\ImmatriculationDirectes;
 use Carbon\Carbon;
+use proj4php\Proj;
+use proj4php\Point;
 use App\Models\User;
 use App\Models\Region;
+use proj4php\Proj4php;
 use App\Models\Service;
 use Livewire\Component;
 use Twilio\Rest\Client;
 use App\Models\Division;
+use App\Models\Operation;
 use App\Models\Sales\Sale;
+use App\Models\EtatCession;
 use App\Models\SubDivision;
 use Illuminate\Support\Str;
 use App\Models\TitreFoncier;
@@ -18,10 +24,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use App\Models\ImmatriculationDirecte;
 use App\Http\Livewire\Traits\WithDataTables;
-use proj4php\Proj4php;
-use proj4php\Proj;
-use proj4php\Point;
-use App\Models\EtatCession;
 
 class Index extends Component
 {
@@ -51,7 +53,7 @@ class Index extends Component
     public $limit_est;
     public $limit_ouest;
     public $duplicata;
-    public $coordinates = ['', ''] , $transform;
+    public $coordinates = ['', ''] , $transform, $element, $selector;
     public $coordonnees = [];
     public $coordonne = [];
     public $detect = 0;
@@ -149,6 +151,14 @@ class Index extends Component
             // 'comissions' => json_encode($this->comissions),
         ]);
 
+        Operation::create([
+            'numero_operation' => Str::upper(Str::random(6)) . "" . now()->format('msu'),
+            // 'titre_foncier_id' => $this->titre_foncier_id,
+            'type_operation' => 'immatriculation_directe',
+            'requestor_id' => auth()->user()->id,
+            'immatriculation_directe_id' => $imma_directe->id,
+        ]);
+
         $imma_directe->users()->sync($this->user_ids);
 
         if (!empty($this->attachements)) {
@@ -162,6 +172,19 @@ class Index extends Component
         $this->clearFields();
 
         $this->refresh(__('Dossier D\'Immatriculation Directe Creé Avec SUCCES'), 'CreateImmaDirecteModal');
+    }
+
+    public function export()
+    {
+        auditLog(
+            auth()->user(),
+            'taxe_fonciere_exported',
+            'web',
+            __('Exported excel file for taxe foncière')
+        );
+        return (new ImmatriculationDirectes($this->element, $this->selector))->download('RapportTitreFoncier-' . Str::random(5) . '.xlsx');
+
+        $this->emit('refresh-page');
     }
 
     public function convert($utmCoordinates)
@@ -695,6 +718,7 @@ class Index extends Component
         $counterFormatted = str_pad($counter, 5, '0', STR_PAD_LEFT);
         return $year . 'STATE' . $counterFormatted;
     }
+
     public function etatDeCession()
     {
           // Récupérer l'année en cours au format 'yy'
@@ -784,6 +808,7 @@ class Index extends Component
         );
 
     }
+
     public function  printAvisPdf($id)
     {
         $this->imma_directe = ImmatriculationDirecte::findOrFail($id);
@@ -927,8 +952,6 @@ class Index extends Component
 
 
     }
-
-
 
     public function convocation($id)
     {
@@ -1116,7 +1139,6 @@ class Index extends Component
 
     }
 
-
     public function clearFields()
     {
         $this->reset(
@@ -1129,6 +1151,23 @@ class Index extends Component
         );
 
         $this->user_ids = [];
+    }
+
+    public function delete()
+    {
+        if (!Gate::allows('user.delete') || !Gate::allows('user.update')) {
+            return abort(401);
+        }
+
+        if (!empty($this->imma_directe)) {
+
+            $this->imma_directe->delete();
+        }
+
+
+        $this->state = 0;
+
+        $this->refresh(__('Dossier supprimé avec succès!'), 'DeleteModal');
     }
 
 

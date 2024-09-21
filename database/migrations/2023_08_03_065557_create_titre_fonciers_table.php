@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('numero_conservation')->index()->nullable();
             $table->date('date_de_delivrance_du_TF');
             $table->string('numero_du_duplicata')->nullable();
-            $table->foreignId('immatriculation_id')->constrained('immatriculation_directes')->nullable()->onDelete('set null');
+            // $table->foreignId('immatriculation_id')->constrained('immatriculation_directes')->nullable()->onDelete('set null');
             $table->foreignId('region_id')->index();
             $table->foreignId('division_id')->index();
             $table->foreignId('sub_division_id')->index();
+            $table->foreignId('land_id')->nullable()->index();
             $table->string('groupement')->nullable();
             $table->string('lieu_dit')->nullable();
             $table->enum('zone',['urbain','rurale']);
@@ -46,6 +47,7 @@ return new class extends Migration
             $table->string('limit_sud');
             $table->string('limit_est');
             $table->string('limit_ouest');
+            $table->boolean('is_vip')->default(0);
             $table->string('recorded_by')->nullable();
             $table->string('nom_et_prenoms_de_largent_traitant')->nullable();
             $table->string('le_conservateur')->nullable();
