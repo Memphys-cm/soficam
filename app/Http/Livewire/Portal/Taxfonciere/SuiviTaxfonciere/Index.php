@@ -263,14 +263,14 @@ class Index extends Component
 
         $titrefonciers = $this->BuildingQuery()->paginate($this->perPage);
         $titrefonciers_count = TitreFoncier::count();
-        $titrefonciers_with_tax = TitreFoncier::whereNotNull('taxFoncier_amount')->count();
-        $totalTaxAmountPrediction = TitreFoncier::sum('taxFoncier_amount');
-        $totalTaxAmountpaid = TitreFoncier::where('status_tax', 'payer')->sum('taxFoncier_amount');
-        $totalTaxAmountPaid = TitreFoncier::where('status_tax', 'payer')->sum('taxFoncier_amount');
-        $tax_paid_percentage = TitreFoncier::whereNotNull('taxFoncier_amount')->count();
-        //  Check if $totalTaxAmountPrediction is not zero or null before calculating the percentage
-        $percentagePaid = ($totalTaxAmountPrediction != 0) ? ($totalTaxAmountPaid / $totalTaxAmountPrediction) * 100 : 0;
-        // $percentagePaid = ($totalTaxAmountPaid / $totalTaxAmountPrediction) * 100;
+        $titrefonciers_with_tax = $this->BuildingQuery()->where('status_tax', 'non_payer')->count();
+        $totalTaxAmountPrediction = $this->BuildingQuery()->where('status_tax', 'non_payer')->get()->sum(function ($titrefonciers) {
+            return $titrefonciers->taxFoncier_amount;
+        }); 
+        $totalTaxAmountpaid = $this->BuildingQuery()->where('status_tax', 'payer')->get()->sum(function ($titrefonciers) {
+            return $titrefonciers->taxFoncier_amount;
+        });
+        
 
         return view('livewire.portal.taxfonciere.suivi-taxfonciere.index',  [
             'titrefonciers' => $titrefonciers,
@@ -278,8 +278,6 @@ class Index extends Component
             'titrefonciers_with_tax' => $titrefonciers_with_tax,
             'totalTaxAmountPrediction' => $totalTaxAmountPrediction,
             'totalTaxAmountpaid' => $totalTaxAmountpaid,
-            'tax_paid_percentage' => $tax_paid_percentage,
-            'percentagePaid' => $percentagePaid,
         ]);
     }
 }

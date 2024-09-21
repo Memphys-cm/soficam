@@ -37,11 +37,14 @@
             <div class="d-flex justify-content-between mb-2">
 
 
-                <button wire:loading.remove wire:click="export" class="btn btn-outline-secondary btn-sm mx-1" type="button">
-                    <svg class="icon icon-xs " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                <button wire:loading.remove wire:click="export" class="btn btn-outline-secondary btn-sm mx-1"
+                    type="button">
+                    <svg class="icon icon-xs " fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
                     </svg><!-- <span class="fas fa-external-link-alt" data-fa-transform="shrink-3 down-2"></span> Font Awesome fontawesome.com -->
-                    <span class="d-none d-sm-inline-block ms-1">{{__('Export')}}</span>
+                    <span class="d-none d-sm-inline-block ms-1">{{ __('Export') }}</span>
                 </button>
             </div>
         </div>
@@ -71,7 +74,7 @@
         <div class="col">
             <div class="card h-md-100 ecommerce-card-min-width">
                 <div class="card-header pb-0">
-                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Nombre total de TF avec Taxe') }}</h6>
+                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Nombre total de TF en Non-Règlementaire') }}</h6>
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
@@ -89,15 +92,36 @@
                 </div>
             </div>
         </div>
-
         <div class="col">
             <div class="card h-md-100 ecommerce-card-min-width">
                 <div class="card-header pb-0">
-                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Montant prédit de la Taxe') }}</h6>
+                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Montant Perçu') }}</h6>
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
-                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmountPrediction }} {{ __('FCFA') }}</p>
+                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmountpaid }} {{ __('FCFA') }}</p>
+
+                    </div>
+                    <div class="">
+                        <svg class="icon text-success" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 1v6m0 10v6m-6-3h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v6a3 3 0 003 3z">
+                            </path>
+                        </svg>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-md-100 ecommerce-card-min-width">
+                <div class="card-header pb-0">
+                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Montant À Percevoir') }}</h6>
+                </div>
+                <div class="p-3 d-flex justify-content-between align-iterms-center">
+                    <div class="col">
+                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmountPrediction  }} {{ __('FCFA') }}</p>
 
                     </div>
                     <div class="">
@@ -308,7 +332,7 @@
                     {{ __('Montrer') }} {{ $perPage > $titrefonciers_count ? $titrefonciers_count : $perPage }}
                     {{ __(' éléments sur ') }} {{ $titrefonciers_count }}
                 </div>
-                {{--{{ $titrefonciers->links() }}--}}
+                {{-- {{ $titrefonciers->links() }} --}}
             </div>
         </div>
     </div>

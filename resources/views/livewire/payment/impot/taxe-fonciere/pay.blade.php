@@ -1,5 +1,9 @@
 <div class="container-fluid mt-3">
-    <div class="content-header">
+    <x-alert />
+    <div class="container-fluid d-flex align-items-center justify-content-center pb-3">
+        <img src="{{ asset('img/dgi-banner-fr.jpg') }}" alt="armoirie">
+    </div>
+    <div class="content-header mt-5">
         <h1>Enregistrez vos informations</h1>
         <p>Bienvenue sur le portail d'enregistrement des informations -- Taxe Foncière</p>
     </div>
@@ -13,7 +17,7 @@
                 <p><small class="text-danger">*** Tous les champs marqués avec l'astérisque (*) sont obligatoires
                         ***</small></p>
 
-                <x-form-items.form wire:submit="store" class="">
+                <x-form-items.form wire:submit="store">
                     <!-- First Row -->
                     <div class="row">
                         <div class="col-md-6 mb-3">
