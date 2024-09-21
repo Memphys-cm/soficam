@@ -105,17 +105,19 @@ class Index extends Component
 
         // dd($this->qualification);
 
-        // Sauvegarde dans la base de données
-        $certificat = FakeCertificate::create($validatedData);
-
-        $this->certificat->saleable->sale->payment_status = "totally_paid";
-        $this->certificat->status = "active";
-        $this->certificat->saleable->sale->save();
-        $this->certificat->save();
+        if($this->certificat){
+            $this->certificat->saleable->sale->payment_status = "totally_paid";
+            $this->certificat->status = "active";
+            $this->certificat->saleable->sale->save();
+            $this->certificat->save();
+        }else{
+            // Sauvegarde dans la base de données
+            $certificat = FakeCertificate::create($validatedData);
+    
+            return $this->generateReceiptPdf($certificat->id);
+        }
 
         session()->flash('message', 'Demande enregistrée avec succès.');
-
-        return $this->generateReceiptPdf($certificat->id);
 
         // Réinitialiser le formulaire
         // $this->reset();
