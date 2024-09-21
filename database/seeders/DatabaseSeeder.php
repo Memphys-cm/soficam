@@ -87,7 +87,7 @@ class DatabaseSeeder extends Seeder
         // $user->assignRole('super_admin');
 
 
-        $this->call(TitreFoncierSeeder::class);
+        #$this->call(TitreFoncierSeeder::class);
         #$this->call(CertificateProprieteSeeder::class);
         // $this->call(TitreFoncierSeeder::class);
         #$this->call(CategoryActivitesSeeder::class);

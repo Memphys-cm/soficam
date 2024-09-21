@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Portal\ImmatriculationDirecte;
 
+use App\Exports\ImmatriculationDirectes;
 use Carbon\Carbon;
 use proj4php\Proj;
 use proj4php\Point;
@@ -52,7 +53,7 @@ class Index extends Component
     public $limit_est;
     public $limit_ouest;
     public $duplicata;
-    public $coordinates = ['', ''] , $transform;
+    public $coordinates = ['', ''] , $transform, $element, $selector;
     public $coordonnees = [];
     public $coordonne = [];
     public $detect = 0;
@@ -171,6 +172,19 @@ class Index extends Component
         $this->clearFields();
 
         $this->refresh(__('Dossier D\'Immatriculation Directe Creé Avec SUCCES'), 'CreateImmaDirecteModal');
+    }
+
+    public function export()
+    {
+        auditLog(
+            auth()->user(),
+            'taxe_fonciere_exported',
+            'web',
+            __('Exported excel file for taxe foncière')
+        );
+        return (new ImmatriculationDirectes($this->element, $this->selector))->download('RapportTitreFoncier-' . Str::random(5) . '.xlsx');
+
+        $this->emit('refresh-page');
     }
 
     public function convert($utmCoordinates)
