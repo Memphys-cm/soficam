@@ -61,7 +61,7 @@ class Index extends Component
     public $numero_ccp;
     public $attachments;
     public $taxFoncier_amount;
-    public $conservateurs, $conservateur_id, $selector, $element, $subdivisions, $is_vip;
+    public $conservateurs, $conservateur_id, $selector, $element, $subdivisions, $is_vip, $subdivision_id, $inter_start, $inter_end;
 
     public  $state = 0;
 
@@ -100,19 +100,6 @@ class Index extends Component
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
         $this->divisions = Division::select('division_name_en', 'division_name_fr', 'id')->get();
         $this->subdivisions = SubDivision::select('sub_division_name_en', 'sub_division_name_fr', 'id')->get();
-    }
-
-    public function export()
-    {
-        auditLog(
-            auth()->user(),
-            'taxe_fonciere_exported',
-            'web',
-            __('Exported excel file for taxe foncière')
-        );
-        return (new TitreFonciers($this->element, $this->selector))->download('RapportTitreFoncier-' . Str::random(5) . '.xlsx');
-
-        $this->emit('refresh-page');
     }
 
     public function updatedRegionID($region_id)
@@ -604,15 +591,63 @@ class Index extends Component
         );
     }
 
+    public function BuildingQuery()
+    {
+        return TitreFoncier::query()
+            ->when($this->query && $this->query != "all", function ($query) {
+                return $query->whereHas('users', function ($query) {
+                    $query->where('first_name', 'like', '%' . $this->query . '%');
+                })->orWhere('numero_titre_foncier', 'like', '%'. $this->query. '%');
+            })
+            ->when($this->region_id && $this->region_id != "all", function ($query) {
+                return $query->where('region_id',  $this->region_id);
+            })
+            ->when($this->division_id && $this->division_id != "all", function ($query) {
+                return $query->where('division_id',  $this->division_id);
+            })
+            ->when($this->subdivision_id && $this->subdivision_id != "all", function ($query) {
+                return $query->where('sub_division_id',  $this->subdivision_id);
+            })
+            ->when($this->inter_start && $this->inter_end, function ($query) {
+                return $query->whereBetween(DB::raw('DATE(created_at)'), [
+                    Carbon::parse($this->inter_start),
+                    Carbon::parse($this->inter_end)
+                ]);
+            })
+            ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc'); // Gérer le tri dynamique
+    }
+
+    public function export()
+    {
+        auditLog(
+            auth()->user(),
+            'sales_report_exported',
+            'web',
+            __('Exported excel file for Sales')
+        );
+        return (new \App\Exports\TitreFonciers(
+            $this->region_id,
+            $this->division_id,
+            $this->subdivision_id,
+            $this->inter_start,
+            $this->inter_end,
+            $this->orderBy,
+            $this->orderAsc
+        ))->download('taxes_foncieres.xlsx');
+        
+       
+    }
+
+
     public function render()
     {
         if (!Gate::allows('titre_foncier.view')) {
             return abort(401);
         }
         if (auth()->user()->hasRole('super_admin')) {
-            $titrefonciers = TitreFoncier::search($this->query)->with('users')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+            $titrefonciers = $this->BuildingQuery()->paginate($this->perPage);
         } else {
-            $titrefonciers = TitreFoncier::search($this->query)->with('users')->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage)->where('is_vip', false);
+            $titrefonciers = $this->BuildingQuery()->paginate($this->perPage)->where('is_vip', false);
         }
 
         $titrefonciers_count = TitreFoncier::count();

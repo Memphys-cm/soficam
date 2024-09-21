@@ -115,7 +115,7 @@
                                 <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
                                     data-bs-dismiss="modal">{{ __('Fermer') }}</button>
                                 <a type="button" class="btn btn-primary btn-loading"
-                                    href="{{ route('tresor_pay.certificat_pay', ['uuid'=>$allsale]) }}">Payer</a>
+                                    href="{{ route('tresor_pay.certificat_pay', ['uuid'=>$sale->id]) }}">Payer</a>
                             </div>
                         @else
                             <div class="d-flex justify-content-end">

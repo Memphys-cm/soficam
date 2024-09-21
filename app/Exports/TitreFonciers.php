@@ -4,6 +4,8 @@ namespace App\Exports;
 
 
 use App\Models\TitreFoncier;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithMapping;
@@ -14,13 +16,23 @@ class TitreFonciers implements FromQuery, WithMapping, WithHeadings
 {
     use Exportable;
 
-    protected $element;
-    protected $selector;
+    protected $region_id;
+    protected $division_id;
+    protected $subdivision_id;
+    protected $inter_start;
+    protected $inter_end;
+    protected $orderBy;
+    protected $orderAsc;
 
-    public function __construct($element, $selector)
+    public function __construct($region_id, $division_id, $subdivision_id, $inter_start, $inter_end, $orderBy = 'id', $orderAsc = true)
     {
-        $this->element = $element;
-        $this->selector = $selector;
+        $this->region_id = $region_id;
+        $this->division_id = $division_id;
+        $this->subdivision_id = $subdivision_id;
+        $this->inter_start = $inter_start;
+        $this->inter_end = $inter_end;
+        $this->orderBy = $orderBy;
+        $this->orderAsc = $orderAsc;
     }
 
 
@@ -38,20 +50,23 @@ class TitreFonciers implements FromQuery, WithMapping, WithHeadings
 
     public function query()
     {
-        $query = TitreFoncier::query();
-
-        // Appliquer le filtre en fonction de la sélection
-        if ($this->element === 'region' && $this->selector) {
-            $query->where('region_id', $this->selector);
-        } elseif ($this->element === 'departement' && $this->selector) {
-            $query->where('division_id', $this->selector);
-        } elseif ($this->element === 'arrondissement' && $this->selector) {
-            $query->where('sub_division_id', $this->selector);
-        } elseif ($this->element === 'statut' && $this->selector) {
-            $query->where('etat_TF', $this->selector);
-        }
-
-        return $query;
+        return TitreFoncier::query()
+            ->when($this->region_id && $this->region_id != "all", function ($query) {
+                return $query->where('region_id',  $this->region_id);
+            })
+            ->when($this->division_id && $this->division_id != "all", function ($query) {
+                return $query->where('division_id',  $this->division_id);
+            })
+            ->when($this->subdivision_id && $this->subdivision_id != "all", function ($query) {
+                return $query->where('sub_division_id',  $this->subdivision_id);
+            })
+            ->when($this->inter_start && $this->inter_end, function ($query) {
+                return $query->whereBetween(DB::raw('DATE(created_at)'), [
+                    Carbon::parse($this->inter_start),
+                    Carbon::parse($this->inter_end)
+                ]);
+            })
+            ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc');
     }
 
     /**
