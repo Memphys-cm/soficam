@@ -32,9 +32,11 @@ class Index extends Component
 
     public $tresorPay_Reference;
 
-    public $manualTresor = false , $codeTresorPay;
+    public $manualTresor = false, $codeTresorPay;
 
-    public function confirmOrder() {}
+    public function confirmOrder() {
+
+    }
 
     public function retrait()
     {
@@ -87,9 +89,8 @@ class Index extends Component
             'payment_number' => 'required_if:payment_method,mtn_mobile_money,orange_money'
         ]);
 
-        DB::transaction(function () { 
-            
-            
+        DB::transaction(function () {
+
             $saleable_item =  Saleable::findOrFail($this->saleable->id);
             $immatriculationDirecte = ImmatriculationDirecte::whereId($saleable_item->saleable_id)->first();
 
@@ -134,7 +135,7 @@ class Index extends Component
                 }
             }
 
-            $saleable_item->sale->sales_code = $this->tresorPay_Reference;
+            $saleable_item->sale->sales_code = $this->codeTresorPay;
             $saleable_item->sale->payment_status = 'totally_paid';
             $saleable_item->sale->payment_method = $this->payment_method;
             $saleable_item->sale->save();

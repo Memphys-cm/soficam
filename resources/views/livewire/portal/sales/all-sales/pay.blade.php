@@ -137,11 +137,11 @@
                         @endif
 
                         @if ($payment_method == 'TresorPay')
-                            <div class="d-flex justify-content-end">
+                            <div class="d-flex justify-content-end my-2">
                                 <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
                                     data-bs-dismiss="modal">{{ __('Fermer') }}</button>
                                 @if ($codeTresorPay)
-                                    <button type="submit" wire:click.prevent="confirmOrder"
+                                    <button type="submit" wire:click.prevent="payment"
                                         class="btn btn-primary btn-loading"
                                         wire:loading.attr="disabled">{{ __('Mettre à jour') }}</button>
                                 @else
