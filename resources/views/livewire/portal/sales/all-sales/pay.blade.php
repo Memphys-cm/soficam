@@ -110,12 +110,44 @@
                             </div>
                         @endif
 
+
+                        @if ($this->payment_method === 'TresorPay')
+                            <div class='col'>
+                                {{-- <label class="px-2" for="land_id">{{ __('Village') }}</label> --}}
+
+                                <!-- Checkbox pour décider d'entrer manuellement le village -->
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="manualTresor"
+                                        wire:model="manualTresor">
+                                    <label class="form-check-label" for="manualTresor">
+                                        {{ __('Cliquez et renseigner le code du recu de tresor pay') }}
+                                    </label>
+                                </div>
+
+                                <!-- Champ Input: Affiché si manualVillage est vrai -->
+                                @if ($manualTresor)
+                                    <input type="text" wire:model="codeTresorPay" name="codeTresorPay"
+                                        class="form-control @error('codeTresorPay') is-invalid @enderror"
+                                        placeholder="{{ __('Entrez le code de tresor pay') }}">
+                                    @error('codeTresorPay')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                @endif
+                            </div>
+                        @endif
+
                         @if ($payment_method == 'TresorPay')
                             <div class="d-flex justify-content-end">
                                 <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
                                     data-bs-dismiss="modal">{{ __('Fermer') }}</button>
-                                <a type="button" class="btn btn-primary btn-loading"
-                                    href="{{ route('tresor_pay.certificat_pay', ['uuid'=>$sale->id]) }}">Payer</a>
+                                @if ($codeTresorPay)
+                                    <button type="submit" wire:click.prevent="confirmOrder"
+                                        class="btn btn-primary btn-loading"
+                                        wire:loading.attr="disabled">{{ __('Mettre à jour') }}</button>
+                                @else
+                                    <a type="button" class="btn btn-primary btn-loading"
+                                        href="{{ route('tresor_pay.certificat_pay', ['uuid' => $sale->id]) }}">Payer</a>
+                                @endif
                             </div>
                         @else
                             <div class="d-flex justify-content-end">

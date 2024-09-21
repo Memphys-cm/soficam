@@ -32,6 +32,8 @@ class Index extends Component
 
     public $tresorPay_Reference;
 
+    public $manualTresor = false , $codeTresorPay;
+
     public function confirmOrder() {}
 
     public function retrait()
