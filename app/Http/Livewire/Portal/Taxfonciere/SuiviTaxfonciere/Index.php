@@ -17,6 +17,8 @@ use Carbon\Carbon;
 use Hachther\MeSomb\Operation\Payment\Collect;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
+use MeSomb\Operation\PaymentOperation;
+use MeSomb\Util\RandomGenerator;
 
 class Index extends Component
 {
@@ -69,6 +71,9 @@ class Index extends Component
         
        
     }
+
+    
+
     public function BuildingQuery()
     {
         return TitreFoncier::query() // Utiliser query() pour une meilleure compatibilité
