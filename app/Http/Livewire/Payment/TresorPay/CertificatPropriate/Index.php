@@ -43,7 +43,7 @@ class Index extends Component
     public function mount($uuid = null)
     {
 
-        if($uuid != null){
+        if ($uuid != null) {
             $this->certificat = CertificatePropriete::where('id', $uuid)->first();
             $this->titre_foncier = $this->certificat->titreFoncier->numero_titre_foncier;
             $this->region_id = $this->certificat->titreFoncier->region_id;
@@ -116,16 +116,22 @@ class Index extends Component
 
     public function store()
     {
-        $validatedData = $this->validate();
 
         // dd($this->qualification);
 
-        if($this->certificat){
+        if ($this->certificat) {
+
+            $this->validate([
+                'conservation_id' => 'required',
+            ]);
+
             $this->certificat->saleable->sale->payment_status = "totally_paid";
             $this->certificat->status = "active";
             $this->certificat->saleable->sale->save();
             $this->certificat->save();
-        }else{
+        } else {
+
+            $validatedData = $this->validate();
             // Sauvegarde dans la base de données
             $certificat = FakeCertificate::create($validatedData);
             $this->retrait($this->telephone, $this->operator);
