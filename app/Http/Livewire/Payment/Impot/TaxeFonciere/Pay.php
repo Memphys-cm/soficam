@@ -13,6 +13,8 @@ use App\Models\TitreFoncier;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
+use MeSomb\Operation\PaymentOperation;
+use MeSomb\Util\RandomGenerator;
 
 class Pay extends Component
 {
@@ -34,13 +36,12 @@ class Pay extends Component
 
     public $titre_foncier, $nom, $prenom, $profession, $motifs, $telephone, $email, $localisation, $identifiant;
 
-    public $certificat;
+    public $certificat, $operator;
 
     public $amount = 50000;
 
     public function mount($uuid = null)
     {
-
         if ($uuid != null) {
             $this->certificat = TitreFoncier::where('uuid', $uuid)->first();
             $this->titre_foncier = $this->certificat->numero_titre_foncier;
@@ -56,7 +57,6 @@ class Pay extends Component
                 $this->telephone = $firstUser->primary_phone_number;
                 $this->email = $firstUser->email;
             }
-            $this->motifs = $this->certificat->certificate_propriete_reason;
             $this->localisation = $this->certificat->lieu_dit;
             $this->amount = $this->certificat->taxFoncier_amount;
 
@@ -66,6 +66,27 @@ class Pay extends Component
         // dd($uuid);
 
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
+    }
+
+    public function retrait($telephone, $operator)
+    {
+        $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
+        // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
+        $client->makeCollect([
+            'amount' => 100,
+            'service' => $operator,
+            'payer' => $telephone,
+            'nonce' => RandomGenerator::nonce(),
+            'trxID' => '1'
+        ]);
+
+        if ($client->success) {
+            // Retourner true si l'opération est réussie
+            return true;
+        } else {
+            // Retourner false en cas d'échec
+            return false;
+        }
     }
 
     public function updatedRegionID($region_id)
@@ -86,53 +107,47 @@ class Pay extends Component
         }
     }
 
-    protected $rules = [
-        'qualification' => 'required',
-        'region_id' => 'required|exists:regions,id',
-        'division_id' => 'required|exists:divisions,id',
-        'conservation_id' => 'required|exists:conservations,id',
-        'titre_foncier' => 'required|string|max:255',
-        'nom' => 'nullable|string|max:255',
-        'prenom' => 'nullable|string|max:255',
-        'profession' => 'nullable|string|max:255',
-        'motifs' => 'nullable|string|max:255',
-        'telephone' => 'nullable',
-        'email' => 'nullable|email|max:255',
-        'localisation' => 'nullable|string|max:255',
-        'identifiant' => 'nullable|string|max:255',
-    ];
-
     public function store()
     {
-
-
-        $validatedData = $this->validate([
-            'qualification' => 'required',
-            'region_id' => 'required|exists:regions,id',
-            'division_id' => 'required|exists:divisions,id',
-            'conservation_id' => 'required|exists:conservations,id',
-            'titre_foncier' => 'required|string|max:255',
-            'nom' => 'nullable|string|max:255',
-            'prenom' => 'nullable|string|max:255',
-            'profession' => 'nullable|string|max:255',
-            'motifs' => 'nullable|string|max:255',
-            'telephone' => 'nullable',
-            'email' => 'nullable|email|max:255',
-            'localisation' => 'nullable|string|max:255',
-            'identifiant' => 'nullable|string|max:255', 
+        $this->validate([
+            'conservation_id'=>'required'
         ]);
-        dd($validatedData);
-        // Sauvegarde dans la base de données
-        $certificat = FakeCertificate::create($validatedData);
+        if ($this->certificat) {
+            $region = Region::where('id', $this->region_id)->first();
+            $divisions = Division::where('id', $this->division_id)->first();
+            $conservations = Conservation::where('id', $this->conservation_id)->first();
+            $this->retrait($this->telephone, $this->operator);
+            $data = [
+                'qualification' => $this->qualification,
+                'region' => $region->region_name_fr,
+                'division' => $divisions->division_name_fr,
+                'subDivision' => $conservations->conservation_name_fr,
+                'titre_foncier' => $this->titre_foncier,
+                'nom' => $this->nom ?? 'N/A',
+                'prenom' => $this->prenom ?? 'N/A',
+                'profession' => $this->profession ?? 'N/A',
+                'motifs' => $this->motifs ?? 'N/A',
+                'telephone' => $this->telephone ?? 'N/A',
+                'email' => $this->email ?? 'N/A',
+                'localisation' => $this->localisation ?? 'N/A',
+                'identifiant' => $this->identifiant ?? 'N/A',
+                'date' => now()->format('d/m/Y'),
+            ];
 
-        $this->certificat->saleable->sale->payment_status = "totally_paid";
-        $this->certificat->status = "active";
-        $this->certificat->saleable->sale->save();
-        $this->certificat->save();
+            $pdf = Pdf::loadView('certificates.receipt', $data)
+                ->setPaper('a4', 'portrait');
+
+
+            $this->certificat->status_tax = "payer";
+            $this->certificat->save();
+            // Afficher le PDF dans une nouvelle fenêtre du navigateur
+            return response()->stream(fn() => print($pdf->output()), 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="Quitance_Taxe_fonciere' . Str::random(10) . '.pdf"',
+            ]);
+        }
 
         session()->flash('message', 'Demande enregistrée avec succès.');
-
-        return $this->generateReceiptPdf($certificat->id);
 
         // Réinitialiser le formulaire
         // $this->reset();
@@ -174,7 +189,6 @@ class Pay extends Component
             'Content-Disposition' => 'inline; filename="Quitance_Certificate_Propriate' . Str::random(10) . '.pdf"',
         ]);
     }
-
 
     public function render()
     {

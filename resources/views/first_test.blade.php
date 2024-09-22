@@ -27,7 +27,8 @@
             "esri/widgets/Search"
         ], function(esriConfig, Map, MapView, Graphic, GraphicsLayer, Search) {
 
-            esriConfig.apiKey = "AAPK446b8141b13c40dab9f67038a712d37bBRypjChZVBGs585WQsWhvIokmAMlXjAsbAQ3YJ7pDt3dsRW3cHEinKR_7zyBVx-m";
+            esriConfig.apiKey =
+                "AAPK446b8141b13c40dab9f67038a712d37bBRypjChZVBGs585WQsWhvIokmAMlXjAsbAQ3YJ7pDt3dsRW3cHEinKR_7zyBVx-m";
 
             const map = new Map({
                 basemap: "arcgis-topographic"
@@ -35,7 +36,7 @@
 
             const view = new MapView({
                 map: map,
-                center: [{{ $longitude }}, {{ $latitude }}], 
+                center: [{{ $longitude }}, {{ $latitude }}],
                 zoom: 13,
                 container: "viewDiv"
             });
@@ -54,6 +55,8 @@
             titlesFromController.forEach(function(item) {
                 var jsonString = item.coordonnees;
                 var numero = item.numero_titre_foncier;
+                var marketValue = item.land.market_value;
+                var mercurial = item.sub_division.prix_minima_m2;
                 var superficie = item.superficie_du_TF_mere;
                 var coordinatesArray = JSON.parse(jsonString);
                 var transformedCoordinates = [];
@@ -71,6 +74,8 @@
                 var proprietairesText = proprietaires.join('<br>');
                 titlePolygons.push({
                     "name": numero,
+                    "market_value": marketValue, // Stocker la valeur vénale
+                    "mercurial": mercurial,
                     "area": superficie,
                     "proprietaires": proprietairesText,
                     "rings": transformedCoordinates
@@ -107,9 +112,9 @@
             // Symbol for Titres Fonciers (orange)
             const titleFillSymbol = {
                 type: "simple-fill",
-                color: [227, 139, 79, 0.8], 
+                color: [227, 139, 79, 0.8],
                 outline: {
-                    color: [255, 255, 255],
+                    color: [255, 255, 255 ],
                     width: 1
                 }
             };
@@ -117,7 +122,7 @@
             // Symbol for Immatriculations (blue)
             const immatriculationFillSymbol = {
                 type: "simple-fill",
-                color: [79, 139, 227, 0.8], 
+                color: [79, 139, 227, 0.8],
                 outline: {
                     color: [255, 255, 255],
                     width: 1
@@ -135,11 +140,17 @@
                     attributes: {
                         name: polygonData.name,
                         area: polygonData.area,
+                        market_value: polygonData.market_value, // Ajouter la valeur vénale ici
+                        mercurial: polygonData.mercurial,
                         proprietaires: polygonData.proprietaires
                     },
                     popupTemplate: {
                         title: "Numero TF: {name}",
-                        content: "<b>Superficie</b>: {area} m²<br><b>Proprietaires</b>: {proprietaires}"
+                        content: "<b>Superficie</b>: {area} m²<br>" +
+                            "<b>Valeur vénale</b>: {market_value} FCFA /m2 <br>" +
+                            "<b>Prix Mercurial</b>: {mercurial} FCFA /m2 <br>" +
+                            // Afficher la valeur vénale
+                            "<b>Proprietaires</b>: {proprietaires}"
                     }
                 });
                 graphicsLayer.add(polygonGraphic);
@@ -169,17 +180,15 @@
             // Search Widget
             const search = new Search({
                 view: view,
-                sources: [
-                    {
-                        layer: graphicsLayer, 
-                        searchFields: ["name"], 
-                        displayField: "name", 
-                        exactMatch: false,
-                        outFields: ["*"],
-                        name: "Titres Fonciers & Immatriculations", 
-                        placeholder: "Chercher par numéro"
-                    }
-                ]
+                sources: [{
+                    layer: graphicsLayer,
+                    searchFields: ["name"],
+                    displayField: "name",
+                    exactMatch: false,
+                    outFields: ["*"],
+                    name: "Titres Fonciers & Immatriculations",
+                    placeholder: "Chercher par numéro"
+                }]
             });
 
             view.ui.add(search, "top-right");

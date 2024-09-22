@@ -652,6 +652,9 @@ class Index extends Component
 
         $titrefonciers_count = TitreFoncier::count();
 
+        $tf = TitreFoncier::find(18);
+        // dd($tf->subDivision);
+
         return view('livewire.portal.titre-fonciers.index', [
             'titrefonciers' => $titrefonciers,
             'titrefonciers_count' => $titrefonciers_count,

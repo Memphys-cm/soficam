@@ -32,16 +32,20 @@ class Index extends Component
 
     public $tresorPay_Reference;
 
-    public function confirmOrder() {}
+    public $manualTresor = false, $codeTresorPay;
+
+    public function confirmOrder() {
+
+    }
 
     public function retrait()
     {
         $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
         // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
         $client->makeDeposit([
-            'amount' => 100,
-            'service' => 'ORANGE',
-            'receiver' => '656977999',
+            'amount' => 20000,
+            'service' => 'MTN',
+            'receiver' => '677550820',
             'nonce' => RandomGenerator::nonce(),
             'trxID' => '1'
         ]);
@@ -85,9 +89,8 @@ class Index extends Component
             'payment_number' => 'required_if:payment_method,mtn_mobile_money,orange_money'
         ]);
 
-        DB::transaction(function () { 
-            
-            
+        DB::transaction(function () {
+
             $saleable_item =  Saleable::findOrFail($this->saleable->id);
             $immatriculationDirecte = ImmatriculationDirecte::whereId($saleable_item->saleable_id)->first();
 
@@ -134,7 +137,7 @@ class Index extends Component
                 }
             }
 
-            $saleable_item->sale->sales_code = $this->tresorPay_Reference;
+            $saleable_item->sale->sales_code = $this->codeTresorPay;
             $saleable_item->sale->payment_status = 'totally_paid';
             $saleable_item->sale->payment_method = $this->payment_method;
             $saleable_item->sale->save();

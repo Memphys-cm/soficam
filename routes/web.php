@@ -236,7 +236,9 @@ Route::group(
             $latitude = 3.8722015777978243;
 
             // Récupérez également vos titres fonciers avec les utilisateurs associés
-            $titles = TitreFoncier::with('users')->get();
+            $titles = TitreFoncier::with('users','land','sub_division')->get();
+
+            
 
             $immatriculations = ImmatriculationDirecte::with('users')->get();
 
