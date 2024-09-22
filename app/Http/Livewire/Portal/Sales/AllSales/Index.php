@@ -30,13 +30,10 @@ class Index extends Component
     public $user_id;
     public $payment_method = 'cash';
 
-<<<<<<< HEAD
-=======
     public $tresorPay_Reference;
 
     public function confirmOrder() {}
 
->>>>>>> 5255c87496b87c703fa46be92ba5571619eb6ca6
     public function retrait()
     {
         $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
