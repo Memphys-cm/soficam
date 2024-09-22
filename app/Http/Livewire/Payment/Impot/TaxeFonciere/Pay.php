@@ -36,7 +36,7 @@ class Pay extends Component
 
     public $titre_foncier, $nom, $prenom, $profession, $motifs, $telephone, $email, $localisation, $identifiant;
 
-    public $certificat;
+    public $certificat, $operator;
 
     public $amount = 50000;
 
@@ -58,7 +58,7 @@ class Pay extends Component
                 $this->email = $firstUser->email;
             }
             $this->localisation = $this->certificat->lieu_dit;
-            $this->amount = $this->certificat->price;
+            $this->amount = $this->certificat->taxFoncier_amount;
 
             // dd($this->certificat->saleable);
         }
@@ -68,17 +68,25 @@ class Pay extends Component
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
     }
 
-    public function retrait()
+    public function retrait($telephone, $operator)
     {
         $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
         // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
         $client->makeCollect([
             'amount' => 100,
-            'service' => 'MTN',
-            'receiver' => '677550820',
+            'service' => $operator,
+            'payer' => $telephone,
             'nonce' => RandomGenerator::nonce(),
             'trxID' => '1'
         ]);
+
+        if ($client->success) {
+            // Retourner true si l'opération est réussie
+            return true;
+        } else {
+            // Retourner false en cas d'échec
+            return false;
+        }
     }
 
     public function updatedRegionID($region_id)
@@ -108,7 +116,7 @@ class Pay extends Component
             $region = Region::where('id', $this->region_id)->first();
             $divisions = Division::where('id', $this->division_id)->first();
             $conservations = Conservation::where('id', $this->conservation_id)->first();
-            $this->retrait();
+            $this->retrait($this->telephone, $this->operator);
             $data = [
                 'qualification' => $this->qualification,
                 'region' => $region->region_name_fr,

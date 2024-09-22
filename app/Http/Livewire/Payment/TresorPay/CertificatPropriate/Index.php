@@ -13,6 +13,8 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 use Illuminate\Support\Str;
+use MeSomb\Operation\PaymentOperation;
+use MeSomb\Util\RandomGenerator;
 
 class Index extends Component
 {
@@ -99,6 +101,19 @@ class Index extends Component
         'identifiant' => 'nullable|string|max:255',
     ];
 
+    public function retrait($telephone, $operator)
+    {
+        $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
+        // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
+        $client->makeCollect([
+            'amount' => 100,
+            'service' => $operator,
+            'payer' => $telephone,
+            'nonce' => RandomGenerator::nonce(),
+            'trxID' => '1'
+        ]);
+    }
+
     public function store()
     {
         $validatedData = $this->validate();
@@ -113,7 +128,7 @@ class Index extends Component
         }else{
             // Sauvegarde dans la base de données
             $certificat = FakeCertificate::create($validatedData);
-    
+            $this->retrait($this->telephone, $this->operator);
             return $this->generateReceiptPdf($certificat->id);
         }
 
