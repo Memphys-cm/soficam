@@ -60,13 +60,13 @@
             <!-- Tab Nav -->
             <ul class="nav nav-pills square nav-fill flex-column vertical-tab mb-3 mb-lg-0" id="tab12" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="home-tab-3" data-bs-toggle="tab" href="#tab-14" role="tab" aria-controls="tab-14" aria-selected="true"><span class="d-block">Tableau de Bord</span></a>
+                    <a class="nav-link active" id="home-tab-3" data-bs-toggle="tab" href="#tab-14" role="tab" aria-controls="tab-14" aria-selected="true"><span class="d-block">{{__('Tableau de Bord')}}</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="profile-tab-3" data-bs-toggle="tab" href="#tab-15" role="tab" aria-controls="tab-15" aria-selected="false"><span class="d-block">Profil</span></a>
+                    <a class="nav-link" id="profile-tab-3" data-bs-toggle="tab" href="#tab-15" role="tab" aria-controls="tab-15" aria-selected="false"><span class="d-block">{{__('Profil')}}</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="contact-tab-3" data-bs-toggle="tab" href="#tab-16" role="tab" aria-controls="tab-16" aria-selected="false">Paramètres</span></a>
+                    <a class="nav-link" id="contact-tab-3" data-bs-toggle="tab" href="#tab-16" role="tab" aria-controls="tab-16" aria-selected="false">{{__('Paramètres')}}</span></a>
                 </li>
             </ul>
             <!-- End of Tab Nav -->

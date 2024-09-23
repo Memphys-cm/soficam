@@ -93,7 +93,7 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <label for="titre_foncier">Numéro du titre foncier *</label>
+                            <label for="titre_foncier">{{ __('Numéro du titre foncier') }} *</label>
                             <input type="text" class="form-control mb-3" wire:model="titre_foncier"
                                 placeholder="Numéro du titre foncier">
                             @error('titre_foncier')
@@ -104,12 +104,12 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="nom">Nom/Raison Sociale</label>
+                            <label for="nom">{{ __('Nom/Raison Sociale') }}</label>
                             <input type="text" class="form-control mb-3" wire:model="nom"
                                 placeholder="Nom/Raison Sociale">
                         </div>
                         <div class="col-md-6">
-                            <label for="prenom">Prénom</label>
+                            <label for="prenom">{{ __('Prénom') }}</label>
                             <input type="text" class="form-control mb-3" wire:model="prenom" placeholder="Prénom">
                         </div>
                     </div>

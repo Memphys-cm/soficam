@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">{{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Région')}}</h1>
-                        <p class="px-1"> {{$state ? 'Mettre à jour' : 'Creer'}} {{__(' Région')}} &#128522;</p>
+                        <h1 class="mb-0 h4">{{$state ? __('Mettre à jour') : __('Créer')}} {{__('Région')}}</h1>
+                        <p class="px-1"> {{$state ? __('Mettre à jour') : __('Créer')}} {{__('Région')}} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <div class='form-group mb-3'>
@@ -23,7 +23,7 @@
                             @enderror
                         </div>
                         <div class="form-group mb-3">
-                            <label for="name">{{__('Nom de la Région ')}} <span>({{__('French')}})</span></label>
+                            <label for="name">{{__('Nom de la Région')}} <span>({{__('French')}})</span></label>
                             <input wire:model="region.region_name_fr" type="text" class="form-control  @error('region.region_name_fr') is-invalid @enderror" placeholder="{{__('Nord')}}" required="" name="name">
                             @error('region.region_name_fr')
                             <div class="invalid-feedback">{{$message}}</div>
@@ -38,7 +38,7 @@
 
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
-                            <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{$state ? 'Mettre à jour' : 'Creer'}} </button>
+                            <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{$state ? __('Mettre à jour') : __('Créer')}} </button>
                         </div>
                     </x-form-items.form>
                 </div>

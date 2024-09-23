@@ -58,11 +58,11 @@
     </div>
     <div class="row p-3">
         <div class="col">
-            <label for="startDate">Date Debut:</label>
+            <label for="startDate">{{__('Date Debut')}}:</label>
             <input type="date" wire:model="startDate" class="form-control" id="startDate">
         </div>
         <div class="col">
-            <label for="endDate">Date Fin:</label>
+            <label for="endDate">{{__('Date Fin')}}:</label>
             <input type="date" wire:model="endDate" class="form-control" id="endDate">
         </div>
         <div class="col">
@@ -92,7 +92,7 @@
         </div>
 
         <div class="col-md-3">
-            <label for="direction">{{__('Sens du Trie')}}: </label>
+            <label for="direction">{{__('Sens du tri')}}: </label>
             <select wire:model="orderAsc" id="direction" class="form-select">
                 <option value="asc">{{__('Ascendante')}}</option>
                 <option value="desc">{{__('Descendante')}}</option>

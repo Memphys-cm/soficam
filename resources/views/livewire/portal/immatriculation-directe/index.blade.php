@@ -532,7 +532,7 @@
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
                     {{ __('Montrer') }} {{ $perPage > $imma_directes_count ? $imma_directes_count : $perPage }}
-                    {{ __(' éléments sur ') }} {{ $imma_directes_count }}
+                    {{ __('éléments sur ') }} {{ $imma_directes_count }}
                 </div>
                 {{ $imma_directes->links() }}
             </div>

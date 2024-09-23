@@ -9,7 +9,7 @@
                 </label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input class="form-control form-control-solid" placeholder="Entrer le nom du rôle" wire:model="name" value="Admin">
+                <input class="form-control form-control-solid" placeholder="{{__('Entrer le nom du rôle')}}" wire:model="name" value="Admin">
                 <!--end::Input-->
                 <div class="fv-plugins-message-container invalid-feedback"></div>
             </div>
@@ -127,7 +127,7 @@
                             </div>
                             <div class="d-flex border-bottom border-1">
                                 <!--begin::Label-->
-                                <div class="text-gray-800 w-25">{{__('Tax Foncier')}}</div>
+                                <div class="text-gray-800 w-25">{{__('Taxe Fonciere')}}</div>
                                 <div>
                                     <!--begin::Wrapper-->
                                     <div class="d-flex">
@@ -388,7 +388,7 @@
                             </div>
                             <div class="d-flex border-bottom border-1">
                                 <!--begin::Label-->
-                                <div class="text-gray-800 w-25">{{__('Certificate Propriete')}}</div>
+                                <div class="text-gray-800 w-25">{{__('Certificat de Propriété')}}</div>
                                 <div>
                                     <!--begin::Wrapper-->
                                     <div class="d-flex">

@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">{{$state ? 'Mettre à jour' : 'Créer'}} {{__(' Arrondissement')}}</h1>
-                        <p class="px-1"> {{$state ? 'Mettre à jour' : 'Créer'}} {{__(' Arrondissement')}}</p>
+                        <h1 class="mb-0 h4">{{$state ? 'Mettre à jour' : __('Créer')}} {{__('Arrondissement')}}</h1>
+                        <p class="px-1"> {{$state ? 'Mettre à jour' : __('Créer')}} {{__('Arrondissement')}}</p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <div class='form-group mb-3'>
@@ -21,7 +21,7 @@
                         </div>
                         <div class="form-group row mb-3">
                             <div class='col'>
-                                <label for="surface_area">{{__('Surface totale ')}} M<sup>2</sup></label>
+                                <label for="surface_area">{{__('Surface totale')}} M<sup>2</sup></label>
                                 <input wire:model="sub_division.total_surface_area" type="text" class="form-control  @error('sub_division.total_surface_area') is-invalid @enderror" placeholder="1230000" required="" value="" name="sub_division.total_surface_area">
                                 @error('sub_division.total_surface_area')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -43,14 +43,14 @@
                             @enderror
                         </div>
                         <div class="form-group mb-3">
-                            <label class="px-2" for="name">{{__('Nom Arrondissement ')}} <span>({{__('Fr')}})</span></label>
+                            <label class="px-2" for="name">{{__('Nom Arrondissement')}} <span>({{__('Fr')}})</span></label>
                             <input wire:model="sub_division.sub_division_name_fr" type="text" class="form-control  @error('sub_division.sub_division_name_fr') is-invalid @enderror" placeholder="{{__('Nord')}}" required="" name="name">
                             @error('sub_division.sub_division_name_fr')
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="form-group mb-3">
-                            <label class="px-2" for="prix_minima_m2">{{__('Prix Minima au metre carre ')}} <span>({{__('Fr')}})</span></label>
+                            <label class="px-2" for="prix_minima_m2">{{__('Prix Minima au metre carre')}} <span>({{__('Fr')}})</span></label>
                             <input wire:model="sub_division.prix_minima_m2" type="text" class="form-control  @error('sub_division.prix_minima_m2') is-invalid @enderror" placeholder="{{__('0')}}" required="" name="name">
                             @error('sub_division.prix_minima_m2')
                             <div class="invalid-feedback">{{$message}}</div>
@@ -67,7 +67,7 @@
 
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
-                            <button type="submit" wire:click.prevent="store" class="btn btn-primary " wire:loading.attr="disabled">{{$state ? 'Mettre à jour' : 'Créer'}} </button>
+                            <button type="submit" wire:click.prevent="store" class="btn btn-primary " wire:loading.attr="disabled">{{$state ? __('Mettre à jour') : __('Créer')}} </button>
                         </div>
                     </x-form-items.form>
                 </div>
