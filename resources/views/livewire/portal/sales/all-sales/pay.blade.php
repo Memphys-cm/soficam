@@ -146,7 +146,7 @@
                                         wire:loading.attr="disabled">{{ __('Mettre à jour') }}</button>
                                 @else
                                     <a type="button" class="btn btn-primary btn-loading"
-                                        href="{{ route('tresor_pay.certificat_pay', ['uuid' => $sale->id]) }}">Payer</a>
+                                        href="{{ route('tresor_pay.certificat_pay', ['uuid' => $sale->certificat_id]) }}">Payer</a>
                                 @endif
                             </div>
                         @else

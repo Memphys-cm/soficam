@@ -773,7 +773,7 @@ class Show extends Component
 
         // Extract the prix_minima_m2 from the selected sub_division
         $prixMinimaM2 = $selectedSubDivision->prix_minima_m2;
-        $taxFoncier_amount_perm2 = $this->superficie_du_TF_mere * $prixMinimaM2;
+        $taxFoncier_amount_perm2 = $this->imma_directe->superficie * $prixMinimaM2;
 
         // Calculate the tax_foncier based on the formula
         $taxFoncier_amount = self::PERCENTAGE_TAX_FONCIER * $taxFoncier_amount_perm2;

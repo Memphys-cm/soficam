@@ -42,21 +42,6 @@
                                 @enderror
                             </div>
                         </div>
-                        {{-- <button wire:click="confirmOrder" type="submit" class="btn btn-primary">pay</button> --}}
-                        <div class='form-group mb-3 row'>
-                            <div class="col">
-                                <label for="status_tax">{{ __('Statut de paiement ') }}</label>
-                                <select wire:model="status_tax" name="status_tax"
-                                    class="form-select  @error('status_tax') is-invalid @enderror" required="">
-                                    <option value="">{{ __('-- Sélectionner --') }}</option>
-                                    <option value="payer">{{ __('Payé') }}</option>
-                                    <option value="non_payer">{{ __('Non Payé') }}</option>
-                                </select>
-                                @error('status_tax')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
                         @if ($paymentType == 'impot')
                             <div class="d-flex justify-content-end">
                                 <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
