@@ -38,7 +38,7 @@ class Index extends Component
     public $phoneNumber = '';
     public $status_tax, $taxFoncier_amount, $price, $payment_method, $regions, $element, $subdivisions, $divisions, $selector, $status, $region_id, $division_id, $subdivision_id;
 
-    public $requestor_id, $requestors, $inter_start, $inter_end;
+    public $requestor_id, $requestors, $inter_start, $inter_end, $manualTresor;
     public function mount()
     {
         $this->requestors = User::role('user')->select('id', 'first_name', 'last_name')->get();

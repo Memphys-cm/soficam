@@ -30,19 +30,32 @@
                                 @enderror
                             </div>
                         </div>
+                        @if ($this->paymentType === 'impot')
+                            <div class='col'>
+                                {{-- <label class="px-2" for="land_id">{{ __('Village') }}</label> --}}
 
-                        <div class='form-group mb-3 row'>
-                            <div class="col">
-                                <label for="taxFoncier_amount">{{ __('Montant de la Taxe') }}</label>
-                                <input wire:model="taxFoncier_amount" type="number"
-                                    class="form-control  @error('taxFoncier_amount') is-invalid @enderror"
-                                    required="" disabled>
-                                @error('taxFoncier_amount')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <!-- Checkbox pour décider d'entrer manuellement le village -->
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="manualTresor"
+                                        wire:model="manualTresor">
+                                    <label class="form-check-label" for="manualTresor">
+                                        {{ __('Cliquez et renseigner le code du recu des impots') }}
+                                    </label>
+                                </div>
+
+                                <!-- Champ Input: Affiché si manualVillage est vrai -->
+                                @if ($manualTresor)
+                                    <input type="text" wire:model="codeTresorPay" name="codeTresorPay"
+                                        class="form-control @error('codeTresorPay') is-invalid @enderror"
+                                        placeholder="{{ __('Entrez le code de tresor pay') }}">
+                                    @error('codeTresorPay')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                @endif
                             </div>
-                        </div>
-                        @if ($paymentType == 'impot')
+                        @endif
+
+                        @if ($paymentType == 'impot' && !$manualTresor)
                             <div class="d-flex justify-content-end">
                                 <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
                                     data-bs-dismiss="modal">{{ __('Fermer') }}</button>

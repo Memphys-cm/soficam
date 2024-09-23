@@ -153,7 +153,7 @@
                             <div class="d-flex justify-content-end">
                                 <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
                                     data-bs-dismiss="modal">{{ __('Fermer') }}</button>
-                                <button type="submit" wire:click.prevent="confirmOrder"
+                                <button type="submit" wire:click.prevent="payment"
                                     class="btn btn-primary btn-loading"
                                     wire:loading.attr="disabled">{{ __('Mettre à jour') }}</button>
                             </div>
