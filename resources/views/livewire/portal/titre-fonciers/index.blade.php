@@ -221,7 +221,6 @@
                                 </div>
                                 <div class="d-flex align-items-centerpy-1">
                                     {{ __('Lieu Dit') }} : <span class="fw-bolder mx-2">
-                                        {{ $titrefoncier->land->name }} </span>
                                 </div>
                             </td>
                             <td>
