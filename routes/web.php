@@ -254,6 +254,9 @@ Route::group(
 
         Route::get('/scanner', QRCodeScanner::class)->name('portal.qrcode');
 
+
+        Route::get('/statistics/daf', App\Http\Livewire\Portal\Statistics\QuestDaf\Index::class)->name('portal.statictics');
+
         //Categories activites
         Route::prefix('category-activites')->group(function () {
             Route::get('/', App\Http\Livewire\Portal\CategoryActivites\Activite::class)->name('portal.category-activities.activites');
