@@ -1,6 +1,5 @@
 <div class="container-fluid">
     <x-alert />
-    @include('livewire.portal.immatriculation-directe.step.cotation_step1')
     <nav aria-label="breadcrumb" class="py-1">
         <ol class="breadcrumb bg-white px-3 py-2 rounded-pill shadow-lg">
             <li class="breadcrumb-item">

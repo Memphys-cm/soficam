@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Créer')}}{{__('  mutation totale')}}</h1>
-                        <p class="px-1"> {{ __('Créer')}}{{__(' une mutation totale du Titre Foncier')}} </p>
+                        <h1 class="mb-0 h4"> {{ __('Créer')}} {{__('mutation totale')}}</h1>
+                        <p class="px-1"> {{ __('Créer')}} {{__('une mutation totale du Titre Foncier')}} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <input type='hidden' wire:model="operation_type" value="mutation_totale_normale">

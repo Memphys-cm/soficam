@@ -144,7 +144,7 @@
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" wire:click.prevent="retrait" wire:loading.attr="disabled"
+                    <button type="submit" wire:click.prevent="store" wire:loading.attr="disabled"
                         class="btn btn-success">Soumettre la Demande</button>
 
                 </x-form-items.form>

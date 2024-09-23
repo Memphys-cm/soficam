@@ -139,7 +139,7 @@
             <div class="col">
                 <label for="division_id">{{ __('Par Département') }}: </label>
                 <select wire:model="division_id" id="division_id" class="form-select">
-                    <option value="">Tous les Départements</option>
+                    <option value="">{{ __('Tous les Départements') }}</option>
                     @foreach ($divisions as $division)
                         <option value="{{ $division->id }}">{{ $division->division_name_en }}</option>
                     @endforeach

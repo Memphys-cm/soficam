@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Créer')}}{{__(' morcellement')}}</h1>
-                        <p class="px-1"> {{ __('Créer')}}{{__(' un morcellement sur Titre Foncier')}} </p>
+                        <h1 class="mb-0 h4"> {{ __('Créer')}} {{__('morcellement')}}</h1>
+                        <p class="px-1"> {{ __('Créer')}} {{__('un morcellement sur Titre Foncier')}} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <div class='form-group  mb-2'>
@@ -89,7 +89,7 @@
                                 @enderror
                             </div>
                             <div class='col'>
-                                <label class="px-2" for="certificates_propriete_id">{{__('Certificat proprieté')}}</label>
+                                <label class="px-2" for="certificates_propriete_id">{{__('Certificat Proprieté')}}</label>
                                 <select wire:model="certificates_propriete_id" class='form-control'>
                                     <option value=''>{{__('-- Selectionner --')}}</option>
                                     @foreach($certificates_proprietes as $certificates_propriete)

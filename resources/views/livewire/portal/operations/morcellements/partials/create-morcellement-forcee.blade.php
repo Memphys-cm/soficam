@@ -10,8 +10,8 @@
                 <div class="modal-body p-0">
                     <div class="p-4 p-lg-4">
                         <div class="mb-4 mt-md-0">
-                            <h1 class="mb-0 h4"> {{ __('Créer')}}{{__(' Morcellement Forcé')}}</h1>
-                            <p class="px-1"> {{ __('Créer')}}{{__(' un Morcellement Forcé sur les Titres Fonciers')}} </p>
+                            <h1 class="mb-0 h4"> {{ __('Créer')}} {{__('Morcellement Forcé')}}</h1>
+                            <p class="px-1"> {{ __('Créer')}} {{__('un Morcellement Forcé sur les Titres Fonciers')}} </p>
                         </div>
                         <x-form-items.form wire:submit="store">
                             <div class='form-group  mb-2'>
