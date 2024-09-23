@@ -6,10 +6,10 @@
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4">
-                            {{ $state ? __('Modifier') : __('Enregistrer') }}{{ __(' une Immatrculation Directe') }}
+                            {{ $state ? __('Modifier') : __('Enregistrer') }} {{ __('une Immatrculation Directe') }}
                         </h1>
                         <p class="px-1">
-                            {{ $state ? __('Modifier') : __('Enregistrer') }}{{ __(' un Dossier D\'Immatrculation Directe') }}
+                            {{ $state ? __('Modifier') : __('Enregistrer') }} {{ __('un Dossier D\'Immatrculation Directe') }}
                         </p>
                     </div>
                     <x-form-items.form wire:submit="{{ $state ? 'update' : 'store' }}">
@@ -46,6 +46,7 @@
                             <div class='col'>
                                 <label class="px-2" for="region_id">{{__('Région')}}</label>
                                 <select wire:model="region_id" name="region_id" class="form-select  @error('region_id') is-invalid @enderror" required="">
+                                    <option value="">{{__('--Selectionner--')}}</option>
                                     @foreach($regions as $region)
                                     <option value="{{$region->id}}">{{$region->region_name}}</option>
                                     @endforeach
@@ -57,6 +58,7 @@
                             <div class='col'>
                                 <label class="px-2" for="division_id">{{__('Département')}}</label>
                                 <select wire:model="division_id" name="division_id" class="form-select  @error('division_id') is-invalid @enderror" required="">
+                                    <option value="">{{__('--Selectionner--')}}</option>
                                     @foreach($divisions as $division)
                                     <option value="{{$division->id}}">{{$division->division_name}}</option>
                                     @endforeach
@@ -68,6 +70,7 @@
                             <div class='col'>
                                 <label class="px-2" for="sub_division_id">{{__('Arrondissement')}}</label>
                                 <select wire:model="sub_division_id" name="sub_division_id" class="form-select  @error('sub_division_id') is-invalid @enderror" required="">
+                                    <option value="">{{__('--Selectionner--')}}</option>
                                     @foreach($sub_divisions as $sub_division)
                                     <option value="{{$sub_division->id}}">{{$sub_division->sub_division_name}}</option>
                                     @endforeach

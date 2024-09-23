@@ -108,7 +108,7 @@
                         <button class="btn btn-secondary" wire:click.prevent="prevStep"> {{ __('<< Précedent') }} </button>
                         <button type="submit" wire:click.prevent="instruction_descente_terrain"
                             class="btn btn-primary btn-loading mx-2"
-                            wire:loading.attr="disabled">{{ __('Enregistrer L\'instruction de la descente sur le Terrain') }}</button>
+                            wire:loading.attr="disabled">{{ __('Enregistrer') }}</button>
                         <button class="btn btn-info" wire:click.prevent="nextStep"> {{ __('Suivant >>') }} </button>
                     </div>
                 </x-form-items.form>

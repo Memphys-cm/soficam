@@ -7,7 +7,7 @@
                 <div class="card soft-card p-2">
                     <div class="d-flex align-items-center card-body">
                         <div class=" text-center">
-                            <h6 class="text-muted">Titres Fonciers Total</h6>
+                            <h6 class="text-muted">{{__('Titres Fonciers Total')}}</h6>
                             <h3 class="fw-bold"> {{ $all_titres_fonciers ? $all_titres_fonciers : 0 }} </h3>
                             <div class="d-flex justify-content-center">
                                 <canvas id="genderChart" width="90" height="90"></canvas>
@@ -19,16 +19,16 @@
             <div class="col-md-4">
                 <div class="card card-custom soft-card">
                     <div class="card-body">
-                        <div class="card-title">Recettes totales</div>
+                        <div class="card-title">{{__('Recettes totales')}}</div>
                         <div class="card-value">{{ number_format($totalSalesAmount, 0, '', ' ') }} {{ __('FCFA') }}
                         </div>
-                        <div class="card-subtitle">Source de revenus top 5</div>
+                        <div class="card-subtitle">{{__('Source de revenus top 5')}}</div>
 
                         <table class="table table-sm table-borderless mt-3">
                             <thead>
                                 <tr>
                                     <th scope="col">Type</th>
-                                    <th scope="col" class="text-right">Montant (FCFA)</th>
+                                    <th scope="col" class="text-right">{{ __('Montant')}} {{ __('FCFA') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,7 +48,7 @@
                 <div class="card soft-card p-2">
                     <div class="d-flex align-items-center card-body">
                         <div>
-                            <h6 class="text-muted">Dossiers Totaux</h6>
+                            <h6 class="text-muted">{{__('Dossiers Totaux')}}</h6>
                             <h3 class="fw-bold">{{ number_format($totalOperations, 0, '', ' ') }}</h3>
                             <canvas id="dossierTypeChart"></canvas>
                         </div>
@@ -57,13 +57,13 @@
             </div>
         </div>
 
-        <div class="section-title">Activités récentes</div>
+        <div class="section-title">{{__('Activités récentes')}}</div>
         <div class="row text-center my-2">
             <div class="col-md-4">
                 <div class="card soft-card p-2">
                     <div class="d-flex align-items-center card-body">
                         <div>
-                            <h6 class="text-muted">Évolution des Titres Fonciers du Dernier Mois</h6>
+                            <h6 class="text-muted">{{__('Évolution des Titres Fonciers du Dernier Mois')}}</h6>
                             <canvas id="titresFoncierRecentChart"></canvas>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card card-custom">
-                    <div class="recent-title">Les dossiers traités</div>
+                    <div class="recent-title">{{__('Les dossiers traités')}}</div>
                     <div class="recent-activity-chart">
                         <!-- Placeholder pour le graphique -->
                         <canvas id="operationsChart"></canvas>
@@ -81,7 +81,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card card-custom">
-                    <div class="recent-title">Recettes</div>
+                    <div class="recent-title">{{__('Recettes')}}</div>
                     <div class="recent-activity-chart">
                         <!-- Placeholder pour le graphique -->
                         <canvas id="salesChart"></canvas>

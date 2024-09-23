@@ -67,20 +67,10 @@
                 });
             </script>
 
-            <div class="d-flex justify-content-end">
-                <button class="btn btn-secondary" wire:click.prevent="prevStep"> {{ __('<< Précedent') }} </button>
-                <button class="btn btn-primary mx-2" wire:click.prevent="signatureAvisCalendrier" {{ $visibility }}>
-                    {{ __('Enregistrer') }} </button>
-                <button class="btn btn-info" wire:click.prevent="nextStep"> {{ __('Suivant >>') }} </button>
-            </div>
-
-            <!-- Notice explicative -->
-            <div class="my-2 p-2 shadow">
-                <p class="text-warning">
-                    {{ __('À cette étape, veuillez indiquer le statut après la publication de l\'avis et la date correspondante. Si le statut est défini, vous pouvez également indiquer la décision portant calendrier de descente sur terrain et sa date. Vous pouvez enregistrer les informations et passer à l\'étape suivante.') }}
-                </p>
-            </div>
-
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-secondary" wire:click.prevent="prevStep"> {{ __('<< Précedent') }} </button>
+            <button class="btn btn-primary mx-2" wire:click.prevent="signatureAvisCalendrier"> {{ __('Enregistrer') }} </button>
+            <button class="btn btn-info" wire:click.prevent="nextStep"> {{ __('Suivant >>') }} </button>
         </div>
     </div>
 @endcan

@@ -3,7 +3,7 @@
         <div class="shadow-lg rounded p-4 bg-white">
             <div class="mb-4 mt-md-0">
                 <h1 class="mb-0 h4">{{ __('Etat Cession') }}</h1>
-                <p class="px-1"> {{ __(' Etat Cession') }} &#128522;
+                <p class="px-1"> {{ __('Etat Cession') }} &#128522;
                 </p>
             </div>
 
@@ -25,16 +25,6 @@
                             <option value="rurale">{{ __('terrain_rurale') }} </option>
                         </select>
                         @error('zone')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="col-md-6 py-2">
-                        <label for="code">{{ __('superficie en m²') }}</label>
-                        <input wire:model="superficie_en_m2" type="number"
-                            class="form-control  @error('superficie_en_m2') is-invalid @enderror" placeholder=""
-                            required="" value="" name="superficie_en_m2">
-                        @error('superficie_en_m2')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

@@ -43,9 +43,9 @@ class Index extends Component
         $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
         // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
         $client->makeDeposit([
-            'amount' => 100,
-            'service' => 'ORANGE',
-            'receiver' => '692085477',
+            'amount' => 20000,
+            'service' => 'MTN',
+            'receiver' => '677550820',
             'nonce' => RandomGenerator::nonce(),
             'trxID' => '1'
         ]);
@@ -117,6 +117,13 @@ class Index extends Component
                 ]);
             }
 
+            elseif ($immatriculationDirecte && $immatriculationDirecte->statut === 'Redevance foncière en attente de paiement') {
+                $immatriculationDirecte->update([
+                    'statut' => 'Redevance foncière payé',
+                    'next_step' => 'finalisation et cloture du dossier',
+                ]);
+            }
+
             if (in_array($this->payment_method, ['ORANGE', 'MTN'])) {
                 try {
                     $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
@@ -128,14 +135,21 @@ class Index extends Component
                         'nonce' => RandomGenerator::nonce(),
                         'trxID' => '1'
                     ]);
+                    $application = $client->getTransactions(['trxID']);
+                    print_r($application->getStatus());
                 } catch (\Throwable $e) {
                     report($e);
                     session()->flash('error', __('Something went wrong please try again later'));
                     abort(500, __('Something went wrong with payment'));
                 }
             }
-
-            $saleable_item->sale->sales_code = $this->codeTresorPay;
+            if($this->codeTresorPay == null){
+                $saleable_item->sale->sales_code = $this->codeTresorPay;
+            }
+            else{
+                $saleable_item->sale->sales_code = $this->codeTresorPay;
+            }
+            $saleable_item->sale->sales_code = '24STATE00002';
             $saleable_item->sale->payment_status = 'totally_paid';
             $saleable_item->sale->payment_method = $this->payment_method;
             $saleable_item->sale->save();

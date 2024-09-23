@@ -146,14 +146,14 @@
                                         wire:loading.attr="disabled">{{ __('Mettre à jour') }}</button>
                                 @else
                                     <a type="button" class="btn btn-primary btn-loading"
-                                        href="{{ route('tresor_pay.certificat_pay', ['uuid' => $sale->id]) }}">Payer</a>
+                                        href="{{ route('tresor_pay.certificat_pay', ['uuid' => $sale->certificat_id]) }}">Payer</a>
                                 @endif
                             </div>
                         @else
                             <div class="d-flex justify-content-end">
                                 <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
                                     data-bs-dismiss="modal">{{ __('Fermer') }}</button>
-                                <button type="submit" wire:click.prevent="confirmOrder"
+                                <button type="submit" wire:click.prevent="payment"
                                     class="btn btn-primary btn-loading"
                                     wire:loading.attr="disabled">{{ __('Mettre à jour') }}</button>
                             </div>

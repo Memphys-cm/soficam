@@ -17,6 +17,8 @@ use Carbon\Carbon;
 use Hachther\MeSomb\Operation\Payment\Collect;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
+use MeSomb\Operation\PaymentOperation;
+use MeSomb\Util\RandomGenerator;
 
 class Index extends Component
 {
@@ -34,9 +36,9 @@ class Index extends Component
     public $selectedUsers = [];
     public $paymentType = 'Cash';
     public $phoneNumber = '';
-    public $status_tax, $taxFoncier_amount, $price, $payment_method, $regions, $element, $subdivisions, $divisions, $selector, $status, $region_id, $division_id, $subdivision_id;
+    public $status_tax, $taxFoncier_amount, $price, $payment_method, $codeTresorPay, $regions, $element, $subdivisions, $divisions, $selector, $status, $region_id, $division_id, $subdivision_id;
 
-    public $requestor_id, $requestors, $inter_start, $inter_end;
+    public $requestor_id, $requestors, $inter_start, $inter_end, $manualTresor;
     public function mount()
     {
         $this->requestors = User::role('user')->select('id', 'first_name', 'last_name')->get();
@@ -69,6 +71,9 @@ class Index extends Component
         
        
     }
+
+    
+
     public function BuildingQuery()
     {
         return TitreFoncier::query() // Utiliser query() pour une meilleure compatibilité
@@ -193,6 +198,11 @@ class Index extends Component
         $this->status_tax = '';
         $this->price = '';
         $this->phoneNumber = '';
+    }
+    public function stores()
+    {
+        $this->titrefoncier->status_tax = "payer";
+        $this->titrefoncier->save();
     }
 
     public function sms($id)

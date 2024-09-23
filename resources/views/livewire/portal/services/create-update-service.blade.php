@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">{{$state ? 'Mettre à jour' : 'Créer'}} {{__(' Service')}}</h1>
-                        <p class="px-1"> {{$state ? 'Mettre à jour' : 'Créer'}} {{__(' Service')}}</p>
+                        <h1 class="mb-0 h4">{{$state ? __('Mettre à jour') : __('Créer')}} {{__(' Service')}}</h1>
+                        <p class="px-1"> {{$state ? __('Mettre à jour') : __('Créer')}} {{__(' Service')}}</p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <div class='form-group mb-3'>
@@ -38,7 +38,7 @@
 
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
-                            <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{$state ? 'Mettre à jour' : 'Créer'}} </button>
+                            <button type="submit" wire:click.prevent="store" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{$state ? __('Mettre à jour') : __('Créer')}} </button>
                         </div>
                     </x-form-items.form>
                 </div>
@@ -53,8 +53,8 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">{{'Mettre à jour'}} {{__(' Service')}}</h1>
-                        <p class="px-1"> {{'Mettre à jour' }} {{__(' Service')}}</p>
+                        <h1 class="mb-0 h4">{{__('Mettre à jour')}} {{__(' Service')}}</h1>
+                        <p class="px-1"> {{__('Mettre à jour') }} {{__(' Service')}}</p>
                     </div>
                     <x-form-items.form wire:submit="update">
                         <div class='form-group mb-3'>
@@ -87,7 +87,7 @@
 
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3" data-bs-dismiss="modal">{{__('Fermer')}}</button>
-                            <button type="submit" wire:click.prevent="update" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{'Mettre à jour'}} </button>
+                            <button type="submit" wire:click.prevent="update" class="btn btn-primary btn-loading" wire:loading.attr="disabled">{{__('Mettre à jour')}} </button>
                         </div>
                     </x-form-items.form>
                 </div>

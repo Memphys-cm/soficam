@@ -150,9 +150,9 @@
         <div class="col-md-2">
             <label for="status">{{ __('par le statut') }}: </label>
             <select wire:model="status" id="status" class="form-select">
-                <option value="">par le statut</option>
-                <option value="payer">PAYER</option>
-                <option value="non_payer">NON PAYER</option>
+                <option value="">{{ __('par le statut') }}</option>
+                <option value="payer">{{ __('PAYER') }}</option>
+                <option value="non_payer">{{ __('NON PAYER') }}</option>
 
             </select>
         </div>

@@ -28,7 +28,7 @@
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                         </path>
                     </svg>
-                    {{ __(' Gestion Cabinet ') }}
+                    {{ __('Gestion Cabinet') }}
                 </h1>
                 <p class="mt-n1 mx-2">{{ __('Voir tous les cabinets avec dans l\'application') }} </p>
             </div>
@@ -82,7 +82,7 @@
                 class="form-control">
         </div>
         <div class="col-md-3">
-            <label for="orderBy">{{ __('Sens du tri') }}: </label>
+            <label for="orderBy">{{ __('Trier par') }}: </label>
             <select wire:model="orderBy" id="orderBy" class="form-select">
                 <option value="nom_cabinet">{{ __('Nom du bureau') }}</option>
                 <option value="description">{{ __('Description') }}</option>
@@ -197,7 +197,7 @@
             <div class='d-flex justify-content-between align-items-center pt-3 px-3 '>
                 <div>
                     {{ __('Montrer') }} {{ $perPage > $cabinets_count ? $cabinets_count : $perPage }}
-                    {{ __('element sur ') }} {{ $cabinets_count }}
+                    {{ __('element sur') }} {{ $cabinets_count }}
                 </div>
                 {{ $cabinets->links() }}
             </div>
