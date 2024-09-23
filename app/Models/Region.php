@@ -29,6 +29,10 @@ class Region extends Model
     {
         return $this->hasMany(TitreFoncier::class);
     }
+    public function divisions() : HasMany
+    {
+        return $this->hasMany(Division::class);
+    }
 
     public static function search($query)
     {
@@ -41,8 +45,4 @@ class Region extends Model
             });
     }
 
-    public function divisions() : HasMany
-    {
-        return $this->hasMany(Division::class);
-    }
 }
