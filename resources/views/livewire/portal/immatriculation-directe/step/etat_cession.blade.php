@@ -3,7 +3,7 @@
         <div class="shadow-lg rounded p-4 bg-white">
             <div class="mb-4 mt-md-0">
                 <h1 class="mb-0 h4">{{ __('Etat Cession') }}</h1>
-                <p class="px-1"> {{ __(' Etat Cession') }} &#128522;
+                <p class="px-1"> {{ __('Etat Cession') }} &#128522;
                 </p>
             </div>
 

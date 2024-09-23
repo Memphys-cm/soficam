@@ -55,8 +55,8 @@
                             </div>
                         </div>
                         <div class="form-group row mb-1 px-2">
-                            <label for="releve_reason">Pourquoi voulez vous créer ce bien immobilier ? </label>
-                            <textarea class="form-control" wire:model="releve_reason" name="releve_reason" id="releve_reason" placeholder="commentaires"></textarea>
+                            <label for="releve_reason">{{__('Pourquoi voulez vous créer ce bien immobilier')}} ? </label>
+                            <textarea class="form-control" wire:model="releve_reason" name="releve_reason" id="releve_reason" placeholder="{{__('commentaires')}}"></textarea>
                         </div>
                         </fieldset>
 

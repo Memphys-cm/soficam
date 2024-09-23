@@ -6,10 +6,10 @@
                 <div class="p-4 p-lg-5">
                     <div class="mb-4 mt-md-0">
                         <h1 class="mb-0 h4">
-                            {{ $state ? __('Modifier') : __('Enregistrer') }}{{ __(' une Immatrculation Directe') }}
+                            {{ $state ? __('Modifier') : __('Enregistrer') }} {{ __('une Immatrculation Directe') }}
                         </h1>
                         <p class="px-1">
-                            {{ $state ? __('Modifier') : __('Enregistrer') }}{{ __(' un Dossier D\'Immatrculation Directe') }}
+                            {{ $state ? __('Modifier') : __('Enregistrer') }} {{ __('un Dossier D\'Immatrculation Directe') }}
                         </p>
                     </div>
                     <x-form-items.form wire:submit="{{ $state ? 'update' : 'store' }}">

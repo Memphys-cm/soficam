@@ -17,7 +17,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
+                        <li class="breadcrumb-item"><a href="/">{{ __('Tableau de bord') }}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ __('Recettes Totales') }}</li>
                     </ol>
                 </nav>
@@ -68,9 +68,9 @@
         <div class="col-md-2">
             <label for="selectedStatus">{{ __('par le statut') }}: </label>
             <select wire:model="selectedStatus" id="selectedStatus" class="form-select">
-                <option value="">par le statut</option>
-                <option value="totally_paid">Payé</option>
-                <option value="pending_payment">Non payé</option>
+                <option value="">{{ __('par le statut') }}</option>
+                <option value="totally_paid">{{ __('Payé') }}</option>
+                <option value="pending_payment">{{ __('Non payé') }}</option>
 
             </select>
         </div>

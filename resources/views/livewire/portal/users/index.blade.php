@@ -161,7 +161,7 @@
         <div class="col-md-2">
             <label for="selectedStatus">{{ __('Trier par statut') }}: </label>
             <select wire:model="selectedStatus" id="selectedStatus" class="form-select">
-                <option value="">par statut</option>
+                <option value="">{{ __('par statut') }}</option>
                 <option value="false">Inactive</option>
                 <option value="1">Active</option>
 
@@ -172,9 +172,9 @@
             <label for="selectedSexe">{{ __('Trier par Sexe') }}: </label>
             <select wire:model="selectedSexe" id="selectedSexe" class="form-select">
 
-                <option value="">par Sexe</option>
-                <option value="M">Homme</option>
-                <option value="F">Femme</option>
+                <option value="">{{ __('par Sexe') }}</option>
+                <option value="M">{{ __('Homme') }}</option>
+                <option value="F">{{ __('Femme') }}</option>
             </select>
         </div>
         <div class="col-md-2">

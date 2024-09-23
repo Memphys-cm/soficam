@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-3 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4">{{ __('Créer') }} {{ __(' Etat Cession') }}</h1>
-                        <p class="px-1"> {{ __('Créer') }} {{ __(' Etat Cession') }} &#128522;</p>
+                        <h1 class="mb-0 h4">{{ __('Créer') }} {{ __('Etat Cession') }}</h1>
+                        <p class="px-1"> {{ __('Créer') }} {{ __('Etat Cession') }} &#128522;</p>
                     </div>
                     <x-form-items.form wire:submit="store">
 
@@ -64,7 +64,7 @@
                     @enderror
                 </div>
                 <div class="col-md-6 py-2">
-                    <label for="code">{{ __('Type de Personne') }}</label>
+                    <label for="code">{{ __('Type de personne') }}</label>
                     <select wire:model="type_personne" name="type_personne" class="form-select  @error('type_personne') is-invalid @enderror">
                         <option value="">{{ __('--Sélectionner le type de personne --') }}</option>
                         <option value="morale">{{ __('moral') }} </option>
@@ -108,7 +108,7 @@
                     @enderror
                 </div>
                 <div class="col-md-6 py-2">
-                    <label for="code">{{ __('superficie en m²') }}</label>
+                    <label for="code">{{ __('Superficie en m²') }}</label>
                     <input wire:model="superficie_en_m2" type="number" class="form-control  @error('superficie_en_m2') is-invalid @enderror" placeholder="25000" required="" value="" name="superficie_en_m2">
                     @error('superficie_en_m2')
                     <div class="invalid-feedback">{{ $message }}</div>
