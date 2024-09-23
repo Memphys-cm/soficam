@@ -4,8 +4,8 @@
             <div class="modal-body p-0">
                 <div class="p-4 p-lg-4">
                     <div class="mb-4 mt-md-0">
-                        <h1 class="mb-0 h4"> {{ __('Créer')}}{{__(' Retrait Indivision ')}}</h1>
-                        <p class="px-1"> {{ __('Créer')}}{{__(' une Retrait Indivision du Titre Foncier')}} </p>
+                        <h1 class="mb-0 h4"> {{ __('Créer')}} {{__('Retrait Indivision')}}</h1>
+                        <p class="px-1"> {{ __('Créer')}} {{__('une Retrait Indivision du Titre Foncier')}} </p>
                     </div>
                     <x-form-items.form wire:submit="store">
                         <input type='hidden' wire:model="operation_type" value="retrait_indivision_normale">
@@ -57,7 +57,7 @@
                             </div>
                         </div>
                         <div class='form-group row mb-2'>
-                            <div class=" col"><label for="sub_division">{{ __('Arrondissent') }}</label>
+                            <div class=" col"><label for="sub_division">{{ __('Arrondissement') }}</label>
                                 <input type="text" wire:model="sub_division" class="form-control  @error('sub_division') is-invalid @enderror " value="{{ old('sub_division') }}" placeholder="" id="sub_division" autofocus="" required="" disabled>
                                 @error('sub_division')
                                 <div class="invalid-feedback">

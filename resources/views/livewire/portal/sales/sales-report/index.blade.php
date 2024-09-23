@@ -71,7 +71,7 @@
                         <option value="">{{ __('Tous les types de vente') }}</option>
                         <option value="certificate_propriete">{{ __('Certificat de Proprieté') }}</option>
                         <option value="immobilier">{{ __('Immobilier') }}</option>
-                        <option value="total_sale">{{ __('Vente par mutations totale ') }}</option>
+                        <option value="total_sale">{{ __('Vente par mutations totale') }}</option>
                         <option value="simple_sale">{{ __('Vente simple') }}</option>
                         <option value="etat_cession">{{ __('Etat de Cession') }}</option>
 

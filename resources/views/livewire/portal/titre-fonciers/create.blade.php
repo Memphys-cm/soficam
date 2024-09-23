@@ -356,7 +356,7 @@
                             </div>
                             <div class='col'>
                                 <label class="px-2"
-                                    for="plan">{{ __('Ajouter Le plan de mise à jour') }}</label>
+                                    for="plan">{{ __('Ajouter Le plan de mise à jour') }}</label>
                                 <div class="input-group">
                                     <input type="file" class="form-control" wire:model="attachments.plan"
                                         multiple>

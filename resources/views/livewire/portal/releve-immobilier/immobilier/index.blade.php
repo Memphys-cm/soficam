@@ -15,7 +15,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
+                        <li class="breadcrumb-item"><a href="/">{{ __('Tableau de bord') }}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ __('Relevé Immobilier') }}</li>
                     </ol>
                 </nav>
@@ -111,7 +111,7 @@
                         <th class="border-bottom">{{ __('Requérant') }}</th>
                         <th class="border-bottom">{{ __('Numéro Titre Foncier') }}</th>
                         <th class="border-bottom">{{ __('TYPE') }}</th>
-                        <th class="border-bottom">{{ __(' NUMÉRO CP') }}</th>
+                        <th class="border-bottom">{{ __('NUMÉRO CP') }}</th>
                         <th class="border-bottom">{{ __('PRIX') }}</th>
                         <th class="border-bottom">{{ __('VALIDITÉ') }}</th>
                         <th class="border-bottom">{{ __(' TYPE PERSONNE') }}</th>
