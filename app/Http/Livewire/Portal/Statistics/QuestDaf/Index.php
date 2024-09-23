@@ -29,8 +29,13 @@ class Index extends Component
         // Organiser les données pour la vue de la table
         $tableData = $this->processTitreFonciers($titreFonciers);
 
+
+        // Récupérer les données de la base
+        $titresFoncier = TitreFoncier::where('immatriculation_directe_id','!=',null)->get();
+
         return view('livewire.portal.statistics.quest-daf.index', [
             'tableData' => $tableData,
+            'titresFoncier' => $titresFoncier
         ]);
     }
 
