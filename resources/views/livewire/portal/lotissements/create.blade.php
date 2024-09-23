@@ -205,8 +205,8 @@
                                 <label for="statut_du_lot">{{__('Statut du Lot')}}</label>
                                 <select wire:model="blocks.{{ $blockIndex }}.parcels.{{ $lotIndex }}.statut_du_lot" class="form-select  @error('statut_du_lot') is-invalid @enderror" required="">
                                     <option value="">{{__('--Sélectionner--')}}</option>
-                                    <option value="batit">{{__('Construit')}}</option>
-                                    <option value="non_batit">{{__('Non construit')}}</option>
+                                    <option value="batit">{{__('Batit')}}</option>
+                                    <option value="non_batit">{{__('Non Batit')}}</option>
                                 </select>
                             </div>
                             <div class="col-md-3">

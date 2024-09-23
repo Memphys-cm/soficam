@@ -96,8 +96,8 @@
                                 <select wire:model="etat_terrain" name="etat_terrain" class="form-select  @error('etat_terrain') is-invalid @enderror" required="">
                                     {{-- @foreach($regions as $region) --}}
                                     <option value="">{{__('Selectionner L\'Etat du Terrain')}}</option>
-                                    <option value="batit">{{__('Construit')}}</option>
-                                    <option value="non_batit">{{__('Non Construit')}}</option>
+                                    <option value="batit">{{__('Batit')}}</option>
+                                    <option value="non_batit">{{__('Non Batit')}}</option>
                                     {{-- @endforeach --}}
                                 </select>
                                 @error('etat_terrain')
