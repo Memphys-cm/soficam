@@ -36,7 +36,7 @@ class Index extends Component
     public $selectedUsers = [];
     public $paymentType = 'Cash';
     public $phoneNumber = '';
-    public $status_tax, $taxFoncier_amount, $price, $payment_method, $regions, $element, $subdivisions, $divisions, $selector, $status, $region_id, $division_id, $subdivision_id;
+    public $status_tax, $taxFoncier_amount, $price, $payment_method, $codeTresorPay, $regions, $element, $subdivisions, $divisions, $selector, $status, $region_id, $division_id, $subdivision_id;
 
     public $requestor_id, $requestors, $inter_start, $inter_end, $manualTresor;
     public function mount()
@@ -198,6 +198,11 @@ class Index extends Component
         $this->status_tax = '';
         $this->price = '';
         $this->phoneNumber = '';
+    }
+    public function stores()
+    {
+        $this->titrefoncier->status_tax = "payer";
+        $this->titrefoncier->save();
     }
 
     public function sms($id)
