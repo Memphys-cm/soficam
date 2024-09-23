@@ -43,7 +43,7 @@ class TitreFoncierSeeder extends Seeder
         ];
 
         // Récupérer toutes les régions, divisions et subdivisions existantes
-        /*
+        
         $regions = Region::all();
         $counter = 0;
 
@@ -86,7 +86,7 @@ class TitreFoncierSeeder extends Seeder
                 }
             }
         } 
-        */
+        
 
         $elements = [[
             'uuid' => 1,
