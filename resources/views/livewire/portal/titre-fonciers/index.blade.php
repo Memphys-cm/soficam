@@ -186,89 +186,114 @@
                 </thead>
                 <tbody>
                     @forelse($titrefonciers as $titrefoncier)
-                    <tr>
-                        <td>
-                            <span class="fw-normal">{{$titrefoncier->numero_titre_foncier}}</span>
-                        </td>
-                        <td>
-                            <span class="fw-normal">{{$titrefoncier->numero_conservation}}</span>
-                        </td>
-                        <td>
-                            <span class="fw-normal">{{$titrefoncier->date_de_delivrance_du_TF}}</span>
-                        </td>
-                        <td>
-                            <x-elements.user :options="$titrefoncier->users->take(5)" />
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-centerpy-1">
-                                {{__('Region')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->region->region_name_fr}} </span>
-                            </div>
-                            <div class="d-flex align-items-centerpy-1">
-                                {{__('Departement')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->division->division_name}} </span>
-                            </div>
-                            <div class="d-flex align-items-centerpy-1">
-                                {{__('Arrondissement')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->subDivision->sub_division_name}} </span>
-                            </div>
-                            <div class="d-flex align-items-centerpy-1">
-                                {{__('Lieu Dit')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->land->name}} </span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-centerpy-1">
-                                <span class="fw-bolder mx-2"> {{__('Nord')}} </span> {{$titrefoncier->limit_nord}}
-                            </div>
-                            <div class="d-flex align-items-centerpy-1">
-                                <span class="fw-bolder mx-2"> {{__('Sud')}} </span> {{$titrefoncier->limit_sud}}
-                            </div>
-                            <div class="d-flex align-items-centerpy-1">
-                                <span class="fw-bolder mx-2"> {{__('Est')}} </span> {{$titrefoncier->limit_est}}
-                            </div>
-                            <div class="d-flex align-items-centerpy-1">
-                                <span class="fw-bolder mx-2"> {{__('Ouest')}} </span> {{$titrefoncier->limit_ouest}}
-                            </div>
-                        </td>
-                        <td>
-                            @foreach(collect(json_decode($titrefoncier->coordonnees_utm,true)) as $key => $value)
-                            <div class="d-flex align-items-centerpy-1">
-                                <span class="fw-bolder mx-2"> {{ $key }} :</span> {{ $value}}
-                            </div>
-                            @endforeach
-                        </td>
-                        <td>
-                            @foreach(collect(json_decode($titrefoncier->coordonnees,true)) as $key => $value)
-                            <div class="d-flex align-items-centerpy-1">
-                                <span class="fw-bolder mx-2"> {{ $key }} :</span> {{ $value}}
-                            </div>
-                            @endforeach
-                        </td>
-                        <td>
-                            <span class="fw-normal badge super-badge p-2 bg-{{$titrefoncier->EtatTFStyle}} round">{{$titrefoncier->etat_TF}}</span>
-                        </td>
-                        <td>
-                            <span class="fw-normal">{{$titrefoncier->created_at->format('Y-m-d')}}</span>
-                        </td>
-                        @canany('titre_foncier.update','titre_foncier.delete')
-                        <td>
-                            @can('titre_foncier.view_detail')
-                            <a href="#">
-                                <svg class="icon icon-sm text-info" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </a>
-                            @endcan
-                            @can('titre_foncier.view_detail')
-                            <a href="{{route('portal.maps.index' , $titrefoncier->id)}}">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon icon-sm text-info">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                                  </svg>                                  
-                            </a>
-                            @endcan
-                            <a href="#" wire:click.prevent='printPdf({{$titrefoncier->id}})'>
-                                <svg class="icon icon-sm text-gray-500"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
-                                </svg>
-                            </a>
+                        <tr>
+                            <td>
+                                <span class="fw-normal">{{ $titrefoncier->numero_titre_foncier }}</span>
+                                @if ($titrefoncier->is_vip)
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2" />
+                                    </svg>
+                                @endif
+                            </td>
+                            <td>
+                                <span class="fw-normal">{{ $titrefoncier->numero_conservation }}</span>
+                            </td>
+                            <td>
+                                <span class="fw-normal">{{ $titrefoncier->date_de_delivrance_du_TF }}</span>
+                            </td>
+                            <td>
+                                <x-elements.user :options="$titrefoncier->users->take(5)" />
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-centerpy-1">
+                                    {{ __('Region') }} : <span class="fw-bolder mx-2">
+                                        {{ $titrefoncier->region->region_name_fr }} </span>
+                                </div>
+                                <div class="d-flex align-items-centerpy-1">
+                                    {{ __('Departement') }} : <span class="fw-bolder mx-2">
+                                        {{ $titrefoncier->division->division_name }} </span>
+                                </div>
+                                <div class="d-flex align-items-centerpy-1">
+                                    {{ __('Arrondissement') }} : <span class="fw-bolder mx-2">
+                                        {{ $titrefoncier->subDivision->sub_division_name }} </span>
+                                </div>
+                                <div class="d-flex align-items-centerpy-1">
+                                    {{ __('Lieu Dit') }} : <span class="fw-bolder mx-2">
+                                        {{ $titrefoncier->land->name }} </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-centerpy-1">
+                                    <span class="fw-bolder mx-2"> {{ __('Nord') }} </span>
+                                    {{ $titrefoncier->limit_nord }}
+                                </div>
+                                <div class="d-flex align-items-centerpy-1">
+                                    <span class="fw-bolder mx-2"> {{ __('Sud') }} </span>
+                                    {{ $titrefoncier->limit_sud }}
+                                </div>
+                                <div class="d-flex align-items-centerpy-1">
+                                    <span class="fw-bolder mx-2"> {{ __('Est') }} </span>
+                                    {{ $titrefoncier->limit_est }}
+                                </div>
+                                <div class="d-flex align-items-centerpy-1">
+                                    <span class="fw-bolder mx-2"> {{ __('Ouest') }} </span>
+                                    {{ $titrefoncier->limit_ouest }}
+                                </div>
+                            </td>
+                            <td>
+                                @foreach (collect(json_decode($titrefoncier->coordonnees_utm, true)) as $key => $value)
+                                    <div class="d-flex align-items-centerpy-1">
+                                        <span class="fw-bolder mx-2"> {{ $key }} :</span>
+                                        {{ $value }}
+                                    </div>
+                                @endforeach
+                            </td>
+                            <td>
+                                @foreach (collect(json_decode($titrefoncier->coordonnees, true)) as $key => $value)
+                                    <div class="d-flex align-items-centerpy-1">
+                                        <span class="fw-bolder mx-2"> {{ $key }} :</span>
+                                        {{ $value }}
+                                    </div>
+                                @endforeach
+                            </td>
+                            <td>
+                                <span
+                                    class="fw-normal badge super-badge p-2 bg-{{ $titrefoncier->EtatTFStyle }} round">{{ $titrefoncier->etat_TF }}</span>
+                            </td>
+                            <td>
+                                <span class="fw-normal">{{ $titrefoncier->created_at->format('Y-m-d') }}</span>
+                            </td>
+                            @canany('titre_foncier.update', 'titre_foncier.delete')
+                                <td>
+                                    @can('titre_foncier.view_detail')
+                                        <a href="#">
+                                            <svg class="icon icon-sm text-info" xmlns="http://www.w3.org/2000/svg"
+                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </a>
+                                    @endcan
+                                    @can('titre_foncier.view_detail')
+                                        <a href="{{ route('portal.maps.index', $titrefoncier->id) }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="icon icon-sm text-info">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                            </svg>
+                                        </a>
+                                    @endcan
+                                    <a href="#" wire:click.prevent='printPdf({{ $titrefoncier->id }})'>
+                                        <svg class="icon icon-sm text-gray-500" xmlns="http://www.w3.org/2000/svg"
+                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
+                                        </svg>
+                                    </a>
 
                                     @can('titre_foncier.update')
                                         <a href="#" wire:click.prevent="initData({{ $titrefoncier->id }})"

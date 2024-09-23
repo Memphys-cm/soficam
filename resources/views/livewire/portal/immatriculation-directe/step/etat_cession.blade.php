@@ -28,16 +28,6 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-
-                    <div class="col-md-6 py-2">
-                        <label for="code">{{ __('superficie en m²') }}</label>
-                        <input wire:model="superficie_en_m2" type="number"
-                            class="form-control  @error('superficie_en_m2') is-invalid @enderror" placeholder=""
-                            required="" value="" name="superficie_en_m2">
-                        @error('superficie_en_m2')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
                     <div class="col-md-6 py-2">
                         <label for="code">{{ __('Coût') }}</label>
                         <input wire:model="cout" type="number" class="form-control  @error('cout') is-invalid @enderror"

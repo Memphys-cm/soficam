@@ -210,8 +210,8 @@
                                 <select wire:model="etat_terrain" name="etat_terrain"
                                     class="form-select  @error('etat_terrain') is-invalid @enderror" required="">
                                     <option value="">{{ __('Selectionner L\'etat') }}</option>
-                                    <option value="batit">{{ __('Construit') }}</option>
-                                    <option value="non_batit">{{ __('Non Construit') }}</option>
+                                    <option value="batit">{{ __('Bâtit') }}</option>
+                                    <option value="non_batit">{{ __('Non Bâtit') }}</option>
                                 </select>
                                 @error('etat_terrain')
                                     <div class="invalid-feedback">{{ $message }}</div>
