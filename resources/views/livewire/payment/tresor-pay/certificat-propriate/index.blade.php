@@ -92,8 +92,25 @@
                     </div>
 
                     <div class="row">
+                        <div class="col-md-6">
+                            <label for="localisation">Operateur*</label>
+                            <select wire:model="operator" name="operator"
+                                class="form-select  @error('operator') is-invalid @enderror" required="">
+                                <option value="">{{ __('--Sélectionner--') }}</option>
+                                <option value="ORANGE">{{ __('ORANGE MONEY') }}</option>
+                                <option value="MTN">{{ __('MOBILE MONEY') }}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="identifiant">Montant*</label>
+                            <input type="text" class="form-control mb-3" wire:model="amount"
+                                placeholder="Numéro d'identifiant unique">
+                        </div>
+                    </div>
+
+                    <div class="row">
                         <div class="col-md-12">
-                            <label for="titre_foncier">{{ __('Numéro du titre foncier') }} *</label>
+                            <label for="titre_foncier">Numéro du titre foncier *</label>
                             <input type="text" class="form-control mb-3" wire:model="titre_foncier"
                                 placeholder="Numéro du titre foncier">
                             @error('titre_foncier')
@@ -104,12 +121,12 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="nom">{{ __('Nom/Raison Sociale') }}</label>
+                            <label for="nom">Nom/Raison Sociale</label>
                             <input type="text" class="form-control mb-3" wire:model="nom"
                                 placeholder="Nom/Raison Sociale">
                         </div>
                         <div class="col-md-6">
-                            <label for="prenom">{{ __('Prénom') }}</label>
+                            <label for="prenom">Prénom</label>
                             <input type="text" class="form-control mb-3" wire:model="prenom" placeholder="Prénom">
                         </div>
                     </div>
@@ -123,7 +140,8 @@
                         </div>
                         <div class="col-md-6">
                             <label for="motifs">Motifs</label>
-                            <input type="text" class="form-control mb-3" wire:model="motifs" placeholder="Motifs">
+                            <input type="text" class="form-control mb-3" wire:model="motifs"
+                                placeholder="Motifs">
                         </div>
                     </div>
 
@@ -137,20 +155,6 @@
                         <div class="col-md-6">
                             <label for="email">Email</label>
                             <input type="email" class="form-control mb-3" wire:model="email" placeholder="Email">
-                        </div>
-                    </div>
-
-                    <!-- Fourth Row -->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="localisation">Localisation de la parcelle</label>
-                            <input type="text" class="form-control mb-3" wire:model="localisation"
-                                placeholder="Localisation de la parcelle">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="identifiant">Numéro d'identifiant unique</label>
-                            <input type="text" class="form-control mb-3" wire:model="identifiant"
-                                placeholder="Numéro d'identifiant unique">
                         </div>
                     </div>
 

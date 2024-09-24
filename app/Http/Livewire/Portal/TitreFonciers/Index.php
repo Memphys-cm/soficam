@@ -323,7 +323,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('0 créé avec succes'), 'CreateTitreFoncierModal');
+        $this->refresh(__('Titre foncier créé avec succes'), 'CreateTitreFoncierModal');
     }
 
     public function convertToUTM($decimalCoordinates)

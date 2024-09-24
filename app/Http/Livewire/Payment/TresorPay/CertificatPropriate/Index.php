@@ -36,7 +36,7 @@ class Index extends Component
 
     public $titre_foncier, $nom, $prenom, $profession, $motifs, $telephone, $email, $localisation, $identifiant;
 
-    public $certificat;
+    public $certificat, $operator;
 
     public $amount = 50000;
 
@@ -101,18 +101,7 @@ class Index extends Component
         'identifiant' => 'nullable|string|max:255',
     ];
 
-    public function retrait($telephone, $operator)
-    {
-        $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
-        // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
-        $client->makeCollect([
-            'amount' => 100,
-            'service' => $operator,
-            'payer' => $telephone,
-            'nonce' => RandomGenerator::nonce(),
-            'trxID' => '1'
-        ]);
-    }
+    public function retrait($telephone, $operator) {}
 
     public function store()
     {
@@ -125,6 +114,16 @@ class Index extends Component
                 'conservation_id' => 'required',
             ]);
 
+            $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
+            // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
+            $client->makeCollect([
+                'amount' => 100,
+                'service' => $this->operator,
+                'payer' => $this->telephone,
+                'nonce' => RandomGenerator::nonce(),
+                'trxID' => '1'
+            ]);
+
             $this->certificat->saleable->sale->payment_status = "totally_paid";
             $this->certificat->status = "active";
             $this->certificat->saleable->sale->save();
@@ -134,7 +133,6 @@ class Index extends Component
             $validatedData = $this->validate();
             // Sauvegarde dans la base de données
             $certificat = FakeCertificate::create($validatedData);
-            $this->retrait($this->telephone, $this->operator);
             return $this->generateReceiptPdf($certificat->id);
         }
 
