@@ -74,7 +74,8 @@
         <div class="col">
             <div class="card h-md-100 ecommerce-card-min-width">
                 <div class="card-header pb-0">
-                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Nombre total de TF en Non-Règlementaire') }}</h6>
+                    <h6 class="mb-0 mt-2 d-flex align-items-center">{{ __('Nombre total de TF en Non-Règlementaire') }}
+                    </h6>
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
@@ -121,7 +122,7 @@
                 </div>
                 <div class="p-3 d-flex justify-content-between align-iterms-center">
                     <div class="col">
-                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmountPrediction  }} {{ __('FCFA') }}</p>
+                        <p class="font-sans-serif lh-1 fs-4">{{ $totalTaxAmountPrediction }} {{ __('FCFA') }}</p>
 
                     </div>
                     <div class="">
@@ -139,82 +140,87 @@
 
     </div>
 
+    <div class="card pt-3">
+        <div class="row py-3 mx-sm">
+            <div class="col-md-2">
+                <label for="region_id">{{ __('Par Région') }}: </label>
+                <select wire:model="region_id" id="region_id" class="form-select">
+                    <option value="">{{ __('Toutes les regions') }}</option>
+                    @foreach ($regions as $r)
+                        <option value="{{ $r->id }}">{{ $r->region_name_fr }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="division_id">{{ __('Par Division') }}: </label>
+                <select wire:model="division_id" id="division_id" class="form-select">
+                    <option value="">{{ __('Toutes les divisions') }}</option>
+                    @foreach ($divisions as $r)
+                        <option value="{{ $r->id }}">{{ $r->division_name_fr }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="subdivision_id">{{ __('Par Arrondissement') }}: </label>
+                <select wire:model="subdivision_id" id="subdivisionn_id" class="form-select">
+                    <option value="">{{ __('Toutes les subdivisions') }}</option>
+                    @foreach ($subdivisions as $r)
+                        <option value="{{ $r->id }}">{{ $r->sub_division_name_fr }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="inter_start">{{ __('Date Debut') }}: </label>
+                <input wire:model="inter_start" id="createdDate" type="date"
+                    placeholder="{{ __('10/12/2022...') }}" class="form-control">
+                <p class="badge badge-info" wire:model="resultCount">{{ $resultCount }}</p>
+            </div>
+            <div class="col-md-3">
+                <label for="inter_end">{{ __('Date Fin') }}: </label>
+                <input wire:model="inter_end" id="createdDate" type="date"
+                    placeholder="{{ __('10/12/2022...') }}" class="form-control">
+                <p class="badge badge-info" wire:model="resultCount">{{ $resultCount }}</p>
+            </div>
+        </div>
 
-    <div class="row py-3">
-        <div class="col-md-3">
-            <label for="search">{{ __('Recherche') }}: </label>
-            <input wire:model="query" id="search" type="text" placeholder="{{ __('Recherche...') }}"
-                class="form-control">
-            <p class="badge badge-info" wire:model="resultCount">{{ $resultCount }}</p>
-        </div>
-        <div class="col-md-2">
-            <label for="status">{{ __('par le statut') }}: </label>
-            <select wire:model="status" id="status" class="form-select">
-                <option value="">{{ __('par le statut') }}</option>
-                <option value="payer">{{ __('PAYER') }}</option>
-                <option value="non_payer">{{ __('NON PAYER') }}</option>
-
-            </select>
-        </div>
-
-        <div class="col-md-2">
-            <label for="direction">{{ __('Sens du tri') }}: </label>
-            <select wire:model="orderAsc" id="direction" class="form-select">
-                <option value="asc">{{ __('Ascendant') }}</option>
-                <option value="desc">{{ __('Descendant') }}</option>
-            </select>
-        </div>
-
-        <div class="col-md-2">
-            <label for="perPage">{{ __('Éléments par page') }}: </label>
-            <select wire:model="perPage" id="perPage" class="form-select">
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-                <option value="25">25</option>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <label for="region_id">{{ __('Par Région') }}: </label>
-            <select wire:model="region_id" id="region_id" class="form-select">
-                <option value="">{{ __('Toutes les regions') }}</option>
-                @foreach ($regions as $r)
-                    <option value="{{ $r->id }}">{{ $r->region_name_fr }}</option>
-                @endforeach
-            </select>
-        </div>
     </div>
-    <div class="row py-3">
-        <div class="col-md-2">
-            <label for="division_id">{{ __('Par Division') }}: </label>
-            <select wire:model="division_id" id="division_id" class="form-select">
-                <option value="">{{ __('Toutes les divisions') }}</option>
-                @foreach ($divisions as $r)
-                    <option value="{{ $r->id }}">{{ $r->division_name_fr }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="col-md-2">
-            <label for="subdivision_id">{{ __('Par Arrondissement') }}: </label>
-            <select wire:model="subdivision_id" id="subdivisionn_id" class="form-select">
-                <option value="">{{ __('Toutes les subdivisions') }}</option>
-                @foreach ($subdivisions as $r)
-                    <option value="{{ $r->id }}">{{ $r->sub_division_name_fr }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="col-md-3">
-            <label for="inter_start">{{ __('Date Debut') }}: </label>
-            <input wire:model="inter_start" id="createdDate" type="date" placeholder="{{ __('10/12/2022...') }}"
-                class="form-control">
-            <p class="badge badge-info" wire:model="resultCount">{{ $resultCount }}</p>
-        </div>
-        <div class="col-md-3">
-            <label for="inter_end">{{ __('Date Fin') }}: </label>
-            <input wire:model="inter_end" id="createdDate" type="date" placeholder="{{ __('10/12/2022...') }}"
-                class="form-control">
-            <p class="badge badge-info" wire:model="resultCount">{{ $resultCount }}</p>
+    <div class="card mt-3 mb-5 " style="height: 100px">
+        <div class="row mx-sm">
+
+            <div class="col-md-3">
+                <label for="search">{{ __('Recherche') }}: </label>
+                <input wire:model="query" id="search" type="text" placeholder="{{ __('Recherche...') }}"
+                    class="form-control">
+                <p class="badge badge-info" wire:model="resultCount">{{ $resultCount }}</p>
+            </div>
+            <div class="col-md-2">
+                <label for="status">{{ __('par le statut') }}: </label>
+                <select wire:model="status" id="status" class="form-select">
+                    <option value="">{{ __('par le statut') }}</option>
+                    <option value="payer">{{ __('PAYER') }}</option>
+                    <option value="non_payer">{{ __('NON PAYER') }}</option>
+
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label for="direction">{{ __('Sens du tri') }}: </label>
+                <select wire:model="orderAsc" id="direction" class="form-select">
+                    <option value="asc">{{ __('Ascendant') }}</option>
+                    <option value="desc">{{ __('Descendant') }}</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label for="perPage">{{ __('Éléments par page') }}: </label>
+                <select wire:model="perPage" id="perPage" class="form-select">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                </select>
+            </div>
         </div>
     </div>
     <div class="card pb-3">
