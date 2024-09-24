@@ -68,7 +68,6 @@ class Pay extends Component
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
     }
 
-    public function retrait($telephone, $operator) {}
 
     public function updatedRegionID($region_id)
     {
@@ -88,6 +87,21 @@ class Pay extends Component
         }
     }
 
+    public function retrait($telephone, $operator)
+    {
+        $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
+        // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
+        $response = $client->makeCollect([
+            'amount' => 100,
+            'service' => $operator,
+            'payer' => $telephone,
+            'nonce' => RandomGenerator::nonce(),
+            'trxID' => '1'
+        ]);
+
+        return $response;
+    }
+
     public function store()
     {
         $this->validate([
@@ -98,108 +112,55 @@ class Pay extends Component
             $divisions = Division::where('id', $this->division_id)->first();
             $conservations = Conservation::where('id', $this->conservation_id)->first();
 
-            $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
-            // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
-            $response = $client->makeCollect([
-                'amount' => 100,
-                'service' => $this->operator,
-                'payer' => $this->telephone,
-                'nonce' => RandomGenerator::nonce(),
-                'trxID' => '1'
-            ]);
+            $transaction = $this->retrait($this->telephone, $this->operator);
 
-            if ($response->transaction->status == "success") {
+            $response = $transaction->getTransactions([$transaction->transaction->pk]);
+
+            if ($response->transaction->status == "SUCCESS") {
                 // Retourner true si l'opération est réussie
-                dd('ok');
-                return 'ok';
+                $data = [
+                    'qualification' => $this->qualification,
+                    'region' => $region->region_name_fr,
+                    'division' => $divisions->division_name_fr,
+                    'subDivision' => $conservations->conservation_name_fr,
+                    'titre_foncier' => $this->titre_foncier,
+                    'nom' => $this->nom ?? 'N/A',
+                    'prenom' => $this->prenom ?? 'N/A',
+                    'profession' => $this->profession ?? 'N/A',
+                    'motifs' => $this->motifs ?? 'N/A',
+                    'telephone' => $this->telephone ?? 'N/A',
+                    'email' => $this->email ?? 'N/A',
+                    'localisation' => $this->localisation ?? 'N/A',
+                    'identifiant' => $this->identifiant ?? 'N/A',
+                    'date' => now()->format('d/m/Y'),
+                ];
+
+                $pdf = Pdf::loadView('certificates.receipt', $data)
+                    ->setPaper('a4', 'portrait');
+
+
+                $this->certificat->status_tax = "payer";
+                $this->certificat->save();
+                // Afficher le PDF dans une nouvelle fenêtre du navigateur
+                return response()->stream(fn() => print($pdf->output()), 200, [
+                    'Content-Type' => 'application/pdf',
+                    'Content-Disposition' => 'inline; filename="Quitance_Taxe_fonciere' . Str::random(10) . '.pdf"',
+                ]);
+
+                session()->flash('message', 'Demande enregistrée avec succès.');
             } else {
                 // Retourner false en cas d'échec
                 dd('false');
-                return false;
+                return redirect()->back();
+
+                session()->flash('message', 'Demande a échoué.');
             }
-            $data = [
-                'qualification' => $this->qualification,
-                'region' => $region->region_name_fr,
-                'division' => $divisions->division_name_fr,
-                'subDivision' => $conservations->conservation_name_fr,
-                'titre_foncier' => $this->titre_foncier,
-                'nom' => $this->nom ?? 'N/A',
-                'prenom' => $this->prenom ?? 'N/A',
-                'profession' => $this->profession ?? 'N/A',
-                'motifs' => $this->motifs ?? 'N/A',
-                'telephone' => $this->telephone ?? 'N/A',
-                'email' => $this->email ?? 'N/A',
-                'localisation' => $this->localisation ?? 'N/A',
-                'identifiant' => $this->identifiant ?? 'N/A',
-                'date' => now()->format('d/m/Y'),
-            ];
-
-            $pdf = Pdf::loadView('certificates.receipt', $data)
-                ->setPaper('a4', 'portrait');
-
-
-            $this->certificat->status_tax = "payer";
-            $this->certificat->save();
-            // Afficher le PDF dans une nouvelle fenêtre du navigateur
-            return response()->stream(fn() => print($pdf->output()), 200, [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="Quitance_Taxe_fonciere' . Str::random(10) . '.pdf"',
-            ]);
         }
-
-        session()->flash('message', 'Demande enregistrée avec succès.');
 
         // Réinitialiser le formulaire
         // $this->reset();
     }
 
-    function sendChargeMessage($numero){
-        $sms='Bonjour Monsieur/Madame, Votre taxe fonciere à bien été receptonné';
-        $mobiles = $numero;
-                
-        if(!empty($sms)){
-            $senderid ='SOFICAM';
-            $mobiles = $mobiles;
-            $api_key = 'wplL0f9wq1moi1NrsjpsBgfBzun4';
-            $url = 'https://api.queensms.net/v1/sms.php';
-
-            $sms_body = array(
-                'api_key' => $api_key,
-                'senderid' => $senderid,
-                'sms' => $sms,
-                'mobiles' => $mobiles
-            );
-                
-            $send_data = http_build_query($sms_body);
-            $gateway_url = $url . "?" . $send_data;
-                
-            try {
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $gateway_url);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_HTTPGET, 1);
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                $output = curl_exec($ch);
-            
-                if (curl_errno($ch)) {
-                    $output = curl_error($ch);
-                    $arr = ['echec'];
-                    return($arr);
-                }
-                else{
-                    return($output);
-                }
-                    curl_close($ch);
-            }
-                
-            catch (Exception $exception){
-                //echo $exception->getMessage();
-                $arr = ['echec'];
-                return($arr);
-            }
-        }
-
-    }
 
     public function render()
     {
