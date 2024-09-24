@@ -47,8 +47,7 @@ class Index extends Component
 
     public function mount()
     {
-        $this->titre_fonciers = TitreFoncier::select('id', 'numero_titre_foncier', 'region_id', 'division_id', 'sub_division_id', 'lieu_dit')->get();
-        $this->requestors = User::role('user')->select('id', 'first_name', 'last_name')->get();
+        $this->titre_fonciers = TitreFoncier::with('users')->select('id', 'numero_titre_foncier', 'region_id', 'division_id', 'sub_division_id', 'lieu_dit')->get();
         $this->certificate_proprietes_number =  $this->CPCode();
     }
 

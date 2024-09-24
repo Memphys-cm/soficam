@@ -68,26 +68,7 @@ class Pay extends Component
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
     }
 
-    public function retrait($telephone, $operator)
-    {
-        $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
-        // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
-        $client->makeCollect([
-            'amount' => 100,
-            'service' => $operator,
-            'payer' => $telephone,
-            'nonce' => RandomGenerator::nonce(),
-            'trxID' => '1'
-        ]);
-
-        if ($client->success) {
-            // Retourner true si l'opération est réussie
-            return true;
-        } else {
-            // Retourner false en cas d'échec
-            return false;
-        }
-    }
+    public function retrait($telephone, $operator) {}
 
     public function updatedRegionID($region_id)
     {
@@ -110,13 +91,32 @@ class Pay extends Component
     public function store()
     {
         $this->validate([
-            'conservation_id'=>'required'
+            'conservation_id' => 'required'
         ]);
         if ($this->certificat) {
             $region = Region::where('id', $this->region_id)->first();
             $divisions = Division::where('id', $this->division_id)->first();
             $conservations = Conservation::where('id', $this->conservation_id)->first();
-            $this->retrait($this->telephone, $this->operator);
+
+            $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
+            // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
+            $response = $client->makeCollect([
+                'amount' => 100,
+                'service' => $this->operator,
+                'payer' => $this->telephone,
+                'nonce' => RandomGenerator::nonce(),
+                'trxID' => '1'
+            ]);
+
+            if ($response->transaction->status == "success") {
+                // Retourner true si l'opération est réussie
+                dd('ok');
+                return 'ok';
+            } else {
+                // Retourner false en cas d'échec
+                dd('false');
+                return false;
+            }
             $data = [
                 'qualification' => $this->qualification,
                 'region' => $region->region_name_fr,
@@ -153,41 +153,52 @@ class Pay extends Component
         // $this->reset();
     }
 
-    public function generateReceiptPdf($certificateId)
-    {
-        // Récupérer le certificat et ses relations
-        $certificate = FakeCertificate::with(['region', 'division', 'conservation'])->findOrFail($certificateId);
+    function sendChargeMessage($numero){
+        $sms='Bonjour Monsieur/Madame, Votre taxe fonciere à bien été receptonné';
+        $mobiles = $numero;
+                
+        if(!empty($sms)){
+            $senderid ='SOFICAM';
+            $mobiles = $mobiles;
+            $api_key = 'wplL0f9wq1moi1NrsjpsBgfBzun4';
+            $url = 'https://api.queensms.net/v1/sms.php';
 
-        // Préparer les données à afficher dans le PDF
-        $data = [
-            'qualification' => $certificate->qualification,
-            'region' => $certificate->region->region_name,
-            'division' => $certificate->division->division_name,
-            'subDivision' => $certificate->conservation->conservation_name,
-            'titre_foncier' => $certificate->titre_foncier,
-            'nom' => $certificate->nom ?? 'N/A',
-            'prenom' => $certificate->prenom ?? 'N/A',
-            'profession' => $certificate->profession ?? 'N/A',
-            'motifs' => $certificate->motifs ?? 'N/A',
-            'telephone' => $certificate->telephone ?? 'N/A',
-            'email' => $certificate->email ?? 'N/A',
-            'localisation' => $certificate->localisation ?? 'N/A',
-            'identifiant' => $certificate->identifiant ?? 'N/A',
-            'date' => now()->format('d/m/Y'),
-        ];
+            $sms_body = array(
+                'api_key' => $api_key,
+                'senderid' => $senderid,
+                'sms' => $sms,
+                'mobiles' => $mobiles
+            );
+                
+            $send_data = http_build_query($sms_body);
+            $gateway_url = $url . "?" . $send_data;
+                
+            try {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $gateway_url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_HTTPGET, 1);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                $output = curl_exec($ch);
+            
+                if (curl_errno($ch)) {
+                    $output = curl_error($ch);
+                    $arr = ['echec'];
+                    return($arr);
+                }
+                else{
+                    return($output);
+                }
+                    curl_close($ch);
+            }
+                
+            catch (Exception $exception){
+                //echo $exception->getMessage();
+                $arr = ['echec'];
+                return($arr);
+            }
+        }
 
-        // dd($certificate);
-
-        // Générer le PDF avec un design épuré et élégant
-        $pdf = Pdf::loadView('certificates.receipt', $data)
-            ->setPaper('a4', 'portrait');
-
-
-        // Afficher le PDF dans une nouvelle fenêtre du navigateur
-        return response()->stream(fn() => print($pdf->output()), 200, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="Quitance_Certificate_Propriate' . Str::random(10) . '.pdf"',
-        ]);
     }
 
     public function render()
