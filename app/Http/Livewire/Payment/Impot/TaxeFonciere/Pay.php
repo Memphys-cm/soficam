@@ -96,10 +96,15 @@ class Pay extends Component
             'service' => $operator,
             'payer' => $telephone,
             'nonce' => RandomGenerator::nonce(),
-            'trxID' => '1'
+            'trxID' => '1',
+            'mode' => 'asynchronous'
         ]);
 
-        return $response;
+        sleep(30);
+
+        $transactions = $client->getTransactions([$response->transaction->pk]);
+
+        return $transactions;
     }
 
     public function store()
@@ -112,42 +117,22 @@ class Pay extends Component
             $divisions = Division::where('id', $this->division_id)->first();
             $conservations = Conservation::where('id', $this->conservation_id)->first();
 
-            $transaction = $this->retrait($this->telephone, $this->operator);
+            $response = $this->retrait($this->telephone, $this->operator);
+            dd($response);
 
-            $response = $transaction->getTransactions([$transaction->transaction->pk]);
-
-            if ($response->transaction->status == "SUCCESS") {
+            if ($response->status == "SUCCESS") {
                 // Retourner true si l'opération est réussie
-                $data = [
-                    'qualification' => $this->qualification,
-                    'region' => $region->region_name_fr,
-                    'division' => $divisions->division_name_fr,
-                    'subDivision' => $conservations->conservation_name_fr,
-                    'titre_foncier' => $this->titre_foncier,
-                    'nom' => $this->nom ?? 'N/A',
-                    'prenom' => $this->prenom ?? 'N/A',
-                    'profession' => $this->profession ?? 'N/A',
-                    'motifs' => $this->motifs ?? 'N/A',
-                    'telephone' => $this->telephone ?? 'N/A',
-                    'email' => $this->email ?? 'N/A',
-                    'localisation' => $this->localisation ?? 'N/A',
-                    'identifiant' => $this->identifiant ?? 'N/A',
-                    'date' => now()->format('d/m/Y'),
-                ];
 
-                $pdf = Pdf::loadView('certificates.receipt', $data)
-                    ->setPaper('a4', 'portrait');
 
 
                 $this->certificat->status_tax = "payer";
                 $this->certificat->save();
                 // Afficher le PDF dans une nouvelle fenêtre du navigateur
-                return response()->stream(fn() => print($pdf->output()), 200, [
-                    'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => 'inline; filename="Quitance_Taxe_fonciere' . Str::random(10) . '.pdf"',
-                ]);
+
 
                 session()->flash('message', 'Demande enregistrée avec succès.');
+
+                return redirect()->route('portal.allsales.index');
             } else {
                 // Retourner false en cas d'échec
                 dd('false');
@@ -159,6 +144,34 @@ class Pay extends Component
 
         // Réinitialiser le formulaire
         // $this->reset();
+    }
+
+    public function generate()
+    {
+        $data = [
+            'qualification' => $this->qualification,
+            'region' => $region->region_name_fr,
+            'division' => $divisions->division_name_fr,
+            'subDivision' => $conservations->conservation_name_fr,
+            'titre_foncier' => $this->titre_foncier,
+            'nom' => $this->nom ?? 'N/A',
+            'prenom' => $this->prenom ?? 'N/A',
+            'profession' => $this->profession ?? 'N/A',
+            'motifs' => $this->motifs ?? 'N/A',
+            'telephone' => $this->telephone ?? 'N/A',
+            'email' => $this->email ?? 'N/A',
+            'localisation' => $this->localisation ?? 'N/A',
+            'identifiant' => $this->identifiant ?? 'N/A',
+            'date' => now()->format('d/m/Y'),
+        ];
+
+        $pdf = Pdf::loadView('certificates.receipt', $data)
+            ->setPaper('a4', 'portrait');
+
+        return response()->stream(fn() => print($pdf->output()), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="Quitance_Taxe_fonciere' . Str::random(10) . '.pdf"',
+        ]);
     }
 
 
