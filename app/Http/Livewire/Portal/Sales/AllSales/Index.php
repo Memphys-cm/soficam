@@ -145,7 +145,6 @@ class Index extends Component
             }
             if($this->codeTresorPay == null){
                 $saleable_item->sale->sales_code = '24STATE00002';
-                $this->sms($saleable_item->sale->certificat_id);
             }
             else{
                 $saleable_item->sale->sales_code = $this->codeTresorPay;
