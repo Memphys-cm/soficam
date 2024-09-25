@@ -13,14 +13,14 @@
             <div>
                 <div class="form-check form-switch mb-3">
                     <input class="form-check-input" type="checkbox" id="statusSwitch" wire:model="status_apres_publication">
-                    <label class="form-check-label" for="statusSwitch">Statut après publication d'avis</label>
+                    <label class="form-check-label" for="statusSwitch">{{ __('Statut après publication d\'avis') }}</label>
                     @error('status_apres_publication')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label for="statusDate" class="form-label">Date du Statut après publication d'avis</label>
+                    <label for="statusDate" class="form-label">{{ __('Date du Statut après publication d\'avis') }}</label>
                     <input type="date" class="form-control" id="statusDate" wire:model="status_apres_publication_date">
                     @error('status_apres_publication_date')
                         <span class="text-danger">{{ $message }}</span>
@@ -29,14 +29,14 @@
 
                 <div class="form-check form-switch mb-3">
                     <input class="form-check-input" type="checkbox" id="calendarSwitch" wire:model="calendarDecision" @if(!$status_apres_publication) disabled @endif>
-                    <label class="form-check-label" for="calendarSwitch">Décision portant calendrier de descente sur terrain</label>
+                    <label class="form-check-label" for="calendarSwitch">{{ __('Décision portant calendrier de descente sur terrain') }}</label>
                     @error('calendarDecision')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label for="calendarDecisionDate" class="form-label">Date de la Décision concernant le calendrier</label>
+                    <label for="calendarDecisionDate" class="form-label">{{ __('Date de la Décision concernant le calendrier') }}</label>
                     <input type="date" class="form-control" id="calendarDecisionDate" wire:model="calendarDecision_date" @if(!$status_apres_publication) disabled @endif>
                     @error('calendarDecision_date')
                         <span class="text-danger">{{ $message }}</span>
