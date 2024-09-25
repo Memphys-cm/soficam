@@ -6,7 +6,7 @@
                     {{ __('Etablissement De L\'ordre de versement de la redevance fonciere') }}
                 </h1>
                 <p class="px-1">
-                    {{ __('Etablir') }}{{ __('L\'ordre de versement de la redevance fonciere') }}
+                    {{ __('Etablir L\'ordre de versement de la redevance fonciere') }}
                 </p>
             </div>
             <x-form-items.form wire:submit="ordre_redevance_fonciere">

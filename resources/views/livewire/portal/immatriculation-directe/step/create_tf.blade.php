@@ -37,7 +37,7 @@
             @enderror
         </div>
         <button wire:click="create_tf" class="btn btn-soft-lg px-5 py-3 shadow" type="button">
-            <i class="fas fa-file-alt me-2"></i> Créer le Titre Foncier
+            <i class="fas fa-file-alt me-2"></i> {{ __('Créer le Titre Foncier') }}
         </button>
     </x-form-items.form>
 </div>

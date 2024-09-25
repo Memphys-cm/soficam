@@ -7,7 +7,7 @@
                     <div class="mb-3 text-primary">
                         <i class="bi bi-upc-scan display-6 text-success"></i>
                     </div>
-                    <h5 class="fw-bold">Référence</h5>
+                    <h5 class="fw-bold">{{__('Référence')}}</h5>
                     <p class="mb-0">{{ $imma_directe->reference }}</p>
                 </div>
             </div>
@@ -18,7 +18,7 @@
                     <div class="mb-3 text-primary">
                         <i class="bi bi-arrows-fullscreen display-6 text-success"></i>
                     </div>
-                    <h5 class="fw-bold">Superficie</h5>
+                    <h5 class="fw-bold">{{__('Superficie')}}</h5>
                     <p class="mb-0">{{ $imma_directe->superficie }} m2</p>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                     <div class="mb-3 text-primary">
                         <i class="bi bi-geo-alt display-6 text-info"></i>
                     </div>
-                    <h5 class="fw-bold">Localisation</h5>
+                    <h5 class="fw-bold">{{__('Localisation')}}</h5>
                     <p class="mb-0">{{ $imma_directe->localisation }}</p>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                     <div class="mb-3 text-primary text-danger">
                         <i class="bi bi-geo display-6"></i>
                     </div>
-                    <h5 class="fw-bold">Région</h5>
+                    <h5 class="fw-bold">{{__('Région')}}</h5>
                     <p class="mb-0">{{ $imma_directe->region->region_name_fr }}</p>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                     <div class="mb-3 text-primary">
                         <i class="bi bi-card-checklist display-6 text-secondary"></i>
                     </div>
-                    <h5 class="fw-bold">État du Terrain</h5>
+                    <h5 class="fw-bold">{{__('État du Terrain')}}</h5>
                     <p class="mb-0">{{ $imma_directe->etat_terrain }}</p>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                     <div class="mb-3 text-primary">
                         <i class="bi bi-file-earmark display-6 text-info"></i>
                     </div>
-                    <h5 class="fw-bold">Source du Terrain</h5>
+                    <h5 class="fw-bold">{{__('Source du Terrain')}}</h5>
                     <p class="mb-0">{{ $imma_directe->source_terrain }}</p>
                 </div>
             </div>
@@ -106,7 +106,7 @@
                     <div class="mb-3 text-primary">
                         <i class="bi bi-bookmark-star display-6 text-warning"></i>
                     </div>
-                    <h5 class="fw-bold">Statut</h5>
+                    <h5 class="fw-bold">{{__('Statut')}}</h5>
                     <p class="mb-0">
                         <span class="badge bg-{{ $imma_directe->StatutStyle }}">{{ $imma_directe->statut }}</span>
                     </p>
@@ -119,7 +119,7 @@
                     <div class="mb-3 text-primary">
                         <i class="bi bi-arrow-right-circle display-6 text-info"></i>
                     </div>
-                    <h5 class="fw-bold">Prochaine Étape</h5>
+                    <h5 class="fw-bold">{{__('Prochaine Étape')}}</h5>
                     <p class="mb-0 badge bg-primary">{{ $imma_directe->next_step }}</p>
                 </div>
             </div>

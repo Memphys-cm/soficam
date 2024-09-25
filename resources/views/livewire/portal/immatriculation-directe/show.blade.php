@@ -10,7 +10,7 @@
             </li>
             <li class="breadcrumb-item active text-primary d-flex align-items-center" aria-current="page">
                 <i class="bi bi-journal-text me-2"></i>
-                <span class="fw-bold">Immatriculation Directe : {{ $imma_directe->reference }}</span>
+                <span class="fw-bold">{{__('Immatriculation Directe')}} : {{ $imma_directe->reference }}</span>
 
                 @if (!$imma_directe)
                     <span class="badge bg-secondary ms-3 d-flex align-items-center">
@@ -25,9 +25,9 @@
                         <i class="bi bi-check-circle me-1"></i> Terminée
                     </span>
                 @endif
-                <span class="fw-bold mx-1"> étape en cours </span>
+                <span class="fw-bold mx-1"> {{__('étape en cours')}} </span>
                 <span class="mx-2 badge bg-warning">{{ $imma_directe->statut }}</span>
-                <span class="fw-bold mx-1"> Prochaine étape </span>
+                <span class="fw-bold mx-1"> {{__('Prochaine étape')}} </span>
                 <span class="mx-2 badge bg-{{ $imma_directe->StatutStyle }}">{{ $imma_directe->next_step }}</span>
             </li>
         </ol>
@@ -102,7 +102,7 @@ $bgClass = $isCompleted
                             2 => __('2- Cotation du Dossier au Csdaf'),
                             3 => __('3- Délivrance de l\'Ordre de Versement'),
                             4 => __(
-                                '4- Changements de Statut après la Publication d’Avis et décision portant calendrier de descente sur le terrain',
+                                '4- Changements de Statut après la Publication d\'Avis et décision portant calendrier de descente sur le terrain',
                             ),
                             5 => __('5- Génération du Certificat d\'Affichage'),
                             6 => __('6- Changements de Statut liés au Certificat d\'Affichage'),
@@ -112,7 +112,7 @@ $bgClass = $isCompleted
                             8 => __('8- Établissement de l\'État de Cession et Paiement'),
                             9 => __('9- Instruction de la Descente sur le Terrain'),
                             10 => __('10- Changement de Statut après la Descente sur le Terrain'),
-                            11 => __('11- Dépôt de la quittance de l’état de cession auprès du géomètre désigné'),
+                            11 => __('11- Dépôt de la quittance de l\'état de cession auprès du géomètre désigné'),
                             12 => __('12- Mise à Jour du Dossier Technique'),
                             13 => __('13- Mise en Forme du Dossier Administratif'),
                         ],
@@ -120,7 +120,7 @@ $bgClass = $isCompleted
                             14 => __('14- Changements de Statut après Transmission dossier technique au CSDAF'),
                             15 => __('15- Établissement du Bordereau de Transmission'),
                             16 => __('16- Transmission du dossier technique au Délégué Régional MINDCAF'),
-                            17 => __('17- Cotation du dossier complet d’immatriculation directe au CSRDAF'),
+                            17 => __('17- Cotation du dossier complet d\'immatriculation directe au CSRDAF'),
                         ],
                         4 => [
                             18 => __('18- Finalisation et Clôture du Dossier'),
