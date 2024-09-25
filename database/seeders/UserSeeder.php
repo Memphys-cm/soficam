@@ -30,6 +30,7 @@ class UserSeeder extends Seeder
             'email' => 'balg1a@gmail.com',
             'is_active' => 1,
             'sexe' => 'F',
+            'is_mobility' => 1,
             'password' => bcrypt('password'),
         ]);
 
@@ -47,6 +48,7 @@ class UserSeeder extends Seeder
             'email' => 'atangana@gmail.com',
             'is_active' => 1,
             'sexe' => 'M',
+            'is_mobility' => 1,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
 
@@ -64,6 +66,7 @@ class UserSeeder extends Seeder
             'email' => 'koupit@gmail.com',
             'is_active' => 1,
             'sexe' => 'F',
+            'is_mobility' => 1,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
 
@@ -81,6 +84,7 @@ class UserSeeder extends Seeder
             'email' => 'chedjou@gmail.com',
             'is_active' => 1,
             'sexe' => 'M',
+            'is_mobility' => 0,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
 
@@ -98,6 +102,7 @@ class UserSeeder extends Seeder
             'email' => 'tengoua@gmail.com',
             'is_active' => 1,
             'sexe' => 'M',
+            'is_mobility' => 0,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
 
@@ -115,6 +120,7 @@ class UserSeeder extends Seeder
             'email' => 'ambassa@gmail.com',
             'is_active' => 1,
             'sexe' => 'F',
+            'is_mobility' => 1,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
 
@@ -132,6 +138,7 @@ class UserSeeder extends Seeder
             'email' => 'ondoa@gmail.com',
             'is_active' => 1,
             'sexe' => 'F',
+            'is_mobility' => 0,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
 
@@ -149,6 +156,7 @@ class UserSeeder extends Seeder
             'email' => 'bidias@gmail.com',
             'is_active' => 1,
             'sexe' => 'M',
+            'is_mobility' => 1,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
 
@@ -166,6 +174,7 @@ class UserSeeder extends Seeder
             'email' => 'baba@gmail.com',
             'is_active' => 1,
             'sexe' => 'M',
+            'is_mobility' => 1,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
 
@@ -183,6 +192,7 @@ class UserSeeder extends Seeder
             'email' => 'njoyaa@gmail.com',
             'is_active' => 1,
             'sexe' => 'M',
+            'is_mobility' => 0,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
 
@@ -200,6 +210,7 @@ class UserSeeder extends Seeder
             'email' => 'priso1@gmail.com',
             'is_active' => 1,
             'sexe' => 'M',
+            'is_mobility' => 1,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
 
@@ -217,6 +228,7 @@ class UserSeeder extends Seeder
             'email' => 'magne@gmail.com',
             'is_active' => 1,
             'sexe' => 'F',
+            'is_mobility' => 1,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
 
@@ -233,6 +245,7 @@ class UserSeeder extends Seeder
             'service_id' => '2',
             'email' => 'cheperter@gmail.com',
             'is_active' => 1,
+            'is_mobility' => 1,
             'sexe' => 'F',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
@@ -251,6 +264,7 @@ class UserSeeder extends Seeder
             'service_id' => '2',
             'email' => 'somependa@gmail.com',
             'is_active' => 1,
+            'is_mobility' => 1,
             'sexe' => 'M',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
@@ -268,6 +282,7 @@ class UserSeeder extends Seeder
             'service_id' => '2',
             'email' => 'mohamadu@gmail.com',
             'is_active' => 1,
+            'is_mobility' => 0,
             'sexe' => 'F',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
@@ -285,6 +300,7 @@ class UserSeeder extends Seeder
             'service_id' => '2',
             'email' => 'tiaga@gmail.com',
             'is_active' => 1,
+            'is_mobility' => 1,
             'sexe' => 'M',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
@@ -303,6 +319,7 @@ class UserSeeder extends Seeder
             'service_id' => '2',
             'email' => 'anegoue1@gmail.com',
             'is_active' => 1,
+            'is_mobility' => 0,
             'sexe' => 'M',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
@@ -355,6 +372,7 @@ class UserSeeder extends Seeder
             'service_id' => '2',
             'email' => 'mbezele@gmail.com',
             'is_active' => 1,
+            'is_mobility' => 1,
             'sexe' => 'M',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
@@ -373,6 +391,7 @@ class UserSeeder extends Seeder
             'service_id' => '2',
             'email' => 'chofor@gmail.com',
             'is_active' => 1,
+            'is_mobility' => 0,
             'sexe' => 'M',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
@@ -391,6 +410,7 @@ class UserSeeder extends Seeder
             'service_id' => '2',
             'email' => 'bessang@gmail.com',
             'is_active' => 1,
+            'is_mobility' => 0,
             'sexe' => 'M',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
@@ -409,6 +429,7 @@ class UserSeeder extends Seeder
             'service_id' => '2',
             'email' => 'njieh@gmail.com',
             'is_active' => 1,
+            'is_mobility' => 1,
             'sexe' => 'F',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
@@ -426,6 +447,7 @@ class UserSeeder extends Seeder
             'service_id' => '2',
             'email' => 'esso1@gmail.com',
             'is_active' => 1,
+            'is_mobility' => 1,
             'sexe' => 'M',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
@@ -451,14 +473,5 @@ class UserSeeder extends Seeder
         //         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         //     ]);
         // }
-
-        // Générer 50000 utilisateurs
-
-        DB::transaction(function () {
-            User::factory()->count(400)->create();
-        });
-
-        // Mettre à jour 1500 utilisateurs pour avoir is_mobility = 1
-        User::inRandomOrder()->limit(1500)->update(['is_mobility' => 1]);
     }
 }

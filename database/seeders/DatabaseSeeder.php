@@ -24,14 +24,14 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesAndPermissionsSeeder::class);
 
         \App\Models\User::create([
-            'first_name' => fake()->name(),
-            'last_name' => fake()->name(),
+            'first_name' => 'MINECAF',
+            'last_name' => 'ADMIN',
             'sexe' => 'M', // Ajouter le sexe généré aléatoirement
             'id_card_number' => Str::random(11),
             'date_of_birth' => fake()->date(),
             'place_of_birth' => fake()->country(),
-            'primary_phone_number' => fake()->phoneNumber(),
-            'secondary_phone_number' => fake()->phoneNumber(),
+            'primary_phone_number' => "677550820",
+            'secondary_phone_number' => "677550820",
             'address' => fake()->address(),
             'email' => 'super_admin@app.com',
             'email_verified_at' => now(),
