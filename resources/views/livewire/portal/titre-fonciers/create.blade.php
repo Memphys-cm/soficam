@@ -110,16 +110,6 @@
                                 @error('land_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-
-                                <!-- Champ Input: Affiché si manualVillage est vrai -->
-                                @if ($manualVillage)
-                                    <input type="text" wire:model="manualVillageName" name="manualVillageName"
-                                        class="form-control @error('manualVillageName') is-invalid @enderror"
-                                        placeholder="{{ __('Entrez le nom du village') }}">
-                                    @error('manualVillageName')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                @endif
                             </div>
 
                             <div class='col'>

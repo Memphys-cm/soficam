@@ -810,6 +810,7 @@ class Show extends Component
             'limit_est' => $this->imma_directe->limit_est,
             'limit_ouest' => $this->imma_directe->limit_ouest,
             'recorded_by' => auth()->user()->name,
+            'land_id' => $this->imma_directe->land_id,
             'nom_et_prenoms_de_largent_traitant' => auth()->user()->name,
             // 'conservateur_id' => $this->conservateur_id,
             'numero_ccp' => $this->imma_directe->numero_cp,
