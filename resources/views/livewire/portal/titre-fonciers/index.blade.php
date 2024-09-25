@@ -215,7 +215,7 @@
                             </div>
                         </td>
                         <td>
-                            <span class="fw-bolder mx-2"> {{$titrefoncier->land->market_value}} {{__('Fcfa')}} </span>
+                            <span class="fw-bolder mx-2"> {{$titrefoncier->land->market_value * $titrefoncier->superficie_du_TF_mere}} {{__('Fcfa')}}({{$titrefoncier->land->market_value}}f/m2)</span>
                         </td>
                         <td>
                             <div class="d-flex align-items-centerpy-1">
