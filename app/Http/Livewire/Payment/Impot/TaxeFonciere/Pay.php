@@ -118,7 +118,8 @@ class Pay extends Component
             $conservations = Conservation::where('id', $this->conservation_id)->first();
 
             $response = $this->retrait($this->telephone, $this->operator);
-            if ($response->status == "SUCCESS") {
+            $transaction = $response[0];
+            if ($transaction->status == "SUCCESS" || $transaction->status == "PENDING") {
                 // Retourner true si l'opération est réussie
 
 
@@ -130,7 +131,7 @@ class Pay extends Component
 
                 session()->flash('message', 'Demande enregistrée avec succès.');
 
-                return redirect()->route('portal.allsales.index');
+                return redirect()->route('portal.taxfonciere.suivi.index');
             } else {
                 return redirect()->back();
 
@@ -142,33 +143,19 @@ class Pay extends Component
         // $this->reset();
     }
 
-    public function generate()
+    public function retraits()
     {
-        $data = [
-            'qualification' => $this->qualification,
-            'region' => $region->region_name_fr,
-            'division' => $divisions->division_name_fr,
-            'subDivision' => $conservations->conservation_name_fr,
-            'titre_foncier' => $this->titre_foncier,
-            'nom' => $this->nom ?? 'N/A',
-            'prenom' => $this->prenom ?? 'N/A',
-            'profession' => $this->profession ?? 'N/A',
-            'motifs' => $this->motifs ?? 'N/A',
-            'telephone' => $this->telephone ?? 'N/A',
-            'email' => $this->email ?? 'N/A',
-            'localisation' => $this->localisation ?? 'N/A',
-            'identifiant' => $this->identifiant ?? 'N/A',
-            'date' => now()->format('d/m/Y'),
-        ];
-
-        $pdf = Pdf::loadView('certificates.receipt', $data)
-            ->setPaper('a4', 'portrait');
-
-        return response()->stream(fn() => print($pdf->output()), 200, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="Quitance_Taxe_fonciere' . Str::random(10) . '.pdf"',
+        $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
+        // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
+        $client->makeDeposit([
+            'amount' => 900,
+            'service' => 'MTN',
+            'receiver' => '651897233',
+            'nonce' => RandomGenerator::nonce(),
+            'trxID' => '1'
         ]);
     }
+
 
 
     public function render()
