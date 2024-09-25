@@ -58,5 +58,32 @@ class ImmatriculationDirecte extends Model implements HasMedia
         return $this->belongsTo(SubDivision::class);
     }
 
+    public static function search($query)
+    {
+        return empty($query) ?
+            static::query() :
+            static::query()
+            ->where(function ($q) use ($query) {
+                $q->where('reference', 'like', '%' . $query . '%');
+                $q->orWhere('localisation', 'like', '%' . $query . '%');                
+                $q->orWhere('zone', 'like', '%' . $query . '%');             
+                $q->orWhereHas('region', function ($q) use ($query) {
+                    $q->where('region_name_en', 'like', '%' . $query . '%');
+                    $q->where('region_name_fr', 'like', '%' . $query . '%');
+                });
+                $q->orWhereHas('division', function ($q) use ($query) {
+                    $q->where('division_name_en', 'like', '%' . $query . '%');
+                    $q->where('division_name_fr', 'like', '%' . $query . '%');
+                });
+                $q->orWhereHas('subDivision', function ($q) use ($query) {
+                    $q->where('sub_division_name_en', 'like', '%' . $query . '%');
+                    $q->where('sub_division_name_fr', 'like', '%' . $query . '%');
+                });
+                    $q->orWhereHas('users', function ($q) use ($query) {
+                    $q->where('first_name', 'like', '%' . $query . '%');
+                    $q->orWhere('last_name', 'like', '%' . $query . '%');
+                }); 
+         });
+    }
 
 }

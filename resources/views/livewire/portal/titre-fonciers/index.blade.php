@@ -174,6 +174,7 @@
                         <th class="border-bottom">{{ __('Date Délivrance') }}</th>
                         <th class="border-bottom">{{ __('Propriétaire(s)') }}</th>
                         <th class="border-bottom">{{ __('Localisation') }}</th>
+                        <th class="border-bottom">{{ __('Valeur Venale') }}</th>
                         <th class="border-bottom">{{ __('Limites') }}</th>
                         <th class="border-bottom">{{ __('Coordonnées utm') }}</th>
                         <th class="border-bottom">{{ __('Coordonnées long , lat') }}</th>
@@ -212,6 +213,9 @@
                             <div class="d-flex align-items-centerpy-1">
                                 {{__('Lieu Dit')}} : <span class="fw-bolder mx-2"> {{$titrefoncier->land ? $titrefoncier->land->name : ""}} </span>
                             </div>
+                        </td>
+                        <td>
+                            <span class="fw-bolder mx-2"> {{$titrefoncier->land->market_value}} {{__('Fcfa')}} </span>
                         </td>
                         <td>
                             <div class="d-flex align-items-centerpy-1">
