@@ -124,7 +124,8 @@ class Index extends Component
     public function store()
     {
         $response = $this->retrait($this->telephone, $this->operator);
-            if ($response->status == "SUCCESS") {
+        $transaction = $response[0];
+        if ($transaction->status == "SUCCESS" || $transaction->status == "PENDING") {
                 if ($this->certificat) {
 
                     $this->validate([

@@ -128,7 +128,7 @@ class Show extends Component
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
-        $this->lands = Land::select('id', 'name', 'market_value')->get();
+        $this->lands = Land::select('id', 'name')->get();
 
         // Calculer montant ordre redevance foncière
         $selectedSubDivision = SubDivision::findOrFail($this->sub_division_id);
