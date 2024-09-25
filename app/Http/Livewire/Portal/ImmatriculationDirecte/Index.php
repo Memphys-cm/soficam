@@ -1173,9 +1173,9 @@ class Index extends Component
 
     public function render()
     {
-        $imma_directes = ImmatriculationDirecte::
+        $imma_directes = ImmatriculationDirecte::search($this->query)
             // withCount('users')->
-            orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
+            ->orderBy($this->orderBy, $this->orderAsc)->paginate($this->perPage);
 
         $imma_directes_count = ImmatriculationDirecte::count();
 

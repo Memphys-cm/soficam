@@ -99,6 +99,22 @@
                     <p class="mb-0">{{ $imma_directe->subDivision->sub_division_name_fr }}</p>
                 </div>
             </div>
+            <!-- Statut -->
+            <div class="col-12">
+                <div class="p-4 bg-light rounded shadow-sm h-100 d-flex flex-column">
+                    <div class="mb-3 text-primary">
+                        <i class="bi bi-bookmark-star display-6 text-warning"></i>
+                    </div>
+                    <h5 class="fw-bold">Coordonnees</h5>
+                    <p class="mb-0">
+                        @foreach(collect(json_decode($imma_directe->coordonnees,true)) as $key => $value)
+                        <div class="d-flex align-items-centerpy-1">
+                            <span class="fw-bolder mx-2"> {{ $key }} :</span> {{ $value}}
+                        </div>
+                        @endforeach
+                    </p>
+                </div>
+            </div>
 
             <!-- Statut -->
             <div class="col-md-6 col-lg-4">
