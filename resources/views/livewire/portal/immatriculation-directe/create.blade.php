@@ -118,6 +118,16 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-group mb-3 row">
+                            <div class='col'>
+                                <label class="px-2" for="land_id">{{ __('Village/Lieu dit') }}</label>
+                                <x-input.select wire:model="land_id" prettyname="land"
+                                :options="$lands->pluck('name', 'id')->toArray()" selected="('land_id')" />
+                                 @error('land_id')
+                                     <div class="invalid-feedback">{{ $message }}</div>
+                                 @enderror
+                             </div>
+                        </div>
                         <div class="p-3 shadow my-4">
                             <h2 class="h5 mb-4">{{__('Ajouter les fichiers')}}</h2>
                             <div class="d-xl-flex align-items-center">
