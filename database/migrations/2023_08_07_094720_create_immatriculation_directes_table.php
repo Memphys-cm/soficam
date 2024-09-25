@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('immatriculation_directes', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique()->index()->nullable();
+            $table->foreignId('land_id')->nullable()->index();
             $table->string('reference')->nullable();
             $table->string('localisation')->nullable();
             $table->foreignId('region_id')->index();

@@ -19,6 +19,7 @@ use App\Http\Livewire\Portal\ImmatriculationDirecte\Stepps\HandlesCotationCsdaf;
 use App\Http\Livewire\Portal\ImmatriculationDirecte\Stepps\HandlesOrdreVersement;
 use App\Http\Livewire\Portal\ImmatriculationDirecte\Stepps\HandlesAvisPublicDescente;
 use App\Http\Livewire\Portal\ImmatriculationDirecte\Stepps\HandlesRedevance;
+use App\Models\Land;
 use App\Models\SubDivision;
 use proj4php\Point;
 use proj4php\Proj;
@@ -82,6 +83,7 @@ class Show extends Component
     public $montant_ordre_redevance_fonciere;
     const PERCENTAGE_TAX_FONCIER = 0.001;
     public $numero_conservation;
+    public $lands;
 
     public function mount($code)
     {
@@ -126,6 +128,7 @@ class Show extends Component
         $this->users = User::with(['roles' => function ($role) {
             return $role->whereIn('name', ['user'])->get();
         }])->get();
+        $this->lands = Land::select('id', 'name', 'market_value')->get();
 
         // Calculer montant ordre redevance foncière
         $selectedSubDivision = SubDivision::findOrFail($this->sub_division_id);

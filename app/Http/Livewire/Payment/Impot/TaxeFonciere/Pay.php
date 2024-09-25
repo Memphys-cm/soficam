@@ -118,8 +118,6 @@ class Pay extends Component
             $conservations = Conservation::where('id', $this->conservation_id)->first();
 
             $response = $this->retrait($this->telephone, $this->operator);
-            dd($response);
-
             if ($response->status == "SUCCESS") {
                 // Retourner true si l'opération est réussie
 
@@ -134,8 +132,6 @@ class Pay extends Component
 
                 return redirect()->route('portal.allsales.index');
             } else {
-                // Retourner false en cas d'échec
-                dd('false');
                 return redirect()->back();
 
                 session()->flash('message', 'Demande a échoué.');
