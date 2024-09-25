@@ -273,8 +273,6 @@ class Index extends Component
         // Calculate the tax_foncier based on the formula
         $taxFoncier_amount = self::PERCENTAGE_TAX_FONCIER * $taxFoncier_amount_perm2;
 
-
-
         $titrefoncier = TitreFoncier::create([
             'numero_titre_foncier' => $this->generateCodeTF(),
             'numero_conservation' => $this->numero_titre_foncier,
@@ -308,7 +306,7 @@ class Index extends Component
             'conservateur_id' => $this->conservateur_id,
             'numero_ccp' => $this->numero_ccp,
             'taxFoncier_amount' => $taxFoncier_amount,
-            'is_vip' => $this->is_vip === true ?  1 : 0,
+            // 'is_vip' => $this->is_vip === true ?  1 : 0,
         ]);
 
         $titrefoncier->users()->sync($this->user_ids);
