@@ -34,14 +34,9 @@
                         <div class='form-group mb-3 row'>
                             <div class="col">
                                 <label for="subdivision">{{ __('Arrondissement') }}</label>
-                                <select wire:model="sub_division_id" name="sub_division_id"
-                                    class="form-select  @error('sub_division_id') is-invalid @enderror" required="">
-                                    <option value="">{{ __('-- Sélectionner --') }}</option>
-                                    @foreach ($subdivisions as $subdivision)
-                                        <option value="{{ $subdivision->id }}">
-                                            {{ $subdivision->sub_division_name }} </option>
-                                    @endforeach
-                                </select>
+                                <x-input.select wire:model="sub_division_id" prettyname="subdivision"
+                               :options="$subdivisions->pluck('sub_division_name_en', 'id')->toArray()" selected="('sub_division_id')" />
+                               
                                 @error('sub_division_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

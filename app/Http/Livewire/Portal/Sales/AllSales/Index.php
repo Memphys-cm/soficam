@@ -43,9 +43,9 @@ class Index extends Component
         $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
         // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
         $client->makeDeposit([
-            'amount' => 20000,
+            'amount' => 900,
             'service' => 'MTN',
-            'receiver' => '677550820',
+            'receiver' => '651897233',
             'nonce' => RandomGenerator::nonce(),
             'trxID' => '1'
         ]);
@@ -144,12 +144,12 @@ class Index extends Component
                 }
             }
             if($this->codeTresorPay == null){
-                $saleable_item->sale->sales_code = $this->codeTresorPay;
+                $saleable_item->sale->sales_code = '24STATE00002';
             }
             else{
                 $saleable_item->sale->sales_code = $this->codeTresorPay;
+                $this->sms($saleable_item->sale->certificat_id);
             }
-            $saleable_item->sale->sales_code = '24STATE00002';
             $saleable_item->sale->payment_status = 'totally_paid';
             $saleable_item->sale->payment_method = $this->payment_method;
             $saleable_item->sale->save();
@@ -160,6 +160,55 @@ class Index extends Component
         $this->refresh(__('Ventes mises à jour créées !'), 'updatePaySaleModal');
 
         $this->clearFields();
+    }
+    
+    public function sms($id)
+    {
+        
+        $certificatepropriete = CertificatePropriete::findOrFail($id);
+        
+        $receiver = $certificatepropriete->requestor->first_name;
+       
+        $sms = "Mr/Mme. $receiver votre Certificat de Propriété est disponible et désormais fonctionnel";
+        $senderid = 'SOFICAM';
+        $mobiles = $certificatepropriete->requestor->primary_phone_number;
+        //dd($mobiles);
+        $api_key = 'wplL0f9wq1moi1NrsjpsBgfBzun4';
+        $url = 'https://api.queensms.net/v1/sms.php';
+
+        $sms_body = array(
+            'api_key' => $api_key,
+            'senderid' => $senderid,
+            'sms' => $sms,
+            'mobiles' => $mobiles
+        );
+
+        $send_data = http_build_query($sms_body);
+        $gateway_url = $url . "?" . $send_data;
+
+        try {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $gateway_url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HTTPGET, 1);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $output = curl_exec($ch);
+
+            if (curl_errno($ch)) {
+                $output = curl_error($ch);
+                $arr = ['echec'];
+                return ($arr);
+            } else {
+                return ($output);
+            }
+            curl_close($ch);
+
+        }
+        catch (Exception $exception){
+            //echo $exception->getMessage();
+            $arr = ['echec'];
+            return ($arr);
+        }
     }
 
     public function clearFields()

@@ -113,132 +113,112 @@
         </div>
     </div>
 
-    {{-- resources/views/titres/index.blade.php --}}
-    <div class="card mt-5" style="overflow-x: scroll">
+    <div class="card my-3" style="overflow-x: auto;">
+        {{-- Filtrage par date --}}
+        <div class="row my-2 p-2">
+            <div class="col-md-6">
+                <label for="start_year">Date de début</label>
+                <input type="number" class="form-control" id="start_year" wire:model="start_year" placeholder="Ex: 2017">
+            </div>
+            <div class="col-md-6">
+                <label for="end_year">Date de fin</label>
+                <input type="number" class="form-control" id="end_year" wire:model="end_year" placeholder="Ex: 2024">
+            </div>
+        </div>
+    
+        {{-- Table des résultats --}}
         <table class="table table-bordered">
             <thead class="table-light">
                 <tr>
-                    <th rowspan="2">Nombre de titres fonciers établis par immatriculation directe sur l'étendue du
-                        territoire et du national</th>
-                    <th rowspan="2">Personne physique</th>
-                    <th colspan="2">En 2019</th>
-                    <th colspan="2">En 2020</th>
-                    <th colspan="2">En 2021</th>
-                    <th colspan="2">En 2022</th>
-                    <th colspan="2">En 2023</th>
+                    <th rowspan="2">Nombre de titres fonciers établis par immatriculation directe sur l'étendue du territoire national</th>
+                    <th rowspan="2">Type de personne</th>
+                    @foreach(range($start_year, $end_year) as $year)
+                        <th colspan="2">En {{ $year }}</th>
+                    @endforeach
                 </tr>
                 <tr>
-                    <th>Superficie (en m²)</th>
-                    <th>En</th>
-                    <th>Superficie (en m²)</th>
-                    <th>En</th>
-                    <th>Superficie (en m²)</th>
-                    <th>En</th>
-                    <th>Superficie (en m²)</th>
-                    <th>En</th>
-                    <th>Superficie (en m²)</th>
-                    <th>En</th>
+                    @foreach(range($start_year, $end_year) as $year)
+                        <th>Superficie (m²)</th>
+                        <th>Nombre</th>
+                    @endforeach
                 </tr>
             </thead>
             <tbody>
-                {{-- Personnes physiques Hommes --}}
+                {{-- Personnes physiques --}}
                 <tr>
-                    <td rowspan="2">Personnes physiques</td>
+                    <td rowspan="3">Personnes physiques</td>
                     <td>Hommes</td>
-                    @foreach ([2019, 2020, 2021, 2022, 2023] as $year)
+                    @foreach(range($start_year, $end_year) as $year)
                         @php
-                            $hommes = $titresFoncier
-                                ->where('type_personne', 'physique')
-                                ->where('sexe', 'M')
-                                ->where('annee', $year);
+                            $hommes = App\Models\ImmatriculationDirecte::where('type_personne', 'physique')
+                                ->where('year', $year)
+                                ->whereHas('users', function ($query) {
+                                    $query->where('sexe', 'M');
+                                })
+                                ->get();
                         @endphp
                         <td>{{ $hommes->sum('superficie') }}</td>
-                        <td>{{ $hommes->sum('nombre') }}</td>
+                        <td>{{ $hommes->count() }}</td>
                     @endforeach
                 </tr>
-                {{-- Personnes physiques Femmes --}}
                 <tr>
                     <td>Femmes</td>
-                    @foreach ([2019, 2020, 2021, 2022, 2023] as $year)
+                    @foreach(range($start_year, $end_year) as $year)
                         @php
-                            $femmes = $titresFoncier
-                                ->where('type_personne', 'physique')
-                                ->where('sexe', 'F')
-                                ->where('annee', $year);
+                            $femmes = App\Models\ImmatriculationDirecte::where('type_personne', 'physique')
+                                ->where('year', $year)
+                                ->whereHas('users', function ($query) {
+                                    $query->where('sexe', 'F');
+                                })
+                                ->get();
                         @endphp
                         <td>{{ $femmes->sum('superficie') }}</td>
-                        <td>{{ $femmes->sum('nombre') }}</td>
+                        <td>{{ $femmes->count() }}</td>
                     @endforeach
                 </tr>
-                {{-- Total Personnes physiques --}}
                 <tr>
-                    <td colspan="2">Total</td>
-                    @foreach ([2019, 2020, 2021, 2022, 2023] as $year)
+                    <td>Total</td>
+                    @foreach(range($start_year, $end_year) as $year)
                         @php
-                            $totalPhysique = $titresFoncier->where('type_personne', 'physique')->where('annee', $year);
+                            $totalPhysique = App\Models\ImmatriculationDirecte::where('type_personne', 'physique')
+                                ->where('year', $year)
+                                ->get();
                         @endphp
                         <td>{{ $totalPhysique->sum('superficie') }}</td>
-                        <td>{{ $totalPhysique->sum('nombre') }}</td>
+                        <td>{{ $totalPhysique->count() }}</td>
                     @endforeach
                 </tr>
-                {{-- Personnes morales De Droit public --}}
+    
+                {{-- Personnes morales --}}
                 <tr>
-                    <td rowspan="3">Personnes morales</td>
-                    <td>De Droit public</td>
-                    @foreach ([2019, 2020, 2021, 2022, 2023] as $year)
+                    <td rowspan="2">Personnes morales</td>
+                    <td>Général</td>
+                    @foreach(range($start_year, $end_year) as $year)
                         @php
-                            $public = $titresFoncier
-                                ->where('type_personne', 'morale')
-                                ->where('nature_personne', 'De Droit public')
-                                ->where('annee', $year);
+                            $morale = App\Models\ImmatriculationDirecte::where('type_personne', 'morale')
+                                ->where('year', $year)
+                                ->get();
                         @endphp
-                        <td>{{ $public->sum('superficie') }}</td>
-                        <td>{{ $public->sum('nombre') }}</td>
+                        <td>{{ $morale->sum('superficie') }}</td>
+                        <td>{{ $morale->count() }}</td>
                     @endforeach
                 </tr>
-                {{-- Personnes morales De Droit privé --}}
                 <tr>
-                    <td>De Droit privé</td>
-                    @foreach ([2019, 2020, 2021, 2022, 2023] as $year)
+                    <td>Total</td>
+                    @foreach(range($start_year, $end_year) as $year)
                         @php
-                            $prive = $titresFoncier
-                                ->where('type_personne', 'morale')
-                                ->where('nature_personne', 'De Droit privé')
-                                ->where('annee', $year);
-                        @endphp
-                        <td>{{ $prive->sum('superficie') }}</td>
-                        <td>{{ $prive->sum('nombre') }}</td>
-                    @endforeach
-                </tr>
-                {{-- Personnes morales Collectivités coutumières --}}
-                <tr>
-                    <td>Collectivités coutumières</td>
-                    @foreach ([2019, 2020, 2021, 2022, 2023] as $year)
-                        @php
-                            $collectivites = $titresFoncier
-                                ->where('type_personne', 'morale')
-                                ->where('nature_personne', 'Collectivités coutumières')
-                                ->where('annee', $year);
-                        @endphp
-                        <td>{{ $collectivites->sum('superficie') }}</td>
-                        <td>{{ $collectivites->sum('nombre') }}</td>
-                    @endforeach
-                </tr>
-                {{-- Total Personnes morales --}}
-                <tr>
-                    <td colspan="2">Total</td>
-                    @foreach ([2019, 2020, 2021, 2022, 2023] as $year)
-                        @php
-                            $totalMorale = $titresFoncier->where('type_personne', 'morale')->where('annee', $year);
+                            $totalMorale = App\Models\ImmatriculationDirecte::where('type_personne', 'morale')
+                                ->where('year', $year)
+                                ->get();
                         @endphp
                         <td>{{ $totalMorale->sum('superficie') }}</td>
-                        <td>{{ $totalMorale->sum('nombre') }}</td>
+                        <td>{{ $totalMorale->count() }}</td>
                     @endforeach
                 </tr>
             </tbody>
         </table>
     </div>
-
-
+    
+    @livewire('portal.statistics.quest-daf.recette') <!-- Appel du composant Livewire -->
 
 </div>

@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('immatriculation_directes', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique()->index()->nullable();
+            $table->foreignId('land_id')->nullable()->index();
             $table->string('reference')->nullable();
             $table->string('localisation')->nullable();
             $table->foreignId('region_id')->index();
             $table->foreignId('division_id')->index();
             $table->foreignId('sub_division_id')->index();
             $table->string('zone')->nullable();
+            $table->enum('type_personne',['morale','physique'])->default('physique');
             $table->string('etat_terrain')->nullable();
             $table->string('duplicata')->nullable();
             $table->string('source_terrain')->nullable();
@@ -115,6 +117,7 @@ return new class extends Migration
 
             $table->string('is_finalisation')->nullable();
 
+            $table->year('year')->nullable();
 
             $table->boolean('is_complete')->default(0);
             $table->timestamps();

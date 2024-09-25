@@ -73,7 +73,7 @@ class Index extends Component
 
 
     public $region_code, $division_code , $sub_division_code;
-    public $lands = [];  // Liste des villages
+    public $lands;  // Liste des villages
     public $land_id;  // Sélection du village
     public $manualVillage = false;  // Activer l'entrée manuelle
     public $manualVillageName;  // Nom du village entré manuellement
@@ -100,6 +100,7 @@ class Index extends Component
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
         $this->divisions = Division::select('division_name_en', 'division_name_fr', 'id')->get();
         $this->subdivisions = SubDivision::select('sub_division_name_en', 'sub_division_name_fr', 'id')->get();
+        $this->lands = Land::select('id', 'name', 'market_value')->get();
     }
 
     public function updatedRegionID($region_id)
@@ -273,8 +274,6 @@ class Index extends Component
         // Calculate the tax_foncier based on the formula
         $taxFoncier_amount = self::PERCENTAGE_TAX_FONCIER * $taxFoncier_amount_perm2;
 
-
-
         $titrefoncier = TitreFoncier::create([
             'numero_titre_foncier' => $this->generateCodeTF(),
             'numero_conservation' => $this->numero_titre_foncier,
@@ -308,7 +307,7 @@ class Index extends Component
             'conservateur_id' => $this->conservateur_id,
             'numero_ccp' => $this->numero_ccp,
             'taxFoncier_amount' => $taxFoncier_amount,
-            'is_vip' => $this->is_vip === true ?  1 : 0,
+            // 'is_vip' => $this->is_vip === true ?  1 : 0,
         ]);
 
         $titrefoncier->users()->sync($this->user_ids);
@@ -323,7 +322,7 @@ class Index extends Component
 
         $this->clearFields();
 
-        $this->refresh(__('0 créé avec succes'), 'CreateTitreFoncierModal');
+        $this->refresh(__('Titre foncier créé avec succes'), 'CreateTitreFoncierModal');
     }
 
     public function convertToUTM($decimalCoordinates)

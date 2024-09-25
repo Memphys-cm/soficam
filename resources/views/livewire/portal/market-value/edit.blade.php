@@ -9,51 +9,45 @@
                         <p class="px-1"> {{ __('Valeur Venale') }} </p>
                     </div>
                     <x-form-items.form wire:submit="update">
-                            <div class="form-group mb-3 row">
-                                <div class="col">
-                                    <label for="villageName">{{ __('Village') }}</label>
-                                    <input wire:model="villageName" type="text"
-                                        class="form-control  @error('villageName') is-invalid @enderror"
-                                        placeholder="{{ __('') }}" required="">
-                                    @error('villageName')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                        <div class="form-group mb-3 row">
+                            <div class="col">
+                                <label for="villageName">{{ __('Village') }}</label>
+                                <input wire:model="villageName" type="text"
+                                    class="form-control  @error('villageName') is-invalid @enderror"
+                                    placeholder="{{ __('') }}" required="">
+                                @error('villageName')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                            <div class='form-group mb-3 row'>
-                                <div class="col">
-                                    <label for="market_value">{{ __('Valeur') }}</label>
-                                    <input wire:model="marketValue" type="number"
-                                        class="form-control  @error('marketValue') is-invalid @enderror"
-                                        placeholder="{{ __('') }}" required="">
-                                    @error('marketValue')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                        </div>
+                        <div class='form-group mb-3 row'>
+                            <div class="col">
+                                <label for="market_value">{{ __('Valeur') }}</label>
+                                <input wire:model="marketValue" type="number"
+                                    class="form-control  @error('marketValue') is-invalid @enderror"
+                                    placeholder="{{ __('') }}" required="">
+                                @error('marketValue')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                            <div class='form-group mb-3 row'>
-                                <div class="col">
-                                    <label for="subdivision">{{ __('Arrondissement') }}</label>
-                                    <select wire:model="sub_division_id" name="sub_division_id"
-                                        class="form-select  @error('sub_division_id') is-invalid @enderror"
-                                        required="">
-                                        <option value="">{{ __('-- Sélectionner --') }}</option>
-                                        @foreach ($subdivisions as $subdivision)
-                                            <option value="{{ $subdivision->id }}">
-                                                {{ $subdivision->sub_division_name }} </option>
-                                        @endforeach
-                                    </select>
-                                    @error('sub_division_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                        </div>
+                        <div class='form-group mb-3 row'>
+                            <div class="col">
+                                <label for="subdivision">{{ __('Arrondissement') }}</label>
+                                <x-input.select wire:model="sub_division_id" prettyname="subdivision" :options="$subdivisions->pluck('sub_division_name_en', 'id')->toArray()"
+                                    selected="('sub_division_id')" />
+
+                                @error('sub_division_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                            <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
-                                    data-bs-dismiss="modal">{{ __('Fermer') }}</button>
-                                <button type="submit" wire:click.prevent="update" class="btn btn-primary btn-loading"
-                                    wire:loading.attr="disabled">{{ __('Modifer') }}</button>
-                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"
+                                data-bs-dismiss="modal">{{ __('Fermer') }}</button>
+                            <button type="submit" wire:click.prevent="update" class="btn btn-primary btn-loading"
+                                wire:loading.attr="disabled">{{ __('Modifer') }}</button>
+                        </div>
                     </x-form-items.form>
                 </div>
             </div>
