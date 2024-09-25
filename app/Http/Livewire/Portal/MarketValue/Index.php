@@ -17,7 +17,7 @@ class Index extends Component
 
     public function mount()
     {
-        $this->subdivisions = SubDivision::orderBy('sub_division_name_en')->get();
+        $this->subdivisions = SubDivision::select('id', 'sub_division_name_en')->get();
     }
     
     public function store()

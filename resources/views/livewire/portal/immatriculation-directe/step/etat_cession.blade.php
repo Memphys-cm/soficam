@@ -21,8 +21,8 @@
                         <label for="code">{{ __('Zone') }}</label>
                         <select wire:model="zone" name="zone" class="form-select  @error('zone') is-invalid @enderror">
                             <option value="">{{ __('--Sélectionner la Zone --') }}</option>
-                            <option value="urbain">{{ __('terrain_urbain') }} </option>
-                            <option value="rurale">{{ __('terrain_rurale') }} </option>
+                            <option value="urbain">{{ __('Terrain Urbain') }} </option>
+                            <option value="rurale">{{ __('Terrain Rural') }} </option>
                         </select>
                         @error('zone')
                             <div class="invalid-feedback">{{ $message }}</div>

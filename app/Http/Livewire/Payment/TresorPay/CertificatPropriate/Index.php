@@ -101,42 +101,62 @@ class Index extends Component
         'identifiant' => 'nullable|string|max:255',
     ];
 
-    public function retrait($telephone, $operator) {}
+    public function retrait($telephone, $operator)
+    {
+        $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
+        // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
+        $response = $client->makeCollect([
+            'amount' => 100,
+            'service' => $operator,
+            'payer' => $telephone,
+            'nonce' => RandomGenerator::nonce(),
+            'trxID' => '1',
+            'mode' => 'asynchronous'
+        ]);
+
+        sleep(30);
+
+        $transactions = $client->getTransactions([$response->transaction->pk]);
+
+        return $transactions;
+    }
 
     public function store()
     {
+        $response = $this->retrait($this->telephone, $this->operator);
+            if ($response->status == "SUCCESS") {
+                if ($this->certificat) {
 
+                    $this->validate([
+                        'conservation_id' => 'required',
+                    ]);
+        
+                    
+        
+                    $this->certificat->saleable->sale->payment_status = "totally_paid";
+                    $this->certificat->status = "active";
+                    $this->certificat->saleable->sale->save();
+                    $this->certificat->save();
+                } else {
+        
+                    $validatedData = $this->validate();
+                    // Sauvegarde dans la base de données
+                    $certificat = FakeCertificate::create($validatedData);
+                    return $this->generateReceiptPdf($certificat->id);
+                }
+        
+                session()->flash('message', 'Demande enregistrée avec succès.');
+
+
+                return redirect()->route('portal.allsales.index');
+            } else {
+                return redirect()->back();
+
+                session()->flash('message', 'Demande a échoué.');
+            }
         // dd($this->qualification);
 
-        if ($this->certificat) {
-
-            $this->validate([
-                'conservation_id' => 'required',
-            ]);
-
-            $client = new PaymentOperation('adc879c6a571f814038489e5826ad47b17436297', 'd3cf0e9b-7514-42b3-9f06-475decb32884', 'd67d4d39-cb07-408e-8f26-cea63484de54');
-            // MeSomb::setVerifySslCerts(false); if to want to disable ssl verification
-            $client->makeCollect([
-                'amount' => 100,
-                'service' => $this->operator,
-                'payer' => $this->telephone,
-                'nonce' => RandomGenerator::nonce(),
-                'trxID' => '1'
-            ]);
-
-            $this->certificat->saleable->sale->payment_status = "totally_paid";
-            $this->certificat->status = "active";
-            $this->certificat->saleable->sale->save();
-            $this->certificat->save();
-        } else {
-
-            $validatedData = $this->validate();
-            // Sauvegarde dans la base de données
-            $certificat = FakeCertificate::create($validatedData);
-            return $this->generateReceiptPdf($certificat->id);
-        }
-
-        session()->flash('message', 'Demande enregistrée avec succès.');
+        
 
         // Réinitialiser le formulaire
         // $this->reset();
