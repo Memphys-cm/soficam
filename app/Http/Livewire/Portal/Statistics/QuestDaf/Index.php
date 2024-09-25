@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\TitreFoncier;
 use Illuminate\Support\Facades\DB;
 use App\Models\ImmatriculationDirecte;
+use App\Models\Sales\Sale;
 
 class Index extends Component
 {
@@ -14,10 +15,54 @@ class Index extends Component
     public $startYear = 2019;
     public $endYear = 2024;
 
-
     public $start_year = 2017;
     public $end_year = 2024;
     public $gender = null;
+
+    public $startcYear;
+    public $endcYear;
+    public $sales = [];
+    public $totalSalesByYear = [];
+
+    public function mount()
+    {
+        $this->startYear = 2019; // Année par défaut
+        $this->endYear = date('Y'); // Année actuelle par défaut
+
+        $this->startcYear = 2019; // Année par défaut
+        $this->endcYear = date('Y'); // Année actuelle par défaut
+        $this->fetchSales();
+    }
+
+    public function fetchSales()
+    {
+        // Initialiser le tableau des recettes par année
+        $this->totalSalesByYear = [];
+
+        // Récupérer les ventes dans la période sélectionnée
+        $sales = Sale::whereYear('created_at', '>=', $this->startcYear)
+                     ->whereYear('created_at', '<=', $this->endcYear)
+                     ->get();
+
+        // Calculer le montant total des ventes par année
+        foreach ($sales as $sale) {
+            $year = $sale->created_at->year;
+            if (!isset($this->totalSalesByYear[$year])) {
+                $this->totalSalesByYear[$year] = 0;
+            }
+            $this->totalSalesByYear[$year] += $sale->sales_amount;
+        }
+    }
+
+    public function updated($propertyName)
+    {
+        // dd('ff');
+        // Lorsque startYear ou endYear change, mettre à jour les ventes
+        if ($propertyName === 'startcYear' || $propertyName === 'endcYear') {
+            $this->fetchSales();
+        }
+    }
+
     public function render()
     {
 
@@ -44,7 +89,8 @@ class Index extends Component
         return view('livewire.portal.statistics.quest-daf.index', [
             'tableData' => $tableData,
             'data' => $data,
-            'years' => $years
+            'years' => $years,
+            'totalSalesByYear' => $this->totalSalesByYear,
         ]);
     }
 

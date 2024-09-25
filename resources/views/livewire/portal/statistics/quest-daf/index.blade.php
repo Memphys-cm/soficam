@@ -116,7 +116,7 @@
     <div class="card my-3" style="overflow-x: auto;">
         {{-- Filtrage par date --}}
         <div class="row my-2 p-2">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label for="start_year">Date de début</label>
                 <input type="number" class="form-control" id="start_year" wire:model="start_year" placeholder="Ex: 2017">
             </div>
@@ -219,6 +219,6 @@
         </table>
     </div>
     
-    
+    @livewire('portal.statistics.quest-daf.recette') <!-- Appel du composant Livewire -->
 
 </div>
