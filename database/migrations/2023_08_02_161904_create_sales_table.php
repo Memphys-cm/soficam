@@ -26,6 +26,7 @@ return new class extends Migration
             $table->foreignId('user_id')->on('users')->nullable()->index();
             $table->foreignId('receveur_id')->on('users')->nullable()->index();
             $table->foreignId('service_id')->on('users')->index()->nullable();
+            $table->foreignId('certificat_id')->index()->nullable();
             $table->enum('payment_status', ['pending_payment', 'totally_paid', 'partially_paid'])->default('pending_payment');
             $table->enum('payment_method', ['mtn_mobile_money', 'orange_money', 'cash', 'cheque', 'bank_transfer','TresorPay'])->default('cash');
             $table->longText('commentaires')->nullable();

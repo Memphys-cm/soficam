@@ -50,8 +50,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ConservationSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(CabinetAndMembreCabinetSeeder::class);
-        // $this->call(CabinetNotaireSeeder::class);
-        #$this->call(TitreFoncierSeeder::class);
+        $this->call(VenaleSeeders::class);
+        $this->call(TitreFoncierSeeder::class);
         #$this->call(LotissementSeeder::class);
         // $this->call(VentesSeeder::class);
         // $this->call(ReleveDeBienSeeder::class);
