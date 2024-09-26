@@ -40,7 +40,7 @@ class ImmatriculationDirecteSeeder extends Seeder
 
 
         $elements = [[
-            'uuid' => 01,
+            'uuid' => 02223,
             'reference' => 'REF-00000001',
             'localisation' => 'Localisation 1',
             'region_id' => 1, // rand(1, 10)
@@ -128,7 +128,7 @@ class ImmatriculationDirecteSeeder extends Seeder
             'is_finalisation' => 'non',
             'is_complete' => 0, //rand(0, 1)
         ], [
-            'uuid' => 02,
+            'uuid' => 02373,
             'reference' => 'REF-00000002',
             'localisation' => 'Localisation 2',
             'region_id' => 2, // rand(1, 10)
@@ -216,7 +216,7 @@ class ImmatriculationDirecteSeeder extends Seeder
             'is_finalisation' => 'non',
             'is_complete' => 1, //rand(0, 1)
         ], [
-            'uuid' => 03,
+            'uuid' => 03743,
             'reference' => 'REF-00000003',
             'localisation' => 'Localisation 3',
             'region_id' => 3, // rand(1, 10)
@@ -304,7 +304,7 @@ class ImmatriculationDirecteSeeder extends Seeder
             'is_finalisation' => 'non',
             'is_complete' => 1, //rand(0, 1)
         ], [
-            'uuid' => 04,
+            'uuid' => 04748,
             'reference' => 'REF-00000004',
             'localisation' => 'Localisation 4',
             'region_id' => 4, // rand(1, 10)
@@ -392,7 +392,7 @@ class ImmatriculationDirecteSeeder extends Seeder
             'is_finalisation' => 'non',
             'is_complete' => 0, //rand(0, 1)
         ], [
-            'uuid' => 05,
+            'uuid' => 05748,
             'reference' => 'REF-00000005',
             'localisation' => 'Localisation 5',
             'region_id' => 5, // rand(1, 10)
@@ -480,7 +480,7 @@ class ImmatriculationDirecteSeeder extends Seeder
             'is_finalisation' => 'non',
             'is_complete' => 0, //rand(0, 1)
         ], [
-            'uuid' => 06,
+            'uuid' => 069493,
             'reference' => 'REF-00000006',
             'localisation' => 'Localisation 6',
             'region_id' => 6, // rand(1, 10)
@@ -568,7 +568,7 @@ class ImmatriculationDirecteSeeder extends Seeder
             'is_finalisation' => 'non',
             'is_complete' => 1, //rand(0, 1)
         ], [
-            'uuid' => 07,
+            'uuid' => 0784,
             'reference' => 'REF-00000007',
             'localisation' => 'Localisation 7',
             'region_id' => 7, // rand(1, 10)
@@ -656,7 +656,7 @@ class ImmatriculationDirecteSeeder extends Seeder
             'is_finalisation' => 'non',
             'is_complete' => 0, //rand(0, 1)
         ], [
-            'uuid' => 8,
+            'uuid' => 8849,
             'reference' => 'REF-00000008',
             'localisation' => 'Localisation 8',
             'region_id' => 8, // rand(1, 10)
@@ -744,7 +744,7 @@ class ImmatriculationDirecteSeeder extends Seeder
             'is_finalisation' => 'non',
             'is_complete' => 0, //rand(0, 1)
         ], [
-            'uuid' => 9,
+            'uuid' => 9994,
             'reference' => 'REF-00000009',
             'localisation' => 'Localisation 9',
             'region_id' => 9, // rand(1, 10)
@@ -832,7 +832,7 @@ class ImmatriculationDirecteSeeder extends Seeder
             'is_finalisation' => 'non',
             'is_complete' => 1, //rand(0, 1)
         ], [
-            'uuid' => 10,
+            'uuid' => 1490,
             'reference' => 'REF-000000010',
             'localisation' => 'Localisation 10',
             'region_id' => 10, // rand(1, 10)
@@ -926,21 +926,21 @@ class ImmatriculationDirecteSeeder extends Seeder
         }
         
         
-        $immatriculations = ImmatriculationDirecte::all();
-        $users = User::all();
+        // $immatriculations = ImmatriculationDirecte::all();
+        // $users = User::all();
 
-        foreach ($immatriculations as $immatriculation) {
-            // Associe aléatoirement entre 1 et 3 utilisateurs à chaque immatriculation_directe
-            $userIds = $users->random(rand(1, 3))->pluck('id');
+        // foreach ($immatriculations as $immatriculation) {
+        //     // Associe aléatoirement entre 1 et 3 utilisateurs à chaque immatriculation_directe
+        //     $userIds = $users->random(rand(1, 3))->pluck('id');
 
-            foreach ($userIds as $userId) {
-                DB::table('immatriculation_directe_user')->insert([
-                    'immatriculation_directe_id' => $immatriculation->id,
-                    'user_id' => $userId,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-            }
-        }
+        //     foreach ($userIds as $userId) {
+        //         DB::table('immatriculation_directe_user')->insert([
+        //             'immatriculation_directe_id' => $immatriculation->id,
+        //             'user_id' => $userId,
+        //             'created_at' => now(),
+        //             'updated_at' => now(),
+        //         ]);
+        //     }
+        // }
     }
 }

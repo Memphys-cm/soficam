@@ -45,6 +45,10 @@ class TitreFoncierSeeder extends Seeder
 
         // Récupérer toutes les régions, divisions et subdivisions existantes
 
+                foreach ($subdivisions as $subdivision) {
+                    if ($counter >= 900) {
+                        break 3; // Sortir des trois boucles si on atteint 90 000
+                    }
 
         $titrefoncier1 = TitreFoncier::create([
             'uuid' => Str::uuid(),
