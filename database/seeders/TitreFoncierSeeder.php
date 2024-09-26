@@ -54,7 +54,7 @@ class TitreFoncierSeeder extends Seeder
                 $subdivisions = SubDivision::where('division_id', $division->id)->get();
 
                 foreach ($subdivisions as $subdivision) {
-                    if ($counter >= 50000) {
+                    if ($counter >= 900) {
                         break 3; // Sortir des trois boucles si on atteint 90 000
                     }
 

@@ -241,6 +241,7 @@ Route::group(
             
 
             $immatriculations = ImmatriculationDirecte::with('users')->get();
+            // dd($immatriculations);
 
             // Passez les coordonnées et les titres fonciers à la vue
             return view('first_test', compact('titles','immatriculations', 'longitude', 'latitude'))->layout('components.layouts.dashboard');

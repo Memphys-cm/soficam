@@ -129,6 +129,28 @@
                 }
             };
 
+            // Add Immatriculations to the map
+            immatriculationPolygons.forEach(polygonData => {
+                const polygonGraphic = new Graphic({
+                    geometry: {
+                        type: "polygon",
+                        rings: polygonData.rings
+                    },
+                    symbol: immatriculationFillSymbol,
+                    attributes: {
+                        name: polygonData.reference,
+                        area: polygonData.area,
+                        proprietaires: polygonData.proprietaires
+                    },
+                    popupTemplate: {
+                        title: "Numero Immatriculation: {name}",
+                        content: "<b>Surface</b>: {area} m²<br><b>Proprietaires</b>: {proprietaires}"
+                    }
+                });
+                graphicsLayer.add(polygonGraphic);
+            });
+
+
             // Add Titres Fonciers to the map
             titlePolygons.forEach(polygonData => {
                 const polygonGraphic = new Graphic({
@@ -155,28 +177,7 @@
                 });
                 graphicsLayer.add(polygonGraphic);
             });
-
-            // Add Immatriculations to the map
-            immatriculationPolygons.forEach(polygonData => {
-                const polygonGraphic = new Graphic({
-                    geometry: {
-                        type: "polygon",
-                        rings: polygonData.rings
-                    },
-                    symbol: immatriculationFillSymbol,
-                    attributes: {
-                        name: polygonData.reference,
-                        area: polygonData.area,
-                        proprietaires: polygonData.proprietaires
-                    },
-                    popupTemplate: {
-                        title: "Numero Immatriculation: {name}",
-                        content: "<b>Surface</b>: {area} m²<br><b>Proprietaires</b>: {proprietaires}"
-                    }
-                });
-                graphicsLayer.add(polygonGraphic);
-            });
-
+            
             // Search Widget
             const search = new Search({
                 view: view,
