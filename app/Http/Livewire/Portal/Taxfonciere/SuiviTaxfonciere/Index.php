@@ -198,11 +198,17 @@ class Index extends Component
         $this->status_tax = '';
         $this->price = '';
         $this->phoneNumber = '';
+        $this->phoneNumber = '';
+        $this->codeTresorPay=false;
     }
     public function stores()
     {
         $this->titrefoncier->status_tax = "payer";
         $this->titrefoncier->save();
+
+        $this->clearFields();
+
+        $this->refresh(__('Taxe Foncière mise à jour avec succès'), 'paiement');
     }
 
     public function sms($id)
