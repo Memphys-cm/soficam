@@ -705,7 +705,15 @@
     "Documents Techniques":"Technical Documents",
     "Numero du Cp":"CP number",
     "Numero du Conservation":"Conservation number",
-    "Créer le Titre Foncier":"Create a land title"
+    "Créer le Titre Foncier":"Create a land title",
+    "AUCUNE":"NOTHING",
+    "Batit":"Build",
+    "Non Batit":"Unbuilt",
+    "IMMATRICULTATION DIRECTE":"DIRECT REGISTRATION",
+    "MUTATION TOTALE":"TOTAL MUTATION",
+    "MORCELLEMENT":"MORCELMENT",
+    "Village/Lieu dit":"Village/Place"
+
     
 }
 
