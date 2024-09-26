@@ -86,7 +86,7 @@
                                 <select wire:model="zone" name="zone" class="form-select  @error('zone') is-invalid @enderror" required="">
                                     {{-- @foreach($regions as $region) --}}
                                     <option value="">{{__('Selectionner La Zone')}}</option>
-                                    <option value="urbain">{{__('Urbain')}}</option>
+                                    <option value="urbain">{{__('Urbaine')}}</option>
                                     <option value="rurale">{{__('Rurale')}}</option>
                                     {{-- @endforeach --}}
                                 </select>

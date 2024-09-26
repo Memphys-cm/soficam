@@ -15,6 +15,8 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Livewire\Traits\WithDataTables;
 use App\Models\Land;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use proj4php\Proj4php;
 use proj4php\Proj;
 use proj4php\Point;
@@ -33,6 +35,9 @@ class Index extends Component
     public $region_id;
     public $division_id;
     public $sub_division_id;
+
+    public $region_ids;
+    public $division_ids;
 
     public $numero_titre_foncier;
     public $date_de_delivrance_du_TF;
@@ -307,7 +312,7 @@ class Index extends Component
             'conservateur_id' => $this->conservateur_id,
             'numero_ccp' => $this->numero_ccp,
             'taxFoncier_amount' => $taxFoncier_amount,
-            // 'is_vip' => $this->is_vip === true ?  1 : 0,
+            'is_vip' => $this->is_vip === true ?  1 : 0,
         ]);
 
         $titrefoncier->users()->sync($this->user_ids);
@@ -413,31 +418,16 @@ class Index extends Component
             return abort(401);
         }
 
-        if($this->manualVillage == true) {
-
-            $this->validate([
-                'manualVillageName' => 'required|unique:lands,name',  // Vérification de l'unicité
-            ]);
-
-            $land = Land::create([
-                'name' => $this->manualVillageName,
-                'sub_division_id' => $this->sub_division_id
-            ]);
-
-            $this->land_id = $land->id;
-
-        }
-
         $this->validate(
             [
                 // 'numero_titre_foncier' => 'required',
                 'region_id' => 'required',
                 'division_id' => 'required',
-                'sub_division_id' => 'required',
+                //'sub_division_id' => 'required',
                 'date_de_delivrance_du_TF' => 'required|date',
                 'numero_du_duplicata' => 'required|integer',
                 'groupement' => 'required',
-                'lieu_dit' => 'required',
+                //'lieu_dit' => 'required',
                 'zone' => 'required',
                 'numero_folio' => 'required|integer',
                 'volume' => 'required|integer',
@@ -598,11 +588,11 @@ class Index extends Component
                     $query->where('first_name', 'like', '%' . $this->query . '%');
                 })->orWhere('numero_titre_foncier', 'like', '%'. $this->query. '%');
             })
-            ->when($this->region_id && $this->region_id != "all", function ($query) {
-                return $query->where('region_id',  $this->region_id);
+            ->when($this->region_ids && $this->region_ids != "all", function ($query) {
+                return $query->where('region_id',  $this->region_ids);
             })
-            ->when($this->division_id && $this->division_id != "all", function ($query) {
-                return $query->where('division_id',  $this->division_id);
+            ->when($this->division_ids && $this->division_ids != "all", function ($query) {
+                return $query->where('division_id',  $this->division_ids);
             })
             ->when($this->subdivision_id && $this->subdivision_id != "all", function ($query) {
                 return $query->where('sub_division_id',  $this->subdivision_id);
