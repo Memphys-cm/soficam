@@ -100,7 +100,7 @@ class Pay extends Component
             'mode' => 'asynchronous'
         ]);
 
-        sleep(30);
+        sleep(15);
 
         $transactions = $client->getTransactions([$response->transaction->pk]);
 
