@@ -5,10 +5,10 @@
             <div class="mb-4 mt-md-0">
                 <div class="mb-4 mt-md-0">
                     <h1 class="mb-0 h4">
-                        {{ __('Descente') }}{{ __(' sur le terrain') }}
+                        {{ __('Descente sur le terrain') }}
                     </h1>
                     <p class="px-1">
-                        {{ __('Descente de la CC en vue du constat d’occupation et ou d’exploitation') }}
+                        {{ __('Descente de la CC en vue du constat d\'occupation et ou d\'exploitation') }}
                     </p>
                 </div>
 

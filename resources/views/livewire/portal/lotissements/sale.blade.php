@@ -89,7 +89,7 @@
         </div>
         <div class='col-md-9'>
             <div class="card p-4 mb-3">
-                <legend class="w-auto">Informations sur le terrain</legend>
+                <legend class="w-auto">{{ __('Informations sur le terrain') }}</legend>
                 <div class='row gap-4'>
                     <div class="col">
                         <a href="#" class="d-flex align-items-center justify-content-between">

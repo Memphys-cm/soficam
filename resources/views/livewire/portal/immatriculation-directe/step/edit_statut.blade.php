@@ -3,11 +3,10 @@
         <div class="mb-4 mt-md-0">
 
             <div class="mb-4 mt-md-0">
-                <h1 class="mb-0 h4">
-                    {{ __('Modification') }}{{ __('Du Statut D\'un Dossier') }}
+                <h1 class="mb-0 h4">{{ __('Modification Du Statut D\'un Dossier') }}
                 </h1>
                 <p class="px-1">
-                    {{ __('Modifier') }}{{ __(' le statut D\'un Dossier D\'Immatrculation') }}
+                    {{ __('Modifier') }} {{ __('le statut D\'un Dossier D\'Immatrculation') }}
                 </p>
             </div>
 

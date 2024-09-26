@@ -127,6 +127,7 @@
                         <th class="border-bottom">{{ __('Superficie') }}</th>
                         <th class="border-bottom">{{ __('Statut') }}</th>
                         <th class="border-bottom">{{ __('Prochaine Etape') }}</th>
+                        <th class="border-bottom">{{ __('Coordonnées') }}</th>
                         <th class="border-bottom">{{ __('Date de création') }}</th>
                         @canany('titre_foncier.update', 'titre_foncier.delete')
                             <th class="border-bottom">{{ __('Action') }}</th>
@@ -157,6 +158,13 @@
                             <td>
                                 <span class="fw-normal badge super-badge p-2 bg-secondary">
                                     {{ $imma_directe->next_step }} </span>
+                            </td>
+                            <td>
+                                @foreach(collect(json_decode($imma_directe->coordonnees,true)) as $key => $value)
+                                <div class="d-flex align-items-centerpy-1">
+                                    <span class="fw-bolder mx-2"> {{ $key }} :</span> {{ $value}}
+                                </div>
+                                @endforeach
                             </td>
                             <td>
                                 <span class="fw-normal">{{ $imma_directe->created_at->format('Y-m-d') }}</span>

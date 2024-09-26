@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use App\Models\ImmatriculationDirecte;
 use App\Http\Livewire\Traits\WithDataTables;
+use App\Models\Land;
 
 class Index extends Component
 {
@@ -57,6 +58,8 @@ class Index extends Component
     public $coordonnees = [];
     public $coordonne = [];
     public $detect = 0;
+    public $lands;
+    public $land_id;
 
     public function addCoordinate()
     {
@@ -84,6 +87,7 @@ class Index extends Component
         // $this->etat_cession = EtatCession::all();
         $this->services = Service::select('id', 'service_name_fr')->get();
         $this->regions = Region::select('region_name_en', 'region_name_fr', 'id')->get();
+        $this->lands = Land::select('id', 'name')->get();
     }
 
     public function updatedRegionID($region_id)
@@ -131,7 +135,8 @@ class Index extends Component
             'localisation' => 'required',
             'division_id' => 'required',
             // 'subdivision_id' => 'required',
-            'region_id' => 'required'
+            'region_id' => 'required',
+            'land_id' => 'required'
         ]);
 
         $imma_directe = ImmatriculationDirecte::create([
@@ -146,6 +151,7 @@ class Index extends Component
             'division_id' => $this->division_id,
             'sub_division_id' => $this->sub_division_id,
             'statut' => 'Dossier Ouvert',
+            'land_id' => $this->land_id,
             'next_step' => 'Cotation du Dossier au CSDAF',
             'StatutStyle' => 'info',
             // 'comissions' => json_encode($this->comissions),
@@ -1119,6 +1125,7 @@ class Index extends Component
             'limit_est' => $this->imma_directe->limit_est,
             'limit_ouest' => $this->imma_directe->limit_ouest,
             'recorded_by' => auth()->user()->name,
+            'land_id' => $this->imma_directe->land_id,
             'nom_et_prenoms_de_largent_traitant' => auth()->user()->name,
             // 'conservateur_id' => $this->conservateur_id,
             'numero_ccp' => $this->imma_directe->numero_cp,
