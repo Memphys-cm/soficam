@@ -64,7 +64,7 @@
                     <div class="d-flex align-items-center card-body">
                         <div>
                             <h6 class="text-muted">Évolution des Titres Fonciers du Dernier Mois</h6>
-                            <canvas id="titresFoncierRecentChart"></canvas>
+                            <canvas id="titresFoncierRecentChart" width="100%"></canvas>
                         </div>
                     </div>
                 </div>
