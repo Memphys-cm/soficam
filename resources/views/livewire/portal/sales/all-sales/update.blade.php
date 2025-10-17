@@ -15,7 +15,7 @@
                                 <select wire:model="payment_method"
                                     class="form-select @error('payment_method') is-invalid @enderror"
                                     id="payment_method" required="">
-                                    {{-- <option value="">{{ __('-- select payment type --') }}</option> --}}
+                                    
                                     <option value="cash">{{ __('Cash') }}</option>
                                     <option value="orange_money">{{ __('Orange Money') }}</option>
                                     <option value="mtn_mobile_money">{{ __('MTN Mobile Money') }}</option>

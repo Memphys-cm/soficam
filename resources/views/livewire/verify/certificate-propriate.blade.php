@@ -82,7 +82,7 @@
             <div class="footer">
                 <p>Coût: <strong>{{ $element->price }}</strong></p>
                 <p>{{ $element->titreFoncier->division->division_name }}, le <strong>  {{ $element->created_at->format('d/m/Y') }} </strong>
-                    {{-- <strong>______________</strong> --}}
+                    
                 </p>
                 <p>Qce N°: <strong>{{ $element->certificate_proprietes_number }}</strong></p>
                 <p><strong>Validité: 03 mois</strong></p>

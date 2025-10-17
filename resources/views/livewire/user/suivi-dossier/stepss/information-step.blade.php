@@ -1,7 +1,7 @@
 <div>
     <div class="container my-5 mx-2 rounded" style="background: white;">
         <div class="row g-4">
-            <!-- Référence -->
+            
             <div class="col-md-6 col-lg-4">
                 <div class="p-4 bg-light rounded shadow-sm h-100 d-flex flex-column">
                     <div class="mb-3 text-primary">
@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-            <!-- Statut -->
+            
             <div class="col-md-6 col-lg-4">
                 <div class="p-4 bg-light rounded shadow-sm h-100 d-flex flex-column">
                     <div class="mb-3 text-primary">
@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <!-- Prochaine Étape -->
+            
             <div class="col-md-6 col-lg-4">
                 <div class="p-4 bg-light rounded shadow-sm h-100 d-flex flex-column">
                     <div class="mb-3 text-primary">

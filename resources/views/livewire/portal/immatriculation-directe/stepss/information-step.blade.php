@@ -1,7 +1,7 @@
 <div>
     <div class="container my-5 mx-2 rounded" style="background: white;">
         <div class="row g-4">
-            <!-- Référence -->
+            
             <div class="col-md-6 col-lg-4">
                 <div class="p-4 bg-light rounded shadow-sm h-100 d-flex flex-column">
                     <div class="mb-3 text-primary">
@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-            <!-- Superficie -->
+            
             <div class="col-md-6 col-lg-4">
                 <div class="p-4 bg-light rounded shadow-sm h-100 d-flex flex-column">
                     <div class="mb-3 text-primary">
@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <!-- Localisation -->
+            
             <div class="col-md-6 col-lg-4">
                 <div class="p-4 bg-light rounded shadow-sm h-100 d-flex flex-column">
                     <div class="mb-3 text-primary">
@@ -34,7 +34,7 @@
                 </div>
             </div>
 
-            <!-- Région -->
+            
             <div class="col-md-6 col-lg-4">
                 <div class="p-4 bg-light rounded shadow-sm h-100 d-flex flex-column">
                     <div class="mb-3 text-primary text-danger">
@@ -45,7 +45,7 @@
                 </div>
             </div>
 
-            <!-- Zone -->
+            
             <div class="col-md-6 col-lg-4">
                 <div class="p-4 bg-light rounded shadow-sm h-100 d-flex flex-column">
                     <div class="mb-3 text-primary">
@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <!-- État du Terrain -->
+            
             <div class="col-md-6 col-lg-4">
                 <div class="p-4 bg-light rounded shadow-sm h-100 d-flex flex-column">
                     <div class="mb-3 text-primary">
@@ -67,7 +67,7 @@
                 </div>
             </div>
 
-            <!-- Source du Terrain -->
+            
             <div class="col-md-6 col-lg-4">
                 <div class="p-4 bg-light rounded shadow-sm h-100 d-flex flex-column">
                     <div class="mb-3 text-primary">
@@ -78,7 +78,7 @@
                 </div>
             </div>
 
-            <!-- Division -->
+            
             <div class="col-md-6 col-lg-4">
                 <div class="p-4 bg-light rounded shadow-sm h-100 d-flex flex-column">
                     <div class="mb-3 text-primary">
@@ -89,7 +89,7 @@
                 </div>
             </div>
 
-            <!-- Sub-division -->
+            
             <div class="col-md-6 col-lg-4">
                 <div class="p-4 bg-light rounded shadow-sm h-100 d-flex flex-column">
                     <div class="mb-3 text-primary">
@@ -100,7 +100,7 @@
                 </div>
             </div>
 
-            <!-- Statut -->
+            
             <div class="col-md-6 col-lg-4">
                 <div class="p-4 bg-light rounded shadow-sm h-100 d-flex flex-column">
                     <div class="mb-3 text-primary">
@@ -113,7 +113,7 @@
                 </div>
             </div>
 
-            <!-- Prochaine Étape -->
+            
             <div class="col-md-6 col-lg-4">
                 <div class="p-4 bg-light rounded shadow-sm h-100 d-flex flex-column">
                     <div class="mb-3 text-primary">
@@ -128,7 +128,7 @@
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
 
-            <!-- Bouton Modifier -->
+            
             <div class="col-12 d-flex justify-content-end mt-4">
                 <button class="btn btn-primary my-2" wire:click="nextStep">
                     {{ __('Suivant') }}

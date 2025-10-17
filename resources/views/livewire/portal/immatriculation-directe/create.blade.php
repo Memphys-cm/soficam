@@ -81,11 +81,11 @@
                             <div class='col'>
                                 <label class="px-2" for="region_id">{{__('Zone')}}</label>
                                 <select wire:model="zone" name="zone" class="form-select  @error('zone') is-invalid @enderror" required="">
-                                    {{-- @foreach($regions as $region) --}}
+                                    
                                     <option value="">{{__('Selectionner La Zone')}}</option>
                                     <option value="urbain">{{__('Urbain')}}</option>
                                     <option value="rurale">{{__('Rurale')}}</option>
-                                    {{-- @endforeach --}}
+                                    
                                 </select>
                                 @error('zone')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -94,11 +94,11 @@
                             <div class='col'>
                                 <label class="px-2" for="region_id">{{__('Etat du Terrain')}}</label>
                                 <select wire:model="etat_terrain" name="etat_terrain" class="form-select  @error('etat_terrain') is-invalid @enderror" required="">
-                                    {{-- @foreach($regions as $region) --}}
+                                    
                                     <option value="">{{__('Selectionner L\'Etat du Terrain')}}</option>
                                     <option value="batit">{{__('Construit')}}</option>
                                     <option value="non_batit">{{__('Non Construit')}}</option>
-                                    {{-- @endforeach --}}
+                                    
                                 </select>
                                 @error('etat_terrain')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -136,42 +136,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- @foreach ($comissions as $index => $user)
-                            <div class="row my-1 py-1">
-                                <div class="col-md-5">
-                                <label>{{__('Nom')}} </label>
-                                    <input class="form-control  @error('comissions') is-invalid @enderror"
-                                        type="text" wire:model="comissions.{{ $index }}.name"
-                                        placeholder="Nom">
-                                </div>
-                                <div class="col-md-5">
-                                    <label>{{__('Poste')}} </label>
-                                    <input class="form-control @error('comissions') is-invalid @enderror" type="text"
-                                        wire:model="comissions.{{ $index }}.position"
-                                        placeholder="Poste">
-                                </div>
-                                <div class="col-md-2 mb-3">
-                                    <label>{{__('Action')}} </label>
-                                    <a type="button" wire:click="removeRow({{ $index }})" class="btn-icon ">
-                                        <svg class="icon icon-sm text-danger me-1" fill="currentColor"
-                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        @endforeach
-                        <button class="btn btn-info" type="button" wire:click="addRow">
-                            <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                            </svg>
-                            {{ __('Ajouter un membre') }}</button>
-                        <button class="btn btn-primary" type="submit">{{ __('Enregistrer') }}</button>
-                        <hr> --}}
+                        
 
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"

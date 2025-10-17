@@ -1,7 +1,7 @@
 <div class="container">
-    <!-- this function of java Script play Camera -->
+    
     <script src="https://reeteshghimire.com.np/wp-content/uploads/2021/05/html5-qrcode.min_.js"></script>
-    <!-- Header -->
+    
     <div class="container-fluid header_se">
         <div class="col-md-8">
             <div class="row">

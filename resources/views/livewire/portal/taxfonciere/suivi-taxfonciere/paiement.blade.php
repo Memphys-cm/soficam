@@ -34,7 +34,7 @@
 
 
                         @if ($paymentType !== 'Cash')
-                            <!-- Only show the field if paymentType is not 'Cash' -->
+                            
                             <div class='form-group mb-3 row'>
                                 <div class="col">
                                     <label for="phoneNumber">{{ __('Numéro de transaction') }}</label>
@@ -59,7 +59,7 @@
                                 @enderror
                             </div>
                         </div>
-                        {{-- <button wire:click="confirmOrder" type="submit" class="btn btn-primary">pay</button> --}}
+                        
                         <div class='form-group mb-3 row'>
                             <div class="col">
                                 <label for="status_tax">{{ __('Statut de paiement ') }}</label>

@@ -1,7 +1,7 @@
 <div>
     <div class="p-5 bg-light">
 
-        <!-- Statistiques Globales -->
+        
         <div class="row my-2">
             <div class="col-lg-4 col-md-6">
                 <div class="card soft-card p-2">
@@ -73,20 +73,20 @@
                 <div class="card card-custom">
                     <div class="recent-title">Les dossiers traités</div>
                     <div class="recent-activity-chart">
-                        <!-- Placeholder pour le graphique -->
+                        
                         <canvas id="operationsChart"></canvas>
                     </div>
-                    {{-- <div class="card-subtitle">Évolution des dossiers traités au cours du dernier mois</div> --}}
+                    
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card card-custom">
                     <div class="recent-title">Recettes</div>
                     <div class="recent-activity-chart">
-                        <!-- Placeholder pour le graphique -->
+                        
                         <canvas id="salesChart"></canvas>
                     </div>
-                    {{-- <div class="card-subtitle">Évolution des ventes au cours du dernier mois</div> --}}
+                    
                 </div>
             </div>
         </div>

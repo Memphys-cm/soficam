@@ -9,13 +9,7 @@
         <input class="form-control" type="text" id="search-input-general" placeholder="Rechercher une adresse , une ville , un lieu">
         <div id="suggestions-list" class="p-2 rounded" style="background-color: white; border: 1px solid #ccc; position: absolute; top: 60px; right: 0; left: 0; max-height: 150px; overflow-y: auto; display: none;"></div>
     </div>
-    {{-- <div id="search-box-polygons"
-        style="position: absolute; top: 10px; right: 100px; background-color: white; padding: 10px; border: 1px solid #ccc; z-index: 100;">
-        <h3>Rechercher un Polygone :</h3>
-        <input type="text" id="search-input-polygons" placeholder="Rechercher un polygone par nom">
-        <h3>Filtrer par Superficie :</h3>
-        <input type="number" id="area-filter-input" placeholder="Filtrer par superficie">
-    </div> --}}
+    
     <script>
         mapboxgl.accessToken = "pk.eyJ1IjoiZGlsYW5lMDUiLCJhIjoiY2xreWJydjNxMGd5aDNtc2lsMG5uYnU5ayJ9.WBERCXWXNAEzQWfwc1RwlA";
         const map = new mapboxgl.Map({
@@ -168,7 +162,7 @@
         .setHTML(`
             <h3>${feature.properties.name}</h3>
             <p><strong>Superficie :</strong> ${feature.properties.area} km²</p>
-            <!-- Ajoutez d'autres propriétés de votre choix ici -->
+            
         `)
         .addTo(map);
 });

@@ -184,7 +184,7 @@
 
                                         </tr>
                                     @endforeach
-                                    <!-- Ajoutez plus de lignes ici -->
+                                    
                                 </tbody>
                             </table>
                         </div>

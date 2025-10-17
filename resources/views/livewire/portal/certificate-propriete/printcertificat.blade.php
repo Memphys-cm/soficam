@@ -108,7 +108,7 @@
                 </td>
                 <td>
                     <div>{{ $element->titreFoncier->division->division_name }}, le <strong> {{ $element->created_at->format('d/m/Y') }}  </strong>
-                        {{-- <strong> ______________</strong> --}}
+                        
                     </div>
                 </td>
             </tr>

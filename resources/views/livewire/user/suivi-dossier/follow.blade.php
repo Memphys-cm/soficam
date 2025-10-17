@@ -72,7 +72,7 @@
             </div>
         </div>
 
-        <!-- Navigation des étapes spécifiques -->
+        
         <div class="col-12 col-md-4">
             <nav class="vertical-nav py-3" aria-label="Navigation des étapes">
                 @php
@@ -119,7 +119,7 @@
             </nav>
         </div>
 
-        <!-- Content Section (9 columns) -->
+        
         <div class="col-12 col-md-8">
             <div class="">
                 @if ($step == 1)
@@ -131,7 +131,7 @@
                     @elseif ($step == 4)
                         @include('livewire.user.suivi-dossier.stepss.signature_avis_calendrier')
                 @endif
-                <!-- Ajoutez d'autres conditions pour les étapes restantes -->
+                
             </div>
         </div>
     </div>

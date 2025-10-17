@@ -6,9 +6,7 @@
 
                     <div class="col-12 d-flex align-items-center justify-content-center ">
                         <div class="shadow-lg border-0 rounded border-light py-5 p-4 px-lg-5 pt-lg-4 pb-lg-5 w-100 fmxw-500" style="background-color: rgba(255,255,255,.7)">
-                            <!-- <div class=" text-center mb-4 mt-md-0 pt-n4">
-                                <img src='/img/logo.png' class="w-50 h-auto" alt=''>
-                            </div> -->
+                            
                             <div class="text-center text-md-center mb-4 pt-2 mt-md-0">
                                 <h1 class="mb-0 h3">{{ __('SOFICAM Soft revolution v2.0.0')}}</h1>
                             </div>
@@ -18,21 +16,13 @@
                                 </div>
                                 <div class="form-group mb-4"><label for="email">{{ __('Adresse e-mail') }}</label>
                                     <input type="email" name="email" class="form-control  " value="{{ old('email') }}" placeholder="jane.doe@app.com" id="email" autofocus="" required="">
-                                    <!-- @error('email')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror -->
+                                    
                                 </div>
                                 <div class="form-group">
                                     <div class="form-group mb-4">
                                         <label for="password">{{ __('Mot de passe') }}</label>
                                         <input type="password" name="password" placeholder="Password" class="form-control " id="password" required="">
-                                        <!-- @error('password')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror -->
+                                        
                                     </div>
                                     <div class="d-flex justify-content-between align-items-top mb-4">
                                         <div class="form-check">

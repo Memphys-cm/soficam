@@ -12,13 +12,7 @@
         </div>
     </div>
 
-    {{-- <div id="search-box-polygons"
-        style="position: absolute; top: 10px; right: 100px; background-color: white; padding: 10px; border: 1px solid #ccc; z-index: 100;">
-        <h3>Rechercher un Polygone :</h3>
-        <input type="text" id="search-input-polygons" placeholder="Rechercher un polygone par nom">
-        <h3>Filtrer par Superficie :</h3>
-        <input type="number" id="area-filter-input" placeholder="Filtrer par superficie">
-    </div> --}}
+    
 
 
     <script>
@@ -240,7 +234,7 @@
                     .setHTML(`
             <h3>${feature.properties.name}</h3>
             <p><strong>Superficie :</strong> ${feature.properties.area} km²</p>
-            <!-- Ajoutez d'autres propriétés de votre choix ici -->
+            
         `)
                     .addTo(map);
             });

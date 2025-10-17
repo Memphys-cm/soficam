@@ -112,8 +112,8 @@
                 <thead>
                     <tr>
                         <th class="border-bottom">{{ __('Numero Reférence') }}</th>
-                        {{-- <th class="border-bottom">{{ __('Date de Delivrance') }}</th> --}}
-                        {{-- <th class="border-bottom">{{__('Requerants Principales')}}</th> --}}
+                        
+                        
                         <th class="border-bottom">{{ __('Requérants Secondaires') }}</th>
                         <th class="border-bottom">{{ __('Localisation') }}</th>
                         <th class="border-bottom">{{ __('Superficie') }}</th>
@@ -269,7 +269,7 @@
                                         @endcan
 
                                         @can('imma_directe.avis', $imma_directe)
-                                            {{-- @if ($imma_directe->next_step == 'Preparation Avis Au publique') --}}
+                                            
                                             @if ($imma_directe->next_step == 'Preparation Avis Au publique')
                                                 <a href="#" data-bs-placement="top" title="Etablisser L'Avis Au Public"
                                                     wire:click.prevent='printAvisPdf({{ $imma_directe->id }})'
@@ -313,7 +313,7 @@
                                                 </a>
                                             @endif
                                         @endcan
-                                        {{-- <button class="btn btn-primary" wire:click="printPdf">Pdf</button> --}}
+                                        
 
                                         @can('imma_directe.enregistrer_geometre', $imma_directe)
                                             @if ($imma_directe->next_step == 'Dépôt de la quittance de l’état de cession auprès du géomètre désigné')
@@ -431,9 +431,9 @@
                                             @endif
                                         @endcan
 
-                                        {{-- //bulletion_avis --}}
+                                        
                                         @can('imma_directe.descente_terrain', $imma_directe)
-                                            {{-- @if ($imma_directe->dossier_technique_created != null) --}}
+                                            
                                             <a href="#" data-bs-placement="top"
                                                 title="Transmission du dossier complet d’immatriculation directe visé et publié au bulletin des avis domaniaux et fonciers à la Délégation Départemental"
                                                 wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
@@ -444,11 +444,11 @@
                                                         d="M9 13.5l3 3m0 0l3-3m-3 3v-6m1.06-4.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
                                                 </svg>
                                             </a>
-                                            {{-- @endif --}}
+                                            
                                         @endcan
-                                        {{-- cadre --}}
+                                        
                                         @can('imma_directe.descente_terrain', $imma_directe)
-                                            {{-- @if ($imma_directe->dossier_technique_created != null) --}}
+                                            
                                             <a href="#" data-bs-placement="top"
                                                 title="Dépôt de la quittance de la redevance foncière et Cotation de la demande à un Cadre"
                                                 wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
@@ -459,11 +459,11 @@
                                                         d="M9 13.5l3 3m0 0l3-3m-3 3v-6m1.06-4.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
                                                 </svg>
                                             </a>
-                                            {{-- @endif --}}
+                                            
                                         @endcan
 
                                         @can('imma_directe.ordre_versement', $imma_directe)
-                                            {{-- @if ($imma_directe->dossier_technique_created != null) --}}
+                                            
                                             <a href="#" data-bs-placement="top"
                                                 title="calcul et délivrance de l’ordre de versement de la redevance foncière à l’usager"
                                                 wire:click.prevent="initData({{ $imma_directe->id }})" data-bs-toggle="modal"
@@ -475,7 +475,7 @@
                                                     </path>
                                                 </svg>
                                             </a>
-                                            {{-- @endif --}}
+                                            
                                         @endcan
                                     @endif
 

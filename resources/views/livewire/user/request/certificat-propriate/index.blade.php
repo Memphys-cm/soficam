@@ -43,14 +43,7 @@
                         d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                 </svg> {{ __('Faire une Nouvelle Démande') }}
             </a>
-            {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#importUsersModal"
-                class="btn btn-sm btn-secondary py-2 d-inline-flex align-items-center">
-                <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                </svg>{{ __('Démande Courante') }}
-            </a> --}}
+            
         </div>
 
         <div class="row pt-4 pb-2 text-gray-600 ">

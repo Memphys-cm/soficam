@@ -94,9 +94,7 @@
 
         <div class='col-md-3 h-50'>
             <div class="card card-flush h-md-100 shadow pb-4 pt-3 px-4 " draggable="false">
-                <!-- <div class="small pt-0 d-flex align-items-end justify-content-end">
-                    {{$role->created_at}}
-                </div> -->
+                
                 <div class="card-header border-0 p-0 mb-2 d-flex justify-content-start align-items-start">
                     <div class="d-flex justify-content-start align-items-start">
                         <div class="avatar-md d-flex align-items-center justify-content-center fw-bold fs-5 rounded bg-primary me-3"><span class="text-gray-50">{{ initials($role->name) }}</span></div>
@@ -115,21 +113,10 @@
                 </div>
                 <div class='d-flex align-items-center justify-content-between'>
                     <div>
-                        <!-- <a href="" class="btn btn-sm btn-outline-primary py-2 d-inline-flex align-items-center ">
-                            <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                            </svg>
-                            <div class="d-none d-md-block">{{__('Voir les employés')}}</div>
-                        </a> -->
+                        
                     </div>
                     <div>
-                        <!-- @can('role.update')
-                        <a href="#" wire:click.prevent="initData({{$role->id}})" data-bs-toggle="modal" data-bs-target="#EditRoleModal" draggable="false">
-                            <svg class="icon icon-sm text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                            </svg>
-                        </a>
-                        @endcan -->
+                        
                         @can('role.delete')
                         <a href="#" wire:click.prevent="initData({{$role->id}})" data-bs-toggle="modal" data-bs-target="#DeleteModal" href="#" draggable="false">
                             <svg class="icon icon-sm text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

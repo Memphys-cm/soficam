@@ -57,7 +57,7 @@
                     <table class="table employee-table table-hover align-items-center ">
                         <thead>
                             <tr>
-                                <!-- <th class="border-bottom">{{__('Employee')}}</th> -->
+                                
                                 <th class="border-bottom">{{__('Type Action')}}</th>
                                 <th class="border-bottom">{{__('Action Effectuée')}}</th>
                                 <th class="border-bottom">{{__('Date')}}</th>
@@ -66,14 +66,7 @@
                         <tbody>
                             @forelse($logs as $log)
                             <tr>
-                                <!-- <td>
-                                    <a href="#" class="d-flex align-items-center">
-                                        <div class="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-secondary me-3"><span class="text-white">{{initials($log->user)}}</span></div>
-                                        <div class="d-block"><span class="fw-bold">{{$log->user}}</span>
-                                            <div class="small text-gray">{{$log->user}}</div>
-                                        </div>
-                                    </a>
-                                </td> -->
+                                
                                 <td>
                                     <span class="fw-normal badge super-badge badge-lg bg-{{$log->style}} rounded">{{$log->action_type}}</span>
                                 </td>

@@ -30,7 +30,7 @@
             <div class="d-flex justify-content-between mb-2">
 
 
-                {{-- @can('user.export_n_print') --}}
+                
                 <div class="mx-2" wire:loading.remove>
                     <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center ">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-                {{-- @endcan --}}
+                
             </div>
         </div>
     </div>
@@ -62,7 +62,7 @@
                 <div class="col-md-3">
                     <label for="search">{{ __('Recherche') }}: </label>
                     <input wire:model="query" id="search" type="text" placeholder="{{ __('Recherche...') }}" class="form-control">
-                    {{-- <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p> --}}
+                    
                 </div>
 
                 <div class="col-md-3 my-2">

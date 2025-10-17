@@ -1,4 +1,4 @@
-{{-- create modal --}}
+
 <div wire:ignore.self class="modal side-layout-modal fade" id="createimmobilierModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:35%;">
         <div class="modal-content">
@@ -80,7 +80,7 @@
     </div>
 </div>
 
-{{-- update modal --}}
+
 <div wire:ignore.self class="modal side-layout-modal fade" id="updateimmobilierModal" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:45%;">
         <div class="modal-content">

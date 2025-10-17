@@ -32,7 +32,7 @@
     <x-alert />
 
     <livewire:checkout-imma_direct-wizard show-step="imma_direct-information-step" :imma_direct_id="$imma_direct->id" />
-    {{-- Success is as dangerous as failure. --}}
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             window.addEventListener('show-error-modal', event => {

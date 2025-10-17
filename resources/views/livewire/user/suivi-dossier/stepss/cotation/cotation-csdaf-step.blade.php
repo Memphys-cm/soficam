@@ -13,7 +13,7 @@ is-invalid
 @enderror" />
                     @error('service_id')
                     <span class="text-danger">{{ $message }}</span>
-                        {{-- <div class="invalid-feedback">{{ $message }}</div> --}}
+                        
                     @enderror
                 </div>
 
@@ -26,7 +26,7 @@ is-invalid
 @enderror" />
                     @error('user_id')
                     <span class="text-danger">{{ $message }}</span>
-                        {{-- <div class="invalid-feedback text-danger"> {{ $message }} </div> --}}
+                        
                     @enderror
                 </div>
 
@@ -36,7 +36,7 @@ is-invalid
                         rows="4" placeholder="{{ __('Ajouter vos observations ici...') }}"></textarea>
                     @error('observation')
                     <span class="text-danger">{{ $message }}</span>
-                        {{-- <div class="invalid-feedback">{{ $message }}</div> --}}
+                        
                     @enderror
                 </div>
             </div>

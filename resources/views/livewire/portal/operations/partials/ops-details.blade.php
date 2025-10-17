@@ -269,9 +269,7 @@
                             </div>
 
 
-                            <!-- {{ $operation->titreFoncier->superficie_du_TF_mere }}
-                            {{ $operation->titreFoncier->superficie_vendue_du_TF_mere }}
-                            {{ $operation->titreFoncier->superficie_restant_du_TF_mere }} -->
+                            
 
                         </div>
                         @if (!empty($operation->titreFoncier))

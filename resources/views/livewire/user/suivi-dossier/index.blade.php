@@ -30,7 +30,7 @@
                 <div class="col-md-3 mb-2">
                     <label for="search">{{__('Recherche')}}: </label>
                     <input wire:model="query" id="search" type="text" placeholder="{{__('Recherche...')}}" class="form-control">
-                    {{-- <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p> --}}
+                    
                 </div>
                 <div class="col-md-3 mb-2">
                     <label for="orderBy">{{__('Trier par')}}: </label>
@@ -59,7 +59,7 @@
             </div>
             <x-alert />
     
-            {{-- @if(count($allsaless) > 0) --}}
+            
             <div class="card">
     
                 <div class="table-responsive pb-3 text-gray-700">

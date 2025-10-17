@@ -11,11 +11,7 @@
                 </p>
             </div>
 
-            {{-- @if ($imma_directe->numero_ordre_versement)
-                @php
-                    $visibility = 'disabled';
-                @endphp
-            @endif --}}
+            
 
 
             <x-form-items.form wire:submit="edit_statut">

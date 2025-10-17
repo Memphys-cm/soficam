@@ -18,15 +18,7 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            {{-- <div class="col">
-                                <label for="price">{{ __('Numéro du Titre Foncier') }}</label>
-                                <input wire:model="numero_titre_foncier" type="text"
-                                    class="form-control  @error('numero_titre_foncier') is-invalid @enderror"
-                                    placeholder="{{ __('') }}" required="">
-                                @error('numero_titre_foncier')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div> --}}
+                            
                         </div>
                         <div class='form-group mb-3 row'>
                             <div class="col">

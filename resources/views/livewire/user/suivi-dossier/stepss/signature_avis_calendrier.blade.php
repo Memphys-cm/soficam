@@ -46,7 +46,7 @@
 
         </x-form-items.form>
 
-        <!-- Script pour activer les tooltips Bootstrap -->
+        
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
@@ -64,7 +64,7 @@
     </div>
 </div>
 
-<!-- Script pour activer les tooltips Bootstrap -->
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))

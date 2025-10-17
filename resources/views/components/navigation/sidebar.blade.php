@@ -40,8 +40,8 @@
                                 <div class="mt-2 mb-1 text-start">
                                     <span class="ml-0 lead "><span class="bg-white px-1 border rounded text-secondary display-4">{{ __('Admin') }}</span>
                                         <span class="display-4">{{ __('Portal') }}</span></span>
-                                    <!-- <img src="{{ asset('img/logo.png') }}" class="rounded" id="fullLogo" alt="SofiCam"> -->
-                                    <!-- <img src="{{ asset('img/fav.jpeg') }}" class="rounded d-none" id="smallLogo" alt="SofiCam"> -->
+                                    
+                                    
 
                                 </div>
                             </div>
@@ -99,9 +99,9 @@
                                                 </a>
                                             </li>
                                             @endcan
-                                            {{-- @can('report_titre_foncier.view') --}}
+                                            
 
-                                            {{-- @endcan --}}
+                                            
                                         </ul>
                                     </div>
                                 </li>
@@ -475,9 +475,7 @@
                                 <li class="nav-item {{ $request->routeIs('portal.roles.*') ? 'active' : '' }}">
                                     <a href="{{ route('portal.roles.index') }}" class="nav-link">
                                         <span class="sidebar-icon">
-                                            <!-- <svg class="icon icon-sm me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                                                        </svg> -->
+                                            
                                             <svg class="icon icon-sm me-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z" />
                                             </svg>
@@ -558,21 +556,9 @@
                         </li>
 
 
-                        {{-- @endcanany --}}
+                        
 
-                        <!-- <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-600"></li>
-                                <li class="nav-item">
-                                    <a href="" target="_blank" class="nav-link d-flex align-items-center">
-                                        <span class="sidebar-icon">
-                                            <svg class="icon icon-sm me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
-                                            </svg>
-                                        </span>
-                                        <span class="sidebar-text">{{ __('Support') }}
-                                            <span class="badge badge-md bg-secondary ms-1 text-gray-50">v0.1</span>
-                                        </span>
-                                    </a>
-                                </li> -->
+                        
                         </ul>
                     </div>
                 </div>

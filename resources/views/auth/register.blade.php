@@ -6,9 +6,7 @@
 
                     <div class="col-12 d-flex align-items-center justify-content-center ">
                         <div class="bg-white shadow border-0 rounded border-light p-4 px-lg-5 pt-lg-4 pb-lg-5 col-md-7 col-sm-12">
-                            <!-- <div class=" text-center mb-4 mt-md-0 pt-n4">
-                                <img src='/img/logo.png' class="w-50 h-auto" alt=''>
-                            </div> -->
+                            
                             <div class="text-center text-md-center mb-4 mt-md-0">
                                 <h1 class="mb-0 h3">{{ __('S\'inscrire')}}</h1>
                             </div>

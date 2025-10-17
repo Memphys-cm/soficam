@@ -32,7 +32,7 @@
             </div>
             <div class="d-flex justify-content-between mb-2">
 
-                {{-- @can('user.export_n_print') --}}
+                
                 <div class="mx-2" wire:loading.remove>
                     <a wire:click="export()" class="btn btn-sm btn-gray-500  py-2 d-inline-flex align-items-center ">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                 </div>
-                {{-- @endcan --}}
+                
             </div>
         </div>
     </div>
@@ -63,7 +63,7 @@
         <div class="col-md-3">
             <label for="search">{{ __('Recherche') }}: </label>
             <input wire:model="query" id="search" type="text" placeholder="{{ __('Jean...') }}" class="form-control">
-            {{-- <p class="badge badge-info" wire:model="resultCount">{{$resultCount}}</p> --}}
+            
         </div>
         <div class="col-md-2">
             <label for="selectedStatus">{{ __('par le statut') }}: </label>
@@ -115,9 +115,9 @@
                         <th class="border-bottom">{{ __('État des paiements') }}</th>
                         <th class="border-bottom">{{ __('Créé par') }}</th>
                         <th class="border-bottom">{{ __('Date de création') }}</th>
-                        {{-- @canany('user.update', 'user.delete') --}}
+                        
                         <th class="border-bottom">{{ __('Action') }}</th>
-                        {{-- @endcanany --}}
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -133,8 +133,7 @@
                                     <span class="fw-bold">{{ $allsale->user->first_name }}</span>
                                 </div>
                             </a>
-                            {{-- @else
-                            User not found --}}
+                            
                             @endif
                         </td>
 
@@ -159,12 +158,7 @@
                             </a>
                             @endif
                           
-                            {{-- <a href='#' data-bs-toggle="modal" data-bs-target="#updateAllSalesModal">
-                                <svg class="icon icon-xs " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9.75h4.875a2.625 2.625 0 010 5.25H12M8.25 9.75L10.5 7.5M8.25 9.75L10.5 12m9-7.243V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185z" />
-                                </svg>
-
-                            </a> --}}
+                            
 
                             @can('sales.delete')
                             <a href='#' wire:click.prevent="initData({{ $allsale->id }})" data-bs-toggle="modal" data-bs-target="#DeleteModal">

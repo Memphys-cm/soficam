@@ -22,14 +22,7 @@
                                 @enderror
                             </div>
                         </div>
-                        {{-- <div class='form-group row mb-2'>
-                            <div class='col'>
-                                <label class="px-2" for="certificates_propriete_id">{{__('Ajouter fichier')}}</label>
-                                <div class="input-group">
-                                    <input type="file" class="form-control" wire:model="attachments" multiple>
-                                </div>
-                            </div>
-                        </div> --}}
+                        
                         
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-gray-200 text-gray-600 ms-auto mx-3"

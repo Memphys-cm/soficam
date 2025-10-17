@@ -78,7 +78,7 @@
                     </div>
                 </td>
                 <td style="width: 4cm; text-align: center;">
-                    {{-- <img src="{{ asset('img/doc_img/images.jpeg') }}" style="margin-top: 10px; margin-bottom: 10px;"> --}}
+                    
                 </td>
                 <td>
                     <div style="text-align: center"><b>

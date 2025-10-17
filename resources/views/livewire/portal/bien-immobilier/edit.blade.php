@@ -1,4 +1,4 @@
-{{-- update modal --}}
+
 <div wire:ignore.self class="modal side-layout-modal fade" id="BienUpdateModal" tabindex="-1"
     aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered " role="document" style="max-width:35%;">

@@ -10,13 +10,7 @@
                     <x-form-items.form wire:submit="update">
 
                         <div class='row form-group mb-3'>
-                            {{-- <div class="col-md-6 py-2">
-                                    <label for="code">{{ __('Reference') }}</label>
-                            <input wire:model="reference_etat_cession" type="text" class="form-control  @error('reference_etat_cession') is-invalid @enderror" placeholder="NW" required="" value="" name="reference_etat_cession" disabled>
-                            @error('reference_etat_cession')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div> --}}
+                            
                         <div class="col-md-6 py-2">
                             <label for="code">{{ __('Titre Foncier') }}</label>
                             <x-input.land_title-select wire:model="titre_foncier_id" prettyname="titre_foncier_id" :options="$land_titles" selected="({{$titre_foncier_id}})" />
@@ -35,19 +29,7 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        {{-- <div class="col-md-6 py-2">
-                            <label for="code">{{ __('Status') }}</label>
-                        <select wire:model="status" name="status" class="form-select  @error('status') is-invalid @enderror">
-                            <option value="pending_payment">{{ __('pending_payment') }}</option>
-                            <option value="pending_payment">{{ __('pending_payment') }} </option>
-                            <option value="paid">{{ __('paid') }} </option>
-                            <option value="cancelled">{{ __('cancelled') }} </option>
-                            <option value="completed">{{ __('completed') }} </option>
-                        </select>
-                        @error('status')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                </div> --}}
+                        
                 <div class="col-md-6 py-2">
                     <label for="code">{{ __('Utilisateur') }}</label>
                     <x-input.select wire:model="user_id" prettyname="user_id" :options="$users->pluck('first_name', 'id')->toArray()" selected="('user_id')" />

@@ -18,8 +18,8 @@
 		@if(count($attributes['options'])>0)
 		@foreach($attributes['options'] as $key=>$option)
 		<option value="{{$option->id}}">{{ucfirst($option->numero_titre_foncier)}} 
-            {{-- {{ucfirst($option->numero_du_duplicata)}} :  --}}
-            {{-- {{$option->medical_record_number}}  --}}
+            
+            
         </option>
 		@endforeach
 		@endif

@@ -57,7 +57,7 @@
 
     <div class="row">
         <div class="col-lg-2">
-            <!-- Tab Nav -->
+            
             <ul class="nav nav-pills square nav-fill flex-column vertical-tab mb-3 mb-lg-0" id="tab12" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="home-tab-3" data-bs-toggle="tab" href="#tab-14" role="tab" aria-controls="tab-14" aria-selected="true"><span class="d-block">Tableau de Bord</span></a>
@@ -69,10 +69,10 @@
                     <a class="nav-link" id="contact-tab-3" data-bs-toggle="tab" href="#tab-16" role="tab" aria-controls="tab-16" aria-selected="false">Paramètres</span></a>
                 </li>
             </ul>
-            <!-- End of Tab Nav -->
+            
         </div>
         <div class="col-lg-10">
-            <!-- Tab Content -->
+            
             <div class="card border-0">
                 <div class="card-body py-0">
                     <div class="tab-content" id="tabcontent">
@@ -122,7 +122,7 @@
                     </div>
                 </div>
             </div>
-            <!-- End of Tab Content -->
+            
         </div>
     </div>
 </div>
