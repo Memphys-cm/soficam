@@ -54,7 +54,7 @@
     <style>
         @if ($request->routeIs('login') || $request->routeIs('register') || $request->routeIs('password.request'))
             body {
-                background-image: url("../img/login.svg");
+                background-image: url("../img/bg.png");
                 background-position: center;
                 background-repeat: no-repeat;
                 background-size: cover;

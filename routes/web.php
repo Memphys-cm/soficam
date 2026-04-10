@@ -232,8 +232,9 @@ Route::group(
             $pointId = 1; // Remplacez 1 par l'ID du point que vous souhaitez récupérer
             // $point = PointModel::find($pointId);11.516213163344588,3.8722015777978243
             // Extrayez les coordonnées du modèle
-            $longitude = 11.516213163344588;
-            $latitude = 3.8722015777978243;
+            // Centre-ville de Bangui (RCA), WGS84
+            $longitude = 18.558189;
+            $latitude = 4.394673;
 
             // Récupérez également vos titres fonciers avec les utilisateurs associés
             $titles = TitreFoncier::with('users','land','sub_division')->get();

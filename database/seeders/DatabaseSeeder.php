@@ -24,8 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesAndPermissionsSeeder::class);
 
         \App\Models\User::create([
-            'first_name' => 'MINECAF',
-            'last_name' => 'ADMIN',
+            'first_name' => 'Admin',
+            'last_name' => 'MCA / RCA',
             'sexe' => 'M', // Ajouter le sexe généré aléatoirement
             'id_card_number' => Str::random(11),
             'date_of_birth' => fake()->date(),
@@ -52,6 +52,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CabinetAndMembreCabinetSeeder::class);
         $this->call(VenaleSeeders::class);
         $this->call(TitreFoncierSeeder::class);
+        $this->call(BulkDemoSeeder::class);
         #$this->call(LotissementSeeder::class);
         // $this->call(VentesSeeder::class);
         // $this->call(ReleveDeBienSeeder::class);

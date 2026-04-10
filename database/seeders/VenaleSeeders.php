@@ -3,30 +3,26 @@
 namespace Database\Seeders;
 
 use App\Models\Land;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class VenaleSeeders extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         Land::create([
-            'name' => 'Carrefour Andon',
+            'name' => 'PK5 — zone commerciale',
             'market_value' => 10000,
-            'sub_division_id'=>59
+            'sub_division_id' => 1,
         ]);
         Land::create([
-            'name' => 'Ngombe III',
+            'name' => 'Berbérati — centre-ville',
             'market_value' => 20000,
-            'sub_division_id'=>202
+            'sub_division_id' => 23,
         ]);
         Land::create([
-            'name' => 'Molyko Stadium',
+            'name' => 'Bangassou — marché',
             'market_value' => 40000,
-            'sub_division_id'=>202
+            'sub_division_id' => 8,
         ]);
     }
 }

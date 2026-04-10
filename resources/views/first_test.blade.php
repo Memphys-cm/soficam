@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Soficam Land - Maps</title>
+    <title>Soficam — Cartographie foncière (République centrafricaine)</title>
     <style>
         html,
         body,
